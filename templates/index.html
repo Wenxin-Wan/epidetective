@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta.home.title}}</title>
+<meta name="description" content="{{meta.home.desc}}">
+{{HREFLANG}}
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
+        <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#notes">{{nav.notes}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui.language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="hero">
+  <div class="hero-net" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="label">{{home.eyebrow}}</div>
+    <h1>{{home.h1}}</h1>
+    <p class="lede">{{home.lede}}</p>
+    <div class="inst-actions" style="margin-top:32px">
+      <a class="btn btn-solid" href="{{URL_HOME}}#instruments">{{home.cta_primary}}</a>
+      <a class="btn btn-ghost" href="{{URL_HOME}}#about">{{home.cta_secondary}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head">
+    <div class="label">{{purpose.label}}</div>
+    <h2>{{purpose.h2}}</h2>
+  </div>
+  <p class="lede" style="max-width:62ch">{{purpose.p1}}</p>
+  <p class="lede" style="max-width:62ch;margin-top:16px">{{purpose.p2}}</p>
+</section>
+
+<section class="sec wrap" id="instruments">
+  <div class="sec-head">
+    <div class="label">{{inst.label}}</div>
+    <h2>{{inst.h2}}</h2>
+  </div>
+
+  <div class="rack">
+
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst.chip_live}}</span>
+          <h3>{{inst.t1.name}}</h3>
+        </div>
+        <p>{{inst.t1.desc}}</p>
+        <div class="inst-meta">
+          <span>{{inst.t1.m1}}</span><span>{{inst.t1.m2}}</span>
+          <span>{{inst.t1.m3}}</span><span>{{inst.t1.m4}}</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_EXPLORER}}">{{inst.t1.btn_about}}</a>
+          <a class="btn btn-ghost" href="{{URL_TOOL}}">{{inst.t1.btn_open}}</a>
+        </div>
+      </div>
+      <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst.t1.name}}"></a>
+    </article>
+
+    <!-- Placeholder instruments removed before launch: they were invented, not
+         planned. To restore, re-add an <article class="inst is-soon"> block using
+         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+
+  </div>
+</section>
+
+<section class="sec wrap" id="about">
+  <div class="sec-head">
+    <div class="label">{{about.label}}</div>
+    <h2>{{about.h2}}</h2>
+  </div>
+  <div class="about">
+    <div>
+      <p>{{about.p1}}</p>
+      <p>{{about.p2}}</p>
+      <p>{{about.p3}}</p>
+      <div class="inline-links">
+        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
+        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+      </div>
+    </div>
+    <div class="creds">
+      <div class="cred"><span class="r">{{about.cred1_label}}</span><span class="w">{{about.cred1_value}}</span></div>
+      <div class="cred"><span class="r">{{about.cred2_label}}</span><span class="w">{{about.cred2_value}}</span></div>
+      <div class="cred"><span class="r">{{about.cred3_label}}</span><span class="w">{{about.cred3_value}}</span></div>
+      <div class="cred"><span class="r">{{about.cred4_label}}</span><span class="w">{{about.cred4_value}}</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="notes">
+  <div class="sec-head">
+    <div class="label">{{notes.label}}</div>
+    <h2>{{notes.h2}}</h2>
+  </div>
+  <div class="notes">
+    <a class="note" href="{{URL_NOTE1}}">
+      <h3>{{notes.n1.title}}</h3>
+      <div class="m">{{notes.n1.meta}}</div>
+    </a>
+    <!-- Second note removed before launch: that article title was invented.
+         The notes.n2.* keys remain in every i18n file if a real one replaces it. -->
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot.tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
+        <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#notes">{{nav.notes}}</a>
+      </nav>
+    </div>
+    <div class="disc">{{foot.disclaimer}}</div>
+    <div class="foot-bot">
+      <span>{{foot.created}}</span>
+      <span>{{foot.affil}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+<script src="{{PREFIX}}scroll.js" defer></script>
+</body>
+</html>
