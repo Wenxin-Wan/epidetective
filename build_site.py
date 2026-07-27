@@ -36,7 +36,15 @@ def load(lang):
 
 
 def url(lang, page, from_lang):
-    """Relative URL to `page` in `lang`, seen from a page in `from_lang`."""
+    """Relative URL to `page` in `lang`, seen from a page in `from_lang`.
+
+    Links within the same language must stay bare filenames. Emitting
+    "../zh/index.html" from inside zh/ resolves to the same file, but the
+    browser treats it as a different URL and reloads the whole page, so
+    in-page anchors stop working.
+    """
+    if lang == from_lang:
+        return page
     prefix = "" if from_lang == "en" else "../"
     sub = "" if lang == "en" else lang + "/"
     return prefix + sub + page

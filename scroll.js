@@ -78,22 +78,13 @@
   try { new ResizeObserver(refresh).observe(page); } catch (e) {}
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
 
-  /* Anchor links: while the wrapper is translated, getBoundingClientRect is
-     relative to the eased position, so add the current offset back. */
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest('a[href*="#"]');
-    if (!a) return;
-    var href = a.getAttribute("href") || "";
-    var hash = href.slice(href.indexOf("#"));
-    if (hash.length < 2) return;
-    // only intercept links pointing at this same document
-    var base = href.slice(0, href.indexOf("#"));
-    if (base && base !== location.pathname.split("/").pop()) return;
-
-    var el = document.querySelector(hash);
-    if (!el) return;
-    e.preventDefault();
-
+  /* Anchor links. While the wrapper is translated, getBoundingClientRect is
+     relative to the eased position, so the current offset is added back to
+     recover the document coordinate. */
+  function goToHash(hash) {
+    var el;
+    try { el = document.querySelector(hash); } catch (err) { return false; }
+    if (!el) return false;
     if (active) {
       var top = Math.max(0, el.getBoundingClientRect().top + offset - headerHeight() - 16);
       window.scrollTo({ top: top, behavior: "auto" });
@@ -103,7 +94,42 @@
         block: "start"
       });
     }
-    history.replaceState(null, "", hash);
+    return true;
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!t || typeof t.closest !== "function") return;
+    var a = t.closest('a[href*="#"]');
+    if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey ||
+        e.altKey || e.button !== 0) return;
+
+    var raw = a.getAttribute("href") || "";
+    var here, there;
+    try {
+      there = new URL(raw, location.href);
+      here = new URL(location.href);
+    } catch (err) { return; }
+
+    // Resolve both sides before comparing. Comparing href fragments by hand
+    // misreads equivalent paths ("../zh/index.html" from inside zh/) and lets
+    // a same-page jump fall through to a full reload.
+    if (there.origin !== here.origin || there.pathname !== here.pathname) return;
+    if (there.hash.length < 2) return;
+
+    if (goToHash(there.hash)) {
+      e.preventDefault();
+      history.replaceState(null, "", there.hash);
+    }
+  });
+
+  // A hash arriving from another page lands before the wrapper is fixed, so
+  // re-apply it once layout has settled.
+  window.addEventListener("load", function () {
+    if (location.hash.length > 1) {
+      refresh();
+      goToHash(location.hash);
+    }
   });
 
   start();

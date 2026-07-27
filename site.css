@@ -32,8 +32,27 @@ html[lang="ru"]{
   --body:"Golos","DMSans",-apple-system,"Segoe UI",sans-serif;
   --wonk:normal;
 }
-/* Chinese: no CJK webfont is viable at this weight, so use the system stack.
-   A CJK serif keeps the editorial register of the Latin display face. */
+/* Chinese: measures are set in `ch`, which is the width of "0" — about half a
+   Han glyph. Left unadjusted every column is half as wide as intended and the
+   hero wraps to eight characters a line. CJK measures are therefore reset in
+   `em`, where one unit is one character, and the display sizes come down:
+   Han carries presence at a smaller size than Latin. */
+html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:14em}
+html[lang="zh"] h2{font-size:clamp(1.5rem,2.7vw,2.15rem)}
+html[lang="zh"] .sec-head h2,
+html[lang="zh"] .tool-hero h1{max-width:15em}
+html[lang="zh"] h3{font-size:clamp(1.05rem,1.7vw,1.3rem)}
+html[lang="zh"] body{line-height:1.8}
+html[lang="zh"] .lede,
+html[lang="zh"] .about p,
+html[lang="zh"] .inst p,
+html[lang="zh"] .read p{max-width:34em}
+html[lang="zh"] .bar-note{max-width:32em}
+html[lang="zh"] .disc{max-width:44em}
+html[lang="zh"] .foot .tag{max-width:24em}
+/* keep the inline style attribute on .lede from re-imposing a ch measure */
+html[lang="zh"] .sec > .lede[style]{max-width:34em}
+
 html[lang="zh"]{
   --display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",
             "Hiragino Sans GB",serif;
@@ -220,6 +239,13 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .foot-row{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:baseline}
 .disc{margin-top:34px;border:1px solid rgba(233,231,223,.2);padding:18px 20px;color:#A7ADA2;
       font-size:.86rem;max-width:80ch}
+/* affiliation notice reads as a formal aside, quieter than the health disclaimer */
+.disc.affil{margin-top:12px;border-color:rgba(233,231,223,.12);color:#949A90;font-size:.8rem}
+.creds a,.disc a{color:inherit;text-decoration:underline;text-underline-offset:2px;
+                 text-decoration-color:rgba(163,53,38,.55)}
+.creds a:hover,.disc a:hover{color:var(--madder);text-decoration-color:var(--madder)}
+.foot .disc a{text-decoration-color:rgba(233,231,223,.4)}
+.foot .disc a:hover{color:var(--chalk);text-decoration-color:var(--chalk)}
 .foot-bot{margin-top:32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
           font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#8A9086}
 
