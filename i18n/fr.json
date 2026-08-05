@@ -33,9 +33,9 @@
 
   "inst.t1.name": "Explorateur des données sur le cancer",
   "inst.t1.desc": "Voyez quelles expositions ont été reliées à quels cancers, et quelle est la solidité des données derrière chaque lien. Il s'appuie sur les Monographies du CIRC, l'évaluation de référence de l'Organisation mondiale de la Santé sur ce qui peut causer le cancer. Partez d'un cancer, partez d'une exposition, ou ouvrez la carte entière.",
-  "inst.t1.m1": "185 expositions",
+  "inst.t1.m1": "186 expositions",
   "inst.t1.m2": "68 types de cancer",
-  "inst.t1.m3": "460 liens",
+  "inst.t1.m3": "466 liens",
   "inst.t1.m4": "10 langues",
   "inst.t1.btn_about": "À propos de cet outil",
   "inst.t1.btn_open": "L'ouvrir &rarr;",
@@ -76,7 +76,7 @@
 
   "exp.crumb_current": "Outil 01 &mdash; ouvert",
   "exp.h1": "Certaines expositions <b>causent</b> le cancer. D'autres le <em>pourraient</em>. Les distinguer, c'est <b>tout le travail</b>.",
-  "exp.lede": "Chaque trait derrière ce texte est réel : 185 expositions, 68 types de cancer, et les 460 liens que l'agence du cancer de l'Organisation mondiale de la Santé a consignés entre eux.",
+  "exp.lede": "Chaque trait derrière ce texte est réel : 186 expositions, 68 types de cancer, et les 466 liens que l'agence du cancer de l'Organisation mondiale de la Santé a consignés entre eux.",
   "exp.leg_est": "Lien établi",
   "exp.leg_sus": "Lien suspecté",
   "exp.leg_can": "Site du cancer",
@@ -89,10 +89,10 @@
   "exp.fig4": "Volumes de monographies",
 
   "exp.bar1_title": "Lien établi",
-  "exp.bar1_meta": "243 &mdash; Preuves suffisantes chez l'humain",
+  "exp.bar1_meta": "247 &mdash; Preuves suffisantes chez l'humain",
   "exp.bar1_note": "Les études chez l'humain concordent assez pour écarter le hasard, les biais et les autres explications. C'est la conclusion la plus forte que formule le CIRC.",
   "exp.bar2_title": "Lien suspecté",
-  "exp.bar2_meta": "217 &mdash; Preuves limitées chez l'humain",
+  "exp.bar2_meta": "219 &mdash; Preuves limitées chez l'humain",
   "exp.bar2_note": "L'association est crédible, même si le hasard ou un biais pourraient encore l'expliquer. La question reste ouverte, et de nouveaux travaux pourraient la trancher dans un sens comme dans l'autre.",
 
   "exp.reads_label": "Avant de conclure",
@@ -111,5 +111,5 @@
   "exp.cta_h2": "Partez d'un <b>cancer</b>. Partez d'une <b>exposition</b>. Ou ouvrez la carte entière.",
   "exp.cta_lede": "Gratuit, sans compte, disponible en dix langues. Déplacez, zoomez et concentrez-vous sur n'importe quelle partie du réseau.",
   "exp.cta_btn": "Ouvrir l'Explorateur &rarr;",
-  "exp.cta_source": "Source : Monographies du CIRC, « Classifications par site de cancer », volumes 1 à 140, et Cogliano et al., JNCI 2011. Cet outil identifie des dangers à l'échelle de populations entières. Pour toute question concernant votre propre santé, adressez-vous à un médecin."
+  "exp.cta_source": "Source : Monographies du CIRC, « Classifications par site de cancer », volumes 1 à 141a (dernière mise à jour le 18 mai 2026), adapté de Schubauer-Berigan et al., JNCI Monographs 2026. Cet outil identifie des dangers à l'échelle de populations entières. Pour toute question concernant votre propre santé, adressez-vous à un médecin."
 }

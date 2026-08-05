@@ -33,9 +33,9 @@
 
   "inst.t1.name": "Explorador de evidencia sobre el cáncer",
   "inst.t1.desc": "Consulta qué exposiciones se han vinculado a qué cánceres, y qué solidez tiene la evidencia detrás de cada vínculo. Se apoya en las Monografías del CIIC, la revisión de referencia de la Organización Mundial de la Salud sobre qué puede causar cáncer. Empieza por un cáncer, empieza por una exposición, o abre el mapa completo.",
-  "inst.t1.m1": "185 exposiciones",
+  "inst.t1.m1": "186 exposiciones",
   "inst.t1.m2": "68 tipos de cáncer",
-  "inst.t1.m3": "460 vínculos",
+  "inst.t1.m3": "466 vínculos",
   "inst.t1.m4": "10 idiomas",
   "inst.t1.btn_about": "Sobre esta herramienta",
   "inst.t1.btn_open": "Abrirla &rarr;",
@@ -76,7 +76,7 @@
 
   "exp.crumb_current": "Herramienta 01 &mdash; abierta",
   "exp.h1": "Algunas exposiciones <b>causan</b> cáncer. Otras <em>podrían</em>. Distinguirlas es <b>todo el trabajo</b>.",
-  "exp.lede": "Cada marca detrás de este texto es real: 185 exposiciones, 68 tipos de cáncer y los 460 vínculos que la agencia del cáncer de la Organización Mundial de la Salud ha registrado entre ellos.",
+  "exp.lede": "Cada marca detrás de este texto es real: 186 exposiciones, 68 tipos de cáncer y los 466 vínculos que la agencia del cáncer de la Organización Mundial de la Salud ha registrado entre ellos.",
   "exp.leg_est": "Vínculo establecido",
   "exp.leg_sus": "Vínculo sospechado",
   "exp.leg_can": "Localización del cáncer",
@@ -89,10 +89,10 @@
   "exp.fig4": "Volúmenes de monografías",
 
   "exp.bar1_title": "Vínculo establecido",
-  "exp.bar1_meta": "243 &mdash; Evidencia suficiente en humanos",
+  "exp.bar1_meta": "247 &mdash; Evidencia suficiente en humanos",
   "exp.bar1_note": "Los estudios en personas coinciden lo bastante como para descartar el azar, el sesgo y otras explicaciones. Es la conclusión más firme que emite el CIIC.",
   "exp.bar2_title": "Vínculo sospechado",
-  "exp.bar2_meta": "217 &mdash; Evidencia limitada en humanos",
+  "exp.bar2_meta": "219 &mdash; Evidencia limitada en humanos",
   "exp.bar2_note": "La asociación es creíble, aunque el azar o el sesgo todavía podrían explicarla. La cuestión sigue abierta, y nuevas investigaciones podrían resolverla en cualquier dirección.",
 
   "exp.reads_label": "Antes de sacar conclusiones",
@@ -111,5 +111,5 @@
   "exp.cta_h2": "Empieza por un <b>cáncer</b>. Empieza por una <b>exposición</b>. O abre el mapa completo.",
   "exp.cta_lede": "Gratuito, sin cuenta, disponible en diez idiomas. Arrastra, amplía y céntrate en cualquier parte de la red.",
   "exp.cta_btn": "Abrir el Explorador &rarr;",
-  "exp.cta_source": "Fuente: Monografías del CIIC, «Clasificaciones por localización del cáncer», volúmenes 1&ndash;140, y Cogliano et al., JNCI 2011. Esta herramienta identifica peligros en poblaciones enteras. Para cualquier cuestión sobre tu propia salud, consulta a un médico."
+  "exp.cta_source": "Fuente: Monografías del CIIC, «Clasificaciones por localización del cáncer», volúmenes 1&ndash;141a (última actualización el 18 de mayo de 2026), adaptado de Schubauer-Berigan et al., JNCI Monographs 2026. Esta herramienta identifica peligros en poblaciones enteras. Para cualquier cuestión sobre tu propia salud, consulta a un médico."
 }

@@ -33,9 +33,9 @@
 
   "inst.t1.name": "Cancer Evidence Explorer",
   "inst.t1.desc": "See which exposures have been linked to which cancers, and how strong the evidence is behind each link. It is built on the IARC Monographs, the World Health Organization's review of what can cause cancer. Start from a cancer, start from an exposure, or open the whole map.",
-  "inst.t1.m1": "185 exposures",
+  "inst.t1.m1": "186 exposures",
   "inst.t1.m2": "68 cancer types",
-  "inst.t1.m3": "460 links",
+  "inst.t1.m3": "466 links",
   "inst.t1.m4": "10 languages",
   "inst.t1.btn_about": "About this tool",
   "inst.t1.btn_open": "Open it &rarr;",
@@ -76,7 +76,7 @@
 
   "exp.crumb_current": "Tool 01 &mdash; open now",
   "exp.h1": "Some exposures <b>cause</b> cancer. Some <em>might</em>. Telling them apart is the <b>whole job</b>.",
-  "exp.lede": "Every mark behind this text is real: 185 exposures, 68 types of cancer, and the 460 links the World Health Organization's cancer agency has recorded between them.",
+  "exp.lede": "Every mark behind this text is real: 186 exposures, 68 types of cancer, and the 466 links the World Health Organization's cancer agency has recorded between them.",
   "exp.leg_est": "Established link",
   "exp.leg_sus": "Suspected link",
   "exp.leg_can": "Cancer site",
@@ -89,10 +89,10 @@
   "exp.fig4": "Monograph volumes",
 
   "exp.bar1_title": "Established link",
-  "exp.bar1_meta": "243 &mdash; Sufficient evidence in humans",
+  "exp.bar1_meta": "247 &mdash; Sufficient evidence in humans",
   "exp.bar1_note": "Studies in people agree closely enough to rule out chance, bias and other explanations. This is the strongest conclusion the IARC draws.",
   "exp.bar2_title": "Suspected link",
-  "exp.bar2_meta": "217 &mdash; Limited evidence in humans",
+  "exp.bar2_meta": "219 &mdash; Limited evidence in humans",
   "exp.bar2_note": "There is a credible association, though chance or bias could still explain it. The question remains open, and more research may settle it either way.",
 
   "exp.reads_label": "Before you draw conclusions",
@@ -111,5 +111,5 @@
   "exp.cta_h2": "Start from a <b>cancer</b>. Start from an <b>exposure</b>. Or open the whole map.",
   "exp.cta_lede": "Free, no account needed, available in ten languages. Drag, zoom, and focus on any part of the network.",
   "exp.cta_btn": "Open the Cancer Evidence Explorer &rarr;",
-  "exp.cta_source": "Source: IARC Monographs, \"Classifications by cancer site\", Volumes 1&ndash;140, and Cogliano et al., JNCI 2011. This tool identifies hazards across whole populations. For anything concerning your own health, speak to a doctor."
+  "exp.cta_source": "Source: IARC Monographs, \"Classifications by cancer site\", Volumes 1&ndash;141a (last update 18 May 2026), adapted from Schubauer-Berigan et al., JNCI Monographs 2026. This tool identifies hazards across whole populations. For anything concerning your own health, speak to a doctor."
 }
