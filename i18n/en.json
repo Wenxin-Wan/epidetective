@@ -50,7 +50,7 @@
   "about.h2": "Built by a cancer epidemiologist who <b>works with this evidence every day</b>.",
   "about.p1": "I am Wenxin Wan, a postdoctoral scientist at the International Agency for Research on Cancer in Lyon, the World Health Organization's cancer agency. My work covers cancer epidemiology, causal inference, biostatistics and machine learning.",
   "about.p2": "I did my PhD at Utrecht University's Institute for Risk Assessment Sciences, studying how exposures at work and in the environment affect cancer risk. That work helped establish the causal role of benzene in lung cancer, which had long been underestimated.",
-  "about.p3": "Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. The methods come from epidemiology, causal inference, pharmacoepidemiology and machine learning.",
+  "about.p3": "Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. At IARC I lead the analysis for OPICO, which pools ten such cohorts across three continents to ask whether long-term opioid use carries a cancer risk, and I advise the Lung Cancer Cohort Consortium (LC3) on how evidence about exposures at work can feed into lung cancer screening. The methods come from epidemiology, causal inference, pharmacoepidemiology and machine learning.",
   "about.p4": "I build these tools because the evidence I work with is public and carefully made, and still almost unreadable unless you already know the field. Closing that gap seemed worth the effort. Everything below is checkable, and the links go to the original sources.",
   "about.cred1_label": "Position",
   "about.cred1_value": "Postdoctoral scientist, IARC / WHO",
@@ -60,6 +60,8 @@
   "about.cred3_value": "Cancer epidemiology &middot; causal inference &middot; biostatistics &middot; machine learning",
   "about.cred4_label": "Research projects",
   "about.cred4_value": "<a href=\"https://opico.iarc.who.int\">OPICO</a> &middot; <a href=\"https://synergy.iarc.fr\">SYNERGY</a> &middot; <a href=\"https://www.ephor-project.eu\">EPHOR</a> &middot; <a href=\"https://www.ecrhs.org\">ECRHS</a>",
+  "about.cred5_label": "Consortium roles",
+  "about.cred5_value": "Lead analyst, OPICO &middot; scientific advisor, LC3",
 
   "notes.label": "Notes",
   "notes.h2": "Working through the <b>hard parts</b> in public.",
