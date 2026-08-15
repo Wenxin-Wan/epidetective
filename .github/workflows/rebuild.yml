@@ -1,0 +1,50 @@
+# The site's pages are generated: i18n/*.json plus templates/*.html are rendered
+# into index.html, zh/index.html and the rest by build_site.py. GitHub Pages only
+# serves files, so editing the JSON through Pages CMS would otherwise change
+# nothing a visitor sees. This runs the build for every content commit and pushes
+# the regenerated pages back.
+#
+# build_site.py exits non-zero if a translation key is missing from any language,
+# so a half-finished edit fails here with a red X instead of shipping.
+name: Rebuild site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "i18n/**"
+      - "templates/**"
+      - "build_site.py"
+  workflow_dispatch:
+
+# Two edits saved in quick succession must not race each other to push.
+concurrency:
+  group: rebuild-site
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Render every language
+        run: python3 build_site.py
+
+      - name: Commit the regenerated pages
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Templates and content produced no change to the rendered pages."
+          else
+            git commit -m "Rebuild pages from content changes"
+            git push
+          fi

@@ -1,0 +1,1638 @@
+# Pages CMS content model for epidetective.com
+#
+# Every key in i18n/*.json is declared here on purpose: Pages CMS rebuilds each
+# file from the fields it knows about, so an undeclared key would be dropped on
+# save. Field names are used as literal JSON keys, which is why the dots survive.
+#
+# Types are string/text throughout. rich-text would rewrite the 22 values that
+# carry inline HTML (<b>, <em>, &middot;) and break them.
+#
+# Generated from i18n/en.json -- regenerate rather than hand-editing.
+
+media: assets
+
+content:
+  - name: en
+    label: "English"
+    type: file
+    path: i18n/en.json
+    format: json
+    fields:
+      - name: "lang.name"
+        label: "Language name, written in that language"
+        type: string
+      - name: "lang.dir"
+        label: "Text direction — leave as ltr"
+        type: string
+      - name: "meta.home.title"
+        label: "Home — browser tab and Google headline"
+        type: string
+      - name: "meta.home.desc"
+        label: "Home — Google result description"
+        type: text
+      - name: "meta.explorer.title"
+        label: "Explorer — browser tab and Google headline"
+        type: string
+      - name: "meta.explorer.desc"
+        label: "Explorer — Google result description"
+        type: text
+      - name: "ui.language"
+        label: "Language switcher label (screen readers)"
+        type: string
+      - name: "nav.instruments"
+        label: "Menu — Tools"
+        type: string
+      - name: "nav.explorer"
+        label: "Menu — Evidence Explorer"
+        type: string
+      - name: "nav.about"
+        label: "Menu — About"
+        type: string
+      - name: "nav.notes"
+        label: "nav — notes"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.eyebrow"
+        label: "home — eyebrow"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.h1"
+        label: "HOME — Headline"
+        type: string
+      - name: "home.audience"
+        label: "HOME — Audience line (bold)"
+        type: string
+      - name: "home.lede"
+        label: "HOME — Description"
+        type: string
+      - name: "home.cta_primary"
+        label: "home — cta primary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.cta_secondary"
+        label: "home — cta secondary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.label"
+        label: "purpose — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.h2"
+        label: "purpose — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p1"
+        label: "purpose — p1"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p2"
+        label: "purpose — p2"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.label"
+        label: "TOOLS — small section label"
+        type: string
+      - name: "inst.h2"
+        label: "TOOLS — section heading"
+        type: string
+      - name: "inst.chip_live"
+        label: "TOOLS — “Open now” badge"
+        type: string
+      - name: "inst.chip_soon"
+        label: "inst — chip soon"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.planned"
+        label: "inst — planned"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t1.name"
+        label: "Tool 1 — name"
+        type: string
+      - name: "inst.t1.desc"
+        label: "Tool 1 — description"
+        type: text
+      - name: "inst.t1.m1"
+        label: "Tool 1 — stat 1 (exposures)"
+        type: string
+      - name: "inst.t1.m2"
+        label: "Tool 1 — stat 2 (cancer types)"
+        type: string
+      - name: "inst.t1.m3"
+        label: "Tool 1 — stat 3 (links)"
+        type: string
+      - name: "inst.t1.m4"
+        label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst.t1.btn_about"
+        label: "Tool 1 — secondary button"
+        type: string
+      - name: "inst.t1.btn_open"
+        label: "Tool 1 — primary button"
+        type: string
+      - name: "inst.t2.name"
+        label: "inst — t2 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.desc"
+        label: "inst — t2 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.name"
+        label: "inst — t3 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.desc"
+        label: "inst — t3 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "about.label"
+        label: "ABOUT — small section label"
+        type: string
+      - name: "about.h2"
+        label: "ABOUT — heading"
+        type: string
+      - name: "about.p1"
+        label: "ABOUT — paragraph 1"
+        type: text
+      - name: "about.p2"
+        label: "ABOUT — paragraph 2"
+        type: text
+      - name: "about.p3"
+        label: "ABOUT — paragraph 3"
+        type: text
+      - name: "about.p4"
+        label: "ABOUT — paragraph 4 (closing)"
+        type: text
+      - name: "about.cred1_label"
+        label: "ABOUT — credential 1: label"
+        type: string
+      - name: "about.cred1_value"
+        label: "ABOUT — credential 1: value"
+        type: string
+      - name: "about.cred2_label"
+        label: "ABOUT — credential 2: label"
+        type: string
+      - name: "about.cred2_value"
+        label: "ABOUT — credential 2: value"
+        type: string
+      - name: "about.cred3_label"
+        label: "ABOUT — credential 3: label"
+        type: string
+      - name: "about.cred3_value"
+        label: "ABOUT — credential 3: value"
+        type: string
+      - name: "about.cred4_label"
+        label: "ABOUT — credential 4: label"
+        type: string
+      - name: "about.cred4_value"
+        label: "ABOUT — credential 4: value"
+        type: text
+      - name: "about.cred5_label"
+        label: "ABOUT — credential 5: label"
+        type: string
+      - name: "about.cred5_value"
+        label: "ABOUT — credential 5: value"
+        type: string
+      - name: "notes.label"
+        label: "notes — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.h2"
+        label: "notes — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.title"
+        label: "notes — n1 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.meta"
+        label: "notes — n1 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.title"
+        label: "notes — n2 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.meta"
+        label: "notes — n2 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "foot.tagline"
+        label: "FOOTER — tagline"
+        type: string
+      - name: "foot.affiliation"
+        label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot.disclaimer"
+        label: "FOOTER — health disclaimer"
+        type: text
+      - name: "foot.created"
+        label: "FOOTER — credit line"
+        type: string
+      - name: "foot.affil"
+        label: "foot — affil"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "exp.crumb_current"
+        label: "EXPLORER — crumb current"
+        type: string
+      - name: "exp.h1"
+        label: "EXPLORER — h1"
+        type: string
+      - name: "exp.lede"
+        label: "EXPLORER — lede"
+        type: text
+      - name: "exp.leg_est"
+        label: "EXPLORER — leg est"
+        type: string
+      - name: "exp.leg_sus"
+        label: "EXPLORER — leg sus"
+        type: string
+      - name: "exp.leg_can"
+        label: "EXPLORER — leg can"
+        type: string
+      - name: "exp.whatsin_label"
+        label: "EXPLORER — whatsin label"
+        type: string
+      - name: "exp.whatsin_h2"
+        label: "EXPLORER — whatsin h2"
+        type: string
+      - name: "exp.fig1"
+        label: "EXPLORER — fig1"
+        type: string
+      - name: "exp.fig2"
+        label: "EXPLORER — fig2"
+        type: string
+      - name: "exp.fig3"
+        label: "EXPLORER — fig3"
+        type: string
+      - name: "exp.fig4"
+        label: "EXPLORER — fig4"
+        type: string
+      - name: "exp.bar1_title"
+        label: "EXPLORER — bar1 title"
+        type: string
+      - name: "exp.bar1_meta"
+        label: "EXPLORER — bar1 meta"
+        type: string
+      - name: "exp.bar1_note"
+        label: "EXPLORER — bar1 note"
+        type: text
+      - name: "exp.bar2_title"
+        label: "EXPLORER — bar2 title"
+        type: string
+      - name: "exp.bar2_meta"
+        label: "EXPLORER — bar2 meta"
+        type: string
+      - name: "exp.bar2_note"
+        label: "EXPLORER — bar2 note"
+        type: text
+      - name: "exp.reads_label"
+        label: "EXPLORER — reads label"
+        type: string
+      - name: "exp.reads_h2"
+        label: "EXPLORER — reads h2"
+        type: string
+      - name: "exp.read1_tag"
+        label: "EXPLORER — read1 tag"
+        type: string
+      - name: "exp.read1_h3"
+        label: "EXPLORER — read1 h3"
+        type: string
+      - name: "exp.read1_p"
+        label: "EXPLORER — read1 p"
+        type: text
+      - name: "exp.read2_tag"
+        label: "EXPLORER — read2 tag"
+        type: string
+      - name: "exp.read2_h3"
+        label: "EXPLORER — read2 h3"
+        type: string
+      - name: "exp.read2_p"
+        label: "EXPLORER — read2 p"
+        type: text
+      - name: "exp.read3_tag"
+        label: "EXPLORER — read3 tag"
+        type: string
+      - name: "exp.read3_h3"
+        label: "EXPLORER — read3 h3"
+        type: string
+      - name: "exp.read3_p"
+        label: "EXPLORER — read3 p"
+        type: text
+      - name: "exp.cta_label"
+        label: "EXPLORER — cta label"
+        type: string
+      - name: "exp.cta_h2"
+        label: "EXPLORER — cta h2"
+        type: string
+      - name: "exp.cta_lede"
+        label: "EXPLORER — cta lede"
+        type: string
+      - name: "exp.cta_btn"
+        label: "EXPLORER — cta btn"
+        type: string
+      - name: "exp.cta_source"
+        label: "EXPLORER — cta source"
+        type: text
+
+  - name: zh
+    label: "中文 Chinese"
+    type: file
+    path: i18n/zh.json
+    format: json
+    fields:
+      - name: "lang.name"
+        label: "Language name, written in that language"
+        type: string
+      - name: "lang.dir"
+        label: "Text direction — leave as ltr"
+        type: string
+      - name: "meta.home.title"
+        label: "Home — browser tab and Google headline"
+        type: string
+      - name: "meta.home.desc"
+        label: "Home — Google result description"
+        type: text
+      - name: "meta.explorer.title"
+        label: "Explorer — browser tab and Google headline"
+        type: string
+      - name: "meta.explorer.desc"
+        label: "Explorer — Google result description"
+        type: text
+      - name: "ui.language"
+        label: "Language switcher label (screen readers)"
+        type: string
+      - name: "nav.instruments"
+        label: "Menu — Tools"
+        type: string
+      - name: "nav.explorer"
+        label: "Menu — Evidence Explorer"
+        type: string
+      - name: "nav.about"
+        label: "Menu — About"
+        type: string
+      - name: "nav.notes"
+        label: "nav — notes"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.eyebrow"
+        label: "home — eyebrow"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.h1"
+        label: "HOME — Headline"
+        type: string
+      - name: "home.audience"
+        label: "HOME — Audience line (bold)"
+        type: string
+      - name: "home.lede"
+        label: "HOME — Description"
+        type: string
+      - name: "home.cta_primary"
+        label: "home — cta primary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.cta_secondary"
+        label: "home — cta secondary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.label"
+        label: "purpose — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.h2"
+        label: "purpose — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p1"
+        label: "purpose — p1"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p2"
+        label: "purpose — p2"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.label"
+        label: "TOOLS — small section label"
+        type: string
+      - name: "inst.h2"
+        label: "TOOLS — section heading"
+        type: string
+      - name: "inst.chip_live"
+        label: "TOOLS — “Open now” badge"
+        type: string
+      - name: "inst.chip_soon"
+        label: "inst — chip soon"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.planned"
+        label: "inst — planned"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t1.name"
+        label: "Tool 1 — name"
+        type: string
+      - name: "inst.t1.desc"
+        label: "Tool 1 — description"
+        type: text
+      - name: "inst.t1.m1"
+        label: "Tool 1 — stat 1 (exposures)"
+        type: string
+      - name: "inst.t1.m2"
+        label: "Tool 1 — stat 2 (cancer types)"
+        type: string
+      - name: "inst.t1.m3"
+        label: "Tool 1 — stat 3 (links)"
+        type: string
+      - name: "inst.t1.m4"
+        label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst.t1.btn_about"
+        label: "Tool 1 — secondary button"
+        type: string
+      - name: "inst.t1.btn_open"
+        label: "Tool 1 — primary button"
+        type: string
+      - name: "inst.t2.name"
+        label: "inst — t2 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.desc"
+        label: "inst — t2 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.name"
+        label: "inst — t3 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.desc"
+        label: "inst — t3 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "about.label"
+        label: "ABOUT — small section label"
+        type: string
+      - name: "about.h2"
+        label: "ABOUT — heading"
+        type: string
+      - name: "about.p1"
+        label: "ABOUT — paragraph 1"
+        type: text
+      - name: "about.p2"
+        label: "ABOUT — paragraph 2"
+        type: text
+      - name: "about.p3"
+        label: "ABOUT — paragraph 3"
+        type: text
+      - name: "about.p4"
+        label: "ABOUT — paragraph 4 (closing)"
+        type: text
+      - name: "about.cred1_label"
+        label: "ABOUT — credential 1: label"
+        type: string
+      - name: "about.cred1_value"
+        label: "ABOUT — credential 1: value"
+        type: string
+      - name: "about.cred2_label"
+        label: "ABOUT — credential 2: label"
+        type: string
+      - name: "about.cred2_value"
+        label: "ABOUT — credential 2: value"
+        type: string
+      - name: "about.cred3_label"
+        label: "ABOUT — credential 3: label"
+        type: string
+      - name: "about.cred3_value"
+        label: "ABOUT — credential 3: value"
+        type: string
+      - name: "about.cred4_label"
+        label: "ABOUT — credential 4: label"
+        type: string
+      - name: "about.cred4_value"
+        label: "ABOUT — credential 4: value"
+        type: text
+      - name: "about.cred5_label"
+        label: "ABOUT — credential 5: label"
+        type: string
+      - name: "about.cred5_value"
+        label: "ABOUT — credential 5: value"
+        type: string
+      - name: "notes.label"
+        label: "notes — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.h2"
+        label: "notes — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.title"
+        label: "notes — n1 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.meta"
+        label: "notes — n1 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.title"
+        label: "notes — n2 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.meta"
+        label: "notes — n2 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "foot.tagline"
+        label: "FOOTER — tagline"
+        type: string
+      - name: "foot.affiliation"
+        label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot.disclaimer"
+        label: "FOOTER — health disclaimer"
+        type: text
+      - name: "foot.created"
+        label: "FOOTER — credit line"
+        type: string
+      - name: "foot.affil"
+        label: "foot — affil"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "exp.crumb_current"
+        label: "EXPLORER — crumb current"
+        type: string
+      - name: "exp.h1"
+        label: "EXPLORER — h1"
+        type: string
+      - name: "exp.lede"
+        label: "EXPLORER — lede"
+        type: text
+      - name: "exp.leg_est"
+        label: "EXPLORER — leg est"
+        type: string
+      - name: "exp.leg_sus"
+        label: "EXPLORER — leg sus"
+        type: string
+      - name: "exp.leg_can"
+        label: "EXPLORER — leg can"
+        type: string
+      - name: "exp.whatsin_label"
+        label: "EXPLORER — whatsin label"
+        type: string
+      - name: "exp.whatsin_h2"
+        label: "EXPLORER — whatsin h2"
+        type: string
+      - name: "exp.fig1"
+        label: "EXPLORER — fig1"
+        type: string
+      - name: "exp.fig2"
+        label: "EXPLORER — fig2"
+        type: string
+      - name: "exp.fig3"
+        label: "EXPLORER — fig3"
+        type: string
+      - name: "exp.fig4"
+        label: "EXPLORER — fig4"
+        type: string
+      - name: "exp.bar1_title"
+        label: "EXPLORER — bar1 title"
+        type: string
+      - name: "exp.bar1_meta"
+        label: "EXPLORER — bar1 meta"
+        type: string
+      - name: "exp.bar1_note"
+        label: "EXPLORER — bar1 note"
+        type: text
+      - name: "exp.bar2_title"
+        label: "EXPLORER — bar2 title"
+        type: string
+      - name: "exp.bar2_meta"
+        label: "EXPLORER — bar2 meta"
+        type: string
+      - name: "exp.bar2_note"
+        label: "EXPLORER — bar2 note"
+        type: text
+      - name: "exp.reads_label"
+        label: "EXPLORER — reads label"
+        type: string
+      - name: "exp.reads_h2"
+        label: "EXPLORER — reads h2"
+        type: string
+      - name: "exp.read1_tag"
+        label: "EXPLORER — read1 tag"
+        type: string
+      - name: "exp.read1_h3"
+        label: "EXPLORER — read1 h3"
+        type: string
+      - name: "exp.read1_p"
+        label: "EXPLORER — read1 p"
+        type: text
+      - name: "exp.read2_tag"
+        label: "EXPLORER — read2 tag"
+        type: string
+      - name: "exp.read2_h3"
+        label: "EXPLORER — read2 h3"
+        type: string
+      - name: "exp.read2_p"
+        label: "EXPLORER — read2 p"
+        type: text
+      - name: "exp.read3_tag"
+        label: "EXPLORER — read3 tag"
+        type: string
+      - name: "exp.read3_h3"
+        label: "EXPLORER — read3 h3"
+        type: string
+      - name: "exp.read3_p"
+        label: "EXPLORER — read3 p"
+        type: text
+      - name: "exp.cta_label"
+        label: "EXPLORER — cta label"
+        type: string
+      - name: "exp.cta_h2"
+        label: "EXPLORER — cta h2"
+        type: string
+      - name: "exp.cta_lede"
+        label: "EXPLORER — cta lede"
+        type: string
+      - name: "exp.cta_btn"
+        label: "EXPLORER — cta btn"
+        type: string
+      - name: "exp.cta_source"
+        label: "EXPLORER — cta source"
+        type: text
+
+  - name: fr
+    label: "Français French"
+    type: file
+    path: i18n/fr.json
+    format: json
+    fields:
+      - name: "lang.name"
+        label: "Language name, written in that language"
+        type: string
+      - name: "lang.dir"
+        label: "Text direction — leave as ltr"
+        type: string
+      - name: "meta.home.title"
+        label: "Home — browser tab and Google headline"
+        type: string
+      - name: "meta.home.desc"
+        label: "Home — Google result description"
+        type: text
+      - name: "meta.explorer.title"
+        label: "Explorer — browser tab and Google headline"
+        type: string
+      - name: "meta.explorer.desc"
+        label: "Explorer — Google result description"
+        type: text
+      - name: "ui.language"
+        label: "Language switcher label (screen readers)"
+        type: string
+      - name: "nav.instruments"
+        label: "Menu — Tools"
+        type: string
+      - name: "nav.explorer"
+        label: "Menu — Evidence Explorer"
+        type: string
+      - name: "nav.about"
+        label: "Menu — About"
+        type: string
+      - name: "nav.notes"
+        label: "nav — notes"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.eyebrow"
+        label: "home — eyebrow"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.h1"
+        label: "HOME — Headline"
+        type: string
+      - name: "home.audience"
+        label: "HOME — Audience line (bold)"
+        type: string
+      - name: "home.lede"
+        label: "HOME — Description"
+        type: string
+      - name: "home.cta_primary"
+        label: "home — cta primary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.cta_secondary"
+        label: "home — cta secondary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.label"
+        label: "purpose — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.h2"
+        label: "purpose — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p1"
+        label: "purpose — p1"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p2"
+        label: "purpose — p2"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.label"
+        label: "TOOLS — small section label"
+        type: string
+      - name: "inst.h2"
+        label: "TOOLS — section heading"
+        type: string
+      - name: "inst.chip_live"
+        label: "TOOLS — “Open now” badge"
+        type: string
+      - name: "inst.chip_soon"
+        label: "inst — chip soon"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.planned"
+        label: "inst — planned"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t1.name"
+        label: "Tool 1 — name"
+        type: string
+      - name: "inst.t1.desc"
+        label: "Tool 1 — description"
+        type: text
+      - name: "inst.t1.m1"
+        label: "Tool 1 — stat 1 (exposures)"
+        type: string
+      - name: "inst.t1.m2"
+        label: "Tool 1 — stat 2 (cancer types)"
+        type: string
+      - name: "inst.t1.m3"
+        label: "Tool 1 — stat 3 (links)"
+        type: string
+      - name: "inst.t1.m4"
+        label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst.t1.btn_about"
+        label: "Tool 1 — secondary button"
+        type: string
+      - name: "inst.t1.btn_open"
+        label: "Tool 1 — primary button"
+        type: string
+      - name: "inst.t2.name"
+        label: "inst — t2 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.desc"
+        label: "inst — t2 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.name"
+        label: "inst — t3 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.desc"
+        label: "inst — t3 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "about.label"
+        label: "ABOUT — small section label"
+        type: string
+      - name: "about.h2"
+        label: "ABOUT — heading"
+        type: string
+      - name: "about.p1"
+        label: "ABOUT — paragraph 1"
+        type: text
+      - name: "about.p2"
+        label: "ABOUT — paragraph 2"
+        type: text
+      - name: "about.p3"
+        label: "ABOUT — paragraph 3"
+        type: text
+      - name: "about.p4"
+        label: "ABOUT — paragraph 4 (closing)"
+        type: text
+      - name: "about.cred1_label"
+        label: "ABOUT — credential 1: label"
+        type: string
+      - name: "about.cred1_value"
+        label: "ABOUT — credential 1: value"
+        type: string
+      - name: "about.cred2_label"
+        label: "ABOUT — credential 2: label"
+        type: string
+      - name: "about.cred2_value"
+        label: "ABOUT — credential 2: value"
+        type: string
+      - name: "about.cred3_label"
+        label: "ABOUT — credential 3: label"
+        type: string
+      - name: "about.cred3_value"
+        label: "ABOUT — credential 3: value"
+        type: string
+      - name: "about.cred4_label"
+        label: "ABOUT — credential 4: label"
+        type: string
+      - name: "about.cred4_value"
+        label: "ABOUT — credential 4: value"
+        type: text
+      - name: "about.cred5_label"
+        label: "ABOUT — credential 5: label"
+        type: string
+      - name: "about.cred5_value"
+        label: "ABOUT — credential 5: value"
+        type: string
+      - name: "notes.label"
+        label: "notes — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.h2"
+        label: "notes — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.title"
+        label: "notes — n1 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.meta"
+        label: "notes — n1 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.title"
+        label: "notes — n2 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.meta"
+        label: "notes — n2 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "foot.tagline"
+        label: "FOOTER — tagline"
+        type: string
+      - name: "foot.affiliation"
+        label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot.disclaimer"
+        label: "FOOTER — health disclaimer"
+        type: text
+      - name: "foot.created"
+        label: "FOOTER — credit line"
+        type: string
+      - name: "foot.affil"
+        label: "foot — affil"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "exp.crumb_current"
+        label: "EXPLORER — crumb current"
+        type: string
+      - name: "exp.h1"
+        label: "EXPLORER — h1"
+        type: string
+      - name: "exp.lede"
+        label: "EXPLORER — lede"
+        type: text
+      - name: "exp.leg_est"
+        label: "EXPLORER — leg est"
+        type: string
+      - name: "exp.leg_sus"
+        label: "EXPLORER — leg sus"
+        type: string
+      - name: "exp.leg_can"
+        label: "EXPLORER — leg can"
+        type: string
+      - name: "exp.whatsin_label"
+        label: "EXPLORER — whatsin label"
+        type: string
+      - name: "exp.whatsin_h2"
+        label: "EXPLORER — whatsin h2"
+        type: string
+      - name: "exp.fig1"
+        label: "EXPLORER — fig1"
+        type: string
+      - name: "exp.fig2"
+        label: "EXPLORER — fig2"
+        type: string
+      - name: "exp.fig3"
+        label: "EXPLORER — fig3"
+        type: string
+      - name: "exp.fig4"
+        label: "EXPLORER — fig4"
+        type: string
+      - name: "exp.bar1_title"
+        label: "EXPLORER — bar1 title"
+        type: string
+      - name: "exp.bar1_meta"
+        label: "EXPLORER — bar1 meta"
+        type: string
+      - name: "exp.bar1_note"
+        label: "EXPLORER — bar1 note"
+        type: text
+      - name: "exp.bar2_title"
+        label: "EXPLORER — bar2 title"
+        type: string
+      - name: "exp.bar2_meta"
+        label: "EXPLORER — bar2 meta"
+        type: string
+      - name: "exp.bar2_note"
+        label: "EXPLORER — bar2 note"
+        type: text
+      - name: "exp.reads_label"
+        label: "EXPLORER — reads label"
+        type: string
+      - name: "exp.reads_h2"
+        label: "EXPLORER — reads h2"
+        type: string
+      - name: "exp.read1_tag"
+        label: "EXPLORER — read1 tag"
+        type: string
+      - name: "exp.read1_h3"
+        label: "EXPLORER — read1 h3"
+        type: string
+      - name: "exp.read1_p"
+        label: "EXPLORER — read1 p"
+        type: text
+      - name: "exp.read2_tag"
+        label: "EXPLORER — read2 tag"
+        type: string
+      - name: "exp.read2_h3"
+        label: "EXPLORER — read2 h3"
+        type: string
+      - name: "exp.read2_p"
+        label: "EXPLORER — read2 p"
+        type: text
+      - name: "exp.read3_tag"
+        label: "EXPLORER — read3 tag"
+        type: string
+      - name: "exp.read3_h3"
+        label: "EXPLORER — read3 h3"
+        type: string
+      - name: "exp.read3_p"
+        label: "EXPLORER — read3 p"
+        type: text
+      - name: "exp.cta_label"
+        label: "EXPLORER — cta label"
+        type: string
+      - name: "exp.cta_h2"
+        label: "EXPLORER — cta h2"
+        type: string
+      - name: "exp.cta_lede"
+        label: "EXPLORER — cta lede"
+        type: string
+      - name: "exp.cta_btn"
+        label: "EXPLORER — cta btn"
+        type: string
+      - name: "exp.cta_source"
+        label: "EXPLORER — cta source"
+        type: text
+
+  - name: es
+    label: "Español Spanish"
+    type: file
+    path: i18n/es.json
+    format: json
+    fields:
+      - name: "lang.name"
+        label: "Language name, written in that language"
+        type: string
+      - name: "lang.dir"
+        label: "Text direction — leave as ltr"
+        type: string
+      - name: "meta.home.title"
+        label: "Home — browser tab and Google headline"
+        type: string
+      - name: "meta.home.desc"
+        label: "Home — Google result description"
+        type: text
+      - name: "meta.explorer.title"
+        label: "Explorer — browser tab and Google headline"
+        type: string
+      - name: "meta.explorer.desc"
+        label: "Explorer — Google result description"
+        type: text
+      - name: "ui.language"
+        label: "Language switcher label (screen readers)"
+        type: string
+      - name: "nav.instruments"
+        label: "Menu — Tools"
+        type: string
+      - name: "nav.explorer"
+        label: "Menu — Evidence Explorer"
+        type: string
+      - name: "nav.about"
+        label: "Menu — About"
+        type: string
+      - name: "nav.notes"
+        label: "nav — notes"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.eyebrow"
+        label: "home — eyebrow"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.h1"
+        label: "HOME — Headline"
+        type: string
+      - name: "home.audience"
+        label: "HOME — Audience line (bold)"
+        type: string
+      - name: "home.lede"
+        label: "HOME — Description"
+        type: string
+      - name: "home.cta_primary"
+        label: "home — cta primary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.cta_secondary"
+        label: "home — cta secondary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.label"
+        label: "purpose — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.h2"
+        label: "purpose — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p1"
+        label: "purpose — p1"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p2"
+        label: "purpose — p2"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.label"
+        label: "TOOLS — small section label"
+        type: string
+      - name: "inst.h2"
+        label: "TOOLS — section heading"
+        type: string
+      - name: "inst.chip_live"
+        label: "TOOLS — “Open now” badge"
+        type: string
+      - name: "inst.chip_soon"
+        label: "inst — chip soon"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.planned"
+        label: "inst — planned"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t1.name"
+        label: "Tool 1 — name"
+        type: string
+      - name: "inst.t1.desc"
+        label: "Tool 1 — description"
+        type: text
+      - name: "inst.t1.m1"
+        label: "Tool 1 — stat 1 (exposures)"
+        type: string
+      - name: "inst.t1.m2"
+        label: "Tool 1 — stat 2 (cancer types)"
+        type: string
+      - name: "inst.t1.m3"
+        label: "Tool 1 — stat 3 (links)"
+        type: string
+      - name: "inst.t1.m4"
+        label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst.t1.btn_about"
+        label: "Tool 1 — secondary button"
+        type: string
+      - name: "inst.t1.btn_open"
+        label: "Tool 1 — primary button"
+        type: string
+      - name: "inst.t2.name"
+        label: "inst — t2 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.desc"
+        label: "inst — t2 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.name"
+        label: "inst — t3 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.desc"
+        label: "inst — t3 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "about.label"
+        label: "ABOUT — small section label"
+        type: string
+      - name: "about.h2"
+        label: "ABOUT — heading"
+        type: string
+      - name: "about.p1"
+        label: "ABOUT — paragraph 1"
+        type: text
+      - name: "about.p2"
+        label: "ABOUT — paragraph 2"
+        type: text
+      - name: "about.p3"
+        label: "ABOUT — paragraph 3"
+        type: text
+      - name: "about.p4"
+        label: "ABOUT — paragraph 4 (closing)"
+        type: text
+      - name: "about.cred1_label"
+        label: "ABOUT — credential 1: label"
+        type: string
+      - name: "about.cred1_value"
+        label: "ABOUT — credential 1: value"
+        type: string
+      - name: "about.cred2_label"
+        label: "ABOUT — credential 2: label"
+        type: string
+      - name: "about.cred2_value"
+        label: "ABOUT — credential 2: value"
+        type: string
+      - name: "about.cred3_label"
+        label: "ABOUT — credential 3: label"
+        type: string
+      - name: "about.cred3_value"
+        label: "ABOUT — credential 3: value"
+        type: string
+      - name: "about.cred4_label"
+        label: "ABOUT — credential 4: label"
+        type: string
+      - name: "about.cred4_value"
+        label: "ABOUT — credential 4: value"
+        type: text
+      - name: "about.cred5_label"
+        label: "ABOUT — credential 5: label"
+        type: string
+      - name: "about.cred5_value"
+        label: "ABOUT — credential 5: value"
+        type: string
+      - name: "notes.label"
+        label: "notes — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.h2"
+        label: "notes — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.title"
+        label: "notes — n1 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.meta"
+        label: "notes — n1 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.title"
+        label: "notes — n2 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.meta"
+        label: "notes — n2 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "foot.tagline"
+        label: "FOOTER — tagline"
+        type: string
+      - name: "foot.affiliation"
+        label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot.disclaimer"
+        label: "FOOTER — health disclaimer"
+        type: text
+      - name: "foot.created"
+        label: "FOOTER — credit line"
+        type: string
+      - name: "foot.affil"
+        label: "foot — affil"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "exp.crumb_current"
+        label: "EXPLORER — crumb current"
+        type: string
+      - name: "exp.h1"
+        label: "EXPLORER — h1"
+        type: string
+      - name: "exp.lede"
+        label: "EXPLORER — lede"
+        type: text
+      - name: "exp.leg_est"
+        label: "EXPLORER — leg est"
+        type: string
+      - name: "exp.leg_sus"
+        label: "EXPLORER — leg sus"
+        type: string
+      - name: "exp.leg_can"
+        label: "EXPLORER — leg can"
+        type: string
+      - name: "exp.whatsin_label"
+        label: "EXPLORER — whatsin label"
+        type: string
+      - name: "exp.whatsin_h2"
+        label: "EXPLORER — whatsin h2"
+        type: string
+      - name: "exp.fig1"
+        label: "EXPLORER — fig1"
+        type: string
+      - name: "exp.fig2"
+        label: "EXPLORER — fig2"
+        type: string
+      - name: "exp.fig3"
+        label: "EXPLORER — fig3"
+        type: string
+      - name: "exp.fig4"
+        label: "EXPLORER — fig4"
+        type: string
+      - name: "exp.bar1_title"
+        label: "EXPLORER — bar1 title"
+        type: string
+      - name: "exp.bar1_meta"
+        label: "EXPLORER — bar1 meta"
+        type: string
+      - name: "exp.bar1_note"
+        label: "EXPLORER — bar1 note"
+        type: text
+      - name: "exp.bar2_title"
+        label: "EXPLORER — bar2 title"
+        type: string
+      - name: "exp.bar2_meta"
+        label: "EXPLORER — bar2 meta"
+        type: string
+      - name: "exp.bar2_note"
+        label: "EXPLORER — bar2 note"
+        type: text
+      - name: "exp.reads_label"
+        label: "EXPLORER — reads label"
+        type: string
+      - name: "exp.reads_h2"
+        label: "EXPLORER — reads h2"
+        type: string
+      - name: "exp.read1_tag"
+        label: "EXPLORER — read1 tag"
+        type: string
+      - name: "exp.read1_h3"
+        label: "EXPLORER — read1 h3"
+        type: string
+      - name: "exp.read1_p"
+        label: "EXPLORER — read1 p"
+        type: text
+      - name: "exp.read2_tag"
+        label: "EXPLORER — read2 tag"
+        type: string
+      - name: "exp.read2_h3"
+        label: "EXPLORER — read2 h3"
+        type: string
+      - name: "exp.read2_p"
+        label: "EXPLORER — read2 p"
+        type: text
+      - name: "exp.read3_tag"
+        label: "EXPLORER — read3 tag"
+        type: string
+      - name: "exp.read3_h3"
+        label: "EXPLORER — read3 h3"
+        type: string
+      - name: "exp.read3_p"
+        label: "EXPLORER — read3 p"
+        type: text
+      - name: "exp.cta_label"
+        label: "EXPLORER — cta label"
+        type: string
+      - name: "exp.cta_h2"
+        label: "EXPLORER — cta h2"
+        type: string
+      - name: "exp.cta_lede"
+        label: "EXPLORER — cta lede"
+        type: string
+      - name: "exp.cta_btn"
+        label: "EXPLORER — cta btn"
+        type: string
+      - name: "exp.cta_source"
+        label: "EXPLORER — cta source"
+        type: text
+
+  - name: ru
+    label: "Русский Russian"
+    type: file
+    path: i18n/ru.json
+    format: json
+    fields:
+      - name: "lang.name"
+        label: "Language name, written in that language"
+        type: string
+      - name: "lang.dir"
+        label: "Text direction — leave as ltr"
+        type: string
+      - name: "meta.home.title"
+        label: "Home — browser tab and Google headline"
+        type: string
+      - name: "meta.home.desc"
+        label: "Home — Google result description"
+        type: text
+      - name: "meta.explorer.title"
+        label: "Explorer — browser tab and Google headline"
+        type: string
+      - name: "meta.explorer.desc"
+        label: "Explorer — Google result description"
+        type: text
+      - name: "ui.language"
+        label: "Language switcher label (screen readers)"
+        type: string
+      - name: "nav.instruments"
+        label: "Menu — Tools"
+        type: string
+      - name: "nav.explorer"
+        label: "Menu — Evidence Explorer"
+        type: string
+      - name: "nav.about"
+        label: "Menu — About"
+        type: string
+      - name: "nav.notes"
+        label: "nav — notes"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.eyebrow"
+        label: "home — eyebrow"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.h1"
+        label: "HOME — Headline"
+        type: string
+      - name: "home.audience"
+        label: "HOME — Audience line (bold)"
+        type: string
+      - name: "home.lede"
+        label: "HOME — Description"
+        type: string
+      - name: "home.cta_primary"
+        label: "home — cta primary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "home.cta_secondary"
+        label: "home — cta secondary"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.label"
+        label: "purpose — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.h2"
+        label: "purpose — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p1"
+        label: "purpose — p1"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "purpose.p2"
+        label: "purpose — p2"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.label"
+        label: "TOOLS — small section label"
+        type: string
+      - name: "inst.h2"
+        label: "TOOLS — section heading"
+        type: string
+      - name: "inst.chip_live"
+        label: "TOOLS — “Open now” badge"
+        type: string
+      - name: "inst.chip_soon"
+        label: "inst — chip soon"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.planned"
+        label: "inst — planned"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t1.name"
+        label: "Tool 1 — name"
+        type: string
+      - name: "inst.t1.desc"
+        label: "Tool 1 — description"
+        type: text
+      - name: "inst.t1.m1"
+        label: "Tool 1 — stat 1 (exposures)"
+        type: string
+      - name: "inst.t1.m2"
+        label: "Tool 1 — stat 2 (cancer types)"
+        type: string
+      - name: "inst.t1.m3"
+        label: "Tool 1 — stat 3 (links)"
+        type: string
+      - name: "inst.t1.m4"
+        label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst.t1.btn_about"
+        label: "Tool 1 — secondary button"
+        type: string
+      - name: "inst.t1.btn_open"
+        label: "Tool 1 — primary button"
+        type: string
+      - name: "inst.t2.name"
+        label: "inst — t2 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.desc"
+        label: "inst — t2 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.name"
+        label: "inst — t3 — name"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t3.desc"
+        label: "inst — t3 — desc"
+        type: text
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "about.label"
+        label: "ABOUT — small section label"
+        type: string
+      - name: "about.h2"
+        label: "ABOUT — heading"
+        type: string
+      - name: "about.p1"
+        label: "ABOUT — paragraph 1"
+        type: text
+      - name: "about.p2"
+        label: "ABOUT — paragraph 2"
+        type: text
+      - name: "about.p3"
+        label: "ABOUT — paragraph 3"
+        type: text
+      - name: "about.p4"
+        label: "ABOUT — paragraph 4 (closing)"
+        type: text
+      - name: "about.cred1_label"
+        label: "ABOUT — credential 1: label"
+        type: string
+      - name: "about.cred1_value"
+        label: "ABOUT — credential 1: value"
+        type: string
+      - name: "about.cred2_label"
+        label: "ABOUT — credential 2: label"
+        type: string
+      - name: "about.cred2_value"
+        label: "ABOUT — credential 2: value"
+        type: string
+      - name: "about.cred3_label"
+        label: "ABOUT — credential 3: label"
+        type: string
+      - name: "about.cred3_value"
+        label: "ABOUT — credential 3: value"
+        type: string
+      - name: "about.cred4_label"
+        label: "ABOUT — credential 4: label"
+        type: string
+      - name: "about.cred4_value"
+        label: "ABOUT — credential 4: value"
+        type: text
+      - name: "about.cred5_label"
+        label: "ABOUT — credential 5: label"
+        type: string
+      - name: "about.cred5_value"
+        label: "ABOUT — credential 5: value"
+        type: string
+      - name: "notes.label"
+        label: "notes — label"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.h2"
+        label: "notes — h2"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.title"
+        label: "notes — n1 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n1.meta"
+        label: "notes — n1 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.title"
+        label: "notes — n2 — title"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "notes.n2.meta"
+        label: "notes — n2 — meta"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "foot.tagline"
+        label: "FOOTER — tagline"
+        type: string
+      - name: "foot.affiliation"
+        label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot.disclaimer"
+        label: "FOOTER — health disclaimer"
+        type: text
+      - name: "foot.created"
+        label: "FOOTER — credit line"
+        type: string
+      - name: "foot.affil"
+        label: "foot — affil"
+        type: string
+        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "exp.crumb_current"
+        label: "EXPLORER — crumb current"
+        type: string
+      - name: "exp.h1"
+        label: "EXPLORER — h1"
+        type: string
+      - name: "exp.lede"
+        label: "EXPLORER — lede"
+        type: text
+      - name: "exp.leg_est"
+        label: "EXPLORER — leg est"
+        type: string
+      - name: "exp.leg_sus"
+        label: "EXPLORER — leg sus"
+        type: string
+      - name: "exp.leg_can"
+        label: "EXPLORER — leg can"
+        type: string
+      - name: "exp.whatsin_label"
+        label: "EXPLORER — whatsin label"
+        type: string
+      - name: "exp.whatsin_h2"
+        label: "EXPLORER — whatsin h2"
+        type: string
+      - name: "exp.fig1"
+        label: "EXPLORER — fig1"
+        type: string
+      - name: "exp.fig2"
+        label: "EXPLORER — fig2"
+        type: string
+      - name: "exp.fig3"
+        label: "EXPLORER — fig3"
+        type: string
+      - name: "exp.fig4"
+        label: "EXPLORER — fig4"
+        type: string
+      - name: "exp.bar1_title"
+        label: "EXPLORER — bar1 title"
+        type: string
+      - name: "exp.bar1_meta"
+        label: "EXPLORER — bar1 meta"
+        type: string
+      - name: "exp.bar1_note"
+        label: "EXPLORER — bar1 note"
+        type: text
+      - name: "exp.bar2_title"
+        label: "EXPLORER — bar2 title"
+        type: string
+      - name: "exp.bar2_meta"
+        label: "EXPLORER — bar2 meta"
+        type: string
+      - name: "exp.bar2_note"
+        label: "EXPLORER — bar2 note"
+        type: text
+      - name: "exp.reads_label"
+        label: "EXPLORER — reads label"
+        type: string
+      - name: "exp.reads_h2"
+        label: "EXPLORER — reads h2"
+        type: string
+      - name: "exp.read1_tag"
+        label: "EXPLORER — read1 tag"
+        type: string
+      - name: "exp.read1_h3"
+        label: "EXPLORER — read1 h3"
+        type: string
+      - name: "exp.read1_p"
+        label: "EXPLORER — read1 p"
+        type: text
+      - name: "exp.read2_tag"
+        label: "EXPLORER — read2 tag"
+        type: string
+      - name: "exp.read2_h3"
+        label: "EXPLORER — read2 h3"
+        type: string
+      - name: "exp.read2_p"
+        label: "EXPLORER — read2 p"
+        type: text
+      - name: "exp.read3_tag"
+        label: "EXPLORER — read3 tag"
+        type: string
+      - name: "exp.read3_h3"
+        label: "EXPLORER — read3 h3"
+        type: string
+      - name: "exp.read3_p"
+        label: "EXPLORER — read3 p"
+        type: text
+      - name: "exp.cta_label"
+        label: "EXPLORER — cta label"
+        type: string
+      - name: "exp.cta_h2"
+        label: "EXPLORER — cta h2"
+        type: string
+      - name: "exp.cta_lede"
+        label: "EXPLORER — cta lede"
+        type: string
+      - name: "exp.cta_btn"
+        label: "EXPLORER — cta btn"
+        type: string
+      - name: "exp.cta_source"
+        label: "EXPLORER — cta source"
+        type: text
