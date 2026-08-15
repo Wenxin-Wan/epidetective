@@ -3,7 +3,7 @@
   "lang.dir": "ltr",
 
   "meta.home.title": "EpiDetective — Open tools for reading health evidence",
-  "meta.home.desc": "Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.",
+  "meta.home.desc": "Free tools that let you explore the published evidence on what causes cancer and other major chronic diseases. Built by a cancer epidemiologist at IARC/WHO.",
   "meta.explorer.title": "Cancer Evidence Explorer — EpiDetective",
   "meta.explorer.desc": "See which exposures have been linked to which cancers, and how strong the evidence is for each link. Built on the WHO's IARC Monographs.",
 
@@ -27,7 +27,7 @@
   "purpose.p2": "The aim is to make findings usable while keeping the uncertainty that makes them trustworthy. Where the science is still unsure, the tool says so plainly.",
 
   "inst.label": "The tools",
-  "inst.h2": "One is <b>open now</b>. More are being built.",
+  "inst.h2": "Two are <b>open now</b>. More are being built.",
   "inst.chip_live": "Open now",
   "inst.chip_soon": "In development",
   "inst.planned": "Planned",
@@ -41,8 +41,14 @@
   "inst.t1.btn_about": "About this tool",
   "inst.t1.btn_open": "Open it &rarr;",
 
-  "inst.t2.name": "Occupational Exposure Atlas",
-  "inst.t2.desc": "What people are exposed to at work, and which of those exposures carry an established cancer risk — drawing on job-exposure matrices from the SYNERGY and EPHOR cohorts.",
+  "inst.t2.name": "Chronic Disease Evidence Explorer",
+  "inst.t2.desc": "Which risk factors have been linked to heart disease, stroke, type 2 diabetes, dementia, cancer and other major chronic conditions — and how strong the evidence is behind each link, including where it is genuinely contested. Pull the network apart to see how the risk factors group together.",
+  "inst.t2.m1": "95 risk factors",
+  "inst.t2.m2": "31 diseases",
+  "inst.t2.m3": "359 graded links",
+  "inst.t2.m4": "English + 中文",
+  "inst.t2.btn_open": "Open it &rarr;",
+  "inst.t2.btn_about": "How it was built",
 
   "inst.t3.name": "Risk in Context",
   "inst.t3.desc": "A translator for the numbers that get misreported most, turning relative risks and hazard ratios into plain figures a person can weigh.",

@@ -90,4 +90,7 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/explorer.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/explorer.html"/>
   </url>
+  <url>
+    <loc>https://epidetective.com/chronic-disease-explorer/</loc>
+  </url>
 </urlset>

@@ -3,7 +3,7 @@
   "lang.dir": "ltr",
 
   "meta.home.title": "EpiDetective — Des outils ouverts pour lire les données de santé",
-  "meta.home.desc": "Des outils gratuits pour explorer vous-même ce que l'Organisation mondiale de la Santé a établi sur les causes du cancer. Conçus par une épidémiologiste du cancer au CIRC/OMS.",
+  "meta.home.desc": "Des outils libres pour explorer soi-même les données publiées sur les causes des cancers et des autres grandes maladies chroniques. Conçu par un épidémiologiste du cancer au CIRC/OMS.",
   "meta.explorer.title": "Explorateur des données sur le cancer — EpiDetective",
   "meta.explorer.desc": "Quelles expositions ont été reliées à quels cancers, et quelle est la solidité des données derrière chaque lien. Fondé sur les Monographies du CIRC (OMS).",
 
@@ -27,7 +27,7 @@
   "purpose.p2": "L'objectif est de rendre les résultats utilisables tout en conservant l'incertitude qui les rend fiables. Là où la science hésite encore, l'outil le dit clairement.",
 
   "inst.label": "Les outils",
-  "inst.h2": "L'un est <b>ouvert dès maintenant</b>. D'autres arrivent.",
+  "inst.h2": "Deux sont <b>ouverts dès maintenant</b>. D'autres arrivent.",
   "inst.chip_live": "Ouvert",
   "inst.chip_soon": "En développement",
   "inst.planned": "Prévu",
@@ -41,8 +41,14 @@
   "inst.t1.btn_about": "À propos de cet outil",
   "inst.t1.btn_open": "L'ouvrir &rarr;",
 
-  "inst.t2.name": "Atlas des expositions professionnelles",
-  "inst.t2.desc": "Ce à quoi les gens sont exposés au travail, et lesquelles de ces expositions comportent un risque de cancer établi — à partir des matrices emplois-expositions des cohortes SYNERGY et EPHOR.",
+  "inst.t2.name": "Explorateur des maladies chroniques",
+  "inst.t2.desc": "Quels facteurs de risque ont été associés aux maladies cardiaques, aux AVC, au diabète de type 2, à la démence, aux cancers et à d'autres grandes maladies chroniques — et quelle est la solidité des preuves derrière chaque lien, y compris là où elles sont réellement contestées. Déployez le réseau pour voir comment les facteurs de risque se regroupent.",
+  "inst.t2.m1": "95 facteurs de risque",
+  "inst.t2.m2": "31 maladies",
+  "inst.t2.m3": "359 liens gradués",
+  "inst.t2.m4": "anglais + chinois",
+  "inst.t2.btn_open": "Ouvrir &rarr;",
+  "inst.t2.btn_about": "Comment il a été construit",
 
   "inst.t3.name": "Le risque en contexte",
   "inst.t3.desc": "Un traducteur pour les chiffres les plus souvent mal rapportés, convertissant risques relatifs et rapports de risque en valeurs simples que chacun peut soupeser.",

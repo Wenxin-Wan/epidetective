@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EpiDetective — Open tools for reading health evidence</title>
-<meta name="description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
+<meta name="description" content="Free tools that let you explore the published evidence on what causes cancer and other major chronic diseases. Built by a cancer epidemiologist at IARC/WHO.">
 <link rel="canonical" href="https://epidetective.com/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/">
 <meta property="og:title" content="EpiDetective — Open tools for reading health evidence">
-<meta property="og:description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
+<meta property="og:description" content="Free tools that let you explore the published evidence on what causes cancer and other major chronic diseases. Built by a cancer epidemiologist at IARC/WHO.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective — Open tools for reading health evidence">
-<meta name="twitter:description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
+<meta name="twitter:description" content="Free tools that let you explore the published evidence on what causes cancer and other major chronic diseases. Built by a cancer epidemiologist at IARC/WHO.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="site.css">
 </head>
@@ -58,7 +58,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">The tools</div>
-    <h2>One is <b>open now</b>. More are being built.</h2>
+    <h2>Two are <b>open now</b>. More are being built.</h2>
   </div>
 
   <div class="rack">
@@ -84,9 +84,30 @@
       <a href="explorer.html" class="thumb" aria-label="Cancer Evidence Explorer"></a>
     </article>
 
-    <!-- Placeholder instruments removed before launch: they were invented, not
-         planned. To restore, re-add an <article class="inst is-soon"> block using
-         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Open now</span>
+          <h3>Chronic Disease Evidence Explorer</h3>
+        </div>
+        <p>Which risk factors have been linked to heart disease, stroke, type 2 diabetes, dementia, cancer and other major chronic conditions — and how strong the evidence is behind each link, including where it is genuinely contested. Pull the network apart to see how the risk factors group together.</p>
+        <div class="inst-meta">
+          <span>95 risk factors</span><span>31 diseases</span>
+          <span>359 graded links</span><span>English + 中文</span>
+        </div>
+        <!-- this tool carries its own methods section, so the secondary action
+             points into it rather than at a separate explainer page -->
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="chronic-disease-explorer/">Open it &rarr;</a>
+          <a class="btn btn-ghost" href="chronic-disease-explorer/#methods">How it was built</a>
+        </div>
+      </div>
+      <a href="chronic-disease-explorer/" class="thumb thumb-chronic" aria-label="Chronic Disease Evidence Explorer"></a>
+    </article>
+
+    <!-- A third slot was drafted before launch and cut: it was invented, not
+         planned. To restore, add an <article class="inst is-soon"> block using
+         the inst.t3.* keys, which are still present in every i18n file. -->
 
   </div>
 </section>

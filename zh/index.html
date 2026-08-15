@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EpiDetective｜读懂健康证据的公开工具</title>
-<meta name="description" content="一组免费工具，帮助你亲自查证世界卫生组织关于癌症成因的研究结论。由国际癌症研究机构（IARC）的癌症流行病学研究者开发。">
+<meta name="description" content="一批免费工具，帮助你自己查阅关于癌症及其他主要慢性病成因的已发表证据。由 IARC/WHO 的癌症流行病学研究者建立。">
 <link rel="canonical" href="https://epidetective.com/zh/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/zh/">
 <meta property="og:title" content="EpiDetective｜读懂健康证据的公开工具">
-<meta property="og:description" content="一组免费工具，帮助你亲自查证世界卫生组织关于癌症成因的研究结论。由国际癌症研究机构（IARC）的癌症流行病学研究者开发。">
+<meta property="og:description" content="一批免费工具，帮助你自己查阅关于癌症及其他主要慢性病成因的已发表证据。由 IARC/WHO 的癌症流行病学研究者建立。">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective｜读懂健康证据的公开工具">
-<meta name="twitter:description" content="一组免费工具，帮助你亲自查证世界卫生组织关于癌症成因的研究结论。由国际癌症研究机构（IARC）的癌症流行病学研究者开发。">
+<meta name="twitter:description" content="一批免费工具，帮助你自己查阅关于癌症及其他主要慢性病成因的已发表证据。由 IARC/WHO 的癌症流行病学研究者建立。">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -58,7 +58,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">工具</div>
-    <h2>目前<b>开放一个</b>，其余仍在开发。</h2>
+    <h2>目前<b>开放两个</b>，其余仍在开发。</h2>
   </div>
 
   <div class="rack">
@@ -84,9 +84,30 @@
       <a href="explorer.html" class="thumb" aria-label="癌症证据探索器"></a>
     </article>
 
-    <!-- Placeholder instruments removed before launch: they were invented, not
-         planned. To restore, re-add an <article class="inst is-soon"> block using
-         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">已开放</span>
+          <h3>慢性病证据图谱</h3>
+        </div>
+        <p>哪些危险因素已被研究证实与心脏病、卒中、2型糖尿病、痴呆、癌症等主要慢性病相关，每一条关联背后的证据又有多强——包括那些确实存在争议的关联。可以直接拖动这张网络图，看清危险因素是如何聚成一类一类的。</p>
+        <div class="inst-meta">
+          <span>95 项危险因素</span><span>31 种疾病</span>
+          <span>359 条分级关联</span><span>中文 + English</span>
+        </div>
+        <!-- this tool carries its own methods section, so the secondary action
+             points into it rather than at a separate explainer page -->
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../chronic-disease-explorer/">打开工具 &rarr;</a>
+          <a class="btn btn-ghost" href="../chronic-disease-explorer/#methods">如何构建</a>
+        </div>
+      </div>
+      <a href="../chronic-disease-explorer/" class="thumb thumb-chronic" aria-label="慢性病证据图谱"></a>
+    </article>
+
+    <!-- A third slot was drafted before launch and cut: it was invented, not
+         planned. To restore, add an <article class="inst is-soon"> block using
+         the inst.t3.* keys, which are still present in every i18n file. -->
 
   </div>
 </section>

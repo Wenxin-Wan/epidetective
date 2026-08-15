@@ -131,13 +131,29 @@ content:
         label: "Tool 1 — primary button"
         type: string
       - name: "inst.t2.name"
-        label: "inst — t2 — name"
+        label: "Tool 2 — name"
         type: string
-        description: "Not shown on the site right now. Kept so the section can be restored."
       - name: "inst.t2.desc"
-        label: "inst — t2 — desc"
+        label: "Tool 2 — description"
         type: text
-        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.m1"
+        label: "Tool 2 — stat 1 (risk factors)"
+        type: string
+      - name: "inst.t2.m2"
+        label: "Tool 2 — stat 2 (diseases)"
+        type: string
+      - name: "inst.t2.m3"
+        label: "Tool 2 — stat 3 (links)"
+        type: string
+      - name: "inst.t2.m4"
+        label: "Tool 2 — stat 4 (languages)"
+        type: string
+      - name: "inst.t2.btn_open"
+        label: "Tool 2 — primary button"
+        type: string
+      - name: "inst.t2.btn_about"
+        label: "Tool 2 — secondary button"
+        type: string
       - name: "inst.t3.name"
         label: "inst — t3 — name"
         type: string
@@ -456,13 +472,29 @@ content:
         label: "Tool 1 — primary button"
         type: string
       - name: "inst.t2.name"
-        label: "inst — t2 — name"
+        label: "Tool 2 — name"
         type: string
-        description: "Not shown on the site right now. Kept so the section can be restored."
       - name: "inst.t2.desc"
-        label: "inst — t2 — desc"
+        label: "Tool 2 — description"
         type: text
-        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.m1"
+        label: "Tool 2 — stat 1 (risk factors)"
+        type: string
+      - name: "inst.t2.m2"
+        label: "Tool 2 — stat 2 (diseases)"
+        type: string
+      - name: "inst.t2.m3"
+        label: "Tool 2 — stat 3 (links)"
+        type: string
+      - name: "inst.t2.m4"
+        label: "Tool 2 — stat 4 (languages)"
+        type: string
+      - name: "inst.t2.btn_open"
+        label: "Tool 2 — primary button"
+        type: string
+      - name: "inst.t2.btn_about"
+        label: "Tool 2 — secondary button"
+        type: string
       - name: "inst.t3.name"
         label: "inst — t3 — name"
         type: string
@@ -781,13 +813,29 @@ content:
         label: "Tool 1 — primary button"
         type: string
       - name: "inst.t2.name"
-        label: "inst — t2 — name"
+        label: "Tool 2 — name"
         type: string
-        description: "Not shown on the site right now. Kept so the section can be restored."
       - name: "inst.t2.desc"
-        label: "inst — t2 — desc"
+        label: "Tool 2 — description"
         type: text
-        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.m1"
+        label: "Tool 2 — stat 1 (risk factors)"
+        type: string
+      - name: "inst.t2.m2"
+        label: "Tool 2 — stat 2 (diseases)"
+        type: string
+      - name: "inst.t2.m3"
+        label: "Tool 2 — stat 3 (links)"
+        type: string
+      - name: "inst.t2.m4"
+        label: "Tool 2 — stat 4 (languages)"
+        type: string
+      - name: "inst.t2.btn_open"
+        label: "Tool 2 — primary button"
+        type: string
+      - name: "inst.t2.btn_about"
+        label: "Tool 2 — secondary button"
+        type: string
       - name: "inst.t3.name"
         label: "inst — t3 — name"
         type: string
@@ -1106,13 +1154,29 @@ content:
         label: "Tool 1 — primary button"
         type: string
       - name: "inst.t2.name"
-        label: "inst — t2 — name"
+        label: "Tool 2 — name"
         type: string
-        description: "Not shown on the site right now. Kept so the section can be restored."
       - name: "inst.t2.desc"
-        label: "inst — t2 — desc"
+        label: "Tool 2 — description"
         type: text
-        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.m1"
+        label: "Tool 2 — stat 1 (risk factors)"
+        type: string
+      - name: "inst.t2.m2"
+        label: "Tool 2 — stat 2 (diseases)"
+        type: string
+      - name: "inst.t2.m3"
+        label: "Tool 2 — stat 3 (links)"
+        type: string
+      - name: "inst.t2.m4"
+        label: "Tool 2 — stat 4 (languages)"
+        type: string
+      - name: "inst.t2.btn_open"
+        label: "Tool 2 — primary button"
+        type: string
+      - name: "inst.t2.btn_about"
+        label: "Tool 2 — secondary button"
+        type: string
       - name: "inst.t3.name"
         label: "inst — t3 — name"
         type: string
@@ -1431,13 +1495,29 @@ content:
         label: "Tool 1 — primary button"
         type: string
       - name: "inst.t2.name"
-        label: "inst — t2 — name"
+        label: "Tool 2 — name"
         type: string
-        description: "Not shown on the site right now. Kept so the section can be restored."
       - name: "inst.t2.desc"
-        label: "inst — t2 — desc"
+        label: "Tool 2 — description"
         type: text
-        description: "Not shown on the site right now. Kept so the section can be restored."
+      - name: "inst.t2.m1"
+        label: "Tool 2 — stat 1 (risk factors)"
+        type: string
+      - name: "inst.t2.m2"
+        label: "Tool 2 — stat 2 (diseases)"
+        type: string
+      - name: "inst.t2.m3"
+        label: "Tool 2 — stat 3 (links)"
+        type: string
+      - name: "inst.t2.m4"
+        label: "Tool 2 — stat 4 (languages)"
+        type: string
+      - name: "inst.t2.btn_open"
+        label: "Tool 2 — primary button"
+        type: string
+      - name: "inst.t2.btn_about"
+        label: "Tool 2 — secondary button"
+        type: string
       - name: "inst.t3.name"
         label: "inst — t3 — name"
         type: string

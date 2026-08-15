@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EpiDetective — Des outils ouverts pour lire les données de santé</title>
-<meta name="description" content="Des outils gratuits pour explorer vous-même ce que l'Organisation mondiale de la Santé a établi sur les causes du cancer. Conçus par une épidémiologiste du cancer au CIRC/OMS.">
+<meta name="description" content="Des outils libres pour explorer soi-même les données publiées sur les causes des cancers et des autres grandes maladies chroniques. Conçu par un épidémiologiste du cancer au CIRC/OMS.">
 <link rel="canonical" href="https://epidetective.com/fr/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/fr/">
 <meta property="og:title" content="EpiDetective — Des outils ouverts pour lire les données de santé">
-<meta property="og:description" content="Des outils gratuits pour explorer vous-même ce que l'Organisation mondiale de la Santé a établi sur les causes du cancer. Conçus par une épidémiologiste du cancer au CIRC/OMS.">
+<meta property="og:description" content="Des outils libres pour explorer soi-même les données publiées sur les causes des cancers et des autres grandes maladies chroniques. Conçu par un épidémiologiste du cancer au CIRC/OMS.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective — Des outils ouverts pour lire les données de santé">
-<meta name="twitter:description" content="Des outils gratuits pour explorer vous-même ce que l'Organisation mondiale de la Santé a établi sur les causes du cancer. Conçus par une épidémiologiste du cancer au CIRC/OMS.">
+<meta name="twitter:description" content="Des outils libres pour explorer soi-même les données publiées sur les causes des cancers et des autres grandes maladies chroniques. Conçu par un épidémiologiste du cancer au CIRC/OMS.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -58,7 +58,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">Les outils</div>
-    <h2>L'un est <b>ouvert dès maintenant</b>. D'autres arrivent.</h2>
+    <h2>Deux sont <b>ouverts dès maintenant</b>. D'autres arrivent.</h2>
   </div>
 
   <div class="rack">
@@ -84,9 +84,30 @@
       <a href="explorer.html" class="thumb" aria-label="Explorateur des données sur le cancer"></a>
     </article>
 
-    <!-- Placeholder instruments removed before launch: they were invented, not
-         planned. To restore, re-add an <article class="inst is-soon"> block using
-         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Ouvert</span>
+          <h3>Explorateur des maladies chroniques</h3>
+        </div>
+        <p>Quels facteurs de risque ont été associés aux maladies cardiaques, aux AVC, au diabète de type 2, à la démence, aux cancers et à d'autres grandes maladies chroniques — et quelle est la solidité des preuves derrière chaque lien, y compris là où elles sont réellement contestées. Déployez le réseau pour voir comment les facteurs de risque se regroupent.</p>
+        <div class="inst-meta">
+          <span>95 facteurs de risque</span><span>31 maladies</span>
+          <span>359 liens gradués</span><span>anglais + chinois</span>
+        </div>
+        <!-- this tool carries its own methods section, so the secondary action
+             points into it rather than at a separate explainer page -->
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../chronic-disease-explorer/">Ouvrir &rarr;</a>
+          <a class="btn btn-ghost" href="../chronic-disease-explorer/#methods">Comment il a été construit</a>
+        </div>
+      </div>
+      <a href="../chronic-disease-explorer/" class="thumb thumb-chronic" aria-label="Explorateur des maladies chroniques"></a>
+    </article>
+
+    <!-- A third slot was drafted before launch and cut: it was invented, not
+         planned. To restore, add an <article class="inst is-soon"> block using
+         the inst.t3.* keys, which are still present in every i18n file. -->
 
   </div>
 </section>

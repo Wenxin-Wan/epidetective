@@ -176,6 +176,9 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 /* thumbnail carries the network — the Explorer's signature, not the platform's */
 .thumb{border:1px solid var(--rule);background:var(--chalk-deep) url(assets/network.svg)
        no-repeat center/cover;aspect-ratio:16/10;position:relative}
+/* the second tool's signature is the clustering, so its thumbnail is the
+   clustered layout rather than the same free-floating one */
+.thumb-chronic{background-image:url(assets/chronic-network.svg)}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
              font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
 

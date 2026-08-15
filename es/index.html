@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EpiDetective — Herramientas abiertas para leer la evidencia en salud</title>
-<meta name="description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
+<meta name="description" content="Herramientas libres para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creado por un epidemiólogo del cáncer del IARC/OMS.">
 <link rel="canonical" href="https://epidetective.com/es/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/es/">
 <meta property="og:title" content="EpiDetective — Herramientas abiertas para leer la evidencia en salud">
-<meta property="og:description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
+<meta property="og:description" content="Herramientas libres para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creado por un epidemiólogo del cáncer del IARC/OMS.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective — Herramientas abiertas para leer la evidencia en salud">
-<meta name="twitter:description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
+<meta name="twitter:description" content="Herramientas libres para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creado por un epidemiólogo del cáncer del IARC/OMS.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -58,7 +58,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">Las herramientas</div>
-    <h2>Una está <b>abierta ya</b>. Vienen más.</h2>
+    <h2>Dos están <b>abiertos ya</b>. Vienen más.</h2>
   </div>
 
   <div class="rack">
@@ -84,9 +84,30 @@
       <a href="explorer.html" class="thumb" aria-label="Explorador de evidencia sobre el cáncer"></a>
     </article>
 
-    <!-- Placeholder instruments removed before launch: they were invented, not
-         planned. To restore, re-add an <article class="inst is-soon"> block using
-         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Abierta</span>
+          <h3>Explorador de enfermedades crónicas</h3>
+        </div>
+        <p>Qué factores de riesgo se han vinculado con la enfermedad cardíaca, el ictus, la diabetes tipo 2, la demencia, el cáncer y otras grandes enfermedades crónicas — y cuánta solidez tiene la evidencia detrás de cada vínculo, incluidos aquellos en los que realmente se discute. Despliega la red para ver cómo se agrupan los factores de riesgo.</p>
+        <div class="inst-meta">
+          <span>95 factores de riesgo</span><span>31 enfermedades</span>
+          <span>359 vínculos graduados</span><span>inglés + chino</span>
+        </div>
+        <!-- this tool carries its own methods section, so the secondary action
+             points into it rather than at a separate explainer page -->
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../chronic-disease-explorer/">Abrirlo &rarr;</a>
+          <a class="btn btn-ghost" href="../chronic-disease-explorer/#methods">Cómo se construyó</a>
+        </div>
+      </div>
+      <a href="../chronic-disease-explorer/" class="thumb thumb-chronic" aria-label="Explorador de enfermedades crónicas"></a>
+    </article>
+
+    <!-- A third slot was drafted before launch and cut: it was invented, not
+         planned. To restore, add an <article class="inst is-soon"> block using
+         the inst.t3.* keys, which are still present in every i18n file. -->
 
   </div>
 </section>

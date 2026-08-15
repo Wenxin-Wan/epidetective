@@ -79,9 +79,30 @@
       <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst.t1.name}}"></a>
     </article>
 
-    <!-- Placeholder instruments removed before launch: they were invented, not
-         planned. To restore, re-add an <article class="inst is-soon"> block using
-         the inst.t2.* / inst.t3.* keys, which are still present in every i18n file. -->
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst.chip_live}}</span>
+          <h3>{{inst.t2.name}}</h3>
+        </div>
+        <p>{{inst.t2.desc}}</p>
+        <div class="inst-meta">
+          <span>{{inst.t2.m1}}</span><span>{{inst.t2.m2}}</span>
+          <span>{{inst.t2.m3}}</span><span>{{inst.t2.m4}}</span>
+        </div>
+        <!-- this tool carries its own methods section, so the secondary action
+             points into it rather than at a separate explainer page -->
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst.t2.btn_open}}</a>
+          <a class="btn btn-ghost" href="{{URL_TOOL2}}#methods">{{inst.t2.btn_about}}</a>
+        </div>
+      </div>
+      <a href="{{URL_TOOL2}}" class="thumb thumb-chronic" aria-label="{{inst.t2.name}}"></a>
+    </article>
+
+    <!-- A third slot was drafted before launch and cut: it was invented, not
+         planned. To restore, add an <article class="inst is-soon"> block using
+         the inst.t3.* keys, which are still present in every i18n file. -->
 
   </div>
 </section>

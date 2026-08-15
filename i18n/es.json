@@ -3,7 +3,7 @@
   "lang.dir": "ltr",
 
   "meta.home.title": "EpiDetective — Herramientas abiertas para leer la evidencia en salud",
-  "meta.home.desc": "Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.",
+  "meta.home.desc": "Herramientas libres para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creado por un epidemiólogo del cáncer del IARC/OMS.",
   "meta.explorer.title": "Explorador de evidencia sobre el cáncer — EpiDetective",
   "meta.explorer.desc": "Qué exposiciones se han vinculado a qué cánceres, y qué solidez tiene la evidencia detrás de cada vínculo. Basado en las Monografías del CIIC (OMS).",
 
@@ -27,7 +27,7 @@
   "purpose.p2": "El objetivo es hacer utilizables los hallazgos conservando la incertidumbre que los hace fiables. Donde la ciencia aún duda, la herramienta lo dice con claridad.",
 
   "inst.label": "Las herramientas",
-  "inst.h2": "Una está <b>abierta ya</b>. Vienen más.",
+  "inst.h2": "Dos están <b>abiertos ya</b>. Vienen más.",
   "inst.chip_live": "Abierta",
   "inst.chip_soon": "En desarrollo",
   "inst.planned": "Prevista",
@@ -41,8 +41,14 @@
   "inst.t1.btn_about": "Sobre esta herramienta",
   "inst.t1.btn_open": "Abrirla &rarr;",
 
-  "inst.t2.name": "Atlas de exposiciones laborales",
-  "inst.t2.desc": "A qué está expuesta la gente en el trabajo, y cuáles de esas exposiciones conllevan un riesgo de cáncer establecido — a partir de las matrices empleo-exposición de las cohortes SYNERGY y EPHOR.",
+  "inst.t2.name": "Explorador de enfermedades crónicas",
+  "inst.t2.desc": "Qué factores de riesgo se han vinculado con la enfermedad cardíaca, el ictus, la diabetes tipo 2, la demencia, el cáncer y otras grandes enfermedades crónicas — y cuánta solidez tiene la evidencia detrás de cada vínculo, incluidos aquellos en los que realmente se discute. Despliega la red para ver cómo se agrupan los factores de riesgo.",
+  "inst.t2.m1": "95 factores de riesgo",
+  "inst.t2.m2": "31 enfermedades",
+  "inst.t2.m3": "359 vínculos graduados",
+  "inst.t2.m4": "inglés + chino",
+  "inst.t2.btn_open": "Abrirlo &rarr;",
+  "inst.t2.btn_about": "Cómo se construyó",
 
   "inst.t3.name": "El riesgo en contexto",
   "inst.t3.desc": "Un traductor para las cifras que peor se comunican, que convierte riesgos relativos y razones de riesgo en valores sencillos que cualquiera puede sopesar.",
