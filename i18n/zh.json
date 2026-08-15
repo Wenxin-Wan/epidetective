@@ -1,37 +1,30 @@
 {
   "lang.name": "中文",
   "lang.dir": "ltr",
-
   "meta.home.title": "EpiDetective｜读懂健康证据的公开工具",
   "meta.home.desc": "一组免费工具，帮助你亲自查证世界卫生组织关于癌症成因的研究结论。由国际癌症研究机构（IARC）的癌症流行病学研究者开发。",
   "meta.explorer.title": "癌症证据探索器｜EpiDetective",
   "meta.explorer.desc": "查看哪些暴露与哪些癌症相关，以及支撑每条关联的证据有多强。数据取自世界卫生组织《IARC 专论》。",
-
   "ui.language": "语言",
-
   "nav.instruments": "工具",
   "nav.explorer": "证据探索器",
   "nav.about": "关于",
   "nav.notes": "札记",
-
   "home.eyebrow": "读懂癌症证据的公开工具",
   "home.h1": "翻译流行病学证据，<b>让世界更健康</b>",
   "home.audience": "写给关心健康的普通读者、患者、医生、记者，以及制定健康政策的人。",
   "home.lede": "EpiDetective 开发免费工具，帮助你亲自查阅已发表的健康研究。",
   "home.cta_primary": "查看工具",
   "home.cta_secondary": "关于开发者",
-
   "purpose.label": "这是什么",
   "purpose.h2": "让你能<em>亲自追问</em>的研究。",
   "purpose.p1": "这里的每个工具，都建立在已经发表、也经得起推敲的研究之上。问题在于，非专业读者几乎无从读起。工具要做的，就是把这些研究重新整理成可以检索、可以追溯、也可以直接质疑的形式。",
   "purpose.p2": "目标是让结论真正可用，同时如实保留其中的不确定性。不确定性并非缺陷，它恰恰是结论可信的前提。凡科学尚无定论之处，工具都会直接标明。",
-
   "inst.label": "工具",
   "inst.h2": "目前<b>开放一个</b>，其余仍在开发。",
   "inst.chip_live": "已开放",
   "inst.chip_soon": "开发中",
   "inst.planned": "计划中",
-
   "inst.t1.name": "癌症证据探索器",
   "inst.t1.desc": "查看哪些暴露与哪些癌症相关，以及支撑每条关联的证据有多强。数据直接取自世界卫生组织《IARC 专论》，这是目前对致癌因素最权威的评估。你可以从某种癌症查起，从某种暴露查起，也可以直接打开整张关系图。",
   "inst.t1.m1": "186 种暴露",
@@ -40,13 +33,10 @@
   "inst.t1.m4": "10 种语言",
   "inst.t1.btn_about": "了解这个工具",
   "inst.t1.btn_open": "直接打开 &rarr;",
-
   "inst.t2.name": "职业暴露图谱",
   "inst.t2.desc": "人们在工作中究竟接触到什么，其中哪些暴露已被确认与癌症相关。数据来自 SYNERGY 与 EPHOR 队列的工作—暴露矩阵。",
-
   "inst.t3.name": "风险的语境",
   "inst.t3.desc": "把最容易被误读的那些数字翻译过来：相对风险和风险比，换算成普通人真正能够权衡的绝对数值。",
-
   "about.label": "关于开发者",
   "about.h2": "由<b>每天与这些数据打交道</b>的癌症流行病学研究者开发。",
   "about.p1": "我是万汶鑫，世界卫生组织国际癌症研究机构（IARC）的博士后研究员，常驻法国里昂。",
@@ -63,41 +53,35 @@
   "about.cred4_value": "<a href=\"https://opico.iarc.who.int\">OPICO</a> &middot; <a href=\"https://synergy.iarc.fr\">SYNERGY</a> &middot; <a href=\"https://www.ephor-project.eu\">EPHOR</a> &middot; <a href=\"https://www.ecrhs.org\">ECRHS</a>",
   "about.cred5_label": "国际联盟职务",
   "about.cred5_value": "OPICO 主要分析负责人兼项目协调人 &middot; LC3 科学顾问",
-
   "notes.label": "札记",
   "notes.h2": "把<b>最难的部分</b>公开地想清楚。",
   "notes.n1.title": "如何认识未知？",
   "notes.n1.meta": "因果推断 &middot; 2026年2月28日",
   "notes.n2.title": "「证据有限」到底是什么意思",
   "notes.n2.meta": "证据 &middot; 草稿",
-
   "foot.tagline": "读懂健康证据的公开工具。",
   "foot.affiliation": "EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书，所表达的观点仅代表作者个人。所依据的科学来源均已注明，任何人都可以独立核查。",
   "foot.disclaimer": "EpiDetective 发布的工具，用于阅读人群层面的证据。它们呈现的是大规模人群中的规律。任何涉及你个人健康的问题，请咨询医生。每个工具都会标明各自的资料来源。",
   "foot.created": "由万汶鑫创建 &middot; 法国里昂",
   "foot.affil": "IARC / 世界卫生组织",
-
   "exp.crumb_current": "工具 01 &middot; 已开放",
   "exp.h1": "有些暴露<b>确实致癌</b>，有些<em>只是可能</em>。分辨这两者，<b>就是全部的工作</b>。",
   "exp.lede": "这段文字背后的每一个标记都真实存在：186 种暴露、68 种癌症，以及世界卫生组织癌症研究机构在两者之间记录下的 466 条关联。",
   "exp.leg_est": "已确认的关联",
   "exp.leg_sus": "尚存疑的关联",
   "exp.leg_can": "癌症部位",
-
   "exp.whatsin_label": "这里有什么",
   "exp.whatsin_h2": "IARC 已与癌症建立关联的每一种暴露，<b>并按证据的确定程度分级</b>。",
   "exp.fig1": "暴露",
   "exp.fig2": "癌症类型",
   "exp.fig3": "记录在案的关联",
   "exp.fig4": "专论卷次",
-
   "exp.bar1_title": "已确认的关联",
   "exp.bar1_meta": "247 条 &middot; 人群证据充分",
   "exp.bar1_note": "人群研究的结果足够一致，可以排除偶然、偏倚以及其他解释。这是 IARC 能够作出的最强判断。",
   "exp.bar2_title": "尚存疑的关联",
   "exp.bar2_meta": "219 条 &middot; 人群证据有限",
   "exp.bar2_note": "关联本身是可信的，但偶然或偏倚仍有可能解释它。这个问题尚无定论，更多研究可能把结论推向任何一边。",
-
   "exp.reads_label": "在下结论之前",
   "exp.reads_h2": "这张图有三处局限，<em>值得先了解</em>。",
   "exp.read1_tag": "危害与风险",
@@ -109,7 +93,6 @@
   "exp.read3_tag": "面向人群",
   "exp.read3_h3": "这张图描述的是人群，无法对任何一个具体病例下判断。",
   "exp.read3_p": "如果你正在与癌症共处，为你诊治的医生所掌握的信息，是任何人群层面的图谱都不会包含的。请把疑问带给他们。",
-
   "exp.cta_label": "打开这个工具",
   "exp.cta_h2": "从某种<b>癌症</b>查起，从某种<b>暴露</b>查起，或者直接打开整张图。",
   "exp.cta_lede": "免费，无需注册，提供十种语言。可以拖动、缩放，聚焦到网络中的任何一处。",
