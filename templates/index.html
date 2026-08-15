@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{meta.home.title}}</title>
-<meta name="description" content="{{meta.home.desc}}">
+<title>{{meta_home_title}}</title>
+<meta name="description" content="{{meta_home_desc}}">
 <link rel="canonical" href="{{CANONICAL}}">
 {{HREFLANG}}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="{{CANONICAL}}">
-<meta property="og:title" content="{{meta.home.title}}">
-<meta property="og:description" content="{{meta.home.desc}}">
+<meta property="og:title" content="{{meta_home_title}}">
+<meta property="og:description" content="{{meta_home_desc}}">
 <meta property="og:image" content="{{OG_IMAGE}}">
 <meta property="og:locale" content="{{OG_LOCALE}}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{meta.home.title}}">
-<meta name="twitter:description" content="{{meta.home.desc}}">
+<meta name="twitter:title" content="{{meta_home_title}}">
+<meta name="twitter:description" content="{{meta_home_desc}}">
 <meta name="twitter:image" content="{{OG_IMAGE}}">
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 </head>
@@ -27,11 +27,11 @@
     <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
     <div class="top-right">
       <nav class="menu">
-        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
-        <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
-        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_EXPLORER}}">{{nav_explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
       </nav>
-      <nav class="langs" aria-label="{{ui.language}}">{{LANGSWITCH}}</nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
     </div>
   </div>
 </header>
@@ -42,18 +42,18 @@
   <div class="hero-net" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
-    <h1>{{home.h1}}</h1>
+    <h1>{{home_h1}}</h1>
     <!-- audience line first, then what the site is: the standfirst pattern the
          redesign settled on, replacing the eyebrow + headline + lede stack. -->
-    <p class="lede lede-lead">{{home.audience}}</p>
-    <p class="lede">{{home.lede}}</p>
+    <p class="lede lede-lead">{{home_audience}}</p>
+    <p class="lede">{{home_lede}}</p>
   </div>
 </section>
 
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
-    <div class="label">{{inst.label}}</div>
-    <h2>{{inst.h2}}</h2>
+    <div class="label">{{inst_label}}</div>
+    <h2>{{inst_h2}}</h2>
   </div>
 
   <div class="rack">
@@ -61,43 +61,43 @@
     <article class="inst">
       <div class="inst-main">
         <div class="inst-top">
-          <span class="chip live">{{inst.chip_live}}</span>
-          <h3>{{inst.t1.name}}</h3>
+          <span class="chip live">{{inst_chip_live}}</span>
+          <h3>{{inst_t1_name}}</h3>
         </div>
-        <p>{{inst.t1.desc}}</p>
+        <p>{{inst_t1_desc}}</p>
         <div class="inst-meta">
-          <span>{{inst.t1.m1}}</span><span>{{inst.t1.m2}}</span>
-          <span>{{inst.t1.m3}}</span><span>{{inst.t1.m4}}</span>
+          <span>{{inst_t1_m1}}</span><span>{{inst_t1_m2}}</span>
+          <span>{{inst_t1_m3}}</span><span>{{inst_t1_m4}}</span>
         </div>
         <!-- opening the tool is the primary action; the explainer page is the
              secondary one. -->
         <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst.t1.btn_open}}</a>
-          <a class="btn btn-ghost" href="{{URL_EXPLORER}}">{{inst.t1.btn_about}}</a>
+          <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst_t1_btn_open}}</a>
+          <a class="btn btn-ghost" href="{{URL_EXPLORER}}">{{inst_t1_btn_about}}</a>
         </div>
       </div>
-      <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst.t1.name}}"></a>
+      <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst_t1_name}}"></a>
     </article>
 
     <article class="inst">
       <div class="inst-main">
         <div class="inst-top">
-          <span class="chip live">{{inst.chip_live}}</span>
-          <h3>{{inst.t2.name}}</h3>
+          <span class="chip live">{{inst_chip_live}}</span>
+          <h3>{{inst_t2_name}}</h3>
         </div>
-        <p>{{inst.t2.desc}}</p>
+        <p>{{inst_t2_desc}}</p>
         <div class="inst-meta">
-          <span>{{inst.t2.m1}}</span><span>{{inst.t2.m2}}</span>
-          <span>{{inst.t2.m3}}</span><span>{{inst.t2.m4}}</span>
+          <span>{{inst_t2_m1}}</span><span>{{inst_t2_m2}}</span>
+          <span>{{inst_t2_m3}}</span><span>{{inst_t2_m4}}</span>
         </div>
         <!-- this tool carries its own methods section, so the secondary action
              points into it rather than at a separate explainer page -->
         <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst.t2.btn_open}}</a>
-          <a class="btn btn-ghost" href="{{URL_TOOL2}}#methods">{{inst.t2.btn_about}}</a>
+          <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst_t2_btn_open}}</a>
+          <a class="btn btn-ghost" href="{{URL_TOOL2}}#methods">{{inst_t2_btn_about}}</a>
         </div>
       </div>
-      <a href="{{URL_TOOL2}}" class="thumb thumb-chronic" aria-label="{{inst.t2.name}}"></a>
+      <a href="{{URL_TOOL2}}" class="thumb thumb-chronic" aria-label="{{inst_t2_name}}"></a>
     </article>
 
     <!-- A third slot was drafted before launch and cut: it was invented, not
@@ -109,15 +109,15 @@
 
 <section class="sec wrap" id="about">
   <div class="sec-head">
-    <div class="label">{{about.label}}</div>
-    <h2>{{about.h2}}</h2>
+    <div class="label">{{about_label}}</div>
+    <h2>{{about_h2}}</h2>
   </div>
   <div class="about">
     <div>
-      <p>{{about.p1}}</p>
-      <p>{{about.p2}}</p>
-      <p>{{about.p3}}</p>
-      <p>{{about.p4}}</p>
+      <p>{{about_p1}}</p>
+      <p>{{about_p2}}</p>
+      <p>{{about_p3}}</p>
+      <p>{{about_p4}}</p>
       <div class="inline-links">
         <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
         <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
@@ -127,11 +127,11 @@
     <!-- a real definition list: these are term/value pairs, and screen readers
          announce them as such -->
     <dl class="creds">
-      <div class="cred"><dt class="r">{{about.cred1_label}}</dt><dd class="w">{{about.cred1_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about.cred2_label}}</dt><dd class="w">{{about.cred2_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about.cred3_label}}</dt><dd class="w">{{about.cred3_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about.cred4_label}}</dt><dd class="w">{{about.cred4_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about.cred5_label}}</dt><dd class="w">{{about.cred5_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred1_label}}</dt><dd class="w">{{about_cred1_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred2_label}}</dt><dd class="w">{{about_cred2_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred3_label}}</dt><dd class="w">{{about_cred3_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred4_label}}</dt><dd class="w">{{about_cred4_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred5_label}}</dt><dd class="w">{{about_cred5_value}}</dd></div>
     </dl>
   </div>
 </section>
@@ -145,20 +145,20 @@
     <div class="foot-row">
       <div>
         <div class="mark">Epi<span>Detective</span></div>
-        <p class="tag">{{foot.tagline}}</p>
+        <p class="tag">{{foot_tagline}}</p>
       </div>
       <nav class="menu">
-        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
-        <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
-        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_EXPLORER}}">{{nav_explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
       </nav>
     </div>
-    <div class="disc">{{foot.disclaimer}}</div>
-    <div class="disc affil">{{foot.affiliation}}</div>
+    <div class="disc">{{foot_disclaimer}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
     <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
          disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
-      <span>{{foot.created}}</span>
+      <span>{{foot_created}}</span>
     </div>
   </div>
 </footer>

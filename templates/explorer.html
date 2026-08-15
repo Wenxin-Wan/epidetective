@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{meta.explorer.title}}</title>
-<meta name="description" content="{{meta.explorer.desc}}">
+<title>{{meta_explorer_title}}</title>
+<meta name="description" content="{{meta_explorer_desc}}">
 <link rel="canonical" href="{{CANONICAL}}">
 {{HREFLANG}}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="{{CANONICAL}}">
-<meta property="og:title" content="{{meta.explorer.title}}">
-<meta property="og:description" content="{{meta.explorer.desc}}">
+<meta property="og:title" content="{{meta_explorer_title}}">
+<meta property="og:description" content="{{meta_explorer_desc}}">
 <meta property="og:image" content="{{OG_IMAGE}}">
 <meta property="og:locale" content="{{OG_LOCALE}}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{meta.explorer.title}}">
-<meta name="twitter:description" content="{{meta.explorer.desc}}">
+<meta name="twitter:title" content="{{meta_explorer_title}}">
+<meta name="twitter:description" content="{{meta_explorer_desc}}">
 <meta name="twitter:image" content="{{OG_IMAGE}}">
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 </head>
@@ -27,11 +27,11 @@
     <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
     <div class="top-right">
       <nav class="menu">
-        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
-        <a href="{{URL_EXPLORER}}" aria-current="page">{{nav.explorer}}</a>
-        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_EXPLORER}}" aria-current="page">{{nav_explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
       </nav>
-      <nav class="langs" aria-label="{{ui.language}}">{{LANGSWITCH}}</nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
     </div>
   </div>
 </header>
@@ -42,70 +42,70 @@
   <div class="net" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="crumb"><a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a> &middot;
-      <span>{{exp.crumb_current}}</span></div>
-    <h1>{{exp.h1}}</h1>
-    <p class="lede" style="margin-top:24px">{{exp.lede}}</p>
+    <div class="crumb"><a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a> &middot;
+      <span>{{exp_crumb_current}}</span></div>
+    <h1>{{exp_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{exp_lede}}</p>
     <div class="legend">
-      <span class="leg est"><i></i>{{exp.leg_est}}</span>
-      <span class="leg sus"><i></i>{{exp.leg_sus}}</span>
-      <span class="leg can"><i></i>{{exp.leg_can}}</span>
+      <span class="leg est"><i></i>{{exp_leg_est}}</span>
+      <span class="leg sus"><i></i>{{exp_leg_sus}}</span>
+      <span class="leg can"><i></i>{{exp_leg_can}}</span>
     </div>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head">
-    <div class="label">{{exp.whatsin_label}}</div>
-    <h2>{{exp.whatsin_h2}}</h2>
+    <div class="label">{{exp_whatsin_label}}</div>
+    <h2>{{exp_whatsin_h2}}</h2>
   </div>
 
   <div class="figs">
-    <div class="fig"><div class="v">186</div><div class="k">{{exp.fig1}}</div></div>
-    <div class="fig"><div class="v">68</div><div class="k">{{exp.fig2}}</div></div>
-    <div class="fig"><div class="v">466</div><div class="k">{{exp.fig3}}</div></div>
-    <div class="fig"><div class="v">141a</div><div class="k">{{exp.fig4}}</div></div>
+    <div class="fig"><div class="v">186</div><div class="k">{{exp_fig1}}</div></div>
+    <div class="fig"><div class="v">68</div><div class="k">{{exp_fig2}}</div></div>
+    <div class="fig"><div class="v">466</div><div class="k">{{exp_fig3}}</div></div>
+    <div class="fig"><div class="v">141a</div><div class="k">{{exp_fig4}}</div></div>
   </div>
 
   <div class="bars">
     <div class="bar-row">
-      <div class="bar-head"><b>{{exp.bar1_title}}</b><span>{{exp.bar1_meta}}</span></div>
+      <div class="bar-head"><b>{{exp_bar1_title}}</b><span>{{exp_bar1_meta}}</span></div>
       <div class="bar est"><i style="width:53.0%"></i></div>
-      <p class="bar-note">{{exp.bar1_note}}</p>
+      <p class="bar-note">{{exp_bar1_note}}</p>
     </div>
     <div class="bar-row">
-      <div class="bar-head"><b>{{exp.bar2_title}}</b><span>{{exp.bar2_meta}}</span></div>
+      <div class="bar-head"><b>{{exp_bar2_title}}</b><span>{{exp_bar2_meta}}</span></div>
       <div class="bar sus"><i style="width:47.0%"></i></div>
-      <p class="bar-note">{{exp.bar2_note}}</p>
+      <p class="bar-note">{{exp_bar2_note}}</p>
     </div>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head">
-    <div class="label">{{exp.reads_label}}</div>
-    <h2>{{exp.reads_h2}}</h2>
+    <div class="label">{{exp_reads_label}}</div>
+    <h2>{{exp_reads_h2}}</h2>
   </div>
   <div class="reads">
     <div class="read">
-      <div class="tag">{{exp.read1_tag}}</div>
+      <div class="tag">{{exp_read1_tag}}</div>
       <div>
-        <h3>{{exp.read1_h3}}</h3>
-        <p>{{exp.read1_p}}</p>
+        <h3>{{exp_read1_h3}}</h3>
+        <p>{{exp_read1_p}}</p>
       </div>
     </div>
     <div class="read">
-      <div class="tag">{{exp.read2_tag}}</div>
+      <div class="tag">{{exp_read2_tag}}</div>
       <div>
-        <h3>{{exp.read2_h3}}</h3>
-        <p>{{exp.read2_p}}</p>
+        <h3>{{exp_read2_h3}}</h3>
+        <p>{{exp_read2_p}}</p>
       </div>
     </div>
     <div class="read">
-      <div class="tag">{{exp.read3_tag}}</div>
+      <div class="tag">{{exp_read3_tag}}</div>
       <div>
-        <h3>{{exp.read3_h3}}</h3>
-        <p>{{exp.read3_p}}</p>
+        <h3>{{exp_read3_h3}}</h3>
+        <p>{{exp_read3_p}}</p>
       </div>
     </div>
   </div>
@@ -113,13 +113,13 @@
 
 <section class="cta-band">
   <div class="wrap">
-    <div class="label" style="color:#8A9086">{{exp.cta_label}}</div>
-    <h2 style="margin:14px 0 0">{{exp.cta_h2}}</h2>
-    <p class="lede">{{exp.cta_lede}}</p>
+    <div class="label" style="color:#8A9086">{{exp_cta_label}}</div>
+    <h2 style="margin:14px 0 0">{{exp_cta_h2}}</h2>
+    <p class="lede">{{exp_cta_lede}}</p>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="{{URL_TOOL}}">{{exp.cta_btn}}</a>
+      <a class="btn btn-solid" href="{{URL_TOOL}}">{{exp_cta_btn}}</a>
     </div>
-    <div class="disc">{{exp.cta_source}}</div>
+    <div class="disc">{{exp_cta_source}}</div>
   </div>
 </section>
 
@@ -128,17 +128,17 @@
     <div class="foot-row">
       <div>
         <div class="mark">Epi<span>Detective</span></div>
-        <p class="tag">{{foot.tagline}}</p>
+        <p class="tag">{{foot_tagline}}</p>
       </div>
       <nav class="menu">
-        <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
-        <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
-        <a href="{{URL_HOME}}#about">{{nav.about}}</a>
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_EXPLORER}}">{{nav_explorer}}</a>
+        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
       </nav>
     </div>
-    <div class="disc affil">{{foot.affiliation}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
     <div class="foot-bot">
-      <span>{{foot.created}}</span>
+      <span>{{foot_created}}</span>
     </div>
   </div>
 </footer>

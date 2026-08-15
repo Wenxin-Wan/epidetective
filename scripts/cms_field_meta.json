@@ -1,0 +1,346 @@
+{
+  "lang_name": {
+    "label": "Language name, written in that language",
+    "type": "string"
+  },
+  "lang_dir": {
+    "label": "Text direction — leave as ltr",
+    "type": "string"
+  },
+  "meta_home_title": {
+    "label": "Home — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_home_desc": {
+    "label": "Home — Google result description",
+    "type": "text"
+  },
+  "meta_explorer_title": {
+    "label": "Explorer — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_explorer_desc": {
+    "label": "Explorer — Google result description",
+    "type": "text"
+  },
+  "ui_language": {
+    "label": "Language switcher label (screen readers)",
+    "type": "string"
+  },
+  "nav_instruments": {
+    "label": "Menu — Tools",
+    "type": "string"
+  },
+  "nav_explorer": {
+    "label": "Menu — Evidence Explorer",
+    "type": "string"
+  },
+  "nav_about": {
+    "label": "Menu — About",
+    "type": "string"
+  },
+  "home_h1": {
+    "label": "HOME — Headline",
+    "type": "string"
+  },
+  "home_audience": {
+    "label": "HOME — Audience line (bold)",
+    "type": "string"
+  },
+  "home_lede": {
+    "label": "HOME — Description",
+    "type": "string"
+  },
+  "inst_label": {
+    "label": "TOOLS — small section label",
+    "type": "string"
+  },
+  "inst_h2": {
+    "label": "TOOLS — section heading",
+    "type": "string"
+  },
+  "inst_chip_live": {
+    "label": "TOOLS — “Open now” badge",
+    "type": "string"
+  },
+  "inst_t1_name": {
+    "label": "Tool 1 — name",
+    "type": "string"
+  },
+  "inst_t1_desc": {
+    "label": "Tool 1 — description",
+    "type": "text"
+  },
+  "inst_t1_m1": {
+    "label": "Tool 1 — stat 1 (exposures)",
+    "type": "string"
+  },
+  "inst_t1_m2": {
+    "label": "Tool 1 — stat 2 (cancer types)",
+    "type": "string"
+  },
+  "inst_t1_m3": {
+    "label": "Tool 1 — stat 3 (links)",
+    "type": "string"
+  },
+  "inst_t1_m4": {
+    "label": "Tool 1 — stat 4 (languages)",
+    "type": "string"
+  },
+  "inst_t1_btn_about": {
+    "label": "Tool 1 — secondary button",
+    "type": "string"
+  },
+  "inst_t1_btn_open": {
+    "label": "Tool 1 — primary button",
+    "type": "string"
+  },
+  "inst_t2_name": {
+    "label": "Tool 2 — name",
+    "type": "string"
+  },
+  "inst_t2_desc": {
+    "label": "Tool 2 — description",
+    "type": "text"
+  },
+  "inst_t2_m1": {
+    "label": "Tool 2 — stat 1 (risk factors)",
+    "type": "string"
+  },
+  "inst_t2_m2": {
+    "label": "Tool 2 — stat 2 (diseases)",
+    "type": "string"
+  },
+  "inst_t2_m3": {
+    "label": "Tool 2 — stat 3 (links)",
+    "type": "string"
+  },
+  "inst_t2_m4": {
+    "label": "Tool 2 — stat 4 (languages)",
+    "type": "string"
+  },
+  "inst_t2_btn_open": {
+    "label": "Tool 2 — primary button",
+    "type": "string"
+  },
+  "inst_t2_btn_about": {
+    "label": "Tool 2 — secondary button",
+    "type": "string"
+  },
+  "about_label": {
+    "label": "ABOUT — small section label",
+    "type": "string"
+  },
+  "about_h2": {
+    "label": "ABOUT — heading",
+    "type": "string"
+  },
+  "about_p1": {
+    "label": "ABOUT — paragraph 1",
+    "type": "text"
+  },
+  "about_p2": {
+    "label": "ABOUT — paragraph 2",
+    "type": "text"
+  },
+  "about_p3": {
+    "label": "ABOUT — paragraph 3",
+    "type": "text"
+  },
+  "about_p4": {
+    "label": "ABOUT — paragraph 4 (closing)",
+    "type": "text"
+  },
+  "about_cred1_label": {
+    "label": "ABOUT — credential 1: label",
+    "type": "string"
+  },
+  "about_cred1_value": {
+    "label": "ABOUT — credential 1: value",
+    "type": "string"
+  },
+  "about_cred2_label": {
+    "label": "ABOUT — credential 2: label",
+    "type": "string"
+  },
+  "about_cred2_value": {
+    "label": "ABOUT — credential 2: value",
+    "type": "string"
+  },
+  "about_cred3_label": {
+    "label": "ABOUT — credential 3: label",
+    "type": "string"
+  },
+  "about_cred3_value": {
+    "label": "ABOUT — credential 3: value",
+    "type": "string"
+  },
+  "about_cred4_label": {
+    "label": "ABOUT — credential 4: label",
+    "type": "string"
+  },
+  "about_cred4_value": {
+    "label": "ABOUT — credential 4: value",
+    "type": "text"
+  },
+  "about_cred5_label": {
+    "label": "ABOUT — credential 5: label",
+    "type": "string"
+  },
+  "about_cred5_value": {
+    "label": "ABOUT — credential 5: value",
+    "type": "string"
+  },
+  "foot_tagline": {
+    "label": "FOOTER — tagline",
+    "type": "string"
+  },
+  "foot_affiliation": {
+    "label": "FOOTER — affiliation notice",
+    "type": "text"
+  },
+  "foot_disclaimer": {
+    "label": "FOOTER — health disclaimer",
+    "type": "text"
+  },
+  "foot_created": {
+    "label": "FOOTER — credit line",
+    "type": "string"
+  },
+  "exp_crumb_current": {
+    "label": "EXPLORER — crumb current",
+    "type": "string"
+  },
+  "exp_h1": {
+    "label": "EXPLORER — h1",
+    "type": "string"
+  },
+  "exp_lede": {
+    "label": "EXPLORER — lede",
+    "type": "text"
+  },
+  "exp_leg_est": {
+    "label": "EXPLORER — leg est",
+    "type": "string"
+  },
+  "exp_leg_sus": {
+    "label": "EXPLORER — leg sus",
+    "type": "string"
+  },
+  "exp_leg_can": {
+    "label": "EXPLORER — leg can",
+    "type": "string"
+  },
+  "exp_whatsin_label": {
+    "label": "EXPLORER — whatsin label",
+    "type": "string"
+  },
+  "exp_whatsin_h2": {
+    "label": "EXPLORER — whatsin h2",
+    "type": "string"
+  },
+  "exp_fig1": {
+    "label": "EXPLORER — fig1",
+    "type": "string"
+  },
+  "exp_fig2": {
+    "label": "EXPLORER — fig2",
+    "type": "string"
+  },
+  "exp_fig3": {
+    "label": "EXPLORER — fig3",
+    "type": "string"
+  },
+  "exp_fig4": {
+    "label": "EXPLORER — fig4",
+    "type": "string"
+  },
+  "exp_bar1_title": {
+    "label": "EXPLORER — bar1 title",
+    "type": "string"
+  },
+  "exp_bar1_meta": {
+    "label": "EXPLORER — bar1 meta",
+    "type": "string"
+  },
+  "exp_bar1_note": {
+    "label": "EXPLORER — bar1 note",
+    "type": "text"
+  },
+  "exp_bar2_title": {
+    "label": "EXPLORER — bar2 title",
+    "type": "string"
+  },
+  "exp_bar2_meta": {
+    "label": "EXPLORER — bar2 meta",
+    "type": "string"
+  },
+  "exp_bar2_note": {
+    "label": "EXPLORER — bar2 note",
+    "type": "text"
+  },
+  "exp_reads_label": {
+    "label": "EXPLORER — reads label",
+    "type": "string"
+  },
+  "exp_reads_h2": {
+    "label": "EXPLORER — reads h2",
+    "type": "string"
+  },
+  "exp_read1_tag": {
+    "label": "EXPLORER — read1 tag",
+    "type": "string"
+  },
+  "exp_read1_h3": {
+    "label": "EXPLORER — read1 h3",
+    "type": "string"
+  },
+  "exp_read1_p": {
+    "label": "EXPLORER — read1 p",
+    "type": "text"
+  },
+  "exp_read2_tag": {
+    "label": "EXPLORER — read2 tag",
+    "type": "string"
+  },
+  "exp_read2_h3": {
+    "label": "EXPLORER — read2 h3",
+    "type": "string"
+  },
+  "exp_read2_p": {
+    "label": "EXPLORER — read2 p",
+    "type": "text"
+  },
+  "exp_read3_tag": {
+    "label": "EXPLORER — read3 tag",
+    "type": "string"
+  },
+  "exp_read3_h3": {
+    "label": "EXPLORER — read3 h3",
+    "type": "string"
+  },
+  "exp_read3_p": {
+    "label": "EXPLORER — read3 p",
+    "type": "text"
+  },
+  "exp_cta_label": {
+    "label": "EXPLORER — cta label",
+    "type": "string"
+  },
+  "exp_cta_h2": {
+    "label": "EXPLORER — cta h2",
+    "type": "string"
+  },
+  "exp_cta_lede": {
+    "label": "EXPLORER — cta lede",
+    "type": "string"
+  },
+  "exp_cta_btn": {
+    "label": "EXPLORER — cta btn",
+    "type": "string"
+  },
+  "exp_cta_source": {
+    "label": "EXPLORER — cta source",
+    "type": "text"
+  }
+}

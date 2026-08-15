@@ -141,7 +141,7 @@ def main():
         # language switcher: plain links, no JavaScript required
         switch = []
         for other in LANGS:
-            label = data[other]["lang.name"]
+            label = data[other]["lang_name"]
             if other == lang:
                 switch.append('<span class="lang-cur" aria-current="true">%s</span>' % label)
             else:
@@ -158,7 +158,7 @@ def main():
 
             ctx = dict(d)
             ctx["LANG"] = lang
-            ctx["DIR"] = d.get("lang.dir", "ltr")
+            ctx["DIR"] = d.get("lang_dir", "ltr")
             ctx["PREFIX"] = "" if lang == "en" else "../"
             ctx["URL_HOME"] = url(lang, "index.html", lang)
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
