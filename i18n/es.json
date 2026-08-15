@@ -2,7 +2,7 @@
   "lang.name": "Español",
   "lang.dir": "ltr",
 
-  "meta.home.title": "EpiDetective — Herramientas abiertas para leer la evidencia sobre el cáncer",
+  "meta.home.title": "EpiDetective — Herramientas abiertas para leer la evidencia en salud",
   "meta.home.desc": "Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.",
   "meta.explorer.title": "Explorador de evidencia sobre el cáncer — EpiDetective",
   "meta.explorer.desc": "Qué exposiciones se han vinculado a qué cánceres, y qué solidez tiene la evidencia detrás de cada vínculo. Basado en las Monografías del CIIC (OMS).",
@@ -15,8 +15,9 @@
   "nav.notes": "Notas",
 
   "home.eyebrow": "Herramientas abiertas para leer la evidencia sobre el cáncer",
-  "home.h1": "La evidencia sobre qué causa el cáncer es pública. <b>Leerla no debería exigir un doctorado.</b>",
-  "home.lede": "EpiDetective crea herramientas gratuitas que te permiten explorar la investigación sobre el cáncer por tu cuenta — para pacientes, médicos, periodistas y quienes escriben las políticas de salud.",
+  "home.h1": "Traducir la evidencia epidemiológica <b>para un mundo más sano</b>",
+  "home.audience": "Para el público curioso, los pacientes, los médicos, los periodistas y quienes escriben las políticas de salud.",
+  "home.lede": "EpiDetective crea herramientas gratuitas que te permiten explorar por tu cuenta la investigación en salud ya publicada.",
   "home.cta_primary": "Ver las herramientas",
   "home.cta_secondary": "Quién construye esto",
 
@@ -48,10 +49,10 @@
 
   "about.label": "Quién construye esto",
   "about.h2": "Creado por una epidemióloga del cáncer que <b>trabaja con esta evidencia cada día</b>.",
-  "about.p1": "Soy Wenxin Wan, investigadora postdoctoral en el Centro Internacional de Investigaciones sobre el Cáncer, en Lyon, la agencia de la Organización Mundial de la Salud dedicada al cáncer. Mi trabajo abarca la epidemiología del cáncer, la inferencia causal, la bioestadística y el aprendizaje automático.",
-  "about.p2": "Hice mi doctorado en el Instituto de Ciencias de la Evaluación de Riesgos de la Universidad de Utrecht, sobre cómo las exposiciones en el trabajo y en el entorno afectan al riesgo de cáncer. Ese trabajo ayudó a establecer el papel causal del benceno en el cáncer de pulmón, largamente subestimado.",
-  "about.p3": "En el día a día trabajo con grandes cohortes internacionales: cientos de miles de personas seguidas durante años para ver qué exposiciones van seguidas de enfermedad. En el CIIC dirijo los análisis de OPICO, un consorcio que reúne diez de esas cohortes en tres continentes para averiguar si el uso prolongado de opioides conlleva riesgo de cáncer, y asesoro al Lung Cancer Cohort Consortium (LC3) sobre cómo la evidencia de exposiciones laborales puede alimentar el cribado del cáncer de pulmón. Los métodos vienen de la epidemiología, la inferencia causal, la farmacoepidemiología y el aprendizaje automático.",
-  "about.p4": "Construyo estas herramientas porque la evidencia con la que trabajo es pública y está cuidadosamente elaborada, y aun así resulta casi ilegible para quien no conoce ya el campo. Cerrar ese hueco merecía el esfuerzo. Todo lo que sigue se puede comprobar, y los enlaces llevan a las fuentes originales.",
+  "about.p1": "Soy Wenxin Wan, investigadora postdoctoral en el Centro Internacional de Investigaciones sobre el Cáncer, en Lyon, la agencia de la Organización Mundial de la Salud dedicada al cáncer.",
+  "about.p2": "Hice mi doctorado en el Instituto de Ciencias de la Evaluación de Riesgos de la Universidad de Utrecht, sobre cómo las exposiciones en el trabajo y en el entorno afectan al riesgo de cáncer. Ese trabajo ayudó a establecer el papel causal del benceno en el cáncer de pulmón, y fue recogido por <i>The New York Times</i>.",
+  "about.p3": "En el día a día trabajo con grandes cohortes internacionales: cientos de miles de personas seguidas durante años para ver qué exposiciones van seguidas de enfermedad. En el CIIC dirijo los análisis de OPICO, un consorcio que reúne diez de esas cohortes en tres continentes para averiguar si el uso prolongado de opioides conlleva riesgo de cáncer, y asesoro al Lung Cancer Cohort Consortium (LC3) sobre cómo la evidencia de exposiciones laborales puede alimentar el cribado del cáncer de pulmón.",
+  "about.p4": "Construyo estas herramientas porque la evidencia con la que trabajo es pública y está cuidadosamente elaborada, y aun así resulta casi ilegible para quien no conoce ya el campo. Cerrar ese hueco merecía el esfuerzo. Todo esto se puede comprobar, y los enlaces llevan a las fuentes originales.",
   "about.cred1_label": "Puesto",
   "about.cred1_value": "Investigadora postdoctoral, CIIC / OMS",
   "about.cred2_label": "Doctorado",
@@ -61,7 +62,7 @@
   "about.cred4_label": "Proyectos de investigación",
   "about.cred4_value": "<a href=\"https://opico.iarc.who.int\">OPICO</a> &middot; <a href=\"https://synergy.iarc.fr\">SYNERGY</a> &middot; <a href=\"https://www.ephor-project.eu\">EPHOR</a> &middot; <a href=\"https://www.ecrhs.org\">ECRHS</a>",
   "about.cred5_label": "Funciones internacionales",
-  "about.cred5_value": "Analista principal, OPICO &middot; asesora científica, LC3",
+  "about.cred5_value": "Analista principal y coordinadora de proyecto, OPICO &middot; asesora científica, LC3",
 
   "notes.label": "Notas",
   "notes.h2": "Pensar en público las <b>partes difíciles</b>.",
@@ -70,10 +71,10 @@
   "notes.n2.title": "Qué significa realmente «evidencia limitada»",
   "notes.n2.meta": "Evidencia &middot; Borrador",
 
-  "foot.tagline": "Traducir la ciencia para un mundo más sano.",
+  "foot.tagline": "Herramientas abiertas para leer la evidencia en salud.",
   "foot.affiliation": "EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud, y las opiniones expresadas aquí son responsabilidad únicamente de su autora. Las fuentes científicas utilizadas están citadas para que cualquiera pueda comprobarlas de forma independiente.",
   "foot.disclaimer": "EpiDetective publica herramientas para leer evidencia referida a poblaciones enteras. Muestran patrones en grandes grupos de personas. Para cualquier cuestión sobre tu propia salud, consulta a un médico. Cada herramienta indica sus fuentes.",
-  "foot.created": "Creado por Wenxin Wan &mdash; Lyon",
+  "foot.created": "Creado por Wenxin Wan &mdash; Lyon, Francia",
   "foot.affil": "CIIC / OMS",
 
   "exp.crumb_current": "Herramienta 01 &mdash; abierta",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EpiDetective — Open tools for reading cancer evidence</title>
+<title>EpiDetective — Open tools for reading health evidence</title>
 <meta name="description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
 <link rel="canonical" href="https://epidetective.com/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
@@ -15,12 +15,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/">
-<meta property="og:title" content="EpiDetective — Open tools for reading cancer evidence">
+<meta property="og:title" content="EpiDetective — Open tools for reading health evidence">
 <meta property="og:description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EpiDetective — Open tools for reading cancer evidence">
+<meta name="twitter:title" content="EpiDetective — Open tools for reading health evidence">
 <meta name="twitter:description" content="Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="site.css">
@@ -35,7 +35,6 @@
         <a href="index.html#instruments">Tools</a>
         <a href="explorer.html">Evidence Explorer</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#notes">Notes</a>
       </nav>
       <nav class="langs" aria-label="Language"><span class="lang-cur" aria-current="true">English</span><a href="zh/index.html" hreflang="zh">中文</a><a href="fr/index.html" hreflang="fr">Français</a><a href="es/index.html" hreflang="es">Español</a><a href="ru/index.html" hreflang="ru">Русский</a></nav>
     </div>
@@ -48,23 +47,12 @@
   <div class="hero-net" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="label">Open tools for reading cancer evidence</div>
-    <h1>The evidence on what causes cancer is public. <b>Reading it shouldn't require a PhD.</b></h1>
-    <p class="lede">EpiDetective builds free tools that let you explore cancer research for yourself — for patients, doctors, journalists, and the people who write health policy.</p>
-    <div class="inst-actions" style="margin-top:32px">
-      <a class="btn btn-solid" href="index.html#instruments">See the tools</a>
-      <a class="btn btn-ghost" href="index.html#about">Who builds this</a>
-    </div>
+    <h1>Translating epidemiological evidence <b>for a healthier world</b></h1>
+    <!-- audience line first, then what the site is: the standfirst pattern the
+         redesign settled on, replacing the eyebrow + headline + lede stack. -->
+    <p class="lede lede-lead">For the curious public, patients, doctors, journalists, and the people who write health policy.</p>
+    <p class="lede">EpiDetective builds free tools that let you explore published health research for yourself.</p>
   </div>
-</section>
-
-<section class="sec wrap">
-  <div class="sec-head">
-    <div class="label">What this is</div>
-    <h2>Research you can <em>question</em> yourself.</h2>
-  </div>
-  <p class="lede" style="max-width:62ch">Every tool here starts from research that is already published and already careful. The difficulty is that almost nobody outside the field can read it. Each tool rebuilds that research into something you can search, follow and question directly.</p>
-  <p class="lede" style="max-width:62ch;margin-top:16px">The aim is to make findings usable while keeping the uncertainty that makes them trustworthy. Where the science is still unsure, the tool says so plainly.</p>
 </section>
 
 <section class="sec wrap" id="instruments">
@@ -86,9 +74,11 @@
           <span>186 exposures</span><span>68 cancer types</span>
           <span>466 links</span><span>10 languages</span>
         </div>
+        <!-- opening the tool is the primary action; the explainer page is the
+             secondary one. -->
         <div class="inst-actions">
-          <a class="btn btn-solid" href="explorer.html">About this tool</a>
-          <a class="btn btn-ghost" href="https://wenxin-wan.github.io/cancer-evidence-explorer/">Open it &rarr;</a>
+          <a class="btn btn-solid" href="https://wenxin-wan.github.io/cancer-evidence-explorer/">Open it &rarr;</a>
+          <a class="btn btn-ghost" href="explorer.html">About this tool</a>
         </div>
       </div>
       <a href="explorer.html" class="thumb" aria-label="Cancer Evidence Explorer"></a>
@@ -108,60 +98,51 @@
   </div>
   <div class="about">
     <div>
-      <p>I am Wenxin Wan, a postdoctoral scientist at the International Agency for Research on Cancer in Lyon, the World Health Organization's cancer agency. My work covers cancer epidemiology, causal inference, biostatistics and machine learning.</p>
-      <p>I did my PhD at Utrecht University's Institute for Risk Assessment Sciences, studying how exposures at work and in the environment affect cancer risk. That work helped establish the causal role of benzene in lung cancer, which had long been underestimated.</p>
-      <p>Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. At IARC I lead the analysis for OPICO, which pools ten such cohorts across three continents to ask whether long-term opioid use carries a cancer risk, and I advise the Lung Cancer Cohort Consortium (LC3) on how evidence about exposures at work can feed into lung cancer screening. The methods come from epidemiology, causal inference, pharmacoepidemiology and machine learning.</p>
-      <p>I build these tools because the evidence I work with is public and carefully made, and still almost unreadable unless you already know the field. Closing that gap seemed worth the effort. Everything below is checkable, and the links go to the original sources.</p>
+      <p>I am Wenxin Wan, a postdoctoral scientist at the International Agency for Research on Cancer in Lyon, the World Health Organization's cancer agency.</p>
+      <p>I did my PhD at Utrecht University's Institute for Risk Assessment Sciences, studying how exposures at work and in the environment affect cancer risk. That work helped establish the causal role of benzene in lung cancer, and was covered by <i>The New York Times</i>.</p>
+      <p>Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. At IARC I lead the analysis for OPICO, which pools ten such cohorts across three continents to ask whether long-term opioid use carries a cancer risk, and I advise the Lung Cancer Cohort Consortium (LC3) on how evidence about exposures at work can feed into lung cancer screening.</p>
+      <p>I build these tools because the evidence I work with is public and carefully made, and still almost unreadable unless you already know the field. Closing that gap seemed worth the effort. Everything here is checkable, and the links go to the original sources.</p>
       <div class="inline-links">
         <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
         <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
         <a href="https://github.com/Wenxin-Wan">GitHub</a>
       </div>
     </div>
-    <div class="creds">
-      <div class="cred"><span class="r">Position</span><span class="w">Postdoctoral scientist, IARC / WHO</span></div>
-      <div class="cred"><span class="r">Doctorate</span><span class="w">Utrecht University, Institute for Risk Assessment Sciences</span></div>
-      <div class="cred"><span class="r">Fields</span><span class="w">Cancer epidemiology &middot; causal inference &middot; biostatistics &middot; machine learning</span></div>
-      <div class="cred"><span class="r">Research projects</span><span class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></span></div>
-      <div class="cred"><span class="r">Consortium roles</span><span class="w">Lead analyst, OPICO &middot; scientific advisor, LC3</span></div>
-    </div>
+    <!-- a real definition list: these are term/value pairs, and screen readers
+         announce them as such -->
+    <dl class="creds">
+      <div class="cred"><dt class="r">Position</dt><dd class="w">Postdoctoral scientist, IARC / WHO</dd></div>
+      <div class="cred"><dt class="r">Doctorate</dt><dd class="w">Utrecht University, Institute for Risk Assessment Sciences</dd></div>
+      <div class="cred"><dt class="r">Fields</dt><dd class="w">Cancer epidemiology &middot; causal inference &middot; biostatistics &middot; machine learning</dd></div>
+      <div class="cred"><dt class="r">Research projects</dt><dd class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></dd></div>
+      <div class="cred"><dt class="r">Consortium roles</dt><dd class="w">Lead analyst and project coordinator, OPICO &middot; scientific advisor, LC3</dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="sec wrap" id="notes">
-  <div class="sec-head">
-    <div class="label">Notes</div>
-    <h2>Working through the <b>hard parts</b> in public.</h2>
-  </div>
-  <div class="notes">
-    <a class="note" href="https://epidetective.wordpress.com/2026/02/28/how-to-know-the-unknown/">
-      <h3>How to know the unknown?</h3>
-      <div class="m">Causal inference &middot; 28 February 2026</div>
-    </a>
-    <!-- Second note removed before launch: that article title was invented.
-         The notes.n2.* keys remain in every i18n file if a real one replaces it. -->
-  </div>
-</section>
+<!-- Notes section removed in the August 2026 pass: the section carried a single
+     essay and the nav entry it needed. The notes.* keys stay in every i18n file
+     so it can come back once there is more than one piece to list. -->
 
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
       <div>
         <div class="mark">Epi<span>Detective</span></div>
-        <p class="tag">Translating science for a healthier world.</p>
+        <p class="tag">Open tools for reading health evidence.</p>
       </div>
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
         <a href="explorer.html">Evidence Explorer</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#notes">Notes</a>
       </nav>
     </div>
     <div class="disc">EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.</div>
     <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>
+    <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
+         disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
-      <span>Created by Wenxin Wan &mdash; Lyon</span>
-      <span>IARC / WHO</span>
+      <span>Created by Wenxin Wan &mdash; Lyon, France</span>
     </div>
   </div>
 </footer>

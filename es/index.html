@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EpiDetective — Herramientas abiertas para leer la evidencia sobre el cáncer</title>
+<title>EpiDetective — Herramientas abiertas para leer la evidencia en salud</title>
 <meta name="description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
 <link rel="canonical" href="https://epidetective.com/es/">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/">
@@ -15,12 +15,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/es/">
-<meta property="og:title" content="EpiDetective — Herramientas abiertas para leer la evidencia sobre el cáncer">
+<meta property="og:title" content="EpiDetective — Herramientas abiertas para leer la evidencia en salud">
 <meta property="og:description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EpiDetective — Herramientas abiertas para leer la evidencia sobre el cáncer">
+<meta name="twitter:title" content="EpiDetective — Herramientas abiertas para leer la evidencia en salud">
 <meta name="twitter:description" content="Herramientas gratuitas para explorar por tu cuenta lo que la Organización Mundial de la Salud ha establecido sobre las causas del cáncer. Creadas por una epidemióloga del cáncer en el CIIC/OMS.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="stylesheet" href="../site.css">
@@ -35,7 +35,6 @@
         <a href="index.html#instruments">Herramientas</a>
         <a href="explorer.html">Explorador</a>
         <a href="index.html#about">Acerca de</a>
-        <a href="index.html#notes">Notas</a>
       </nav>
       <nav class="langs" aria-label="Idioma"><a href="../index.html" hreflang="en">English</a><a href="../zh/index.html" hreflang="zh">中文</a><a href="../fr/index.html" hreflang="fr">Français</a><span class="lang-cur" aria-current="true">Español</span><a href="../ru/index.html" hreflang="ru">Русский</a></nav>
     </div>
@@ -48,23 +47,12 @@
   <div class="hero-net" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="label">Herramientas abiertas para leer la evidencia sobre el cáncer</div>
-    <h1>La evidencia sobre qué causa el cáncer es pública. <b>Leerla no debería exigir un doctorado.</b></h1>
-    <p class="lede">EpiDetective crea herramientas gratuitas que te permiten explorar la investigación sobre el cáncer por tu cuenta — para pacientes, médicos, periodistas y quienes escriben las políticas de salud.</p>
-    <div class="inst-actions" style="margin-top:32px">
-      <a class="btn btn-solid" href="index.html#instruments">Ver las herramientas</a>
-      <a class="btn btn-ghost" href="index.html#about">Quién construye esto</a>
-    </div>
+    <h1>Traducir la evidencia epidemiológica <b>para un mundo más sano</b></h1>
+    <!-- audience line first, then what the site is: the standfirst pattern the
+         redesign settled on, replacing the eyebrow + headline + lede stack. -->
+    <p class="lede lede-lead">Para el público curioso, los pacientes, los médicos, los periodistas y quienes escriben las políticas de salud.</p>
+    <p class="lede">EpiDetective crea herramientas gratuitas que te permiten explorar por tu cuenta la investigación en salud ya publicada.</p>
   </div>
-</section>
-
-<section class="sec wrap">
-  <div class="sec-head">
-    <div class="label">Qué es esto</div>
-    <h2>Investigación que puedes <em>cuestionar</em> tú mismo.</h2>
-  </div>
-  <p class="lede" style="max-width:62ch">Cada herramienta parte de trabajos ya publicados y ya rigurosos. La dificultad es que casi nadie fuera del campo consigue leerlos. Cada herramienta reconstruye esa investigación en algo que puedes recorrer, seguir y cuestionar directamente.</p>
-  <p class="lede" style="max-width:62ch;margin-top:16px">El objetivo es hacer utilizables los hallazgos conservando la incertidumbre que los hace fiables. Donde la ciencia aún duda, la herramienta lo dice con claridad.</p>
 </section>
 
 <section class="sec wrap" id="instruments">
@@ -86,9 +74,11 @@
           <span>186 exposiciones</span><span>68 tipos de cáncer</span>
           <span>466 vínculos</span><span>10 idiomas</span>
         </div>
+        <!-- opening the tool is the primary action; the explainer page is the
+             secondary one. -->
         <div class="inst-actions">
-          <a class="btn btn-solid" href="explorer.html">Sobre esta herramienta</a>
-          <a class="btn btn-ghost" href="https://wenxin-wan.github.io/cancer-evidence-explorer/">Abrirla &rarr;</a>
+          <a class="btn btn-solid" href="https://wenxin-wan.github.io/cancer-evidence-explorer/">Abrirla &rarr;</a>
+          <a class="btn btn-ghost" href="explorer.html">Sobre esta herramienta</a>
         </div>
       </div>
       <a href="explorer.html" class="thumb" aria-label="Explorador de evidencia sobre el cáncer"></a>
@@ -108,60 +98,51 @@
   </div>
   <div class="about">
     <div>
-      <p>Soy Wenxin Wan, investigadora postdoctoral en el Centro Internacional de Investigaciones sobre el Cáncer, en Lyon, la agencia de la Organización Mundial de la Salud dedicada al cáncer. Mi trabajo abarca la epidemiología del cáncer, la inferencia causal, la bioestadística y el aprendizaje automático.</p>
-      <p>Hice mi doctorado en el Instituto de Ciencias de la Evaluación de Riesgos de la Universidad de Utrecht, sobre cómo las exposiciones en el trabajo y en el entorno afectan al riesgo de cáncer. Ese trabajo ayudó a establecer el papel causal del benceno en el cáncer de pulmón, largamente subestimado.</p>
-      <p>En el día a día trabajo con grandes cohortes internacionales: cientos de miles de personas seguidas durante años para ver qué exposiciones van seguidas de enfermedad. En el CIIC dirijo los análisis de OPICO, un consorcio que reúne diez de esas cohortes en tres continentes para averiguar si el uso prolongado de opioides conlleva riesgo de cáncer, y asesoro al Lung Cancer Cohort Consortium (LC3) sobre cómo la evidencia de exposiciones laborales puede alimentar el cribado del cáncer de pulmón. Los métodos vienen de la epidemiología, la inferencia causal, la farmacoepidemiología y el aprendizaje automático.</p>
-      <p>Construyo estas herramientas porque la evidencia con la que trabajo es pública y está cuidadosamente elaborada, y aun así resulta casi ilegible para quien no conoce ya el campo. Cerrar ese hueco merecía el esfuerzo. Todo lo que sigue se puede comprobar, y los enlaces llevan a las fuentes originales.</p>
+      <p>Soy Wenxin Wan, investigadora postdoctoral en el Centro Internacional de Investigaciones sobre el Cáncer, en Lyon, la agencia de la Organización Mundial de la Salud dedicada al cáncer.</p>
+      <p>Hice mi doctorado en el Instituto de Ciencias de la Evaluación de Riesgos de la Universidad de Utrecht, sobre cómo las exposiciones en el trabajo y en el entorno afectan al riesgo de cáncer. Ese trabajo ayudó a establecer el papel causal del benceno en el cáncer de pulmón, y fue recogido por <i>The New York Times</i>.</p>
+      <p>En el día a día trabajo con grandes cohortes internacionales: cientos de miles de personas seguidas durante años para ver qué exposiciones van seguidas de enfermedad. En el CIIC dirijo los análisis de OPICO, un consorcio que reúne diez de esas cohortes en tres continentes para averiguar si el uso prolongado de opioides conlleva riesgo de cáncer, y asesoro al Lung Cancer Cohort Consortium (LC3) sobre cómo la evidencia de exposiciones laborales puede alimentar el cribado del cáncer de pulmón.</p>
+      <p>Construyo estas herramientas porque la evidencia con la que trabajo es pública y está cuidadosamente elaborada, y aun así resulta casi ilegible para quien no conoce ya el campo. Cerrar ese hueco merecía el esfuerzo. Todo esto se puede comprobar, y los enlaces llevan a las fuentes originales.</p>
       <div class="inline-links">
         <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
         <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
         <a href="https://github.com/Wenxin-Wan">GitHub</a>
       </div>
     </div>
-    <div class="creds">
-      <div class="cred"><span class="r">Puesto</span><span class="w">Investigadora postdoctoral, CIIC / OMS</span></div>
-      <div class="cred"><span class="r">Doctorado</span><span class="w">Universidad de Utrecht, Instituto de Ciencias de la Evaluación de Riesgos</span></div>
-      <div class="cred"><span class="r">Campos</span><span class="w">Epidemiología del cáncer &middot; inferencia causal &middot; bioestadística &middot; aprendizaje automático</span></div>
-      <div class="cred"><span class="r">Proyectos de investigación</span><span class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></span></div>
-      <div class="cred"><span class="r">Funciones internacionales</span><span class="w">Analista principal, OPICO &middot; asesora científica, LC3</span></div>
-    </div>
+    <!-- a real definition list: these are term/value pairs, and screen readers
+         announce them as such -->
+    <dl class="creds">
+      <div class="cred"><dt class="r">Puesto</dt><dd class="w">Investigadora postdoctoral, CIIC / OMS</dd></div>
+      <div class="cred"><dt class="r">Doctorado</dt><dd class="w">Universidad de Utrecht, Instituto de Ciencias de la Evaluación de Riesgos</dd></div>
+      <div class="cred"><dt class="r">Campos</dt><dd class="w">Epidemiología del cáncer &middot; inferencia causal &middot; bioestadística &middot; aprendizaje automático</dd></div>
+      <div class="cred"><dt class="r">Proyectos de investigación</dt><dd class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></dd></div>
+      <div class="cred"><dt class="r">Funciones internacionales</dt><dd class="w">Analista principal y coordinadora de proyecto, OPICO &middot; asesora científica, LC3</dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="sec wrap" id="notes">
-  <div class="sec-head">
-    <div class="label">Notas</div>
-    <h2>Pensar en público las <b>partes difíciles</b>.</h2>
-  </div>
-  <div class="notes">
-    <a class="note" href="https://epidetective.wordpress.com/2026/02/28/how-to-know-the-unknown/">
-      <h3>¿Cómo conocer lo desconocido?</h3>
-      <div class="m">Inferencia causal &middot; 28 de febrero de 2026</div>
-    </a>
-    <!-- Second note removed before launch: that article title was invented.
-         The notes.n2.* keys remain in every i18n file if a real one replaces it. -->
-  </div>
-</section>
+<!-- Notes section removed in the August 2026 pass: the section carried a single
+     essay and the nav entry it needed. The notes.* keys stay in every i18n file
+     so it can come back once there is more than one piece to list. -->
 
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
       <div>
         <div class="mark">Epi<span>Detective</span></div>
-        <p class="tag">Traducir la ciencia para un mundo más sano.</p>
+        <p class="tag">Herramientas abiertas para leer la evidencia en salud.</p>
       </div>
       <nav class="menu">
         <a href="index.html#instruments">Herramientas</a>
         <a href="explorer.html">Explorador</a>
         <a href="index.html#about">Acerca de</a>
-        <a href="index.html#notes">Notas</a>
       </nav>
     </div>
     <div class="disc">EpiDetective publica herramientas para leer evidencia referida a poblaciones enteras. Muestran patrones en grandes grupos de personas. Para cualquier cuestión sobre tu propia salud, consulta a un médico. Cada herramienta indica sus fuentes.</div>
     <div class="disc affil">EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud, y las opiniones expresadas aquí son responsabilidad únicamente de su autora. Las fuentes científicas utilizadas están citadas para que cualquiera pueda comprobarlas de forma independiente.</div>
+    <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
+         disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
-      <span>Creado por Wenxin Wan &mdash; Lyon</span>
-      <span>CIIC / OMS</span>
+      <span>Creado por Wenxin Wan &mdash; Lyon, Francia</span>
     </div>
   </div>
 </footer>

@@ -30,7 +30,6 @@
         <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
         <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
         <a href="{{URL_HOME}}#about">{{nav.about}}</a>
-        <a href="{{URL_HOME}}#notes">{{nav.notes}}</a>
       </nav>
       <nav class="langs" aria-label="{{ui.language}}">{{LANGSWITCH}}</nav>
     </div>
@@ -43,23 +42,12 @@
   <div class="hero-net" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="label">{{home.eyebrow}}</div>
     <h1>{{home.h1}}</h1>
+    <!-- audience line first, then what the site is: the standfirst pattern the
+         redesign settled on, replacing the eyebrow + headline + lede stack. -->
+    <p class="lede lede-lead">{{home.audience}}</p>
     <p class="lede">{{home.lede}}</p>
-    <div class="inst-actions" style="margin-top:32px">
-      <a class="btn btn-solid" href="{{URL_HOME}}#instruments">{{home.cta_primary}}</a>
-      <a class="btn btn-ghost" href="{{URL_HOME}}#about">{{home.cta_secondary}}</a>
-    </div>
   </div>
-</section>
-
-<section class="sec wrap">
-  <div class="sec-head">
-    <div class="label">{{purpose.label}}</div>
-    <h2>{{purpose.h2}}</h2>
-  </div>
-  <p class="lede" style="max-width:62ch">{{purpose.p1}}</p>
-  <p class="lede" style="max-width:62ch;margin-top:16px">{{purpose.p2}}</p>
 </section>
 
 <section class="sec wrap" id="instruments">
@@ -81,9 +69,11 @@
           <span>{{inst.t1.m1}}</span><span>{{inst.t1.m2}}</span>
           <span>{{inst.t1.m3}}</span><span>{{inst.t1.m4}}</span>
         </div>
+        <!-- opening the tool is the primary action; the explainer page is the
+             secondary one. -->
         <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_EXPLORER}}">{{inst.t1.btn_about}}</a>
-          <a class="btn btn-ghost" href="{{URL_TOOL}}">{{inst.t1.btn_open}}</a>
+          <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst.t1.btn_open}}</a>
+          <a class="btn btn-ghost" href="{{URL_EXPLORER}}">{{inst.t1.btn_about}}</a>
         </div>
       </div>
       <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst.t1.name}}"></a>
@@ -113,30 +103,21 @@
         <a href="https://github.com/Wenxin-Wan">GitHub</a>
       </div>
     </div>
-    <div class="creds">
-      <div class="cred"><span class="r">{{about.cred1_label}}</span><span class="w">{{about.cred1_value}}</span></div>
-      <div class="cred"><span class="r">{{about.cred2_label}}</span><span class="w">{{about.cred2_value}}</span></div>
-      <div class="cred"><span class="r">{{about.cred3_label}}</span><span class="w">{{about.cred3_value}}</span></div>
-      <div class="cred"><span class="r">{{about.cred4_label}}</span><span class="w">{{about.cred4_value}}</span></div>
-      <div class="cred"><span class="r">{{about.cred5_label}}</span><span class="w">{{about.cred5_value}}</span></div>
-    </div>
+    <!-- a real definition list: these are term/value pairs, and screen readers
+         announce them as such -->
+    <dl class="creds">
+      <div class="cred"><dt class="r">{{about.cred1_label}}</dt><dd class="w">{{about.cred1_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about.cred2_label}}</dt><dd class="w">{{about.cred2_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about.cred3_label}}</dt><dd class="w">{{about.cred3_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about.cred4_label}}</dt><dd class="w">{{about.cred4_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about.cred5_label}}</dt><dd class="w">{{about.cred5_value}}</dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="sec wrap" id="notes">
-  <div class="sec-head">
-    <div class="label">{{notes.label}}</div>
-    <h2>{{notes.h2}}</h2>
-  </div>
-  <div class="notes">
-    <a class="note" href="{{URL_NOTE1}}">
-      <h3>{{notes.n1.title}}</h3>
-      <div class="m">{{notes.n1.meta}}</div>
-    </a>
-    <!-- Second note removed before launch: that article title was invented.
-         The notes.n2.* keys remain in every i18n file if a real one replaces it. -->
-  </div>
-</section>
+<!-- Notes section removed in the August 2026 pass: the section carried a single
+     essay and the nav entry it needed. The notes.* keys stay in every i18n file
+     so it can come back once there is more than one piece to list. -->
 
 <footer class="foot">
   <div class="wrap">
@@ -149,14 +130,14 @@
         <a href="{{URL_HOME}}#instruments">{{nav.instruments}}</a>
         <a href="{{URL_EXPLORER}}">{{nav.explorer}}</a>
         <a href="{{URL_HOME}}#about">{{nav.about}}</a>
-        <a href="{{URL_HOME}}#notes">{{nav.notes}}</a>
       </nav>
     </div>
     <div class="disc">{{foot.disclaimer}}</div>
     <div class="disc affil">{{foot.affiliation}}</div>
+    <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
+         disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
       <span>{{foot.created}}</span>
-      <span>{{foot.affil}}</span>
     </div>
   </div>
 </footer>

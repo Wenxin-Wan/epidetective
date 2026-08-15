@@ -2,7 +2,7 @@
   "lang.name": "English",
   "lang.dir": "ltr",
 
-  "meta.home.title": "EpiDetective — Open tools for reading cancer evidence",
+  "meta.home.title": "EpiDetective — Open tools for reading health evidence",
   "meta.home.desc": "Free tools that let you explore what the World Health Organization has found about the causes of cancer. Built by a cancer epidemiologist at IARC/WHO.",
   "meta.explorer.title": "Cancer Evidence Explorer — EpiDetective",
   "meta.explorer.desc": "See which exposures have been linked to which cancers, and how strong the evidence is for each link. Built on the WHO's IARC Monographs.",
@@ -15,8 +15,9 @@
   "nav.notes": "Notes",
 
   "home.eyebrow": "Open tools for reading cancer evidence",
-  "home.h1": "The evidence on what causes cancer is public. <b>Reading it shouldn't require a PhD.</b>",
-  "home.lede": "EpiDetective builds free tools that let you explore cancer research for yourself — for patients, doctors, journalists, and the people who write health policy.",
+  "home.h1": "Translating epidemiological evidence <b>for a healthier world</b>",
+  "home.audience": "For the curious public, patients, doctors, journalists, and the people who write health policy.",
+  "home.lede": "EpiDetective builds free tools that let you explore published health research for yourself.",
   "home.cta_primary": "See the tools",
   "home.cta_secondary": "Who builds this",
 
@@ -48,10 +49,10 @@
 
   "about.label": "Who builds this",
   "about.h2": "Built by a cancer epidemiologist who <b>works with this evidence every day</b>.",
-  "about.p1": "I am Wenxin Wan, a postdoctoral scientist at the International Agency for Research on Cancer in Lyon, the World Health Organization's cancer agency. My work covers cancer epidemiology, causal inference, biostatistics and machine learning.",
-  "about.p2": "I did my PhD at Utrecht University's Institute for Risk Assessment Sciences, studying how exposures at work and in the environment affect cancer risk. That work helped establish the causal role of benzene in lung cancer, which had long been underestimated.",
-  "about.p3": "Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. At IARC I lead the analysis for OPICO, which pools ten such cohorts across three continents to ask whether long-term opioid use carries a cancer risk, and I advise the Lung Cancer Cohort Consortium (LC3) on how evidence about exposures at work can feed into lung cancer screening. The methods come from epidemiology, causal inference, pharmacoepidemiology and machine learning.",
-  "about.p4": "I build these tools because the evidence I work with is public and carefully made, and still almost unreadable unless you already know the field. Closing that gap seemed worth the effort. Everything below is checkable, and the links go to the original sources.",
+  "about.p1": "I am Wenxin Wan, a postdoctoral scientist at the International Agency for Research on Cancer in Lyon, the World Health Organization's cancer agency.",
+  "about.p2": "I did my PhD at Utrecht University's Institute for Risk Assessment Sciences, studying how exposures at work and in the environment affect cancer risk. That work helped establish the causal role of benzene in lung cancer, and was covered by <i>The New York Times</i>.",
+  "about.p3": "Day to day I work with large international cohort studies, following hundreds of thousands of people over many years to see which exposures are followed by disease. At IARC I lead the analysis for OPICO, which pools ten such cohorts across three continents to ask whether long-term opioid use carries a cancer risk, and I advise the Lung Cancer Cohort Consortium (LC3) on how evidence about exposures at work can feed into lung cancer screening.",
+  "about.p4": "I build these tools because the evidence I work with is public and carefully made, and still almost unreadable unless you already know the field. Closing that gap seemed worth the effort. Everything here is checkable, and the links go to the original sources.",
   "about.cred1_label": "Position",
   "about.cred1_value": "Postdoctoral scientist, IARC / WHO",
   "about.cred2_label": "Doctorate",
@@ -61,7 +62,7 @@
   "about.cred4_label": "Research projects",
   "about.cred4_value": "<a href=\"https://opico.iarc.who.int\">OPICO</a> &middot; <a href=\"https://synergy.iarc.fr\">SYNERGY</a> &middot; <a href=\"https://www.ephor-project.eu\">EPHOR</a> &middot; <a href=\"https://www.ecrhs.org\">ECRHS</a>",
   "about.cred5_label": "Consortium roles",
-  "about.cred5_value": "Lead analyst, OPICO &middot; scientific advisor, LC3",
+  "about.cred5_value": "Lead analyst and project coordinator, OPICO &middot; scientific advisor, LC3",
 
   "notes.label": "Notes",
   "notes.h2": "Working through the <b>hard parts</b> in public.",
@@ -70,10 +71,10 @@
   "notes.n2.title": "What \"limited evidence\" actually means",
   "notes.n2.meta": "Evidence &middot; Draft",
 
-  "foot.tagline": "Translating science for a healthier world.",
+  "foot.tagline": "Open tools for reading health evidence.",
   "foot.affiliation": "EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.",
   "foot.disclaimer": "EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.",
-  "foot.created": "Created by Wenxin Wan &mdash; Lyon",
+  "foot.created": "Created by Wenxin Wan &mdash; Lyon, France",
   "foot.affil": "IARC / WHO",
 
   "exp.crumb_current": "Tool 01 &mdash; open now",

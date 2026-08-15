@@ -2,7 +2,7 @@
   "lang.name": "Français",
   "lang.dir": "ltr",
 
-  "meta.home.title": "EpiDetective — Des outils ouverts pour lire les données sur le cancer",
+  "meta.home.title": "EpiDetective — Des outils ouverts pour lire les données de santé",
   "meta.home.desc": "Des outils gratuits pour explorer vous-même ce que l'Organisation mondiale de la Santé a établi sur les causes du cancer. Conçus par une épidémiologiste du cancer au CIRC/OMS.",
   "meta.explorer.title": "Explorateur des données sur le cancer — EpiDetective",
   "meta.explorer.desc": "Quelles expositions ont été reliées à quels cancers, et quelle est la solidité des données derrière chaque lien. Fondé sur les Monographies du CIRC (OMS).",
@@ -15,8 +15,9 @@
   "nav.notes": "Notes",
 
   "home.eyebrow": "Des outils ouverts pour lire les données sur le cancer",
-  "home.h1": "Les données sur ce qui cause le cancer sont publiques. <b>Les lire ne devrait pas exiger un doctorat.</b>",
-  "home.lede": "EpiDetective conçoit des outils gratuits qui vous permettent d'explorer vous-même la recherche sur le cancer — pour les patients, les médecins, les journalistes et celles et ceux qui écrivent les politiques de santé.",
+  "home.h1": "Traduire les données épidémiologiques <b>pour un monde en meilleure santé</b>",
+  "home.audience": "Pour le public curieux, les patients, les médecins, les journalistes et celles et ceux qui écrivent les politiques de santé.",
+  "home.lede": "EpiDetective conçoit des outils gratuits qui vous permettent d'explorer vous-même la recherche en santé déjà publiée.",
   "home.cta_primary": "Voir les outils",
   "home.cta_secondary": "Qui construit cela",
 
@@ -48,10 +49,10 @@
 
   "about.label": "Qui construit cela",
   "about.h2": "Conçu par une épidémiologiste du cancer qui <b>travaille avec ces données chaque jour</b>.",
-  "about.p1": "Je suis Wenxin Wan, chercheuse postdoctorale au Centre international de Recherche sur le Cancer, à Lyon, l'agence de l'Organisation mondiale de la Santé consacrée au cancer. Mon travail couvre l'épidémiologie du cancer, l'inférence causale, la biostatistique et l'apprentissage automatique.",
-  "about.p2": "J'ai réalisé mon doctorat à l'Institut des sciences de l'évaluation des risques de l'Université d'Utrecht, sur la façon dont les expositions au travail et dans l'environnement influencent le risque de cancer. Ces travaux ont contribué à établir le rôle causal du benzène dans le cancer du poumon, longtemps sous-estimé.",
-  "about.p3": "Au quotidien, je travaille sur de grandes cohortes internationales : des centaines de milliers de personnes suivies pendant des années, pour repérer quelles expositions sont suivies de maladies. Au CIRC, je dirige les analyses d'OPICO, un consortium qui réunit dix de ces cohortes sur trois continents pour savoir si l'usage prolongé d'opioïdes s'accompagne d'un risque de cancer, et je conseille le Lung Cancer Cohort Consortium (LC3) sur la manière dont les données relatives aux expositions professionnelles peuvent nourrir le dépistage du cancer du poumon. Les méthodes viennent de l'épidémiologie, de l'inférence causale, de la pharmaco-épidémiologie et de l'apprentissage automatique.",
-  "about.p4": "Je construis ces outils parce que les données avec lesquelles je travaille sont publiques et soigneusement établies, et pourtant presque illisibles pour qui ne connaît pas déjà le domaine. Combler cet écart méritait l'effort. Tout ce qui suit est vérifiable, et les liens mènent aux sources d'origine.",
+  "about.p1": "Je suis Wenxin Wan, chercheuse postdoctorale au Centre international de Recherche sur le Cancer, à Lyon, l'agence de l'Organisation mondiale de la Santé consacrée au cancer.",
+  "about.p2": "J'ai réalisé mon doctorat à l'Institut des sciences de l'évaluation des risques de l'Université d'Utrecht, sur la façon dont les expositions au travail et dans l'environnement influencent le risque de cancer. Ces travaux ont contribué à établir le rôle causal du benzène dans le cancer du poumon, et ont été repris par le <i>New York Times</i>.",
+  "about.p3": "Au quotidien, je travaille sur de grandes cohortes internationales : des centaines de milliers de personnes suivies pendant des années, pour repérer quelles expositions sont suivies de maladies. Au CIRC, je dirige les analyses d'OPICO, un consortium qui réunit dix de ces cohortes sur trois continents pour savoir si l'usage prolongé d'opioïdes s'accompagne d'un risque de cancer, et je conseille le Lung Cancer Cohort Consortium (LC3) sur la manière dont les données relatives aux expositions professionnelles peuvent nourrir le dépistage du cancer du poumon.",
+  "about.p4": "Je construis ces outils parce que les données avec lesquelles je travaille sont publiques et soigneusement établies, et pourtant presque illisibles pour qui ne connaît pas déjà le domaine. Combler cet écart méritait l'effort. Tout cela est vérifiable, et les liens mènent aux sources d'origine.",
   "about.cred1_label": "Poste",
   "about.cred1_value": "Chercheuse postdoctorale, CIRC / OMS",
   "about.cred2_label": "Doctorat",
@@ -61,7 +62,7 @@
   "about.cred4_label": "Projets de recherche",
   "about.cred4_value": "<a href=\"https://opico.iarc.who.int\">OPICO</a> &middot; <a href=\"https://synergy.iarc.fr\">SYNERGY</a> &middot; <a href=\"https://www.ephor-project.eu\">EPHOR</a> &middot; <a href=\"https://www.ecrhs.org\">ECRHS</a>",
   "about.cred5_label": "Fonctions internationales",
-  "about.cred5_value": "Analyste principale, OPICO &middot; conseillère scientifique, LC3",
+  "about.cred5_value": "Analyste principale et coordinatrice de projet, OPICO &middot; conseillère scientifique, LC3",
 
   "notes.label": "Notes",
   "notes.h2": "Réfléchir aux <b>parties difficiles</b> en public.",
@@ -70,10 +71,10 @@
   "notes.n2.title": "Ce que signifie vraiment « preuves limitées »",
   "notes.n2.meta": "Données &middot; Brouillon",
 
-  "foot.tagline": "Traduire la science pour un monde en meilleure santé.",
+  "foot.tagline": "Des outils ouverts pour lire les données de santé.",
   "foot.affiliation": "EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d'aucune approbation du Centre international de Recherche sur le Cancer ni de l'Organisation mondiale de la Santé, et les opinions exprimées ici n'engagent que leur autrice. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.",
   "foot.disclaimer": "EpiDetective publie des outils permettant de lire des données portant sur des populations entières. Ils montrent des tendances au sein de grands groupes de personnes. Pour toute question concernant votre propre santé, adressez-vous à un médecin. Chaque outil indique ses sources.",
-  "foot.created": "Créé par Wenxin Wan &mdash; Lyon",
+  "foot.created": "Créé par Wenxin Wan &mdash; Lyon, France",
   "foot.affil": "CIRC / OMS",
 
   "exp.crumb_current": "Outil 01 &mdash; ouvert",
