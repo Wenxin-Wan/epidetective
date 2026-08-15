@@ -23,6 +23,11 @@ TPL = os.path.join(HERE, "templates")
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
 PAGES = {"index.html": "home", "explorer.html": "explorer"}
+SITE_URL = "https://epidetective.com"
+# og:image must be an absolute URL on a raster format; social scrapers ignore SVG
+OG_IMAGE = SITE_URL + "/assets/og.png"
+# og:locale wants a full locale, not the bare language code
+OG_LOCALE = {"en": "en_GB", "zh": "zh_CN", "fr": "fr_FR", "es": "es_ES", "ru": "ru_RU"}
 TOOL_URL = "https://wenxin-wan.github.io/cancer-evidence-explorer/"
 # The one genuine Note currently published, still living on the WordPress site.
 # It must use the wordpress.com host: epidetective.com now points at this site on
@@ -50,6 +55,47 @@ def url(lang, page, from_lang):
     prefix = "" if from_lang == "en" else "../"
     sub = "" if lang == "en" else lang + "/"
     return prefix + sub + page
+
+
+def abs_url(lang, page):
+    """Canonical absolute URL for `page` in `lang`.
+
+    canonical, og:url, hreflang and the sitemap all need absolute URLs -- search
+    engines treat a relative hreflang as a weaker hint, and social scrapers
+    cannot resolve a relative og:url at all. index.html is dropped so the
+    canonical form is the directory, matching what the server actually serves.
+    """
+    sub = "" if lang == "en" else lang + "/"
+    leaf = "" if page == "index.html" else page
+    return "%s/%s%s" % (SITE_URL, sub, leaf)
+
+
+def write_sitemap():
+    """One <url> per page per language, each listing every language as an
+    alternate. Search engines want the alternates repeated inside every entry,
+    not only on the page that happens to be canonical."""
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+           ' xmlns:xhtml="http://www.w3.org/1999/xhtml">']
+    for page in PAGES:
+        for lang in LANGS:
+            out.append("  <url>")
+            out.append("    <loc>%s</loc>" % abs_url(lang, page))
+            for other in LANGS:
+                out.append('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
+                           % (other, abs_url(other, page)))
+            out.append('    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>'
+                       % abs_url("en", page))
+            out.append("  </url>")
+    out.append("</urlset>")
+    with open(os.path.join(HERE, "sitemap.xml"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(out) + "\n")
+
+
+def write_robots():
+    lines = ["User-agent: *", "Allow: /", "", "Sitemap: %s/sitemap.xml" % SITE_URL]
+    with open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(lines) + "\n")
 
 
 def main():
@@ -96,9 +142,9 @@ def main():
         for page in PAGES:
             # hreflang alternates for this page across every language
             alts = ['<link rel="alternate" hreflang="%s" href="%s">'
-                    % (o, url(o, page, lang)) for o in LANGS]
+                    % (o, abs_url(o, page)) for o in LANGS]
             alts.append('<link rel="alternate" hreflang="x-default" href="%s">'
-                        % url("en", page, lang))
+                        % abs_url("en", page))
 
             ctx = dict(d)
             ctx["LANG"] = lang
@@ -108,6 +154,9 @@ def main():
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_NOTE1"] = NOTE1_URL
+            ctx["CANONICAL"] = abs_url(lang, page)
+            ctx["OG_IMAGE"] = OG_IMAGE
+            ctx["OG_LOCALE"] = OG_LOCALE[lang]
             ctx["LANGSWITCH"] = switch_html
             ctx["HREFLANG"] = "\n".join(alts)
 
@@ -129,6 +178,9 @@ def main():
             with open(path, "w", encoding="utf-8") as fh:
                 fh.write(html)
             written.append(os.path.relpath(path, HERE))
+
+    write_sitemap()
+    write_robots()
 
     print("Built %d pages across %d languages:" % (len(written), len(LANGS)))
     for w in written:
