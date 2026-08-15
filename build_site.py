@@ -24,8 +24,10 @@ TPL = os.path.join(HERE, "templates")
 LANGS = ["en", "zh", "fr", "es", "ru"]
 PAGES = {"index.html": "home", "explorer.html": "explorer"}
 TOOL_URL = "https://wenxin-wan.github.io/cancer-evidence-explorer/"
-# The one genuine Note currently published, still living on the WordPress site
-NOTE1_URL = "https://epidetective.com/2026/02/28/how-to-know-the-unknown/"
+# The one genuine Note currently published, still living on the WordPress site.
+# It must use the wordpress.com host: epidetective.com now points at this site on
+# GitHub Pages, so the old epidetective.com/2026/... path no longer resolves.
+NOTE1_URL = "https://epidetective.wordpress.com/2026/02/28/how-to-know-the-unknown/"
 
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
 
