@@ -24,7 +24,7 @@ English.
 
 ## Content
 
-All copy lives in `i18n/<lang>.json`, 105 keys each. `en.json` is the source of
+All copy lives in `i18n/<lang>.json`, 86 keys each. `en.json` is the source of
 truth for key parity. To change wording, edit the JSON and rebuild — never edit
 the generated HTML, it is overwritten.
 
@@ -89,6 +89,7 @@ The homepage lists two instruments because two exist. The `inst.t2.*` slot
 originally described a planned Occupational Exposure Atlas and now holds the
 chronic-disease explorer, which is live. A third card (`inst.t3.*`) and a second
 Note (`notes.n2.*`) were drafted during design and **removed before launch** —
-they described things that do not exist. Their translation keys remain in every
-`i18n` file, and `templates/index.html` carries a comment showing where to
-reinstate the markup once there is something real to announce.
+they described things that do not exist. Their translation keys were dropped in
+the August 2026 CMS cleanup; `templates/index.html` carries a comment showing
+where to reinstate the markup (re-add the keys to every `i18n` file and to the
+CMS via `scripts/generate_pages_yml.py`) once there is something real to announce.
