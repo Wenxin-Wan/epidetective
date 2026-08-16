@@ -153,7 +153,7 @@
         <h2 data-i18n="sourcesH">Official sources</h2>
         <ul>
           <li><a href="https://www.iarc.who.int/faq/world-code-against-cancer-framework" rel="noopener">IARC — World Code Against Cancer Framework</a></li>
-          <li><a href="https://cancer-code-europe.iarc.who.int/" rel="noopener" data-i18n="srcEurope">European Code Against Cancer (4th edition)</a></li>
+          <li><a href="https://cancer-code-europe.iarc.who.int/" rel="noopener" data-i18n="srcEurope">European Code Against Cancer (5th edition)</a></li>
           <li><a href="https://www.paho.org/en/campaigns/latin-america-and-caribbean-code-against-cancer" rel="noopener" data-i18n="srcLac">Latin America and the Caribbean Code Against Cancer</a></li>
           <li><a href="https://www.thelancet.com/journals/lansea/article/PIIS2772-3682(23)00176-2/fulltext" rel="noopener" data-i18n="srcAsia">Mapping towards an Asian Code Against Cancer (ANCCA · IARC)</a></li>
         </ul>
@@ -182,7 +182,7 @@ var STRINGS = {
     disclaimerH:"How to use this.",
     disclaimerP:"This page summarises official guidance for your information. It is not medical advice. Screening ages, vaccination schedules and workplace rules vary by country — follow the programme available where you live. For anything concerning your own health, speak to a doctor.",
     sourcesH:"Official sources",
-    srcEurope:"European Code Against Cancer (4th edition)",
+    srcEurope:"European Code Against Cancer (5th edition)",
     srcLac:"Latin America and the Caribbean Code Against Cancer",
     srcAsia:"Mapping towards an Asian Code Against Cancer (ANCCA · IARC)",
     footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates."
@@ -201,7 +201,7 @@ var STRINGS = {
     disclaimerH:"如何理解本页。",
     disclaimerP:"本页为官方指南的摘要，仅供了解，不构成医疗建议。筛查年龄、疫苗与职业规定因国家而异——请遵循你所在地区的现有方案。涉及个人健康的问题，请咨询医生。",
     sourcesH:"官方来源",
-    srcEurope:"欧洲防癌守则（第四版）",
+    srcEurope:"欧洲防癌守则（第五版）",
     srcLac:"拉丁美洲及加勒比防癌守则",
     srcAsia:"亚洲防癌守则筹备（ANCCA · IARC）",
     footNote:"由 EpiDetective 依据 IARC / PAHO / ANCCA 公开资料整理。最终表述与更新请以上方官方来源为准。"
@@ -213,20 +213,22 @@ var REGIONS = [
   { id:"europe", dev:false,
     name:{en:"Europe",zh:"欧洲"},
     partner:{en:"IARC & the European Commission",zh:"IARC 与欧盟委员会"},
-    status:{en:"4th edition (2014)",zh:"第四版（2014）"},
+    status:{en:"5th edition (2025)",zh:"第五版（2025）"},
     recs:[
-      [{en:"Do not smoke",zh:"不要吸烟"},{en:"Do not use any form of tobacco.",zh:"不要使用任何形式的烟草。"}],
-      [{en:"Make your home smoke-free",zh:"让家里保持无烟"},{en:"Support smoke-free policies in your workplace.",zh:"支持工作场所的无烟政策。"}],
-      [{en:"Keep a healthy body weight",zh:"保持健康的体重"},{en:"Take action to reach and keep a healthy body weight.",zh:"采取行动，达到并保持健康的体重。"}],
-      [{en:"Be physically active",zh:"每天保持身体活动"},{en:"Be active in everyday life and limit the time you spend sitting.",zh:"在日常生活中多活动，减少久坐时间。"}],
-      [{en:"Eat a healthy diet",zh:"健康饮食"},{en:"Eat plenty of whole grains, pulses, vegetables and fruit; limit high-calorie and sugary foods; avoid sugary drinks; avoid processed meat and limit red meat and salt.",zh:"多吃全谷物、豆类、蔬菜和水果；少吃高热量、高糖食物；不喝含糖饮料；不吃加工肉类，限制红肉和高盐食物。"}],
-      [{en:"Limit alcohol",zh:"限制饮酒"},{en:"If you drink alcohol of any type, limit your intake. Not drinking is better for cancer prevention.",zh:"无论何种酒，如饮请限量；不饮酒更有益于防癌。"}],
-      [{en:"Avoid too much sun",zh:"避免过度日晒"},{en:"Avoid too much sun, especially for children. Use sun protection and do not use sunbeds.",zh:"避免过度日晒，尤其是儿童；做好防晒，不使用日光浴床。"}],
-      [{en:"Protect yourself at work",zh:"工作中做好防护"},{en:"Protect yourself against cancer-causing substances by following health and safety instructions.",zh:"遵守健康与安全规范，避免接触致癌物。"}],
-      [{en:"Reduce high radon levels",zh:"降低氡气暴露"},{en:"Find out whether your home has naturally high radon levels, and take action to reduce them.",zh:"了解家中是否存在天然氡气超标，并采取措施降低。"}],
-      [{en:"For women: breastfeed, limit HRT",zh:"对女性：母乳喂养、限制 HRT"},{en:"Breastfeeding reduces the mother's cancer risk. Hormone replacement therapy (HRT) raises the risk of certain cancers — limit its use.",zh:"母乳喂养可降低母亲的患癌风险；激素替代疗法（HRT）会增加某些癌症风险，应限制使用。"}],
-      [{en:"Vaccinate your children",zh:"让孩子接种疫苗"},{en:"Ensure your children take part in vaccination for hepatitis B (newborns) and HPV (girls).",zh:"让子女接种疫苗：新生儿接种乙肝疫苗，女孩接种 HPV 疫苗。"}],
-      [{en:"Take part in screening",zh:"参加癌症筛查"},{en:"Join organised screening programmes for bowel cancer (men and women), breast cancer (women) and cervical cancer (women).",zh:"参加有组织的筛查项目：结直肠癌（男女）、乳腺癌（女性）和宫颈癌（女性）。"}]
+      [{en:"Do not smoke",zh:"不要吸烟"},{en:"Do not use any form of tobacco, or vaping products. If you smoke, you should quit.",zh:"不要使用任何形式的烟草或电子烟产品；如已吸烟，应戒烟。"}],
+      [{en:"Keep your home and car smoke-free",zh:"让家中和车内保持无烟"},{en:"Keep your home and car free of tobacco smoke.",zh:"让家中和车内远离烟草烟雾。"}],
+      [{en:"Avoid or manage overweight",zh:"避免或管理超重"},{en:"Take action to avoid or manage overweight and obesity: limit foods high in calories, sugar, fat and salt; limit sugary drinks; limit ultra-processed foods.",zh:"采取行动避免或管理超重和肥胖：少吃高热量、高糖、高脂、高盐食物；少喝含糖饮料；少吃超加工食品。"}],
+      [{en:"Be physically active",zh:"保持身体活动"},{en:"Be physically active in everyday life. Limit the time you spend sitting.",zh:"在日常生活中保持身体活动，减少久坐时间。"}],
+      [{en:"Eat a healthy diet",zh:"健康饮食"},{en:"Eat whole grains, vegetables, legumes and fruits as a major part of your daily diet. Limit red meat and avoid processed meat.",zh:"以全谷物、蔬菜、豆类和水果作为日常饮食的主要部分；限制红肉，不吃加工肉类。"}],
+      [{en:"Avoid alcohol",zh:"避免饮酒"},{en:"Avoid alcoholic drinks.",zh:"避免饮酒。"}],
+      [{en:"Breastfeed",zh:"母乳喂养"},{en:"Breastfeed your baby for as long as possible.",zh:"尽可能长时间地母乳喂养宝宝。"}],
+      [{en:"Avoid too much sun",zh:"避免过度日晒"},{en:"Avoid too much sun exposure, especially for children. Use sun protection. Never use sunbeds.",zh:"避免过度日晒，尤其是儿童；做好防晒；绝不使用日光浴床。"}],
+      [{en:"Protect yourself at work",zh:"工作中做好防护"},{en:"Inform yourself about cancer-causing factors at work, and call on your employer to protect you. Always follow health and safety instructions at your workplace.",zh:"了解工作中的致癌因素，并要求雇主提供防护；始终遵守工作场所的健康安全规范。"}],
+      [{en:"Check your radon exposure",zh:"了解氡气暴露"},{en:"Check a local radon map to learn about radon levels in your area. Seek professional help to measure levels in your home and, if necessary, reduce them.",zh:"通过当地氡气地图了解所在地区的氡气水平；请专业人员测量家中氡气，必要时采取措施降低。"}],
+      [{en:"Reduce air pollution exposure",zh:"减少空气污染暴露"},{en:"Use public transport, walk or cycle instead of driving; choose low-traffic routes; keep your home free of smoke; support policies that improve air quality.",zh:"多乘公共交通、步行或骑车代替开车；选择车流量小的路线；保持家中无烟；支持改善空气质量的公共政策。"}],
+      [{en:"Vaccinate against infections",zh:"接种预防感染的疫苗"},{en:"Vaccinate girls and boys against hepatitis B virus and human papillomavirus (HPV) at the age recommended in your country. Take part in testing and treatment for hepatitis B and C, HIV and H. pylori, as recommended.",zh:"按本国建议年龄为女孩和男孩接种乙肝疫苗和 HPV 疫苗；并按建议参与乙肝、丙肝、HIV 和幽门螺杆菌的检测与治疗。"}],
+      [{en:"Limit hormone replacement therapy",zh:"限制激素替代疗法"},{en:"If you use hormone replacement therapy for menopausal symptoms, after a thorough discussion with your health-care professional, limit its use to the shortest duration possible.",zh:"如使用激素替代疗法缓解更年期症状，应在与医生充分沟通后，将使用时间限制在最短。"}],
+      [{en:"Take part in screening",zh:"参加癌症筛查"},{en:"Take part in organized cancer screening programmes, as recommended in your country, for bowel, breast, cervical and lung cancer.",zh:"参加本国建议的有组织癌症筛查：结直肠癌、乳腺癌、宫颈癌和肺癌。"}]
     ]
   },
   { id:"lac", dev:false,
