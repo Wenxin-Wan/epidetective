@@ -29,6 +29,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_HOME}}#about">{{nav_about}}</a>
+        <a href="{{URL_HOME}}#contact">{{nav_contact}}</a>
       </nav>
       <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
     </div>
@@ -142,6 +143,15 @@
      CMS cleanup; re-add them to every i18n file (and the CMS via
      scripts/generate_pages_yml.py) once there is more than one piece to list. -->
 
+<section class="sec wrap" id="contact">
+  <div class="sec-head">
+    <div class="label">{{contact_label}}</div>
+    <h2>{{contact_h2}}</h2>
+  </div>
+  <p class="lede">{{contact_p}}</p>
+  <a class="contact-email" href="mailto:epidetective@gmail.com">epidetective@gmail.com</a>
+</section>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -152,6 +162,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_HOME}}#about">{{nav_about}}</a>
+        <a href="{{URL_HOME}}#contact">{{nav_contact}}</a>
       </nav>
     </div>
     <div class="disc">{{foot_disclaimer}}</div>

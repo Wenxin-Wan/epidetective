@@ -268,6 +268,12 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
                 transition:border-color .16s ease,color .16s ease}
 .inline-links a:hover{border-color:var(--madder);color:var(--madder)}
 
+/* ---------- contact ---------- */
+.contact-email{display:inline-block;margin-top:24px;font-family:var(--display);
+  font-variation-settings:var(--wonk);font-size:clamp(1.3rem,2.6vw,1.85rem);
+  text-decoration:none;border-bottom:2px solid var(--madder)}
+.contact-email:hover{color:var(--madder)}
+
 /* ---------- notes ---------- */
 .notes{border-top:1px solid var(--rule)}
 .note{display:grid;gap:5px;padding-block:22px;border-bottom:1px solid var(--rule);

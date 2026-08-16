@@ -35,6 +35,10 @@
     "label": "Menu — About",
     "type": "string"
   },
+  "nav_contact": {
+    "label": "Menu — Contact",
+    "type": "string"
+  },
   "home_h1": {
     "label": "HOME — Headline",
     "type": "string"
@@ -186,6 +190,18 @@
   "about_cred5_value": {
     "label": "ABOUT — credential 5: value",
     "type": "string"
+  },
+  "contact_label": {
+    "label": "CONTACT — small section label",
+    "type": "string"
+  },
+  "contact_h2": {
+    "label": "CONTACT — heading",
+    "type": "string"
+  },
+  "contact_p": {
+    "label": "CONTACT — paragraph",
+    "type": "text"
   },
   "foot_tagline": {
     "label": "FOOTER — tagline",

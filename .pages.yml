@@ -40,6 +40,9 @@ content:
       - name: "nav_about"
         label: "Menu — About"
         type: string
+      - name: "nav_contact"
+        label: "Menu — Contact"
+        type: string
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
@@ -154,6 +157,15 @@ content:
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
         type: string
+      - name: "contact_label"
+        label: "CONTACT — small section label"
+        type: string
+      - name: "contact_h2"
+        label: "CONTACT — heading"
+        type: string
+      - name: "contact_p"
+        label: "CONTACT — paragraph"
+        type: text
       - name: "foot_tagline"
         label: "FOOTER — tagline"
         type: string
@@ -302,6 +314,9 @@ content:
       - name: "nav_about"
         label: "Menu — About"
         type: string
+      - name: "nav_contact"
+        label: "Menu — Contact"
+        type: string
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
@@ -416,6 +431,15 @@ content:
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
         type: string
+      - name: "contact_label"
+        label: "CONTACT — small section label"
+        type: string
+      - name: "contact_h2"
+        label: "CONTACT — heading"
+        type: string
+      - name: "contact_p"
+        label: "CONTACT — paragraph"
+        type: text
       - name: "foot_tagline"
         label: "FOOTER — tagline"
         type: string
@@ -564,6 +588,9 @@ content:
       - name: "nav_about"
         label: "Menu — About"
         type: string
+      - name: "nav_contact"
+        label: "Menu — Contact"
+        type: string
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
@@ -678,6 +705,15 @@ content:
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
         type: string
+      - name: "contact_label"
+        label: "CONTACT — small section label"
+        type: string
+      - name: "contact_h2"
+        label: "CONTACT — heading"
+        type: string
+      - name: "contact_p"
+        label: "CONTACT — paragraph"
+        type: text
       - name: "foot_tagline"
         label: "FOOTER — tagline"
         type: string
@@ -826,6 +862,9 @@ content:
       - name: "nav_about"
         label: "Menu — About"
         type: string
+      - name: "nav_contact"
+        label: "Menu — Contact"
+        type: string
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
@@ -940,6 +979,15 @@ content:
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
         type: string
+      - name: "contact_label"
+        label: "CONTACT — small section label"
+        type: string
+      - name: "contact_h2"
+        label: "CONTACT — heading"
+        type: string
+      - name: "contact_p"
+        label: "CONTACT — paragraph"
+        type: text
       - name: "foot_tagline"
         label: "FOOTER — tagline"
         type: string
@@ -1088,6 +1136,9 @@ content:
       - name: "nav_about"
         label: "Menu — About"
         type: string
+      - name: "nav_contact"
+        label: "Menu — Contact"
+        type: string
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
@@ -1202,6 +1253,15 @@ content:
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
         type: string
+      - name: "contact_label"
+        label: "CONTACT — small section label"
+        type: string
+      - name: "contact_h2"
+        label: "CONTACT — heading"
+        type: string
+      - name: "contact_p"
+        label: "CONTACT — paragraph"
+        type: text
       - name: "foot_tagline"
         label: "FOOTER — tagline"
         type: string
