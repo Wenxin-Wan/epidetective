@@ -37,9 +37,6 @@ content:
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
-      - name: "nav_explorer"
-        label: "Menu — Evidence Explorer"
-        type: string
       - name: "nav_about"
         label: "Menu — About"
         type: string
@@ -301,9 +298,6 @@ content:
         type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
-        type: string
-      - name: "nav_explorer"
-        label: "Menu — Evidence Explorer"
         type: string
       - name: "nav_about"
         label: "Menu — About"
@@ -567,9 +561,6 @@ content:
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
-      - name: "nav_explorer"
-        label: "Menu — Evidence Explorer"
-        type: string
       - name: "nav_about"
         label: "Menu — About"
         type: string
@@ -832,9 +823,6 @@ content:
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
-      - name: "nav_explorer"
-        label: "Menu — Evidence Explorer"
-        type: string
       - name: "nav_about"
         label: "Menu — About"
         type: string
@@ -1096,9 +1084,6 @@ content:
         type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
-        type: string
-      - name: "nav_explorer"
-        label: "Menu — Evidence Explorer"
         type: string
       - name: "nav_about"
         label: "Menu — About"

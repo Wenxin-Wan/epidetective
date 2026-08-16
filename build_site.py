@@ -138,18 +138,20 @@ def main():
         outdir = HERE if lang == "en" else os.path.join(HERE, lang)
         os.makedirs(outdir, exist_ok=True)
 
-        # language switcher: plain links, no JavaScript required
-        switch = []
-        for other in LANGS:
-            label = data[other]["lang_name"]
-            if other == lang:
-                switch.append('<span class="lang-cur" aria-current="true">%s</span>' % label)
-            else:
-                switch.append('<a href="%s" hreflang="%s">%s</a>'
-                              % (url(other, "index.html", lang), other, label))
-        switch_html = "".join(switch)
-
         for page in PAGES:
+            # language switcher: plain links, no JavaScript required. Built per
+            # page so switching language keeps you on the same page rather than
+            # dumping you back to the home page.
+            switch = []
+            for other in LANGS:
+                label = data[other]["lang_name"]
+                if other == lang:
+                    switch.append('<span class="lang-cur" aria-current="true">%s</span>' % label)
+                else:
+                    switch.append('<a href="%s" hreflang="%s">%s</a>'
+                                  % (url(other, page, lang), other, label))
+            switch_html = "".join(switch)
+
             # hreflang alternates for this page across every language
             alts = ['<link rel="alternate" hreflang="%s" href="%s">'
                     % (o, abs_url(o, page)) for o in LANGS]

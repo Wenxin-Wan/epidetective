@@ -31,10 +31,6 @@
     "label": "Menu — Tools",
     "type": "string"
   },
-  "nav_explorer": {
-    "label": "Menu — Evidence Explorer",
-    "type": "string"
-  },
   "nav_about": {
     "label": "Menu — About",
     "type": "string"
