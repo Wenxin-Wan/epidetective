@@ -33,6 +33,9 @@ TOOL_URL = "https://wenxin-wan.github.io/cancer-evidence-explorer/"
 # is a directory here. Its path is joined to PREFIX per language: a bare
 # "chronic-disease-explorer/" would 404 from inside zh/, fr/ and the rest.
 TOOL2_PATH = "chronic-disease-explorer/"
+# The Code Against Cancer reference page is likewise a self-contained directory
+# (bilingual EN/ZH inside), so it is linked with the same PREFIX join as TOOL2.
+PREVENTION_PATH = "code-against-cancer/"
 # The one genuine Note currently published, still living on the WordPress site.
 # It must use the wordpress.com host: epidetective.com now points at this site on
 # GitHub Pages, so the old epidetective.com/2026/... path no longer resolves.
@@ -96,6 +99,10 @@ def write_sitemap():
     # browser -- so it gets one plain entry with no alternates.
     out.append("  <url>")
     out.append("    <loc>%s/%s</loc>" % (SITE_URL, TOOL2_PATH))
+    out.append("  </url>")
+    # The Code Against Cancer page is likewise self-contained and bilingual.
+    out.append("  <url>")
+    out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
     out.append("  </url>")
     out.append("</urlset>")
     with open(os.path.join(HERE, "sitemap.xml"), "w", encoding="utf-8") as fh:
@@ -166,6 +173,7 @@ def main():
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_TOOL2"] = ctx["PREFIX"] + TOOL2_PATH
+            ctx["URL_PREVENTION"] = ctx["PREFIX"] + PREVENTION_PATH
             ctx["URL_NOTE1"] = NOTE1_URL
             ctx["CANONICAL"] = abs_url(lang, page)
             ctx["OG_IMAGE"] = OG_IMAGE

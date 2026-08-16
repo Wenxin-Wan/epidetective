@@ -24,7 +24,7 @@ English.
 
 ## Content
 
-All copy lives in `i18n/<lang>.json`, 89 keys each. `en.json` is the source of
+All copy lives in `i18n/<lang>.json`, 90 keys each. `en.json` is the source of
 truth for key parity. To change wording, edit the JSON and rebuild — never edit
 the generated HTML, it is overwritten.
 

@@ -39,6 +39,10 @@
     "label": "Menu — Contact",
     "type": "string"
   },
+  "nav_prevention": {
+    "label": "Menu — Code Against Cancer",
+    "type": "string"
+  },
   "home_h1": {
     "label": "HOME — Headline",
     "type": "string"

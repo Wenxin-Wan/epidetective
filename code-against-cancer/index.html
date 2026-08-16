@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Against Cancer — EpiDetective</title>
+<meta name="description" content="Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap');
+  :root{
+    --chalk:#E9E7DF;--chalk-deep:#DFDCD2;--card:#F6F4EE;--ink:#171814;
+    --ink-soft:#4A4E46;--ink-faint:#7C8179;--madder:#A33526;--teal:#1F5B55;
+    --teal-soft:#DCE7E2;--rule:rgba(23,24,20,.14);
+    --serif:'Fraunces',Georgia,serif;--sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--sans);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body.zh{font-family:'DM Sans','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif}
+  body.zh h1,body.zh h2,body.zh h3{font-family:'Fraunces','Songti SC','SimSun',serif}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  :focus-visible{outline:2px solid var(--madder);outline-offset:3px}
+
+  /* header */
+  .top{position:sticky;top:0;z-index:20;background:rgba(233,231,223,.92);
+       backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
+  .mark{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-.015em;text-decoration:none}
+  .mark span{font-weight:400;font-style:italic}
+  .top-right{display:flex;align-items:center;gap:12px}
+  .back{font-size:.82rem;text-decoration:none;color:var(--ink-soft)}
+  .back:hover{color:var(--madder)}
+  .langbtn{border:1px solid var(--rule);background:var(--card);color:var(--ink);
+           border-radius:999px;padding:7px 13px;font-size:.82rem;font-weight:600;cursor:pointer}
+  .langbtn:hover{border-color:var(--madder);color:var(--madder)}
+
+  /* hero */
+  .hero{border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+  .hero .wrap{padding-block:clamp(48px,9vh,84px) 40px}
+  .eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--madder)}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,6vw,3.8rem);
+           line-height:1.04;letter-spacing:-.02em;margin:14px 0 0}
+  .hero p.lede{color:var(--ink-soft);max-width:62ch;font-size:1.05rem;margin:20px 0 0}
+  .statrow{margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .stat{background:var(--ink);color:var(--chalk);border-radius:16px;padding:16px 22px}
+  .stat b{font-family:var(--serif);font-size:2.2rem;line-height:1;font-weight:600}
+  .stat span{display:block;font-size:.8rem;color:#B9BDB2;margin-top:5px;max-width:30ch}
+
+  /* framework blurb */
+  .framework{padding-block:44px}
+  .framework .card{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:26px 28px}
+  .framework h2{font-family:var(--serif);font-size:1.5rem;margin:0 0 10px}
+  .framework p{color:var(--ink-soft);margin:0;max-width:72ch}
+
+  /* region tabs */
+  .regions{padding-bottom:20px}
+  .regions-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .regions-head h2{font-family:var(--serif);font-size:1.3rem;margin:0}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tab{border:1px solid var(--rule);background:transparent;color:var(--ink-soft);border-radius:999px;
+       padding:9px 16px;font-size:.86rem;font-weight:600;cursor:pointer}
+  .tab:hover{border-color:var(--madder);color:var(--madder)}
+  .tab.active{background:var(--teal);border-color:var(--teal);color:#fff}
+
+  .region{display:none}
+  .region.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .region-meta{border-left:3px solid var(--madder);padding:6px 0 6px 16px;margin-bottom:20px}
+  .region-meta b{font-family:var(--serif);font-size:1.25rem}
+  .region-meta .sub{color:var(--ink-faint);font-size:.82rem;display:block;margin-top:3px}
+  .region-meta .partner{color:var(--teal);font-size:.82rem;font-weight:600;display:block;margin-top:5px}
+  .badge{display:inline-block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+         padding:3px 9px;border:1px solid currentColor;border-radius:999px;margin-left:10px;vertical-align:2px}
+  .badge.dev{color:var(--ink-faint)}
+  .badge.pub{color:var(--madder)}
+
+  .recs{display:grid;gap:10px}
+  .rec{display:grid;grid-template-columns:34px 1fr;gap:14px;background:var(--card);
+       border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+  .rec .n{width:34px;height:34px;border-radius:10px;background:var(--teal-soft);color:var(--teal);
+          display:grid;place-items:center;font-weight:700;font-size:.82rem}
+  .rec h3{font-size:1.02rem;margin:0 0 3px;font-weight:700}
+  .rec p{color:var(--ink-soft);margin:0;font-size:.9rem}
+
+  /* disclaimer + sources */
+  .disclaimer{border-top:1px solid var(--rule);padding-block:40px 60px}
+  .disclaimer .disc{border:1px solid var(--rule);border-radius:16px;padding:20px 24px;color:var(--ink-soft);
+                    font-size:.88rem;max-width:76ch}
+  .disclaimer .disc b{color:var(--ink)}
+  .sources{margin-top:22px}
+  .sources h2{font-family:var(--serif);font-size:1.05rem;margin:0 0 10px}
+  .sources ul{margin:0;padding-left:18px;display:grid;gap:6px}
+  .sources a{color:var(--teal);text-underline-offset:3px}
+  .sources a:hover{color:var(--madder)}
+  .foot-note{font-size:.78rem;color:var(--ink-faint);margin-top:26px}
+
+  @media (max-width:640px){
+    .rec{grid-template-columns:30px 1fr;padding:14px}
+  }
+</style>
+</head>
+<body class="lang-en">
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="../">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <a class="back" href="../">&#8592; <span data-i18n="back">Back to EpiDetective</span></a>
+      <button class="langbtn" id="langBtn" aria-label="Switch language">中文</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="eyebrow">Official cancer-prevention guidance</div>
+      <h1 data-i18n="title">Code Against Cancer</h1>
+      <p class="lede" data-i18n="lede">Concrete, evidence-based things you can do to lower your own risk of cancer — drawn from the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.</p>
+      <div class="statrow">
+        <div class="stat"><b data-i18n="statV">≈40%</b><span data-i18n="statL">of cancers are linked to preventable causes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="framework">
+    <div class="wrap">
+      <div class="card">
+        <h2 data-i18n="frameworkH">The World Code Against Cancer Framework</h2>
+        <p data-i18n="frameworkP">One evidence-review method, adapted region by region. Each regional Code is developed by IARC together with a regional coordinating partner, then tailored to local cancer patterns and living conditions. Europe and Latin America &amp; the Caribbean are published; Asia is in development.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="regions">
+    <div class="wrap">
+      <div class="regions-head">
+        <h2 data-i18n="regionsLabel">Choose a region</h2>
+        <div class="tabs" id="tabs"></div>
+      </div>
+      <div id="regions"></div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <div class="wrap">
+      <div class="disc">
+        <b data-i18n="disclaimerH">How to use this.</b>
+        <span data-i18n="disclaimerP">This page summarises official guidance for your information. It is not medical advice. Screening ages, vaccination schedules and workplace rules vary by country — follow the programme available where you live. For anything concerning your own health, speak to a doctor.</span>
+      </div>
+      <div class="sources">
+        <h2 data-i18n="sourcesH">Official sources</h2>
+        <ul>
+          <li><a href="https://www.iarc.who.int/faq/world-code-against-cancer-framework" rel="noopener">IARC — World Code Against Cancer Framework</a></li>
+          <li><a href="https://cancer-code-europe.iarc.who.int/" rel="noopener" data-i18n="srcEurope">European Code Against Cancer (4th edition)</a></li>
+          <li><a href="https://www.paho.org/en/campaigns/latin-america-and-caribbean-code-against-cancer" rel="noopener" data-i18n="srcLac">Latin America and the Caribbean Code Against Cancer</a></li>
+          <li><a href="https://www.thelancet.com/journals/lansea/article/PIIS2772-3682(23)00176-2/fulltext" rel="noopener" data-i18n="srcAsia">Mapping towards an Asian Code Against Cancer (ANCCA · IARC)</a></li>
+        </ul>
+        <p class="foot-note" data-i18n="footNote">Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+"use strict";
+/* Bilingual text store. Everything visible is swapped by data-i18n keys; the
+   recommendations live in REGIONS and are rendered by build(). */
+var STRINGS = {
+  en: {
+    back:"Back to EpiDetective", eyebrow:"Official cancer-prevention guidance",
+    title:"Code Against Cancer",
+    lede:"Concrete, evidence-based things you can do to lower your own risk of cancer — drawn from the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.",
+    statV:"≈40%", statL:"of cancers are linked to preventable causes",
+    frameworkH:"The World Code Against Cancer Framework",
+    frameworkP:"One evidence-review method, adapted region by region. Each regional Code is developed by IARC together with a regional coordinating partner, then tailored to local cancer patterns and living conditions. Europe and Latin America & the Caribbean are published; Asia is in development.",
+    regionsLabel:"Choose a region",
+    published:"Published", developing:"In development",
+    coordinated:"Coordinated by",
+    recs:"recommendations",
+    disclaimerH:"How to use this.",
+    disclaimerP:"This page summarises official guidance for your information. It is not medical advice. Screening ages, vaccination schedules and workplace rules vary by country — follow the programme available where you live. For anything concerning your own health, speak to a doctor.",
+    sourcesH:"Official sources",
+    srcEurope:"European Code Against Cancer (4th edition)",
+    srcLac:"Latin America and the Caribbean Code Against Cancer",
+    srcAsia:"Mapping towards an Asian Code Against Cancer (ANCCA · IARC)",
+    footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates."
+  },
+  zh: {
+    back:"返回 EpiDetective", eyebrow:"官方防癌指南",
+    title:"防癌守则",
+    lede:"你可以立刻采取的、有证据支撑的防癌行动——摘自 IARC（世界卫生组织癌症研究机构）及其区域合作伙伴制定的各区域《防癌守则》。",
+    statV:"约 40%", statL:"的癌症与可预防的成因相关",
+    frameworkH:"世界防癌守则框架",
+    frameworkP:"同一套证据评估方法，逐区域本土化。每一部区域守则都由 IARC 与区域协调伙伴共同制定，再根据当地癌症谱和生活方式调整。欧洲、拉丁美洲及加勒比已发布；亚洲正在制定中。",
+    regionsLabel:"选择地区",
+    published:"已发布", developing:"制定中",
+    coordinated:"协调方",
+    recs:"条建议",
+    disclaimerH:"如何理解本页。",
+    disclaimerP:"本页为官方指南的摘要，仅供了解，不构成医疗建议。筛查年龄、疫苗与职业规定因国家而异——请遵循你所在地区的现有方案。涉及个人健康的问题，请咨询医生。",
+    sourcesH:"官方来源",
+    srcEurope:"欧洲防癌守则（第四版）",
+    srcLac:"拉丁美洲及加勒比防癌守则",
+    srcAsia:"亚洲防癌守则筹备（ANCCA · IARC）",
+    footNote:"由 EpiDetective 依据 IARC / PAHO / ANCCA 公开资料整理。最终表述与更新请以上方官方来源为准。"
+  }
+};
+
+/* Each rec is [ {en,zh} title, {en,zh} detail ]. */
+var REGIONS = [
+  { id:"europe", dev:false,
+    name:{en:"Europe",zh:"欧洲"},
+    partner:{en:"IARC & the European Commission",zh:"IARC 与欧盟委员会"},
+    status:{en:"4th edition (2014)",zh:"第四版（2014）"},
+    recs:[
+      [{en:"Do not smoke",zh:"不要吸烟"},{en:"Do not use any form of tobacco.",zh:"不要使用任何形式的烟草。"}],
+      [{en:"Make your home smoke-free",zh:"让家里保持无烟"},{en:"Support smoke-free policies in your workplace.",zh:"支持工作场所的无烟政策。"}],
+      [{en:"Keep a healthy body weight",zh:"保持健康的体重"},{en:"Take action to reach and keep a healthy body weight.",zh:"采取行动，达到并保持健康的体重。"}],
+      [{en:"Be physically active",zh:"每天保持身体活动"},{en:"Be active in everyday life and limit the time you spend sitting.",zh:"在日常生活中多活动，减少久坐时间。"}],
+      [{en:"Eat a healthy diet",zh:"健康饮食"},{en:"Eat plenty of whole grains, pulses, vegetables and fruit; limit high-calorie and sugary foods; avoid sugary drinks; avoid processed meat and limit red meat and salt.",zh:"多吃全谷物、豆类、蔬菜和水果；少吃高热量、高糖食物；不喝含糖饮料；不吃加工肉类，限制红肉和高盐食物。"}],
+      [{en:"Limit alcohol",zh:"限制饮酒"},{en:"If you drink alcohol of any type, limit your intake. Not drinking is better for cancer prevention.",zh:"无论何种酒，如饮请限量；不饮酒更有益于防癌。"}],
+      [{en:"Avoid too much sun",zh:"避免过度日晒"},{en:"Avoid too much sun, especially for children. Use sun protection and do not use sunbeds.",zh:"避免过度日晒，尤其是儿童；做好防晒，不使用日光浴床。"}],
+      [{en:"Protect yourself at work",zh:"工作中做好防护"},{en:"Protect yourself against cancer-causing substances by following health and safety instructions.",zh:"遵守健康与安全规范，避免接触致癌物。"}],
+      [{en:"Reduce high radon levels",zh:"降低氡气暴露"},{en:"Find out whether your home has naturally high radon levels, and take action to reduce them.",zh:"了解家中是否存在天然氡气超标，并采取措施降低。"}],
+      [{en:"For women: breastfeed, limit HRT",zh:"对女性：母乳喂养、限制 HRT"},{en:"Breastfeeding reduces the mother's cancer risk. Hormone replacement therapy (HRT) raises the risk of certain cancers — limit its use.",zh:"母乳喂养可降低母亲的患癌风险；激素替代疗法（HRT）会增加某些癌症风险，应限制使用。"}],
+      [{en:"Vaccinate your children",zh:"让孩子接种疫苗"},{en:"Ensure your children take part in vaccination for hepatitis B (newborns) and HPV (girls).",zh:"让子女接种疫苗：新生儿接种乙肝疫苗，女孩接种 HPV 疫苗。"}],
+      [{en:"Take part in screening",zh:"参加癌症筛查"},{en:"Join organised screening programmes for bowel cancer (men and women), breast cancer (women) and cervical cancer (women).",zh:"参加有组织的筛查项目：结直肠癌（男女）、乳腺癌（女性）和宫颈癌（女性）。"}]
+    ]
+  },
+  { id:"lac", dev:false,
+    name:{en:"Latin America & the Caribbean",zh:"拉丁美洲及加勒比"},
+    partner:{en:"IARC & PAHO (Pan American Health Organization)",zh:"IARC 与泛美卫生组织（PAHO）"},
+    status:{en:"1st edition (2023)",zh:"第一版（2023）"},
+    recs:[
+      [{en:"Do not smoke or use tobacco",zh:"不要吸烟或使用烟草"},{en:"Do not use any type of tobacco, and do not use e-cigarettes, which can lead to tobacco use.",zh:"不要使用任何形式的烟草，也不要使用可能诱导吸烟的电子烟。"}],
+      [{en:"Keep your home smoke-free",zh:"让家里保持无烟"},{en:"Make your home a smoke-free place, and respect and promote smoke-free space laws.",zh:"让家里保持无烟，并遵守和推广无烟场所法规。"}],
+      [{en:"Keep a healthy body weight",zh:"终身保持健康体重"},{en:"Achieve or maintain a healthy body weight throughout your life.",zh:"在整个人生中达到并保持健康的体重。"}],
+      [{en:"Be active every day",zh:"每天坚持活动"},{en:"Do physical activity every day and limit the time you spend sitting.",zh:"每天进行身体活动，减少久坐时间。"}],
+      [{en:"Eat well, avoid very hot drinks",zh:"健康饮食，少喝过烫饮品"},{en:"Eat a healthy diet with fruit and whole grains; avoid sugary drinks and ultra-processed foods. Limit very hot beverages, which raise the risk of oesophageal cancer.",zh:"健康饮食，多吃水果和全谷物；不喝含糖饮料，少吃超加工食品；少喝过烫的饮品，因其增加食管癌风险。"}],
+      [{en:"Avoid alcohol",zh:"避免饮酒"},{en:"Avoid drinking alcoholic beverages — there is no safe level of alcohol in relation to cancer risk.",zh:"避免饮酒——就癌症风险而言，酒精没有安全剂量。"}],
+      [{en:"Breastfeed your baby",zh:"母乳喂养宝宝"},{en:"Breastfeed your baby — the more months, the better.",zh:"母乳喂养宝宝——时间越长越好。"}],
+      [{en:"Avoid direct sun at peak hours",zh:"避开强日照时段"},{en:"Protect yourself from direct sun exposure during peak sunlight hours.",zh:"在日照最强的时段避免直接暴晒。"}],
+      [{en:"Avoid indoor smoke from fuel",zh:"避免室内燃料烟雾"},{en:"If you cook or heat your home with coal or firewood, make sure the smoke does not build up indoors — indoor burning causes lung cancer.",zh:"若用煤或柴做饭取暖，注意排烟、避免室内烟雾积聚——室内燃烧会导致肺癌。"}],
+      [{en:"Limit time outdoors when air is bad",zh:"空气差时减少外出"},{en:"If outdoor air pollution is high, limit your time outdoors — it is causally linked to lung cancer.",zh:"户外空气污染严重时，减少户外活动——它与肺癌存在因果关系。"}],
+      [{en:"Protect yourself at work",zh:"工作中做好防护"},{en:"Find out whether your job exposes you to carcinogens, and adopt the recommended protective measures.",zh:"了解工作是否让你接触致癌物，并采取建议的防护措施。"}],
+      [{en:"Check for H. pylori",zh:"关注幽门螺杆菌"},{en:"Learn about screening for and treatment of Helicobacter pylori infection, which can cause stomach cancer.",zh:"了解可导致胃癌的幽门螺杆菌感染的筛查与治疗。"}],
+      [{en:"Prevent cancer-related infections",zh:"预防致癌相关感染"},{en:"Take protective measures against hepatitis B, hepatitis C, HPV and HIV, and use condoms consistently and correctly.",zh:"对乙肝、丙肝、HPV 和 HIV 采取防护措施，并正确、坚持使用安全套。"}],
+      [{en:"Limit menopausal HRT",zh:"限制更年期 HRT"},{en:"Do not use hormone replacement therapy for menopause unless directed by a health professional.",zh:"除非医生建议，不要使用更年期激素替代疗法。"}],
+      [{en:"Colorectal screening, 50–74",zh:"50–74 岁结直肠癌早筛"},{en:"If you are aged 50–74, ask for early-detection tests for colon and rectal cancer.",zh:"50–74 岁者，应接受结肠和直肠癌的早筛检查。"}],
+      [{en:"Breast exam from 40",zh:"40 岁起临床乳腺检查"},{en:"If you are 40 or older, have a clinical breast examination every two years.",zh:"40 岁及以上，每两年做一次临床乳腺检查。"}],
+      [{en:"HPV test, 30–64",zh:"30–64 岁 HPV 检测"},{en:"If you are aged 30–64, ask for a molecular HPV test at least twice in your lifetime.",zh:"30–64 岁者，一生中至少做两次 HPV 分子检测。"}]
+    ]
+  },
+  { id:"asia", dev:true,
+    name:{en:"Asia",zh:"亚洲"},
+    partner:{en:"IARC & ANCCA (Asian National Cancer Centers Alliance)",zh:"IARC 与亚洲国家癌症中心联盟（ANCCA）"},
+    status:{en:"In development",zh:"制定中"},
+    recs:[
+      [{en:"Say no to tobacco",zh:"远离烟草"},{en:"Do not smoke, quit smoking, and keep environments smoke-free.",zh:"不吸烟、戒烟，并保持无烟环境。"}],
+      [{en:"Keep a healthy body weight",zh:"保持健康体重"},{en:"Maintain a healthy body weight.",zh:"保持健康的体重。"}],
+      [{en:"Be active daily",zh:"每天坚持活动"},{en:"Be physically active every day and avoid a sedentary lifestyle.",zh:"每天进行身体活动，避免久坐的生活方式。"}],
+      [{en:"Eat balanced meals",zh:"均衡饮食"},{en:"Eat more fruit, vegetables, whole grains and legumes; reduce sugary foods and drinks, processed and red meat, and salty foods.",zh:"多吃蔬果、全谷物和豆类；减少高糖食物与饮料、加工肉类、红肉和高盐食物。"}],
+      [{en:"Avoid or minimise alcohol",zh:"不饮酒或尽量少饮"},{en:"Avoid or minimise alcohol intake.",zh:"避免饮酒或尽量减少饮酒。"}],
+      [{en:"Avoid workplace carcinogens",zh:"避免职业致癌物"},{en:"Avoid or reduce exposure to workplace carcinogens and use personal protective equipment.",zh:"减少或避免接触职业致癌物，并佩戴个人防护用品。"}],
+      [{en:"Reduce environmental pollutants",zh:"减少环境污染物"},{en:"Reduce exposure to environmental pollutants, including air pollution, pesticides and radiation.",zh:"减少接触环境污染物，包括空气污染、农药和辐射。"}],
+      [{en:"Get vaccinated",zh:"接种疫苗"},{en:"Take part in vaccination programmes for cancer-related infections.",zh:"参加预防致癌相关感染的疫苗接种。"}],
+      [{en:"Take part in screening",zh:"参加癌症筛查"},{en:"Take part in cancer screening programmes.",zh:"参加癌症筛查项目。"}],
+      [{en:"Promote breastfeeding",zh:"提倡母乳喂养"},{en:"Promote and support breastfeeding.",zh:"提倡并支持母乳喂养。"}]
+    ]
+  }
+];
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function i18n(key,lang){return STRINGS[lang][key] || key;}
+
+function build(lang){
+  document.body.classList.toggle("zh", lang==="zh");
+  document.body.classList.toggle("en", lang!=="zh");
+  document.documentElement.lang = lang;
+  document.getElementById("langBtn").textContent = lang==="en" ? "中文" : "EN";
+
+  /* static strings */
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    el.textContent = i18n(el.getAttribute("data-i18n"), lang);
+  });
+
+  /* region tabs + panels */
+  var tabs = document.getElementById("tabs");
+  var holder = document.getElementById("regions");
+  tabs.innerHTML = ""; holder.innerHTML = "";
+
+  REGIONS.forEach(function(r){
+    var b = document.createElement("button");
+    b.className = "tab"; b.textContent = r.name[lang];
+    b.setAttribute("data-region", r.id);
+    b.addEventListener("click", function(){ select(r.id); });
+    tabs.appendChild(b);
+
+    var sec = document.createElement("div");
+    sec.className = "region"; sec.id = "region-"+r.id;
+
+    var badge = r.dev
+      ? '<span class="badge dev">'+i18n("developing",lang)+'</span>'
+      : '<span class="badge pub">'+i18n("published",lang)+'</span>';
+    var count = r.recs.length + " " + i18n("recs", lang);
+
+    var meta = '<div class="region-meta"><b>'+esc(r.name[lang])+'</b>'+badge+
+      '<span class="sub">'+esc(r.status[lang])+" · "+esc(count)+'</span>'+
+      '<span class="partner">'+i18n("coordinated",lang)+": "+esc(r.partner[lang])+'</span></div>';
+
+    var cards = r.recs.map(function(rec, i){
+      return '<div class="rec"><div class="n">'+(i+1)+'</div>'+
+        '<div><h3>'+esc(rec[0][lang])+'</h3><p>'+esc(rec[1][lang])+'</p></div></div>';
+    }).join("");
+
+    sec.innerHTML = meta + '<div class="recs">'+cards+'</div>';
+    holder.appendChild(sec);
+  });
+
+  select(REGIONS[0].id, true);
+}
+
+function select(id, silent){
+  REGIONS.forEach(function(r){
+    var on = r.id===id;
+    document.getElementById("region-"+r.id).classList.toggle("active", on);
+  });
+  document.querySelectorAll(".tab").forEach(function(t){
+    t.classList.toggle("active", t.getAttribute("data-region")===id);
+  });
+}
+
+var lang = "en";
+try { lang = localStorage.getItem("cac-lang") || "en"; } catch(e){}
+build(lang);
+
+document.getElementById("langBtn").addEventListener("click", function(){
+  lang = lang==="en" ? "zh" : "en";
+  try { localStorage.setItem("cac-lang", lang); } catch(e){}
+  build(lang);
+});
+</script>
+</body>
+</html>
