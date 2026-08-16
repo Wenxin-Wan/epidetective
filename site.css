@@ -269,9 +269,8 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .inline-links a:hover{border-color:var(--madder);color:var(--madder)}
 
 /* ---------- contact ---------- */
-.contact-email{display:inline-block;margin-top:24px;font-family:var(--display);
-  font-variation-settings:var(--wonk);font-size:clamp(1.3rem,2.6vw,1.85rem);
-  text-decoration:none;border-bottom:2px solid var(--madder)}
+.contact-email{display:inline-block;margin-top:18px;font-size:1.05rem;font-weight:600;
+  text-decoration:none;border-bottom:2px solid var(--madder);padding-bottom:3px}
 .contact-email:hover{color:var(--madder)}
 
 /* ---------- notes ---------- */
