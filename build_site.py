@@ -28,11 +28,10 @@ SITE_URL = "https://epidetective.com"
 OG_IMAGE = SITE_URL + "/assets/og.png"
 # og:locale wants a full locale, not the bare language code
 OG_LOCALE = {"en": "en_GB", "zh": "zh_CN", "fr": "fr_FR", "es": "es_ES", "ru": "ru_RU"}
-TOOL_URL = "https://wenxin-wan.github.io/cancer-evidence-explorer/"
-# The second tool is served from this repo rather than its own Pages site, so it
-# is a directory here. Its path is joined to PREFIX per language: a bare
-# "chronic-disease-explorer/" would 404 from inside zh/, fr/ and the rest.
-TOOL2_PATH = "chronic-disease-explorer/"
+TOOL_URL = "https://tools.epidetective.com/cancer/"
+# The second tool now lives behind the tools.epidetective.com login gate, so it
+# is an absolute URL rather than a directory served from this repo.
+TOOL2_URL = "https://tools.epidetective.com/chronic/"
 # The Code Against Cancer reference page is likewise a self-contained directory
 # (bilingual EN/ZH inside), so it is linked with the same PREFIX join as TOOL2.
 PREVENTION_PATH = "code-against-cancer/"
@@ -94,13 +93,9 @@ def write_sitemap():
             out.append('    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>'
                        % abs_url("en", page))
             out.append("  </url>")
-    # The chronic-disease tool is a single self-contained page served from this
-    # domain. It is not rendered per language -- it switches language in the
-    # browser -- so it gets one plain entry with no alternates.
-    out.append("  <url>")
-    out.append("    <loc>%s/%s</loc>" % (SITE_URL, TOOL2_PATH))
-    out.append("  </url>")
-    # The Code Against Cancer page is likewise self-contained and bilingual.
+    # The two tools are behind the tools.epidetective.com login gate and are no
+    # longer indexable, so neither gets a sitemap entry. The Code Against Cancer
+    # page is self-contained and bilingual and stays public.
     out.append("  <url>")
     out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
     out.append("  </url>")
@@ -172,7 +167,7 @@ def main():
             ctx["URL_HOME"] = url(lang, "index.html", lang)
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
             ctx["URL_TOOL"] = TOOL_URL
-            ctx["URL_TOOL2"] = ctx["PREFIX"] + TOOL2_PATH
+            ctx["URL_TOOL2"] = TOOL2_URL
             ctx["URL_PREVENTION"] = ctx["PREFIX"] + PREVENTION_PATH
             ctx["URL_NOTE1"] = NOTE1_URL
             ctx["CANONICAL"] = abs_url(lang, page)
