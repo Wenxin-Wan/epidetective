@@ -176,6 +176,7 @@
 
   /* network */
   #mapWrap{display:none}#mapWrap.on{display:flex;flex-direction:column}
+  #mapWrap.fs{position:fixed;inset:0;z-index:9999;border-radius:0;background:var(--paper)}
   .mapbar{display:flex;flex-wrap:wrap;gap:8px 9px;align-items:center;padding:13px 14px;border-bottom:1px solid var(--line2);font-size:12px}
   .mapbar .mlabel{color:var(--faint);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}
   .msearch{position:relative;flex:1;min-width:170px;max-width:280px}
@@ -187,6 +188,8 @@
   .btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 11px;font-size:11px;font-weight:700;color:var(--ink);cursor:pointer}
   .btn:hover{border-color:var(--accent);color:var(--accent-ink)}
   .btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .btn.primary:hover{background:#164c48;color:#fff;border-color:#164c48}
   .mspacer{flex:1 1 auto;min-width:0}
   /* segmented control: the three readings of the same graph */
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--paper)}
@@ -203,6 +206,7 @@
   .gt-chips{display:flex;flex-wrap:wrap;gap:6px}
   .linkb{border:0;background:transparent;color:var(--accent-ink);font-size:10.5px;font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
   .maparea{position:relative;height:660px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#fffef9 0,#f6f6ef 72%)}
+  #mapWrap.fs .maparea{height:auto;flex:1}
   #cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
   .zoombtns{position:absolute;right:13px;bottom:13px;display:flex;flex-direction:column;gap:6px;z-index:5}
   .zoombtns button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:18px;color:var(--ink);box-shadow:0 2px 8px rgba(28,62,57,.09)}
@@ -512,6 +516,7 @@
           <button class="btn" id="mapShake">Shake</button>
           <button class="btn" id="mapFit">Fit</button>
           <button class="btn" id="mapReset">Reset</button>
+          <button class="btn primary" id="mapFs">⤢ Full screen</button>
         </div>
         <div class="grouptray" id="mapGroups"></div>
         <div class="maparea">
@@ -683,6 +688,7 @@ en: {
   mapGradeLbl:'Grade', mapLayoutLbl:'View',
   mapHint:'<b>Drag any node</b> and the graph reorganises around it — everything is live, nothing is fixed. Drag the background to pan, scroll to zoom, click a node for its links, double-click to pin it in place. Line colour shows the evidence grade; thickness shows the strength score; dashed lines are protective.',
   mapReset:'Reset', mapFit:'Fit', mapShake:'Shake', mapGroupsBtn:'Groups',
+  mapFs:'⤢ Full screen', mapFsExit:'⤡ Exit full screen',
   mapModeGrouped:'Grouped', mapModeFree:'Free', mapModeOverview:'Overview',
   mapModeTips:{
     grouped:'Risk factors gather into their category and diseases into their body system.',
@@ -813,6 +819,7 @@ zh: {
   mapGradeLbl:'证据等级', mapLayoutLbl:'视图',
   mapHint:'<b>可直接拖动任一节点</b>，整张图会随之重新排布——所有节点都是活的，没有固定位置。拖动空白处可平移，滚轮可缩放，点击节点查看其关联，双击可将节点固定。连线颜色表示证据等级，粗细表示证据强度评分，虚线表示保护性关联。',
   mapReset:'重置', mapFit:'适应窗口', mapShake:'重新排布', mapGroupsBtn:'分组',
+  mapFs:'⤢ 全屏', mapFsExit:'⤡ 退出全屏',
   mapModeGrouped:'按组聚集', mapModeFree:'自由排布', mapModeOverview:'分组总览',
   mapModeTips:{
     grouped:'危险因素按类别聚集，疾病按所属系统聚集。',
@@ -930,6 +937,8 @@ function renderStatic(){
   ['mapReset','mapFit','mapShake','mapGroupsBtn'].forEach(k => {
     const e = $(k); if (e) e.textContent = x[k];
   });
+  const fsBtn = $('mapFs');
+  if (fsBtn) fsBtn.textContent = $('mapWrap').classList.contains('fs') ? x.mapFsExit : x.mapFs;
   $('heroNote').innerHTML = x.heroNote.map(s => `<span>${s}</span>`).join('');
   $('statDis').textContent = diseases.length;
   $('statRisk').textContent = risks.length;
@@ -1899,6 +1908,17 @@ function resizeMap(){
   dirty = true;
 }
 
+/* full screen */
+function setFs(on){
+  const w = $('mapWrap');
+  const want = on === undefined ? !w.classList.contains('fs') : on;
+  w.classList.toggle('fs', want);
+  $('mapFs').textContent = want ? t().mapFsExit : t().mapFs;
+  if (want && w.requestFullscreen){ w.requestFullscreen().catch(() => {}); }
+  else if (!want && document.fullscreenElement && document.exitFullscreen){ document.exitFullscreen().catch(() => {}); }
+  setTimeout(resizeMap, 80);
+}
+
 /* Run the simulation to convergence before the first frame is shown. Stopping
    early and framing the result looks fine for a second and then wrong: the
    layout carries on expanding for several seconds afterwards and drifts out of
@@ -2078,6 +2098,17 @@ function initMap(){
     presettle(900);
     fitMap(); refitIn = 40;
   };
+  $('mapFs').onclick = () => setFs();
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && $('mapWrap').classList.contains('fs')){
+      $('mapWrap').classList.remove('fs');
+      $('mapFs').textContent = t().mapFs;
+    }
+    setTimeout(resizeMap, 80);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('mapWrap').classList.contains('fs')) setFs(false);
+  });
   $('mapSearch').oninput = e => { mapQuery = e.target.value.trim().toLowerCase(); dirty = true; };
   $('mcClose').onclick = () => { mapSel = null; $('mapCard').classList.remove('on'); dirty = true; };
   window.addEventListener('resize', () => { resizeMap(); });
