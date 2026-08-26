@@ -72,6 +72,9 @@
   .region-meta b{font-family:var(--serif);font-size:1.25rem}
   .region-meta .sub{color:var(--ink-faint);font-size:.82rem;display:block;margin-top:3px}
   .region-meta .partner{color:var(--teal);font-size:.82rem;font-weight:600;display:block;margin-top:5px}
+  .region-meta .official{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:.76rem;font-weight:600;
+    letter-spacing:.04em;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .region-meta .official:hover{background:var(--ink);color:var(--chalk);text-decoration:none}
   .badge{display:inline-block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
          padding:3px 9px;border:1px solid currentColor;border-radius:999px;margin-left:10px;vertical-align:2px}
   .badge.dev{color:var(--ink-faint)}
@@ -155,7 +158,7 @@
         <ul>
           <li><a href="https://www.iarc.who.int/faq/world-code-against-cancer-framework" rel="noopener">IARC — World Code Against Cancer Framework</a></li>
           <li><a href="https://cancer-code-europe.iarc.who.int/" rel="noopener" data-i18n="srcEurope">European Code Against Cancer (5th edition)</a></li>
-          <li><a href="https://www.paho.org/en/campaigns/latin-america-and-caribbean-code-against-cancer" rel="noopener" data-i18n="srcLac">Latin America and the Caribbean Code Against Cancer</a></li>
+          <li><a href="https://www.paho.org/en/latin-america-and-caribbean-code-against-cancer" rel="noopener" data-i18n="srcLac">Latin America and the Caribbean Code Against Cancer</a></li>
           <li><a href="https://www.thelancet.com/journals/lansea/article/PIIS2772-3682(23)00176-2/fulltext" rel="noopener" data-i18n="srcAsia">Mapping towards an Asian Code Against Cancer (ANCCA · IARC)</a></li>
         </ul>
         <p class="foot-note" data-i18n="footNote">Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.</p>
@@ -186,7 +189,8 @@ var STRINGS = {
     srcEurope:"European Code Against Cancer (5th edition)",
     srcLac:"Latin America and the Caribbean Code Against Cancer",
     srcAsia:"Mapping towards an Asian Code Against Cancer (ANCCA · IARC)",
-    footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates."
+    footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.",
+    officialSite:"Read the official Code"
   },
   zh: {
     back:"返回 EpiDetective", eyebrow:"官方防癌指南",
@@ -205,13 +209,14 @@ var STRINGS = {
     srcEurope:"欧洲防癌守则（第五版）",
     srcLac:"拉丁美洲及加勒比防癌守则",
     srcAsia:"亚洲防癌守则筹备（ANCCA · IARC）",
-    footNote:"由 EpiDetective 依据 IARC / PAHO / ANCCA 公开资料整理。最终表述与更新请以上方官方来源为准。"
+    footNote:"由 EpiDetective 依据 IARC / PAHO / ANCCA 公开资料整理。最终表述与更新请以上方官方来源为准。",
+    officialSite:"阅读官方守则"
   }
 };
 
 /* Each rec is [ {en,zh} title, {en,zh} detail ]. */
 var REGIONS = [
-  { id:"europe", dev:false,
+  { id:"europe", dev:false, official:"https://cancer-code-europe.iarc.who.int/",
     name:{en:"Europe",zh:"欧洲"},
     partner:{en:"IARC & the European Commission",zh:"IARC 与欧盟委员会"},
     status:{en:"5th edition (2025)",zh:"第五版（2025）"},
@@ -232,7 +237,7 @@ var REGIONS = [
       [{en:"Take part in screening",zh:"参加癌症筛查"},{en:"Take part in organized cancer screening programmes, as recommended in your country, for bowel, breast, cervical and lung cancer.",zh:"参加本国建议的有组织癌症筛查：结直肠癌、乳腺癌、宫颈癌和肺癌。"}]
     ]
   },
-  { id:"lac", dev:false,
+  { id:"lac", dev:false, official:"https://cancer-code-lac.iarc.who.int/",
     name:{en:"Latin America & the Caribbean",zh:"拉丁美洲及加勒比"},
     partner:{en:"IARC & PAHO (Pan American Health Organization)",zh:"IARC 与泛美卫生组织（PAHO）"},
     status:{en:"1st edition (2023)",zh:"第一版（2023）"},
@@ -309,9 +314,12 @@ function build(lang){
       : '<span class="badge pub">'+i18n("published",lang)+'</span>';
     var count = r.recs.length + " " + i18n("recs", lang);
 
+    var official = r.official
+      ? '<a class="official" href="'+r.official+'" rel="noopener" target="_blank">'+i18n("officialSite",lang)+' &rarr;</a>'
+      : '';
     var meta = '<div class="region-meta"><b>'+esc(r.name[lang])+'</b>'+badge+
       '<span class="sub">'+esc(r.status[lang])+" · "+esc(count)+'</span>'+
-      '<span class="partner">'+i18n("coordinated",lang)+": "+esc(r.partner[lang])+'</span></div>';
+      '<span class="partner">'+i18n("coordinated",lang)+": "+esc(r.partner[lang])+'</span>'+official+'</div>';
 
     var cards = r.recs.map(function(rec, i){
       return '<div class="rec"><div class="n">'+(i+1)+'</div>'+
