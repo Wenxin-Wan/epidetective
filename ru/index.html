@@ -34,8 +34,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/">Кодекс против рака</a>
-        <a href="index.html#about">Об авторе</a>
-        <a href="index.html#contact">Контакты</a>
+        <a href="about.html">Об авторе</a>
+        <a href="about.html#contact">Контакты</a>
       </nav>
       <nav class="langs" aria-label="Язык"><a href="../index.html" hreflang="en">English</a><a href="../zh/index.html" hreflang="zh">中文</a><a href="../fr/index.html" hreflang="fr">Français</a><a href="../es/index.html" hreflang="es">Español</a><span class="lang-cur" aria-current="true">Русский</span></nav>
     </div>
@@ -49,8 +49,6 @@
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
     <h1>Переводим эпидемиологические доказательства <b>ради более здорового мира</b></h1>
-    <!-- audience line first, then what the site is: the standfirst pattern the
-         redesign settled on, replacing the eyebrow + headline + lede stack. -->
     <p class="lede lede-lead">Для любознательных читателей, пациентов, врачей, журналистов и тех, кто пишет политику здравоохранения.</p>
     <p class="lede">EpiDetective создаёт бесплатные инструменты, позволяющие самостоятельно изучать опубликованные исследования о здоровье.</p>
   </div>
@@ -59,7 +57,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">Инструменты</div>
-    <h2>Два <b>уже открыты</b>. Другие в работе.</h2>
+    <h2>Три уже <b>открыты</b>. Другие в работе.</h2>
   </div>
 
   <div class="rack">
@@ -75,8 +73,6 @@
           <span>186 воздействий</span><span>68 видов рака</span>
           <span>466 связей</span><span>10 языков</span>
         </div>
-        <!-- opening the tool is the primary action; the explainer page is the
-             secondary one. -->
         <div class="inst-actions">
           <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Открыть &rarr;</a>
           <a class="btn btn-ghost" href="explorer.html">Об этом инструменте</a>
@@ -93,11 +89,10 @@
         </div>
         <p>Какие факторы риска связаны с болезнями сердца, инсультом, диабетом 2-го типа, деменцией, раком и другими крупными хроническими заболеваниями — и насколько прочны доказательства за каждой связью, включая те, где они по-настоящему противоречивы. Растяните сеть, чтобы увидеть, как факторы риска собираются в группы.</p>
         <div class="inst-meta">
-          <span>95 факторов риска</span><span>31 заболевание</span>
-          <span>359 оценённых связей</span><span>английский + китайский</span>
+          <span>128 факторов риска</span><span>45 болезней</span>
+          <span>456 ранжированных связей</span><span>10 языков</span>
+          <span>GBD · WCRF снимок v1.2 · авг 2026</span>
         </div>
-        <!-- this tool carries its own methods section, so the secondary action
-             points into it rather than at a separate explainer page -->
         <div class="inst-actions">
           <a class="btn btn-solid" href="https://tools.epidetective.com/chronic/">Открыть &rarr;</a>
           <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/#methods">Об этом инструменте</a>
@@ -106,57 +101,28 @@
       <a href="https://tools.epidetective.com/chronic/" class="thumb thumb-chronic" aria-label="Атлас доказательств о хронических болезнях"></a>
     </article>
 
-    <!-- A third slot was drafted before launch and cut: it was invented, not
-         planned. Its inst.t3.* keys were removed in the August 2026 CMS cleanup;
-         to restore, re-add the keys to every i18n file (and to the CMS via
-         scripts/generate_pages_yml.py), then add an
-         <article class="inst is-soon"> block here. -->
-
-  </div>
-</section>
-
-<section class="sec wrap" id="about">
-  <div class="sec-head">
-    <div class="label">Кто это создаёт</div>
-    <h2>Создано онкологом-эпидемиологом, которая <b>работает с этими данными каждый день</b>.</h2>
-  </div>
-  <div class="about">
-    <div>
-      <p>Меня зовут Вэньсинь Вань (Wenxin Wan), я научный сотрудник Международного агентства по изучению рака в Лионе — онкологического агентства Всемирной организации здравоохранения.</p>
-      <p>Докторскую степень я получила в Институте наук об оценке риска Утрехтского университета, изучая, как воздействия на работе и в окружающей среде влияют на риск рака. Эта работа помогла установить причинную роль бензола в развитии рака лёгкого, и о ней написала <i>The New York Times</i>.</p>
-      <p>В повседневной работе я имею дело с крупными международными когортами: сотни тысяч людей, за которыми наблюдают годами, чтобы увидеть, за какими воздействиями следует болезнь. В МАИР я руковожу анализом в консорциуме OPICO, который объединяет десять таких когорт на трёх континентах, чтобы выяснить, повышает ли длительный приём опиоидов риск рака, и консультирую Lung Cancer Cohort Consortium (LC3) по тому, как данные о профессиональных воздействиях могут работать на скрининг рака лёгкого.</p>
-      <p>Я много лет участвую в получении таких данных, и мне давно не даёт покоя то, как мало из них доходит до тех, кого они должны защищать. Вывод, который так и не вышел за пределы научной литературы, сделал лишь половину своей работы. Сократить это расстояние стоит каждого потраченного часа, и именно поэтому существует этот сайт.</p>
-      <div class="inline-links">
-        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
-        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Открыт</span>
+          <h3>Кодекс против рака</h3>
+        </div>
+        <p>Официальные, основанные на доказательствах рекомендации по снижению собственного риска рака — из региональных Кодексов против рака, координируемых МАИР (ВОЗ) и партнёрами. Четырнадцать конкретных действий, по регионам. (страница пока на английском и китайском)</p>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../code-against-cancer/">Открыть &rarr;</a>
+        </div>
       </div>
-    </div>
-    <!-- a real definition list: these are term/value pairs, and screen readers
-         announce them as such -->
-    <dl class="creds">
-      <div class="cred"><dt class="r">Должность</dt><dd class="w">Научный сотрудник, МАИР / ВОЗ</dd></div>
-      <div class="cred"><dt class="r">Докторантура</dt><dd class="w">Утрехтский университет, Институт наук об оценке риска</dd></div>
-      <div class="cred"><dt class="r">Области</dt><dd class="w">Эпидемиология рака &middot; причинный вывод &middot; биостатистика &middot; машинное обучение</dd></div>
-      <div class="cred"><dt class="r">Исследовательские проекты</dt><dd class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></dd></div>
-      <div class="cred"><dt class="r">Роли в консорциумах</dt><dd class="w">Ведущий аналитик и координатор проекта, OPICO &middot; научный консультант, LC3</dd></div>
-    </dl>
+      <a href="../code-against-cancer/" class="thumb blank" aria-label="Кодекс против рака">EU&ensp;&middot;&ensp;LAC&ensp;&middot;&ensp;ASIA</a>
+    </article>
+
+
   </div>
 </section>
 
-<!-- Notes section removed in the August 2026 pass: the section carried a single
-     essay and the nav entry it needed. The notes.* keys were removed in the
-     CMS cleanup; re-add them to every i18n file (and the CMS via
-     scripts/generate_pages_yml.py) once there is more than one piece to list. -->
 
-<section class="sec wrap" id="contact">
-  <div class="sec-head">
-    <div class="label">Контакты</div>
-    <h2>Напишите мне.</h2>
-  </div>
-  <p class="lede">Вопросы, поправки или идея инструмента, который вы хотели бы увидеть, — напишите мне.</p>
-  <a class="contact-email" href="mailto:epidetective@gmail.com">epidetective@gmail.com</a>
-</section>
+
+
+
 
 <footer class="foot">
   <div class="wrap">
@@ -168,22 +134,18 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/">Кодекс против рака</a>
-        <a href="index.html#about">Об авторе</a>
-        <a href="index.html#contact">Контакты</a>
+        <a href="about.html">Об авторе</a>
+        <a href="about.html#contact">Контакты</a>
       </nav>
     </div>
     <div class="disc">EpiDetective публикует инструменты для чтения данных о целых популяциях. Они показывают закономерности в больших группах людей. По любым вопросам о вашем собственном здоровье обращайтесь к врачу. Каждый инструмент указывает свои источники.</div>
     <div class="disc affil">EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения, и высказанные здесь взгляды принадлежат исключительно автору. Использованные научные источники указаны, чтобы каждый мог проверить их самостоятельно.</div>
-    <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
-         disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
       <span>Создано Вэньсинь Вань &mdash; Лион, Франция</span>
     </div>
   </div>
 </footer>
 
-</div><!-- /#page -->
-
-<script src="../scroll.js" defer></script>
+</div>
 </body>
 </html>

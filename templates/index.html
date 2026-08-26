@@ -29,8 +29,8 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
-        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
-        <a href="{{URL_HOME}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
       </nav>
       <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
     </div>
@@ -90,6 +90,7 @@
         <div class="inst-meta">
           <span>{{inst_t2_m1}}</span><span>{{inst_t2_m2}}</span>
           <span>{{inst_t2_m3}}</span><span>{{inst_t2_m4}}</span>
+          <span>{{inst_t2_m5}}</span>
         </div>
         <!-- this tool carries its own methods section, so the secondary action
              points into it rather than at a separate explainer page -->
@@ -101,57 +102,32 @@
       <a href="{{URL_TOOL2}}" class="thumb thumb-chronic" aria-label="{{inst_t2_name}}"></a>
     </article>
 
-    <!-- A third slot was drafted before launch and cut: it was invented, not
-         planned. Its inst.t3.* keys were removed in the August 2026 CMS cleanup;
-         to restore, re-add the keys to every i18n file (and to the CMS via
-         scripts/generate_pages_yml.py), then add an
-         <article class="inst is-soon"> block here. -->
-
-  </div>
-</section>
-
-<section class="sec wrap" id="about">
-  <div class="sec-head">
-    <div class="label">{{about_label}}</div>
-    <h2>{{about_h2}}</h2>
-  </div>
-  <div class="about">
-    <div>
-      <p>{{about_p1}}</p>
-      <p>{{about_p2}}</p>
-      <p>{{about_p3}}</p>
-      <p>{{about_p4}}</p>
-      <div class="inline-links">
-        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
-        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst_chip_live}}</span>
+          <h3>{{nav_prevention}}</h3>
+        </div>
+        <p>{{inst_cac_desc}}</p>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_PREVENTION}}">{{inst_t1_btn_open}}</a>
+        </div>
       </div>
-    </div>
-    <!-- a real definition list: these are term/value pairs, and screen readers
-         announce them as such -->
-    <dl class="creds">
-      <div class="cred"><dt class="r">{{about_cred1_label}}</dt><dd class="w">{{about_cred1_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about_cred2_label}}</dt><dd class="w">{{about_cred2_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about_cred3_label}}</dt><dd class="w">{{about_cred3_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about_cred4_label}}</dt><dd class="w">{{about_cred4_value}}</dd></div>
-      <div class="cred"><dt class="r">{{about_cred5_label}}</dt><dd class="w">{{about_cred5_value}}</dd></div>
-    </dl>
+      <a href="{{URL_PREVENTION}}" class="thumb blank" aria-label="{{nav_prevention}}">EU&ensp;&middot;&ensp;LAC&ensp;&middot;&ensp;ASIA</a>
+    </article>
+
+
   </div>
 </section>
+
+
 
 <!-- Notes section removed in the August 2026 pass: the section carried a single
      essay and the nav entry it needed. The notes.* keys were removed in the
      CMS cleanup; re-add them to every i18n file (and the CMS via
      scripts/generate_pages_yml.py) once there is more than one piece to list. -->
 
-<section class="sec wrap" id="contact">
-  <div class="sec-head">
-    <div class="label">{{contact_label}}</div>
-    <h2>{{contact_h2}}</h2>
-  </div>
-  <p class="lede">{{contact_p}}</p>
-  <a class="contact-email" href="mailto:epidetective@gmail.com">epidetective@gmail.com</a>
-</section>
+
 
 <footer class="foot">
   <div class="wrap">
@@ -163,8 +139,8 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
-        <a href="{{URL_HOME}}#about">{{nav_about}}</a>
-        <a href="{{URL_HOME}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
       </nav>
     </div>
     <div class="disc">{{foot_disclaimer}}</div>
@@ -179,6 +155,5 @@
 
 </div><!-- /#page -->
 
-<script src="{{PREFIX}}scroll.js" defer></script>
 </body>
 </html>

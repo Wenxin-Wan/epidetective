@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_about_title}}</title>
+<meta name="description" content="{{meta_about_desc}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_about_title}}">
+<meta property="og:description" content="{{meta_about_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_about_title}}">
+<meta name="twitter:description" content="{{meta_about_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_ABOUT}}" aria-current="page">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="sec wrap" id="about">
+  <div class="sec-head">
+    <div class="label">{{about_label}}</div>
+    <h2>{{about_h2}}</h2>
+  </div>
+  <div class="about">
+    <div>
+      <p>{{about_p1}}</p>
+      <p>{{about_p2}}</p>
+      <p>{{about_p3}}</p>
+      <p>{{about_p4}}</p>
+      <div class="inline-links">
+        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
+        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+      </div>
+    </div>
+    <dl class="creds">
+      <div class="cred"><dt class="r">{{about_cred1_label}}</dt><dd class="w">{{about_cred1_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred2_label}}</dt><dd class="w">{{about_cred2_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred3_label}}</dt><dd class="w">{{about_cred3_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred4_label}}</dt><dd class="w">{{about_cred4_value}}</dd></div>
+      <div class="cred"><dt class="r">{{about_cred5_label}}</dt><dd class="w">{{about_cred5_value}}</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec wrap" id="cite">
+  <div class="sec-head">
+    <div class="label">{{cite_label}}</div>
+  </div>
+  <p class="cite-line">{{cite_p}}</p>
+</section>
+
+<section class="sec wrap" id="contact">
+  <div class="sec-head">
+    <div class="label">{{contact_label}}</div>
+    <h2>{{contact_h2}}</h2>
+  </div>
+  <p class="lede">{{contact_p}}</p>
+  <a class="contact-email" href="mailto:epidetective@gmail.com">epidetective@gmail.com</a>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+    </div>
+    <div class="disc">{{foot_disclaimer}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+</body>
+</html>

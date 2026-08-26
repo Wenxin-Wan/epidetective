@@ -34,8 +34,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Outils</a>
         <a href="../code-against-cancer/">Code contre le cancer</a>
-        <a href="index.html#about">À propos</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="about.html">À propos</a>
+        <a href="about.html#contact">Contact</a>
       </nav>
       <nav class="langs" aria-label="Langue"><a href="../index.html" hreflang="en">English</a><a href="../zh/index.html" hreflang="zh">中文</a><span class="lang-cur" aria-current="true">Français</span><a href="../es/index.html" hreflang="es">Español</a><a href="../ru/index.html" hreflang="ru">Русский</a></nav>
     </div>
@@ -49,8 +49,6 @@
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap">
     <h1>Traduire les données épidémiologiques <b>pour un monde en meilleure santé</b></h1>
-    <!-- audience line first, then what the site is: the standfirst pattern the
-         redesign settled on, replacing the eyebrow + headline + lede stack. -->
     <p class="lede lede-lead">Pour le public curieux, les patients, les médecins, les journalistes et celles et ceux qui écrivent les politiques de santé.</p>
     <p class="lede">EpiDetective conçoit des outils gratuits qui vous permettent d'explorer vous-même la recherche en santé déjà publiée.</p>
   </div>
@@ -59,7 +57,7 @@
 <section class="sec wrap" id="instruments">
   <div class="sec-head">
     <div class="label">Les outils</div>
-    <h2>Deux sont <b>ouverts dès maintenant</b>. D'autres arrivent.</h2>
+    <h2>Trois sont <b>ouverts</b>. D'autres arrivent.</h2>
   </div>
 
   <div class="rack">
@@ -75,8 +73,6 @@
           <span>186 expositions</span><span>68 types de cancer</span>
           <span>466 liens</span><span>10 langues</span>
         </div>
-        <!-- opening the tool is the primary action; the explainer page is the
-             secondary one. -->
         <div class="inst-actions">
           <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">L'ouvrir &rarr;</a>
           <a class="btn btn-ghost" href="explorer.html">À propos de cet outil</a>
@@ -93,11 +89,10 @@
         </div>
         <p>Quels facteurs de risque ont été associés aux maladies cardiaques, aux AVC, au diabète de type 2, à la démence, aux cancers et à d'autres grandes maladies chroniques — et quelle est la solidité des preuves derrière chaque lien, y compris là où elles sont réellement contestées. Déployez le réseau pour voir comment les facteurs de risque se regroupent.</p>
         <div class="inst-meta">
-          <span>95 facteurs de risque</span><span>31 maladies</span>
-          <span>359 liens gradués</span><span>anglais + chinois</span>
+          <span>128 facteurs de risque</span><span>45 maladies</span>
+          <span>456 liens gradés</span><span>10 langues</span>
+          <span>GBD · WCRF instantané v1.2 · août 2026</span>
         </div>
-        <!-- this tool carries its own methods section, so the secondary action
-             points into it rather than at a separate explainer page -->
         <div class="inst-actions">
           <a class="btn btn-solid" href="https://tools.epidetective.com/chronic/">Ouvrir &rarr;</a>
           <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/#methods">À propos de cet outil</a>
@@ -106,57 +101,28 @@
       <a href="https://tools.epidetective.com/chronic/" class="thumb thumb-chronic" aria-label="Explorateur des maladies chroniques"></a>
     </article>
 
-    <!-- A third slot was drafted before launch and cut: it was invented, not
-         planned. Its inst.t3.* keys were removed in the August 2026 CMS cleanup;
-         to restore, re-add the keys to every i18n file (and to the CMS via
-         scripts/generate_pages_yml.py), then add an
-         <article class="inst is-soon"> block here. -->
-
-  </div>
-</section>
-
-<section class="sec wrap" id="about">
-  <div class="sec-head">
-    <div class="label">Qui construit cela</div>
-    <h2>Conçu par une épidémiologiste du cancer qui <b>travaille avec ces données chaque jour</b>.</h2>
-  </div>
-  <div class="about">
-    <div>
-      <p>Je suis Wenxin Wan, chercheuse postdoctorale au Centre international de Recherche sur le Cancer, à Lyon, l'agence de l'Organisation mondiale de la Santé consacrée au cancer.</p>
-      <p>J'ai réalisé mon doctorat à l'Institut des sciences de l'évaluation des risques de l'Université d'Utrecht, sur la façon dont les expositions au travail et dans l'environnement influencent le risque de cancer. Ces travaux ont contribué à établir le rôle causal du benzène dans le cancer du poumon, et ont été repris par le <i>New York Times</i>.</p>
-      <p>Au quotidien, je travaille sur de grandes cohortes internationales : des centaines de milliers de personnes suivies pendant des années, pour repérer quelles expositions sont suivies de maladies. Au CIRC, je dirige les analyses d'OPICO, un consortium qui réunit dix de ces cohortes sur trois continents pour savoir si l'usage prolongé d'opioïdes s'accompagne d'un risque de cancer, et je conseille le Lung Cancer Cohort Consortium (LC3) sur la manière dont les données relatives aux expositions professionnelles peuvent nourrir le dépistage du cancer du poumon.</p>
-      <p>J'ai passé des années à contribuer à produire ce type de données, et il m'a longtemps frustrée de voir combien peu d'entre elles atteignent celles et ceux qu'elles étaient censées protéger. Un résultat qui ne quitte jamais la littérature n'a fait que la moitié de son travail. Combler cette distance vaut chaque heure qu'on y consacre, et c'est la raison d'être de ce site.</p>
-      <div class="inline-links">
-        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
-        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Ouvert</span>
+          <h3>Code contre le cancer</h3>
+        </div>
+        <p>Les recommandations officielles, fondées sur les preuves, pour réduire votre propre risque de cancer — issues des Codes contre le cancer régionaux coordonnés par le CIRC (OMS) et ses partenaires. Quatorze actions concrètes, région par région. (page pour l'instant en anglais et en chinois)</p>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../code-against-cancer/">L'ouvrir &rarr;</a>
+        </div>
       </div>
-    </div>
-    <!-- a real definition list: these are term/value pairs, and screen readers
-         announce them as such -->
-    <dl class="creds">
-      <div class="cred"><dt class="r">Poste</dt><dd class="w">Chercheuse postdoctorale, CIRC / OMS</dd></div>
-      <div class="cred"><dt class="r">Doctorat</dt><dd class="w">Université d'Utrecht, Institut des sciences de l'évaluation des risques</dd></div>
-      <div class="cred"><dt class="r">Domaines</dt><dd class="w">Épidémiologie du cancer &middot; inférence causale &middot; biostatistique &middot; apprentissage automatique</dd></div>
-      <div class="cred"><dt class="r">Projets de recherche</dt><dd class="w"><a href="https://opico.iarc.who.int">OPICO</a> &middot; <a href="https://synergy.iarc.fr">SYNERGY</a> &middot; <a href="https://www.ephor-project.eu">EPHOR</a> &middot; <a href="https://www.ecrhs.org">ECRHS</a></dd></div>
-      <div class="cred"><dt class="r">Fonctions internationales</dt><dd class="w">Analyste principale et coordinatrice de projet, OPICO &middot; conseillère scientifique, LC3</dd></div>
-    </dl>
+      <a href="../code-against-cancer/" class="thumb blank" aria-label="Code contre le cancer">EU&ensp;&middot;&ensp;LAC&ensp;&middot;&ensp;ASIA</a>
+    </article>
+
+
   </div>
 </section>
 
-<!-- Notes section removed in the August 2026 pass: the section carried a single
-     essay and the nav entry it needed. The notes.* keys were removed in the
-     CMS cleanup; re-add them to every i18n file (and the CMS via
-     scripts/generate_pages_yml.py) once there is more than one piece to list. -->
 
-<section class="sec wrap" id="contact">
-  <div class="sec-head">
-    <div class="label">Contact</div>
-    <h2>Écrivez-moi.</h2>
-  </div>
-  <p class="lede">Des questions, une correction, ou une idée d'outil que vous aimeriez voir — écrivez-moi.</p>
-  <a class="contact-email" href="mailto:epidetective@gmail.com">epidetective@gmail.com</a>
-</section>
+
+
+
 
 <footer class="foot">
   <div class="wrap">
@@ -168,22 +134,18 @@
       <nav class="menu">
         <a href="index.html#instruments">Outils</a>
         <a href="../code-against-cancer/">Code contre le cancer</a>
-        <a href="index.html#about">À propos</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="about.html">À propos</a>
+        <a href="about.html#contact">Contact</a>
       </nav>
     </div>
     <div class="disc">EpiDetective publie des outils permettant de lire des données portant sur des populations entières. Ils montrent des tendances au sein de grands groupes de personnes. Pour toute question concernant votre propre santé, adressez-vous à un médecin. Chaque outil indique ses sources.</div>
     <div class="disc affil">EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d'aucune approbation du Centre international de Recherche sur le Cancer ni de l'Organisation mondiale de la Santé, et les opinions exprimées ici n'engagent que leur autrice. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.</div>
-    <!-- the IARC/WHO badge that used to sit here is gone: next to a notice
-         disclaiming endorsement, a bare affiliation line read as the opposite -->
     <div class="foot-bot">
       <span>Créé par Wenxin Wan &mdash; Lyon, France</span>
     </div>
   </div>
 </footer>
 
-</div><!-- /#page -->
-
-<script src="../scroll.js" defer></script>
+</div>
 </body>
 </html>

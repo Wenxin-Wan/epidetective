@@ -1,37 +1,48 @@
-@font-face{font-family:"Fraunces";src:url(assets/fraunces.woff2) format("woff2");
-           font-weight:300 900;font-style:normal;font-display:swap}
-@font-face{font-family:"DMSans";src:url(assets/dmsans.woff2) format("woff2");
-           font-weight:100 1000;font-style:normal;font-display:swap}
-/* Fraunces and DM Sans have no Cyrillic, so Russian gets matched substitutes.
-   Golos Text is Cyrillic-first, so it reads native rather than bolted-on. */
-@font-face{font-family:"Playfair";src:url(assets/playfair.woff2) format("woff2");
-           font-weight:400 900;font-style:normal;font-display:swap}
-@font-face{font-family:"Golos";src:url(assets/golos.woff2) format("woff2");
-           font-weight:400 900;font-style:normal;font-display:swap}
+/* Literata carries Latin, Latin-ext and Cyrillic natively, so every language
+   (including Russian) sets in the same face; unicode-range keeps the Cyrillic
+   files out of Latin pages. IBM Plex Mono carries the data voice: counts,
+   ratios, group codes — measurements, visibly distinct from prose. */
+@font-face{font-family:"Literata";src:url(assets/literata-latin.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:swap;
+           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Literata";src:url(assets/literata-latin-italic.woff2) format("woff2");
+           font-weight:400 800;font-style:italic;font-display:swap;
+           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Literata";src:url(assets/literata-latinext.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:swap;
+           unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Literata";src:url(assets/literata-cyr.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:swap;
+           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Literata";src:url(assets/literata-cyr-italic.woff2) format("woff2");
+           font-weight:400 800;font-style:italic;font-display:swap;
+           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"PlexMono";src:url(assets/plexmono-400.woff2) format("woff2");
+           font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"PlexMono";src:url(assets/plexmono-600.woff2) format("woff2");
+           font-weight:600;font-style:normal;font-display:swap}
 
 :root{
-  --chalk:#E9E7DF;
-  --chalk-deep:#DFDCD2;
-  --ink:#171814;
-  --ink-soft:#4A4E46;
-  --ink-faint:#7C8179;
-  --madder:#A33526;
-  --sage:#8C9A8E;
-  --teal:#1F5B55;
-  --veil:rgba(233,231,223,.88);
-  --rule:rgba(23,24,20,.14);
-  --display:"Fraunces",Georgia,serif;
-  --body:"DMSans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --wonk:"WONK" 1;
-  --display-track:-.025em;
+  /* "The Instrument": ink on laboratory paper. Colour appears only where it
+     carries meaning — the evidence scale — never as decoration. */
+  --chalk:#F5F4F0;            /* paper */
+  --chalk-deep:#EBEAE3;       /* recessed band */
+  --ink:#161713;
+  --ink-soft:#454740;
+  --ink-faint:#6B6E65;
+  --madder:#9E2F23;           /* semantic only: established / known-cause red */
+  --sage:#B4681F;             /* semantic only: suspected / probable amber */
+  --teal:#161713;             /* entity marks (cancers, diseases) set in ink */
+  --veil:rgba(245,244,240,.88);
+  --rule:rgba(22,23,19,.14);
+  --display:"Literata",Georgia,serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
+  --mono:"PlexMono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --wonk:normal;
+  --display-track:-.012em;
   --pad:clamp(20px,5vw,56px);
 }
-/* Russian: substitute faces that actually carry Cyrillic */
-html[lang="ru"]{
-  --display:"Playfair",Georgia,serif;
-  --body:"Golos","DMSans",-apple-system,"Segoe UI",sans-serif;
-  --wonk:normal;
-}
+/* Literata carries Cyrillic natively — Russian needs no substitute faces. */
 /* Chinese: measures are set in `ch`, which is the width of "0" — about half a
    Han glyph. Left unadjusted every column is half as wide as intended and the
    hero wraps to eight characters a line. CJK measures are therefore reset in
@@ -40,8 +51,13 @@ html[lang="ru"]{
 /* Han text can break between any two characters, and `balance` happily splits a
    two-character word (证|据) to even the lines up. `pretty` respects the comma
    instead, so the headline breaks where the sentence does. */
-html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:9em;
+html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:13em;
                          text-wrap:pretty}
+/* Han has no true italic and synthesised oblique is a typographic error; in
+   Chinese the display emphasis carries by weight instead. */
+html[lang="zh"] .hero h1 b,
+html[lang="zh"] .sec-head h2 b,
+html[lang="zh"] .tool-hero h1 b{font-style:normal;font-weight:700}
 html[lang="zh"] h2{font-size:clamp(1.5rem,2.7vw,2.15rem)}
 html[lang="zh"] .sec-head h2,
 html[lang="zh"] .tool-hero h1{max-width:15em}
@@ -106,43 +122,43 @@ body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--body);
      text-rendering:optimizeLegibility;overflow-x:hidden}
 a{color:inherit}
 img,svg{max-width:100%}
-:focus-visible{outline:2px solid var(--madder);outline-offset:4px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 
 .wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--pad)}
-.label{font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;font-weight:600;
+.label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
        color:var(--ink-faint)}
 .serif{font-family:var(--display);font-variation-settings:var(--wonk)}
 
 /* ---------- header ---------- */
-.top{position:sticky;top:0;z-index:20;background:rgba(233,231,223,.92);
+.top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
      backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;
            flex-wrap:wrap;padding-block:14px}
 /* wordmark stays Latin in every language: it is the brand, not copy */
-.mark{font-family:"Fraunces",Georgia,serif;font-variation-settings:"WONK" 1;font-size:1.2rem;
-      font-weight:600;letter-spacing:-.015em;text-decoration:none}
-.mark span{font-weight:300;font-style:italic}
+.mark{font-family:"Literata",Georgia,serif;font-size:1.18rem;
+      font-weight:700;letter-spacing:-.01em;text-decoration:none}
+.mark span{font-weight:450;font-style:italic}
 .top-right{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
 .langs{display:flex;gap:11px;flex-wrap:wrap;align-items:baseline;
        padding-left:20px;border-left:1px solid var(--rule)}
 .langs a,.langs .lang-cur{font-size:.76rem;letter-spacing:.03em;text-decoration:none}
 .langs a{color:var(--ink-faint);border-bottom:1px solid transparent}
-.langs a:hover{color:var(--ink);border-bottom-color:var(--madder)}
-.langs .lang-cur{color:var(--madder);font-weight:600}
+.langs a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.langs .lang-cur{color:var(--ink);font-weight:700;border-bottom:2px solid var(--ink)}
 @media (max-width:700px){.langs{padding-left:0;border-left:0}}
 .menu{display:flex;gap:20px;flex-wrap:wrap}
 .menu a{text-decoration:none;font-size:.82rem;letter-spacing:.04em;color:var(--ink-soft);
         padding-bottom:2px;border-bottom:1px solid transparent}
-.menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--madder)}
+.menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
 
 /* ---------- type ---------- */
 h1,h2,h3{font-family:var(--display);font-variation-settings:var(--wonk);font-weight:400;
          letter-spacing:var(--display-track);text-wrap:balance;margin:0}
-h1{font-size:clamp(2.3rem,5.4vw,4.15rem);line-height:1.03}
-h2{font-size:clamp(1.7rem,3.3vw,2.65rem);line-height:1.09}
+h1{font-size:clamp(2.1rem,4.9vw,3.7rem);line-height:1.06}
+h2{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12}
 h3{font-size:clamp(1.1rem,1.9vw,1.4rem);line-height:1.22;font-weight:600}
 b,strong{font-weight:700}
-em{font-style:italic;font-weight:300;color:var(--madder)}
+em{font-family:var(--display);font-style:italic;font-weight:500;color:inherit}
 /* Han characters have no true italic; a synthesised oblique is a typographic
    error, so emphasis in Chinese carries by colour alone. */
 html[lang="zh"] em{font-style:normal;font-weight:inherit}
@@ -158,12 +174,14 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
           background:url(assets/network.svg) no-repeat right -6% center;
           background-size:auto 128%;opacity:.24}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-           background:linear-gradient(97deg,var(--chalk) 0%,rgba(233,231,223,.96) 32%,
-                      rgba(233,231,223,.62) 62%,rgba(233,231,223,.30) 100%)}
+           background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
+                      rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
 .hero .wrap{position:relative;z-index:2;padding-block:clamp(64px,13vh,132px)}
 /* 23ch keeps "epidemiological evidence" whole on its own line; the old 17ch was
    set for a headline made of short words and now breaks it mid-phrase */
 .hero h1{margin:20px 0 0;max-width:23ch}
+/* emphasis inside display type: Literata speaks emphasis in italic, not bold */
+.hero h1 b,.sec-head h2 b,.tool-hero h1 b{font-weight:inherit;font-style:italic}
 .hero .lede{margin-top:24px;font-size:clamp(1rem,1.3vw,1.15rem)}
 /* standfirst: names the audience in full ink, then hands off to the lede that
    explains the site. Two paragraphs, so the line breaks where each language
@@ -172,7 +190,7 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .hero .lede-lead + .lede{margin-top:11px}
 @media (max-width:820px){
   .hero-net{background-position:center;background-size:cover;opacity:.16}
-  .hero-veil{background:linear-gradient(180deg,rgba(233,231,223,.72) 0%,var(--chalk) 78%)}
+  .hero-veil{background:linear-gradient(180deg,rgba(245,244,240,.72) 0%,var(--chalk) 78%)}
 }
 /* On a phone a single long word runs past the measure -- "эпидемиологические",
    "epidemiological". Hyphenation is confined to these widths so display type on
@@ -191,18 +209,18 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
   background:url(assets/network.svg) no-repeat right -6% center;
   background-size:auto 128%;opacity:.22}
 .tool-hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(97deg,var(--chalk) 0%,rgba(233,231,223,.96) 32%,
-             rgba(233,231,223,.62) 62%,rgba(233,231,223,.30) 100%)}
+  background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
+             rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
 .tool-hero .wrap{position:relative;z-index:2;padding-block:clamp(56px,10vh,112px)}
 .tool-hero h1{margin:20px 0 0;max-width:23ch}
 @media (max-width:820px){
   .tool-hero .net{background-position:center;background-size:cover;opacity:.15}
-  .tool-hero .veil{background:linear-gradient(180deg,rgba(233,231,223,.72) 0%,var(--chalk) 78%)}
+  .tool-hero .veil{background:linear-gradient(180deg,rgba(245,244,240,.72) 0%,var(--chalk) 78%)}
 }
-.crumb{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+.crumb{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
        color:var(--ink-faint);font-weight:600}
 .crumb a{text-decoration:none}
-.crumb a:hover{color:var(--ink);border-bottom:1px solid var(--madder)}
+.crumb a:hover{color:var(--ink);border-bottom:1px solid var(--ink)}
 .crumb span{color:var(--ink-soft)}
 
 /* ---------- CTA band (explorer page) ---------- */
@@ -222,14 +240,14 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 }
 .inst-main{display:grid;gap:11px}
 .inst-top{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
-.chip{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;
+.chip{font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
       padding:4px 9px;border:1px solid currentColor;white-space:nowrap}
-.chip.live{color:var(--madder)}
+.chip.live{color:var(--ink)}
 .chip.soon{color:var(--ink-faint)}
 .inst h3{margin:0}
 .inst p{margin:0;color:var(--ink-soft);max-width:56ch}
-.inst-meta{display:flex;gap:8px 18px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.09em;
-           text-transform:uppercase;color:var(--ink-faint);font-weight:600;
+.inst-meta{display:flex;gap:8px 18px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;
+           text-transform:uppercase;color:var(--ink-faint);font-weight:400;
            font-variant-numeric:tabular-nums}
 .inst-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
 .inst.is-soon .inst-main{opacity:.62}
@@ -241,16 +259,16 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
    clustered layout rather than the same free-floating one */
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
-             font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+             font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:13px 21px;
      font-weight:600;font-size:.92rem;border:1px solid var(--ink);
      transition:background .17s ease,color .17s ease,transform .17s ease}
 .btn-solid{background:var(--ink);color:var(--chalk)}
-.btn-solid:hover{background:var(--madder);border-color:var(--madder);transform:translateY(-2px)}
+.btn-solid:hover{background:var(--ink-soft);border-color:var(--ink-soft);transform:translateY(-2px)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
-.btn-ghost:hover{border-color:var(--madder);color:var(--madder)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 
 /* ---------- about strip ---------- */
 .about{display:grid;gap:34px}
@@ -259,43 +277,46 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .creds{display:grid;border-top:1px solid var(--rule);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
 .cred dd{margin:0}
-.cred .r{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);
+.cred .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 .cred .w{font-size:.92rem}
 .inline-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
 .inline-links a{text-decoration:none;border:1px solid var(--rule);padding:8px 13px;
                 font-size:.79rem;letter-spacing:.04em;
                 transition:border-color .16s ease,color .16s ease}
-.inline-links a:hover{border-color:var(--madder);color:var(--madder)}
+.inline-links a:hover{border-color:var(--ink);color:var(--ink)}
+
+.cite-line{font-family:var(--mono);font-size:.88rem;line-height:1.7;max-width:72ch;
+  border-left:3px solid var(--ink);padding:10px 0 10px 18px;margin:0}
 
 /* ---------- contact ---------- */
-.contact-email{display:inline-block;margin-top:18px;font-size:1.05rem;font-weight:600;
-  text-decoration:none;border-bottom:2px solid var(--madder);padding-bottom:3px}
-.contact-email:hover{color:var(--madder)}
+.contact-email{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:1rem;font-weight:600;
+  text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:3px}
+.contact-email:hover{background:var(--ink);color:var(--chalk)}
 
 /* ---------- notes ---------- */
 .notes{border-top:1px solid var(--rule)}
 .note{display:grid;gap:5px;padding-block:22px;border-bottom:1px solid var(--rule);
       text-decoration:none}
 .note h3{font-weight:400}
-.note:hover h3{color:var(--madder)}
-.note .m{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);
+.note:hover h3{text-decoration:underline;text-underline-offset:4px}
+.note .m{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 
 /* ---------- figures / bars (explorer page) ---------- */
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
       background:var(--rule);border:1px solid var(--rule);margin-top:30px}
 .fig{background:var(--veil);padding:22px 20px}
-.fig .v{font-family:var(--display);font-variation-settings:"WONK" 1;
-        font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1;font-variant-numeric:tabular-nums;
-        letter-spacing:-.02em}
-.fig .k{margin-top:8px;font-size:.69rem;letter-spacing:.15em;text-transform:uppercase;
+.fig .v{font-family:var(--mono);font-weight:600;
+        font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1;font-variant-numeric:tabular-nums;
+        letter-spacing:-.03em}
+.fig .k{margin-top:8px;font-family:var(--mono);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;
         color:var(--ink-faint);font-weight:600}
 .bars{margin-top:36px;display:grid;gap:25px;max-width:640px}
 .bar-row{display:grid;gap:9px}
 .bar-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
 .bar-head b{font-weight:600}
-.bar-head span{font-size:.73rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+.bar-head span{font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint)}
 .bar{height:6px;background:var(--chalk-deep);position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;display:block}
 .bar.est i{background:var(--madder)}
@@ -305,7 +326,7 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .reads{margin-top:26px;border-top:1px solid var(--rule)}
 .read{padding-block:26px;border-bottom:1px solid var(--rule);display:grid;gap:11px}
 @media (min-width:840px){.read{grid-template-columns:186px minmax(0,1fr);gap:30px;align-items:start}}
-.read .tag{color:var(--madder);font-size:.69rem;letter-spacing:.15em;text-transform:uppercase;
+.read .tag{font-family:var(--mono);color:var(--ink-faint);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;
            font-weight:600;padding-top:5px}
 .read h3{margin:0 0 8px}
 .read p{margin:0;color:var(--ink-soft);max-width:58ch}
@@ -325,17 +346,17 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .foot .menu a{color:#A7ADA2}
 .foot .menu a:hover{color:var(--chalk);border-bottom-color:var(--chalk)}
 .foot-row{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:baseline}
-.disc{margin-top:34px;border:1px solid rgba(233,231,223,.2);padding:18px 20px;color:#A7ADA2;
+.disc{margin-top:34px;border:1px solid rgba(245,244,240,.2);padding:18px 20px;color:#A7ADA2;
       font-size:.86rem;max-width:80ch}
 /* affiliation notice reads as a formal aside, quieter than the health disclaimer */
-.disc.affil{margin-top:12px;border-color:rgba(233,231,223,.12);color:#949A90;font-size:.8rem}
+.disc.affil{margin-top:12px;border-color:rgba(245,244,240,.12);color:#949A90;font-size:.8rem}
 .creds a,.disc a{color:inherit;text-decoration:underline;text-underline-offset:2px;
-                 text-decoration-color:rgba(163,53,38,.55)}
-.creds a:hover,.disc a:hover{color:var(--madder);text-decoration-color:var(--madder)}
-.foot .disc a{text-decoration-color:rgba(233,231,223,.4)}
+                 text-decoration-color:rgba(22,23,19,.4)}
+.creds a:hover,.disc a:hover{color:var(--ink);text-decoration-color:var(--ink)}
+.foot .disc a{text-decoration-color:rgba(245,244,240,.4)}
 .foot .disc a:hover{color:var(--chalk);text-decoration-color:var(--chalk)}
 .foot-bot{margin-top:32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-          font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#8A9086}
+          font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#8A8D85}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

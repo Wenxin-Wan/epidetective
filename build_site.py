@@ -22,7 +22,7 @@ TPL = os.path.join(HERE, "templates")
 
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
-PAGES = {"index.html": "home", "explorer.html": "explorer"}
+PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about"}
 SITE_URL = "https://epidetective.com"
 # og:image must be an absolute URL on a raster format; social scrapers ignore SVG
 OG_IMAGE = SITE_URL + "/assets/og.png"
@@ -166,6 +166,7 @@ def main():
             ctx["PREFIX"] = "" if lang == "en" else "../"
             ctx["URL_HOME"] = url(lang, "index.html", lang)
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
+            ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_TOOL2"] = TOOL2_URL
             ctx["URL_PREVENTION"] = ctx["PREFIX"] + PREVENTION_PATH
@@ -186,6 +187,8 @@ def main():
                 return str(ctx[k])
 
             html = PLACEHOLDER.sub(sub, templates[page])
+            # dev-notes stay in the templates; the shipped page carries none
+            html = re.sub(r"[ \t]*<!--(?!\[).*?-->\n?", "", html, flags=re.S)
             if missing:
                 raise SystemExit("%s/%s: unresolved placeholders %s"
                                  % (lang, page, sorted(set(missing))))
