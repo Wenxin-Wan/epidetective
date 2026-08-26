@@ -169,7 +169,9 @@ def main():
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_TOOL2"] = TOOL2_URL
-            ctx["URL_PREVENTION"] = ctx["PREFIX"] + PREVENTION_PATH
+            # the Code page localises itself client-side; hand it the language
+            ctx["URL_PREVENTION"] = (ctx["PREFIX"] + PREVENTION_PATH
+                                     + ("" if lang == "en" else "?lang=" + lang))
             ctx["URL_NOTE1"] = NOTE1_URL
             ctx["CANONICAL"] = abs_url(lang, page)
             ctx["OG_IMAGE"] = OG_IMAGE
