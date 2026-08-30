@@ -99,6 +99,10 @@ def write_sitemap():
     out.append("  <url>")
     out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
     out.append("  </url>")
+    # The developer timeline is a public standalone page.
+    out.append("  <url>")
+    out.append("    <loc>%s/timeline/</loc>" % SITE_URL)
+    out.append("  </url>")
     out.append("</urlset>")
     with open(os.path.join(HERE, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
@@ -172,6 +176,9 @@ def main():
             # the Code page localises itself client-side; hand it the language
             ctx["URL_PREVENTION"] = (ctx["PREFIX"] + PREVENTION_PATH
                                      + ("" if lang == "en" else "?lang=" + lang))
+            # the timeline speaks en/zh; only zh gets the handoff
+            ctx["URL_TIMELINE"] = (ctx["PREFIX"] + "timeline/"
+                                   + ("?lang=zh" if lang == "zh" else ""))
             ctx["URL_NOTE1"] = NOTE1_URL
             ctx["CANONICAL"] = abs_url(lang, page)
             ctx["OG_IMAGE"] = OG_IMAGE
