@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Timeline — Wenxin Wan</title>
-<meta name="description" content="A chronological record of Wenxin Wan's work in cancer and occupational epidemiology — every paper, consortium role, tool and conference record, newest first, each linked to its primary source.">
+<meta name="description" content="A timeline of Wenxin Wan and the work — degrees, moves, papers, consortium roles, tools and coverage, newest first, each entry linked to its primary source.">
 <link rel="canonical" href="https://epidetective.com/timeline/">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/timeline/">
 <meta property="og:title" content="Timeline — Wenxin Wan">
-<meta property="og:description" content="Every paper, role, tool and conference record, newest first, linked to primary sources.">
+<meta property="og:description" content="Me, and the work: every degree, paper, role, tool and conference record, newest first, linked to primary sources.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -108,7 +108,39 @@
   body.zh .meta{letter-spacing:.02em}
   .meta b{color:var(--ink);font-weight:600}
   .item h3{font-size:1.04rem;margin:6px 0 4px;font-weight:700;line-height:1.35}
+  .item h3 button{all:unset;cursor:pointer;display:block;width:100%}
+  .item h3 button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   .item p{color:var(--ink-soft);margin:0;font-size:.9rem}
+
+  /* overview <-> in-full: the scaling trick. Bodies collapse via the 0fr/1fr
+     grid transition; compact rows put date, kind and a one-line title on one
+     baseline so the whole record scans in a couple of screens. */
+  .head{cursor:pointer}
+  .tog{position:absolute;right:15px;top:13px;font-family:var(--mono);font-size:.9rem;
+       font-weight:600;color:var(--faint);pointer-events:none}
+  .item.open .tog{color:var(--ink)}
+  .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+  .body>.inner{overflow:hidden;min-width:0}
+  .body p{padding-top:2px}
+  .item.open .body,.mode-full .body{grid-template-rows:1fr}
+  .mode-full .tog{display:none}
+  .mode-full .head{cursor:default}
+  .mode-compact .items{gap:7px;padding:12px 0 16px 26px}
+  .mode-compact .yeargroup{margin-top:4px}
+  .mode-compact .year{font-size:1.45rem;padding-top:12px}
+  .mode-compact .item:not(.open){padding:8px 42px 8px 16px}
+  .mode-compact .item:not(.open)::before{top:14px}
+  .mode-compact .item:not(.open) .head{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .mode-compact .item:not(.open) .meta{flex:none;white-space:nowrap;font-size:.66rem}
+  .mode-compact .item:not(.open) h3{flex:1 1 auto;min-width:0;margin:0;font-size:.94rem}
+  .mode-compact .item:not(.open) h3 button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mode-compact .item:not(.open) .tog{top:9px}
+  .view{margin-left:auto;display:flex;gap:8px}
+  @media (max-width:700px){
+    .mode-compact .item:not(.open) .head{display:block}
+    .mode-compact .item:not(.open) .meta{white-space:normal}
+    .view{margin-left:0;width:100%}
+  }
   .links{margin-top:9px;display:flex;gap:14px;flex-wrap:wrap}
   .links a{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em;
            text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
@@ -171,24 +203,26 @@ var STRINGS = {
   en: {
     back:"← About the developer",
     eyebrow:"EpiDetective · The developer's record",
-    h1:'A timeline of <i>the work</i>',
-    lede:'Everything I have made or helped make — papers, consortium roles, tools, conference records and the coverage they drew — most recent first. Each entry links to its primary source, so any claim here can be traced back and checked: the same standard <a href="../">EpiDetective</a> asks of health evidence. Assembled by Wenxin Wan; the record itself lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
+    h1:'Me, and <i>the work</i>',
+    lede:'Where I have been and what I have made — degrees and moves, papers, consortium roles, tools, conference records and the coverage they drew — most recent first. Skim the whole record in one view, open any entry for the detail, or filter to one kind at a time. Each entry links to its primary source, so any claim here can be traced back and checked: the same standard <a href="../">EpiDetective</a> asks of health evidence. Assembled by Wenxin Wan; the record itself lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
     cats:{all:"All",paper:"Papers",tool:"Tools",role:"Roles",milestone:"Milestones",talk:"Conferences",press:"Press"},
     kinds:{paper:"Paper",tool:"Tool",role:"Role",milestone:"Milestone",talk:"Conferences",press:"Press &amp; commentary"},
     lead:"lead author", coauthor:"co-author", selected:"selected", upcoming:"upcoming",
     preview:"in gated preview", present:"present", nextLabel:"Next",
+    viewCompact:"Overview", viewFull:"In full",
     key1:'Sources: journal articles are linked by DOI; conference items link their published abstracts; roles link the consortium sites. The full publication record lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>. Conference abstracts and works in review are listed only where a public record exists.',
     key2:'EpiDetective is a personal project by Wenxin Wan, independent of IARC and WHO. <a href="../about.html">About the developer</a> · <a href="../about.html#cite">How to cite</a> · <a href="../about.html#contact">Contact</a>'
   },
   zh: {
     back:"← 关于开发者",
     eyebrow:"EPIDETECTIVE · 开发者档案",
-    h1:'我的工作<b>年表</b>',
-    lede:'我做过或参与过的一切——论文、国际联盟职责、工具、会议记录，以及它们获得的报道——最新的排在最上面。每一条都链接到原始来源，任何说法都可以回溯核查：这也是 <a href="../">EpiDetective</a> 对健康证据的一贯要求。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
+    h1:'我，和<b>我的工作</b>',
+    lede:'我走过的路与做出的东西——学位与迁徙、论文、国际联盟职责、工具、会议记录，以及它们获得的报道——最新的排在最上面。既可以一眼扫完整个年表，也可以点开任何一条深入细节，或用筛选只看某一类。每一条都链接到原始来源，任何说法都可以回溯核查：这也是 <a href="../">EpiDetective</a> 对健康证据的一贯要求。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
     cats:{all:"全部",paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"报道"},
     kinds:{paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"媒体与评论"},
     lead:"第一作者", coauthor:"合作者", selected:"精选", upcoming:"即将进行",
     preview:"预览 · 审校中", present:"至今", nextLabel:"即将",
+    viewCompact:"总览", viewFull:"全部展开",
     key1:'来源说明：期刊论文以 DOI 链接；会议条目链接已发表的摘要；联盟职责链接项目官网。完整发表记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。会议摘要与审稿中的工作，仅在已有公开记录时列出。',
     key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../about.html">关于开发者</a> · <a href="../about.html#cite">如何引用</a> · <a href="../about.html#contact">联系方式</a>'
   }
@@ -423,6 +457,17 @@ function build(lang){
     b.addEventListener("click", function(){ filter(k, b); });
     filters.appendChild(b);
   });
+  var view = document.createElement("div");
+  view.className = "view";
+  [["compact", S.viewCompact], ["full", S.viewFull]].forEach(function(pair){
+    var b = document.createElement("button");
+    b.className = "chip" + (mode===pair[0] ? " active" : "");
+    b.setAttribute("data-mode", pair[0]);
+    b.textContent = pair[1];
+    b.addEventListener("click", function(){ setMode(pair[0]); });
+    view.appendChild(b);
+  });
+  filters.appendChild(view);
 
   var tl = document.getElementById("tl");
   tl.innerHTML = "";
@@ -435,15 +480,46 @@ function build(lang){
         return '<a href="' + l[1] + '"' + ext + '>' + pick(l[0],lang) + '</a>';
       }).join("");
       return '<article class="item' + (it.sel ? ' sel' : '') + '" data-k="' + it.k + '">' +
+        '<span class="tog" aria-hidden="true">+</span>' +
+        '<div class="head">' +
         '<div class="meta">' + pick(it.date,lang) + ' · <b>' + S.kinds[it.k] + '</b>' + noteText(it, S) + '</div>' +
-        '<h3>' + pick(it.t,lang) + '</h3>' +
+        '<h3><button type="button" aria-expanded="false">' + pick(it.t,lang) + '</button></h3>' +
+        '</div>' +
+        '<div class="body"><div class="inner">' +
         '<p>' + pick(it.d,lang) + '</p>' +
         (links ? '<div class="links">' + links + '</div>' : '') +
+        '</div></div>' +
         '</article>';
     }).join("");
     yg.innerHTML = '<div class="year">' + pick(g.y,lang) + '</div><div class="items">' + itemsHtml + '</div>';
     tl.appendChild(yg);
   });
+
+  document.querySelectorAll(".item .head").forEach(function(h){
+    h.addEventListener("click", function(){
+      if (mode === "full") return;
+      var it = h.closest(".item");
+      var open = it.classList.toggle("open");
+      it.querySelector(".tog").textContent = open ? "\u2212" : "+";
+      it.querySelector("h3 button").setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+  applyMode();
+}
+
+function applyMode(){
+  document.body.classList.toggle("mode-compact", mode === "compact");
+  document.body.classList.toggle("mode-full", mode === "full");
+  document.querySelectorAll(".view .chip").forEach(function(b){
+    b.classList.toggle("active", b.getAttribute("data-mode") === mode);
+  });
+}
+
+function setMode(m){
+  if (m === mode) return;
+  mode = m;
+  try { localStorage.setItem("tl-mode", mode); } catch(e){}
+  applyMode();
 }
 
 function filter(k, chip){
@@ -460,6 +536,11 @@ function filter(k, chip){
 
 var VALID = ["en","zh"];
 var lang = "en";
+var mode = "compact";
+try {
+  var m0 = localStorage.getItem("tl-mode");
+  if (m0 === "full" || m0 === "compact") mode = m0;
+} catch(e){}
 try {
   var q = new URLSearchParams(location.search).get("lang");
   var stored = null;

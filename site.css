@@ -285,10 +285,16 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
                 font-size:.79rem;letter-spacing:.04em;
                 transition:border-color .16s ease,color .16s ease}
 .inline-links a:hover{border-color:var(--ink);color:var(--ink)}
-.tl-link{margin-top:22px}
-.tl-link a{font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.05em;
-  text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.tl-link a:hover{background:var(--ink);color:var(--paper,#F5F4F0);text-decoration:none}
+.tl-card{display:block;background:var(--ink);color:var(--chalk);border-radius:16px;
+  padding:18px 20px;text-decoration:none;margin-bottom:24px}
+.tl-card .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:600;color:#B9BDB2}
+.tl-card .w{font-family:var(--display);font-size:1.08rem;font-weight:600;display:block;
+  margin-top:6px;line-height:1.35}
+.tl-card .arr{display:inline-block;transition:transform .18s ease}
+.tl-card:hover .arr{transform:translateX(5px)}
+.tl-card:hover .r{color:var(--chalk)}
+html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 
 .cite-line{font-family:var(--mono);font-size:.88rem;line-height:1.7;max-width:72ch;
   border-left:3px solid var(--ink);padding:10px 0 10px 18px;margin:0}
