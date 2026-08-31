@@ -274,6 +274,14 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .about{display:grid;gap:34px}
 @media (min-width:900px){.about{grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:start}}
 .about p{color:var(--ink-soft);margin:0 0 14px;max-width:56ch}
+/* Chinese prose runs markedly shorter than the sidebar's credential list --
+   CJK carries more per line, while the credential values (institute names,
+   consortium acronyms) stay Latin-length regardless of language -- so the
+   two columns end at very different heights. A rule along the gap turns
+   that gap from "these don't line up" into a deliberate divided layout. */
+@media (min-width:900px){
+  html[lang="zh"] .side{border-left:1px solid var(--rule);padding-left:26px}
+}
 .creds{display:grid;border-top:1px solid var(--rule);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
 .cred dd{margin:0}
