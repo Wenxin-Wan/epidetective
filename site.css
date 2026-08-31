@@ -285,13 +285,19 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
                 font-size:.79rem;letter-spacing:.04em;
                 transition:border-color .16s ease,color .16s ease}
 .inline-links a:hover{border-color:var(--ink);color:var(--ink)}
-.tl-card{display:block;background:var(--ink);color:var(--chalk);border-radius:16px;
+/* The portrait is an engraved line screen: a high-frequency pattern, so each
+   density is delivered at its own size via srcset rather than rescaled. */
+.portrait{display:block;width:100%;max-width:300px;height:auto;
+  border-radius:14px;margin-bottom:22px}
+.tl-card{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--ink);color:var(--chalk);border-radius:16px;
   padding:18px 20px;text-decoration:none;margin-bottom:24px}
+.tl-txt{min-width:0}
 .tl-card .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
-  font-weight:600;color:#B9BDB2}
+  font-weight:600;color:#B9BDB2;display:block}
 .tl-card .w{font-family:var(--display);font-size:1.08rem;font-weight:600;display:block;
   margin-top:6px;line-height:1.35}
-.tl-card .arr{display:inline-block;transition:transform .18s ease}
+.tl-card .arr{flex:none;font-size:1.15rem;line-height:1;transition:transform .18s ease}
 .tl-card:hover .arr{transform:translateX(5px)}
 .tl-card:hover .r{color:var(--chalk)}
 html[lang="zh"] .tl-card .r{letter-spacing:.02em}

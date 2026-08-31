@@ -90,9 +90,19 @@
       </div>
     </div>
     <div class="side">
+      <picture>
+        <source type="image/webp" srcset="../assets/portrait-300.webp 1x,
+                                          ../assets/portrait-600.webp 2x">
+        <img class="portrait" src="../assets/portrait-300.jpg"
+             srcset="../assets/portrait-300.jpg 1x, ../assets/portrait-600.jpg 2x"
+             width="300" height="375" decoding="async" alt="Портрет Вэньсинь Вань">
+      </picture>
       <a class="tl-card" href="../timeline/">
-        <span class="r">Хроника</span>
-        <span class="w">Мой путь и мои работы, год за годом&nbsp;<span class="arr">&rarr;</span></span>
+        <span class="tl-txt">
+          <span class="r">Хроника</span>
+          <span class="w">Мой путь и мои работы, год за годом</span>
+        </span>
+        <span class="arr" aria-hidden="true">&rarr;</span>
       </a>
       <dl class="creds">
       <div class="cred"><dt class="r">Должность</dt><dd class="w">Постдокторант, МАИР / ВОЗ</dd></div>

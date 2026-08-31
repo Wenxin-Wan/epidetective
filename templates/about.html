@@ -85,9 +85,19 @@
       </div>
     </div>
     <div class="side">
+      <picture>
+        <source type="image/webp" srcset="{{PREFIX}}assets/portrait-300.webp 1x,
+                                          {{PREFIX}}assets/portrait-600.webp 2x">
+        <img class="portrait" src="{{PREFIX}}assets/portrait-300.jpg"
+             srcset="{{PREFIX}}assets/portrait-300.jpg 1x, {{PREFIX}}assets/portrait-600.jpg 2x"
+             width="300" height="375" decoding="async" alt="{{about_photo_alt}}">
+      </picture>
       <a class="tl-card" href="{{URL_TIMELINE}}">
-        <span class="r">{{about_timeline_label}}</span>
-        <span class="w">{{about_timeline_link}}&nbsp;<span class="arr">&rarr;</span></span>
+        <span class="tl-txt">
+          <span class="r">{{about_timeline_label}}</span>
+          <span class="w">{{about_timeline_link}}</span>
+        </span>
+        <span class="arr" aria-hidden="true">&rarr;</span>
       </a>
       <dl class="creds">
       <div class="cred"><dt class="r">{{about_cred1_label}}</dt><dd class="w">{{about_cred1_value}}</dd></div>
