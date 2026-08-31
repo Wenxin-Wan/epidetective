@@ -62,7 +62,7 @@
   .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
   .mark{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-.015em;text-decoration:none}
   .mark span{font-weight:400;font-style:italic}
-  .top-right{display:flex;align-items:center;gap:14px}
+  .top-right{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;justify-content:flex-end}
   .back{font-size:.82rem;text-decoration:none;color:var(--ink-soft)}
   .back:hover{color:var(--ink);text-decoration:underline}
   .langs{display:flex;gap:11px;align-items:baseline}
@@ -99,7 +99,7 @@
   .yeargroup.now .items{border-left-style:dashed}
   .yeargroup.next .items{border-left-style:dotted}
 
-  .item{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;position:relative}
+  .item{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;position:relative;min-width:0}
   .item::before{content:"";position:absolute;left:-32px;top:24px;width:10px;height:10px;border-radius:50%;
                 background:var(--paper);border:2px solid var(--ink)}
   .item.sel{border-left:3px solid var(--ink)}
@@ -136,11 +136,6 @@
   .mode-compact .item:not(.open) h3 button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .mode-compact .item:not(.open) .tog{top:9px}
   .view{margin-left:auto;display:flex;gap:8px}
-  @media (max-width:700px){
-    .mode-compact .item:not(.open) .head{display:block}
-    .mode-compact .item:not(.open) .meta{white-space:normal}
-    .view{margin-left:0;width:100%}
-  }
   .links{margin-top:9px;display:flex;gap:14px;flex-wrap:wrap}
   .links a{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em;
            text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
@@ -152,10 +147,22 @@
   .keyline a{text-underline-offset:3px}
 
   @media (max-width:700px){
+    .top .wrap{padding-block:11px}
+    .back{font-size:.78rem}
     .yeargroup{grid-template-columns:1fr;gap:0}
     .year{position:static;font-size:1.5rem;padding:18px 0 0}
     .items{border-left:none;padding-left:0}
     .item::before{display:none}
+    /* Compact mode's single-line title truncation exists to keep desktop rows
+       to one line; on a phone the stacked head has no such row to protect, so
+       let titles wrap instead of running past the viewport edge. */
+    .mode-compact .items{padding-left:0}
+    .mode-compact .item:not(.open) .head{display:block}
+    .mode-compact .item:not(.open) .meta{white-space:normal}
+    .mode-compact .item:not(.open) h3{white-space:normal}
+    .mode-compact .item:not(.open) h3 button{overflow:visible;text-overflow:clip;
+      white-space:normal;text-align:left}
+    .view{margin-left:0;width:100%}
   }
 </style>
 </head>
