@@ -80,7 +80,7 @@
   body.zh .lede{max-width:36em}
   .lede a{text-underline-offset:3px}
 
-  /* the evidence stroke, read top-of-page first: upcoming dotted, current dashed, past solid */
+  /* the evidence stroke: EpiDetective's signature mark, a small brand flourish here */
   .stroke{margin:30px 0 0;height:26px}
 
   .filters{display:flex;gap:8px;flex-wrap:wrap;padding-block:22px 6px}
@@ -95,9 +95,14 @@
   .yeargroup{display:grid;grid-template-columns:110px 1fr;gap:0 28px;margin-top:10px}
   .year{font-family:var(--serif);font-weight:600;font-size:1.9rem;letter-spacing:-.02em;
         color:var(--ink);padding-top:18px;position:sticky;top:64px;align-self:start;line-height:1}
+  .ytag{display:inline-block;margin-top:7px;font-family:var(--mono);
+        font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+        color:var(--ink-soft);border:1px solid var(--rule);border-radius:999px;padding:3px 9px}
+  body.zh .ytag{letter-spacing:.02em}
+  /* one uninterrupted rule down the whole record — the "now/next" state is
+     said once in words (the .ytag pill, the "Next" heading), not repeated as
+     a decorative line change every reader has to notice and decode. */
   .items{border-left:2px solid var(--ink);padding:18px 0 26px 26px;display:grid;gap:14px;min-width:0}
-  .yeargroup.now .items{border-left-style:dashed}
-  .yeargroup.next .items{border-left-style:dotted}
 
   .item{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;position:relative;min-width:0}
   .item::before{content:"";position:absolute;left:-32px;top:24px;width:10px;height:10px;border-radius:50%;
@@ -246,7 +251,7 @@ var GROUPS = [
          zh:"《Mapping the Occupational Exposome for Respiratory Health》的正式答辩仪式，此后论文将收入乌得勒支大学论文库。"},
       links:[[{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan"]] }
   ]},
-  { y:{en:"2026",zh:"2026"}, cls:"now", items:[
+  { y:{en:"2026",zh:"2026"}, cls:"now", tag:{en:"in progress",zh:"进行中"}, items:[
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"EpiDetective launches",zh:"EpiDetective 上线"},
       d:{en:"A personal, independent platform with one purpose: evidence that never leaves the literature has done less than half its job. Five languages, an ink-on-paper design, and a standing rule that every number links to its source — plus a Code Against Cancer page carrying the official IARC prevention guidance.",
@@ -498,7 +503,8 @@ function build(lang){
         '</div></div>' +
         '</article>';
     }).join("");
-    yg.innerHTML = '<div class="year">' + pick(g.y,lang) + '</div><div class="items">' + itemsHtml + '</div>';
+    var ytag = g.tag ? ' <span class="ytag">' + pick(g.tag,lang) + '</span>' : '';
+    yg.innerHTML = '<div class="year">' + pick(g.y,lang) + ytag + '</div><div class="items">' + itemsHtml + '</div>';
     tl.appendChild(yg);
   });
 
