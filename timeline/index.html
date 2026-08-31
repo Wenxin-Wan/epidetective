@@ -140,7 +140,20 @@
   .mode-compact .item:not(.open) h3{flex:1 1 auto;min-width:0;margin:0;font-size:.94rem}
   .mode-compact .item:not(.open) h3 button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .mode-compact .item:not(.open) .tog{top:9px}
-  .view{margin-left:auto;display:flex;gap:8px}
+  /* A segmented control, not another loose chip: joined pill, hairline
+     divider, ink-filled active half — a different shape so it reads as a
+     display-density switch rather than one more category filter. */
+  .view{margin-left:auto;display:inline-flex;align-items:center;gap:10px}
+  .vlabel{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+          font-weight:600;color:var(--faint)}
+  body.zh .vlabel{letter-spacing:.02em}
+  .seg{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+  .seg-btn{border:0;background:var(--paper);color:var(--ink-soft);cursor:pointer;
+           padding:7px 14px;font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em}
+  body.zh .seg-btn{font-family:inherit;letter-spacing:0}
+  .seg-btn+.seg-btn{border-left:1px solid var(--ink)}
+  .seg-btn:hover{color:var(--ink)}
+  .seg-btn.active{background:var(--ink);color:var(--paper);cursor:default}
   .links{margin-top:9px;display:flex;gap:14px;flex-wrap:wrap}
   .links a{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em;
            text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
@@ -221,7 +234,7 @@ var STRINGS = {
     kinds:{paper:"Paper",tool:"Tool",role:"Role",milestone:"Milestone",talk:"Conferences",press:"Press &amp; commentary"},
     lead:"lead author", coauthor:"co-author", selected:"selected", upcoming:"upcoming",
     preview:"in gated preview", present:"present", nextLabel:"Next",
-    viewCompact:"Overview", viewFull:"In full",
+    viewLabel:"Show", viewCompact:"Overview", viewFull:"In full",
     key1:'Sources: journal articles are linked by DOI; conference items link their published abstracts; roles link the consortium sites. The full publication record lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>. Conference abstracts and works in review are listed only where a public record exists.',
     key2:'EpiDetective is a personal project by Wenxin Wan, independent of IARC and WHO. <a href="../about.html">About the developer</a> · <a href="../about.html#cite">How to cite</a> · <a href="../about.html#contact">Contact</a>'
   },
@@ -234,7 +247,7 @@ var STRINGS = {
     kinds:{paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"媒体与评论"},
     lead:"第一作者", coauthor:"合作者", selected:"精选", upcoming:"即将进行",
     preview:"预览 · 审校中", present:"至今", nextLabel:"即将",
-    viewCompact:"总览", viewFull:"全部展开",
+    viewLabel:"显示", viewCompact:"总览", viewFull:"全部展开",
     key1:'来源说明：期刊论文以 DOI 链接；会议条目链接已发表的摘要；联盟职责链接项目官网。完整发表记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。会议摘要与审稿中的工作，仅在已有公开记录时列出。',
     key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../about.html">关于开发者</a> · <a href="../about.html#cite">如何引用</a> · <a href="../about.html#contact">联系方式</a>'
   }
@@ -471,14 +484,21 @@ function build(lang){
   });
   var view = document.createElement("div");
   view.className = "view";
+  var vlabel = document.createElement("span");
+  vlabel.className = "vlabel";
+  vlabel.textContent = S.viewLabel;
+  view.appendChild(vlabel);
+  var seg = document.createElement("div");
+  seg.className = "seg";
   [["compact", S.viewCompact], ["full", S.viewFull]].forEach(function(pair){
     var b = document.createElement("button");
-    b.className = "chip" + (mode===pair[0] ? " active" : "");
+    b.className = "seg-btn" + (mode===pair[0] ? " active" : "");
     b.setAttribute("data-mode", pair[0]);
     b.textContent = pair[1];
     b.addEventListener("click", function(){ setMode(pair[0]); });
-    view.appendChild(b);
+    seg.appendChild(b);
   });
+  view.appendChild(seg);
   filters.appendChild(view);
 
   var tl = document.getElementById("tl");
@@ -523,7 +543,7 @@ function build(lang){
 function applyMode(){
   document.body.classList.toggle("mode-compact", mode === "compact");
   document.body.classList.toggle("mode-full", mode === "full");
-  document.querySelectorAll(".view .chip").forEach(function(b){
+  document.querySelectorAll(".seg-btn").forEach(function(b){
     b.classList.toggle("active", b.getAttribute("data-mode") === mode);
   });
 }
