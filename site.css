@@ -287,8 +287,9 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .inline-links a:hover{border-color:var(--ink);color:var(--ink)}
 /* The portrait is an engraved line screen: a high-frequency pattern, so each
    density is delivered at its own size via srcset rather than rescaled. */
-.portrait{display:block;width:100%;max-width:300px;height:auto;
-  border-radius:14px;margin-bottom:22px}
+.portrait{display:block;width:100%;max-width:220px;height:auto;
+  border-radius:14px;margin:0 auto 22px}
+.side picture{display:block}
 .tl-card{display:flex;align-items:center;justify-content:space-between;gap:16px;
   background:var(--ink);color:var(--chalk);border-radius:16px;
   padding:18px 20px;text-decoration:none;margin-bottom:24px}
