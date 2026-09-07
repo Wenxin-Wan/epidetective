@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_games_title}}</title>
+<meta name="description" content="{{meta_games_desc}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_games_title}}">
+<meta property="og:description" content="{{meta_games_desc}}">
+<meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_games_title}}">
+<meta name="twitter:description" content="{{meta_games_desc}}">
+<meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}" aria-current="page">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="wrap game-page" id="play">
+
+  <!-- Left: the game. A real screenshot of it first, one Play button; on
+       Play the same frame loads the game itself. The game is English-only,
+       so every language links the same build. -->
+  <div class="stage" id="stage">
+    <div class="stage-frame" id="stage-frame">
+      <picture>
+        <source srcset="{{PREFIX}}assets/games/sun-safety-shot.webp" type="image/webp">
+        <img src="{{PREFIX}}assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="{{games_shot_alt}}" loading="eager">
+      </picture>
+      <div class="play"><button type="button" id="play-btn">{{games_play}}</button></div>
+    </div>
+    <div class="stage-cap">
+      <span>{{games_cap}}</span>
+      <a href="{{URL_GAME1}}" target="_blank" rel="noopener">{{games_open_full}} &nearr;</a>
+    </div>
+  </div>
+
+  <!-- Right: what it is, what it teaches, how to play -->
+  <div class="game-intro">
+    <div class="label">{{games_label}}</div>
+    <h1>Sol &amp; the UV Shield Quest</h1>
+    <p><b>{{games_sub}}</b></p>
+    <p>{{games_p1}}</p>
+    <p>{{games_p2}}</p>
+
+    <div class="game-facts">
+      <div><b>6&ndash;12</b><span>{{games_fact_age}}</span></div>
+      <div><b>5</b><span>{{games_fact_regions}}</span></div>
+      <div><b>30</b><span>{{games_fact_questions}}</span></div>
+      <div><b>~10 min</b><span>{{games_fact_time}}</span></div>
+    </div>
+
+    <h3>{{games_howto_h}}</h3>
+    <ol class="howto">
+      <li><span>{{games_step1}}</span></li>
+      <li><span>{{games_step2}}</span></li>
+      <li><span>{{games_step3}}</span></li>
+      <li><span>{{games_step4}}</span></li>
+      <li><span>{{games_step5}}</span></li>
+    </ol>
+
+    <h3>{{games_regions_h}}</h3>
+    <ul class="regions">
+      <li>{{games_region1}} <span>UV 5</span></li>
+      <li>{{games_region2}} <span>UV 3</span></li>
+      <li>{{games_region3}} <span>UV 7</span></li>
+      <li>{{games_region4}} <span>UV 8</span></li>
+      <li>{{games_region5}} <span>UV 6</span></li>
+    </ul>
+
+    <p class="fine">{{games_fine}}</p>
+  </div>
+</section>
+
+<!-- The shelf: one game open, the next ones named by topic only, so nothing
+     is promised that does not exist yet. -->
+<section class="sec wrap shelf" id="games">
+  <div class="sec-head">
+    <div class="label">{{games_shelf_label}}</div>
+    <h2>{{games_shelf_h2}}</h2>
+  </div>
+
+  <div class="rack">
+
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst_chip_live}}</span>
+          <h3>Sol &amp; the UV Shield Quest</h3>
+        </div>
+        <p>{{games_g1_desc}}</p>
+        <div class="inst-meta">
+          <span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="#play">{{games_g1_btn}}</a>
+        </div>
+      </div>
+      <a href="#play" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest"></a>
+    </article>
+
+    <article class="inst is-soon">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip soon">{{games_chip_soon}}</span>
+          <h3>{{games_soon1_name}}</h3>
+        </div>
+        <p>{{games_soon1_desc}}</p>
+      </div>
+      <div class="thumb blank" aria-hidden="true"><span>{{games_chip_soon}}</span></div>
+    </article>
+
+    <article class="inst is-soon">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip soon">{{games_chip_soon}}</span>
+          <h3>{{games_soon2_name}}</h3>
+        </div>
+        <p>{{games_soon2_desc}}</p>
+      </div>
+      <div class="thumb blank" aria-hidden="true"><span>{{games_chip_soon}}</span></div>
+    </article>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+    </div>
+    <div class="disc">{{foot_disclaimer}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+<script>
+(function(){
+  var btn=document.getElementById('play-btn'), frame=document.getElementById('stage-frame'), stage=document.getElementById('stage');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var f=document.createElement('iframe');
+    f.src='{{URL_GAME1}}'; f.title='Sol & the UV Shield Quest'; f.allow='fullscreen; gamepad; autoplay';
+    f.setAttribute('allowfullscreen','');
+    frame.innerHTML=''; frame.appendChild(f); stage.classList.add('is-playing');
+    // keyboard control goes to the game straight away
+    f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });
+    stage.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+
+</body>
+</html>

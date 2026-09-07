@@ -22,7 +22,8 @@ TPL = os.path.join(HERE, "templates")
 
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
-PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about"}
+PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about",
+         "games.html": "games"}
 SITE_URL = "https://epidetective.com"
 # og:image must be an absolute URL on a raster format; social scrapers ignore SVG
 OG_IMAGE = SITE_URL + "/assets/og.png"
@@ -39,6 +40,10 @@ PREVENTION_PATH = "code-against-cancer/"
 # It must use the wordpress.com host: epidetective.com now points at this site on
 # GitHub Pages, so the old epidetective.com/2026/... path no longer resolves.
 NOTE1_URL = "https://epidetective.wordpress.com/2026/02/28/how-to-know-the-unknown/"
+# The first awareness game is a self-contained static build (React bundle) of
+# github.com/Wenxin-Wan/sun-safety-adventure, served from this repo. It is
+# English-only, so every language links the same directory.
+GAME1_PATH = "games/sun-safety/"
 
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
 
@@ -99,10 +104,11 @@ def write_sitemap():
     out.append("  <url>")
     out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
     out.append("  </url>")
-    # The developer timeline is a public standalone page.
-    out.append("  <url>")
-    out.append("    <loc>%s/timeline/</loc>" % SITE_URL)
-    out.append("  </url>")
+    # The developer timeline and the first game are public standalone pages.
+    for leaf in ("timeline/", GAME1_PATH):
+        out.append("  <url>")
+        out.append("    <loc>%s/%s</loc>" % (SITE_URL, leaf))
+        out.append("  </url>")
     out.append("</urlset>")
     with open(os.path.join(HERE, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
@@ -171,6 +177,8 @@ def main():
             ctx["URL_HOME"] = url(lang, "index.html", lang)
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
+            ctx["URL_GAMES"] = url(lang, "games.html", lang)
+            ctx["URL_GAME1"] = ctx["PREFIX"] + GAME1_PATH
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_TOOL2"] = TOOL2_URL
             # the Code page localises itself client-side; hand it the language

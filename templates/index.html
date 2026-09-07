@@ -29,6 +29,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
       </nav>
@@ -107,7 +108,34 @@
   </div>
 </section>
 
-
+<!-- Games: a third kind of thing the site publishes. The rack idiom is reused
+     so it reads as part of the same shelf, with the game's own screenshot as
+     the thumbnail. -->
+<section class="sec wrap shelf" id="games">
+  <div class="sec-head">
+    <div class="label">{{home_games_label}}</div>
+    <h2>{{home_games_h2}}</h2>
+  </div>
+  <div class="rack">
+    <article class="inst">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst_chip_live}}</span>
+          <h3>Sol &amp; the UV Shield Quest</h3>
+        </div>
+        <p>{{home_games_desc}}</p>
+        <div class="inst-meta">
+          <span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_GAMES}}#play">{{home_games_btn}}</a>
+          <a class="btn btn-ghost" href="{{URL_GAMES}}">{{home_games_more}}</a>
+        </div>
+      </div>
+      <a href="{{URL_GAMES}}#play" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest"></a>
+    </article>
+  </div>
+</section>
 
 <!-- Notes section removed in the August 2026 pass: the section carried a single
      essay and the nav entry it needed. The notes.* keys were removed in the
@@ -126,6 +154,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
       </nav>

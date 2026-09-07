@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sol & the UV Shield Quest — a sun-safety game on EpiDetective</title>
+<meta name="description" content="A side-scrolling platform game for children aged 6 to 12 about smart sun-safe habits: check the UV Index, find shade, cover up, wear a hat and sunglasses, use SPF 30+ sunscreen correctly.">
+<link rel="canonical" href="https://epidetective.com/games/sun-safety/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Sol & the UV Shield Quest">
+<meta property="og:description" content="Run, jump, explore, and learn how to enjoy the outdoors safely. A sun-safety game on EpiDetective.">
+<meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<link rel="stylesheet" href="game.css">
+<style>
+  /* the back link sits over the dark stage, out of the way of the HUD */
+  .backhome{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));z-index:20;
+    font:600 11px/1 ui-monospace,"IBM Plex Mono",Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;
+    color:#dbe7eb;text-decoration:none;background:rgba(9,33,45,.7);border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;padding:7px 11px}
+  .backhome:hover{color:#fff;border-color:#fff}
+  @media (pointer:coarse),(max-width:760px){.backhome{display:none}}
+  html.embedded .backhome{display:none}
+</style>
+</head>
+<body>
+<a class="backhome" href="../../games.html">&larr; EpiDetective &middot; games</a>
+<div id="root"></div>
+<script>if(self!==top||/embed=1/.test(location.search))document.documentElement.classList.add('embedded');</script>
+<script src="game.js"></script>
+</body>
+</html>
