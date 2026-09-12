@@ -282,10 +282,18 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 /* Prose length varies a lot by language (CJK runs markedly shorter per word
    than Latin scripts), while the sidebar's credential values stay close to
    Latin-length in every language -- so the two columns are rarely the same
-   height. Centering the shorter one against the taller, rather than pinning
-   both to the top, keeps that difference from reading as misalignment, in
-   any language, without a per-language override. */
-@media (min-width:900px){.about{grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:center}}
+   natural height. On desktop both are stretched to the row: the prose column
+   keeps its text at the top and pushes the profile links to its bottom edge,
+   the sidebar spreads portrait, timeline card and credentials over the same
+   span -- so the two columns share their top and bottom edges in every
+   language, without a per-language override. */
+@media (min-width:900px){
+  .about{grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:stretch}
+  .about>div:first-child{display:flex;flex-direction:column}
+  .about>div:first-child .inline-links{margin-top:auto;padding-top:20px}
+  .side{display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+  .side .portrait,.side .tl-card{margin-bottom:0}
+}
 .about p{color:var(--ink-soft);margin:0 0 14px;max-width:56ch}
 .creds{display:grid;border-top:1px solid var(--rule);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
