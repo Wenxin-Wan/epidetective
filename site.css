@@ -57,6 +57,7 @@ html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:13em;
    Chinese the display emphasis carries by weight instead. */
 html[lang="zh"] .hero h1 b,
 html[lang="zh"] .sec-head h2 b,
+html[lang="zh"] .sec-head h1 b,
 html[lang="zh"] .tool-hero h1 b{font-style:normal;font-weight:700}
 html[lang="zh"] h2{font-size:clamp(1.5rem,2.7vw,2.15rem)}
 html[lang="zh"] .sec-head h2,
@@ -184,7 +185,7 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
    set for a headline made of short words and now breaks it mid-phrase */
 .hero h1{margin:20px 0 0;max-width:23ch}
 /* emphasis inside display type: Literata speaks emphasis in italic, not bold */
-.hero h1 b,.sec-head h2 b,.tool-hero h1 b{font-weight:inherit;font-style:italic}
+.hero h1 b,.sec-head h2 b,.sec-head h1 b,.tool-hero h1 b{font-weight:inherit;font-style:italic}
 .hero .lede{margin-top:24px;font-size:clamp(1rem,1.3vw,1.15rem)}
 /* standfirst: names the audience in full ink, then hands off to the lede that
    explains the site. Two paragraphs, so the line breaks where each language
@@ -431,7 +432,7 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
    the DOM so choosing another game from the shelf can bring them straight back */
 .stage.is-playing .stage-frame picture,.stage.is-playing .stage-frame .play{display:none}
 .game-intro .label{margin-bottom:12px}
-.game-intro h1{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:14px}
+.game-intro h1,.game-intro h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:14px}
 .game-intro p{color:var(--ink-soft);margin:0 0 14px;max-width:52ch}
 .game-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px 18px;margin:18px 0 22px;
   padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -449,9 +450,31 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .regions li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.92rem}
 .regions li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--ink-faint);white-space:nowrap}
 .game-intro .fine{font-size:.82rem;color:var(--ink-faint);max-width:52ch}
-/* the shelf of games: three open; the rack draws its own rule. The card whose
-   game is on the stage carries an inked "Now on stage" chip; the others hide it. */
+/* ---------- games overview: all three at first sight (games page and home) ---------- */
 .shelf .sec-head{margin-bottom:22px}
-.shelf .chip.on-stage{display:none;background:var(--ink);color:var(--chalk);border-color:var(--ink)}
-.shelf .inst.is-on .chip.on-stage{display:inline-block}
-.shelf .inst.is-on .thumb{border-color:var(--ink)}
+/* the stage section is a grid, so the hidden attribute needs saying out loud */
+.game-page[hidden]{display:none}
+.games-over{padding-block:clamp(26px,4vh,48px) clamp(20px,3vh,36px)}
+.games-over .sec-head h1{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:24ch;margin:0}
+.games-over .sec-head .lede{margin:16px 0 0;max-width:64ch;color:var(--ink-soft)}
+.game-grid{display:grid;gap:22px;margin-top:30px}
+@media (min-width:780px){.game-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.game-card{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--rule);background:var(--chalk);
+  transition:border-color .16s ease,transform .16s ease}
+.game-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.game-card.is-on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.gc-thumb{display:block;aspect-ratio:16/9;background-size:cover;background-position:center top;
+  border-bottom:1px solid var(--rule)}
+.gc-body{display:flex;flex-direction:column;gap:11px;padding:18px 18px 20px}
+.gc-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.game-card h2,.game-card h3{font-size:1.35rem;line-height:1.2;margin:0}
+.game-card p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.game-card .inst-actions{margin-top:auto;padding-top:6px}
+.game-card .chip.on-stage{display:none;background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.game-card.is-on .chip.on-stage{display:inline-block}
+.game-more{margin:22px 0 0}
+.game-page .back-row{grid-column:1/-1;margin-bottom:-14px}
+.back-all{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:2px}
+.back-all:hover{color:var(--ink);border-bottom-color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.game-card{transition:none}.game-card:hover{transform:none}}

@@ -40,7 +40,52 @@
 
 <div id="page">
 
+<!-- Overview: all three games at first sight. Each card's thumbnail and button
+     link straight to the game's own directory, so they work without JavaScript;
+     with it, the click opens that game's stage and how-to just below. -->
+<section class="wrap games-over" id="games">
+  <div class="sec-head">
+    <div class="label">{{games_label}}</div>
+    <h1>{{games_shelf_h2}}</h1>
+    <p class="lede">{{games_over_lede}}</p>
+  </div>
+  <div class="game-grid">
+    <article class="game-card" data-game="sun-safety">
+      <a class="gc-thumb thumb-game" href="{{URL_GAME1}}" data-select="sun-safety" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <div class="gc-body">
+        <div class="gc-top"><span class="chip live">{{games_g1_topic}}</span><span class="chip on-stage">{{games_on_stage}}</span></div>
+        <h2>Sol &amp; the UV Shield Quest</h2>
+        <p>{{games_g1_desc}}</p>
+        <div class="inst-meta"><span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span></div>
+        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAME1}}" data-select="sun-safety">{{games_g1_btn}}</a></div>
+      </div>
+    </article>
+    <article class="game-card" data-game="lung-detective">
+      <a class="gc-thumb thumb-game thumb-lung" href="{{URL_GAME2}}" data-select="lung-detective" aria-label="The Lung Detective"></a>
+      <div class="gc-body">
+        <div class="gc-top"><span class="chip live">{{games_g2_topic}}</span><span class="chip on-stage">{{games_on_stage}}</span></div>
+        <h2>The Lung Detective</h2>
+        <p>{{games_g2_desc}}</p>
+        <div class="inst-meta"><span>{{games_g2_m1}}</span><span>{{games_g2_m2}}</span><span>{{games_g2_m3}}</span></div>
+        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAME2}}" data-select="lung-detective">{{games_g1_btn}}</a></div>
+      </div>
+    </article>
+    <article class="game-card" data-game="town-of-1000">
+      <a class="gc-thumb thumb-game thumb-town" href="{{URL_GAME3}}" data-select="town-of-1000" aria-label="A Town of 1,000"></a>
+      <div class="gc-body">
+        <div class="gc-top"><span class="chip live">{{games_g3_topic}}</span><span class="chip on-stage">{{games_on_stage}}</span></div>
+        <h2>A Town of 1,000</h2>
+        <p>{{games_g3_desc}}</p>
+        <div class="inst-meta"><span>{{games_g3_m1}}</span><span>{{games_g3_m2}}</span><span>{{games_g3_m3}}</span></div>
+        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAME3}}" data-select="town-of-1000">{{games_g1_btn}}</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="wrap game-page" id="play">
+
+  <div class="back-row"><a class="back-all" href="#games">{{games_back_all}}</a></div>
 
   <!-- Left: one stage for all three games. It shows a real screenshot of the
        selected game with one Play button; on Play the same frame loads the
@@ -70,7 +115,7 @@
 
     <div class="game-intro" data-game="sun-safety" data-url="{{URL_GAME1}}" data-shot="{{PREFIX}}assets/games/sun-safety-shot" data-title="Sol &amp; the UV Shield Quest" data-alt="{{games_shot_alt}}" data-cap="{{games_cap}}">
       <div class="label">{{games_label}}</div>
-      <h1>Sol &amp; the UV Shield Quest</h1>
+      <h2>Sol &amp; the UV Shield Quest</h2>
       <p><b>{{games_sub}}</b></p>
       <p>{{games_p1}}</p>
       <p>{{games_p2}}</p>
@@ -105,7 +150,7 @@
 
     <div class="game-intro" data-game="lung-detective" data-url="{{URL_GAME2}}" data-shot="{{PREFIX}}assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="{{games_g2_shot_alt}}" data-cap="{{games_g2_cap}}" hidden>
       <div class="label">{{games_g2_label}}</div>
-      <h1>The Lung Detective</h1>
+      <h2>The Lung Detective</h2>
       <p><b>{{games_g2_sub}}</b></p>
       <p>{{games_g2_p1}}</p>
       <p>{{games_g2_p2}}</p>
@@ -131,7 +176,7 @@
 
     <div class="game-intro" data-game="town-of-1000" data-url="{{URL_GAME3}}" data-shot="{{PREFIX}}assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="{{games_g3_shot_alt}}" data-cap="{{games_g3_cap}}" hidden>
       <div class="label">{{games_g3_label}}</div>
-      <h1>A Town of 1,000</h1>
+      <h2>A Town of 1,000</h2>
       <p><b>{{games_g3_sub}}</b></p>
       <p>{{games_g3_p1}}</p>
       <p>{{games_g3_p2}}</p>
@@ -154,76 +199,6 @@
 
       <p class="fine">{{games_g3_fine}}</p>
     </div>
-
-  </div>
-</section>
-
-<!-- The shelf: the three open games. Each card's Play button and thumbnail
-     link straight to the game's own directory, so they work without
-     JavaScript; with it, the click puts that game on the stage instead and
-     scrolls there. The card whose game is on the stage carries the
-     "Now on stage" chip (class is-on). -->
-<section class="sec wrap shelf" id="games">
-  <div class="sec-head">
-    <div class="label">{{games_shelf_label}}</div>
-    <h2>{{games_shelf_h2}}</h2>
-  </div>
-
-  <div class="rack">
-
-    <article class="inst is-on" data-game="sun-safety">
-      <div class="inst-main">
-        <div class="inst-top">
-          <span class="chip live">{{inst_chip_live}}</span>
-          <span class="chip on-stage">{{games_on_stage}}</span>
-          <h3>Sol &amp; the UV Shield Quest</h3>
-        </div>
-        <p>{{games_g1_desc}}</p>
-        <div class="inst-meta">
-          <span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span>
-        </div>
-        <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_GAME1}}" data-select="sun-safety">{{games_g1_btn}}</a>
-        </div>
-      </div>
-      <a href="{{URL_GAME1}}" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest" data-select="sun-safety"></a>
-    </article>
-
-    <article class="inst" data-game="lung-detective">
-      <div class="inst-main">
-        <div class="inst-top">
-          <span class="chip live">{{inst_chip_live}}</span>
-          <span class="chip on-stage">{{games_on_stage}}</span>
-          <h3>The Lung Detective</h3>
-        </div>
-        <p>{{games_g2_desc}}</p>
-        <div class="inst-meta">
-          <span>{{games_g2_m1}}</span><span>{{games_g2_m2}}</span><span>{{games_g2_m3}}</span>
-        </div>
-        <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_GAME2}}" data-select="lung-detective">{{games_g1_btn}}</a>
-        </div>
-      </div>
-      <a href="{{URL_GAME2}}" class="thumb thumb-game thumb-lung" aria-label="The Lung Detective" data-select="lung-detective"></a>
-    </article>
-
-    <article class="inst" data-game="town-of-1000">
-      <div class="inst-main">
-        <div class="inst-top">
-          <span class="chip live">{{inst_chip_live}}</span>
-          <span class="chip on-stage">{{games_on_stage}}</span>
-          <h3>A Town of 1,000</h3>
-        </div>
-        <p>{{games_g3_desc}}</p>
-        <div class="inst-meta">
-          <span>{{games_g3_m1}}</span><span>{{games_g3_m2}}</span><span>{{games_g3_m3}}</span>
-        </div>
-        <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_GAME3}}" data-select="town-of-1000">{{games_g1_btn}}</a>
-        </div>
-      </div>
-      <a href="{{URL_GAME3}}" class="thumb thumb-game thumb-town" aria-label="A Town of 1,000" data-select="town-of-1000"></a>
-    </article>
 
   </div>
 </section>
@@ -255,25 +230,26 @@
 
 <script>
 (function(){
-  var stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
+  var play=document.getElementById('play'), stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
       btn=document.getElementById('play-btn'), src=document.getElementById('stage-src'),
       img=document.getElementById('stage-img'), cap=document.getElementById('stage-cap'),
       open=document.getElementById('stage-open');
-  if(!stage||!btn) return;
+  if(!play||!stage||!btn) return;
   var each=function(sel,fn){ Array.prototype.forEach.call(document.querySelectorAll(sel),fn); };
-  var intros={}, cards={}, current=stage.getAttribute('data-game');
+  var intros={}, cards={}, current=null;
   each('.game-intro[data-game]', function(el){ intros[el.getAttribute('data-game')]=el; });
-  each('.shelf .inst[data-game]', function(el){ cards[el.getAttribute('data-game')]=el; });
+  each('.game-card[data-game]', function(el){ cards[el.getAttribute('data-game')]=el; });
   var motion=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth';
-  function toStage(){ stage.scrollIntoView({behavior:motion, block:'start'}); }
+  function toStage(){ play.scrollIntoView({behavior:motion, block:'start'}); }
 
   // the frame shows the selected game's screenshot until Play, then the game
   function stop(){
     var f=frame.querySelector('iframe'); if(f) frame.removeChild(f);
     stage.classList.remove('is-playing');
   }
-  function play(){
-    var g=intros[current], f=document.createElement('iframe');
+  function start(){
+    var g=intros[current]; if(!g) return;
+    var f=document.createElement('iframe');
     f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
     f.setAttribute('allowfullscreen','');
     stop(); frame.appendChild(f); stage.classList.add('is-playing');
@@ -281,9 +257,9 @@
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });
     toStage();
   }
-  // choosing a game on the shelf puts it on the stage: screenshot, caption,
-  // "own window" link and the intro column swap; a running game is unloaded
-  function select(id){
+  // choosing a game in the overview opens its stage: screenshot, caption,
+  // "own window" link and the how-to column; a running game is unloaded
+  function select(id, scroll){
     var g=intros[id]; if(!g) return;
     if(id!==current){
       stop(); current=id;
@@ -294,9 +270,11 @@
       for(var c in cards){ cards[c].classList[c===id?'add':'remove']('is-on'); }
       stage.setAttribute('data-game', id);
     }
-    toStage();
+    play.hidden=false;
+    if(scroll!==false) toStage();
+    if(history.replaceState) history.replaceState(null,'','#'+id);
   }
-  btn.addEventListener('click', play);
+  btn.addEventListener('click', start);
   each('[data-select]', function(a){
     a.addEventListener('click', function(e){
       // a modified click keeps its native meaning: the game in a new tab
@@ -304,8 +282,15 @@
       e.preventDefault(); select(a.getAttribute('data-select'));
     });
   });
-  // games.html#lung-detective or #town-of-1000 opens with that game on the stage
-  var h=location.hash.replace(/^#/,''); if(h&&intros[h]&&h!==current) select(h);
+  each('.back-all', function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault(); document.getElementById('games').scrollIntoView({behavior:motion, block:'start'});
+    });
+  });
+  // The page opens on the overview. games.html#sun-safety, #lung-detective or
+  // #town-of-1000 (the home page links these) opens with that game on the stage.
+  var h=location.hash.replace(/^#/,''); if(h==='play') h='sun-safety';
+  if(h&&intros[h]) select(h); else play.hidden=true;
 })();
 </script>
 
