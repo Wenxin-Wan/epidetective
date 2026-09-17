@@ -40,10 +40,15 @@ PREVENTION_PATH = "code-against-cancer/"
 # It must use the wordpress.com host: epidetective.com now points at this site on
 # GitHub Pages, so the old epidetective.com/2026/... path no longer resolves.
 NOTE1_URL = "https://epidetective.wordpress.com/2026/02/28/how-to-know-the-unknown/"
-# The first awareness game is a self-contained static build (React bundle) of
-# github.com/Wenxin-Wan/sun-safety-adventure, served from this repo. It is
-# English-only, so every language links the same directory.
+# The awareness games are self-contained static builds served from this repo,
+# one directory each. All three are English-only, so every language links the
+# same directories. GAME1 is a React bundle of
+# github.com/Wenxin-Wan/sun-safety-adventure (Sol & the UV Shield Quest); GAME2
+# is The Lung Detective, an investigation game about the causes of lung cancer;
+# GAME3 is A Town of 1,000, a choices game about breast-cancer prevention.
 GAME1_PATH = "games/sun-safety/"
+GAME2_PATH = "games/lung-detective/"
+GAME3_PATH = "games/town-of-1000/"
 
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
 
@@ -104,8 +109,8 @@ def write_sitemap():
     out.append("  <url>")
     out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
     out.append("  </url>")
-    # The developer timeline and the first game are public standalone pages.
-    for leaf in ("timeline/", GAME1_PATH):
+    # The developer timeline and the three games are public standalone pages.
+    for leaf in ("timeline/", GAME1_PATH, GAME2_PATH, GAME3_PATH):
         out.append("  <url>")
         out.append("    <loc>%s/%s</loc>" % (SITE_URL, leaf))
         out.append("  </url>")
@@ -179,6 +184,8 @@ def main():
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_GAMES"] = url(lang, "games.html", lang)
             ctx["URL_GAME1"] = ctx["PREFIX"] + GAME1_PATH
+            ctx["URL_GAME2"] = ctx["PREFIX"] + GAME2_PATH
+            ctx["URL_GAME3"] = ctx["PREFIX"] + GAME3_PATH
             ctx["URL_TOOL"] = TOOL_URL
             ctx["URL_TOOL2"] = TOOL2_URL
             # the Code page localises itself client-side; hand it the language

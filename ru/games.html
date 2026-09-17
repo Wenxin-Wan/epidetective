@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sol & the UV Shield Quest — игра о защите от солнца — EpiDetective</title>
-<meta name="description" content="Браузерная игра для детей 6–12 лет о разумных привычках на солнце: читать УФ-индекс, искать тень, прикрывать кожу и правильно пользоваться солнцезащитным кремом. Бесплатно, без установки, без сбора данных.">
+<title>Игры о профилактике рака — солнце, лёгкие и грудь — EpiDetective</title>
+<meta name="description" content="Три бесплатные браузерные игры о профилактике рака: Sol & the UV Shield Quest (защита от солнца, 6–12 лет), The Lung Detective (причины рака лёгкого, 10–16 лет) и A Town of 1,000 (рак молочной железы в городке, за которым наблюдают сорок лет, от 14 лет). Без установки, без сбора данных.">
 <link rel="canonical" href="https://epidetective.com/ru/games.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/games.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/games.html">
@@ -15,13 +15,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/ru/games.html">
-<meta property="og:title" content="Sol & the UV Shield Quest — игра о защите от солнца — EpiDetective">
-<meta property="og:description" content="Браузерная игра для детей 6–12 лет о разумных привычках на солнце: читать УФ-индекс, искать тень, прикрывать кожу и правильно пользоваться солнцезащитным кремом. Бесплатно, без установки, без сбора данных.">
+<meta property="og:title" content="Игры о профилактике рака — солнце, лёгкие и грудь — EpiDetective">
+<meta property="og:description" content="Три бесплатные браузерные игры о профилактике рака: Sol & the UV Shield Quest (защита от солнца, 6–12 лет), The Lung Detective (причины рака лёгкого, 10–16 лет) и A Town of 1,000 (рак молочной железы в городке, за которым наблюдают сорок лет, от 14 лет). Без установки, без сбора данных.">
 <meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sol & the UV Shield Quest — игра о защите от солнца — EpiDetective">
-<meta name="twitter:description" content="Браузерная игра для детей 6–12 лет о разумных привычках на солнце: читать УФ-индекс, искать тень, прикрывать кожу и правильно пользоваться солнцезащитным кремом. Бесплатно, без установки, без сбора данных.">
+<meta name="twitter:title" content="Игры о профилактике рака — солнце, лёгкие и грудь — EpiDetective">
+<meta name="twitter:description" content="Три бесплатные браузерные игры о профилактике рака: Sol & the UV Shield Quest (защита от солнца, 6–12 лет), The Lung Detective (причины рака лёгкого, 10–16 лет) и A Town of 1,000 (рак молочной железы в городке, за которым наблюдают сорок лет, от 14 лет). Без установки, без сбора данных.">
 <meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -34,7 +34,7 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
-        <a href="games.html" aria-current="page">Игра о профилактике</a>
+        <a href="games.html" aria-current="page">Игры о профилактике</a>
         <a href="about.html">Об авторе</a>
         <a href="about.html#contact">Контакты</a>
       </nav>
@@ -47,68 +47,125 @@
 
 <section class="wrap game-page" id="play">
 
-  <div class="stage" id="stage">
+  <div class="stage" id="stage" data-game="sun-safety">
     <div class="stage-frame" id="stage-frame">
       <picture>
-        <source srcset="../assets/games/sun-safety-shot.webp" type="image/webp">
-        <img src="../assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="Игра в процессе: Сол на травяной платформе, УФ-индекс в верхней панели, впереди монеты и солнечные звёзды." loading="eager">
+        <source id="stage-src" srcset="../assets/games/sun-safety-shot.webp" type="image/webp">
+        <img id="stage-img" src="../assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="Игра в процессе: Сол на травяной платформе, УФ-индекс в верхней панели, впереди монеты и солнечные звёзды." loading="eager">
       </picture>
       <div class="play"><button type="button" id="play-btn">Играть в браузере</button></div>
     </div>
     <div class="stage-cap">
-      <span>Снимок экрана из запущенной игры</span>
-      <a href="../games/sun-safety/" target="_blank" rel="noopener">Открыть в отдельном окне &nearr;</a>
+      <span id="stage-cap">Снимок экрана из запущенной игры</span>
+      <a id="stage-open" href="../games/sun-safety/" target="_blank" rel="noopener">Открыть в отдельном окне &nearr;</a>
     </div>
   </div>
 
-  <div class="game-intro">
-    <div class="label">Игры о профилактике рака</div>
-    <h1>Sol &amp; the UV Shield Quest</h1>
-    <p><b>Платформер, который учит детей радоваться солнцу, не вредя коже.</b></p>
-    <p>Большинство случаев рака кожи вызвано ультрафиолетовым излучением, а привычки, которые его предотвращают, закладываются в детстве. В этой игре Сол бегает, прыгает и собирает солнечные звёзды в пяти регионах, от солнечного луга до снежной горы. По пути Сол находит широкополую шляпу и крем SPF 30+, теряет крем после купания и доходит до контрольных точек, где нужно ответить на вопрос, прежде чем путь откроется.</p>
-    <p>Вопросы о том, что означает УФ-индекс, когда нужна защита (УФ 3 и выше), почему тень, одежда и крем работают лучше вместе, как песок, вода и снег отражают ультрафиолет и почему стоит избегать соляриев. За ошибку не наказывают: Сол получает подсказку и со смехом пробует снова. Игра работает в браузере, в том числе на телефоне, и не собирает никаких данных. Язык игры — английский.</p>
+  <div class="game-intros">
 
-    <div class="game-facts">
-      <div><b>6&ndash;12</b><span>рекомендуемый возраст</span></div>
-      <div><b>5</b><span>регионов на пути</span></div>
-      <div><b>30</b><span>вопросов в банке, 5 за игру</span></div>
-      <div><b>~10 min</b><span>на полное прохождение</span></div>
+    <div class="game-intro" data-game="sun-safety" data-url="../games/sun-safety/" data-shot="../assets/games/sun-safety-shot" data-title="Sol &amp; the UV Shield Quest" data-alt="Игра в процессе: Сол на травяной платформе, УФ-индекс в верхней панели, впереди монеты и солнечные звёзды." data-cap="Снимок экрана из запущенной игры">
+      <div class="label">Игры о профилактике рака</div>
+      <h1>Sol &amp; the UV Shield Quest</h1>
+      <p><b>Платформер, который учит детей радоваться солнцу, не вредя коже.</b></p>
+      <p>Большинство случаев рака кожи вызвано ультрафиолетовым излучением, а привычки, которые его предотвращают, закладываются в детстве. В этой игре Сол бегает, прыгает и собирает солнечные звёзды в пяти регионах, от солнечного луга до снежной горы. По пути Сол находит широкополую шляпу и крем SPF 30+, теряет крем после купания и доходит до контрольных точек, где нужно ответить на вопрос, прежде чем путь откроется.</p>
+      <p>Вопросы о том, что означает УФ-индекс, когда нужна защита (УФ 3 и выше), почему тень, одежда и крем работают лучше вместе, как песок, вода и снег отражают ультрафиолет и почему стоит избегать соляриев. За ошибку не наказывают: Сол получает подсказку и со смехом пробует снова. Игра работает в браузере, в том числе на телефоне, и не собирает никаких данных. Язык игры — английский.</p>
+
+      <div class="game-facts">
+        <div><b>6&ndash;12</b><span>рекомендуемый возраст</span></div>
+        <div><b>5</b><span>регионов на пути</span></div>
+        <div><b>30</b><span>вопросов в банке, 5 за игру</span></div>
+        <div><b>~10 min</b><span>на полное прохождение</span></div>
+      </div>
+
+      <h3>Как играть</h3>
+      <ol class="howto">
+        <li><span>Нажмите <b>Играть</b>. На клавиатуре двигайтесь клавишами <kbd>A</kbd> <kbd>D</kbd> или <kbd>&larr;</kbd> <kbd>&rarr;</kbd>, прыгайте <kbd>пробелом</kbd>. На телефоне используйте экранные кнопки. Геймпад тоже подойдёт.</span></li>
+        <li><span>Собирайте солнечные монеты и девять спрятанных звёзд. Одни платформы движутся, другие падают — не останавливайтесь.</span></li>
+        <li><span>Следите за УФ-индексом в верхней панели. Он меняется от региона к региону и падает, когда Сол стоит в тени.</span></li>
+        <li><span>На каждой контрольной точке прочитайте вопрос и подпрыгните под одним из трёх блоков с ответами. Правильный ответ открывает ворота; неправильный даёт подсказку и новую попытку.</span></li>
+        <li><span>Клавиша <kbd>R</kbd> начинает игру заново. Шестерёнка открывает настройки: озвучивание, высокий контраст, шрифт для людей с дислексией, крупный текст, скорость игры и размер сенсорных кнопок.</span></li>
+      </ol>
+
+      <h3>Пять регионов и их УФ-индекс</h3>
+      <ul class="regions">
+        <li>Солнечный луг (Sunny Grassland) <span>UV 5</span></li>
+        <li>Тенистый лес (Shade Forest) <span>UV 3</span></li>
+        <li>Пляж с кремом (Sunscreen Beach) <span>UV 7</span></li>
+        <li>Спорт и горы (Sports & Mountain) <span>UV 8</span></li>
+        <li>Замок защиты от солнца (Sun-Safety Castle) <span>UV 6</span></li>
+      </ul>
+
+      <p class="fine">В игре оригинальный персонаж и оригинальная графика. Исходный код открыт: github.com/Wenxin-Wan/sun-safety-adventure. Советы по защите от солнца соответствуют Европейскому кодексу борьбы против рака и рекомендациям ВОЗ по УФ-излучению.</p>
     </div>
 
-    <h3>Как играть</h3>
-    <ol class="howto">
-      <li><span>Нажмите <b>Играть</b>. На клавиатуре двигайтесь клавишами <kbd>A</kbd> <kbd>D</kbd> или <kbd>&larr;</kbd> <kbd>&rarr;</kbd>, прыгайте <kbd>пробелом</kbd>. На телефоне используйте экранные кнопки. Геймпад тоже подойдёт.</span></li>
-      <li><span>Собирайте солнечные монеты и девять спрятанных звёзд. Одни платформы движутся, другие падают — не останавливайтесь.</span></li>
-      <li><span>Следите за УФ-индексом в верхней панели. Он меняется от региона к региону и падает, когда Сол стоит в тени.</span></li>
-      <li><span>На каждой контрольной точке прочитайте вопрос и подпрыгните под одним из трёх блоков с ответами. Правильный ответ открывает ворота; неправильный даёт подсказку и новую попытку.</span></li>
-      <li><span>Клавиша <kbd>R</kbd> начинает игру заново. Шестерёнка открывает настройки: озвучивание, высокий контраст, шрифт для людей с дислексией, крупный текст, скорость игры и размер сенсорных кнопок.</span></li>
-    </ol>
+    <div class="game-intro" data-game="lung-detective" data-url="../games/lung-detective/" data-shot="../assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="The Lung Detective в процессе: одна из трёх сцен, кольца отмечают улики, которые ещё предстоит классифицировать." data-cap="Снимок экрана из запущенной игры The Lung Detective" hidden>
+      <div class="label">Игра-расследование · рак лёгкого</div>
+      <h1>The Lung Detective</h1>
+      <p><b>Расследование в квартире, на улице и на стройке, где каждая улика классифицируется так, как МАИР классифицирует доказательства.</b></p>
+      <p>Курение вызывает большинство случаев рака лёгкого, а отказ от него помогает в любом возрасте. Это первая запись в деле, и всё расследование строится на ней. Игрок обыскивает три сцены — квартиру, улицу и стройку — и находит двенадцать улик. Каждую нужно классифицировать так, как МАИР классифицирует доказательства: доказанная причина рака лёгкого (группа 1), вероятная причина (группа 2A) или то, за чем нет доказательств. Затем настоящие опасности можно устранить, и с каждой из них растёт показатель чистого воздуха.</p>
+      <p>Улики охватывают пассивное курение; радон в жилье, с небольшой мини-игрой про детектор, построенной вокруг референтного уровня ВОЗ в 100 Бк/м³; загрязнение наружного воздуха и выхлопы дизельных двигателей; дым от дров и жарку при высокой температуре; а также кремнезёмную пыль, асбест и сварочные аэрозоли на стройке. Битумная кровля попадает в группу вероятных причин, а кофе и стресс оказываются вовсе без доказательств. Три разговора несут главный аргумент: сосед по квартире, который курит «всего несколько в день», владелец вейп-шопа, называющий вейпинг безвредным, и прораб, уверенный, что бросать после двадцати лет уже бессмысленно. Каждая улика показывает свой источник и официальную формулировку Европейского кодекса борьбы против рака. Игра работает в браузере, в том числе на телефоне, и не собирает никаких данных. Язык игры — английский.</p>
 
-    <h3>Пять регионов и их УФ-индекс</h3>
-    <ul class="regions">
-      <li>Солнечный луг (Sunny Grassland) <span>UV 5</span></li>
-      <li>Тенистый лес (Shade Forest) <span>UV 3</span></li>
-      <li>Пляж с кремом (Sunscreen Beach) <span>UV 7</span></li>
-      <li>Спорт и горы (Sports & Mountain) <span>UV 8</span></li>
-      <li>Замок защиты от солнца (Sun-Safety Castle) <span>UV 6</span></li>
-    </ul>
+      <div class="game-facts">
+        <div><b>10&ndash;16</b><span>рекомендуемый возраст</span></div>
+        <div><b>3</b><span>сцены для обыска</span></div>
+        <div><b>12</b><span>улик для классификации</span></div>
+        <div><b>~10 min</b><span>на полное прохождение</span></div>
+      </div>
 
-    <p class="fine">В игре оригинальный персонаж и оригинальная графика. Исходный код открыт: github.com/Wenxin-Wan/sun-safety-adventure. Советы по защите от солнца соответствуют Европейскому кодексу борьбы против рака и рекомендациям ВОЗ по УФ-излучению.</p>
+      <h3>Как играть</h3>
+      <ol class="howto">
+        <li><span>Нажмите <b>Играть</b>. Управляйте мышью или пальцем, либо клавишей <kbd>Tab</kbd> переходите к улике и клавишей <kbd>Enter</kbd> рассматривайте её. Пульсирующие кольца показывают, где лежат улики.</span></li>
+        <li><span>Разложите каждую улику по одному из трёх ящиков: доказанная причина (группа 1), вероятная причина (группа 2A) или без доказательств. Неверный ящик гаснет, и вы пробуете снова; верный открывает источник и формулировку Европейского кодекса борьбы против рака.</span></li>
+        <li><span>Устраните опасности, которые можно устранить. Каждая повышает показатель чистого воздуха. В квартире детектор радона — отдельная маленькая игра: референтный уровень ВОЗ — 100 Бк/м³, а национальные референтные уровни, по рекомендации ВОЗ, не должны превышать 300.</span></li>
+        <li><span>Поговорите с тремя людьми, которых встретите: соседом, владельцем вейп-шопа и прорабом. У каждого есть причина сомневаться, и каждый получает доказательства — по-доброму.</span></li>
+        <li><span>Шестерёнка открывает настройки: высокий контраст, крупный текст, более широкие и удобные для чтения буквы, меньше анимации. В конце отчёт показывает, что было классифицировано, что устранено и каков показатель чистого воздуха.</span></li>
+      </ol>
+
+      <p class="fine">Каждая улика в игре указывает свой источник. Классификации следуют Монографиям МАИР, формулировки по профилактике взяты из Европейского кодекса борьбы против рака, референтный уровень радона — уровень ВОЗ (100 Бк/м³). Вывод о том, что отказ от курения помогает в любом возрасте, принадлежит Пето и соавторам (BMJ, 2000).</p>
+    </div>
+
+    <div class="game-intro" data-game="town-of-1000" data-url="../games/town-of-1000/" data-shot="../assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="A Town of 1,000 в процессе: сетка из 1 000 точек с отмеченными затронутыми женщинами и две карты решений главы." data-cap="Снимок экрана из запущенной игры A Town of 1,000" hidden>
+      <div class="label">Игра-выбор · рак молочной железы</div>
+      <h1>A Town of 1,000</h1>
+      <p><b>Игра-выбор, в которой городской совет наблюдает за 1 000 женщин от двадцати до шестидесяти лет и видит, точка за точкой, что меняет профилактика.</b></p>
+      <p>Рак молочной железы — самый частый рак у женщин, и многое из того, что говорят о его профилактике, опирается на очень немногое. В этой игре игрок — совет городка, за 1 000 женщин которого наблюдают от двадцати до шестидесяти лет. Каждая из пяти глав приносит две карты решений и небольшой бюджет усилий, который на них тратится: алкоголь, физическая активность, вес после менопаузы, грудное вскармливание, менопаузальная гормональная терапия, скрининг. Результат отображается на сетке из 1 000 точек: число женщин, у которых рак молочной железы диагностирован до 75 лет — около 94 из 1 000 в Западной Европе (оценки GLOBOCAN 2024), — и число тех, кто от него умирает, около 15.</p>
+      <p>Размеры эффектов скромные и честные, взяты из объединённых исследований, поэтому даже хорошее десятилетие решений сдвигает горстку точек. Карты-мифы ждут, когда их распознают: антиперспиранты и бюстгальтеры на косточках стоят усилий и ничего не меняют, а карта «без табака» объясняет, что для рака молочной железы доказательства о курении ограниченны, что бы курение ни делало с остальным организмом. Игра заканчивается панелью честности: это средние по населению, и они ничего не предсказывают ни об одной конкретной женщине. Она работает в браузере, в том числе на телефоне, и не собирает никаких данных. Язык игры — английский.</p>
+
+      <div class="game-facts">
+        <div><b>14+</b><span>рекомендуемый возраст</span></div>
+        <div><b>5</b><span>глав, по одной на десятилетие</span></div>
+        <div><b>10</b><span>карт решений, по две на главу</span></div>
+        <div><b>~8 min</b><span>на полное прохождение</span></div>
+      </div>
+
+      <h3>Как играть</h3>
+      <ol class="howto">
+        <li><span>Нажмите <b>Играть</b>. Вы заседаете в совете городка, за 1 000 женщин которого будете наблюдать сорок лет — по главе на каждое десятилетие их жизни.</span></li>
+        <li><span>Каждая глава раздаёт две карты решений и даёт небольшой бюджет усилий. Прочитайте обе карты, затем потратьте бюджет там, где, по-вашему, он сработает.</span></li>
+        <li><span>Следите за 1 000 точками. Каждое решение сдвигает число женщин с диагнозом до 75 лет и число умерших ровно настолько, насколько подтверждают объединённые исследования. Небольшие сдвиги и есть честные.</span></li>
+        <li><span>Некоторые карты — мифы. Антиперспиранты и бюстгальтеры на косточках стоят усилий и не сдвигают ничего; карта «без табака» объясняет, почему доказательства связи курения с раком молочной железы лишь ограниченны.</span></li>
+        <li><span>Прочитайте панель честности в конце. Цифры — средние для населения вроде западноевропейского, и ни одна точка не обозначает какую-то конкретную женщину.</span></li>
+      </ol>
+
+      <p class="fine">Исходные показатели — для Западной Европы (оценки GLOBOCAN 2024). Размеры эффектов взяты из объединённых исследований об алкоголе, физической активности, весе после менопаузы, грудном вскармливании, менопаузальной гормональной терапии и участии в скрининге. Советы по профилактике соответствуют Европейскому кодексу борьбы против рака.</p>
+    </div>
+
   </div>
 </section>
 
 <section class="sec wrap shelf" id="games">
   <div class="sec-head">
     <div class="label">Игры</div>
-    <h2>Одна <b>уже открыта</b>. Следующие в разработке.</h2>
+    <h2>Три <b>уже открыты</b>: о коже, о лёгких и о груди.</h2>
   </div>
 
   <div class="rack">
 
-    <article class="inst">
+    <article class="inst is-on" data-game="sun-safety">
       <div class="inst-main">
         <div class="inst-top">
           <span class="chip live">Открыт</span>
+          <span class="chip on-stage">Сейчас на сцене</span>
           <h3>Sol &amp; the UV Shield Quest</h3>
         </div>
         <p>Платформер о защите от солнца для детей 6–12 лет. Пять регионов, вопрос на каждой контрольной точке и набор защиты, который нужно собрать по пути: шляпа, закрытая одежда, тень и крем.</p>
@@ -116,10 +173,46 @@
           <span>6–12 лет</span><span>Клавиатура, сенсор, геймпад</span><span>На английском</span>
         </div>
         <div class="inst-actions">
-          <a class="btn btn-solid" href="#play">Играть &rarr;</a>
+          <a class="btn btn-solid" href="../games/sun-safety/" data-select="sun-safety">Играть &rarr;</a>
         </div>
       </div>
-      <a href="#play" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <a href="../games/sun-safety/" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest" data-select="sun-safety"></a>
+    </article>
+
+    <article class="inst" data-game="lung-detective">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Открыт</span>
+          <span class="chip on-stage">Сейчас на сцене</span>
+          <h3>The Lung Detective</h3>
+        </div>
+        <p>Игра-расследование о причинах рака лёгкого для 10–16 лет. Три сцены, двенадцать улик, которые нужно отнести к доказанным причинам, вероятным причинам или к тому, за чем нет доказательств, детектор радона, который нужно прочитать, и три человека, которых нужно переубедить.</p>
+        <div class="inst-meta">
+          <span>10–16 лет</span><span>Мышь, сенсор, клавиатура</span><span>На английском</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../games/lung-detective/" data-select="lung-detective">Играть &rarr;</a>
+        </div>
+      </div>
+      <a href="../games/lung-detective/" class="thumb thumb-game thumb-lung" aria-label="The Lung Detective" data-select="lung-detective"></a>
+    </article>
+
+    <article class="inst" data-game="town-of-1000">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">Открыт</span>
+          <span class="chip on-stage">Сейчас на сцене</span>
+          <h3>A Town of 1,000</h3>
+        </div>
+        <p>Игра-выбор о профилактике рака молочной железы, от 14 лет. Пять глав, десять карт решений, небольшой бюджет усилий и 1 000 точек, которые честно показывают, скольких женщин уберегают решения городка.</p>
+        <div class="inst-meta">
+          <span>От 14 лет</span><span>Мышь, сенсор</span><span>На английском</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../games/town-of-1000/" data-select="town-of-1000">Играть &rarr;</a>
+        </div>
+      </div>
+      <a href="../games/town-of-1000/" class="thumb thumb-game thumb-town" aria-label="A Town of 1,000" data-select="town-of-1000"></a>
     </article>
 
   </div>
@@ -135,7 +228,7 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
-        <a href="games.html">Игра о профилактике</a>
+        <a href="games.html">Игры о профилактике</a>
         <a href="about.html">Об авторе</a>
         <a href="about.html#contact">Контакты</a>
       </nav>
@@ -151,17 +244,57 @@
 </div>
 <script>
 (function(){
-  var btn=document.getElementById('play-btn'), frame=document.getElementById('stage-frame'), stage=document.getElementById('stage');
-  if(!btn) return;
-  btn.addEventListener('click', function(){
-    var f=document.createElement('iframe');
-    f.src='../games/sun-safety/'; f.title='Sol & the UV Shield Quest'; f.allow='fullscreen; gamepad; autoplay';
+  var stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
+      btn=document.getElementById('play-btn'), src=document.getElementById('stage-src'),
+      img=document.getElementById('stage-img'), cap=document.getElementById('stage-cap'),
+      open=document.getElementById('stage-open');
+  if(!stage||!btn) return;
+  var each=function(sel,fn){ Array.prototype.forEach.call(document.querySelectorAll(sel),fn); };
+  var intros={}, cards={}, current=stage.getAttribute('data-game');
+  each('.game-intro[data-game]', function(el){ intros[el.getAttribute('data-game')]=el; });
+  each('.shelf .inst[data-game]', function(el){ cards[el.getAttribute('data-game')]=el; });
+  var motion=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth';
+  function toStage(){ stage.scrollIntoView({behavior:motion, block:'start'}); }
+
+  // the frame shows the selected game's screenshot until Play, then the game
+  function stop(){
+    var f=frame.querySelector('iframe'); if(f) frame.removeChild(f);
+    stage.classList.remove('is-playing');
+  }
+  function play(){
+    var g=intros[current], f=document.createElement('iframe');
+    f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
     f.setAttribute('allowfullscreen','');
-    frame.innerHTML=''; frame.appendChild(f); stage.classList.add('is-playing');
+    stop(); frame.appendChild(f); stage.classList.add('is-playing');
     // keyboard control goes to the game straight away
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });
-    stage.scrollIntoView({behavior:'smooth', block:'start'});
+    toStage();
+  }
+  // choosing a game on the shelf puts it on the stage: screenshot, caption,
+  // "own window" link and the intro column swap; a running game is unloaded
+  function select(id){
+    var g=intros[id]; if(!g) return;
+    if(id!==current){
+      stop(); current=id;
+      var shot=g.getAttribute('data-shot');
+      src.setAttribute('srcset', shot+'.webp'); img.src=shot+'.jpg'; img.alt=g.getAttribute('data-alt');
+      cap.textContent=g.getAttribute('data-cap'); open.href=g.getAttribute('data-url');
+      for(var k in intros){ intros[k].hidden=(k!==id); }
+      for(var c in cards){ cards[c].classList[c===id?'add':'remove']('is-on'); }
+      stage.setAttribute('data-game', id);
+    }
+    toStage();
+  }
+  btn.addEventListener('click', play);
+  each('[data-select]', function(a){
+    a.addEventListener('click', function(e){
+      // a modified click keeps its native meaning: the game in a new tab
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+      e.preventDefault(); select(a.getAttribute('data-select'));
+    });
   });
+  // games.html#lung-detective or #town-of-1000 opens with that game on the stage
+  var h=location.hash.replace(/^#/,''); if(h&&intros[h]&&h!==current) select(h);
 })();
 </script>
 

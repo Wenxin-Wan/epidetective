@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Town of 1,000 — a breast-cancer prevention game on EpiDetective</title>
+<meta name="description" content="A choices game for ages 14 and up: sit on the council of a town of 1,000 women, spend three points of effort each decade, and watch how the town's projected breast-cancer outcome changes. Every number carries its source.">
+<link rel="canonical" href="https://epidetective.com/games/town-of-1000/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:title" content="A Town of 1,000">
+<meta property="og:description" content="Sit on the council of a town of 1,000 women. Spend three points of effort each decade and see how the town's breast-cancer outcome changes, with the evidence behind every card.">
+<meta property="og:url" content="https://epidetective.com/games/town-of-1000/">
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+<div id="app" class="app" data-screen="title">
+
+  <!-- Title -->
+  <section class="screen title" id="screen-title">
+    <div class="title-card">
+      <p class="kicker">EpiDetective · cancer awareness game</p>
+      <h1>A Town of <em>1,000</em></h1>
+      <p class="lede">One town, one thousand women, followed from their twenties to 75. You sit on the council, and each decade you have three points of effort to spend on the things that shape breast-cancer risk across a whole population. The town's projected outcome updates as you go. The effects come from published studies, and they are modest; that is part of the point.</p>
+      <div class="title-actions">
+        <button type="button" class="btn primary" id="btn-start">Start</button>
+        <button type="button" class="btn" id="btn-how">How to play</button>
+        <button type="button" class="btn" id="btn-about">About the numbers</button>
+        <button type="button" class="btn" id="btn-settings">Settings</button>
+      </div>
+      <p class="fine">Ages 14 and up · about 8 minutes · keyboard, mouse or touch. Sources are shown with every card.</p>
+    </div>
+    <div class="title-art" id="title-art"></div>
+  </section>
+
+  <!-- Play -->
+  <section class="screen play" id="screen-play" hidden>
+    <header class="hud">
+      <div class="hud-left">
+        <span class="hud-kicker" id="hud-step">Chapter 1 of 5</span>
+        <strong id="hud-chapter">The Twenties</strong>
+      </div>
+      <div class="hud-mid">
+        <span class="hud-kicker">Effort left</span>
+        <strong><span id="hud-effort">3</span>/3</strong>
+        <span class="pips big" id="hud-pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+      <div class="hud-right">
+        <span class="hud-kicker">Baseline, Western Europe</span>
+        <strong>about 94 diagnosed · about 15 die</strong>
+      </div>
+      <div class="hud-btns">
+        <button type="button" class="hud-btn wide" id="btn-about-2">About the numbers</button>
+        <button type="button" class="hud-btn" id="btn-settings-2" aria-label="Settings">⚙</button>
+      </div>
+    </header>
+
+    <div class="board">
+      <div class="town">
+        <div class="skyline" id="skyline" aria-hidden="true"></div>
+        <div class="dots-card">
+          <div class="dots-head">
+            <p class="kicker">The town's 1,000 women</p>
+            <h2 class="dots-title">Projected to age 75</h2>
+          </div>
+          <div class="dots" id="dots"></div>
+          <div class="figures">
+            <div class="figure case">
+              <b><small>about</small> <span id="fig-cases">94</span></b>
+              <span class="lab">of 1,000 diagnosed by 75</span>
+              <em class="delta" id="fig-cases-d">the baseline</em>
+            </div>
+            <div class="figure die">
+              <b><small>about</small> <span id="fig-deaths">15</span></b>
+              <span class="lab">of 1,000 die of it</span>
+              <em class="delta" id="fig-deaths-d">the baseline</em>
+            </div>
+          </div>
+          <ul class="legend" aria-label="Legend">
+            <li><span class="sw case"></span>diagnosed by 75</li>
+            <li><span class="sw die"></span>die of it</li>
+            <li><span class="sw rest"></span>neither</li>
+            <li><span class="sw ghost"></span>baseline, about 94 and about 15</li>
+          </ul>
+          <p class="visually-hidden" id="town-status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <p class="kicker chapter-kicker"><span id="chapter-season">spring morning</span></p>
+        <h2 class="chapter-title" id="chapter-title" tabindex="-1">The Twenties</h2>
+        <p class="chapter-intro" id="chapter-intro"></p>
+        <div id="cards"></div>
+        <div class="actions close-row">
+          <button type="button" class="btn primary" id="btn-close-chapter" disabled>Close the chapter</button>
+          <span class="fine" id="close-hint">Pick an option on each card.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter-end panel -->
+    <aside class="panel file" id="panel" hidden aria-live="polite" aria-labelledby="panel-title">
+      <div class="file-tab"><span class="kicker" id="panel-kicker">End of the chapter</span></div>
+      <h2 id="panel-title" tabindex="-1"></h2>
+      <p id="panel-text"></p>
+      <div id="panel-body"></div>
+    </aside>
+  </section>
+
+  <!-- Ending -->
+  <section class="screen report" id="screen-report" hidden>
+    <div class="report-card file">
+      <div class="skyline final" id="skyline-final" aria-hidden="true"></div>
+      <div class="file-tab"><span class="kicker">Council file · the cohort at 75</span></div>
+      <h1>How the town did</h1>
+      <p class="headline" id="report-headline"></p>
+      <div class="report-grid" id="report-grid"></div>
+      <div class="dots ending-dots" id="dots-final"></div>
+      <ul class="legend" aria-label="Legend">
+        <li><span class="sw case"></span>diagnosed by 75</li>
+        <li><span class="sw die"></span>die of it</li>
+        <li><span class="sw rest"></span>neither</li>
+        <li><span class="sw ghost"></span>baseline, about 94 and about 15</li>
+      </ul>
+      <div id="report-body"></div>
+      <div class="title-actions">
+        <button type="button" class="btn primary" id="btn-again">Play again</button>
+        <a class="btn" href="../../games.html">Back to the games</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <div class="modal" id="modal-how" hidden role="dialog" aria-modal="true" aria-labelledby="how-title">
+    <div class="modal-card">
+      <div class="panel-head"><h2 id="how-title">How to play</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
+      <ol class="steps">
+        <li>The town follows <b>1,000 women</b> from their twenties to age 75. The grid of dots shows how many are projected to be diagnosed with breast cancer by 75 (red) and how many to die of it (ink). It starts from the Western European figures.</li>
+        <li>Each decade brings <b>two decision cards</b>. Every option has an effort cost of 0, 1 or 2, and the council has <b>3 points of effort</b> per decade, so you cannot do everything.</li>
+        <li>Pick one option on each card, then <b>close the chapter</b>. The projection updates and you see what changed, with the evidence and the matching recommendation from the European Code Against Cancer.</li>
+        <li>Some cards test judgement more than budget. Effort spent on something without evidence changes nothing in the town.</li>
+        <li>After five decades you see how the town did, and what the game can and cannot say.</li>
+      </ol>
+      <p class="fine">The numbers are population averages from pooled studies. They describe what tends to happen across a thousand women and cannot predict any one woman's future.</p>
+    </div>
+  </div>
+
+  <!-- About the numbers -->
+  <div class="modal" id="modal-about" hidden role="dialog" aria-modal="true" aria-labelledby="about-title">
+    <div class="modal-card wide">
+      <div class="panel-head"><h2 id="about-title">About the numbers</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
+      <div id="about-body"></div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="modal" id="modal-settings" hidden role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal-card">
+      <div class="panel-head"><h2 id="settings-title">Settings</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
+      <label class="opt"><input type="checkbox" id="opt-contrast"> High contrast</label>
+      <label class="opt"><input type="checkbox" id="opt-large"> Larger text</label>
+      <label class="opt"><input type="checkbox" id="opt-font"> Wider, easier-to-read letters</label>
+      <label class="opt"><input type="checkbox" id="opt-motion"> Reduce motion</label>
+      <p class="fine">Settings are kept on this device only.</p>
+    </div>
+  </div>
+
+</div>
+<script src="art.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

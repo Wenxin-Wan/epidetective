@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Lung Detective — a lung-cancer awareness game on EpiDetective</title>
+<meta name="description" content="An investigation game for ages 10 to 16: find the sources of lung-cancer risk in a flat, a street and a building yard, file each one the way IARC does, and fix what can be fixed.">
+<link rel="canonical" href="https://epidetective.com/games/lung-detective/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:title" content="The Lung Detective">
+<meta property="og:description" content="Find the sources of lung-cancer risk in a flat, a street and a building yard. File each one the way IARC does. Fix what can be fixed.">
+<meta property="og:url" content="https://epidetective.com/games/lung-detective/">
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+<div id="app" class="app" data-screen="title">
+
+  <!-- Title -->
+  <section class="screen title" id="screen-title">
+    <div class="title-card">
+      <p class="kicker">EpiDetective · cancer awareness game</p>
+      <h1>The Lung <em>Detective</em></h1>
+      <p class="subtitle">An investigation in three cases, filed the way IARC files them.</p>
+      <p class="lede">Three places. Twelve clues. Some of them cause lung cancer, some probably do, and some only sound as if they do. Your job: find each one, file it the way scientists at IARC do, and fix what can be fixed.</p>
+      <ul class="cases" aria-label="The three cases"><li><i>1</i>The flat</li><li><i>2</i>The street</li><li><i>3</i>The building yard</li></ul>
+      <div class="title-actions">
+        <button type="button" class="btn primary" id="btn-start">Start the investigation</button>
+        <button type="button" class="btn" id="btn-how">How to play</button>
+        <button type="button" class="btn" id="btn-settings">Settings</button>
+      </div>
+      <p class="fine">Ages 10 to 16 · about 10 minutes · keyboard, mouse or touch. Sources are shown with every clue.</p>
+    </div>
+    <div class="title-art" aria-hidden="true"><svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="t-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FB8C9"/><stop offset=".6" stop-color="#CDDBE1"/><stop offset="1" stop-color="#EFE7D8"/></linearGradient>
+    <linearGradient id="t-road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A6C68"/><stop offset="1" stop-color="#4E504C"/></linearGradient>
+    <radialGradient id="t-sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF4D6" stop-opacity=".95"/><stop offset="1" stop-color="#FFF4D6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="t-lens" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".35"/><stop offset=".6" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#161713" stop-opacity=".12"/></radialGradient>
+    <filter id="t-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="t-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <clipPath id="t-clip"><circle cx="392" cy="178" r="98"/></clipPath>
+    <g id="t-city">
+      <rect width="600" height="440" fill="url(#t-sky)"/>
+      <circle cx="120" cy="70" r="120" fill="url(#t-sun)"/><circle cx="120" cy="70" r="22" fill="#FFF4D6"/>
+      <g fill="#FFFFFF" opacity=".8"><ellipse cx="250" cy="60" rx="46" ry="10"/><ellipse cx="272" cy="52" rx="20" ry="10"/><ellipse cx="500" cy="96" rx="40" ry="9"/></g>
+      <g fill="#B3C2CA"><path d="M0 300 Q60 240 120 260 T260 250 T400 262 T560 240 T600 270 V340 H0z"/></g>
+      <g fill="none" stroke="#A9B7BF" stroke-width="2.5"><path d="M548 250 V112 M556 250 V112 M470 120 H600 M470 128 H600 M552 108 L500 120 M552 108 L596 120 M500 128 V170"/><path d="M548 130 l8 -8 M548 146 l8 -8 M548 162 l8 -8 M548 178 l8 -8 M548 194 l8 -8 M548 210 l8 -8 M548 226 l8 -8"/></g><rect x="544" y="104" width="16" height="8" fill="#A9B7BF"/><path d="M496 170 h8 v5 q-4 6 -8 0z" fill="#A9B7BF"/>
+      <g><rect x="30" y="150" width="130" height="190" fill="#E8D9C6"/><rect x="26" y="144" width="138" height="8" fill="#C9B79C"/><rect x="30" y="300" width="130" height="40" fill="#DCCBB3"/>
+        <g fill="#DCE9EE"><rect x="44" y="164" width="24" height="28"/><rect x="44" y="206" width="24" height="28"/><rect x="44" y="248" width="24" height="28"/><rect x="84" y="164" width="24" height="28"/><rect x="84" y="206" width="24" height="28"/><rect x="84" y="248" width="24" height="28"/><rect x="124" y="164" width="24" height="28"/><rect x="124" y="206" width="24" height="28"/><rect x="124" y="248" width="24" height="28"/></g><rect x="84" y="206" width="24" height="28" fill="#FFE7B0"/><path d="M84 206 h10 v28 h-10z" fill="#93A9B7" opacity=".7"/>
+        <rect x="80" y="304" width="30" height="36" fill="#315f5a"/></g>
+      <g><rect x="176" y="204" width="116" height="136" fill="#E4D9C6"/><rect x="172" y="198" width="124" height="8" fill="#C9B79C"/><rect x="176" y="238" width="116" height="18" fill="#315f5a"/><text x="234" y="251" text-anchor="middle" font-family="Literata,Georgia,serif" font-size="10" font-weight="600" letter-spacing="2" fill="#F5F4F0">CAFÉ</text>
+        <rect x="178" y="256" width="19" height="14" fill="#F5F4F0"/><path d="M178 270 a9.5 6 0 0 0 19 0z" fill="#F5F4F0"/><rect x="197" y="256" width="19" height="14" fill="#ba4c38"/><path d="M197 270 a9.5 6 0 0 0 19 0z" fill="#ba4c38"/><rect x="216" y="256" width="19" height="14" fill="#F5F4F0"/><path d="M216 270 a9.5 6 0 0 0 19 0z" fill="#F5F4F0"/><rect x="235" y="256" width="19" height="14" fill="#ba4c38"/><path d="M235 270 a9.5 6 0 0 0 19 0z" fill="#ba4c38"/><rect x="254" y="256" width="19" height="14" fill="#F5F4F0"/><path d="M254 270 a9.5 6 0 0 0 19 0z" fill="#F5F4F0"/><rect x="273" y="256" width="19" height="14" fill="#ba4c38"/><path d="M273 270 a9.5 6 0 0 0 19 0z" fill="#ba4c38"/>
+        <rect x="186" y="286" width="60" height="54" fill="#6B5A4A"/><rect x="186" y="286" width="60" height="54" fill="#DCE9EE" opacity=".5"/><rect x="256" y="290" width="26" height="50" fill="#315f5a"/><rect x="192" y="212" width="22" height="20" fill="#DCE9EE"/><rect x="254" y="212" width="22" height="20" fill="#DCE9EE"/>
+        <ellipse cx="200" cy="356" rx="14" ry="4" fill="#F5F4F0"/><rect x="198" y="356" width="4" height="12" fill="#43494E"/></g>
+      <g><rect x="380" y="136" width="18" height="70" fill="#A9705A"/><rect x="377" y="132" width="24" height="6" fill="#8F5F4C"/>
+        <rect x="302" y="212" width="112" height="128" fill="#C9967E"/><path d="M302 222 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 232 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 242 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 252 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 262 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 272 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 282 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 292 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 302 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 312 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 322 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/><path d="M302 332 H414" stroke="#B4806C" stroke-width="1" opacity=".5"/>
+        <path d="M296 214 L358 150 L420 214 Z" fill="#5F6A6E"/><rect x="292" y="212" width="128" height="6" fill="#F5F4F0"/>
+        <rect x="322" y="236" width="40" height="44" fill="#F5F4F0"/><rect x="326" y="240" width="32" height="36" fill="#5A4034"/><rect x="334" y="252" width="16" height="22" rx="2" fill="#2B2B28"/><rect x="337" y="258" width="10" height="8" fill="#E8863A"/><ellipse cx="342" cy="248" rx="12" ry="5" fill="#B5B1A8" opacity=".6"/>
+        <rect x="378" y="272" width="26" height="68" fill="#ba4c38"/><circle cx="398" cy="308" r="2" fill="#D9A35B"/>
+        <g fill="#7F7F78" opacity=".55"><ellipse cx="392" cy="122" rx="12" ry="9" filter="url(#t-soft)"/><ellipse cx="404" cy="102" rx="16" ry="11" filter="url(#t-soft)"/><ellipse cx="422" cy="80" rx="20" ry="13" filter="url(#t-soft)"/><ellipse cx="446" cy="60" rx="24" ry="14" filter="url(#t-soft)"/></g></g>
+      <g><rect x="426" y="218" width="76" height="122" fill="#D9CFC0"/><rect x="422" y="212" width="84" height="8" fill="#C9B79C"/><rect x="426" y="250" width="76" height="16" fill="#23443F"/><text x="464" y="262" text-anchor="middle" font-family="Literata,Georgia,serif" font-size="10" font-weight="800" letter-spacing="3" fill="#7FE3D6">VAPE</text><rect x="432" y="272" width="44" height="40" fill="#2E3A3A"/><rect x="482" y="272" width="16" height="68" fill="#1E2A2A"/><rect x="436" y="226" width="18" height="16" fill="#DCE9EE"/><rect x="474" y="226" width="18" height="16" fill="#DCE9EE"/></g>
+      <g><rect x="506" y="250" width="94" height="90" fill="#C9967E"/><path d="M506 260 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 270 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 280 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 290 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 300 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 310 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 320 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><path d="M506 330 H600" stroke="#A9705A" stroke-width="1" opacity=".5"/><rect x="506" y="244" width="94" height="8" fill="#B9B0A0"/>
+        <rect x="516" y="176" width="84" height="70" fill="#D9CFC0"/><g stroke="#8C949A" stroke-width="3"><path d="M520 246 V170 M550 246 V170 M580 246 V170 M514 200 H600 M514 230 H600"/></g><rect x="514" y="202" width="86" height="4" fill="#B48A5A"/><rect x="514" y="232" width="86" height="4" fill="#B48A5A"/>
+        <g fill="#EEE9DE" opacity=".95"><ellipse cx="530" cy="330" rx="20" ry="10" filter="url(#t-soft)"/><ellipse cx="556" cy="322" rx="16" ry="8" filter="url(#t-soft)"/></g></g>
+      <rect y="340" width="600" height="10" fill="#B5AE9F"/><rect y="350" width="600" height="90" fill="url(#t-road)"/><path d="M0 396 H600" stroke="#E8E2D6" stroke-width="3" stroke-dasharray="22 16" opacity=".6"/>
+      <g><rect x="230" y="352" width="150" height="44" rx="7" fill="#3E5C7A"/><rect x="238" y="358" width="112" height="18" rx="3" fill="#DCE9EE"/><rect x="356" y="358" width="18" height="20" rx="3" fill="#DCE9EE"/><rect x="230" y="382" width="150" height="5" fill="#F5F4F0" opacity=".8"/><circle cx="256" cy="396" r="9" fill="#2B2B28"/><circle cx="352" cy="396" r="9" fill="#2B2B28"/><g fill="#4E4E4A" opacity=".55"><ellipse cx="222" cy="392" rx="9" ry="6" filter="url(#t-soft)"/><ellipse cx="206" cy="386" rx="12" ry="7" filter="url(#t-soft)"/></g></g>
+    </g>
+  </defs>
+  <use href="#t-city"/>
+  <rect width="600" height="440" fill="#161713" opacity=".06"/>
+  <g clip-path="url(#t-clip)"><g transform="translate(392 178) scale(1.85) translate(-392 -178)"><use href="#t-city"/></g><circle cx="392" cy="178" r="98" fill="url(#t-lens)"/></g>
+  <circle cx="392" cy="178" r="102" fill="none" stroke="#161713" stroke-width="10"/><circle cx="392" cy="178" r="96" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".5"/>
+  <path d="M340 122 q-16 14 -20 40" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  <path d="M324 246 L266 312" stroke="#161713" stroke-width="20" stroke-linecap="round"/><path d="M316 258 L280 298" stroke="#ba4c38" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+  <g fill="#161713"><path d="M20 440 L48 330 Q90 292 160 288 Q220 292 254 320 L276 440 Z"/><path d="M220 326 L270 300" stroke="#161713" stroke-width="26" stroke-linecap="round"/><circle cx="276" cy="300" r="15"/><circle cx="154" cy="252" r="36"/><path d="M108 236 L118 194 Q154 178 190 194 L200 236 Z"/><ellipse cx="154" cy="238" rx="60" ry="11"/></g>
+  <rect x="114" y="206" width="80" height="7" fill="#ba4c38"/><path d="M140 300 q14 -10 28 0 q-14 40 -28 0z" fill="#F5F4F0" opacity=".12"/><path d="M60 340 L84 300" stroke="#F5F4F0" stroke-width="2" opacity=".2"/><path d="M234 340 L226 304" stroke="#F5F4F0" stroke-width="2" opacity=".2"/>
+  <rect width="600" height="440" filter="url(#t-grain)" opacity=".06" style="mix-blend-mode:multiply"/>
+</svg></div>
+  </section>
+
+  <!-- Play -->
+  <section class="screen play" id="screen-play" hidden>
+    <header class="hud">
+      <div class="hud-left">
+        <span class="avatar" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" focusable="false"><circle cx="22" cy="22" r="22" fill="#EBEAE3"/><circle cx="22" cy="46" r="17" fill="#315f5a"/><rect x="17" y="30" width="10" height="8" fill="#EBC7A6"/><circle cx="22" cy="24" r="11" fill="#EBC7A6"/><circle cx="12" cy="25" r="2.6" fill="#EBC7A6"/><circle cx="18.5" cy="24" r="1.5" fill="#161713"/><circle cx="25.5" cy="24" r="1.5" fill="#161713"/><path d="M19 29 q3 2.5 6 0" fill="none" stroke="#161713" stroke-width="1.3" stroke-linecap="round"/><path d="M11 16 Q13 5 22 5 Q31 5 33 16 Z" fill="#161713"/><rect x="5" y="14" width="34" height="4.5" rx="2" fill="#161713"/><rect x="11.5" y="11.5" width="21" height="3" fill="#ba4c38"/><circle cx="33" cy="33" r="5.5" fill="#FFFFFF" fill-opacity=".85" stroke="#161713" stroke-width="2"/><path d="M37 37 l4 4" stroke="#161713" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        <span class="hud-kicker">Case</span>
+        <strong id="hud-scene">The flat</strong>
+      </div>
+      <div class="hud-mid">
+        <span class="hud-kicker">Clues filed</span>
+        <strong><span id="hud-found">0</span>/<span id="hud-total">4</span></strong>
+      </div>
+      <div class="hud-right">
+        <span class="hud-kicker">Clean-air score</span>
+        <div class="meter" aria-hidden="true"><i id="hud-air-bar"></i></div>
+        <strong id="hud-air">0</strong>
+      </div>
+      <button type="button" class="hud-btn" id="btn-settings-2" aria-label="Settings">⚙</button>
+    </header>
+
+    <div class="stage-wrap">
+      <div class="scene" id="scene" aria-label="Scene"></div>
+      <p class="hint" id="scene-hint">Look for the pulsing rings. Click one, or press Tab to reach it and Enter to inspect.</p>
+    </div>
+
+    <!-- Case-file panel -->
+    <aside class="panel" id="panel" hidden aria-live="polite">
+      <div class="panel-head">
+        <span class="kicker" id="panel-kicker">Case file</span>
+        <button type="button" class="close" id="panel-close" aria-label="Close">×</button>
+      </div>
+      <h2 id="panel-title"></h2>
+      <p id="panel-text"></p>
+      <div id="panel-body"></div>
+    </aside>
+  </section>
+
+  <!-- Report -->
+  <section class="screen report" id="screen-report" hidden>
+    <div class="report-card">
+      <p class="kicker">Case closed</p>
+      <h1>Detective's report</h1>
+      <div class="report-grid" id="report-grid"></div>
+      <div id="report-body"></div>
+      <div class="title-actions">
+        <button type="button" class="btn primary" id="btn-again">Play again</button>
+        <a class="btn" href="../../games.html">Back to the games</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <div class="modal" id="modal-how" hidden role="dialog" aria-modal="true" aria-labelledby="how-title">
+    <div class="modal-card">
+      <div class="panel-head"><h2 id="how-title">How to play</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
+      <ol class="steps">
+        <li>Each scene hides <b>four clues</b>, marked with a pulsing ring. Click one to open its case file.</li>
+        <li>Decide how to file it: a <b>known cause</b> of lung cancer (IARC Group 1), a <b>probable cause</b> (Group 2A), or <b>no evidence</b>. A wrong choice costs nothing: you get the explanation and can try again.</li>
+        <li>Real hazards can be <b>fixed</b>. Every fix raises the clean-air score.</li>
+        <li>Somebody in each scene wants to talk. Pick the reply you think is right.</li>
+        <li>When all clues are filed, the case closes and the next one opens. Three cases, then your report.</li>
+      </ol>
+      <p class="fine">The game shows whether something <b>can</b> cause lung cancer in people in general. It cannot tell anyone what caused their own illness, and most people with these exposures never develop lung cancer.</p>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="modal" id="modal-settings" hidden role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal-card">
+      <div class="panel-head"><h2 id="settings-title">Settings</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
+      <label class="opt"><input type="checkbox" id="opt-contrast"> High contrast</label>
+      <label class="opt"><input type="checkbox" id="opt-large"> Larger text</label>
+      <label class="opt"><input type="checkbox" id="opt-font"> Wider, easier-to-read letters</label>
+      <label class="opt"><input type="checkbox" id="opt-motion"> Reduce motion</label>
+      <p class="fine">Settings are kept on this device only.</p>
+    </div>
+  </div>
+
+</div>
+<script src="game.js"></script>
+</body>
+</html>

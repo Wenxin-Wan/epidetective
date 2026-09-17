@@ -42,62 +42,127 @@
 
 <section class="wrap game-page" id="play">
 
-  <!-- Left: the game. A real screenshot of it first, one Play button; on
-       Play the same frame loads the game itself. The game is English-only,
-       so every language links the same build. -->
-  <div class="stage" id="stage">
+  <!-- Left: one stage for all three games. It shows a real screenshot of the
+       selected game with one Play button; on Play the same frame loads the
+       game itself. Sol is on the stage by default; the shelf below swaps in
+       the others. The games are English-only, so every language links the
+       same builds. The screenshot, caption and "own window" link are the
+       parts the switcher rewrites. -->
+  <div class="stage" id="stage" data-game="sun-safety">
     <div class="stage-frame" id="stage-frame">
       <picture>
-        <source srcset="{{PREFIX}}assets/games/sun-safety-shot.webp" type="image/webp">
-        <img src="{{PREFIX}}assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="{{games_shot_alt}}" loading="eager">
+        <source id="stage-src" srcset="{{PREFIX}}assets/games/sun-safety-shot.webp" type="image/webp">
+        <img id="stage-img" src="{{PREFIX}}assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="{{games_shot_alt}}" loading="eager">
       </picture>
       <div class="play"><button type="button" id="play-btn">{{games_play}}</button></div>
     </div>
     <div class="stage-cap">
-      <span>{{games_cap}}</span>
-      <a href="{{URL_GAME1}}" target="_blank" rel="noopener">{{games_open_full}} &nearr;</a>
+      <span id="stage-cap">{{games_cap}}</span>
+      <a id="stage-open" href="{{URL_GAME1}}" target="_blank" rel="noopener">{{games_open_full}} &nearr;</a>
     </div>
   </div>
 
-  <!-- Right: what it is, what it teaches, how to play -->
-  <div class="game-intro">
-    <div class="label">{{games_label}}</div>
-    <h1>Sol &amp; the UV Shield Quest</h1>
-    <p><b>{{games_sub}}</b></p>
-    <p>{{games_p1}}</p>
-    <p>{{games_p2}}</p>
+  <!-- Right: what the selected game is, what it teaches, how to play. All
+       three intro blocks are in the page; the switcher toggles `hidden`, so
+       the page is complete without JavaScript. Each block carries the data
+       the stage needs for its game (URL, screenshot stem, title, alt, caption). -->
+  <div class="game-intros">
 
-    <div class="game-facts">
-      <div><b>6&ndash;12</b><span>{{games_fact_age}}</span></div>
-      <div><b>5</b><span>{{games_fact_regions}}</span></div>
-      <div><b>30</b><span>{{games_fact_questions}}</span></div>
-      <div><b>~10 min</b><span>{{games_fact_time}}</span></div>
+    <div class="game-intro" data-game="sun-safety" data-url="{{URL_GAME1}}" data-shot="{{PREFIX}}assets/games/sun-safety-shot" data-title="Sol &amp; the UV Shield Quest" data-alt="{{games_shot_alt}}" data-cap="{{games_cap}}">
+      <div class="label">{{games_label}}</div>
+      <h1>Sol &amp; the UV Shield Quest</h1>
+      <p><b>{{games_sub}}</b></p>
+      <p>{{games_p1}}</p>
+      <p>{{games_p2}}</p>
+
+      <div class="game-facts">
+        <div><b>6&ndash;12</b><span>{{games_fact_age}}</span></div>
+        <div><b>5</b><span>{{games_fact_regions}}</span></div>
+        <div><b>30</b><span>{{games_fact_questions}}</span></div>
+        <div><b>~10 min</b><span>{{games_fact_time}}</span></div>
+      </div>
+
+      <h3>{{games_howto_h}}</h3>
+      <ol class="howto">
+        <li><span>{{games_step1}}</span></li>
+        <li><span>{{games_step2}}</span></li>
+        <li><span>{{games_step3}}</span></li>
+        <li><span>{{games_step4}}</span></li>
+        <li><span>{{games_step5}}</span></li>
+      </ol>
+
+      <h3>{{games_regions_h}}</h3>
+      <ul class="regions">
+        <li>{{games_region1}} <span>UV 5</span></li>
+        <li>{{games_region2}} <span>UV 3</span></li>
+        <li>{{games_region3}} <span>UV 7</span></li>
+        <li>{{games_region4}} <span>UV 8</span></li>
+        <li>{{games_region5}} <span>UV 6</span></li>
+      </ul>
+
+      <p class="fine">{{games_fine}}</p>
     </div>
 
-    <h3>{{games_howto_h}}</h3>
-    <ol class="howto">
-      <li><span>{{games_step1}}</span></li>
-      <li><span>{{games_step2}}</span></li>
-      <li><span>{{games_step3}}</span></li>
-      <li><span>{{games_step4}}</span></li>
-      <li><span>{{games_step5}}</span></li>
-    </ol>
+    <div class="game-intro" data-game="lung-detective" data-url="{{URL_GAME2}}" data-shot="{{PREFIX}}assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="{{games_g2_shot_alt}}" data-cap="{{games_g2_cap}}" hidden>
+      <div class="label">{{games_g2_label}}</div>
+      <h1>The Lung Detective</h1>
+      <p><b>{{games_g2_sub}}</b></p>
+      <p>{{games_g2_p1}}</p>
+      <p>{{games_g2_p2}}</p>
 
-    <h3>{{games_regions_h}}</h3>
-    <ul class="regions">
-      <li>{{games_region1}} <span>UV 5</span></li>
-      <li>{{games_region2}} <span>UV 3</span></li>
-      <li>{{games_region3}} <span>UV 7</span></li>
-      <li>{{games_region4}} <span>UV 8</span></li>
-      <li>{{games_region5}} <span>UV 6</span></li>
-    </ul>
+      <div class="game-facts">
+        <div><b>10&ndash;16</b><span>{{games_fact_age}}</span></div>
+        <div><b>3</b><span>{{games_g2_fact_scenes}}</span></div>
+        <div><b>12</b><span>{{games_g2_fact_clues}}</span></div>
+        <div><b>~10 min</b><span>{{games_fact_time}}</span></div>
+      </div>
 
-    <p class="fine">{{games_fine}}</p>
+      <h3>{{games_howto_h}}</h3>
+      <ol class="howto">
+        <li><span>{{games_g2_step1}}</span></li>
+        <li><span>{{games_g2_step2}}</span></li>
+        <li><span>{{games_g2_step3}}</span></li>
+        <li><span>{{games_g2_step4}}</span></li>
+        <li><span>{{games_g2_step5}}</span></li>
+      </ol>
+
+      <p class="fine">{{games_g2_fine}}</p>
+    </div>
+
+    <div class="game-intro" data-game="town-of-1000" data-url="{{URL_GAME3}}" data-shot="{{PREFIX}}assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="{{games_g3_shot_alt}}" data-cap="{{games_g3_cap}}" hidden>
+      <div class="label">{{games_g3_label}}</div>
+      <h1>A Town of 1,000</h1>
+      <p><b>{{games_g3_sub}}</b></p>
+      <p>{{games_g3_p1}}</p>
+      <p>{{games_g3_p2}}</p>
+
+      <div class="game-facts">
+        <div><b>14+</b><span>{{games_fact_age}}</span></div>
+        <div><b>5</b><span>{{games_g3_fact_chapters}}</span></div>
+        <div><b>10</b><span>{{games_g3_fact_cards}}</span></div>
+        <div><b>~8 min</b><span>{{games_fact_time}}</span></div>
+      </div>
+
+      <h3>{{games_howto_h}}</h3>
+      <ol class="howto">
+        <li><span>{{games_g3_step1}}</span></li>
+        <li><span>{{games_g3_step2}}</span></li>
+        <li><span>{{games_g3_step3}}</span></li>
+        <li><span>{{games_g3_step4}}</span></li>
+        <li><span>{{games_g3_step5}}</span></li>
+      </ol>
+
+      <p class="fine">{{games_g3_fine}}</p>
+    </div>
+
   </div>
 </section>
 
-<!-- The shelf: the one open game. Further games are mentioned in the heading
-     only; nothing is listed until it exists. -->
+<!-- The shelf: the three open games. Each card's Play button and thumbnail
+     link straight to the game's own directory, so they work without
+     JavaScript; with it, the click puts that game on the stage instead and
+     scrolls there. The card whose game is on the stage carries the
+     "Now on stage" chip (class is-on). -->
 <section class="sec wrap shelf" id="games">
   <div class="sec-head">
     <div class="label">{{games_shelf_label}}</div>
@@ -106,10 +171,11 @@
 
   <div class="rack">
 
-    <article class="inst">
+    <article class="inst is-on" data-game="sun-safety">
       <div class="inst-main">
         <div class="inst-top">
           <span class="chip live">{{inst_chip_live}}</span>
+          <span class="chip on-stage">{{games_on_stage}}</span>
           <h3>Sol &amp; the UV Shield Quest</h3>
         </div>
         <p>{{games_g1_desc}}</p>
@@ -117,10 +183,46 @@
           <span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span>
         </div>
         <div class="inst-actions">
-          <a class="btn btn-solid" href="#play">{{games_g1_btn}}</a>
+          <a class="btn btn-solid" href="{{URL_GAME1}}" data-select="sun-safety">{{games_g1_btn}}</a>
         </div>
       </div>
-      <a href="#play" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <a href="{{URL_GAME1}}" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest" data-select="sun-safety"></a>
+    </article>
+
+    <article class="inst" data-game="lung-detective">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst_chip_live}}</span>
+          <span class="chip on-stage">{{games_on_stage}}</span>
+          <h3>The Lung Detective</h3>
+        </div>
+        <p>{{games_g2_desc}}</p>
+        <div class="inst-meta">
+          <span>{{games_g2_m1}}</span><span>{{games_g2_m2}}</span><span>{{games_g2_m3}}</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_GAME2}}" data-select="lung-detective">{{games_g1_btn}}</a>
+        </div>
+      </div>
+      <a href="{{URL_GAME2}}" class="thumb thumb-game thumb-lung" aria-label="The Lung Detective" data-select="lung-detective"></a>
+    </article>
+
+    <article class="inst" data-game="town-of-1000">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">{{inst_chip_live}}</span>
+          <span class="chip on-stage">{{games_on_stage}}</span>
+          <h3>A Town of 1,000</h3>
+        </div>
+        <p>{{games_g3_desc}}</p>
+        <div class="inst-meta">
+          <span>{{games_g3_m1}}</span><span>{{games_g3_m2}}</span><span>{{games_g3_m3}}</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="{{URL_GAME3}}" data-select="town-of-1000">{{games_g1_btn}}</a>
+        </div>
+      </div>
+      <a href="{{URL_GAME3}}" class="thumb thumb-game thumb-town" aria-label="A Town of 1,000" data-select="town-of-1000"></a>
     </article>
 
   </div>
@@ -153,17 +255,57 @@
 
 <script>
 (function(){
-  var btn=document.getElementById('play-btn'), frame=document.getElementById('stage-frame'), stage=document.getElementById('stage');
-  if(!btn) return;
-  btn.addEventListener('click', function(){
-    var f=document.createElement('iframe');
-    f.src='{{URL_GAME1}}'; f.title='Sol & the UV Shield Quest'; f.allow='fullscreen; gamepad; autoplay';
+  var stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
+      btn=document.getElementById('play-btn'), src=document.getElementById('stage-src'),
+      img=document.getElementById('stage-img'), cap=document.getElementById('stage-cap'),
+      open=document.getElementById('stage-open');
+  if(!stage||!btn) return;
+  var each=function(sel,fn){ Array.prototype.forEach.call(document.querySelectorAll(sel),fn); };
+  var intros={}, cards={}, current=stage.getAttribute('data-game');
+  each('.game-intro[data-game]', function(el){ intros[el.getAttribute('data-game')]=el; });
+  each('.shelf .inst[data-game]', function(el){ cards[el.getAttribute('data-game')]=el; });
+  var motion=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth';
+  function toStage(){ stage.scrollIntoView({behavior:motion, block:'start'}); }
+
+  // the frame shows the selected game's screenshot until Play, then the game
+  function stop(){
+    var f=frame.querySelector('iframe'); if(f) frame.removeChild(f);
+    stage.classList.remove('is-playing');
+  }
+  function play(){
+    var g=intros[current], f=document.createElement('iframe');
+    f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
     f.setAttribute('allowfullscreen','');
-    frame.innerHTML=''; frame.appendChild(f); stage.classList.add('is-playing');
+    stop(); frame.appendChild(f); stage.classList.add('is-playing');
     // keyboard control goes to the game straight away
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });
-    stage.scrollIntoView({behavior:'smooth', block:'start'});
+    toStage();
+  }
+  // choosing a game on the shelf puts it on the stage: screenshot, caption,
+  // "own window" link and the intro column swap; a running game is unloaded
+  function select(id){
+    var g=intros[id]; if(!g) return;
+    if(id!==current){
+      stop(); current=id;
+      var shot=g.getAttribute('data-shot');
+      src.setAttribute('srcset', shot+'.webp'); img.src=shot+'.jpg'; img.alt=g.getAttribute('data-alt');
+      cap.textContent=g.getAttribute('data-cap'); open.href=g.getAttribute('data-url');
+      for(var k in intros){ intros[k].hidden=(k!==id); }
+      for(var c in cards){ cards[c].classList[c===id?'add':'remove']('is-on'); }
+      stage.setAttribute('data-game', id);
+    }
+    toStage();
+  }
+  btn.addEventListener('click', play);
+  each('[data-select]', function(a){
+    a.addEventListener('click', function(e){
+      // a modified click keeps its native meaning: the game in a new tab
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+      e.preventDefault(); select(a.getAttribute('data-select'));
+    });
   });
+  // games.html#lung-detective or #town-of-1000 opens with that game on the stage
+  var h=location.hash.replace(/^#/,''); if(h&&intros[h]&&h!==current) select(h);
 })();
 </script>
 

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sol 与紫外线护盾之旅 —— 防晒小游戏 —— EpiDetective</title>
-<meta name="description" content="一款面向 6 至 12 岁儿童的浏览器游戏，教孩子养成聪明的防晒习惯：看懂紫外线指数、找阴凉、穿戴遮挡、正确使用防晒霜。免费，无需下载，不收集任何数据。">
+<title>防癌小游戏 —— 防晒、肺癌与乳腺癌 —— EpiDetective</title>
+<meta name="description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（跟踪一座小镇四十年的乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
 <link rel="canonical" href="https://epidetective.com/zh/games.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/games.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/games.html">
@@ -15,13 +15,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/zh/games.html">
-<meta property="og:title" content="Sol 与紫外线护盾之旅 —— 防晒小游戏 —— EpiDetective">
-<meta property="og:description" content="一款面向 6 至 12 岁儿童的浏览器游戏，教孩子养成聪明的防晒习惯：看懂紫外线指数、找阴凉、穿戴遮挡、正确使用防晒霜。免费，无需下载，不收集任何数据。">
+<meta property="og:title" content="防癌小游戏 —— 防晒、肺癌与乳腺癌 —— EpiDetective">
+<meta property="og:description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（跟踪一座小镇四十年的乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
 <meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sol 与紫外线护盾之旅 —— 防晒小游戏 —— EpiDetective">
-<meta name="twitter:description" content="一款面向 6 至 12 岁儿童的浏览器游戏，教孩子养成聪明的防晒习惯：看懂紫外线指数、找阴凉、穿戴遮挡、正确使用防晒霜。免费，无需下载，不收集任何数据。">
+<meta name="twitter:title" content="防癌小游戏 —— 防晒、肺癌与乳腺癌 —— EpiDetective">
+<meta name="twitter:description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（跟踪一座小镇四十年的乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
 <meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -47,68 +47,125 @@
 
 <section class="wrap game-page" id="play">
 
-  <div class="stage" id="stage">
+  <div class="stage" id="stage" data-game="sun-safety">
     <div class="stage-frame" id="stage-frame">
       <picture>
-        <source srcset="../assets/games/sun-safety-shot.webp" type="image/webp">
-        <img src="../assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="游戏画面：Sol 站在草地平台上，顶栏显示紫外线指数，前方有金币和太阳星。" loading="eager">
+        <source id="stage-src" srcset="../assets/games/sun-safety-shot.webp" type="image/webp">
+        <img id="stage-img" src="../assets/games/sun-safety-shot.jpg" width="1200" height="780" alt="游戏画面：Sol 站在草地平台上，顶栏显示紫外线指数，前方有金币和太阳星。" loading="eager">
       </picture>
       <div class="play"><button type="button" id="play-btn">在浏览器中开始游戏</button></div>
     </div>
     <div class="stage-cap">
-      <span>游戏运行时的实际截图</span>
-      <a href="../games/sun-safety/" target="_blank" rel="noopener">在新窗口打开 &nearr;</a>
+      <span id="stage-cap">游戏运行时的实际截图</span>
+      <a id="stage-open" href="../games/sun-safety/" target="_blank" rel="noopener">在新窗口打开 &nearr;</a>
     </div>
   </div>
 
-  <div class="game-intro">
-    <div class="label">防癌小游戏</div>
-    <h1>Sol &amp; the UV Shield Quest</h1>
-    <p><b>一款横版闯关小游戏，教孩子在享受阳光的同时保护皮肤。</b></p>
-    <p>大多数皮肤癌由紫外线引起，而预防它的习惯要从小养成。游戏里，小主角 Sol 会在五个地区之间奔跑、跳跃、收集太阳星，从青草地一路走到雪山。途中 Sol 会捡到宽檐帽和 SPF 30+ 防晒霜，游泳后防晒霜会失效，到达关卡时必须答对一道问题，前路才会打开。</p>
-    <p>题目涉及紫外线指数的含义、什么时候需要防护（指数 3 及以上）、为什么阴凉、衣物和防晒霜要搭配使用、沙子、水面和雪如何反射紫外线，以及为什么要远离晒黑床。答错不会受罚：Sol 会得到一个提示，笑着再试一次。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
+  <div class="game-intros">
 
-    <div class="game-facts">
-      <div><b>6&ndash;12</b><span>建议年龄</span></div>
-      <div><b>5</b><span>个地区</span></div>
-      <div><b>30</b><span>道题库，每局 5 道</span></div>
-      <div><b>~10 min</b><span>通关一局约需</span></div>
+    <div class="game-intro" data-game="sun-safety" data-url="../games/sun-safety/" data-shot="../assets/games/sun-safety-shot" data-title="Sol &amp; the UV Shield Quest" data-alt="游戏画面：Sol 站在草地平台上，顶栏显示紫外线指数，前方有金币和太阳星。" data-cap="游戏运行时的实际截图">
+      <div class="label">防癌小游戏</div>
+      <h1>Sol &amp; the UV Shield Quest</h1>
+      <p><b>一款横版闯关小游戏，教孩子在享受阳光的同时保护皮肤。</b></p>
+      <p>大多数皮肤癌由紫外线引起，而预防它的习惯要从小养成。游戏里，小主角 Sol 会在五个地区之间奔跑、跳跃、收集太阳星，从青草地一路走到雪山。途中 Sol 会捡到宽檐帽和 SPF 30+ 防晒霜，游泳后防晒霜会失效，到达关卡时必须答对一道问题，前路才会打开。</p>
+      <p>题目涉及紫外线指数的含义、什么时候需要防护（指数 3 及以上）、为什么阴凉、衣物和防晒霜要搭配使用、沙子、水面和雪如何反射紫外线，以及为什么要远离晒黑床。答错不会受罚：Sol 会得到一个提示，笑着再试一次。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
+
+      <div class="game-facts">
+        <div><b>6&ndash;12</b><span>建议年龄</span></div>
+        <div><b>5</b><span>个地区</span></div>
+        <div><b>30</b><span>道题库，每局 5 道</span></div>
+        <div><b>~10 min</b><span>通关一局约需</span></div>
+      </div>
+
+      <h3>怎么玩</h3>
+      <ol class="howto">
+        <li><span>点击<b>开始游戏</b>。键盘：<kbd>A</kbd> <kbd>D</kbd> 或 <kbd>&larr;</kbd> <kbd>&rarr;</kbd> 移动，<kbd>空格</kbd> 跳跃。手机：使用屏幕上的按钮。也支持游戏手柄。</span></li>
+        <li><span>收集太阳币和九颗隐藏的太阳星。有的平台会移动，有的会坠落，别停下脚步。</span></li>
+        <li><span>留意顶栏的紫外线指数。它会随地区变化，Sol 站在阴凉处时会下降。</span></li>
+        <li><span>到达关卡时，读题，然后从下方跳起顶一下三个答案方块中的一个。答对开门；答错会得到提示，可以再试。</span></li>
+        <li><span>按 <kbd>R</kbd> 重新开始。齿轮图标打开设置：语音朗读、高对比度、阅读障碍友好字体、更大字号、游戏速度和触控按钮大小。</span></li>
+      </ol>
+
+      <h3>五个地区及其紫外线指数</h3>
+      <ul class="regions">
+        <li>阳光草原（Sunny Grassland） <span>UV 5</span></li>
+        <li>阴凉森林（Shade Forest） <span>UV 3</span></li>
+        <li>防晒海滩（Sunscreen Beach） <span>UV 7</span></li>
+        <li>运动与雪山（Sports & Mountain） <span>UV 8</span></li>
+        <li>防晒城堡（Sun-Safety Castle） <span>UV 6</span></li>
+      </ul>
+
+      <p class="fine">游戏角色与美术均为原创。源代码公开于 github.com/Wenxin-Wan/sun-safety-adventure。防晒建议依据《欧洲防癌守则》及世界卫生组织关于紫外线防护的指导。</p>
     </div>
 
-    <h3>怎么玩</h3>
-    <ol class="howto">
-      <li><span>点击<b>开始游戏</b>。键盘：<kbd>A</kbd> <kbd>D</kbd> 或 <kbd>&larr;</kbd> <kbd>&rarr;</kbd> 移动，<kbd>空格</kbd> 跳跃。手机：使用屏幕上的按钮。也支持游戏手柄。</span></li>
-      <li><span>收集太阳币和九颗隐藏的太阳星。有的平台会移动，有的会坠落，别停下脚步。</span></li>
-      <li><span>留意顶栏的紫外线指数。它会随地区变化，Sol 站在阴凉处时会下降。</span></li>
-      <li><span>到达关卡时，读题，然后从下方跳起顶一下三个答案方块中的一个。答对开门；答错会得到提示，可以再试。</span></li>
-      <li><span>按 <kbd>R</kbd> 重新开始。齿轮图标打开设置：语音朗读、高对比度、阅读障碍友好字体、更大字号、游戏速度和触控按钮大小。</span></li>
-    </ol>
+    <div class="game-intro" data-game="lung-detective" data-url="../games/lung-detective/" data-shot="../assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="The Lung Detective 游戏画面：三个场景之一，圆环标出尚待归档的线索。" data-cap="The Lung Detective 运行时的实际截图" hidden>
+      <div class="label">调查类游戏 · 肺癌</div>
+      <h1>The Lung Detective</h1>
+      <p><b>一场横跨公寓、街道和工地的调查，每条线索都按 IARC 归档证据的方式归档。</b></p>
+      <p>大多数肺癌由吸烟引起，而无论在什么年龄戒烟都有好处。这是案卷里的第一条发现，之后的整个调查都建立在它之上。玩家搜查三个场景：一套公寓、一条街道和一处工地，找出十二条线索。每条线索都要按 IARC 归档证据的方式归档：已确认的肺癌病因（1 类）、很可能的病因（2A 类），或者没有证据的东西。随后可以排除真正的危害，每排除一项，清洁空气得分就上升一格。</p>
+      <p>线索涉及二手烟；家中的氡（附带一个小型探测器游戏，围绕世界卫生组织 100 Bq/m³ 的参考水平展开）；室外空气污染与柴油尾气；木柴烟和高温煎炸；以及工地上的硅尘、石棉和焊接烟尘。沥青屋面归入“很可能”一类，咖啡和压力则完全没有证据支持。三段对话推动整个论证：一位“每天只抽几根”的室友、一位说电子烟无害的电子烟店主，以及一位认为抽了二十年再戒也没用的工头。每条线索都注明来源，并附有《欧洲防癌守则》的官方原文。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
 
-    <h3>五个地区及其紫外线指数</h3>
-    <ul class="regions">
-      <li>阳光草原（Sunny Grassland） <span>UV 5</span></li>
-      <li>阴凉森林（Shade Forest） <span>UV 3</span></li>
-      <li>防晒海滩（Sunscreen Beach） <span>UV 7</span></li>
-      <li>运动与雪山（Sports & Mountain） <span>UV 8</span></li>
-      <li>防晒城堡（Sun-Safety Castle） <span>UV 6</span></li>
-    </ul>
+      <div class="game-facts">
+        <div><b>10&ndash;16</b><span>建议年龄</span></div>
+        <div><b>3</b><span>个场景待搜查</span></div>
+        <div><b>12</b><span>条线索待归档</span></div>
+        <div><b>~10 min</b><span>通关一局约需</span></div>
+      </div>
 
-    <p class="fine">游戏角色与美术均为原创。源代码公开于 github.com/Wenxin-Wan/sun-safety-adventure。防晒建议依据《欧洲防癌守则》及世界卫生组织关于紫外线防护的指导。</p>
+      <h3>怎么玩</h3>
+      <ol class="howto">
+        <li><span>点击<b>开始游戏</b>。用鼠标或手指操作，也可以按 <kbd>Tab</kbd> 移到线索上、按 <kbd>Enter</kbd> 查看。闪动的圆环标出线索所在。</span></li>
+        <li><span>把每条线索放进三个抽屉之一：已确认病因（1 类）、很可能的病因（2A 类）或没有证据。放错的抽屉会变灰，可以再试；放对后会显示来源和《欧洲防癌守则》的原文。</span></li>
+        <li><span>排除可以排除的危害，每排除一项，清洁空气得分就上升。公寓里的氡探测器是一个独立的小游戏：世界卫生组织的参考水平是 100 Bq/m³，并指出各国设定的参考水平不应超过 300。</span></li>
+        <li><span>和遇到的三个人谈谈：室友、电子烟店主和工头。每个人都有怀疑的理由，每个人都会温和地得到证据。</span></li>
+        <li><span>齿轮图标打开设置：高对比度、更大字号、更宽更易读的字母，以及减少动效。结尾的报告会显示归档了什么、排除了什么，以及清洁空气得分。</span></li>
+      </ol>
+
+      <p class="fine">游戏中每条线索都注明来源。分类依据 IARC 专论，预防建议采用《欧洲防癌守则》的原文，氡的参考水平采用世界卫生组织的标准（100 Bq/m³）。“任何年龄戒烟都有好处”这一发现来自 Peto 等人（BMJ，2000）。</p>
+    </div>
+
+    <div class="game-intro" data-game="town-of-1000" data-url="../games/town-of-1000/" data-shot="../assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="A Town of 1,000 游戏画面：1,000 个点组成的图阵，标出受影响的女性，下方是本章的两张决策卡。" data-cap="A Town of 1,000 运行时的实际截图" hidden>
+      <div class="label">抉择类游戏 · 乳腺癌</div>
+      <h1>A Town of 1,000</h1>
+      <p><b>一款抉择类游戏：镇议会跟随 1,000 名女性从二十多岁走到六十多岁，一个点一个点地看到预防改变了什么。</b></p>
+      <p>乳腺癌是女性最常见的癌症，而关于如何预防它的许多说法依据都很薄弱。在这个游戏里，玩家是一座小镇的议会，镇上的 1,000 名女性将从二十多岁被跟踪到六十多岁。五个章节，每章两张决策卡和一小笔可以花在上面的“努力预算”：饮酒、身体活动、绝经后的体重、母乳喂养、绝经激素治疗、筛查。结果显示在一个由 1,000 个点组成的图阵上：到 75 岁时被诊断出乳腺癌的女性人数（西欧约为每 1,000 人中 94 人，GLOBOCAN 2024 估计值），以及因此去世的人数（约 15 人）。</p>
+      <p>效应量取自汇总研究，克制而诚实，所以十年的正确选择也只会移动少数几个点。迷思卡等着你识破：止汗剂和钢圈胸罩会耗掉预算却什么也不改变；“无烟”卡则解释，就乳腺癌而言，吸烟的证据只是有限的，尽管它对身体其他部位的危害另当别论。游戏以一块“坦诚面板”结束：这些是人群平均值，对任何一位女性都不构成预测。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
+
+      <div class="game-facts">
+        <div><b>14+</b><span>建议年龄</span></div>
+        <div><b>5</b><span>个章节，每十年一章</span></div>
+        <div><b>10</b><span>张决策卡，每章两张</span></div>
+        <div><b>~8 min</b><span>通关一局约需</span></div>
+      </div>
+
+      <h3>怎么玩</h3>
+      <ol class="howto">
+        <li><span>点击<b>开始游戏</b>。你是镇议会，将跟随镇上的 1,000 名女性走过四十年，她们人生的每个十年是一章。</span></li>
+        <li><span>每章发两张决策卡，并给你一小笔努力预算。读完两张卡，再把预算花在你认为最有用的地方。</span></li>
+        <li><span>留意那 1,000 个点。每个选择都会按汇总研究支持的幅度，改变到 75 岁时被诊断的人数和因此去世的人数。小幅的变化才是诚实的变化。</span></li>
+        <li><span>有些卡是迷思。止汗剂和钢圈胸罩会耗掉预算却一个点也不动；“无烟”卡会解释，为什么吸烟与乳腺癌的证据只是有限的。</span></li>
+        <li><span>读一读结尾的坦诚面板。这些数字是类似西欧人群的平均值，没有哪个点代表某一位具体的女性。</span></li>
+      </ol>
+
+      <p class="fine">基线数据为西欧（GLOBOCAN 2024 估计值）。效应量来自关于饮酒、身体活动、绝经后体重、母乳喂养、绝经激素治疗和筛查参与的汇总研究。预防建议依据《欧洲防癌守则》。</p>
+    </div>
+
   </div>
 </section>
 
 <section class="sec wrap shelf" id="games">
   <div class="sec-head">
     <div class="label">游戏列表</div>
-    <h2>一款<b>已上线</b>，更多正在制作中。</h2>
+    <h2>三款<b>已上线</b>：皮肤、肺、乳腺各一款。</h2>
   </div>
 
   <div class="rack">
 
-    <article class="inst">
+    <article class="inst is-on" data-game="sun-safety">
       <div class="inst-main">
         <div class="inst-top">
           <span class="chip live">已开放</span>
+          <span class="chip on-stage">当前展示</span>
           <h3>Sol &amp; the UV Shield Quest</h3>
         </div>
         <p>面向 6 至 12 岁儿童的防晒横版闯关游戏。五个地区，每个关卡一道问题，一路收集帽子、遮挡衣物、阴凉和防晒霜组成的“护盾装备”。</p>
@@ -116,10 +173,46 @@
           <span>6–12 岁</span><span>键盘、触屏、手柄</span><span>英文</span>
         </div>
         <div class="inst-actions">
-          <a class="btn btn-solid" href="#play">开始游戏 &rarr;</a>
+          <a class="btn btn-solid" href="../games/sun-safety/" data-select="sun-safety">开始游戏 &rarr;</a>
         </div>
       </div>
-      <a href="#play" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <a href="../games/sun-safety/" class="thumb thumb-game" aria-label="Sol &amp; the UV Shield Quest" data-select="sun-safety"></a>
+    </article>
+
+    <article class="inst" data-game="lung-detective">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">已开放</span>
+          <span class="chip on-stage">当前展示</span>
+          <h3>The Lung Detective</h3>
+        </div>
+        <p>一款关于肺癌成因的调查类游戏，适合 10 至 16 岁。三个场景，十二条线索要归档为已确认病因、很可能的病因或没有证据，一个氡探测器要读数，还有三个人要说服。</p>
+        <div class="inst-meta">
+          <span>10–16 岁</span><span>鼠标、触屏、键盘</span><span>英文</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../games/lung-detective/" data-select="lung-detective">开始游戏 &rarr;</a>
+        </div>
+      </div>
+      <a href="../games/lung-detective/" class="thumb thumb-game thumb-lung" aria-label="The Lung Detective" data-select="lung-detective"></a>
+    </article>
+
+    <article class="inst" data-game="town-of-1000">
+      <div class="inst-main">
+        <div class="inst-top">
+          <span class="chip live">已开放</span>
+          <span class="chip on-stage">当前展示</span>
+          <h3>A Town of 1,000</h3>
+        </div>
+        <p>一款关于乳腺癌预防的抉择类游戏，适合 14 岁以上。五个章节，十张决策卡，一小笔努力预算，以及 1,000 个点，诚实地显示小镇的选择让多少女性免于患病。</p>
+        <div class="inst-meta">
+          <span>14 岁以上</span><span>鼠标、触屏</span><span>英文</span>
+        </div>
+        <div class="inst-actions">
+          <a class="btn btn-solid" href="../games/town-of-1000/" data-select="town-of-1000">开始游戏 &rarr;</a>
+        </div>
+      </div>
+      <a href="../games/town-of-1000/" class="thumb thumb-game thumb-town" aria-label="A Town of 1,000" data-select="town-of-1000"></a>
     </article>
 
   </div>
@@ -151,17 +244,57 @@
 </div>
 <script>
 (function(){
-  var btn=document.getElementById('play-btn'), frame=document.getElementById('stage-frame'), stage=document.getElementById('stage');
-  if(!btn) return;
-  btn.addEventListener('click', function(){
-    var f=document.createElement('iframe');
-    f.src='../games/sun-safety/'; f.title='Sol & the UV Shield Quest'; f.allow='fullscreen; gamepad; autoplay';
+  var stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
+      btn=document.getElementById('play-btn'), src=document.getElementById('stage-src'),
+      img=document.getElementById('stage-img'), cap=document.getElementById('stage-cap'),
+      open=document.getElementById('stage-open');
+  if(!stage||!btn) return;
+  var each=function(sel,fn){ Array.prototype.forEach.call(document.querySelectorAll(sel),fn); };
+  var intros={}, cards={}, current=stage.getAttribute('data-game');
+  each('.game-intro[data-game]', function(el){ intros[el.getAttribute('data-game')]=el; });
+  each('.shelf .inst[data-game]', function(el){ cards[el.getAttribute('data-game')]=el; });
+  var motion=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth';
+  function toStage(){ stage.scrollIntoView({behavior:motion, block:'start'}); }
+
+  // the frame shows the selected game's screenshot until Play, then the game
+  function stop(){
+    var f=frame.querySelector('iframe'); if(f) frame.removeChild(f);
+    stage.classList.remove('is-playing');
+  }
+  function play(){
+    var g=intros[current], f=document.createElement('iframe');
+    f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
     f.setAttribute('allowfullscreen','');
-    frame.innerHTML=''; frame.appendChild(f); stage.classList.add('is-playing');
+    stop(); frame.appendChild(f); stage.classList.add('is-playing');
     // keyboard control goes to the game straight away
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });
-    stage.scrollIntoView({behavior:'smooth', block:'start'});
+    toStage();
+  }
+  // choosing a game on the shelf puts it on the stage: screenshot, caption,
+  // "own window" link and the intro column swap; a running game is unloaded
+  function select(id){
+    var g=intros[id]; if(!g) return;
+    if(id!==current){
+      stop(); current=id;
+      var shot=g.getAttribute('data-shot');
+      src.setAttribute('srcset', shot+'.webp'); img.src=shot+'.jpg'; img.alt=g.getAttribute('data-alt');
+      cap.textContent=g.getAttribute('data-cap'); open.href=g.getAttribute('data-url');
+      for(var k in intros){ intros[k].hidden=(k!==id); }
+      for(var c in cards){ cards[c].classList[c===id?'add':'remove']('is-on'); }
+      stage.setAttribute('data-game', id);
+    }
+    toStage();
+  }
+  btn.addEventListener('click', play);
+  each('[data-select]', function(a){
+    a.addEventListener('click', function(e){
+      // a modified click keeps its native meaning: the game in a new tab
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+      e.preventDefault(); select(a.getAttribute('data-select'));
+    });
   });
+  // games.html#lung-detective or #town-of-1000 opens with that game on the stage
+  var h=location.hash.replace(/^#/,''); if(h&&intros[h]&&h!==current) select(h);
 })();
 </script>
 

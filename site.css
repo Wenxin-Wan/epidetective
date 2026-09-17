@@ -261,8 +261,10 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 /* the second tool's signature is the clustering, so its thumbnail is the
    clustered layout rather than the same free-floating one */
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
-/* the game's thumbnail is a frame of the game itself */
+/* a game's thumbnail is a frame of the game itself; Sol is the default */
 .thumb-game{background-image:url(assets/games/sun-safety-shot.jpg);background-size:cover}
+.thumb-game.thumb-lung{background-image:url(assets/games/lung-detective-shot.jpg)}
+.thumb-game.thumb-town{background-image:url(assets/games/town-of-1000-shot.jpg)}
 /* the shelf section on the home page sits under the tools rack; no extra top padding */
 .sec.shelf{padding-top:0}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
@@ -425,6 +427,9 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .stage-cap a{text-decoration:none;border-bottom:1px solid var(--rule)}
 .stage-cap a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .stage.is-playing .stage-frame{aspect-ratio:auto;height:clamp(420px,78vh,720px)}
+/* while a game runs, its screenshot and Play button step aside; they stay in
+   the DOM so choosing another game from the shelf can bring them straight back */
+.stage.is-playing .stage-frame picture,.stage.is-playing .stage-frame .play{display:none}
 .game-intro .label{margin-bottom:12px}
 .game-intro h1{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:14px}
 .game-intro p{color:var(--ink-soft);margin:0 0 14px;max-width:52ch}
@@ -444,5 +449,9 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .regions li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.92rem}
 .regions li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--ink-faint);white-space:nowrap}
 .game-intro .fine{font-size:.82rem;color:var(--ink-faint);max-width:52ch}
-/* the shelf of games: one open, the rest on the way; the rack draws its own rule */
+/* the shelf of games: three open; the rack draws its own rule. The card whose
+   game is on the stage carries an inked "Now on stage" chip; the others hide it. */
 .shelf .sec-head{margin-bottom:22px}
+.shelf .chip.on-stage{display:none;background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.shelf .inst.is-on .chip.on-stage{display:inline-block}
+.shelf .inst.is-on .thumb{border-color:var(--ink)}
