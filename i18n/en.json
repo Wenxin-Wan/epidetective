@@ -91,7 +91,7 @@
   "exp_read3_p": "If you are living with a cancer diagnosis, the people treating you know things about your case that no population map contains. Bring your questions to them.",
   "exp_cta_label": "Open the tool",
   "exp_cta_h2": "Start from a <b>cancer</b>. Start from an <b>exposure</b>. Or open the whole map.",
-  "exp_cta_lede": "Free, in ten languages. Drag, zoom, and focus on any part of the network. Access is limited to reviewers while the scientific revision completes.",
+  "exp_cta_lede": "Free, in ten languages. Drag, zoom, and focus on any part of the network.",
   "exp_cta_btn": "Open the Cancer Evidence Explorer &rarr;",
   "exp_cta_source": "Source: IARC Monographs, \"Classifications by cancer site\", Volumes 1&ndash;141a (last update 18 May 2026), adapted from Schubauer-Berigan et al., JNCI Monographs 2026. This tool identifies hazards across whole populations. For anything concerning your own health, speak to a doctor.",
   "meta_about_title": "About Wenxin Wan — EpiDetective",

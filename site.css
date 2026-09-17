@@ -154,6 +154,15 @@ img,svg{max-width:100%}
 .menu a{text-decoration:none;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
         padding-bottom:3px;border-bottom:1.5px solid transparent}
 .menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+/* On a phone the wrapped menu made a sticky header a fifth of the screen tall;
+   it is set tighter there and scrolls away with the page. */
+@media (max-width:700px){
+  .top{position:static}
+  .top .wrap{gap:8px 20px;padding-block:12px 10px}
+  .top-right{gap:8px 20px}
+  .menu{gap:2px 18px}
+  .menu a{font-size:.92rem;padding-block:5px 3px}
+}
 
 /* ---------- type ---------- */
 h1,h2,h3{font-family:var(--display);font-variation-settings:var(--wonk);font-weight:400;
@@ -171,6 +180,9 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .sec{padding-block:clamp(62px,9vh,112px)}
 .sec-head{margin-bottom:34px}
 .sec-head h2{margin:14px 0 16px;max-width:21ch}
+/* a page whose title sits in a section head: h1 in the outline, h2 in scale */
+.sec-head h1.page-h{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12;margin:14px 0 16px;max-width:21ch}
+html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-width:15em}
 
 /* ---------- hero (platform) ---------- */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
@@ -181,6 +193,7 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
            background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
                       rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
 .hero .wrap{position:relative;z-index:2;padding-block:clamp(64px,13vh,132px)}
+@media (max-width:700px){.hero .wrap{padding-block:52px 60px}}
 /* 23ch keeps "epidemiological evidence" whole on its own line; the old 17ch was
    set for a headline made of short words and now breaks it mid-phrase */
 .hero h1{margin:20px 0 0;max-width:23ch}
@@ -200,7 +213,8 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
    "epidemiological". Hyphenation is confined to these widths so display type on
    a wide screen still sets unbroken. Han does not hyphenate. */
 @media (max-width:560px){
-  .hero h1{hyphens:auto}
+  .hero h1{overflow-wrap:break-word}
+  html[lang="ru"] .hero h1{hyphens:auto}
   html[lang="zh"] .hero h1{hyphens:manual}
 }
 
@@ -264,8 +278,8 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
 /* a game's thumbnail is a frame of the game itself; Sol is the default */
 .thumb-game{background-image:url(assets/games/sun-safety-shot.jpg);background-size:cover}
-.thumb-game.thumb-lung{background-image:url(assets/games/lung-detective-shot.jpg)}
-.thumb-game.thumb-town{background-image:url(assets/games/town-of-1000-shot.jpg)}
+.thumb-game.thumb-lung{background-image:url(assets/games/lung-detective-card.jpg)}
+.thumb-game.thumb-town{background-image:url(assets/games/town-of-1000-card.jpg)}
 /* the shelf section on the home page sits under the tools rack; no extra top padding */
 .sec.shelf{padding-top:0}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
@@ -388,7 +402,7 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .foot .menu a:hover{color:var(--chalk);border-bottom-color:var(--chalk)}
 .foot-row{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:baseline}
 .disc{margin-top:34px;border:1px solid rgba(245,244,240,.2);padding:18px 20px;color:#A7ADA2;
-      font-size:.86rem;max-width:80ch}
+      font-size:.86rem;max-width:44rem}
 /* affiliation notice reads as a formal aside, quieter than the health disclaimer */
 .disc.affil{margin-top:12px;border-color:rgba(245,244,240,.12);color:#949A90;font-size:.8rem}
 .creds a,.disc a{color:inherit;text-decoration:underline;text-underline-offset:2px;
@@ -455,7 +469,7 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 /* the stage section is a grid, so the hidden attribute needs saying out loud */
 .game-page[hidden]{display:none}
 .games-over{padding-block:clamp(26px,4vh,48px) clamp(20px,3vh,36px)}
-.games-over .sec-head h1{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:24ch;margin:0}
+.games-over .sec-head h1{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:24ch;margin:12px 0 0}
 .games-over .sec-head .lede{margin:16px 0 0;max-width:64ch;color:var(--ink-soft)}
 .game-grid{display:grid;gap:22px;margin-top:30px}
 @media (min-width:780px){.game-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -469,6 +483,7 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .gc-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .game-card h2,.game-card h3{font-size:1.35rem;line-height:1.2;margin:0}
 .game-card p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.game-card .inst-meta{gap:3px 16px;line-height:1.5}
 .game-card .inst-actions{margin-top:auto;padding-top:6px}
 .game-card .chip.on-stage{display:none;background:var(--ink);color:var(--chalk);border-color:var(--ink)}
 .game-card.is-on .chip.on-stage{display:inline-block}
