@@ -3,11 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Code Against Cancer — EpiDetective<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Code Against Cancer — EpiDetective</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-</title>
 <meta name="description" content="Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.">
+<link rel="canonical" href="https://epidetective.com/code-against-cancer/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="https://epidetective.com/code-against-cancer/">
+<meta property="og:title" content="Code Against Cancer — EpiDetective">
+<meta property="og:description" content="Official, evidence-based ways to lower your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners.">
+<meta property="og:image" content="https://epidetective.com/assets/og.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap');
   :root{
@@ -178,6 +185,7 @@
           <li><a href="https://www.thelancet.com/journals/lansea/article/PIIS2772-3682(23)00176-2/fulltext" rel="noopener" data-i18n="srcAsia">Mapping towards an Asian Code Against Cancer (ANCCA · IARC)</a></li>
         </ul>
         <p class="foot-note" data-i18n="footNote">Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.</p>
+        <p class="foot-note" data-i18n="affiliation">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization.</p>
       </div>
     </div>
   </section>
@@ -213,12 +221,14 @@ var STRINGS = {
     srcAsia:"Mapping towards an Asian Code Against Cancer (ANCCA · IARC)",
     footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.",
     officialSite:"Read the official Code",
-    summaryNote:"The official Code has no English edition; below is an EpiDetective summary."
+    summaryNote:"The official Code has no English edition; below is an EpiDetective summary.",
+    devNote:"No Asian Code has been published yet. The ten points below are EpiDetective's summary of the themes mapped by IARC and ANCCA.",
+    affiliation:"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization."
   },
   zh: {
     back:"返回 EpiDetective", eyebrow:"官方防癌指南",
     title:"防癌守则",
-    lede:"你可以立刻采取的、有证据支撑的防癌行动——摘自 IARC（世界卫生组织癌症研究机构）及其区域合作伙伴制定的各区域《防癌守则》。",
+    lede:"你可以立刻采取的、有证据支撑的防癌行动——摘自 IARC（世界卫生组织国际癌症研究机构）及其区域合作伙伴制定的各区域《防癌守则》。",
     statV:"约 40%", statL:"的癌症与可预防的成因相关",
     frameworkH:"世界防癌守则框架",
     frameworkP:"同一套证据评估方法，逐区域本土化。每一部区域守则都由 IARC 与区域协调伙伴共同制定，再根据当地癌症谱和生活方式调整。欧洲、拉丁美洲及加勒比已发布；亚洲正在制定中。",
@@ -234,7 +244,9 @@ var STRINGS = {
     srcAsia:"亚洲防癌守则筹备（ANCCA · IARC）",
     footNote:"由 EpiDetective 依据 IARC / PAHO / ANCCA 公开资料整理。最终表述与更新请以上方官方来源为准。",
     officialSite:"阅读官方守则",
-    summaryNote:"官方守则未发布中文版，以下为 EpiDetective 编写的中文摘要。"
+    summaryNote:"官方守则未发布中文版，以下为 EpiDetective 编写的中文摘要。",
+    devNote:"亚洲守则尚未发布。以下十条是 EpiDetective 对 IARC 与 ANCCA 已梳理主题的摘要。",
+    affiliation:"EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书。"
   },
   fr: {
     back:"Retour à EpiDetective", eyebrow:"Recommandations officielles de prévention du cancer",
@@ -255,7 +267,9 @@ var STRINGS = {
     srcAsia:"Vers un Code asiatique contre le cancer (ANCCA · CIRC)",
     footNote:"Compilé par EpiDetective à partir des documents publics du CIRC, de l'OPS et de l'ANCCA. Pour la formulation définitive et les mises à jour, reportez-vous aux sources officielles ci-dessus.",
     officialSite:"Lire le Code officiel",
-    summaryNote:"Le Code officiel de cette région n'est pas publié en français ; ce qui suit est un résumé d'EpiDetective."
+    summaryNote:"Le Code officiel de cette région n'est pas publié en français ; ce qui suit est un résumé d'EpiDetective.",
+    devNote:"Aucun Code asiatique n'est encore publié. Les dix points ci-dessous résument les thèmes recensés par le CIRC et l'ANCCA.",
+    affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d'aucune approbation du Centre international de Recherche sur le Cancer ni de l'Organisation mondiale de la Santé."
   },
   es: {
     back:"Volver a EpiDetective", eyebrow:"Recomendaciones oficiales para la prevención del cáncer",
@@ -276,7 +290,9 @@ var STRINGS = {
     srcAsia:"Hacia un Código Asiático contra el Cáncer (ANCCA · IARC)",
     footNote:"Compilado por EpiDetective a partir de materiales públicos de la IARC, la OPS y la ANCCA. Consulte las fuentes oficiales anteriores para la redacción definitiva y las actualizaciones.",
     officialSite:"Leer el Código oficial",
-    summaryNote:"El Código oficial de esta región no se publica en español; lo que sigue es un resumen de EpiDetective."
+    summaryNote:"El Código oficial de esta región no se publica en español; lo que sigue es un resumen de EpiDetective.",
+    devNote:"Todavía no se ha publicado ningún Código asiático. Los diez puntos siguientes resumen los temas identificados por el CIIC y la ANCCA.",
+    affiliation:"EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud."
   },
   ru: {
     back:"Назад к EpiDetective", eyebrow:"Официальные рекомендации по профилактике рака",
@@ -297,7 +313,9 @@ var STRINGS = {
     srcAsia:"На пути к Азиатскому кодексу против рака (ANCCA · МАИР)",
     footNote:"Составлено EpiDetective по открытым материалам МАИР, ПАОЗ и ANCCA. Точные формулировки и обновления — в официальных источниках выше.",
     officialSite:"Читать официальный Кодекс",
-    summaryNote:"Официальный Кодекс не публикуется на русском языке; ниже — краткое изложение, подготовленное EpiDetective."
+    summaryNote:"Официальный Кодекс не публикуется на русском языке; ниже — краткое изложение, подготовленное EpiDetective.",
+    devNote:"Азиатский кодекс ещё не опубликован. Десять пунктов ниже — краткое изложение тем, намеченных МАИР и ANCCA.",
+    affiliation:"EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения."
   }
 };
 
@@ -329,7 +347,7 @@ var REGIONS = [
       "en": "IARC & the European Commission",
       "zh": "IARC 与欧盟委员会",
       "fr": "CIRC et Commission européenne",
-      "es": "IARC y la Comisión Europea",
+      "es": "CIIC y la Comisión Europea",
       "ru": "МАИР и Европейская комиссия"
     },
     "status": {
@@ -385,7 +403,7 @@ var REGIONS = [
           "zh": "采取行动避免或管理超重和肥胖：少吃高热量、高糖、高脂、高盐食物；少喝含糖饮料；少吃超加工食品。",
           "fr": "Prenez des mesures pour éviter ou gérer le surpoids et l'obésité : Limitez les aliments riches en calories, en sucres, en matières grasses et en sel. Limitez les boissons riches en sucres. Buvez principalement de l'eau et des boissons non sucrées. Limitez les aliments ultratransformés.",
           "es": "Tome medidas para evitar o reducir el sobrepeso y la obesidad: Limite los alimentos con alto contenido calórico, azúcares, grasas y sal. Limite las bebidas con alto contenido de azúcar. Beba principalmente agua y bebidas sin azúcar. Limite los alimentos ultraprocesados.",
-          "ru": "Предупреждайте и корректируйте избыточный вес: ограничьте продукты с высоким содержанием калорий, сахара, жира и соли, сладкие напитки и ультрапереработанные продукты."
+          "ru": "Предупреждайте и корректируйте избыточный вес: ограничьте продукты с высоким содержанием калорий, сахара, жира и соли; ограничьте сладкие напитки и пейте в основном воду и напитки без сахара; ограничьте ультрапереработанные продукты."
         }
       ],
       [
@@ -465,7 +483,7 @@ var REGIONS = [
           "zh": "避免过度日晒，尤其是儿童；做好防晒；绝不使用日光浴床。",
           "fr": "Évitez une exposition excessive au soleil, surtout chez les enfants. Utilisez une protection solaire. N'utilisez jamais d'appareils de bronzage.",
           "es": "Evite una exposición excesiva al sol, sobre todo en los niños. Utilice protección solar. No utilice camas solares.",
-          "ru": "Избегайте чрезмерного пребывания на солнце, особенно детям. Пользуйтесь солнцезащитными средствами. Никогда не пользуйтесь солярием."
+          "ru": "Избегайте чрезмерного пребывания на солнце; особенно берегите от него детей. Пользуйтесь солнцезащитными средствами. Никогда не пользуйтесь солярием."
         }
       ],
       [
@@ -505,7 +523,7 @@ var REGIONS = [
           "en": "Reduce air pollution exposure",
           "zh": "减少空气污染暴露",
           "fr": "Réduisez la pollution de l'air",
-          "es": "Reduzca la contaminación del aire",
+          "es": "Reduzca su exposición a la contaminación del aire",
           "ru": "Меньше загрязнённого воздуха"
         },
         {
@@ -588,7 +606,7 @@ var REGIONS = [
       "en": "IARC & PAHO (Pan American Health Organization)",
       "zh": "IARC 与泛美卫生组织（PAHO）",
       "fr": "CIRC et OPS (Organisation panaméricaine de la santé)",
-      "es": "IARC y OPS (Organización Panamericana de la Salud)",
+      "es": "CIIC y OPS (Organización Panamericana de la Salud)",
       "ru": "МАИР и ПАОЗ (Панамериканская организация здравоохранения)"
     },
     "status": {
@@ -676,7 +694,7 @@ var REGIONS = [
           "zh": "健康饮食，多吃水果和全谷物；不喝含糖饮料，少吃超加工食品；少喝过烫的饮品，因其增加食管癌风险。",
           "fr": "Adoptez une alimentation saine, riche en fruits, légumes et céréales complètes ; évitez les boissons sucrées et les aliments ultratransformés ; évitez la viande transformée et limitez la viande rouge ; limitez les boissons très chaudes, qui augmentent le risque de cancer de l'œsophage.",
           "es": "Lleve una dieta saludable: abundantes verduras, frutas, leguminosas y cereales integrales; evite las bebidas azucaradas y limite los alimentos ultraprocesados; evite la carne procesada y limite la carne roja. Limite las bebidas a temperaturas muy calientes, como el mate, el té o el café.",
-          "ru": "Питайтесь правильно: больше фруктов, овощей и цельных злаков; избегайте сладких напитков и ультрапереработанных продуктов; избегайте переработанного мяса и ограничьте красное; ограничьте очень горячие напитки — они повышают риск рака пищевода."
+          "ru": "Питайтесь правильно: больше фруктов, овощей и цельных злаков; избегайте сладких напитков и ультрапереработанных продуктов; избегайте переработанного мяса и ограничьте красное мясо; ограничьте очень горячие напитки — они повышают риск рака пищевода."
         }
       ],
       [
@@ -753,8 +771,8 @@ var REGIONS = [
         },
         {
           "en": "If outdoor air pollution is high, limit your time outdoors — it is causally linked to lung cancer.",
-          "zh": "户外空气污染严重时，减少户外活动——它与肺癌存在因果关系。",
-          "fr": "Quand la pollution de l'air extérieur est élevée, limitez le temps passé dehors — elle est une cause avérée de cancer du poumon.",
+          "zh": "户外空气污染严重时，减少户外活动——空气污染与肺癌存在因果关系。",
+          "fr": "Quand la pollution de l'air extérieur est élevée, limitez le temps passé dehors — c'est une cause avérée de cancer du poumon.",
           "es": "Si existe alta contaminación del aire en su entorno, limite el tiempo que pasa al aire libre.",
           "ru": "Когда воздух на улице сильно загрязнён, сокращайте время, проводимое вне дома, — такое загрязнение вызывает рак лёгкого."
         }
@@ -779,7 +797,7 @@ var REGIONS = [
         {
           "en": "Check for H. pylori",
           "zh": "关注幽门螺杆菌",
-          "fr": "Pensez à H. pylori",
+          "fr": "Dépistez H. pylori",
           "es": "Consulte sobre H. pylori",
           "ru": "Проверьтесь на H. pylori"
         },
@@ -811,7 +829,7 @@ var REGIONS = [
         {
           "en": "Limit menopausal HRT",
           "zh": "限制更年期 HRT",
-          "fr": "Limitez le THS de la ménopause",
+          "fr": "Limitez le traitement hormonal de la ménopause",
           "es": "Limite el reemplazo hormonal",
           "ru": "Ограничьте гормональную терапию"
         },
@@ -887,7 +905,7 @@ var REGIONS = [
       "en": "IARC & ANCCA (Asian National Cancer Centers Alliance)",
       "zh": "IARC 与亚洲国家癌症中心联盟（ANCCA）",
       "fr": "CIRC et ANCCA (Alliance des centres nationaux du cancer d'Asie)",
-      "es": "IARC y ANCCA (Alianza de Centros Nacionales del Cáncer de Asia)",
+      "es": "CIIC y ANCCA (Alianza de Centros Nacionales del Cáncer de Asia)",
       "ru": "МАИР и ANCCA (Альянс национальных онкологических центров Азии)"
     },
     "status": {
@@ -1073,6 +1091,9 @@ function build(lang){
   document.body.classList.toggle("zh", lang==="zh");
   document.body.classList.toggle("en", lang!=="zh");
   document.documentElement.lang = lang;
+  document.title = i18n("title", lang) + " — EpiDetective";
+  var md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute("content", i18n("lede", lang));
 
   /* language switcher */
   var nav = document.getElementById("langNav");
@@ -1117,13 +1138,15 @@ function build(lang){
       : '';
     var meta = '<div class="region-meta"><b>'+esc(pick(r.name,lang))+'</b>'+badge+
       '<span class="sub">'+esc(pick(r.status,lang))+" · "+esc(count)+'</span>'+
-      '<span class="partner">'+i18n("coordinated",lang)+": "+esc(pick(r.partner,lang))+'</span>'+official+'</div>';
+      '<span class="partner">'+i18n("coordinated",lang)+(lang==="zh"?"：":lang==="fr"?"\u202f: ":": ")+esc(pick(r.partner,lang))+'</span>'+official+'</div>';
 
     /* published Codes without an official edition in this language get the
        summary notice; the in-development region's badge already says enough */
-    var note = (!r.dev && r.officialLangs && r.officialLangs.indexOf(lang) < 0)
-      ? '<p class="summary-note">'+esc(i18n("summaryNote",lang))+'</p>'
-      : '';
+    var note = r.dev
+      ? '<p class="summary-note">'+esc(i18n("devNote",lang))+'</p>'
+      : (r.officialLangs && r.officialLangs.indexOf(lang) < 0)
+        ? '<p class="summary-note">'+esc(i18n("summaryNote",lang))+'</p>'
+        : '';
 
     var cards = r.recs.map(function(rec, i){
       return '<div class="rec"><div class="n">'+(i+1)+'</div>'+

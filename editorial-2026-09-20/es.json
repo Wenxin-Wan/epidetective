@@ -1,0 +1,335 @@
+{
+ "_about": "Spanish edits from the 20 Sep 2026 editorial review. The 14 European Code recommendations were checked word for word against cancer-code-europe.iarc.who.int/es on 20 Sep 2026 and are untouched: the four that a reviewer suspected of being altered are in fact the official wording. The agency is CIIC throughout, which is what both tools already ship.",
+ "lang": "es",
+ "i18n": [
+  {
+   "key": "inst_h2",
+   "set": "Dos ya están <b>abiertas</b>. Hay más en camino.",
+   "why": "El sujeto son las herramientas (femenino); los distintivos debajo ya dicen «Abierta». «Vienen más» es calco de More are being built."
+  },
+  {
+   "key": "foot_affiliation",
+   "sub": [
+    "responsabilidad únicamente de su autora",
+    "responsabilidad únicamente de su autor"
+   ],
+   "why": "Concordancia masculina para Wenxin Wan (confirmada por el autor)."
+  },
+  {
+   "key": "meta_home_desc",
+   "set": "Herramientas gratuitas para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creadas por un epidemiólogo del cáncer del CIIC (OMS).",
+   "why": "«libres» es calco de free (el cuerpo del sitio dice «gratuitas»); «Creado» no concuerda con «Herramientas»; el nombre en español de la agencia es CIIC."
+  },
+  {
+   "key": "about_p1",
+   "sub": [
+    "la Agencia Internacional de Investigación sobre el Cáncer (IARC)",
+    "el Centro Internacional de Investigaciones sobre el Cáncer (CIIC)"
+   ],
+   "why": "Nombre oficial en español, el mismo que usan las dos herramientas y el pie de página."
+  },
+  {
+   "key": "about_p3",
+   "sub": [
+    "Mi trabajo diario en la IARC",
+    "Mi trabajo diario en el CIIC"
+   ],
+   "why": "Mismo nombre y género en todo el sitio."
+  },
+  {
+   "key": "about_p2",
+   "sub": [
+    "y mi doctorado en la Universidad de Utrecht",
+    "y realicé mi investigación doctoral en la Universidad de Utrecht"
+   ],
+   "why": "La defensa pública es el 28 de septiembre de 2026 y el título se confiere ese día."
+  },
+  {
+   "key": "exp_read1_p",
+   "sub": [
+    "Cuánta, durante cuánto tiempo, a qué edad y con qué genes se interponen entre ese hallazgo y cualquier persona concreta.",
+    "Entre ese hallazgo y cualquier persona concreta se interponen la cantidad, la duración, la edad a la que ocurre la exposición y los genes de cada quien."
+   ],
+   "why": "La frase actual no tiene sujeto gramatical y pierde «which genes you carry»."
+  },
+  {
+   "key": "exp_cta_lede",
+   "set": "Gratuito, en diez idiomas. Arrastra, amplía y céntrate en cualquier parte de la red.",
+   "why": "El resto del sitio tutea; estas líneas estaban en usted."
+  },
+  {
+   "key": "contact_h2",
+   "set": "Escríbeme.",
+   "why": "Coherencia con el tuteo del sitio."
+  },
+  {
+   "key": "contact_p",
+   "set": "Preguntas, correcciones o una herramienta que te gustaría ver: escríbeme un correo.",
+   "why": "Coherencia con el tuteo del sitio."
+  },
+  {
+   "key": "cite_p",
+   "sub": [
+    "Cite también las fuentes primarias indicadas dentro de cada herramienta.",
+    "Cita también las fuentes primarias indicadas dentro de cada herramienta."
+   ],
+   "why": "Coherencia con el tuteo del sitio."
+  },
+  {
+   "key": "inst_t2_name",
+   "set": "Atlas de evidencia — enfermedades crónicas",
+   "why": "Es el nombre que la propia herramienta muestra en español."
+  },
+  {
+   "key": "inst_t2_desc",
+   "sub": [
+    "la enfermedad cardíaca, el ictus",
+    "las enfermedades cardiovasculares, el accidente cerebrovascular (ictus)"
+   ],
+   "why": "«ictus» es de uso peninsular; el sitio aloja además un Código latinoamericano, así que conviene el término panhispánico con la aclaración."
+  },
+  {
+   "key": "inst_t2_m5",
+   "set": "GBD · Comisiones de The Lancet · metaanálisis · v1.4 · sept. 2026",
+   "why": "El inglés no dice «instantánea»; abreviatura correcta «sept.»."
+  },
+  {
+   "key": "about_cred_msc_value",
+   "set": "Universidad de Bristol (Reino Unido), MSc en Epidemiología, con distinción (Distinction)",
+   "why": "La mención británica, explicada en español."
+  },
+  {
+   "key": "exp_reads_h2",
+   "set": "Tres límites de este mapa que <em>conviene conocer</em> antes de leerlo.",
+   "why": "La yuxtaposición con «conviene conocerlos» deja la frase sin hilo sintáctico."
+  },
+  {
+   "key": "exp_fig4",
+   "set": "Volúmenes de las Monografías",
+   "why": "La obra se llama Monografías del CIIC; en minúscula y sin artículo parece un sustantivo común."
+  },
+  {
+   "key": "meta_about_desc",
+   "sub": [
+    "que construye EpiDetective",
+    "que crea EpiDetective"
+   ],
+   "why": "«construir» un sitio es calco; en español se crea o se desarrolla."
+  },
+  {
+   "key": "meta_about_desc",
+   "sub": [
+    "y cómo contactar.",
+    "y cómo ponerse en contacto."
+   ],
+   "why": "«contactar» sin complemento queda cojo."
+  },
+  {
+   "key": "games_over_lede",
+   "sub": [
+    "Cada juego enseña, jugando, un aspecto",
+    "Cada juego enseña un aspecto"
+   ],
+   "why": "El gerundio deja sin sujeto la acción de jugar."
+  },
+  {
+   "key": "games_over_lede",
+   "sub": [
+    "Elige uno para ver cómo se juega y qué enseña.",
+    "Elige uno para ver cómo se juega y qué enseña a través del juego."
+   ],
+   "why": "Recupera el matiz de «learning by playing» sin gerundio suelto."
+  },
+  {
+   "key": "games_p1",
+   "sub": [
+    "protector solar SPF 30+",
+    "protector solar con FPS 30+"
+   ],
+   "why": "En español el factor de protección solar se abrevia FPS."
+  },
+  {
+   "key": "games_p2",
+   "sub": [
+    "por qué evitar las camas de bronceado",
+    "por qué conviene evitar las camas solares"
+   ],
+   "why": "El Código contra el cáncer en español dice «camas solares»; dos nombres para lo mismo en el mismo sitio."
+  },
+  {
+   "key": "games_step5",
+   "sub": [
+    "fuente apta para dislexia",
+    "tipografía adaptada a la dislexia"
+   ],
+   "why": "«fuente apta para dislexia» no es la fórmula al uso en accesibilidad."
+  },
+  {
+   "key": "games_g2_step5",
+   "sub": [
+    "y menos animación",
+    "y movimiento reducido"
+   ],
+   "why": "Es el ajuste de accesibilidad «reduced motion»."
+  },
+  {
+   "key": "games_g2_step2",
+   "sub": [
+    "Un cajón equivocado se apaga",
+    "Un cajón equivocado se atenúa"
+   ],
+   "why": "Un cajón no se apaga; en la interfaz se atenúa."
+  },
+  {
+   "key": "games_g2_p2",
+   "sub": [
+    "Las pistas abarcan el humo ajeno",
+    "Las pistas abarcan el humo de tabaco ajeno"
+   ],
+   "why": "«humo ajeno» solo se entiende con el complemento."
+  },
+  {
+   "key": "games_g2_p2",
+   "sub": [
+    "los gases del diésel",
+    "los gases de escape de los motores diésel"
+   ],
+   "why": "Es el término del CIIC para diesel engine exhaust."
+  },
+  {
+   "key": "games_g2_sub",
+   "sub": [
+    "por un piso, una calle y una obra",
+    "por una vivienda, una calle y una obra"
+   ],
+   "why": "«piso» es peninsular; «vivienda» es panhispánico."
+  },
+  {
+   "key": "games_g2_p1",
+   "sub": [
+    "El jugador registra tres escenas, un piso, una calle y una obra",
+    "El jugador explora tres escenas, una vivienda, una calle y una obra"
+   ],
+   "why": "Igual que arriba; «registrar» suena a registro policial."
+  },
+  {
+   "key": "games_g2_step3",
+   "sub": [
+    "En el piso, el detector de radón",
+    "En la vivienda, el detector de radón"
+   ],
+   "why": "Coherencia."
+  },
+  {
+   "key": "games_g2_step4",
+   "sub": [
+    "el compañero de piso",
+    "la persona con quien comparte la vivienda"
+   ],
+   "why": "Coherencia y registro neutro."
+  },
+  {
+   "key": "games_g3_sub",
+   "sub": [
+    "un ayuntamiento sigue a 1.000 mujeres",
+    "un consejo municipal sigue a 1.000 mujeres"
+   ],
+   "why": "«ayuntamiento» es peninsular; «consejo municipal» se entiende en toda América Latina."
+  },
+  {
+   "key": "games_g3_p1",
+   "sub": [
+    "el jugador es el ayuntamiento de un pueblo",
+    "el jugador es el consejo municipal de un pueblo"
+   ],
+   "why": "Coherencia."
+  },
+  {
+   "key": "games_g3_step1",
+   "sub": [
+    "Formas el ayuntamiento de un pueblo",
+    "Formas el consejo municipal de un pueblo"
+   ],
+   "why": "Coherencia."
+  },
+  {
+   "key": "games_g3_p2",
+   "sub": [
+    "los sujetadores con aros",
+    "los sostenes con aros"
+   ],
+   "why": "«sujetador» es peninsular."
+  },
+  {
+   "key": "games_g3_step4",
+   "sub": [
+    "los sujetadores con aros",
+    "los sostenes con aros"
+   ],
+   "why": "Coherencia."
+  },
+  {
+   "key": "games_g3_p2",
+   "sub": [
+    "Los efectos son modestos y honestos",
+    "Los tamaños del efecto son modestos y honestos"
+   ],
+   "why": "En epidemiología, effect size es «tamaño del efecto»."
+  },
+  {
+   "key": "games_g3_step3",
+   "sub": [
+    "y el de las que mueren por ello, en lo que los estudios agrupados respaldan",
+    "y el de las que mueren por la enfermedad, en la medida en que lo respaldan los estudios agrupados"
+   ],
+   "why": "«por ello» queda ambiguo y la subordinada estaba mal ensamblada."
+  },
+  {
+   "key": "games_g3_step3",
+   "sub": [
+    "Los movimientos pequeños son los honestos.",
+    "Son los movimientos pequeños los que resultan honestos."
+   ],
+   "why": "La frase original es calco del inglés."
+  },
+  {
+   "key": "games_g3_desc",
+   "sub": [
+    "a cuántas mujeres libran las decisiones de un pueblo",
+    "a cuántas mujeres ahorran la enfermedad las decisiones de un pueblo"
+   ],
+   "why": "«librar a alguien» necesita complemento («de qué»)."
+  },
+  {
+   "key": "meta_games_title",
+   "set": "Juegos sobre el cáncer — piel, pulmón y mama — EpiDetective",
+   "why": "El primer juego trata del cáncer de piel, no del sol como tal; además acorta un título de 77 caracteres."
+  },
+  {
+   "key": "meta_games_desc",
+   "set": "Tres juegos gratuitos en el navegador sobre prevención del cáncer: protección solar (de 6 a 12 años), causas del cáncer de pulmón (de 10 a 16) y cáncer de mama (desde los 14).",
+   "why": "La descripción anterior tenía 338 caracteres y se cortaba a media frase en los resultados de búsqueda."
+  },
+  {
+   "key": "about_timeline_link",
+   "set": "Mi trayectoria y mis trabajos, año a año (en inglés)",
+   "why": "The timeline exists in English and Chinese only; the link now says so in the reader's language."
+  },
+  {
+   "key": "games_g3_step1",
+   "sub": [
+    "durante cuarenta años",
+    "a lo largo de cinco décadas"
+   ],
+   "why": "Aligned with the English after the review: the game spans five decades, and the tool states its provenance in full."
+  },
+  {
+   "key": "exp_cta_source",
+   "sub": [
+    "adaptado de Schubauer-Berigan et al., JNCI Monographs 2026.",
+    "adaptado de Schubauer-Berigan et al., JNCI Monographs 2026, y ampliado con las evaluaciones posteriores y con los tipos de VPH nombrados uno a uno en el volumen 100B."
+   ],
+   "why": "Aligned with the English after the review: the game spans five decades, and the tool states its provenance in full."
+  }
+ ]
+}

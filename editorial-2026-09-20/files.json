@@ -1,0 +1,231 @@
+{
+ "_about": "Page-level edits from the 20 Sep 2026 editorial review: the two hand-written pages (Code Against Cancer, timeline), the three games and the 404 page. Official Code recommendation wording is untouched; only EpiDetective's own labels, notes and page furniture change.",
+ "files": [
+  {
+   "file": "code-against-cancer/index.html",
+   "edits": [
+    {
+     "old": "<title>Code Against Cancer — EpiDetective<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">\n</title>",
+     "new": "<title>Code Against Cancer — EpiDetective</title>\n<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+     "why": "The closing </title> sat after three <link> tags, so the browser tab showed raw markup and the page had no favicon."
+    },
+    {
+     "old": "<meta name=\"description\" content=\"Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.\">",
+     "new": "<meta name=\"description\" content=\"Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.\">\n<link rel=\"canonical\" href=\"https://epidetective.com/code-against-cancer/\">\n<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:site_name\" content=\"EpiDetective\">\n<meta property=\"og:url\" content=\"https://epidetective.com/code-against-cancer/\">\n<meta property=\"og:title\" content=\"Code Against Cancer — EpiDetective\">\n<meta property=\"og:description\" content=\"Official, evidence-based ways to lower your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners.\">\n<meta property=\"og:image\" content=\"https://epidetective.com/assets/og.png\">",
+     "why": "Every other page carries a canonical link and the Open Graph set; this one carried neither."
+    },
+    {
+     "old": "  document.documentElement.lang = lang;",
+     "new": "  document.documentElement.lang = lang;\n  document.title = i18n(\"title\", lang) + \" — EpiDetective\";\n  var md = document.querySelector('meta[name=\"description\"]');\n  if (md) md.setAttribute(\"content\", i18n(\"lede\", lang));",
+     "why": "With ?lang=fr the page was fully French while the tab, the bookmark and anything shared still read English."
+    },
+    {
+     "old": "'<span class=\"partner\">'+i18n(\"coordinated\",lang)+\": \"+esc(pick(r.partner,lang))+'</span>'",
+     "new": "'<span class=\"partner\">'+i18n(\"coordinated\",lang)+(lang===\"zh\"?\"：\":lang===\"fr\"?\"\\u202f: \":\": \")+esc(pick(r.partner,lang))+'</span>'",
+     "why": "Chinese renders a half-width colon after 协调方; Chinese punctuation is full width. French takes a narrow no-break space before the colon."
+    },
+    {
+     "old": "它与肺癌存在因果关系",
+     "new": "空气污染与肺癌存在因果关系",
+     "why": "The nearest noun to 它 was 户外活动, so the sentence read as \"outdoor activity causes lung cancer\"."
+    },
+    {
+     "old": "IARC（世界卫生组织癌症研究机构）",
+     "new": "IARC（世界卫生组织国际癌症研究机构）",
+     "why": "IARC's Chinese name is 国际癌症研究机构."
+    },
+    {
+     "old": "Избегайте чрезмерного пребывания на солнце, особенно детям.",
+     "new": "Избегайте чрезмерного пребывания на солнце; особенно берегите от него детей.",
+     "why": "The imperative addresses вы and then a dative appears with nothing to agree with."
+    },
+    {
+     "old": "ограничьте продукты с высоким содержанием калорий, сахара, жира и соли, сладкие напитки и ультрапереработанные продукты.",
+     "new": "ограничьте продукты с высоким содержанием калорий, сахара, жира и соли; ограничьте сладкие напитки и пейте в основном воду и напитки без сахара; ограничьте ультрапереработанные продукты.",
+     "why": "The Russian card dropped the official instruction to drink mostly water and unsweetened drinks, which every other language carries."
+    },
+    {
+     "old": "избегайте переработанного мяса и ограничьте красное",
+     "new": "избегайте переработанного мяса и ограничьте красное мясо",
+     "why": "Without the noun the adjective is left hanging."
+    },
+    {
+     "old": "Limitez le THS de la ménopause",
+     "new": "Limitez le traitement hormonal de la ménopause",
+     "why": "A bare English abbreviation in a card title; French health agencies write traitement hormonal de la ménopause."
+    },
+    {
+     "old": "Pensez à H. pylori",
+     "new": "Dépistez H. pylori",
+     "why": "The recommendation is to be screened and treated, which \"pensez à\" does not say."
+    },
+    {
+     "old": "elle est une cause avérée de cancer du poumon",
+     "new": "c'est une cause avérée de cancer du poumon",
+     "why": "\"elle\" has no antecedent in the French sentence."
+    },
+    {
+     "old": "IARC y la Comisión Europea",
+     "new": "CIIC y la Comisión Europea",
+     "why": "The Spanish name of the agency is CIIC, which both tools and the site footer already use."
+    },
+    {
+     "old": "IARC y OPS (Organización Panamericana de la Salud)",
+     "new": "CIIC y OPS (Organización Panamericana de la Salud)",
+     "why": "Same."
+    },
+    {
+     "old": "IARC y ANCCA (Alianza de Centros Nacionales del Cáncer de Asia)",
+     "new": "CIIC y ANCCA (Alianza de Centros Nacionales del Cáncer de Asia)",
+     "why": "Same."
+    },
+    {
+     "old": "Reduzca la contaminación del aire",
+     "new": "Reduzca su exposición a la contaminación del aire",
+     "why": "The official recommendation is about reducing your exposure; an individual cannot reduce air pollution."
+    },
+    {
+     "old": "summaryNote:\"The official Code has no English edition; below is an EpiDetective summary.\"",
+     "new": "summaryNote:\"The official Code has no English edition; below is an EpiDetective summary.\",\n    devNote:\"No Asian Code has been published yet. The ten points below are EpiDetective's summary of the themes mapped by IARC and ANCCA.\",\n    affiliation:\"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization.\"",
+     "why": "Adds the in-development note and the affiliation line (en)."
+    },
+    {
+     "old": "summaryNote:\"官方守则未发布中文版，以下为 EpiDetective 编写的中文摘要。\"",
+     "new": "summaryNote:\"官方守则未发布中文版，以下为 EpiDetective 编写的中文摘要。\",\n    devNote:\"亚洲守则尚未发布。以下十条是 EpiDetective 对 IARC 与 ANCCA 已梳理主题的摘要。\",\n    affiliation:\"EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书。\"",
+     "why": "Adds the in-development note and the affiliation line (zh)."
+    },
+    {
+     "old": "summaryNote:\"Le Code officiel de cette région n'est pas publié en français ; ce qui suit est un résumé d'EpiDetective.\"",
+     "new": "summaryNote:\"Le Code officiel de cette région n'est pas publié en français ; ce qui suit est un résumé d'EpiDetective.\",\n    devNote:\"Aucun Code asiatique n'est encore publié. Les dix points ci-dessous résument les thèmes recensés par le CIRC et l'ANCCA.\",\n    affiliation:\"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d'aucune approbation du Centre international de Recherche sur le Cancer ni de l'Organisation mondiale de la Santé.\"",
+     "why": "Adds the in-development note and the affiliation line (fr)."
+    },
+    {
+     "old": "summaryNote:\"El Código oficial de esta región no se publica en español; lo que sigue es un resumen de EpiDetective.\"",
+     "new": "summaryNote:\"El Código oficial de esta región no se publica en español; lo que sigue es un resumen de EpiDetective.\",\n    devNote:\"Todavía no se ha publicado ningún Código asiático. Los diez puntos siguientes resumen los temas identificados por el CIIC y la ANCCA.\",\n    affiliation:\"EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud.\"",
+     "why": "Adds the in-development note and the affiliation line (es)."
+    },
+    {
+     "old": "summaryNote:\"Официальный Кодекс не публикуется на русском языке; ниже — краткое изложение, подготовленное EpiDetective.\"",
+     "new": "summaryNote:\"Официальный Кодекс не публикуется на русском языке; ниже — краткое изложение, подготовленное EpiDetective.\",\n    devNote:\"Азиатский кодекс ещё не опубликован. Десять пунктов ниже — краткое изложение тем, намеченных МАИР и ANCCA.\",\n    affiliation:\"EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения.\"",
+     "why": "Adds the in-development note and the affiliation line (ru)."
+    },
+    {
+     "old": "    var note = (!r.dev && r.officialLangs && r.officialLangs.indexOf(lang) < 0)\n      ? '<p class=\"summary-note\">'+esc(i18n(\"summaryNote\",lang))+'</p>'\n      : '';",
+     "new": "    var note = r.dev\n      ? '<p class=\"summary-note\">'+esc(i18n(\"devNote\",lang))+'</p>'\n      : (r.officialLangs && r.officialLangs.indexOf(lang) < 0)\n        ? '<p class=\"summary-note\">'+esc(i18n(\"summaryNote\",lang))+'</p>'\n        : '';",
+     "why": "The one region whose Code is still being developed was the only one with no note, so its ten cards read like a published Code."
+    },
+    {
+     "old": "<p class=\"foot-note\" data-i18n=\"footNote\">Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.</p>",
+     "new": "<p class=\"foot-note\" data-i18n=\"footNote\">Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.</p>\n        <p class=\"foot-note\" data-i18n=\"affiliation\">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization.</p>",
+     "why": "This is the page most likely to be read as an official IARC publication, and it was the only one without the affiliation note."
+    }
+   ]
+  },
+  {
+   "file": "timeline/index.html",
+   "edits": [
+    {
+     "old": "<title>Timeline — Wenxin Wan<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">\n</title>",
+     "new": "<title>Timeline — Wenxin Wan — EpiDetective</title>\n<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+     "why": "Same unclosed <title> as the Code page: raw markup in the tab, no favicon."
+    },
+    {
+     "old": "<meta property=\"og:description\" content=\"Me, and the work: every degree, paper, role, tool and conference record, newest first, linked to primary sources.\">",
+     "new": "<meta property=\"og:description\" content=\"Me, and the work: every degree, paper, role, tool and conference record, newest first, linked to primary sources.\">\n<meta property=\"og:image\" content=\"https://epidetective.com/assets/og.png\">",
+     "why": "The other pages carry an og:image; shared links from this page had none."
+    },
+    {
+     "old": "癌症证据浏览器",
+     "new": "癌症证据探索器",
+     "why": "The site calls it 癌症证据探索器; two names for one product, two clicks apart.",
+     "count": 2
+    },
+    {
+     "old": "慢病证据浏览器",
+     "new": "慢性病证据图谱",
+     "why": "The tool's own Chinese name is 慢性病证据图谱."
+    },
+    {
+     "old": "coauthor:\"合作者\"",
+     "new": "coauthor:\"共同作者\"",
+     "why": "合作者 means collaborator; co-author is 共同作者."
+    },
+    {
+     "old": "逐条估计的审计线索",
+     "new": "逐条估计的溯源记录",
+     "why": "\"审计线索\" is an accounting term; the tool shows where each estimate comes from."
+    },
+    {
+     "old": "我走过的路与做出的东西",
+     "new": "我走过的路与做过的工作",
+     "why": "\"做出的东西\" is colloquial for a research record."
+    },
+    {
+     "old": "以优秀毕业论文奖毕业",
+     "new": "毕业论文获评优秀",
+     "why": "The award is for the thesis, and the original reads as graduating by means of an award."
+    }
+   ]
+  },
+  {
+   "file": "games/sun-safety/index.html",
+   "edits": [
+    {
+     "old": "<body>",
+     "new": "<body>\n<h1 class=\"sr-only\">Sol &amp; the UV Shield Quest — a sun-safety game</h1>",
+     "why": "The page had no h1 at all, while the other two games have two each."
+    }
+   ]
+  },
+  {
+   "file": "games/lung-detective/index.html",
+   "edits": [
+    {
+     "old": "<h1>Detective's report",
+     "new": "<h2>Detective's report",
+     "why": "Two h1 elements on one page; the end-screen heading belongs under the game title."
+    },
+    {
+     "old": "<meta property=\"og:url\" content=\"https://epidetective.com/games/lung-detective/\">",
+     "new": "<meta property=\"og:url\" content=\"https://epidetective.com/games/lung-detective/\">\n<meta property=\"og:image\" content=\"https://epidetective.com/assets/games/lung-detective-card.jpg\">",
+     "why": "No og:image, so shared links showed nothing."
+    }
+   ]
+  },
+  {
+   "file": "games/town-of-1000/index.html",
+   "edits": [
+    {
+     "old": "<h1>How the town did",
+     "new": "<h2>How the town did",
+     "why": "Two h1 elements on one page."
+    },
+    {
+     "old": "<meta property=\"og:url\" content=\"https://epidetective.com/games/town-of-1000/\">",
+     "new": "<meta property=\"og:url\" content=\"https://epidetective.com/games/town-of-1000/\">\n<meta property=\"og:image\" content=\"https://epidetective.com/assets/games/town-of-1000-card.jpg\">",
+     "why": "No og:image."
+    }
+   ]
+  },
+  {
+   "file": "404.html",
+   "edits": [
+    {
+     "old": "<title>Page not found — EpiDetective</title>",
+     "new": "<title>Page not found — EpiDetective</title>\n<meta name=\"description\" content=\"This page is not on EpiDetective. Everything on the site is reachable from the home page.\">",
+     "why": "The only page with no meta description."
+    }
+   ]
+  },
+  {
+   "file": "games/sun-safety/game.css",
+   "edits": [
+    {
+     "old": "button,select,input{font:inherit}body{overflow:hidden}",
+     "new": "button,select,input{font:inherit}body{overflow:hidden}\n.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}",
+     "why": "Class for the page's new h1, which is read by screen readers and search engines without changing the design."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "_about": "English edits from the 20 Sep 2026 editorial review. Every count on the English pages was checked against the two tools' own DATA and none was stale, so nothing here changes a figure.",
+ "lang": "en",
+ "i18n": [
+  {"key": "about_p2", "sub": ["and my PhD from Utrecht University in the Netherlands", "and completed my doctoral research at Utrecht University in the Netherlands"],
+   "why": "The public defence is on 28 September 2026, and in the Dutch system the degree is conferred at that ceremony; the timeline already lists the defence as upcoming."},
+  {"key": "exp_lede", "sub": ["and the 469 links the World Health Organization's cancer agency has recorded between them.", "and the 469 links between them recorded by the World Health Organization's cancer agency."],
+   "why": "Reads as the agency's own record rather than a claim about how much it has found."},
+  {"key": "exp_cta_source", "sub": ["adapted from Schubauer-Berigan et al., JNCI Monographs 2026.", "adapted from Schubauer-Berigan et al., JNCI Monographs 2026, and augmented for later evaluations and for the single HPV types named in Volume 100B."],
+   "why": "The tool states its provenance in full; the page introducing it stopped halfway."},
+  {"key": "exp_whatsin_h2", "sub": ["The exposures the IARC has linked", "The exposures IARC has linked"], "why": "IARC takes no article, as everywhere else on the site."},
+  {"key": "exp_bar1_note", "sub": ["the strongest conclusion the IARC draws", "the strongest conclusion IARC draws"], "why": "Same."},
+  {"key": "home_audience", "sub": ["journalists, and the people who write health policy", "journalists and the people who write health policy"], "why": "The rest of the site does not use the serial comma."},
+  {"key": "meta_games_title", "set": "Cancer awareness games — skin, lung and breast — EpiDetective", "why": "The first game is about skin cancer; sun exposure is its subject, not the cancer."},
+  {"key": "meta_games_desc", "set": "Three free browser games about cancer prevention: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and breast cancer for 14 and up.",
+   "why": "The old description ran to 283 characters, so search results cut it mid-sentence."},
+  {"key": "games_g3_step1", "sub": ["whose 1,000 women you will follow for forty years", "whose 1,000 women you will follow across five decades"],
+   "why": "The game follows them from their twenties to their sixties and counts the outcome at 75, so \"forty years\" matches neither."}
+ ]
+}

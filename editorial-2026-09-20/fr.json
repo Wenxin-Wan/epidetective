@@ -1,0 +1,261 @@
+{
+ "_about": "French edits from the 20 Sep 2026 editorial review. Wenxin chose to settle the site on 'preuves' (the word the chronic tool itself ships with) and to name the two tools as the tools name themselves. Official European Code wording on the Code page was checked against cancer-code-europe.iarc.who.int/fr and is untouched. A final mechanical pass replaced the straight apostrophe with the typographic one (U+2019) in every French string, which the file already used in three places.",
+ "lang": "fr",
+ "i18n": [
+  {
+   "key": "foot_affiliation",
+   "sub": [
+    "n'engagent que leur autrice",
+    "n'engagent que leur auteur"
+   ],
+   "why": "Accord masculin pour Wenxin Wan (confirmé par l'auteur). L'anglais dit seulement « the author »."
+  },
+  {
+   "key": "foot_tagline",
+   "set": "Des outils ouverts pour lire les preuves en santé.",
+   "why": "« données de santé » est le terme juridique du RGPD pour les données médicales personnelles ; la ligne de citation du site dit déjà « lire les preuves en santé »."
+  },
+  {
+   "key": "meta_home_title",
+   "set": "EpiDetective — Des outils ouverts pour lire les preuves en santé",
+   "why": "Même correction, dans le titre de la page d'accueil."
+  },
+  {
+   "key": "meta_home_desc",
+   "set": "Des outils gratuits pour explorer soi-même les travaux publiés sur les causes des cancers et des autres grandes maladies chroniques. Conçus par un épidémiologiste du cancer au CIRC/OMS.",
+   "why": "« libres » est un calque de free (le corps du texte dit « gratuits ») ; accord au pluriel avec « outils »."
+  },
+  {
+   "key": "home_h1",
+   "set": "Traduire les preuves épidémiologiques <b>pour un monde en meilleure santé</b>",
+   "why": "Cohérence avec « preuves » ; « données » veut dire data."
+  },
+  {
+   "key": "inst_t1_name",
+   "set": "Explorateur des preuves sur le cancer",
+   "why": "Même terme que le reste du site et que l'outil jumeau."
+  },
+  {
+   "key": "meta_explorer_title",
+   "set": "Explorateur des preuves sur le cancer — EpiDetective",
+   "why": "Suit le nom de l'outil."
+  },
+  {
+   "key": "inst_t2_name",
+   "set": "Atlas des preuves — maladies chroniques",
+   "why": "C'est le nom que porte l'outil lui-même dans son interface française."
+  },
+  {
+   "key": "inst_t1_desc",
+   "sub": [
+    "la solidité des données derrière chaque lien",
+    "la solidité des preuves derrière chaque lien"
+   ],
+   "why": "Cohérence terminologique."
+  },
+  {
+   "key": "inst_t1_desc",
+   "sub": [
+    "l'évaluation de référence de l'Organisation mondiale de la Santé",
+    "l'évaluation de l'Organisation mondiale de la Santé"
+   ],
+   "why": "« de référence » n'est pas dans l'anglais (« the World Health Organization's review »)."
+  },
+  {
+   "key": "inst_t1_desc",
+   "sub": [
+    "Voyez quelles expositions ont été reliées",
+    "Découvrez quelles expositions ont été associées"
+   ],
+   "why": "« Voyez » sonne comme une traduction de See ; « associées » est le verbe du domaine."
+  },
+  {
+   "key": "meta_explorer_desc",
+   "sub": [
+    "quelle est la solidité des données derrière chaque lien",
+    "quelle est la solidité des preuves derrière chaque lien"
+   ],
+   "why": "Cohérence terminologique."
+  },
+  {
+   "key": "meta_explorer_desc",
+   "sub": [
+    "Quelles expositions ont été reliées",
+    "Quelles expositions ont été associées"
+   ],
+   "why": "Idem."
+  },
+  {
+   "key": "inst_t2_m3",
+   "set": "434 liens classés par niveau de preuve",
+   "why": "« gradé » en français courant désigne un militaire ; « niveau de preuve » est le terme de la HAS et du CIRC."
+  },
+  {
+   "key": "exp_whatsin_h2",
+   "set": "Les expositions que le CIRC a associ&eacute;es &agrave; un cancer, <b>class&eacute;es selon la solidit&eacute; des preuves</b>.",
+   "why": "« graduées selon la solidité des données » : même correction, deux fois."
+  },
+  {
+   "key": "exp_bar1_meta",
+   "set": "249 &mdash; Preuves suffisantes chez l'être humain",
+   "why": "Le CIRC écrit « chez l'être humain » ; « chez l'humain » est un calque de in humans."
+  },
+  {
+   "key": "exp_bar2_meta",
+   "set": "220 &mdash; Preuves limitées chez l'être humain",
+   "why": "Idem."
+  },
+  {
+   "key": "exp_bar1_note",
+   "sub": [
+    "Les études chez l'humain concordent assez",
+    "Les études chez l'être humain concordent suffisamment"
+   ],
+   "why": "Idem ; « assez » est trop faible ici."
+  },
+  {
+   "key": "exp_bar2_note",
+   "sub": [
+    "les biais ou la confusion",
+    "les biais ou les facteurs de confusion"
+   ],
+   "why": "En épidémiologie française, confounding se dit « facteurs de confusion » ; « la confusion » veut dire le désordre mental."
+  },
+  {
+   "key": "exp_read2_p",
+   "sub": [
+    "une preuve de sécurité très faible",
+    "une preuve d'innocuité très faible"
+   ],
+   "why": "« sécurité » renvoie à la sécurité au travail ; pour une substance, c'est l'innocuité."
+  },
+  {
+   "key": "exp_leg_can",
+   "set": "Localisation du cancer",
+   "why": "« Site du cancer » est un calque ; les registres français disent « localisation »."
+  },
+  {
+   "key": "exp_read1_p",
+   "sub": [
+    "La dose, la durée, l'âge auquel elle survient et les gènes que l'on porte se tiennent tous entre ce constat et une personne donnée.",
+    "Entre ce constat et une personne donnée s'interposent la dose, la durée, l'âge auquel l'exposition survient et les gènes que l'on porte."
+   ],
+   "why": "« se tiennent entre » ne se dit pas ; la phrase se lit mieux avec l'inversion."
+  },
+  {
+   "key": "exp_read1_h3",
+   "set": "Un agent capable de causer un cancer peut n'avoir eu aucun rapport avec le vôtre.",
+   "why": "« Une chose » est vague dans un titre scientifique ; temps du passé pour un cancer déjà survenu."
+  },
+  {
+   "key": "home_audience",
+   "sub": [
+    "celles et ceux qui écrivent les politiques de santé",
+    "celles et ceux qui élaborent les politiques de santé"
+   ],
+   "why": "On élabore une politique publique ; on n'« écrit » pas une politique."
+  },
+  {
+   "key": "contact_h2",
+   "set": "Prenons contact.",
+   "why": "Évite la répétition avec « écrivez-moi » juste en dessous."
+  },
+  {
+   "key": "about_p2",
+   "sub": [
+    "puis mon doctorat à l'université d'Utrecht",
+    "puis j'ai mené mes travaux de doctorat à l'université d'Utrecht"
+   ],
+   "why": "La soutenance publique a lieu le 28 septembre 2026 ; le diplôme est conféré ce jour-là."
+  },
+  {
+   "key": "about_p4",
+   "sub": [
+    "Une découverte qui reste dans la littérature scientifique a accompli moins de la moitié de son travail.",
+    "Une découverte qui reste enfermée dans la littérature scientifique n'a rempli qu'une part de sa mission."
+   ],
+   "why": "« accomplir son travail » ne se dit pas d'une découverte."
+  },
+  {
+   "key": "games_over_lede",
+   "sub": [
+    "ce qu'il apprend",
+    "ce qu'il enseigne"
+   ],
+   "why": "Un jeu enseigne ; c'est le joueur qui apprend."
+  },
+  {
+   "key": "games_g2_p1",
+   "sub": [
+    "Le tabac cause la plupart des cancers du poumon, et arrêter est bénéfique à tout âge.",
+    "Le tabac est à l'origine de la plupart des cancers du poumon, et arrêter de fumer est bénéfique à tout âge."
+   ],
+   "why": "« arrêter » seul reste en suspens en français."
+  },
+  {
+   "key": "games_g3_p2",
+   "sub": [
+    "tirés d'études poolées",
+    "tirés d'analyses groupées"
+   ],
+   "why": "« poolé » est un anglicisme de laboratoire."
+  },
+  {
+   "key": "games_g3_step3",
+   "sub": [
+    "de ce que les études poolées justifient",
+    "de ce que les analyses groupées permettent d'affirmer"
+   ],
+   "why": "Idem, et la tournure était elliptique."
+  },
+  {
+   "key": "games_g3_step3",
+   "sub": [
+    "Les petits mouvements sont les honnêtes.",
+    "Ce sont les petits mouvements qui sont honnêtes."
+   ],
+   "why": "« les honnêtes » n'est pas une tournure française."
+  },
+  {
+   "key": "games_fact_questions",
+   "set": "questions au total, 5 par partie",
+   "why": "« la banque » de questions ne se dit pas en français courant."
+  },
+  {
+   "key": "games_open_full",
+   "set": "Ouvrir dans un nouvel onglet",
+   "why": "C'est ce que fait le lien (target=_blank) et la formule attendue en français."
+  },
+  {
+   "key": "meta_games_desc",
+   "set": "Trois jeux gratuits dans le navigateur sur la prévention du cancer : la protection solaire (6 à 12 ans), les causes du cancer du poumon (10 à 16 ans) et le cancer du sein (14 ans et plus).",
+   "why": "L'ancienne description faisait 338 caractères et était coupée en plein milieu dans les résultats de recherche."
+  },
+  {
+   "key": "meta_games_title",
+   "set": "Jeux de sensibilisation au cancer — EpiDetective",
+   "why": "73 caractères, tronqué dans les résultats de recherche."
+  },
+  {
+   "key": "about_timeline_link",
+   "set": "Mon parcours et mes travaux, année par année (en anglais)",
+   "why": "The timeline exists in English and Chinese only; the link now says so in the reader's language."
+  },
+  {
+   "key": "games_g3_step1",
+   "sub": [
+    "pendant quarante ans",
+    "sur cinq décennies"
+   ],
+   "why": "Aligned with the English after the review: the game spans five decades, and the tool states its provenance in full."
+  },
+  {
+   "key": "exp_cta_source",
+   "sub": [
+    "adapté de Schubauer-Berigan et al., JNCI Monographs 2026.",
+    "adapté de Schubauer-Berigan et al., JNCI Monographs 2026, et complété pour les évaluations ultérieures et pour les types de HPV nommés individuellement dans le volume 100B."
+   ],
+   "why": "Aligned with the English after the review: the game spans five decades, and the tool states its provenance in full."
+  }
+ ]
+}
