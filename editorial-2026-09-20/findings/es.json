@@ -1,0 +1,692 @@
+[
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_h2",
+  "context": "Home page, heading over the two tool cards (es/index.html).",
+  "current": "Dos están <b>abiertos</b>. Vienen más.",
+  "proposed": "Dos ya están <b>abiertas</b>. Hay más en camino.",
+  "why": "The subject is «las herramientas», feminine, so the participle must be «abiertas»; the chips right below already say «Abierta». «Vienen más» is also too clipped for the register; «Hay más en camino» renders «More are being built» idiomatically.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "foot_affiliation",
+  "context": "Footer disclaimer, present on all four Spanish pages.",
+  "current": "las opiniones expresadas aquí son responsabilidad únicamente de su autora",
+  "proposed": "las opiniones expresadas aquí son responsabilidad únicamente de su autor",
+  "why": "Feminine agreement for Wenxin Wan, who is referred to with masculine forms everywhere else on the site («investigador posdoctoral», «un epidemiólogo»). This is the only feminine slip in the Spanish build and it sits in the legal disclaimer on every page.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p2",
+  "context": "About page, paragraph on the PhD work and the NYT coverage.",
+  "current": "Parte de ese trabajo aportó nuevas pruebas sobre la relación causal entre el benceno y el cáncer de pulmón, y fue recogido por <i>The New York Times</i>.",
+  "proposed": "Parte de ese trabajo aportó nuevas pruebas sobre la relación causal entre el benceno y el cáncer de pulmón, y de ella se hizo eco <i>The New York Times</i>.",
+  "why": "The subject of both verbs is «Parte de ese trabajo», feminine, so «fue recogido» does not agree («fue recogida»). «Hacerse eco de» is what a Spanish health writer uses for press pick-up of a study.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/es/index.html",
+  "i18n_key": "meta_home_desc",
+  "context": "<meta name=\"description\">, og:description and twitter:description on es/index.html.",
+  "current": "Herramientas libres para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creado por un epidemiólogo del cáncer del IARC/OMS.",
+  "proposed": "Herramientas gratuitas para explorar por tu cuenta la evidencia publicada sobre las causas del cáncer y de otras grandes enfermedades crónicas. Creadas por un epidemiólogo del cáncer del CIIC (OMS).",
+  "why": "Two problems in the site's most-indexed sentence. «Creado» has no masculine antecedent: the only candidate is «Herramientas», feminine plural, so it must be «Creadas». And «libres» is a calque of English «free»: for zero cost Spanish says «gratuitas», which is what home_lede itself uses two lines later.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p1",
+  "context": "About page, first sentence: the employer's name.",
+  "current": "la Agencia Internacional de Investigación sobre el Cáncer (IARC), la agencia de la OMS especializada en el cáncer",
+  "proposed": "el Centro Internacional de Investigaciones sobre el Cáncer (CIIC), la agencia de la OMS especializada en el cáncer",
+  "why": "The WHO's own Spanish name for IARC is «Centro Internacional de Investigaciones sobre el Cáncer (CIIC)». The site already uses that exact name in the footer disclaimer and «CIIC» throughout the explorer page and the live tool, so the About page invents a second name for the same body in the sentence where the author states his affiliation.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": null,
+  "context": "Agency name and its gender across the whole Spanish estate: meta_home_desc «del IARC/OMS»; about_p1 «(IARC)»; about_p3 «Mi trabajo diario en la IARC»; about_cred1_value «IARC / OMS»; games_g2_sub, games_g2_p1 «la IARC»; games_g2_fine «Monografías de la IARC»; explorer page and foot_affiliation «CIIC» / «Centro Internacional de Investigaciones sobre el Cáncer»; code-against-cancer es block «la IARC» everywhere.",
+  "current": "del IARC · la IARC · IARC / OMS · CIIC · Centro Internacional de Investigaciones sobre el Cáncer",
+  "proposed": "CIIC throughout (masculine: «el CIIC», «del CIIC»), with «Centro Internacional de Investigaciones sobre el Cáncer (CIIC, IARC por sus siglas en inglés)» at first mention on the About page.",
+  "why": "Three variants of one agency's name are in circulation, and the acronym even changes gender between «del IARC» and «la IARC» within the same file. The French build uses CIRC consistently and the live Spanish explorer uses CIIC, so CIIC is the house standard; «Monografías del CIIC» also matches how the explorer page already cites the series.",
+  "severity": "high",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_read1_p",
+  "context": "Explorer page, «Peligro y riesgo» card.",
+  "current": "Cuánta, durante cuánto tiempo, a qué edad y con qué genes se interponen entre ese hallazgo y cualquier persona concreta.",
+  "proposed": "La cantidad, la duración, la edad a la que se produce y los genes de cada persona se interponen entre ese hallazgo y cualquier caso concreto.",
+  "why": "A string of interrogative words cannot serve as the subject of «se interponen» in Spanish: «Cuánta» has no noun to agree with and «con qué genes» is a prepositional phrase, so the sentence has no grammatical subject. English gets away with the list because «all stand between» closes it; Spanish needs noun phrases. The proposal also restores «which genes you carry», which the current text loses.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g3_desc",
+  "context": "Card for «A Town of 1,000» on the home page and the games page.",
+  "current": "1.000 puntos que muestran, con honestidad, a cuántas mujeres libran las decisiones de un pueblo",
+  "proposed": "1.000 puntos que muestran, con honestidad, a cuántas mujeres ahorra la enfermedad lo que decide un pueblo",
+  "why": "«Librar» needs its complement («librar a alguien de algo»); left bare it stops the reader, who waits for «¿de qué?». English «spare» carries the object implicitly and Spanish does not.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_cta_lede",
+  "context": "Explorer page, closing call-to-action band, immediately under exp_cta_h2 «Empieza por un cáncer…».",
+  "current": "Gratuito, en diez idiomas. Arrastre, amplíe y céntrese en cualquier parte de la red.",
+  "proposed": "Gratuito, en diez idiomas. Arrastra, amplía y céntrate en cualquier parte de la red.",
+  "why": "Usted forms sitting directly below a tú heading in the same band («Empieza por un cáncer»), and the tool the button opens addresses the reader as tú throughout. The whole main site is tú; this line is one of four usted survivors.",
+  "severity": "high",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "contact_h2 / contact_p / cite_p",
+  "context": "About page: contact heading, contact line and the «Cómo citar» line.",
+  "current": "Escríbame. / Preguntas, correcciones o una herramienta que le gustaría ver: envíeme un correo. / Cite también las fuentes primarias indicadas dentro de cada herramienta.",
+  "proposed": "Escríbeme. / Preguntas, correcciones o una herramienta nueva que te gustaría ver: escríbeme un correo. / Cita también las fuentes primarias que cada herramienta indica.",
+  "why": "The site speaks to the reader as tú everywhere else («te permiten», «consulta a un médico», «Empieza por», «Pulsa Jugar»), and so does the live explorer. Switching to usted at the point of contact reads as a different author. The proposal also restores «new» from «a new tool you would like to see».",
+  "severity": "high",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_t2_name",
+  "context": "Name of the second tool, on the home card and its two buttons.",
+  "current": "Explorador de enfermedades crónicas",
+  "proposed": "Explorador de evidencia sobre enfermedades crónicas",
+  "why": "The English name is «Chronic Disease Evidence Explorer» and the sibling tool keeps «evidencia» in its Spanish name («Explorador de evidencia sobre el cáncer»). As it stands the Spanish promises an explorer of diseases rather than of the evidence about them, and breaks the pair.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_t2_desc",
+  "context": "Chronic Disease Explorer card, list of conditions.",
+  "current": "la enfermedad cardíaca, el ictus, la diabetes tipo 2, la demencia",
+  "proposed": "las enfermedades cardiovasculares, el accidente cerebrovascular (ictus), la diabetes tipo 2, la demencia",
+  "why": "Two problems. «La enfermedad cardíaca» is a literal rendering of «heart disease»; Spanish-language epidemiology says «las enfermedades cardiovasculares» or «la cardiopatía isquémica». And «ictus» is the Spain-only term: PAHO and Latin American sources say «accidente cerebrovascular (ACV)», so on a site meant to read as neutral international Spanish the ACV form should lead, with «ictus» in parentheses for Spanish readers.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_t2_desc",
+  "context": "Chronic Disease Explorer card, opening words and the clause about contested links.",
+  "current": "Qué factores de riesgo se han vinculado con la enfermedad cardíaca […] — y cuánta solidez tiene la evidencia detrás de cada vínculo, incluidos aquellos en los que realmente se discute.",
+  "proposed": "Consulta qué factores de riesgo se han vinculado con […] y qué solidez tiene la evidencia detrás de cada vínculo, incluidos los casos en los que sigue habiendo una discusión real.",
+  "why": "The card opens with a bare «Qué…» fragment, while the sibling card opens with a verb («Consulta qué exposiciones…»); Spanish tolerates a headless interrogative fragment far less than English. «Incluidos aquellos en los que realmente se discute» also leaves «se discute» without an object, so the reader has to reconstruct what is being disputed. «Cuánta solidez» should be «qué solidez», as in the sibling card and the meta description.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_t2_m5",
+  "context": "Provenance chip under the Chronic Disease Explorer card.",
+  "current": "GBD · Comisiones de The Lancet · metaanálisis · instantánea v1.4 · sept 2026",
+  "proposed": "GBD · Comisiones de The Lancet · metaanálisis · v1.4 · sept. 2026",
+  "why": "«Instantánea» adds a claim the English key does not make («GBD · Lancet Commissions · meta-analyses · v1.4 · Sep 2026»); a version number needs no gloss. The Spanish abbreviation for September also carries a full stop: «sept.». («Metaanálisis» is spelled correctly here.)",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_cred_msc_value",
+  "context": "About page, credentials list, Master's row.",
+  "current": "Universidad de Bristol (Reino Unido), MSc en Epidemiología, con Distinction",
+  "proposed": "Universidad de Bristol (Reino Unido), máster en Epidemiología, con distinción (Distinction)",
+  "why": "«Con Distinction» leaves an untranslated English grade inside a Spanish line, and the same row already renders the degree as «Máster» in its label while the value keeps «MSc». Spanish practice is to translate and gloss: «con distinción (Distinction)».",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p3",
+  "context": "About page, OPICO sentence.",
+  "current": "que reúne diez cohortes de tres continentes para responder qué riesgo de cáncer conlleva el uso prolongado de opioides",
+  "proposed": "que reúne diez cohortes de tres continentes para averiguar qué riesgo de cáncer puede conllevar el uso prolongado de opioides",
+  "why": "«Responder qué riesgo…» needs a noun between verb and clause in careful Spanish («responder a la pregunta de qué riesgo»); «averiguar» solves it cleanly. The modality of the English is also lost: «what cancer risk long-term opioid use may carry» is an open question, and the flat indicative makes the consortium sound as though the risk is established.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p3 / games_g3_p1 / games_g3_fine",
+  "context": "«cribado del cáncer de pulmón» (About), «cribado» as a decision card and «participación en el cribado» (A Town of 1,000); also «Cribado colorrectal» on the Code page's Latin American card.",
+  "current": "cribado",
+  "proposed": "tamizaje (cribado) at first mention on each page, then one term consistently",
+  "why": "«Cribado» is the Spain term; PAHO, and therefore most Latin American readers and the Latin American Code itself, say «tamizaje» or «detección temprana». The site otherwise aims at neutral international Spanish and is read across the region, so a bare «cribado» quietly marks the whole site as peninsular. Note the official European Code wording uses «cribado» and must stay as it is; the site's own prose is what should be neutral.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": null,
+  "context": "«evidencia» and «pruebas» across pages: explorer page uses «evidencia» throughout (exp_bar1_meta, exp_whatsin_h2, foot_tagline); the About page uses «pruebas» (about_p2, about_p3); the games use «pruebas» for the same IARC grading («como la IARC archiva las pruebas», «sin pruebas», «las pruebas sobre el tabaco son limitadas»).",
+  "current": "evidencia / pruebas, mixed",
+  "proposed": "Keep «evidencia» for the graded categories and the site's tagline, and reserve «pruebas» for individual study findings — then apply that rule page by page.",
+  "why": "Both words are defensible in Spanish public-health writing, but the site currently switches between them for the very same concept: the explorer grades «Evidencia limitada en humanos» while the lung game files clues by whether they have «pruebas». A reader moving from one page to the other cannot tell whether two different things are meant.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_bar1_meta / exp_bar2_meta",
+  "context": "Explorer page, the two evidence-grade bars.",
+  "current": "249 — Evidencia suficiente en humanos / 220 — Evidencia limitada en humanos",
+  "proposed": null,
+  "why": "Owner decision, no error. IARC's and WHO's own Spanish releases word these categories «pruebas suficientes en humanos» / «pruebas limitadas en humanos», so a professional reader may notice the difference. The live explorer already says «Evidencia limitada / sólida / insuficiente», so changing the site alone would break consistency with the tool: either both move to «pruebas» or both stay as they are.",
+  "severity": "note",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_reads_h2",
+  "context": "Explorer page, heading over the three caveat cards.",
+  "current": "Tres límites de este mapa, <em>conviene conocerlos</em> antes de leerlo.",
+  "proposed": "Tres límites de este mapa que <em>conviene conocer</em> antes de leerlo.",
+  "why": "A comma splice: «Tres límites de este mapa» is a noun phrase and «conviene conocerlos» a full clause, so the comma joins two things that Spanish punctuation cannot join. A relative clause carries the same meaning and keeps the emphasis span.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_fig4",
+  "context": "Explorer page, fourth figure («1–141»).",
+  "current": "Volúmenes de monografías",
+  "proposed": "Volúmenes de las Monografías",
+  "why": "This counts volumes of one named series, the IARC Monographs, which the same page cites as «Monografías del CIIC». Lower-case and article-less, the label reads as volumes of monographs in general.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_leg_sus / exp_bar2_title",
+  "context": "Explorer page legend and second bar; the same label is used in the live tool.",
+  "current": "Vínculo sospechado",
+  "proposed": "Vínculo posible",
+  "why": "«Sospechado» as an adjective is a calque of «suspected»; Spanish uses «sospechoso» for people and things under suspicion and prefers «posible» or «probable» for a hypothesis. «Posible» is preferable to «probable» here because «probable» collides with the IARC Group 2A label «probablemente cancerígeno». If this changes, the live explorer's label has to change with it.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "meta_about_desc",
+  "context": "About page <meta name=\"description\"> and og/twitter description.",
+  "current": "Wenxin Wan, el epidemiólogo del cáncer que construye EpiDetective: por qué existe el sitio, cómo citarlo y cómo contactar.",
+  "proposed": "Wenxin Wan, el epidemiólogo del cáncer que crea EpiDetective: por qué existe el sitio, cómo citarlo y cómo ponerse en contacto.",
+  "why": "«Construir» is for buildings and models; for a website Spanish says «crear» or «desarrollar». «Cómo contactar» left bare is an anglicism: «contactar» takes a complement («contactar con él») or gives way to «ponerse en contacto».",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p2",
+  "context": "About page, PhD sentence.",
+  "current": "moldean el riesgo de cáncer a nivel poblacional",
+  "proposed": "moldean el riesgo de cáncer en el conjunto de la población",
+  "why": "«A nivel de» is the standard flag of bureaucratic Spanish and is rejected outside literal levels or ranks; style guides of Spanish scientific publishing single it out. «En el conjunto de la población» or «en la población» says the same thing plainly.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "about_p4",
+  "context": "About page, closing paragraph.",
+  "current": "es muy poca la que llega de verdad a la gente corriente",
+  "proposed": "es muy poca la que llega de verdad a la gente común",
+  "why": "«La gente corriente» is a peninsular collocation; «la gente común» or «las personas de a pie» travels across the Spanish-speaking world without sounding local.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_bar1_note",
+  "context": "Explorer page, note under the «Vínculo establecido» bar.",
+  "current": "Los estudios en personas coinciden lo bastante como para descartar el azar, el sesgo y otras explicaciones.",
+  "proposed": "Los estudios en personas coinciden lo suficiente para descartar el azar, el sesgo y otras explicaciones.",
+  "why": "«Lo bastante como para» is peninsular and colloquial; «lo suficiente para» is the neutral form and is what the register of this page calls for.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_read2_p",
+  "context": "Explorer page, «Los huecos del mapa» card, final clause.",
+  "current": "de modo que un espacio vacío es una prueba muy débil de seguridad",
+  "proposed": "de modo que un espacio vacío constituye un indicio muy débil de seguridad",
+  "why": "«Una prueba muy débil» is close to a contradiction in Spanish, where «prueba» implies something proven; «indicio» carries the gradable sense the English «weak evidence» has. It also avoids using «prueba» on a page that otherwise says «evidencia».",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_over_lede",
+  "context": "Games page, lede under the H1.",
+  "current": "Cada juego enseña, jugando, un aspecto de la prevención del cáncer.",
+  "proposed": "Cada juego enseña un aspecto de la prevención del cáncer a través del juego.",
+  "why": "Dangling gerund: the subject of «enseña» is «cada juego», so as written it is the game that is playing. Spanish binds the gerund to the sentence subject far more strictly than English does.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_p1",
+  "context": "Sun-safety game, first paragraph.",
+  "current": "Sol consigue un sombrero de ala ancha y protector solar SPF 30+",
+  "proposed": "Sol consigue un sombrero de ala ancha y protector solar con FPS 30+",
+  "why": "Spanish-language sunscreen labelling and health guidance use FPS (factor de protección solar); SPF is the English abbreviation and appears on no Spanish-language bottle. In a children's sun-safety context the reader is expected to recognise the number on the product in front of them.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_p1",
+  "context": "Sun-safety game, first paragraph.",
+  "current": "recoge estrellas de sol a través de cinco regiones",
+  "proposed": "recoge estrellas de sol por cinco regiones",
+  "why": "«A través de» for English «across» is an over-literal rendering; it means «by means of» or «right through» in Spanish. Movement over successive places is «por» or «a lo largo de».",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_p2",
+  "context": "Sun-safety game, quiz-topic list; compare the Code page, which says «camas solares».",
+  "current": "por qué evitar las camas de bronceado",
+  "proposed": "por qué conviene evitar las camas solares",
+  "why": "The same object is called «camas solares» in the official Code text elsewhere on the site, so the games page invents a second name for it. «Camas de bronceado» is also the Latin American form where Spain says «cabinas de rayos UVA», which makes a neutral-Spanish choice worth settling once. The list is grammatically broken too: every other item hangs on a finite verb («qué significa», «cuándo importa», «por qué funcionan»), and «por qué evitar» hangs on an infinitive.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_step5",
+  "context": "Sun-safety game, settings step.",
+  "current": "fuente apta para dislexia",
+  "proposed": "tipografía adaptada a la dislexia",
+  "why": "«Fuente» alone is ambiguous in Spanish (source/spring) and the accessibility literature in Spanish says «tipografía»; «apta para dislexia» also reads as if the font suited the condition rather than the reader.",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_step5",
+  "context": "Lung game, settings step.",
+  "current": "menos animación",
+  "proposed": "movimiento reducido",
+  "why": "This is the standard accessibility setting «reduced motion», rendered «movimiento reducido» in Spanish interfaces and in the CSS media query documentation. «Menos animación» describes the visual effect but will not be recognised as the setting.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_step2",
+  "context": "Lung game, filing step.",
+  "current": "Un cajón equivocado se apaga y vuelves a intentarlo",
+  "proposed": "Un cajón equivocado se atenúa y vuelves a intentarlo",
+  "why": "«Se apaga» says the drawer switches off. The interface state is «greyed out», which Spanish interfaces render «se atenúa» or «aparece atenuado/desactivado».",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung game, list of clues.",
+  "current": "Las pistas abarcan el humo ajeno",
+  "proposed": "Las pistas abarcan el humo de tabaco ajeno",
+  "why": "WHO and PAHO Spanish say «humo de tabaco ajeno» (or «humo ambiental de tabaco»); «el humo ajeno» on its own reads as somebody else's smoke of any kind, which in a paragraph that goes on to list wood smoke and welding fumes is genuinely ambiguous.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung game, list of clues.",
+  "current": "la contaminación del aire exterior y los gases del diésel",
+  "proposed": "la contaminación del aire exterior y los gases de escape de los motores diésel",
+  "why": "The IARC Group 1 agent is «diesel engine exhaust», rendered «gases de escape de motores diésel» in Spanish IARC and occupational-health material. «Los gases del diésel» sounds like fumes given off by the fuel itself.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung game, the Group 2A clue.",
+  "current": "El betún de las cubiertas va al grupo probable",
+  "proposed": "Los betunes de techado van al grupo probable",
+  "why": "IARC's «bitumen roofing» is «betunes» in Spanish IARC material, but a bare «el betún» is read as shoe polish across most of Latin America, and «cubiertas» for roofs is architectural Spain usage that a general reader will take as covers or tyres.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_sub / games_g2_p1 / games_g2_step3 / games_g2_step4",
+  "context": "Lung game: «Una investigación por un piso, una calle y una obra», «el compañero de piso», «En el piso, el detector de radón…».",
+  "current": "un piso / el compañero de piso",
+  "proposed": "una vivienda / la persona con quien comparte la vivienda (or «un apartamento» / «el compañero de apartamento»)",
+  "why": "«Piso» for a dwelling is Spain-only; in Latin America it is a floor or storey, so «En el piso, el detector de radón» will be read as «on the floor». Radon is exactly the context where the distinction between a dwelling and a floor level matters.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_p1 / games_g2_fact_scenes",
+  "context": "Lung game, first paragraph and the facts strip.",
+  "current": "El jugador registra tres escenas / escenas que registrar",
+  "proposed": "El jugador explora tres escenas / escenas que explorar",
+  "why": "«Registrar» in this sense (to search premises) is peninsular police usage, and its dominant reading elsewhere is «to record», which in a game about filing evidence sends the reader down the wrong path. «Explorar» or «inspeccionar» is unambiguous.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g2_p1 / games_g2_step2 vs exp_read1_p",
+  "context": "IARC group names: the games write «grupo 1», «grupo 2A»; the explorer page writes «Grupo 1».",
+  "current": "grupo 1 / Grupo 1",
+  "proposed": "Grupo 1, Grupo 2A (capitalised) everywhere",
+  "why": "These are the names of IARC classification categories, and the site capitalises them on one page and not on another. IARC's own Spanish material capitalises «Grupo 1».",
+  "severity": "low",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g3_sub / games_g3_p1 / games_g3_step1",
+  "context": "Breast-cancer game: «un ayuntamiento sigue a 1.000 mujeres», «el jugador es el ayuntamiento de un pueblo», «Formas el ayuntamiento de un pueblo».",
+  "current": "ayuntamiento",
+  "proposed": "el consejo municipal / el gobierno municipal del pueblo",
+  "why": "«Ayuntamiento» is the Spanish municipal institution; in most of Latin America the body is «el consejo municipal», «la alcaldía» or «el municipio». Since the game's framing is that the player sits as the council, the term carries the whole conceit and should read naturally region-wide.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g3_p2 / games_g3_step4",
+  "context": "Breast-cancer game, the myth cards.",
+  "current": "los sujetadores con aros",
+  "proposed": "los sostenes con aros",
+  "why": "«Sujetador» is Spain-only; «sostén» is the widest-travelling neutral option (with «brasier»/«corpiño» local). A myth card is precisely where the reader has to recognise the everyday object instantly.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g3_p2",
+  "context": "Breast-cancer game, second paragraph; compare games_g3_fine, which says «Los tamaños del efecto».",
+  "current": "Los efectos son modestos y honestos, tomados de estudios agrupados",
+  "proposed": "Los tamaños del efecto son modestos y honestos, tomados de estudios agrupados",
+  "why": "«The effect sizes» is a technical quantity and the fine print on the same page already renders it «tamaños del efecto». Bare «los efectos» loses the point that it is the magnitude, and not the existence, of the effect that is modest.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g3_step3",
+  "context": "Breast-cancer game, step 3.",
+  "current": "mueve el número de mujeres diagnosticadas antes de los 75 años, y el de las que mueren por ello, en lo que los estudios agrupados respaldan",
+  "proposed": "mueve el número de mujeres diagnosticadas antes de los 75 años, y el de las que mueren por la enfermedad, en la medida en que lo respaldan los estudios agrupados",
+  "why": "«En lo que los estudios agrupados respaldan» is not an idiomatic quantity phrase; the reader expects «en la medida en que». «Mueren por ello» is also vague where the antecedent is a number rather than the disease.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "nav_games vs games_label / meta_games_title",
+  "context": "Navigation on all four pages says one thing, the games page itself another.",
+  "current": "nav: «Juegos de prevención» · page label and title: «Juegos de sensibilización sobre el cáncer»",
+  "proposed": "Use «Juegos» in the navigation and «Juegos de sensibilización sobre el cáncer» as the page title, or align both on one name.",
+  "why": "The nav label and the page it opens name the same section differently, which costs the reader a moment of doubt about having landed in the right place. English uses «Cancer awareness games» in both places.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_p1",
+  "context": "Sun-safety game, first paragraph.",
+  "current": "llega a puntos de control donde hay que responder una pregunta",
+  "proposed": "llega a puntos de control donde hay que responder a una pregunta",
+  "why": "Both régimes exist, and «responder una pregunta» is common in America, but the preposition is the careful form and the site's register is careful throughout.",
+  "severity": "low",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_g1_m2",
+  "context": "Input-method chip on the sun-safety card.",
+  "current": "Teclado, táctil, mando",
+  "proposed": "Teclado, táctil, mando de juego",
+  "why": "Bare «mando» is peninsular for a game controller (Latin America says «control»); adding «de juego» makes it legible everywhere without lengthening the chip much.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "home_games_h2",
+  "context": "Home page, heading over the three game cards.",
+  "current": "Aprender jugando: <b>tres juegos</b>, sobre el cáncer de piel, de pulmón y de mama.",
+  "proposed": "Aprender jugando: <b>tres juegos</b>, uno sobre el cáncer de piel, otro de pulmón y otro de mama.",
+  "why": "The comma before «sobre» separates the noun from its own complement, which Spanish punctuation does not allow. The English key also says «one each», which the current line drops.",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[1] detail (es)",
+  "context": "European Code Against Cancer, recommendation 1 («No fume»). English key: «Do not use any form of tobacco, or vaping products. If you smoke, you should quit.»",
+  "current": "No consuma ningún tipo de tabaco ni productos de vapeo. Si fuma, procure dejarlo.",
+  "proposed": null,
+  "why": "Looks altered from the official wording, and in the direction of weakening it. «Procure dejarlo» is «try to quit»; the Code says the reader should quit («debería dejarlo»). Please check against the official Spanish edition at cancer-code-europe.iarc.who.int/es/ and restore the published sentence verbatim.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[8] detail (es)",
+  "context": "European Code Against Cancer, recommendation on sun exposure. English key: «Avoid too much sun exposure, especially for children. Use sun protection. Never use sunbeds.»",
+  "current": "Evite una exposición excesiva al sol, sobre todo en los niños. Utilice protección solar. No utilice camas solares.",
+  "proposed": null,
+  "why": "The categorical «Never» is gone: «No utilice camas solares» is a plain prohibition where the Code's force is «no las utilice nunca». The device name should also be checked: the Spanish edition of the European Code speaks of «cabinas de bronceado / rayos UVA», while this page says «camas solares» here and the games page says «camas de bronceado». Please restore the official sentence verbatim.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[5] detail (es)",
+  "context": "European Code Against Cancer, healthy-diet recommendation. English key: «…Limit red meat, and avoid processed meat.»",
+  "current": "Consuma cereales integrales, verduras, legumbres y frutas como parte fundamental de su alimentación diaria. Restrinja la carne roja y evite las carnes procesadas.",
+  "proposed": null,
+  "why": "«Restrinja» looks altered: the Code's verb throughout is «limitar» (the overweight recommendation on this same page uses «Limite» three times), and IARC's Spanish material says «limite el consumo de carne roja y evite la carne procesada» in the singular. Please check against the official Spanish edition and restore the published wording.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[3] detail (es)",
+  "context": "European Code Against Cancer, overweight recommendation. English key: «Take action to avoid or manage overweight and obesity…»",
+  "current": "Tome medidas para evitar o reducir el sobrepeso y la obesidad: Limite los alimentos con alto contenido calórico…",
+  "proposed": null,
+  "why": "«Manage» rendered as «reducir» looks altered, and it narrows the advice: managing weight also covers holding a healthy weight steady, which «reducir» excludes. The official Spanish wording (likely «controlar») should be restored verbatim. The capital «Limite» after the colon is a carry-over from the English list layout and would be lower case in a Spanish sentence, but that too should follow the official edition rather than be corrected here.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[11] title (es)",
+  "context": "EpiDetective's own short card title for the air-pollution recommendation (the detail text below it is the official wording). English title: «Reduce air pollution exposure».",
+  "current": "Reduzca la contaminación del aire",
+  "proposed": "Reduzca su exposición a la contaminación del aire",
+  "why": "The title tells the individual reader to reduce air pollution itself, which is not what the recommendation asks of them; the official text under it is about reducing one's own exposure. The English title keeps «exposure» and the Spanish drops it.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[lac].recs[10] title (es)",
+  "context": "EpiDetective's own short card title in the Latin America and the Caribbean Code. The official detail text under it says «solicite una prueba de detección temprana de cáncer de colon y recto».",
+  "current": "Cribado colorrectal, 50–74",
+  "proposed": "Detección temprana de cáncer colorrectal, 50–74",
+  "why": "«Cribado» is the Spain term sitting on top of a Latin American Code whose own official wording says «detección temprana»; PAHO uses «tamizaje» or «detección temprana». The card title should speak the region's Spanish, and the European card can keep «cribado» because the European Code's Spanish edition uses it.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.es (lede, frameworkP, footNote) and REGIONS[*].partner.es",
+  "context": "Code page Spanish text store: «elaborados por la IARC», «Cada Código regional es elaborado por la IARC», «materiales públicos de la IARC, la OPS y la ANCCA», «IARC y la Comisión Europea», «IARC y OPS».",
+  "current": "la IARC",
+  "proposed": "el CIIC (with «CIIC y la Comisión Europea», «CIIC y OPS», «materiales públicos del CIIC, la OPS y la ANCCA»)",
+  "why": "The French block of this same store uses CIRC throughout, and the Spanish pages of the main site and the live explorer use CIIC, so the Spanish block is the outlier. It also fixes the gender, since «Centro» is masculine and this page treats the acronym as feminine.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.es.srcLac",
+  "context": "Official sources list on the Code page.",
+  "current": "Código Latinoamericano y Caribeño contra el Cáncer",
+  "proposed": null,
+  "why": "Proper name to verify: IARC and PAHO publish this Code in Spanish, so its Spanish title should be copied from the official cover rather than translated from the English. Check the wording at cancer-code-lac.iarc.who.int/es/ (the form used in PAHO material is «Código Latinoamericano y del Caribe contra el Cáncer») and match it exactly, including capitalisation.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.es.disclaimerP",
+  "context": "Code page disclaimer; compare the main site's footer, which says «consulta a un médico».",
+  "current": "Las edades de cribado […] varían según el país: siga el programa disponible donde usted vive. Para cualquier asunto relacionado con su salud, consulte a un profesional médico.",
+  "proposed": "Las edades de tamizaje […] varían según el país: siga el programa disponible donde viva. Para cualquier asunto relacionado con su salud, consulte a un médico.",
+  "why": "Three small things. «Cribado» is peninsular on a page that presents the Latin American Code. The explicit «usted» in «donde usted vive» is redundant and slightly emphatic, and a subjunctive («donde viva») is the natural form for an unspecified place. «Un profesional médico» is a calque of «health-care professional»; Spanish says «un médico» or «un profesional sanitario/de la salud», and the rest of the site says «un médico».",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": null,
+  "context": "Page furniture: the Code page is one HTML document switched by JS. build() sets document.documentElement.lang, but <title>, <meta name=\"description\">, og:title and og:description stay in English when the reader arrives at ?lang=es from the Spanish navigation.",
+  "current": "<title>Code Against Cancer — EpiDetective</title> / description «Official, evidence-based ways to reduce your own cancer risk…»",
+  "proposed": "Swap the title and meta description in build() as well, e.g. «Código contra el cáncer — EpiDetective» and a Spanish description drawn from STRINGS[lang].lede.",
+  "why": "A Spanish reader coming from «Código contra el cáncer» in the navigation gets an English browser tab, English bookmarks and English link previews when sharing the page. The five-language store already holds a translated title. (The <title> element in this file also wraps the <link rel=\"icon\"> tags, which is a separate markup slip worth fixing while there.)",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.es.frameworkP",
+  "context": "Code page, framework paragraph.",
+  "current": "Cada Código regional es elaborado por la IARC junto con un socio coordinador regional y luego se ajusta a los patrones de cáncer y las condiciones de vida locales.",
+  "proposed": "Cada Código regional lo elabora el CIIC junto con una entidad coordinadora regional y después se adapta a los patrones de cáncer y las condiciones de vida locales.",
+  "why": "The sentence mixes a «ser + participio» passive with a reflexive passive, which reads as translated English; Spanish prefers the active or the reflexive throughout. «Socio» suggests a business partner, where «entidad coordinadora» or «institución asociada» is the register used for an inter-agency partner.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[europe].recs[2] and [11] detail (es)",
+  "context": "Official European Code wording: «Mantenga su hogar y su coche libres de humo de tabaco», «caminando o utilizando la bicicleta en lugar del coche».",
+  "current": "coche",
+  "proposed": null,
+  "why": "For information only, no change to make: the official Spanish edition of the European Code is peninsular («coche» rather than «auto/carro»), which is entirely appropriate for a European Code. Worth knowing because it sets the ceiling on how neutral this page can read, and because it is one more reason for EpiDetective's own prose around it to be neutral.",
+  "severity": "note",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS[lac].recs[9] title (es)",
+  "context": "EpiDetective's own short card title in the Latin American Code. English title: «Prevent cancer-related infections».",
+  "current": "Prevenga las infecciones que causan cáncer",
+  "proposed": "Prevenga las infecciones relacionadas con el cáncer",
+  "why": "«Que causan cáncer» states causation for every infection in the list, where the official text under it covers hepatitis B and C, HPV and HIV, whose relationships to cancer differ. «Relacionadas con el cáncer» matches the English and the official scope.",
+  "severity": "low",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_cac_desc",
+  "context": "Description of the Code Against Cancer tool (string present in es.json; the card is not rendered on the Spanish home page at the moment).",
+  "current": "Las recomendaciones oficiales y basadas en la evidencia para reducir su propio riesgo de cáncer, de los Códigos contra el Cáncer regionales coordinados por el CIIC (OMS) y sus socios.",
+  "proposed": "Las recomendaciones oficiales, basadas en la evidencia, para reducir tu propio riesgo de cáncer, tomadas de los códigos regionales contra el cáncer que coordina el CIIC (OMS) con sus entidades asociadas.",
+  "why": "Usted («su propio riesgo») where the rest of the site uses tú; «Códigos contra el Cáncer regionales» splits the name from its modifier, which Spanish places before it («los códigos regionales contra el cáncer»); and «de los Códigos» after a comma reads as possession rather than provenance, so «tomadas de» makes the source explicit.",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/es/explorer.html",
+  "i18n_key": "meta_explorer_desc",
+  "context": "Explorer page meta description, og:description and twitter:description.",
+  "current": "Qué exposiciones se han vinculado a qué cánceres, y qué solidez tiene la evidencia detrás de cada vínculo. Basado en las Monografías del CIIC (OMS).",
+  "proposed": "Consulta qué exposiciones se han vinculado a qué cánceres y qué solidez tiene la evidencia detrás de cada vínculo. Se basa en las Monografías del CIIC (OMS).",
+  "why": "The headless «Qué…» fragment works in English and reads as an unfinished indirect question in Spanish; a search-result snippet is exactly where it will be read cold. The comma before «y» in a two-item coordination is also unnecessary, and «Basado» has no masculine antecedent (the subject would be «el Explorador», never named in the sentence).",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_whatsin_h2 / inst_chip_review",
+  "context": "Explorer page H2 and the (currently unused) «in revision» chip.",
+  "current": "…ha vinculado a un c&aacute;ncer… / En revisi&oacute;n",
+  "proposed": "…ha vinculado a un cáncer… / En revisión",
+  "why": "Two strings use HTML character entities for accented letters while every other accent in the file is a literal UTF-8 character. The page declares UTF-8, so the entities are unnecessary and they make the strings harder to search, spell-check and translate.",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "inst_t2_desc / about_p4",
+  "context": "«…otras grandes enfermedades crónicas — y cuánta solidez…» and «…a la gente corriente — precisamente a quienes esa investigación debía proteger».",
+  "current": "space + em dash + space, as a parenthetical break",
+  "proposed": "Use a colon, a comma, or a paired raya with no space between dash and text, e.g. «…otras grandes enfermedades crónicas, y qué solidez…» and «…a la gente corriente: precisamente a quienes…».",
+  "why": "The free-standing spaced em dash is an English convention carried over from the source text. Spanish uses the raya in pairs and attached to the text it encloses, and for a simple break prefers a comma or a colon.",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/es/games.html",
+  "i18n_key": "meta_games_desc",
+  "context": "Games page meta description, og:description and twitter:description.",
+  "current": "…sobre prevención del cáncer: Sol & the UV Shield Quest (protección solar…",
+  "proposed": "…sobre prevención del cáncer: Sol &amp; the UV Shield Quest (protección solar…",
+  "why": "A raw ampersand inside an HTML attribute value. Browsers recover, but validators and some link-preview parsers do not; the body of the same page escapes it correctly as «Sol &amp; the UV Shield Quest».",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/es/index.html",
+  "i18n_key": null,
+  "context": "og:locale on all four Spanish pages (index, about, explorer, games).",
+  "current": "<meta property=\"og:locale\" content=\"es_ES\">",
+  "proposed": "Consider es_419 (or es_MX/es_AR alongside es_ES as og:locale:alternate) if the intended audience is region-wide.",
+  "why": "es_ES declares Spain Spanish to the platforms that read Open Graph, which sits oddly with a site that otherwise aims at neutral international Spanish and is linked from a page carrying the Latin American Code. This is an owner decision, since es_ES is also the safest widely-supported value.",
+  "severity": "note",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "games_p2 / games_g2_p2 / games_g3_p2",
+  "context": "Quotation marks across the Spanish build: «solo unos pocos al día», «sin humo», «Clasificaciones por localización del cáncer».",
+  "current": "« » used consistently, with no straight quotes anywhere in the file",
+  "proposed": null,
+  "why": "For information: the angular quotes are used correctly and consistently across every Spanish string, and there are no double spaces, no straight apostrophes and no stray English quotation marks in the file. Keep this convention if new strings are added.",
+  "severity": "note",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/es.json",
+  "i18n_key": "exp_cta_btn",
+  "context": "Explorer page, main call-to-action button.",
+  "current": "Abrir el Explorador &rarr;",
+  "proposed": "Abrir el Explorador de evidencia sobre el cáncer &rarr;",
+  "why": "The English button names the tool in full («Open the Cancer Evidence Explorer»). Shortened to «el Explorador», the button relies on the reader remembering which of the two explorers this page is about. If the short form is kept for width, «Abrir el explorador» would take a lower-case «e», since it is then a common noun rather than the tool's name.",
+  "severity": "low",
+  "category": "microcopy"
+ }
+]

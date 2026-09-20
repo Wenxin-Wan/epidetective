@@ -1,0 +1,802 @@
+[
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "home_lede",
+    "context": "首页 hero 第二行导语（zh/index.html .lede）",
+    "current": "EpiDetective 开发实用工具，把最权威的健康研究结论直接带到你面前",
+    "proposed": "EpiDetective 开发免费工具，让你自己查阅已发表的健康研究。",
+    "why": "英文原句是 “builds free tools that let you explore published health research for yourself”。中文丢掉了 free 和 for yourself 这两个要点，把“读者自己去查”改写成“把结论带到你面前”，并加进了原文没有的“最权威”。全站的立意是可追溯、可自查，这句话的改写恰好与之相反。",
+    "severity": "high",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "home_h1",
+    "context": "首页大标题",
+    "current": "转化最可靠的流行病学证据，<b>让世界更健康</b>",
+    "proposed": "转化流行病学证据，<b>让世界更健康</b>",
+    "why": "英文为 “Translating epidemiological evidence for a healthier world”，没有“最可靠的”。这类最高级修饰在首页反复出现（另见 meta_home_desc、inst_t1_desc），中文读者会读成自我标榜，反而削弱可信度。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "meta_home_desc",
+    "context": "首页 <meta name=description>、og:description、twitter:description",
+    "current": "一系列公开免费工具，来帮助你自己查阅关于癌症及其他主要慢性病成因的权威证据。由 IARC/WHO 的癌症流行病学研究者建立。",
+    "proposed": "一系列免费开放的工具，帮助你自己查阅关于癌症及其他主要慢性病成因的已发表证据。由 IARC/WHO 的癌症流行病学研究者开发。",
+    "why": "三处：①“来帮助”的“来”是口语衬字，书面搜索摘要里多余；②英文是 published evidence（已发表的证据），“权威证据”是添加的判断；③网站和工具用“建立”不搭配，中文一般说“开发”或“创建”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t1_desc",
+    "context": "首页工具卡片一（癌症证据探索器）正文",
+    "current": "……数据直接取自世界卫生组织《IARC 专论》，这是目前对致癌因素最权威的评估。……",
+    "proposed": "……数据直接取自世界卫生组织《IARC 致癌物专论》，这是世界卫生组织对致癌因素的系统评估。……",
+    "why": "英文只说 “the World Health Organization's review of what can cause cancer”，中文加了“目前……最权威”。同一段还有专论名称的问题（见另一条）。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t2_desc",
+    "context": "首页工具卡片二（慢性病）首句",
+    "current": "哪些危险因素已被研究证实与心脏病、卒中、2型糖尿病、痴呆等主要慢性病相关",
+    "proposed": "哪些危险因素被研究发现与心脏病、卒中、2 型糖尿病、痴呆、癌症等主要慢性病相关",
+    "why": "英文是 “have been linked to”（已被发现相关），中文写成“已被研究证实”，把关联升格为证实；同一句结尾又说“包括那些确实存在争议的关联”，前后自相矛盾。这是整份中文里最实质的一处意思改变。",
+    "severity": "high",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t2_desc",
+    "context": "首页工具卡片二疾病列表",
+    "current": "心脏病、卒中、2型糖尿病、痴呆等主要慢性病",
+    "proposed": "心脏病、卒中、2 型糖尿病、痴呆、癌症等主要慢性病",
+    "why": "英文列举里有 cancer（“dementia, cancer and other major chronic conditions”），中文漏掉了。这个工具明确覆盖癌症，漏掉会让读者以为它把癌症排除在外。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t2_desc",
+    "context": "首页工具卡片二句中破折号与数字排版",
+    "current": "每一条关联背后的证据又有多强 — 包括那些确实存在争议的关联。……2型糖尿病",
+    "proposed": "每一条关联背后的证据又有多强——包括那些确实存在争议的关联。……2 型糖尿病",
+    "why": "中文破折号应写作占两个字宽的“——”且前后不留空格；这里用了前后带空格的半角 —，与站内其他中文段落（games_*、防癌守则页、年表页都用“——”）不一致。同串里“2型糖尿病”没有按全站习惯在数字与汉字间留空格（对比同串“434 条”“124 个”）。",
+    "severity": "medium",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_whatsin_h2",
+    "context": "癌症证据探索器页“这里有什么”小节标题",
+    "current": "IARC 已与癌症建立关联的暴露，<b>并按证据的确定程度分级</b>。",
+    "proposed": "IARC 认定与癌症存在关联的暴露因素，<b>并按证据的确定程度分级</b>。",
+    "why": "现在的定语结构断句失败：读者先读到“IARC 已与癌症建立关联”，主语变成 IARC 自己与癌症有关联，读到“的暴露”才发现要回头重读。英文 “The exposures the IARC has linked to a cancer” 在中文里必须换成“认定……存在关联的暴露因素”一类说法。",
+    "severity": "high",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_leg_sus",
+    "context": "探索器页图例，另见 exp_bar2_title 同一措辞",
+    "current": "尚存疑的关联",
+    "proposed": "疑似关联",
+    "why": "英文 Suspected link 指“怀疑存在这条关联”，中文“存疑”是“这条关联本身值得怀疑”，重心相反。国内文献与科普对 limited evidence 一档惯用“疑似”“可疑”。改动需同时覆盖 exp_leg_sus 与 exp_bar2_title。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_bar1_meta",
+    "context": "探索器页证据强度条，另见 exp_bar2_meta",
+    "current": "249 条 &middot; 人群证据充分 / 220 条 &middot; 人群证据有限",
+    "proposed": "249 条 &middot; 对人类致癌性证据充分 / 220 条 &middot; 对人类致癌性证据有限",
+    "why": "IARC 的 “sufficient / limited evidence in humans” 在中文文献与卫生部门文件里固定译作“对人类致癌性证据充分／有限”。“人群证据充分”读得懂，但不是这一行的行话，专业读者会觉得外行。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_bar1_note",
+    "context": "探索器页“已确认的关联”说明，另见 exp_bar2_note",
+    "current": "可以排除偶然、偏倚以及其他解释",
+    "proposed": "可以排除机遇、偏倚以及其他解释",
+    "why": "流行病学里 chance / bias / confounding 的固定中文三件套是“机遇、偏倚、混杂”。本文已用了“偏倚”“混杂”，唯独 chance 写成“偶然”，读起来像半套术语。exp_bar2_note 的“偶然、偏倚或混杂”同改。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_bar2_note",
+    "context": "探索器页“尚存疑的关联”说明首句",
+    "current": "将这一关联作因果解读是可信的，但偶然、偏倚或混杂尚不能排除。",
+    "proposed": "把这一关联解释为因果关系是可信的，但机遇、偏倚或混杂尚不能排除。",
+    "why": "“作因果解读”是把英文 a causal reading 逐字搬过来的名词化写法，中文健康写作会用动词结构“把……解释为因果关系”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_read1_p",
+    "context": "探索器页“危害与风险”正文首句",
+    "current": "所谓 1 类，指的是这种暴露在特定条件下能够引发癌症。",
+    "proposed": "列为 1 类，意味着这种暴露在特定条件下能够引发癌症。",
+    "why": "中文“所谓”带轻蔑意味（所谓专家、所谓证据）。用在 IARC 自己的分级上，会让读者觉得作者在暗示这个分级不作数，与这一段要传达的意思相反。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_lede",
+    "context": "探索器页 hero 导语",
+    "current": "世界卫生组织癌症研究机构",
+    "proposed": "世界卫生组织国际癌症研究机构",
+    "why": "IARC 的正式中文名是“国际癌症研究机构”，about 页与页脚都用全名。这里少了“国际”，变成一个描述性说法，同一站点两种叫法。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": null,
+    "context": "《IARC 专论》一名出现在 meta_explorer_desc、inst_t1_desc、exp_fig4、exp_cta_source、games_g2_fine，年表页作《致癌物专论》",
+    "current": "《IARC 专论》／专论卷次／IARC 专论／IARC《致癌物专论》",
+    "proposed": "统一为《IARC 致癌物专论》（正文重复出现时可简称《专论》）",
+    "why": "IARC Monographs 的中文通称是《IARC 致癌物专论》。单写“《IARC 专论》”不告诉读者这是关于什么的专论；而年表页已经写成《致癌物专论》，同一套资料在站内有两个名字。",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_cta_source",
+    "context": "探索器页底部资料来源",
+    "current": "《IARC 专论》「按癌症部位分类」第 1&ndash;141 卷",
+    "proposed": "《IARC 致癌物专论》“按癌症部位分类”第 1&ndash;141 卷",
+    "why": "全站引号共出现 20 处，只有这一处用了「」（日式／繁体习惯），其余（games_* 八处、年表页两处）都是简体标准的“ ”。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_cta_source",
+    "context": "探索器页底部资料来源，与英文 exp_cta_source 比对",
+    "current": "改编自 Schubauer-Berigan 等人发表于 JNCI Monographs 2026 的补充表格",
+    "proposed": null,
+    "why": "英文只写 “adapted from Schubauer-Berigan et al., JNCI Monographs 2026”，中文多出“的补充表格”。若数据确实取自补充材料，建议英文一并补上；若不是，中文应删。请作者确认后统一。",
+    "severity": "low",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "meta_explorer_desc",
+    "context": "探索器页 meta description / og / twitter",
+    "current": "……数据取自世界卫生组织《IARC 专论》",
+    "proposed": "……数据取自世界卫生组织《IARC 致癌物专论》。",
+    "why": "句末缺句号（英文该键以句号收尾），同页其他描述性句子都有句号。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_chip_live",
+    "context": "首页工具卡片角标，对比 inst_h2「已上线」、exp_crumb_current「已上线」、games_shelf_h2「已上线」",
+    "current": "已开放",
+    "proposed": "已上线",
+    "why": "同一状态在站内有“已开放”和“已上线”两种说法，且两者在首页同屏出现（标题说“两个工具已上线”，卡片角标写“已开放”）。",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t1_m1",
+    "context": "首页工具卡片数字标签，另见 exp_fig1「暴露」、exp_lede「185 种暴露」",
+    "current": "185 种暴露",
+    "proposed": "185 种暴露因素",
+    "why": "“暴露”在中文里更多作动词或与“因素／水平”搭配；单独作可数名词（185 种暴露）是从 exposures 直译来的，面向公众的文本一般写“暴露因素”。这是可讨论的取舍，但全站出现多次，建议一次定下来。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_t2_m5",
+    "context": "首页工具卡片二版本行",
+    "current": "GBD · 柳叶刀委员会 · 荟萃分析 · 快照 v1.4 · 2026年9月",
+    "proposed": "GBD · 《柳叶刀》委员会 · 荟萃分析 · v1.4 · 2026年9月",
+    "why": "①期刊名应加书名号（年表页已写《柳叶刀》委员会报告）；②英文该键没有“快照”，读者也不需要这个技术词；③“2026年9月”与同文件 exp_cta_source 的“2026 年 5 月 18 日”两种日期排版并存，建议纯中文日期一律不加空格。",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "inst_h2",
+    "context": "首页工具区标题",
+    "current": "两个工具<b>已上线</b>，其余仍在开发。",
+    "proposed": "两个工具<b>已上线</b>，更多正在开发。",
+    "why": "英文是 “More are being built”，没有给出一个已知的工具总数；“其余”预设了一份固定名单，读者会想“一共几个”。",
+    "severity": "low",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_p2",
+    "context": "防晒游戏介绍第二段句末，另见防癌守则页欧洲第 8 条「绝不使用日光浴床」",
+    "current": "以及为什么要远离晒黑床。",
+    "proposed": "以及为什么要远离日光浴床。",
+    "why": "“晒黑床”是 tanning bed 的逐字直译，中文没有这个说法；国内通行译名是“日光浴床”或“日晒机”。本站自己的《防癌守则》页就写“日光浴床”，两页对同一件东西叫法不同。",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_fact_questions",
+    "context": "防晒游戏数字块，渲染为「30 道题库，每局 5 道」",
+    "current": "道题库，每局 5 道",
+    "proposed": "道题，每局抽 5 道",
+    "why": "“道”不能用来量“题库”——题库的量词是“个”。现在渲染出来是“30 道题库”，是量词错误。英文原文 “questions in the bank, 5 per run” 指题库里有 30 道题。",
+    "severity": "high",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_fact_time",
+    "context": "三款游戏的数字块标签，渲染为「~10 min 通关一局约需」",
+    "current": "通关一局约需",
+    "proposed": "单局时长",
+    "why": "数字块的其他标签都是名词短语（建议年龄、个地区、条线索待归档），只有这一条是以“需”结尾的动词短语，跟在数字后面像半截话。",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/games.html",
+    "i18n_key": null,
+    "context": "zh/games.html 三处 .game-facts 数值（第 122、157、183 行）",
+    "current": "<b>~10 min</b> / <b>~8 min</b>",
+    "proposed": "<b>约 10 分钟</b> / <b>约 8 分钟</b>",
+    "why": "中文页面里唯一没有本地化的单位。同一排数字的其他值（6–12、5、30）都已本地化，只有时间留着英文 min 和波浪号。",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_p2",
+    "context": "防晒游戏介绍第二段的题目清单",
+    "current": "题目涉及紫外线指数的含义、什么时候需要防护（指数 3 及以上）、为什么阴凉、衣物和防晒霜要搭配使用、沙子、水面和雪如何反射紫外线，以及为什么要远离晒黑床。",
+    "proposed": "题目涉及：紫外线指数的含义；什么时候需要防护（指数 3 及以上）；为什么阴凉、衣物和防晒霜要搭配使用；沙子、水面和雪如何反射紫外线；以及为什么要远离日光浴床。",
+    "why": "顿号同时承担了句级并列和句内并列两层任务，读到“……要搭配使用、沙子、水面和雪如何……”时分不清“沙子”是接着上一项还是新起一项。句级并列改用分号即可。",
+    "severity": "medium",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_p1",
+    "context": "防晒游戏介绍第一段，另见 games_step4「到达关卡时，读题」",
+    "current": "到达关卡时必须答对一道问题，前路才会打开",
+    "proposed": "到达检查点时必须答对一道问题，前路才会打开",
+    "why": "同一段里“五个地区”才是关卡，把 checkpoint 也叫“关卡”会让读者以为每关只有一道题、或者地区与关卡是两套东西。中文游戏文案里 checkpoint 是“检查点／存档点”。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g1_desc",
+    "context": "防晒游戏卡片简介（首页与游戏页各一处）",
+    "current": "一路收集帽子、遮挡衣物、阴凉和防晒霜组成的“护盾装备”。",
+    "proposed": "一路集齐帽子、遮阳衣物、阴凉处和防晒霜这套“护盾装备”。",
+    "why": "“收集阴凉”在中文里不成立（阴凉不是可收集的物件）；“遮挡衣物”也不如“遮阳衣物”自然。英文 assemble a shield kit 是“集齐一套”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_step2",
+    "context": "防晒游戏玩法第 2 步，对比 games_shot_alt「前方有金币和太阳星」",
+    "current": "收集太阳币和九颗隐藏的太阳星。",
+    "proposed": "收集太阳币和九颗隐藏的太阳星。（或把 games_shot_alt 的“金币”一并改为“太阳币”）",
+    "why": "同一个道具，玩法说明叫“太阳币”，截图替代文字叫“金币”。",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g2_step3",
+    "context": "肺癌游戏玩法第 3 步末句",
+    "current": "世界卫生组织的参考水平是 100 Bq/m³，并指出各国设定的参考水平不应超过 300。",
+    "proposed": "世界卫生组织的参考水平是 100 Bq/m³，并建议各国的参考水平不超过 300 Bq/m³。",
+    "why": "两个问题：①“并指出”的主语顺延成了“参考水平”，句子结构塌了（英文这里重新出现主语 WHO）；②“不应超过 300”缺单位，中文读者会停一下才补出 Bq/m³。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g2_step4",
+    "context": "肺癌游戏玩法第 4 步末句",
+    "current": "每个人都有怀疑的理由，每个人都会温和地得到证据。",
+    "proposed": "每个人都有怀疑的理由，而你要温和地把证据讲给他们听。",
+    "why": "“温和地得到证据”不通——“温和”修饰的是给的人，不是收的人。英文 “each gets the evidence, kindly” 的语态在中文里必须换主语。",
+    "severity": "high",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g2_p1",
+    "context": "肺癌游戏介绍第一段，另见 games_g2_sub 同一说法",
+    "current": "每条线索都要按 IARC 归档证据的方式归档",
+    "proposed": "每条线索都要按 IARC 评估证据的方式归类",
+    "why": "一句之内“归档”出现两次，读起来打转；而且 IARC 做的是评估分级，不是归档。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g2_step3",
+    "context": "肺癌游戏玩法第 3 步首句",
+    "current": "排除可以排除的危害，每排除一项，清洁空气得分就上升。",
+    "proposed": "能消除的危害就去消除，每消除一项，清洁空气得分就上升。",
+    "why": "一句三个“排除”。另外“排除危害”在中文安全用语里偏向“排查隐患”，这里指的是把危害源去掉，用“消除”更准。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g2_p2",
+    "context": "肺癌游戏介绍第二段的三段对话",
+    "current": "一位说电子烟无害的电子烟店主",
+    "proposed": "一位坚称自家产品无害的电子烟店主",
+    "why": "“电子烟”在同一个名词短语里连出两次。",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g3_p1",
+    "context": "乳腺癌游戏介绍第一段，另见 games_g3_shot_alt",
+    "current": "结果显示在一个由 1,000 个点组成的图阵上",
+    "proposed": "结果显示在一张由 1,000 个点组成的点阵图上",
+    "why": "“图阵”不是现成的中文词（dot array 的自造译法）。国内数据可视化与科普里这种图叫“点阵图”“千人图”。量词也应是“一张”。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g3_p2",
+    "context": "乳腺癌游戏介绍第二段首句",
+    "current": "效应量取自汇总研究，克制而诚实，所以十年的正确选择也只会移动少数几个点。",
+    "proposed": "效应量取自汇总研究，数值不大，如实呈现，所以十年的正确选择也只会移动少数几个点。",
+    "why": "英文 modest 在这里指“效应本身小”，中文“克制”说的是写作态度，把因果关系说反了——正因为效应小，点才只动几个。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "games_g3_p2",
+    "context": "乳腺癌游戏介绍第二段，另见 games_g3_step4「有些卡是迷思」",
+    "current": "迷思卡等着你识破",
+    "proposed": "误区卡等着你识破",
+    "why": "“迷思”是港台对 myth 的译法，大陆健康传播里通用“误区”“谣言”。面向大陆读者的科普文本里“迷思”会显得翻译腔。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "meta_games_title",
+    "context": "游戏页 <title> / og:title / twitter:title",
+    "current": "防癌小游戏 —— 防晒、肺癌与乳腺癌 —— EpiDetective",
+    "proposed": "防癌小游戏｜皮肤癌、肺癌与乳腺癌｜EpiDetective",
+    "why": "两处：①“防晒、肺癌与乳腺癌”并列的不是同类——前一项是行为，后两项是疾病，英文 “sun, lung and breast” 指的是三个部位；②分隔符与站内其他标题不一致（首页与探索器用“｜”，about 用“ — ”，这里用“ —— ”），三种并存。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/games.html",
+    "i18n_key": null,
+    "context": "zh/games.html 第 7、19、24 行 meta 描述，以及第 139 行地区列表",
+    "current": "content=\"……Sol & the UV Shield Quest……\" / <li>运动与雪山（Sports & Mountain）",
+    "proposed": "改为 &amp;",
+    "why": "HTML 里的裸 & 未转义。浏览器多半容错，但 meta 描述会被抓取工具原样解析，地区列表那行同样。英文版 games_region4 在 i18n 里也是裸 &。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_cta_lede",
+    "context": "探索器页 CTA 导语，对比 inst_t1_m4「10 种语言」",
+    "current": "免费使用，支持十种语言。",
+    "proposed": "免费使用，支持 10 种语言。",
+    "why": "同一事实在首页写“10 种语言”、在探索器页写“十种语言”。数字用法建议统一（正文小数目用汉字、数据标签用阿拉伯数字也可以，但要成规则）。",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "exp_crumb_current",
+    "context": "探索器页面包屑",
+    "current": "工具 01 &mdash; 已上线",
+    "proposed": "工具 01 &middot; 已上线",
+    "why": "站内其余并列分隔（页脚、卡片元信息、来源行）一律用 &middot;，只有面包屑用了前后带空格的 &mdash;。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/zh.json",
+    "i18n_key": "home_audience",
+    "context": "首页两行导语（另见 home_lede），与同屏 inst_h2 比较",
+    "current": "写给关心健康的普通读者、患者、医生、记者，以及制定健康政策的人",
+    "proposed": null,
+    "why": "两行导语都不收句号，而同一屏的小节标题“两个工具已上线，其余仍在开发。”收句号。展示性文字不收句号是可以的写法，但需要成规则；目前同页两种做法并存。请作者定一条：标题与导语一律不收，或一律收。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "about_p3",
+    "context": "关于页第三段开头（作者已亲自校订，仅报告，不提修改）",
+    "current": "在 IARC的日常工作中",
+    "proposed": null,
+    "why": "IARC 与“的”之间缺空格，全文件其他中英混排处（“在 IARC 的”以外的 185 种、IARC 专论等）都留了空格。像是排版疏漏而非有意选择，故报为提示。",
+    "severity": "note",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "about_p3",
+    "context": "关于页第三段与第四段的破折号（仅报告）",
+    "current": "项目统筹工作 — 这个联盟…… / 实在太少 — 尽管这些研究……",
+    "proposed": null,
+    "why": "这两处用的是前后带空格的半角 —，而站内其他中文段落（游戏页、防癌守则页、年表页）用的是“——”。若日后统一全站破折号，这两处会是仅存的例外。",
+    "severity": "note",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "about_p4",
+    "context": "关于页第四段（仅报告）",
+    "current": "仅仅只完成了不到一半的工作 / 关于危险因素的证据的产出",
+    "proposed": null,
+    "why": "“仅仅只”是叠用（仅仅＝只）；“……的证据的产出”是连续两个“的”。两处都不影响理解，作者若愿意可顺手收一下。",
+    "severity": "note",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "cite_p",
+    "context": "关于页“如何引用”（位于已校订的关于页，故只报告）",
+    "current": "Wan, W. EpiDetective：解读健康证据的开放工具。epidetective.com，2026。",
+    "proposed": null,
+    "why": "同一句标语在站内有两种译法：页脚与首页标题是“读懂健康证据的公开工具”，这里是“解读健康证据的开放工具”。另外引用条目里把英文站名的副标题译成中文，读者照此引用会检索不到英文原条目——是否保留英文副标题请作者定。",
+    "severity": "note",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "about_cred_msc_value",
+    "context": "关于页学历栏，与年表页 2020 年 9 月条目比对（仅报告）",
+    "current": "流行病学硕士（优等 Distinction）",
+    "proposed": null,
+    "why": "年表页同一学位写作“布里斯托大学流行病学硕士（Distinction）”，没有“优等”。两处并非矛盾，但读者对照时会注意到详略不一。",
+    "severity": "note",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/zh/about.html",
+    "i18n_key": "about_p3",
+    "context": "关于页 OPICO 描述与年表页 OPICO 条目比对（仅报告事实差异）",
+    "current": "这个联盟把三大洲的十项队列汇到一处，要回答的是长期使用阿片类药物和癌症的风险",
+    "proposed": null,
+    "why": "年表页写“汇集约十项队列、约三十个经统一协调的真实世界数据源……覆盖美、英、澳、法约 120 万人”，关于页写“三大洲的十项队列”。美、英、澳、法分属北美、欧洲、大洋洲三洲，数字自洽；但一处写“十项”、一处写“约十项”。请作者确认要不要都加“约”。",
+    "severity": "note",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "（页面 furniture）",
+    "context": "第 2 行 <html lang=\"en\">、第 6 行 <title>、第 10 行 meta description；build() 只改 documentElement.lang",
+    "current": "<title>Code Against Cancer — EpiDetective</title> / meta description 为英文，切到中文后不变",
+    "proposed": "在 build(lang) 里同时设置 document.title 与 meta[name=description]（中文：防癌守则｜EpiDetective）",
+    "why": "从中文站点击“防癌守则”会带 ?lang=zh 进来，正文整页变中文，但浏览器标签页、书签名、分享卡片和搜索摘要仍是英文。这是中文读者唯一会看到的英文界面元素。",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "第 6–9 行 <title> 元素",
+    "current": "<title>Code Against Cancer — EpiDetective<link rel=\"icon\" …><link …></title>",
+    "proposed": "把三个 <link> 移到 </title> 之后",
+    "why": "三个 <link> 被包进了 <title> 里，标题文本因此可能带上链接标记，图标也不会生效。年表页 timeline/index.html 第 6–9 行有同样的问题。非中文专属，但属于页面 furniture，顺带报出。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "coordinated",
+    "context": "build() 中 '<span class=\"partner\">'+i18n(\"coordinated\",lang)+\": \"+… （约第 1117 行）",
+    "current": "协调方: IARC 与欧盟委员会",
+    "proposed": "中文渲染为“协调方：IARC 与欧盟委员会”（把冒号并入字符串，或按语言选全角/半角）",
+    "why": "冒号由 JS 以半角 \": \" 硬拼，中文页面里出现半角冒号加空格。",
+    "severity": "medium",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "第 130 行 <nav class=\"langs\" id=\"langNav\" aria-label=\"Language\">",
+    "current": "aria-label=\"Language\"",
+    "proposed": "随语言切换为“语言”（zh/*.html 已经这样做）",
+    "why": "读屏用户在中文页面听到的是英文标签。zh/index.html 等页面的语言切换器已本地化为 aria-label=\"语言\"，此页与年表页没有。",
+    "severity": "low",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "zh.frameworkP",
+    "context": "“世界防癌守则框架”正文",
+    "current": "再根据当地癌症谱和生活方式调整",
+    "proposed": "再根据当地癌症谱和生活条件调整",
+    "why": "英文是 living conditions（生活条件：居住、燃料、职业、医疗可及性），中文写成“生活方式”，把结构性因素缩成了个人习惯。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "zh.disclaimerP",
+    "context": "页面底部“如何理解本页”",
+    "current": "筛查年龄、疫苗与职业规定因国家而异",
+    "proposed": "筛查年龄、疫苗接种程序和工作场所的相关规定因国家而异",
+    "why": "英文是 vaccination schedules（接种程序，不只是“疫苗”）和 workplace rules（工作场所规定）。“职业规定”在中文里指向不明，读者可能理解成执业资格规定。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[europe].recs[2] zh detail",
+    "context": "欧洲守则第 3 条“避免或管理超重”",
+    "current": "采取行动避免或管理超重和肥胖：少吃高热量、高糖、高脂、高盐食物；少喝含糖饮料；少吃超加工食品。",
+    "proposed": "采取行动预防和控制超重与肥胖：少吃高热量、高糖、高脂、高盐的食物；少喝含糖饮料，以白水和无糖饮料为主；少吃超加工食品。",
+    "why": "两处：①官方原文有 “Drink mostly water and unsweetened drinks”，中文漏掉了这条正面建议（法、西、俄文版都保留了）；②“管理超重”是 manage 的直译，中文健康教育说“预防和控制超重”。",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[9] zh detail",
+    "context": "拉美守则第 10 条“空气差时减少外出”",
+    "current": "户外空气污染严重时，减少户外活动——它与肺癌存在因果关系。",
+    "proposed": "户外空气污染严重时，减少户外活动——空气污染与肺癌存在因果关系。",
+    "why": "“它”最近的名词是“户外活动”，字面读下来成了“户外活动与肺癌存在因果关系”。这条建议本身就在劝人少外出，误读的代价不小。",
+    "severity": "high",
+    "category": "meaning"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[11] zh detail",
+    "context": "拉美守则第 12 条“关注幽门螺杆菌”",
+    "current": "了解可导致胃癌的幽门螺杆菌感染的筛查与治疗。",
+    "proposed": "幽门螺杆菌感染可导致胃癌；了解相关的筛查与治疗。",
+    "why": "“可导致胃癌的……感染的筛查与治疗”是连续两层“的”套叠，读者要数一遍才知道谁修饰谁。拆成两句即可。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[12] zh detail",
+    "context": "拉美守则第 13 条“预防致癌相关感染”",
+    "current": "并正确、坚持使用安全套。",
+    "proposed": "并坚持正确使用安全套。",
+    "why": "英文 “consistently and correctly” 是修饰同一个动作的两个副词，中文用顿号并列成了两件事。惯用搭配是“坚持正确使用”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[2] zh detail",
+    "context": "拉美守则第 3 条“终身保持健康体重”",
+    "current": "在整个人生中达到并保持健康的体重。",
+    "proposed": "终身达到并保持健康体重。",
+    "why": "“在整个人生中”是 throughout your life 的逐字搬运；标题已经用了更好的“终身”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[16] zh detail",
+    "context": "拉美守则第 17 条“30–64 岁 HPV 检测”",
+    "current": "应至少每 5–10 年做一次 HPV 分子检测",
+    "proposed": "每 5–10 年至少做一次 HPV 分子检测",
+    "why": "“至少每 5–10 年”把副词压在区间前面，逻辑上说不通（至少的是次数，不是间隔）。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[europe].recs[12] / REGIONS[lac].recs[13]",
+    "context": "欧洲第 13 条“限制激素替代疗法”与拉美第 14 条“限制更年期 HRT”，对比 i18n/zh.json games_g3_p1「绝经激素治疗」",
+    "current": "限制激素替代疗法 / 限制更年期 HRT / 更年期症状",
+    "proposed": "统一为“限制绝经激素治疗（HRT）”“绝经症状”",
+    "why": "同一概念站内三种写法，其中“更年期 HRT”把英文缩写直接放进卡片标题，没有任何解释。国内妇产科与肿瘤预防文献已普遍改用“绝经激素治疗（MHT/HRT）”“绝经”。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[europe].recs[9] zh",
+    "context": "欧洲守则第 10 条“了解氡气暴露”，对比游戏页「家中的氡」「氡探测器」",
+    "current": "氡气暴露 / 当地氡气地图 / 氡气水平",
+    "proposed": "氡暴露 / 当地氡浓度分布图 / 氡浓度",
+    "why": "同一物质站内两种叫法（防癌守则页“氡气”，肺癌游戏页“氡”）。专业文本用“氡”；另外“水平”宜作“浓度”，与 100 Bq/m³ 这个量纲对应。",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[15] zh detail",
+    "context": "拉美守则第 16 条“40 岁起临床乳腺检查”",
+    "current": "另加每两年一次乳腺X线（钼靶）检查。",
+    "proposed": "另加每两年一次乳腺 X 线（钼靶）检查。",
+    "why": "汉字与拉丁字母之间缺空格，是本页中文里唯一一处（其余如 100 Bq/m³、HPV、H. pylori 都留了空格）。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[8] zh detail",
+    "context": "拉美守则第 9 条“避免室内燃料烟雾”",
+    "current": "注意排烟、避免室内烟雾积聚",
+    "proposed": "注意排烟，避免室内烟雾积聚",
+    "why": "顿号用于并列的词或短语，两个动词性分句之间应用逗号。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "zh.lede",
+    "context": "页面导语",
+    "current": "IARC（世界卫生组织癌症研究机构）",
+    "proposed": "IARC（世界卫生组织国际癌症研究机构）",
+    "why": "与 i18n/zh.json exp_lede 同一问题：机构正式中文名是“国际癌症研究机构”，关于页与页脚都用全名。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "REGIONS[lac].recs[14] zh detail",
+    "context": "拉美守则第 15 条“50–74 岁结直肠癌早筛”",
+    "current": "50–74 岁者，应接受结肠和直肠癌的早筛检查。",
+    "proposed": "50–74 岁的人，可主动要求做结肠癌和直肠癌的早期筛查。",
+    "why": "①英文是 ask for（主动要求），中文“应接受”把读者放在被动位置，与这份守则“你可以做什么”的口吻不合；②“早筛”是业内简称，面向公众宜写“早期筛查”。",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2026 · tool 条目 t.zh",
+    "context": "年表 2026 年两条工具条目，对比 i18n/zh.json inst_t1_name「癌症证据探索器」与 inst_t2_name「慢性病证据图谱」",
+    "current": "癌症证据浏览器 / 慢病证据浏览器",
+    "proposed": "癌症证据探索器 / 慢性病证据图谱",
+    "why": "两件产品在年表页与主站叫法不同（浏览器 vs 探索器／图谱），而年表页正是从关于页点进来的。同一条目正文里还写了“癌症证据浏览器后来正是把这里的《致癌物专论》交到公众手中”，读者会以为是第三件工具。产品名是全站最该锁死的词。",
+    "severity": "high",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "STRINGS.zh.coauthor",
+    "context": "论文条目的元信息标签，渲染为「2026年8月 · 论文 · 合作者」",
+    "current": "合作者",
+    "proposed": "共同作者",
+    "why": "co-author 的中文是“共同作者／合著者”。“合作者”指 collaborator，是另一回事——在学术履历里这两者的分量不同，专业读者会当成错误。",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "STRINGS.zh.cats/kinds.role",
+    "context": "筛选按钮与条目类型标签，对比关于页 about_cred5_label「国际联盟职务」",
+    "current": "职责",
+    "proposed": "任职",
+    "why": "Roles 在履历语境里是“担任的职位”，中文说“任职”“职务”；“职责”指的是岗位要做的事，做筛选器标签时读者会以为点开是工作内容清单。关于页同一概念已写“职务”。",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2026 · Cancer Evidence Explorer d.zh",
+    "context": "年表 2026 年 8 月工具条目正文",
+    "current": "把 IARC《致癌物专论》的按部位证据表变成可探索的工具",
+    "proposed": "把 IARC《致癌物专论》按癌症部位整理的证据表变成可探索的工具",
+    "why": "“的按部位证据表”里，“的”后面直接跟介词短语，中文读不顺；另外“按部位”对非专业读者太简，补出“癌症部位”。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2026 · Chronic Disease Evidence Explorer d.zh",
+    "context": "年表 2026 年 8 月工具条目正文",
+    "current": "逐条估计的审计线索",
+    "proposed": "逐条估计的溯源记录",
+    "why": "audit trail 直译成“审计线索”会把读者带到财务审计上。这里指的是每个估计值都能回溯到来源，中文说“溯源记录”“可追溯记录”。",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "STRINGS.zh.lede",
+    "context": "年表页导语首句",
+    "current": "我走过的路与做出的东西",
+    "proposed": "我走过的路与做过的工作",
+    "why": "“做出的东西”在一页学位、论文、国际联盟职务的记录里口语得突兀，与同页“国际联盟职责”“完整发表记录”的书面语不在一个层面上。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2024 · benzene meta-analysis d.zh",
+    "context": "2024 年 12 月论文条目，对比同页“已发表的荟萃分析”与 i18n/zh.json inst_t2_m5「荟萃分析」",
+    "current": "含剂量—反应 Meta 分析并公开 R 代码",
+    "proposed": "含剂量—反应荟萃分析并公开 R 代码",
+    "why": "同一页对 meta-analysis 有“Meta 分析”和“荟萃分析”两种写法。",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2019 · BSc d.zh",
+    "context": "2019 年 7 月学历条目",
+    "current": "以优秀毕业论文奖毕业",
+    "proposed": "毕业论文获评优秀",
+    "why": "“以……奖毕业”不是中文说法（英文 graduated with the award 的句式）。",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "（页面 furniture）",
+    "context": "第 2 行 <html lang=\"en\">、第 6 行 <title>、第 10 行 meta description、第 196 行 aria-label=\"Language\"、第 212 行 aria-label=\"Filter by kind\"",
+    "current": "标题、描述与两个 aria-label 切到中文后仍为英文",
+    "proposed": "在 build(lang) 里一并设置 document.title、meta description 与两处 aria-label（中文：我，和我的工作 — EpiDetective／语言／按类型筛选）",
+    "why": "与防癌守则页同样的问题。关于页的“我与我的工作年表”链接会带 ?lang=zh 进来，正文全中文，标签页标题、分享卡片和读屏标签仍是英文。",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "STRINGS.zh.eyebrow",
+    "context": "年表页 hero 上方小标（.eyebrow 已由 CSS text-transform:uppercase 处理）",
+    "current": "EPIDETECTIVE · 开发者档案",
+    "proposed": "EpiDetective · 开发者档案",
+    "why": "字符串里把品牌写成全大写，而英文版写的是 EpiDetective（大写由 CSS 完成）。视觉上相同，但复制文本和读屏时会变成逐字母拼读的 E-P-I-…，品牌拼写也与全站不一致。",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2024 · talk links zh",
+    "context": "2024 年会议条目的链接标签，对比同条正文“工作因素与 2 型糖尿病”",
+    "current": "EPICOH 海报 · 2型糖尿病 / ISEE · 2型糖尿病",
+    "proposed": "EPICOH 海报 · 2 型糖尿病 / ISEE · 2 型糖尿病",
+    "why": "同一条目内“2 型糖尿病”有带空格与不带空格两种写法（i18n/zh.json inst_t2_desc 也是不带空格的那种）。建议全站统一为数字与汉字之间留空格。",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2026 · IARC milestone d.zh 等",
+    "context": "年表页多处写《致癌物专论》，i18n/zh.json 多处写《IARC 专论》",
+    "current": "IARC《致癌物专论》 / 《致癌物专论》",
+    "proposed": "统一为《IARC 致癌物专论》",
+    "why": "与 i18n/zh.json 的同名条目相对应：同一套资料在两个页面有两个名字，读者无法判断是不是同一份东西。",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "GROUPS 2020 · MSc t.zh",
+    "context": "2020 年 9 月学历条目，对比关于页 about_cred_msc_value",
+    "current": "布里斯托大学流行病学硕士（Distinction）",
+    "proposed": "布里斯托大学流行病学硕士（优等 Distinction）",
+    "why": "关于页已写“优等 Distinction”，年表页留了个未加说明的英文词。",
+    "severity": "low",
+    "category": "consistency"
+  }
+]

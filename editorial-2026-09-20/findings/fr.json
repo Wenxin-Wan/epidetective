@@ -1,0 +1,662 @@
+[
+  {
+    "file": "i18n/fr.json + fr/index.html, fr/about.html, fr/explorer.html, fr/games.html",
+    "i18n_key": "foot_affiliation",
+    "context": "Footer affiliation disclaimer, present on all four French pages.",
+    "current": "les opinions exprimées ici n'engagent que leur autrice",
+    "proposed": "les opinions exprimées ici n'engagent que leur auteur",
+    "why": "Feminine agreement for Wenxin Wan. Owner-confirmed usage is masculine (il, chercheur, né). The English key says only \"the author\", so the feminine is an addition as well as an error. It sits in the footer of every French page, which makes it the most visible slip on the site.",
+    "severity": "high",
+    "category": "grammar"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "inst_t2_m3",
+    "context": "Metadata chip under the Chronic Disease Evidence Explorer card.",
+    "current": "434 liens gradés",
+    "proposed": "434 liens classés par niveau de preuve",
+    "why": "\"Gradé\" in French means ranked in a military sense (un gradé = an NCO). It is not the participle that renders English \"graded\". The English key is \"434 graded links\". The same idea is rendered \"graduées\" in exp_whatsin_h2, so the site also disagrees with itself. French epidemiology says \"niveau de preuve\", which is both correct and the field's own phrase.",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_bar1_meta / exp_bar2_meta / exp_bar1_note",
+    "context": "The two evidence-grade bars on the explorer page, and the note under the first.",
+    "current": "249 — Preuves suffisantes chez l'humain / 220 — Preuves limitées chez l'humain / Les études chez l'humain concordent assez pour…",
+    "proposed": "249 — Preuves suffisantes chez l'être humain / 220 — Preuves limitées chez l'être humain / Les études chez l'être humain concordent suffisamment pour…",
+    "why": "These are the CIRC's own evidence categories. The French wording used by the CIRC and by INCa is \"chez l'Homme\" or \"chez l'être humain\" (indications/preuves suffisantes de cancérogénicité chez l'Homme). \"Chez l'humain\" is a calque of \"in humans\" that a French epidemiologist would not write in this formula. If the owner prefers the agency's historical form, use \"chez l'Homme\".",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_read2_p",
+    "context": "Second of the three caveats: gaps in the map.",
+    "current": "si bien qu'un espace vide constitue une preuve de sécurité très faible",
+    "proposed": "si bien qu'un espace vide constitue une preuve d'innocuité très faible",
+    "why": "\"Sécurité\" is a calque of English \"safety\". For a substance or an exposure the French term of art is \"innocuité\"; \"sécurité\" in French health writing means workplace or product safety. \"Preuve de sécurité\" reads as a slip to anyone at the CIRC or INCa.",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_leg_can",
+    "context": "Legend label under the explorer hero network, alongside \"Lien établi\" and \"Lien suspecté\".",
+    "current": "Site du cancer",
+    "proposed": "Localisation du cancer",
+    "why": "\"Site\" here is a calque of English \"cancer site\". French cancer registries, the CIRC's own French pages and INCa use \"localisation\" (localisation cancéreuse, cancers par localisation). The same choice recurs in exp_cta_source, where \"Classifications par site de cancer\" appears inside guillemets as a quoted section title; there it would be \"Classifications par localisation cancéreuse\".",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html, fr/about.html, fr/explorer.html, fr/games.html",
+    "i18n_key": "foot_tagline / meta_home_title",
+    "context": "Site tagline in every footer, and the home page <title>, og:title and twitter:title.",
+    "current": "Des outils ouverts pour lire les données de santé.",
+    "proposed": "Des outils ouverts pour lire les preuves en santé.",
+    "why": "In French, \"les données de santé\" is a fixed legal term for an individual's personal health data (RGPD, dossier médical). A French reader arrives on a page that appears to be about reading their own medical records. The English is \"health evidence\". The site's own citation line (cite_p) already says \"lire les preuves en santé\", so the change also removes an internal contradiction.",
+    "severity": "high",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json (all four fr pages)",
+    "i18n_key": "home_h1 / meta_home_desc / meta_explorer_title / meta_explorer_desc / inst_t1_name / inst_t1_desc / exp_whatsin_h2 vs inst_t2_desc / cite_p / about_p2 / inst_cac_desc",
+    "context": "How the English word \"evidence\" is rendered across the whole French site.",
+    "current": "\"données\" on the cancer side (Traduire les données épidémiologiques ; Explorateur des données sur le cancer ; la solidité des données ; graduées selon la solidité des données) and \"preuves\" on the chronic-disease side and the about/cite pages (la solidité des preuves ; de nouvelles preuves ; fondées sur les preuves).",
+    "proposed": "Settle on \"preuves\" and \"niveau de preuve\" throughout: \"Traduire les preuves épidémiologiques\", \"Explorateur des preuves sur le cancer\", \"la solidité des preuves derrière chaque lien\", \"classées selon le niveau de preuve\". Keep \"données\" only where the English genuinely means data (about_h2, foot_disclaimer).",
+    "why": "\"Données\" means data; \"evidence\" is \"preuves\" or \"données probantes\", and the graded sense is \"niveau de preuve\" — the phrase used by the CIRC, INCa and the HAS. Using both words for the same English term, split by tool, makes the two explorers look as though they measure different things, and \"la solidité des données\" suggests data quality rather than strength of evidence.",
+    "severity": "high",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "meta_home_desc",
+    "context": "Home page meta description, og:description and twitter:description.",
+    "current": "Des outils libres pour explorer soi-même les données publiées… Conçu par un épidémiologiste du cancer au CIRC/OMS.",
+    "proposed": "Des outils gratuits pour explorer soi-même les travaux publiés… Conçus par un épidémiologiste du cancer au CIRC/OMS.",
+    "why": "Two problems. \"Libre\" in French means free as in open-source or unconstrained; the English is \"Free tools\", and the site's own home_lede already says \"des outils gratuits\". And \"Conçu\" is masculine singular with no antecedent but \"outils\" (masculine plural) two clauses earlier, so it reads as a missing agreement.",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "inst_t2_name",
+    "context": "Card title for the second tool, beside inst_t1_name \"Explorateur des données sur le cancer\".",
+    "current": "Explorateur des maladies chroniques",
+    "proposed": "Explorateur des preuves sur les maladies chroniques",
+    "why": "The English name is \"Chronic Disease Evidence Explorer\"; the French drops \"Evidence\" entirely, so the tool reads as a disease browser. The sibling tool keeps the evidence word, which makes the pair look asymmetrical on the same page.",
+    "severity": "medium",
+    "category": "meaning"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_p1",
+    "context": "First line of the About text, the author's own introduction.",
+    "current": "Je suis Wenxin Wan, chercheur postdoctoral au Centre international de recherche sur le cancer (CIRC), l'agence de l'OMS spécialisée dans le cancer, basé à Lyon, en France.",
+    "proposed": "Je suis Wenxin Wan, chercheur postdoctoral au Centre international de Recherche sur le Cancer (CIRC), l'agence de l'OMS spécialisée dans le cancer. Je travaille à Lyon, en France.",
+    "why": "\"Basé\" is masculine singular and is meant to agree with \"je\", but it sits immediately after \"l'agence\" (feminine), so the sentence reads as a botched agreement. \"Basé à\" is also a calque of \"based in\" that French style guides discourage; \"en poste à\", \"installé à\" or a fresh sentence all read better.",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_p4",
+    "context": "The closing paragraph of the About text, the emotional core of the page.",
+    "current": "Cela fait des années que je participe moi-même à la production de ces preuves, et trop peu d'entre elles parviennent réellement aux gens ordinaires… Combler cette distance mérite tous les efforts que nous pouvons y consacrer.",
+    "proposed": "Cela fait des années que je participe moi-même à la production de ces preuves ; pourtant, bien trop peu d'entre elles parviennent jusqu'au grand public… Réduire cette distance mérite tous les efforts que nous pouvons y consacrer.",
+    "why": "Three things. The English \"yet far too little of it ever reaches\" is adversative, and the flat \"et trop peu\" loses that turn. \"Les gens ordinaires\" carries a faint condescension in French that \"ordinary people\" does not; \"le grand public\" is the neutral register. And one combles un écart or un fossé, never une distance — \"combler cette distance\" is not an existing collocation.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_p4",
+    "context": "Same paragraph, the sentence about findings that stay in the literature.",
+    "current": "Une découverte qui reste dans la littérature scientifique a accompli moins de la moitié de son travail.",
+    "proposed": "Une découverte qui reste enfermée dans la littérature scientifique n'a rempli qu'une part de sa mission.",
+    "why": "\"A accompli moins de la moitié de son travail\" is a word-for-word rendering of \"has done less than half its job\". French does not attribute a \"travail\" to a discovery; the natural nouns are \"mission\", \"rôle\" or \"office\". As written, the sentence stops the reader on the strongest line of the page.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "contact_h2 / contact_p",
+    "context": "Contact section heading and the line under it.",
+    "current": "Écrivez-moi. / Des questions, une correction ou un outil que vous aimeriez voir : écrivez-moi.",
+    "proposed": "Prenons contact. / Une question, une correction ou un outil que vous aimeriez voir : écrivez-moi.",
+    "why": "The heading and the sentence under it end on the same two words, so the page says \"écrivez-moi\" twice in four seconds. The English pairs \"Get in touch.\" with \"…email me.\", which varies. \"Des questions\" in the plural also sits oddly in a list whose other members are singular.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_read1_p",
+    "context": "First caveat, on hazard versus risk.",
+    "current": "La dose, la durée, l'âge auquel elle survient et les gènes que l'on porte se tiennent tous entre ce constat et une personne donnée.",
+    "proposed": "Entre ce constat et une personne donnée s'interposent la dose, la durée, l'âge auquel l'exposition survient et les gènes que l'on porte.",
+    "why": "\"Se tenir entre\" is a literal transfer of English \"to stand between\"; in French the verb is \"s'interposer\" or \"séparer\". The four-item subject before the verb also makes the sentence front-heavy, and \"elle\" is far from its antecedent \"une exposition\" in the previous sentence.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_bar2_note",
+    "context": "Note under the \"Lien suspecté\" bar, explaining limited evidence.",
+    "current": "mais le hasard, les biais ou la confusion ne peuvent pas encore être écartés",
+    "proposed": "mais le hasard, les biais ou les facteurs de confusion ne peuvent pas encore être écartés",
+    "why": "Bare \"la confusion\" in a list beside \"le hasard\" and \"les biais\" reads to a lay audience as confusion in the everyday sense. French epidemiology writes \"facteurs de confusion\" or \"biais de confusion\"; the English key says \"confounding\", which is the technical sense.",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_read1_h3",
+    "context": "Heading of the first caveat.",
+    "current": "Une chose capable de causer un cancer peut n'avoir aucun rapport avec le vôtre.",
+    "proposed": "Un agent capable de causer un cancer peut n'avoir eu aucun rapport avec le vôtre.",
+    "why": "\"Une chose\" is vague for a page whose subject is agents and exposures; \"un agent\" is the word the CIRC uses and keeps the register. The English also uses a perfect (\"may still have had nothing to do with yours\"), which the French present tense loses — the reader's cancer is already diagnosed.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_over_lede",
+    "context": "Lede under the games page H1.",
+    "current": "Choisissez-en un pour voir comment il se joue et ce qu'il apprend.",
+    "proposed": "Choisissez-en un pour voir comment il se joue et ce qu'il enseigne.",
+    "why": "Without an indirect object, \"ce qu'il apprend\" means what the game itself learns. The English is \"what it teaches\". \"Apprendre\" only carries the teaching sense with a dative (\"qui apprend aux enfants à…\", as in games_sub, which is correct).",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g2_p1",
+    "context": "Opening sentence of The Lung Detective description.",
+    "current": "Le tabac cause la plupart des cancers du poumon, et arrêter est bénéfique à tout âge.",
+    "proposed": "Le tabac est à l'origine de la plupart des cancers du poumon, et arrêter de fumer est bénéfique à tout âge.",
+    "why": "Two points. French health communication says \"est à l'origine de\" or \"est responsable de\" for this claim (INCa: \"le tabac est responsable de 8 cancers du poumon sur 10\"); \"cause\" as a finite verb reads as a transfer from English. And \"arrêter\" needs its object: a French reader has to supply \"de fumer\" from context. The same ellipsis returns in games_g2_p2 (\"qu'arrêter après vingt ans\"), while games_g2_fine gets it right (\"arrêter de fumer\").",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g2_p2",
+    "context": "Second paragraph of The Lung Detective description.",
+    "current": "le café et le stress se révèlent sans aucune preuve. Trois conversations portent l'argument : …",
+    "proposed": "le café et le stress, eux, ne reposent sur aucune preuve. Trois dialogues font avancer la démonstration : …",
+    "why": "\"Se révéler sans aucune preuve\" attributes the absence of evidence to the coffee rather than to the claim, and \"porter l'argument\" is a calque of \"carry the argument\" with no French equivalent — \"porter\" plus \"argument\" reads as carrying a physical object.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g3_p2 / games_g3_step3 / games_g3_fine",
+    "context": "Three places where the breast-cancer game states where its effect sizes come from.",
+    "current": "tirés d'études poolées / de ce que les études poolées justifient / viennent d'études poolées",
+    "proposed": "tirés d'analyses groupées / de ce que les analyses groupées permettent d'affirmer / proviennent d'analyses groupées",
+    "why": "\"Poolé\" is lab-corridor English that has never been naturalised in written French. Published French epidemiology uses \"analyse groupée\", \"études regroupées\" or, when it applies, \"méta-analyse sur données individuelles\". On a page written for the public it is the one word that will stop a French reader.",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g3_step3",
+    "context": "Third how-to step of the breast-cancer game.",
+    "current": "Les petits mouvements sont les honnêtes.",
+    "proposed": "Ce sont les petits mouvements qui sont honnêtes.",
+    "why": "French cannot elide the noun after a definite article the way English does with \"the honest ones\". \"Les honnêtes\" is ungrammatical; the cleft sentence carries the same emphasis.",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_fact_questions",
+    "context": "Fact tile under the sun-safety game, rendered as \"30 · questions dans la banque, 5 par partie\".",
+    "current": "questions dans la banque, 5 par partie",
+    "proposed": "questions au total, 5 par partie",
+    "why": "\"La banque\" with no qualifier reads as a bank in the financial sense; French would need \"la banque de questions\", which is long for a tile. \"Au total\" carries the same meaning in fewer words.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_open_full",
+    "context": "Link beside the game stage caption; the link carries target=\"_blank\".",
+    "current": "Ouvrir dans une fenêtre à part",
+    "proposed": "Ouvrir dans un nouvel onglet",
+    "why": "French browser UI says \"nouvel onglet\" or \"nouvelle fenêtre\"; \"une fenêtre à part\" is not the phrase any French interface uses. The link actually opens a tab, so \"onglet\" is also the accurate word.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "home_audience",
+    "context": "Lede under the home page H1.",
+    "current": "celles et ceux qui écrivent les politiques de santé",
+    "proposed": "celles et ceux qui élaborent les politiques de santé",
+    "why": "\"Écrire une politique de santé\" is a calque; in French a policy is \"élaborée\", \"conçue\" or \"définie\". The inclusive \"celles et ceux\" is well judged and should stay.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "inst_t1_desc",
+    "context": "Opening verb of the Cancer Evidence Explorer card.",
+    "current": "Voyez quelles expositions ont été reliées à quels cancers",
+    "proposed": "Découvrez quelles expositions ont été associées à quels cancers",
+    "why": "\"Voyez\" as an imperative opener sounds like \"look here\" in French and is rarely used to invite exploration; \"Découvrez\" or \"Explorez\" is the standard. \"Relié\" is also the lay word: French epidemiology says \"associé à\", which inst_t2_desc already uses for the same English \"linked\".",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 14 title (fr)",
+    "context": "Card title for the Latin America and Caribbean recommendation on menopausal hormone therapy; the detail under it says \"traitement hormonal de la ménopause\".",
+    "current": "Limitez le THS de la ménopause",
+    "proposed": "Limitez le traitement hormonal de la ménopause",
+    "why": "THS (traitement hormonal substitutif) is the older French term, retired in France in favour of THM (traitement hormonal de la ménopause) after the 2000s safety reviews. The card's own detail line already uses the current term, so the title contradicts it two lines later. The LAC Code has no French edition, so this text is EpiDetective's own and can be changed freely.",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · recs 13 and 17 (fr)",
+    "context": "French text for the LAC recommendations on infections and cervical screening, on the same page as the official European French text.",
+    "current": "le VPH / Test VPH, 30–64 ans / un test moléculaire du VPH",
+    "proposed": "le HPV / Test HPV, 30–64 ans / un test HPV",
+    "why": "The official European French text on this same page writes \"papillomavirus humain (HPV)\". VPH is the Latin-American and Canadian French form; in France, Santé publique France, INCa and the HAS all write HPV (test HPV, vaccination HPV). A French reader meets both acronyms on one screen.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 1 (fr)",
+    "context": "First LAC card, title and detail.",
+    "current": "Ne fumez pas, n'utilisez pas de tabac / N'utilisez aucun type de tabac ni de cigarettes électroniques",
+    "proposed": "Ne fumez pas, ne consommez pas de tabac / Ne consommez aucun produit du tabac et n'utilisez pas de cigarette électronique",
+    "why": "French does not \"utiliser\" tobacco; the verb is \"consommer\" (or \"fumer\"). The official European text on the same page says \"Ne consommez pas de tabac, sous quelque forme que ce soit\", so the LAC card reads as a rougher translation sitting next to a polished one. The title also joins two imperatives with a bare comma where French wants \"et\" or a semicolon.",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 12 title (fr)",
+    "context": "Card title, English \"Check for H. pylori\".",
+    "current": "Pensez à H. pylori",
+    "proposed": "Dépistez H. pylori",
+    "why": "\"Pensez à\" is vague where the English asks for an action, and on a prevention card it can read as a reminder to remember something. \"Dépistez\" matches the detail line (\"le dépistage et le traitement de l'infection\") and is the field's verb.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 15 (fr)",
+    "context": "Colorectal screening card for Latin America and the Caribbean.",
+    "current": "demandez un test de détection précoce du cancer du côlon et du rectum",
+    "proposed": "demandez un dépistage du cancer colorectal",
+    "why": "\"Test de détection précoce\" is a literal rendering of \"early-detection test\"; the French programme word is \"dépistage\", used everywhere else on this very page (\"Participez au dépistage\", \"programmes de dépistage organisé\"). \"Cancer colorectal\" is also the standard one-word form, already used in the European card.",
+    "severity": "medium",
+    "category": "terminology"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · asia · rec 1 detail (fr)",
+    "context": "First Asia card.",
+    "current": "Ne fumez pas, arrêtez de fumer et gardez les environnements sans fumée.",
+    "proposed": "Ne fumez pas, arrêtez de fumer et préservez des espaces sans tabac.",
+    "why": "\"Garder les environnements sans fumée\" transfers \"keep environments smoke-free\" word for word; \"environnement\" in the plural with this sense does not exist in French, and the fixed phrase is \"espace sans tabac\" or \"lieu sans fumée\", which the LAC card on the same page already uses (\"les lois sur les espaces sans fumée\").",
+    "severity": "medium",
+    "category": "idiom"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 10 detail (fr)",
+    "context": "Air pollution card for Latin America and the Caribbean.",
+    "current": "elle est une cause avérée de cancer du poumon",
+    "proposed": "c'est une cause avérée de cancer du poumon",
+    "why": "French requires \"c'est\" before a noun introduced by a determiner; \"elle est une cause\" is the construction French teachers correct first. The neighbouring cards all avoid it.",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "LANG_LIST",
+    "context": "Language switcher in the page header; rendered as buttons EN · 中文 · FR · ES · RU.",
+    "current": "[[\"en\",\"EN\"],[\"zh\",\"中文\"],[\"fr\",\"FR\"],[\"es\",\"ES\"],[\"ru\",\"RU\"]]",
+    "proposed": "Use the endonyms the rest of the site uses: English · 中文 · Français · Español · Русский",
+    "why": "Every other page of the site labels the switcher with full native names. Here a French reader sees \"FR\", and Russian is labelled with Latin letters \"RU\" while Chinese gets 中文, which is an odd half-measure. Matching the main switcher also helps readers who do not know the two-letter codes.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "<title> / <meta name=\"description\">",
+    "context": "Page furniture. build() sets document.documentElement.lang from the chosen language, but never touches the title or the description.",
+    "current": "<title>Code Against Cancer — EpiDetective…</title> and an English meta description, on every language including fr",
+    "proposed": "Set document.title (and ideally the meta description) from the STRINGS block inside build(), e.g. document.title = i18n('title',lang) + ' — EpiDetective'.",
+    "why": "With ?lang=fr the whole page is French but the browser tab, the bookmark and anything a French reader shares still read \"Code Against Cancer\". The fr STRINGS block already has \"Code contre le cancer\", so nothing new needs translating. Separately, the <title> element in the source is malformed: three <link> tags sit inside it before the closing tag.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · fr card titles (all three regions)",
+    "context": "The short card titles above each recommendation detail.",
+    "current": "Mixed register: \"Ne fumez pas\", \"Évitez ou gérez le surpoids\", \"Bougez au quotidien\" beside \"Une maison et une voiture sans fumée\", \"Un poids sain toute la vie\", \"Des repas équilibrés\", \"Peu ou pas d'alcool\".",
+    "proposed": "Make them all imperative, e.g. \"Chassez la fumée de chez vous et de votre voiture\", \"Gardez un poids sain toute votre vie\", \"Mangez équilibré\", \"Évitez ou limitez l'alcool\".",
+    "why": "Within one list the reader is alternately addressed and handed a label, which makes the set feel unfinished. The English titles are imperative throughout. These short titles are EpiDetective's own headings rather than the Code's official wording, so they can be changed; the detail texts must stay untouched.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "i18n/fr.json",
+    "i18n_key": "inst_h2 / exp_bar2_note / inst_cac_desc vs the rest of the file",
+    "context": "Apostrophes across the whole French string file: 124 straight ASCII apostrophes against 5 typographic ones.",
+    "current": "D’autres arrivent. / de l’association / l’Europe — beside l'agence, l'OMS, d'un cancer, n'avoir…",
+    "proposed": "Use the typographic apostrophe ’ everywhere, or the straight one everywhere; three strings should not differ from the other hundred.",
+    "why": "French typography wants U+2019. Three strings already use it, which means the mixture is visible within a single page: the home page shows \"D’autres arrivent\" one line above \"l'évaluation de référence\".",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_whatsin_h2",
+    "context": "Section heading on the explorer page; every other string in the file uses literal accented characters.",
+    "current": "Les expositions que le CIRC a reli&eacute;es &agrave; un cancer, <b>gradu&eacute;es selon la solidit&eacute; des donn&eacute;es</b>.",
+    "proposed": "Les expositions que le CIRC a reliées à un cancer, <b>classées selon le niveau de preuve</b>.",
+    "why": "This is the only French string written with HTML entities for its accents, which makes it awkward to proofread and to diff against the other languages. The file is UTF-8 and every other key uses é and à directly. (The wording change is the same \"gradué/données\" point raised at high severity.)",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g2_p2 / games_g2_step3 / games_g2_fine",
+    "context": "The radon reference level, given three times.",
+    "current": "100 Bq/m³ (ordinary space between the number and the unit)",
+    "proposed": "100 Bq/m³ with a no-break space (U+00A0) between 100 and Bq",
+    "why": "French typography puts an unbreakable space between a number and its unit, so the value never wraps away from its unit at the end of a line. The file already does this correctly for thousands separators (1 000) and for the percentage on the Code page (≈ 40 %), so this is the one place where the rule is not applied.",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "fr/games.html",
+    "i18n_key": null,
+    "context": "Fact tiles under each game: playing time.",
+    "current": "~10 min / ~8 min",
+    "proposed": "≈ 10 min / ≈ 8 min, or \"10 min environ\"",
+    "why": "The tilde is an English convention; French uses ≈ or the word \"environ\". The Code Against Cancer page already writes \"≈ 40 %\" in its French block, so the two pages disagree.",
+    "severity": "low",
+    "category": "typography"
+  },
+  {
+    "file": "i18n/fr.json",
+    "i18n_key": "foot_affiliation vs about_p1",
+    "context": "The agency's French name, given twice on the same page (about.html).",
+    "current": "Centre international de Recherche sur le Cancer (footer) vs Centre international de recherche sur le cancer (body)",
+    "proposed": "Use one form on both. The agency's own French name carries the capitals: Centre international de Recherche sur le Cancer.",
+    "why": "The two forms sit a screen apart on the About page. Either capitalisation is defensible in isolation; having both looks like an oversight.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "inst_t2_m5",
+    "context": "Provenance chip under the chronic-disease card.",
+    "current": "GBD · Commissions du Lancet · méta-analyses · instantané v1.4 · sept. 2026",
+    "proposed": "GBD · Commissions du Lancet · méta-analyses · v1.4 · sept. 2026",
+    "why": "\"Instantané\" has no counterpart in the English key (\"GBD · Lancet Commissions · meta-analyses · v1.4 · Sep 2026\") and adds a claim about what v1.4 is. It also reads oddly in French, where \"instantané\" evokes a photograph or a powdered coffee.",
+    "severity": "low",
+    "category": "meaning"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_cta_btn",
+    "context": "The single call-to-action button at the foot of the explorer page.",
+    "current": "Ouvrir l'Explorateur &rarr;",
+    "proposed": "Ouvrir l'explorateur des preuves sur le cancer &rarr;",
+    "why": "The English button names the tool in full (\"Open the Cancer Evidence Explorer\"); the French shortens it to a generic noun with a stray mid-sentence capital. A reader who arrives at this band from a search result has no other statement of what opens.",
+    "severity": "low",
+    "category": "microcopy"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_fig4",
+    "context": "Fourth statistic tile, showing the value 1–141.",
+    "current": "Volumes de monographies",
+    "proposed": "Volumes des Monographies",
+    "why": "The Monographs are a named series, referred to elsewhere on the site as \"les Monographies du CIRC\". The indefinite \"de monographies\" turns them into monographs in general.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_cta_source",
+    "context": "Source line under the explorer call to action.",
+    "current": "…volumes 1 à 141 …, adapté de Schubauer-Berigan et al., JNCI Monographs 2026.",
+    "proposed": "…volumes 1 à 141 …, d'après Schubauer-Berigan et coll., JNCI Monographs 2026.",
+    "why": "\"Adapté\" is masculine singular with no clear antecedent (the nearest nouns are \"Classifications\" and \"volumes\"); \"d'après\" sidesteps the agreement entirely and is the usual French citation formula. Separately, games_g2_fine writes \"Peto et collaborateurs\" while this line writes \"et al.\", so the site uses two citation conventions.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_cta_lede",
+    "context": "Lede in the call-to-action band, describing how to use the network.",
+    "current": "Faites glisser, zoomez et ciblez n'importe quelle partie du réseau.",
+    "proposed": "Faites glisser, zoomez et concentrez-vous sur n'importe quelle partie du réseau.",
+    "why": "\"Cibler\" means to take aim at or to target, which suggests the tool does something to the network. The English is \"focus on\".",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_cred_msc_value",
+    "context": "Credentials list, master's degree entry.",
+    "current": "MSc en épidémiologie, mention Distinction",
+    "proposed": "MSc en épidémiologie, obtenu avec la mention « Distinction »",
+    "why": "French \"mention\" is normally followed by a French grade (mention Bien, Très bien). Bare \"mention Distinction\" reads as a half-translated British award; setting the foreign grade in guillemets signals that it is the awarding university's own wording.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_p3",
+    "context": "OPICO description.",
+    "current": "pour répondre à la question du risque de cancer associé à l'usage prolongé d'opioïdes",
+    "proposed": "pour déterminer quel risque de cancer peut être associé à l'usage prolongé d'opioïdes",
+    "why": "The English is hedged (\"to ask what cancer risk long-term opioid use may carry\"); the French presupposes that such a risk exists and needs only to be described. On a site built around the difference between established and suspected links, the hedge is worth keeping.",
+    "severity": "low",
+    "category": "meaning"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_p2 / games_step4 vs games_step3 vs games_g2_*",
+    "context": "The word \"indice\" carries three unrelated meanings on the same page.",
+    "current": "un indice (a hint after a wrong answer) · l'indice UV (the UV index) · douze indices à classer (the clues in the lung game)",
+    "proposed": "Keep \"indice UV\" and the lung game's \"indices\"; render the quiz hint as \"un coup de pouce\" or \"une aide\".",
+    "why": "Within four consecutive how-to steps the reader meets \"l'indice UV\" in step 3 and \"un indice\" meaning a hint in step 4. The English uses three different words (index, hint, clue), so nothing is lost by varying the French.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g2_p1 / games_g2_step3 / games_g2_step5",
+    "context": "The lung game's running score.",
+    "current": "un score d'air pur",
+    "proposed": "un score « air pur »",
+    "why": "\"Score d'air pur\" reads as a score belonging to the air rather than a score named after it. Guillemets mark it as the game's label, which is how French handles a coined name inside running text — the same device the page already uses for the « sans tabac » card.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g3_p1",
+    "context": "Baseline figures for the breast-cancer game.",
+    "current": "environ 94 sur 1 000 en Europe de l'Ouest (estimations GLOBOCAN 2024)",
+    "proposed": "environ 94 sur 1 000 en Europe occidentale (estimations GLOBOCAN 2024)",
+    "why": "GLOBOCAN's own French region label is \"Europe occidentale\"; \"Europe de l'Ouest\" is the everyday phrase and carries a Cold War echo. Since the figure is cited to GLOBOCAN, matching its region name lets a reader find it. The same swap applies to games_g3_step5 and games_g3_fine.",
+    "severity": "low",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g3_p1",
+    "context": "Chapter structure of the breast-cancer game.",
+    "current": "Chacun des cinq chapitres apporte deux cartes de décision et un petit budget d'effort à dépenser",
+    "proposed": "Chacun des cinq chapitres propose deux cartes de décision et un petit budget d'effort à dépenser",
+    "why": "\"Apporter\" is a literal rendering of \"brings\"; in French a chapter \"propose\", \"présente\" or \"distribue\" cards. games_g3_step2 already uses \"distribue\" for the same action.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_g3_p2 / games_g3_step5",
+    "context": "The closing panel of the breast-cancer game.",
+    "current": "un panneau d'honnêteté",
+    "proposed": "un encadré de mise au point, or un encadré « en toute honnêteté »",
+    "why": "\"Panneau d'honnêteté\" transfers \"honesty panel\" directly; in French a \"panneau\" is a road sign or a wooden board, and the abstract genitive makes it read as signage about honesty. \"Encadré\" is the word for a boxed aside in French editorial writing.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_shelf_h2",
+    "context": "Reused as the H1 of games.html, directly under the label \"Jeux de sensibilisation au cancer\".",
+    "current": "Trois sont <b>ouverts</b> : un pour la peau, un pour le poumon, un pour le sein.",
+    "proposed": "On the games page, give the H1 its subject: \"Trois jeux sont <b>ouverts</b> : un pour la peau, un pour le poumon, un pour le sein.\"",
+    "why": "On the home page the string follows the section label \"Les jeux\", so \"Trois\" has an antecedent. As the first heading of games.html it opens on a bare numeral. The English H1 has the same gap, so this is a judgement call for the owner rather than a translation error.",
+    "severity": "low",
+    "category": "microcopy"
+  },
+  {
+    "file": "i18n/fr.json + fr/index.html",
+    "i18n_key": "inst_chip_live",
+    "context": "Status chip on both tool cards, beside the button \"Ouvrir →\".",
+    "current": "Ouvert",
+    "proposed": "En ligne, or Disponible",
+    "why": "A lone \"Ouvert\" on a badge reads in French as opening hours — a shop that is open. The English \"Open now\" carries the same metaphor but is idiomatic for software; French is not. \"En ligne\" keeps the badge short and still pairs with the \"Ouvrir\" button. The same applies to exp_crumb_current (\"Outil 01 — ouvert\").",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "STRINGS.fr.disclaimerP vs i18n/fr.json foot_disclaimer",
+    "context": "The medical disclaimer, worded one way on the Code page and another way on the four main pages.",
+    "current": "Pour toute question concernant votre santé, parlez-en à un médecin. (Code page) vs Pour toute question concernant votre propre santé, adressez-vous à un médecin. (site footer)",
+    "proposed": "Use the footer wording on both: \"Pour toute question concernant votre propre santé, adressez-vous à un médecin.\"",
+    "why": "The English is identical in both places (\"For anything concerning your own health, speak to a doctor\"). A safety line repeated across a site gains from being word-for-word the same, and \"votre propre santé\" also keeps the contrast with population-level evidence that the sentence exists to draw.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "STRINGS.fr.frameworkP",
+    "context": "Paragraph describing the World Code Against Cancer Framework.",
+    "current": "Les Codes de l'Europe et de l'Amérique latine et des Caraïbes sont publiés ; celui de l'Asie est en cours d'élaboration.",
+    "proposed": "Les Codes pour l'Europe et pour l'Amérique latine et les Caraïbes sont publiés ; celui de l'Asie est en cours d'élaboration.",
+    "why": "Four \"de\" in eleven words, and the chain makes \"des Caraïbes\" briefly look like it depends on \"l'Amérique latine\" rather than on \"les Codes\". Switching the first two to \"pour\" unties it.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · asia · partner (fr)",
+    "context": "Partner line under the Asia tab.",
+    "current": "CIRC et ANCCA (Alliance des centres nationaux du cancer d'Asie)",
+    "proposed": "CIRC et ANCCA (Alliance des centres nationaux de lutte contre le cancer d'Asie)",
+    "why": "In French an institution of this kind is a \"centre de lutte contre le cancer\" — the established name (the CLCC network in France). \"Centre national du cancer\" reads as a centre belonging to the disease.",
+    "severity": "low",
+    "category": "terminology"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "meta_about_desc",
+    "context": "About page meta description, og:description and twitter:description.",
+    "current": "l'épidémiologiste du cancer qui construit EpiDetective",
+    "proposed": "l'épidémiologiste du cancer qui développe EpiDetective",
+    "why": "\"Construire\" applies to buildings and to arguments; for software and websites French says \"développer\" or \"conçoit\". The site's own about_h2 uses \"Conçu par\", so \"développe\" keeps the family.",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/explorer.html",
+    "i18n_key": "exp_bar1_note",
+    "context": "Note under the established-link bar.",
+    "current": "Les études chez l'humain concordent assez pour écarter le hasard",
+    "proposed": "Les études chez l'être humain concordent suffisamment pour écarter le hasard",
+    "why": "Bare \"assez\" before an infinitive clause is colloquial; scientific French uses \"suffisamment\". (The \"chez l'humain\" half of this line is covered by the high-severity terminology finding.)",
+    "severity": "low",
+    "category": "idiom"
+  },
+  {
+    "file": "i18n/fr.json + fr/games.html",
+    "i18n_key": "games_p1",
+    "context": "Sun-safety game description.",
+    "current": "atteint des points de passage où il faut répondre à une question avant que le chemin ne s'ouvre",
+    "proposed": "atteint des points de passage où il faut répondre à une question avant que le chemin ne se rouvre",
+    "why": "The English says \"before the path opens again\" — the path was open and has closed. The French loses the repetition, which changes what the player expects to see. The ne explétif is correctly used.",
+    "severity": "low",
+    "category": "meaning"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · lac · rec 5 detail (fr)",
+    "context": "LAC diet card; the French runs longer than the English key.",
+    "current": "Adoptez une alimentation saine, riche en fruits, légumes et céréales complètes ; … ; évitez la viande transformée et limitez la viande rouge ; limitez les boissons très chaudes…",
+    "proposed": null,
+    "why": "The French adds two claims the English key does not carry: vegetables in the list, and the whole clause on processed and red meat. The Spanish and Russian versions carry the same additions, so the English looks like the abbreviated one rather than the French being wrong. Flagging so the owner can decide which version is the reference and align the other four.",
+    "severity": "note",
+    "category": "meaning"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · europe · all 14 fr detail texts",
+    "context": "Verification against the official source, as required before proposing anything here.",
+    "current": "The 14 French detail texts as shipped.",
+    "proposed": null,
+    "why": "Checked verbatim against the official French edition at cancer-code-europe.iarc.who.int/fr/accueil/. All fourteen match the official 5th-edition wording exactly, including the passages that look unusual out of context: \"comme ration principale de votre alimentation quotidienne\" (rec 5) and the impersonal \"Il est nécessaire de vacciner les filles et les garçons\" (rec 12), which breaks the imperative pattern of the other thirteen in the official text itself. The only editorial liberty is rec 1, where the official \"Ne fumez pas.\" has been lifted out of the detail to serve as the card title; the remaining sentences are untouched. No rewording is proposed for any of them.",
+    "severity": "note",
+    "category": "meaning"
+  },
+  {
+    "file": "code-against-cancer/index.html",
+    "i18n_key": "REGIONS · europe · rec 12 (fr, official text)",
+    "context": "Vaccination card; the official French text mixes acronym conventions.",
+    "current": "le papillomavirus humain (HPV) … du virus de l'immunodéficience humaine (VIH)",
+    "proposed": null,
+    "why": "The English-order acronym HPV sits beside the French-order VIH in one sentence. This is the CIRC's own published French wording, so it must not be touched; noting it only so the owner is not surprised by it and so the site's other French pages follow the same HPV form.",
+    "severity": "note",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json + fr/about.html",
+    "i18n_key": "about_cred2_value",
+    "context": "Doctorate entry in the credentials list.",
+    "current": "Université d'Utrecht (Pays-Bas), Institut des sciences de l'évaluation des risques",
+    "proposed": null,
+    "why": "IRAS is translated where the other named bodies on the page (OPICO, SYNERGY, EPHOR, ECRHS, Lung Cancer Cohort Consortium) keep their original names. A French reader cannot look up \"Institut des sciences de l'évaluation des risques\". Owner's call: either add the original in parentheses — Institut des sciences de l'évaluation des risques (IRAS) — or leave the English name. Also note that about_p2 writes \"l'université d'Utrecht\" in lower case while this entry capitalises it.",
+    "severity": "note",
+    "category": "consistency"
+  },
+  {
+    "file": "i18n/fr.json",
+    "i18n_key": "(whole file)",
+    "context": "French spacing conventions, checked byte by byte.",
+    "current": "50 no-break spaces (U+00A0) before : and ; and inside « », plus 1 000 with U+00A0 as thousands separator; no double spaces anywhere.",
+    "proposed": null,
+    "why": "Recording a clean result. The strict typographic rule calls for a narrow no-break space (U+202F) before ; ! ? and a full no-break space before :, but U+00A0 throughout is the standard and safer web practice, since U+202F still renders inconsistently in some fonts. Nothing to change; only the number-plus-unit case (100 Bq/m³) escaped the rule, which is logged separately.",
+    "severity": "note",
+    "category": "typography"
+  },
+  {
+    "file": "fr/index.html, fr/about.html, fr/explorer.html, fr/games.html",
+    "i18n_key": null,
+    "context": "Page furniture check across the four built French pages.",
+    "current": "lang=\"fr\" dir=\"ltr\", og:locale fr_FR, canonical and five hreflang alternates plus x-default, French alt text on the portrait and on both game screenshots, aria-label=\"Langue\" on the switcher, switcher labelled with endonyms.",
+    "proposed": null,
+    "why": "Recording a clean result: the furniture on these four pages is correct and complete, and the alt texts are genuine descriptions rather than repeated captions. One structural gap worth noting: fr/explorer.html carries only the affiliation block in its footer, while the other three pages carry the medical disclaimer (foot_disclaimer) as well — on the page most likely to be read by a patient.",
+    "severity": "note",
+    "category": "consistency"
+  }
+]

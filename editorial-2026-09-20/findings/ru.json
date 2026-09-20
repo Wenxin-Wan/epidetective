@@ -1,0 +1,972 @@
+[
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_m1",
+  "context": "Metric chip on the Chronic Disease tool card (home page)",
+  "current": "124 факторов риска",
+  "proposed": "124 фактора риска",
+  "why": "Числительное, оканчивающееся на 4, требует родительного падежа единственного числа: 124 фактора. Форма «124 факторов» — грубая ошибка, которую читатель заметит сразу, причём в самом заметном месте — в счётчике на карточке инструмента.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_m3",
+  "context": "Metric chip on the Chronic Disease tool card (home page)",
+  "current": "434 ранжированных связей",
+  "proposed": "434 связи с оценкой доказательности",
+  "why": "Та же ошибка согласования: при числительном на 4 существительное стоит в родительном единственного числа — «434 связи». Кроме того «ранжированный» означает «расставленный по рангу»; английское graded здесь говорит об оценке уровня доказательности, а не о ранжировании.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "foot_tagline",
+  "context": "Site tagline in the footer of every Russian page; the same wording is in meta_home_title, meta_home_desc, inst_t1_name, meta_explorer_title",
+  "current": "Открытые инструменты для чтения доказательств о здоровье.",
+  "proposed": "Открытые инструменты для чтения научных данных о здоровье.",
+  "why": "«Доказательства» в русском требуют родительного падежа (доказательства чего-либо) или оборота «доказательства в пользу чего-либо»; сочетание «доказательства о здоровье» нарушает управление и звучит как подстрочник. В российском общественном здравоохранении для evidence используют «научные данные», «фактические данные» (так их называет ВОЗ) или «доказательная база». Формулировка cite_p уже использует «научных данных о здоровье» — стоит выровнять по ней всю линейку.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t1_name",
+  "context": "Name of tool 01 on the home page, explorer page, browser title and CTA button",
+  "current": "Обозреватель доказательств о раке",
+  "proposed": "Атлас доказательной базы по раку",
+  "why": "Две проблемы. «Доказательств о раке» — то же нарушение управления. «Обозреватель» в русском интерфейсном узусе закрепилось за браузером и файловым менеджером, и для научного инструмента читается как машинный перевод слова Explorer. Второй инструмент в этом же списке назван «Атлас», хотя по-английски он тоже Explorer.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_name",
+  "context": "Name of tool 02 on the home page",
+  "current": "Атлас доказательств о хронических болезнях",
+  "proposed": "Атлас доказательной базы по хроническим заболеваниям",
+  "why": "В медицинском регистре принято «хронические заболевания» (а в профильных текстах — «хронические неинфекционные заболевания»); «болезни» на странице соседствуют с «заболеваниями» в описании того же инструмента. Плюс всё то же «доказательств о».",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "meta_explorer_desc",
+  "context": "Meta description of the explorer page; the same construction is in inst_t1_desc and inst_t2_desc",
+  "current": "насколько надёжны доказательства за каждой связью",
+  "proposed": "насколько прочна доказательная база каждой связи",
+  "why": "«Доказательства за связью» — калька английского behind each link: по-русски «за» в этом значении прочитывается пространственно. Кроме того, для одной и той же английской формулировки how strong the evidence is на соседних карточках стоят разные прилагательные — «надёжны» и «прочны».",
+  "severity": "high",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "home_h1",
+  "context": "Main headline on the Russian home page",
+  "current": "Переводим эпидемиологические доказательства <b>ради более здорового мира</b>",
+  "proposed": "Объясняем данные эпидемиологии <b>ради более здорового мира</b>",
+  "why": "«Переводим доказательства» — калька. По-русски «переводить» в первую очередь про языки, и метафора английского translating evidence не переносится. «Эпидемиологические доказательства» тоже не термин: говорят «данные эпидемиологических исследований».",
+  "severity": "high",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "home_audience",
+  "context": "Lede under the home-page headline",
+  "current": "и тех, кто пишет политику здравоохранения",
+  "proposed": "и тех, кто разрабатывает политику в сфере здравоохранения",
+  "why": "«Писать политику» по-русски не говорят. Устойчивое сочетание — «разрабатывать политику» или «принимать решения в сфере здравоохранения».",
+  "severity": "high",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "home_lede",
+  "context": "Second lede line on the home page",
+  "current": "опубликованные исследования о здоровье",
+  "proposed": "опубликованные научные исследования о здоровье",
+  "why": "«Исследования о здоровье» без уточнения звучит расплывчато и по-газетному; добавление «научные» ставит фразу в нужный регистр. Как вариант — «опубликованные медицинские исследования».",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t1_desc",
+  "context": "Description of tool 01 on the home page",
+  "current": "Он построен на Монографиях МАИР — оценке Всемирной организации здравоохранения о том, что может вызывать рак.",
+  "proposed": "Он построен на Монографиях МАИР — экспертном обзоре Всемирной организации здравоохранения, посвящённом тому, что может вызывать рак.",
+  "why": "«Оценка о том, что…» — нарушение управления: оценка бывает чего-либо. Английское review здесь — именно экспертный обзор, и это слово в русском эпидемиологическом обиходе привычнее «оценки».",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_desc",
+  "context": "Description of tool 02 on the home page; «крупные хронические заболевания» also appears in meta_home_desc",
+  "current": "другими крупными хроническими заболеваниями",
+  "proposed": "другими основными хроническими заболеваниями",
+  "why": "«Крупное заболевание» — калька английского major: по-русски болезни бывают «основные», «наиболее распространённые», «социально значимые». «Крупный» применительно к болезни читается как ошибка.",
+  "severity": "high",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_desc",
+  "context": "Description of tool 02 on the home page",
+  "current": "включая те, где они по-настоящему противоречивы",
+  "proposed": "в том числе там, где доказательства действительно противоречат друг другу",
+  "why": "Местоимения расходятся: «те» отсылает к связям, «они» — к доказательствам, и читатель на секунду теряет нить. Повтор существительного здесь дешевле местоимения.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t1_m1",
+  "context": "Metric chip «185 воздействий»; the same noun carries exp_fig1 and exp_lede",
+  "current": "185 воздействий",
+  "proposed": "185 факторов воздействия",
+  "why": "«Воздействие» в русском — прежде всего название процесса, и во множественном числе с числительным («185 воздействий») звучит непривычно. В отечественной литературе счётной единицей выступают «факторы», «агенты» или «факторы воздействия»; МАИР в русскоязычных материалах перечисляет именно «агенты» и «факторы».",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_h2",
+  "context": "Heading of the About page; compare meta_home_desc, which says «онкоэпидемиологом»",
+  "current": "Создано онкологом-эпидемиологом, который <b>работает с этими данными каждый день</b>.",
+  "proposed": "Создано эпидемиологом, который <b>работает с этими данными каждый день</b>.",
+  "why": "«Онколог-эпидемиолог» читается как врач-онколог со второй специальностью, тогда как автор — исследователь без клинической практики. Точные варианты: «эпидемиолог», «специалист по эпидемиологии рака». Заодно снимается расхождение с мета-описанием главной, где стоит «онкоэпидемиолог».",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_cred2_label",
+  "context": "Credentials list on the About page (label above «Утрехтский университет»)",
+  "current": "Докторантура",
+  "proposed": "Докторская степень (PhD)",
+  "why": "В российской системе докторантура — это подготовка доктора наук после кандидатской, а не PhD-трек (ему соответствует аспирантура). Подпись искажает уровень образования автора.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_cred1_value",
+  "context": "Credentials list: «Должность» and about_p1",
+  "current": "Постдокторант, МАИР / ВОЗ",
+  "proposed": "Научный сотрудник (постдок), МАИР / ВОЗ",
+  "why": "«Постдокторант» в русском академическом обиходе почти не встречается; говорят «постдок» (разговорно) или «научный сотрудник». В подписи к должности лучше формальный вариант с пояснением в скобках.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p1",
+  "context": "First paragraph of the About page",
+  "current": "постдокторант Международного агентства по изучению рака (МАИР), онкологического агентства ВОЗ, в Лионе (Франция).",
+  "proposed": "научный сотрудник Международного агентства по изучению рака (МАИР) — специализированного учреждения ВОЗ по изучению рака. Работаю в Лионе (Франция).",
+  "why": "Обстоятельство места «в Лионе (Франция)» оторвано от своего глагола и повисает в конце цепочки приложений. Русская фраза распадается на два предложения естественнее. Название МАИР приведено верно.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p2",
+  "context": "Second paragraph of the About page; «причинный вывод» also in about_cred3_value",
+  "current": "новые доказательства причинной связи между бензолом и раком лёгкого",
+  "proposed": "новые доказательства причинно-следственной связи между бензолом и раком лёгкого",
+  "why": "В русской эпидемиологии устойчивый термин — «причинно-следственная связь»; «причинная связь» закреплена за юридическим и философским обиходом. То же касается подписи «причинный вывод» для causal inference: принято «причинно-следственный вывод» или «каузальный вывод».",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p3",
+  "context": "Third paragraph of the About page",
+  "current": "миллионы людей наблюдаются в течение многих лет, чтобы выявить факторы риска, причинно связанные с болезнями",
+  "proposed": "за миллионами людей наблюдают многие годы, чтобы выявить факторы риска, причинно связанные с болезнями",
+  "why": "Возвратный пассив «люди наблюдаются» в русском читается как «люди наблюдают себя», а придаточное цели «чтобы выявить» требует того же деятеля, что и главное предложение. Неопределённо-личная конструкция снимает обе проблемы сразу.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p3",
+  "context": "Third paragraph of the About page",
+  "current": "помогаю встроить доказательства, накопленные исследованиями профессиональных воздействий, в скрининг рака лёгкого",
+  "proposed": "помогаю применить данные исследований профессиональных воздействий в программах скрининга рака лёгкого",
+  "why": "«Встроить доказательства в скрининг» — сочетание, которого в русском нет; причастный оборот «накопленные исследованиями» дополнительно утяжеляет фразу.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p4",
+  "context": "Fourth paragraph of the About page",
+  "current": "Я сам годами участвую в получении таких доказательств, и до обычных людей … доходит лишь малая их часть.",
+  "proposed": "Я сам годами участвую в получении таких данных, а до обычных людей … доходит лишь малая их часть.",
+  "why": "В английском здесь противительное yet; русское «и» стирает противопоставление, ради которого написан абзац. Нужен противительный союз «а» (или «между тем»).",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p4",
+  "context": "Fourth paragraph of the About page",
+  "current": "Открытие, оставшееся в научной литературе, выполнило меньше половины своей задачи.",
+  "proposed": "Результат, который остаётся в научной литературе, выполняет меньше половины своей задачи.",
+  "why": "Английское has done less than half its job — обобщение, а русский перфект прошедшего времени привязывает мысль к одному конкретному случаю; нужен вид настоящего времени. «Открытие» к тому же сильнее английского finding: по-русски открытие — это событие масштаба нобелевской премии.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "contact_p",
+  "context": "Contact block: heading contact_h2 is «Напишите мне.», and the paragraph under it ends the same way",
+  "current": "Вопросы, поправки или идея нового инструмента — напишите мне.",
+  "proposed": "Вопросы, поправки или идея нового инструмента — пишите на почту ниже.",
+  "why": "«Напишите мне» стоит подряд в заголовке и в тексте под ним; повтор в двух строках выглядит недосмотром вёрстки.",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "foot_affiliation",
+  "context": "Footer disclaimer on every Russian page",
+  "current": "Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения",
+  "proposed": "Международное агентство по изучению рака и Всемирная организация здравоохранения к нему отношения не имеют и его не одобряли",
+  "why": "«Не имеет одобрения» — дословный перевод carries no endorsement; по-русски об этом говорят от лица организации. Рядом «личный проект … созданный в личном качестве» удваивает одну и ту же мысль.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_h1",
+  "context": "H1 on the explorer page",
+  "current": "Одни воздействия <b>вызывают</b> рак. Другие <em>могут</em>.",
+  "proposed": "Одни воздействия <b>вызывают</b> рак. Другие — <em>возможно</em>.",
+  "why": "Эллипсис английского типа (Some might.) русский не допускает: «Другие могут.» обрывается на модальном глаголе без инфинитива и читается как опечатка.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_lede",
+  "context": "Lede on the explorer page",
+  "current": "469 связей, которые агентство по изучению рака Всемирной организации здравоохранения зафиксировало между ними",
+  "proposed": "469 связей, которые зафиксировало между ними агентство ВОЗ по изучению рака",
+  "why": "Цепочка родительных падежей («агентство по изучению рака Всемирной организации здравоохранения») — типичный признак перевода. Вынос подлежащего за глагол и сокращение до аббревиатуры ВОЗ разгружают фразу.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_whatsin_h2",
+  "context": "H2 in the «Что здесь есть» section",
+  "current": "с градацией по надёжности доказательств",
+  "proposed": "с указанием уровня доказательности",
+  "why": "«Уровень доказательности» — принятый в русской доказательной медицине термин; «градация по надёжности» понятна, но в профессиональных текстах не встречается.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_bar1_meta",
+  "context": "Bar labels on the explorer page (also exp_bar2_meta)",
+  "current": "249 &mdash; Достаточные доказательства у человека",
+  "proposed": "249 &mdash; Достаточные доказательства канцерогенности для человека",
+  "why": "Формулировка МАИР — sufficient evidence of carcinogenicity in humans, и в русских переводах она передаётся полностью: «достаточные доказательства канцерогенности для человека». Без слова «канцерогенности» фраза повисает: доказательства чего именно.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_bar1_note",
+  "context": "Explanatory note under the first bar",
+  "current": "Исследования у людей согласуются достаточно, чтобы исключить случайность",
+  "proposed": "Исследования на людях согласуются между собой достаточно, чтобы исключить случайность",
+  "why": "«Исследования у людей» — калька in humans; по-русски исследования проводят на людях. Добавление «между собой» уточняет, с чем именно они согласуются.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_bar2_note",
+  "context": "Explanatory note under the second bar",
+  "current": "но случайность, систематическую ошибку или смешивание пока нельзя исключить",
+  "proposed": "но случайность, систематическую ошибку или влияние вмешивающихся факторов пока нельзя исключить",
+  "why": "Confounding по-русски — «вмешивающиеся (смешивающие) факторы» или «конфаундинг»; слово «смешивание» в этом ряду не употребляется и читается как бытовое «перемешивание».",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_bar1_note",
+  "context": "Explanatory note under the first bar",
+  "current": "Это самый сильный вывод, который делает МАИР.",
+  "proposed": "Это самое твёрдое заключение, которое делает МАИР.",
+  "why": "«Сильный вывод» — калька strongest conclusion; по-русски выводы бывают твёрдыми, строгими, категоричными.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_fig4",
+  "context": "Figure label under «1–141» on the explorer page; the neighbouring labels are nominative",
+  "current": "Томов монографий",
+  "proposed": "Тома «Монографий» МАИР",
+  "why": "Соседние подписи стоят в именительном падеже («Воздействия», «Виды рака», «Зафиксированные связи»), а эта — в родительном, и ряд рассыпается. Кроме того «Монографии» здесь — название серии МАИР и требует прописной буквы, как в других местах сайта.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read1_p",
+  "context": "First of the three caveats on the explorer page",
+  "current": "Сколько, как долго, в каком возрасте и с какими генами — всё это стоит между этим выводом и любым конкретным человеком.",
+  "proposed": "Доза, длительность, возраст, в котором это произошло, и наследственность — всё это стоит между таким выводом и конкретным человеком.",
+  "why": "Ряд вопросительных наречий без опорных существительных («Сколько, как долго… и с какими генами») в русском не держится: «с какими генами» не сочетается со сказуемым «стоит между». Назывной ряд читается сразу.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read1_h3",
+  "context": "First caveat heading on the explorer page",
+  "current": "может не иметь никакого отношения к вашему",
+  "proposed": "может не иметь никакого отношения к вашему случаю",
+  "why": "Эллипсис «к вашему [раку]» заставляет читателя восстанавливать существительное; в заголовке это лишняя работа, а тема слишком чувствительная для ребуса.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read2_p",
+  "context": "Second caveat on the explorer page",
+  "current": "Многие пробелы вызваны нехваткой финансирования или слишком коротким наблюдением",
+  "proposed": "Многие пробелы объясняются нехваткой финансирования или слишком коротким периодом наблюдения",
+  "why": "Follow-up по-русски — «период наблюдения»; «короткое наблюдение» без опорного слова звучит как наблюдение за одним человеком. «Вызваны» рядом со словом «вызывать рак» в том же тексте создаёт ненужное эхо.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_cta_source",
+  "context": "Source line at the foot of the explorer page",
+  "current": "адаптировано из Schubauer-Berigan et al., JNCI Monographs 2026",
+  "proposed": "по данным Schubauer-Berigan et al., JNCI Monographs 2026",
+  "why": "«Адаптировано из» — калька adapted from; в русских библиографических примечаниях пишут «по данным» или «в адаптации по».",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read1_p",
+  "context": "Caveat text uses «Группе 1» with a capital letter; the games strings use «группа 1» lowercase",
+  "current": "Отнесение к Группе 1 означает",
+  "proposed": "Отнесение к группе 1 означает",
+  "why": "В русских текстах о классификации МАИР номер группы пишут со строчной: «группа 1», «группа 2A». На этом же сайте в описаниях игр стоит строчная — расхождение видно при переходе между страницами.",
+  "severity": "low",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_over_lede",
+  "context": "Lede above the three game cards on the games page",
+  "current": "Каждая игра через игру знакомит с одной из сторон профилактики рака.",
+  "proposed": "Каждая игра в игровой форме рассказывает об одной из сторон профилактики рака.",
+  "why": "«Игра через игру» — тавтология, которой в английском оригинале нет (teaches … through play). Читается как сбой автоперевода в первой же строке страницы.",
+  "severity": "high",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_shelf_h2",
+  "context": "H1 of the games page and the games section of the home page",
+  "current": "Три <b>уже открыты</b>: о коже, о лёгких и о груди.",
+  "proposed": "Три игры <b>уже открыты</b>: о раке кожи, лёгкого и молочной железы.",
+  "why": "Числительное «Три» без существительного в русском заголовке повисает. И главное: «о груди» в контексте рака — разговорное; медицинский регистр требует «молочной железы», как уже написано в home_games_h2 на главной.",
+  "severity": "high",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "meta_games_title",
+  "context": "Browser title and og:title of the games page",
+  "current": "Игры о профилактике рака — солнце, лёгкие и грудь — EpiDetective",
+  "proposed": "Игры о профилактике рака — кожа, лёгкие, молочная железа — EpiDetective",
+  "why": "«Грудь» в заголовке страницы о раке звучит бытово и рядом с «солнцем» образует несопоставимый ряд (явление, орган, часть тела). Перечень органов выравнивает ряд и совпадает с формулировкой на главной.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_p2",
+  "context": "First sentence of the sun-safety description",
+  "current": "Вопросы о том, что означает УФ-индекс, когда нужна защита (УФ 3 и выше), почему тень, одежда и крем работают лучше вместе…",
+  "proposed": "Вопросы охватывают то, что означает УФ-индекс, когда нужна защита (УФ 3 и выше), почему тень, одежда и крем работают лучше вместе…",
+  "why": "В предложении нет сказуемого: назывная конструкция такой длины по-русски не держится и воспринимается как оборванная фраза. Достаточно вернуть глагол (или поставить тире после «Вопросы»).",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_fine",
+  "context": "Fine print under the sun-safety game",
+  "current": "рекомендациям ВОЗ по УФ-излучению",
+  "proposed": "рекомендациям ВОЗ по защите от УФ-излучения",
+  "why": "В английском — guidance on UV protection. «Рекомендации по УФ-излучению» меняют предмет рекомендаций: получается, что ВОЗ рекомендует излучение.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung-detective description: the flatmate's line",
+  "current": "сосед по квартире, который курит «всего несколько в день»",
+  "proposed": "сосед по квартире, который курит «всего пару сигарет в день»",
+  "why": "Эллипсис «несколько в день» без существительного по-русски не работает — читатель ждёт, чего именно несколько. В кавычках это особенно заметно: прямая речь должна звучать как живая.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung-detective description: the foreman's line",
+  "current": "прораб, уверенный, что бросать после двадцати лет уже бессмысленно",
+  "proposed": "прораб, уверенный, что бросать курить после двадцати лет уже бессмысленно",
+  "why": "Без дополнения «курить» глагол повисает; в русском «бросать» требует объекта, тем более через несколько строк после разговора о вейпах.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung-detective description: the radon mini-game",
+  "current": "с небольшой мини-игрой про детектор, построенной вокруг референтного уровня ВОЗ в 100 Бк/м³",
+  "proposed": "с небольшой мини-игрой про детектор, в основе которой — референтный уровень ВОЗ 100 Бк/м³",
+  "why": "«Построенный вокруг» — калька built around. «Небольшая мини-игра» вдобавок дважды говорит об одном и том же размере. Термин «референтный уровень» выбран верно — он и стоит в русском руководстве ВОЗ по радону.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p1",
+  "context": "Lung-detective description; the same phrase is in games_g2_desc and on the home-page card",
+  "current": "или то, за чем нет доказательств",
+  "proposed": "или то, что доказательствами не подтверждено",
+  "why": "Ещё одно «за» из английского behind. По-русски доказательства бывают у утверждения, а не за ним.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Lung-detective description",
+  "current": "Три разговора несут главный аргумент",
+  "proposed": "На трёх разговорах держится главный довод",
+  "why": "«Разговоры несут аргумент» — калька carry the argument; русский глагол «нести» в переносном значении так не употребляется.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_p1",
+  "context": "A Town of 1,000 description",
+  "current": "небольшой бюджет усилий, который на них тратится: алкоголь, физическая активность, вес после менопаузы…",
+  "proposed": "небольшой бюджет усилий, который можно на них потратить. Темы глав — алкоголь, физическая активность, вес после менопаузы…",
+  "why": "Двоеточие после «который на них тратится» обещает перечень того, на что уходит бюджет, а дальше идут темы карт. Возвратный пассив тоже лишний: бюджет тратит игрок.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_p2",
+  "context": "A Town of 1,000 description; the same wording is in games_g3_step4",
+  "current": "доказательства о курении ограниченны",
+  "proposed": "данных о связи курения с раком молочной железы недостаточно",
+  "why": "Короткая форма «ограниченны» держится на различении прилагательного и причастия, на котором спотыкаются и носители языка; в тексте для широкой аудитории это лишний риск. Заодно снимается конструкция «доказательства о», которая повторяется по всему сайту.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_p2",
+  "context": "A Town of 1,000 description",
+  "current": "это средние по населению, и они ничего не предсказывают",
+  "proposed": "это средние показатели по населению, и они ничего не предсказывают",
+  "why": "Субстантивированное «средние» без существительного в научно-популярном тексте выглядит как пропуск слова.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_p2",
+  "context": "A Town of 1,000 description; the term repeats in games_g3_step5",
+  "current": "Игра заканчивается панелью честности",
+  "proposed": "Игра заканчивается честным послесловием",
+  "why": "«Панель честности» — дословный перевод honesty panel; по-русски «панель» — это элемент интерфейса или мебель, и сочетание звучит комично там, где текст как раз просит доверия.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_step5",
+  "context": "A Town of 1,000, step 5",
+  "current": "Цифры — средние для населения вроде западноевропейского",
+  "proposed": "Цифры — средние для населения, подобного западноевропейскому",
+  "why": "«Вроде» — разговорная частица; в строке, которая объясняет ограничения данных, она снижает доверие к цифрам.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_step3",
+  "context": "A Town of 1,000, step 3",
+  "current": "Небольшие сдвиги и есть честные.",
+  "proposed": "Именно небольшие сдвиги здесь и есть честные.",
+  "why": "Без усилительной частицы конструкция «X и есть Y» звучит оборванно.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_cap",
+  "context": "Caption under the game screenshot (also games_g2_cap, games_g3_cap)",
+  "current": "Снимок экрана из запущенной игры",
+  "proposed": "Кадр из игры",
+  "why": "«Снимок экрана из запущенной игры» — три слова там, где хватает двух, и «запущенной» тянет за собой техническую ноту, неуместную в подписи к картинке.",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_shot_alt",
+  "context": "alt text of the game screenshots (also games_g2_shot_alt, games_g3_shot_alt)",
+  "current": "Игра в процессе: Сол на травяной платформе…",
+  "proposed": "Кадр из игры: Сол на травяной платформе…",
+  "why": "«Игра в процессе» — калька as it runs; в alt-тексте, который читает скринридер, лучше короткое «Кадр из игры».",
+  "severity": "medium",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_p1",
+  "context": "Sun-safety description, first sentence",
+  "current": "Большинство случаев рака кожи вызвано ультрафиолетовым излучением, а привычки, которые его предотвращают, закладываются в детстве.",
+  "proposed": "Большинство случаев рака кожи вызвано ультрафиолетовым излучением, а привычки, которые от него защищают, закладываются в детстве.",
+  "why": "Местоимение «его» стоит сразу после «ультрафиолетовым излучением» и притягивается к нему, хотя предотвращают привычки рак. «Защищают от него» снимает двусмысленность.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_m5",
+  "context": "Source chip on the Chronic Disease card",
+  "current": "GBD · Комиссии Lancet · метаанализы · снимок v1.4 · сен 2026",
+  "proposed": "GBD · комиссии The Lancet · метаанализы · v1.4 · сент. 2026",
+  "why": "Три мелочи в одной строке: «сен» не является русским сокращением (правильно «сент.» с точкой); слово «снимок» добавлено там, где в английском его нет; журнал по-русски обычно называют «The Lancet». Написание «метаанализы» верное.",
+  "severity": "medium",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/ru/games.html",
+  "i18n_key": null,
+  "context": "Game facts block on the Russian games page (three occurrences: ~10 min, ~10 min, ~8 min)",
+  "current": "<b>~10 min</b><span>на полное прохождение</span>",
+  "proposed": "<b>~10 мин</b><span>на полное прохождение</span>",
+  "why": "Английское сокращение min осталось непереведённым посреди русской строки. То же самое во всех языковых версиях, так что чинить, вероятно, нужно в генераторе страниц.",
+  "severity": "medium",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_fine",
+  "context": "Fine print of the sun-safety game; compare the Code Against Cancer page, which says «Европейский кодекс против рака»",
+  "current": "Европейскому кодексу борьбы против рака",
+  "proposed": "Европейскому кодексу против рака",
+  "why": "Название одного и того же документа на сайте звучит по-разному: «Кодекс борьбы против рака» в описаниях игр и «Кодекс против рака» в навигации и на странице кодексов. Повторяется в games_g2_p2, games_g2_step2, games_g2_fine, games_g3_fine.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_fine",
+  "context": "Fine print of the lung game: the author's name is transliterated, while exp_cta_source keeps the Latin spelling",
+  "current": "принадлежит Пето и соавторам (BMJ, 2000)",
+  "proposed": "принадлежит Peto и соавторам (BMJ, 2000)",
+  "why": "На сайте два правила для фамилий: «Пето» кириллицей здесь и «Schubauer-Berigan et al.» латиницей на странице обозревателя. Стоит выбрать одно — для читателя, который захочет найти статью, латиница практичнее.",
+  "severity": "low",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_p1",
+  "context": "Sun-safety description",
+  "current": "находит широкополую шляпу и крем SPF 30+",
+  "proposed": "находит широкополую шляпу и солнцезащитный крем SPF 30+",
+  "why": "«Крем SPF 30+» понятен, но полное «солнцезащитный крем» — то, как об этом пишут в русских памятках, и в тексте для детей и родителей это уместнее.",
+  "severity": "low",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_chip_review",
+  "context": "Status chip «In revision» (currently unused on the Russian pages)",
+  "current": "На сверке",
+  "proposed": "На доработке",
+  "why": "«Сверка» — это сличение двух текстов; in revision означает, что инструмент перерабатывают. «На доработке» или «обновляется» точнее.",
+  "severity": "low",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "meta_home_desc",
+  "context": "Meta description of the Russian home page",
+  "current": "Создано онкоэпидемиологом из МАИР/ВОЗ.",
+  "proposed": "Создано эпидемиологом МАИР (ВОЗ).",
+  "why": "Предлог «из» намекает на происхождение, а не на место работы. Плюс «онкоэпидемиолог» здесь и «онколог-эпидемиолог» на странице «Об авторе» — две разные подписи одного человека.",
+  "severity": "medium",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.frameworkP",
+  "context": "Framework card on the Code Against Cancer page",
+  "current": "Каждый региональный Кодекс разрабатывается МАИР вместе с региональным партнёром-координатором и затем учитывает местную структуру заболеваемости и условия жизни.",
+  "proposed": "Каждый региональный Кодекс разрабатывается МАИР вместе с региональным партнёром-координатором, а затем адаптируется к местной структуре заболеваемости и условиям жизни.",
+  "why": "Сочинение ломается: первая часть — пассив («разрабатывается»), вторая — актив с тем же подлежащим («Кодекс учитывает»). В английском обе части пассивные (is developed … then tailored), и русский оборот «адаптируется к» сохраняет и конструкцию, и смысл.",
+  "severity": "medium",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.disclaimerP",
+  "context": "Disclaimer at the foot of the Code Against Cancer page",
+  "current": "Она не является медицинской консультацией.",
+  "proposed": "Она не заменяет консультацию врача.",
+  "why": "«Не является медицинской консультацией» — юридическая калька; русская памятка для пациента говорит «не заменяет консультацию врача», и это же предложение эхом отзывается в последней строке абзаца («обращайтесь к врачу»).",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.disclaimerP",
+  "context": "Disclaimer at the foot of the Code Against Cancer page",
+  "current": "Возраст начала скрининга, календари прививок и правила охраны труда различаются по странам",
+  "proposed": "Возраст начала скрининга, календари прививок и правила охраны труда в разных странах различаются",
+  "why": "«Различаются по странам» — сжатая конструкция из отчётности; в тексте для читателя естественнее «в разных странах различаются».",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.statV",
+  "context": "Statistic in the hero of the Code Against Cancer page",
+  "current": "≈ 40 %",
+  "proposed": "≈40 %",
+  "why": "По русской издательской традиции (Мильчин) знак процента ставится вплотную к числу; пробел перед ним пришёл из французской вёрстки соседней языковой версии. Между числом и знаком также желателен неразрывный пробел, если пробел решено сохранить.",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.srcEurope",
+  "context": "Official-sources list; compare the games strings, which say «Европейский кодекс борьбы против рака»",
+  "current": "Европейский кодекс против рака (5-е издание)",
+  "proposed": "Европейский кодекс против рака (5-е издание)",
+  "why": "Сама формулировка верна — её и стоит закрепить как единственную на сайте; расхождение с описаниями игр нужно править на их стороне.",
+  "severity": "note",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.europe.recs[8]",
+  "context": "European Code, recommendation 8 (sun)",
+  "current": "Избегайте чрезмерного пребывания на солнце, особенно детям.",
+  "proposed": "Избегайте чрезмерного пребывания на солнце; особенно берегите от него детей.",
+  "why": "Повелительное наклонение обращено к «вы», а «детям» стоит в дательном и ни с чем не согласуется — фраза грамматически разваливается. Это самая заметная ошибка среди карточек кодекса.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.europe.recs[3]",
+  "context": "European Code, recommendation 3 (weight)",
+  "current": "Предупреждайте и корректируйте избыточный вес: ограничьте продукты с высоким содержанием калорий, сахара, жира и соли, сладкие напитки и ультрапереработанные продукты.",
+  "proposed": "Не допускайте избыточного веса, а если он есть — снижайте: ограничьте продукты с высоким содержанием калорий, сахара, жира и соли, а также сладкие напитки и ультрапереработанные продукты. Пейте в основном воду и несладкие напитки.",
+  "why": "Две вещи. «Предупреждайте вес» — несочетаемая пара (предупреждают болезнь, последствие, но не вес). И из перевода выпала целая рекомендация английского оригинала: Drink mostly water and unsweetened drinks — то есть читатель русской версии не получает положительного совета, который есть у остальных.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.europe.recs[5]",
+  "context": "European Code, recommendation 5 (diet)",
+  "current": "цельные злаки",
+  "proposed": "цельнозерновые продукты",
+  "why": "В русских рекомендациях по питанию принято «цельнозерновые продукты»; «цельные злаки» — буквальный перевод whole grains, который в профильных текстах не встречается. То же слово стоит в азиатском кодексе.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.europe.recs[10]",
+  "context": "European Code, recommendation 10 (radon)",
+  "current": "Узнайте по местной карте об уровнях радона в вашем районе.",
+  "proposed": "Узнайте по местной карте радона, каков его уровень в вашем районе.",
+  "why": "Обстоятельство «по местной карте» вклинилось между глаголом и его дополнением, и фраза спотыкается. Множественное «уровнях» здесь тоже лишнее: у района один уровень.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.europe.recs[13]",
+  "context": "European Code, recommendation 13 (HRT); the games strings call the same thing «менопаузальная гормональная терапия»",
+  "current": "используйте её как можно более короткий срок",
+  "proposed": "применяйте её как можно меньшее время",
+  "why": "«Как можно более короткий срок» — тяжёлая конструкция со сравнительной степенью; «как можно меньшее время» или «как можно короче» короче и естественнее. Кроме того, современные российские руководства говорят «менопаузальная гормональная терапия (МГТ)», а карточка использует «заместительная гормональная терапия» — на сайте сосуществуют оба термина.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.lac.recs[1]",
+  "context": "LAC Code, recommendation 1 (tobacco)",
+  "current": "не пользуйтесь электронными сигаретами, которые ведут к курению",
+  "proposed": "не пользуйтесь электронными сигаретами: они могут привести к курению табака",
+  "why": "Английское can lead to передаёт возможность, а русская версия утверждает это как факт. Для страницы, которая объясняет, чем доказанное отличается от предполагаемого, такая потеря модальности особенно неудачна.",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.lac.recs[5]",
+  "context": "LAC Code, recommendation 5 (diet)",
+  "current": "избегайте переработанного мяса и ограничьте красное",
+  "proposed": "избегайте переработанного мяса и ограничьте красное мясо",
+  "why": "Во-первых, «ограничьте красное» без существительного по-русски не работает. Во-вторых, совета про мясо в английском тексте этой карточки нет вовсе — его добавили только в русской версии (в официальном кодексе ЛАК он есть, поэтому решение за владельцем: либо убрать, либо добавить и в английский).",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.lac.recs[10]",
+  "context": "LAC Code, recommendation 10 (air pollution)",
+  "current": "Меньше на улице в дни смога / такое загрязнение вызывает рак лёгкого",
+  "proposed": "Меньше на улице в дни сильного загрязнения воздуха / такое загрязнение причинно связано с раком лёгкого",
+  "why": "«Смог» — частный вид загрязнения (фотохимический или дымовой), и в большинстве российских городов сводка говорит о «загрязнении воздуха», а не о смоге. В детали английское causally linked превратилось в «вызывает» — формулировка сильнее исходной.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.lac.recs[11]",
+  "context": "LAC Code, recommendation 11 (workplace)",
+  "current": "и добивайтесь рекомендованных мер защиты",
+  "proposed": "и соблюдайте рекомендованные меры защиты",
+  "why": "Английское adopt the recommended protective measures — о том, что человек сам применяет меры; «добивайтесь» переносит действие на требование к работодателю, что здесь сказано в европейской карточке, а не в латиноамериканской.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.asia.recs[1]",
+  "context": "Asia Code draft, recommendation 1 (tobacco)",
+  "current": "поддерживайте бездымную среду",
+  "proposed": "следите, чтобы в помещениях не курили",
+  "why": "«Бездымная среда» — калька smoke-free environments. В русском обиходе есть «зоны, свободные от табачного дыма», но в списке коротких советов живая формулировка работает лучше.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "REGIONS.asia.recs[2]",
+  "context": "Asia Code draft, recommendation 2 (weight); the LAC card says «здоровый вес»",
+  "current": "Поддерживайте здоровый вес тела.",
+  "proposed": "Поддерживайте здоровый вес.",
+  "why": "«Вес тела» — избыточная калька body weight; по-русски достаточно «вес» или, в клиническом регистре, «нормальная масса тела». Соседняя карточка в другом регионе уже говорит просто «здоровый вес».",
+  "severity": "low",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": null,
+  "context": "<title> and <meta name=\"description\"> of the Code Against Cancer page; the JS switches every visible string but never these",
+  "current": "<title>Code Against Cancer — EpiDetective …</title>",
+  "proposed": "Переключать title и meta-description вместе с языком (для ru — «Кодекс против рака — EpiDetective»)",
+  "why": "Русский читатель приходит по ссылке ?lang=ru, видит полностью русскую страницу, а во вкладке, в закладке и в результатах поиска получает английский заголовок и английское описание. Попутно: тег <title> сейчас сломан — внутрь него попали три тега <link>, и закрывающий </title> стоит после них, так что в заголовке вкладки оказывается разметка.",
+  "severity": "high",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": null,
+  "context": "Language switcher in the header: <nav class=\"langs\" id=\"langNav\" aria-label=\"Language\">",
+  "current": "aria-label=\"Language\"",
+  "proposed": "aria-label переключать вместе с языком (для ru — «Язык»)",
+  "why": "На основных страницах сайта переключатель подписан по-русски (aria-label=\"Язык\"), а здесь остаётся английский — для читателя со скринридером это единственное английское слово на русской странице. Сами подписи кнопок (EN / 中文 / FR / ES / RU) при этом выдержаны последовательно.",
+  "severity": "low",
+  "category": "microcopy"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": "STRINGS.ru.recs",
+  "context": "Region header line: rendered as «5-е издание (2025) · 14 рекомендаций»",
+  "current": "рекомендаций",
+  "proposed": "оставить «рекомендаций», но учесть, что форма фиксированная",
+  "why": "Для нынешних значений (14, 17, 10) родительный множественного верен. Если у какого-нибудь региона окажется 2, 3, 4, 22 и т. п. рекомендации, строка выдаст «22 рекомендаций». Русскому счёту нужны три формы, и это стоит заложить в шаблон заранее.",
+  "severity": "note",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+  "i18n_key": null,
+  "context": "body.classList.toggle(\"en\", lang!==\"zh\") in build()",
+  "current": "document.body.classList.toggle(\"en\", lang!==\"zh\")",
+  "proposed": null,
+  "why": "При русском языке на <body> вешается класс en. На вид это не влияет (класс выбирает только шрифтовую пару для китайского), но если позже появятся правила для кириллицы — например, перенос или межбуквенный интервал, — имя класса будет сбивать с толку.",
+  "severity": "note",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_p2",
+  "context": "Radon and other figures across the Russian strings",
+  "current": "100 Бк/м³ (обычный пробел между числом и единицей)",
+  "proposed": "100 Бк/м³ с неразрывным пробелом",
+  "why": "Между числом и единицей измерения по русским правилам вёрстки ставится неразрывный пробел, иначе «100» и «Бк/м³» могут разъехаться по строкам на узком экране. В строках про 1 000 женщин неразрывный пробел уже стоит — здесь его просто забыли.",
+  "severity": "low",
+  "category": "typography"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_step3",
+  "context": "A Town of 1,000, step 3",
+  "current": "Следите за 1 000 точками.",
+  "proposed": "Следите за тысячей точек.",
+  "why": "Предлог «за» требует творительного падежа от числительного «тысяча», а зависимое существительное при нём остаётся в родительном: «за тысячей точек». Запись «за 1 000 точками» разворачивается в «за тысячей точками» — ошибка согласования. В соседних строках («наблюдает за 1 000 женщин», «сетка из 1 000 точек») падежи выставлены верно.",
+  "severity": "high",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g3_sub",
+  "context": "Subtitle of A Town of 1,000; the same wording is in games_g3_p1",
+  "current": "наблюдает за 1 000 женщин от двадцати до шестидесяти лет",
+  "proposed": "наблюдает за тысячей женщин с двадцати до шестидесяти лет",
+  "why": "«Наблюдает … от двадцати до шестидесяти лет» читается в первую очередь как срок наблюдения (от 20 до 60 лет), а не как возраст женщин. Предлог «с … до» переводит фразу в возрастное чтение, которое и имеется в виду в английском (from their twenties to their sixties).",
+  "severity": "high",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_cta_lede",
+  "context": "CTA band on the explorer page",
+  "current": "Перетаскивайте, масштабируйте и фокусируйтесь на любой части сети.",
+  "proposed": "Перетаскивайте, приближайте и рассматривайте любую часть сети.",
+  "why": "«Фокусируйтесь на части сети» — калька focus on; по-русски фокусируются на задаче или мысли, а часть изображения приближают и рассматривают. Ряд из трёх глаголов при этом становится однородным по управлению.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read2_p",
+  "context": "Second caveat on the explorer page",
+  "current": "Карта фиксирует то, что было изучено и рассмотрено.",
+  "proposed": "Карта фиксирует то, что было изучено и прошло экспертную оценку.",
+  "why": "«Рассмотрено» — слишком слабое слово для reviewed: у МАИР это формальная процедура рабочей группы, и именно она отличает монографию от обычной публикации.",
+  "severity": "medium",
+  "category": "terminology"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read3_p",
+  "context": "Third caveat on the explorer page",
+  "current": "Если вы живёте с диагнозом «рак»",
+  "proposed": "Если вам поставили онкологический диагноз",
+  "why": "Кавычки вокруг слова «рак» создают лёгкий эффект отстранения — будто диагноз назван условно. В тексте, обращённом к пациенту, спокойнее звучит обычная формулировка без кавычек.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_read2_p",
+  "context": "Second caveat on the explorer page",
+  "current": "пустое место здесь — очень слабое свидетельство безопасности",
+  "proposed": "пустое место здесь — слабое свидетельство безопасности",
+  "why": "Усилитель «очень» в английском отсутствует (an empty space here is weak evidence of safety). На странице, которая учит различать степени доказанности, лишнее наречие сдвигает оценку.",
+  "severity": "low",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "exp_bar2_note",
+  "context": "Explanatory note under the second bar",
+  "current": "новые исследования могут решить его в любую сторону",
+  "proposed": "новые исследования могут разрешить его в любую сторону",
+  "why": "Вопрос «разрешают», а «решают» задачу; для итогового предложения абзаца разница заметна.",
+  "severity": "low",
+  "category": "grammar"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_h2",
+  "context": "H2 above the tool rack on the home page",
+  "current": "Два инструмента <b>уже открыты</b>. Другие в работе.",
+  "proposed": "Два инструмента <b>уже открыты</b>. Остальные в работе.",
+  "why": "«Другие» открывает неопределённое множество, тогда как английское More are being built говорит об остальных инструментах той же линейки.",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_t2_desc",
+  "context": "Description of tool 02 on the home page",
+  "current": "Растяните сеть, чтобы увидеть, как факторы риска собираются в группы.",
+  "proposed": "Разведите узлы сети, чтобы увидеть, как факторы риска собираются в группы.",
+  "why": "«Растянуть сеть» описывает действие с тканью или рыболовной сетью; для графа понятнее «развести узлы» или «раздвинуть сеть».",
+  "severity": "low",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "games_g2_sub",
+  "context": "Subtitle of The Lung Detective; the same doubling is in games_g2_p1",
+  "current": "где каждая улика классифицируется так, как МАИР классифицирует доказательства",
+  "proposed": "где каждую улику раскладывают по тем же правилам, по каким оценивает доказательства МАИР",
+  "why": "Возвратный пассив плюс повтор однокоренных «классифицируется — классифицирует» в одной строке. В английском повтор files … files работает как приём, по-русски он звучит как бедность словаря.",
+  "severity": "medium",
+  "category": "idiom"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_p3",
+  "context": "Third paragraph of the About page",
+  "current": "Я руковожу анализом и координацией проекта в OPICO",
+  "proposed": "Я руковожу анализом данных и координирую проект OPICO",
+  "why": "В английском две разные роли: lead the analysis и coordinate the project. «Руковожу … координацией» превращает вторую в руководство координацией и добавляет ещё одно отглагольное существительное к и без того тяжёлой фразе.",
+  "severity": "medium",
+  "category": "meaning"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "about_cred2_value",
+  "context": "Credentials list: doctorate line",
+  "current": "Институт наук об оценке рисков",
+  "proposed": "Институт наук об оценке риска (Institute for Risk Assessment Sciences)",
+  "why": "Название института у русского читателя ни с чем не соотносится; латинский оригинал в скобках даёт возможность его найти — так же, как имя автора уже продублировано латиницей в about_p1.",
+  "severity": "low",
+  "category": "consistency"
+ },
+ {
+  "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/i18n/ru.json",
+  "i18n_key": "inst_cac_desc",
+  "context": "Description of the Code Against Cancer entry",
+  "current": "координируемых МАИР (ВОЗ) и партнёрами",
+  "proposed": "координируемых МАИР (ВОЗ) и его партнёрами",
+  "why": "В английском its partners — партнёры агентства; без притяжательного местоимения по-русски получается неопределённый список партнёров.",
+  "severity": "low",
+  "category": "meaning"
+ }
+]

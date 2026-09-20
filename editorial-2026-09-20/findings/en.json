@@ -1,0 +1,502 @@
+[
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "Line 6-9, the document head.",
+    "current": "<title>Code Against Cancer — EpiDetective<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">\n</title>",
+    "proposed": "<title>Code Against Cancer — EpiDetective</title>\n<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+    "why": "The closing </title> tag sits after the three <link> elements, so the browser treats the whole block as title text. The page title measures 212 characters and shows raw markup in the tab, in search results and in anything that shares the link; the three icons never load. This is the single worst piece of page furniture on the site.",
+    "severity": "high",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": null,
+    "context": "Line 6-9, the document head. The same fault as the Code Against Cancer page, so it is a template problem rather than a one-off.",
+    "current": "<title>Timeline — Wenxin Wan<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">\n</title>",
+    "proposed": "<title>Timeline — Wenxin Wan — EpiDetective</title>\n<link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"alternate icon\" href=\"/favicon.ico\" sizes=\"any\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+    "why": "Same misplaced closing tag: the title runs to 199 characters of markup. Whoever fixes one should fix both, and check the template the two pages are generated from. The proposed wording also restores the — EpiDetective suffix every other page carries.",
+    "severity": "high",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_cta_source",
+    "context": "The source line under the CTA band, and the same figure in the hero lede.",
+    "current": "Source: IARC Monographs, \"Classifications by cancer site\", Volumes 1–141 (last update 18 May 2026), adapted from Schubauer-Berigan et al., JNCI Monographs 2026.",
+    "proposed": "Source: IARC Monographs, \"Classifications by cancer site\", Volumes 1–141 (last update 18 May 2026), adapted from Schubauer-Berigan et al., JNCI Monographs 2026, and augmented by EpiDetective for evaluations published since, and for the single HPV types named in Volume 100B.",
+    "why": "The tool's own DATA.meta.source (deploy/index.html) ends \"...and augmented for later evaluations and for single HPV types named in Vol 100B\". The site drops that clause, so the page presents all 469 links as IARC's own record. The hero lede compounds it: \"the 469 links the World Health Organization's cancer agency has recorded between them\". The tool is more candid about its provenance than the page that introduces it.",
+    "severity": "high",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_lede",
+    "context": "Hero lede.",
+    "current": "Every mark behind this text is real: 185 exposures, 68 types of cancer, and the 469 links the World Health Organization's cancer agency has recorded between them.",
+    "proposed": "Every mark behind this text is real: 185 exposures, 68 types of cancer, and 469 links between them, drawn from the World Health Organization's cancer agency and kept current by EpiDetective.",
+    "why": "The counts are right, but \"has recorded\" attributes the whole set to IARC. Part of the set is EpiDetective's augmentation, as the tool's own metadata says. Attributing an editorial extension to WHO is the kind of thing a journalist would pick up.",
+    "severity": "high",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "Meta description, line 10.",
+    "current": "Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.",
+    "proposed": "Official, evidence-based ways to reduce your own cancer risk, from the Codes Against Cancer that IARC (WHO) and its partners have published for Europe and for Latin America and the Caribbean, with Asia in preparation.",
+    "why": "The description puts Asia on equal footing with the two published Codes. There is no Asian Code Against Cancer: the page's own badge says \"In development\", and the source it cites is a Lancet Regional Health scoping paper. The description is the text a reader sees before they reach the badge.",
+    "severity": "high",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "The Asia tab. REGIONS[2] has dev:true and ten recommendation cards; build() suppresses the summary note for in-development regions (\"the in-development region's badge already says enough\").",
+    "current": "Ten numbered recommendation cards under a heading reading: Asia  [In development]  ·  In development · 10 recommendations · Coordinated by: IARC & ANCCA (Asian National Cancer Centers Alliance)",
+    "proposed": "Show the summary note on this panel too, worded for the case: \"No Asian Code has been published yet. The ten points below are EpiDetective's reading of the ANCCA and IARC scoping work cited under Official sources.\"",
+    "why": "A small grey badge is carrying the whole disclosure. Everything else on the panel — numbered cards, the word \"recommendations\", a named coordinating partner — reads exactly like the two published Codes. A reader who skims will take these ten points as adopted guidance for Asia. Europe and Latin America get an explicit note when their wording is a summary; the region where the whole Code is provisional gets none.",
+    "severity": "high",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/about.html",
+    "i18n_key": "about_p2",
+    "context": "About page, second paragraph; and the Doctorate line in the credentials list. Compare timeline/index.html, where the top entry is dated 28 Sep 2026 and marked \"upcoming\": \"Public defence of the doctoral thesis, Utrecht University\".",
+    "current": "I obtained my MSc in Epidemiology from the University of Bristol in the United Kingdom, and my PhD from Utrecht University in the Netherlands, where I studied how exposures at work and in the environment shape cancer risk at the population level.",
+    "proposed": "I obtained my MSc in Epidemiology from the University of Bristol in the United Kingdom, and completed my doctoral research at Utrecht University in the Netherlands, where I studied how exposures at work and in the environment shape cancer risk at the population level.",
+    "why": "Today is 20 September 2026 and the site's own timeline dates the public defence to 28 September 2026, eight days away. In the Dutch system the doctorate is conferred at that ceremony. Two pages of the same site currently disagree about whether the degree is held. Please confirm which is right and align both; if the defence has effectively happened, the timeline entry is the one to move.",
+    "severity": "high",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "The page footer area. Compare index.html, about.html, explorer.html and games.html, each of which carries the affiliation disclaimer.",
+    "current": "The page ends with its own \"How to use this\" note and the Official sources list. It carries no affiliation disclaimer.",
+    "proposed": "Add the standard block: \"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone.\"",
+    "why": "This is the page most likely to be mistaken for an official IARC publication: it reproduces IARC wording, uses IARC partner names, and is titled Code Against Cancer. It is also the only English page carrying no statement of independence. The timeline page manages a one-line version of it; this page should too.",
+    "severity": "high",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "statV / statL",
+    "context": "Hero statistic, the only figure on the page.",
+    "current": "≈40% of cancers are linked to preventable causes",
+    "proposed": "≈40% of cancers are linked to causes that can be avoided — followed by a source in the Official sources list.",
+    "why": "The headline figure carries no source anywhere on the page, and the four sources listed at the foot do not obviously support it. Everything else on this site follows the rule that every number links to where it came from; the timeline states that rule out loud. This number should not be the exception.",
+    "severity": "medium",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "meta_games_title",
+    "context": "<title>, og:title and twitter:title, all three identical. The page's own h1 reads \"one each for skin, lung and breast\".",
+    "current": "Cancer awareness games — sun, lung and breast — EpiDetective",
+    "proposed": "Cancer awareness games — skin, lung and breast — EpiDetective",
+    "why": "\"sun\" is the exposure; \"skin\" is the cancer. Listed beside \"lung and breast\" the reader expects three cancers, and the h1 six lines below supplies exactly that. Align the title with the heading.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "meta_games_desc",
+    "context": "Meta description, og:description and twitter:description, all three identical. 283 characters.",
+    "current": "Three free browser games about cancer prevention: Sol & the UV Shield Quest (sun safety, ages 6 to 12), The Lung Detective (what causes lung cancer, ages 10 to 16) and A Town of 1,000 (breast cancer in a town followed for forty years, ages 14 and up). No download, nothing collected.",
+    "proposed": "Three free browser games about cancer prevention, for skin, lung and breast: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and the choices a town makes for ages 14 and up. No download, nothing collected.",
+    "why": "At 283 characters this is nearly twice the length search results will show, so the three closing sentences — including \"nothing collected\", which is the strongest thing the page has to say — are cut off. Every other page on the site sits between 124 and 195 characters.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_whatsin_h2 / exp_bar1_note",
+    "context": "Section heading and the first bar note. Every other page writes IARC without an article.",
+    "current": "The exposures the IARC has linked to a cancer ... This is the strongest conclusion the IARC draws.",
+    "proposed": "The exposures IARC has linked to a cancer ... This is the strongest conclusion IARC draws.",
+    "why": "IARC takes no definite article in its own house style or in the scientific press. The article survives here in two places while index.html, games.html and about.html all use the bare form.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_leg_can / exp_fig2",
+    "context": "The hero legend says \"Cancer site\"; the figures block six lines later says \"Cancer types\"; the hero lede says \"68 types of cancer\"; timeline/index.html says \"68 cancer sites\".",
+    "current": "Cancer site (legend) / Cancer types (figure) / types of cancer (lede) / cancer sites (timeline)",
+    "proposed": "Use \"cancer types\" throughout the site, which is what the tool itself says (DATA metaCounts: \"${ne} exposures · ${nc} cancer types · ${nl} links\" and pickerCancer: \"Cancer types\"). Reserve \"site\" for the source citation, where the IARC table's own name is \"Classifications by cancer site\".",
+    "why": "Four labels for one thing, two of them within 300 pixels of each other on the same page. The tool has already settled on \"cancer types\" for readers; the site should follow it.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_t1_m4 / exp_cta_lede",
+    "context": "The tool chip on the home page reads \"10 languages\"; the CTA lede on explorer.html reads \"Free, in ten languages\". The games page writes ages both ways too: \"Ages 6–12\" on the chips, \"aged 6 to 12\" in the prose.",
+    "current": "10 languages (chip) / ten languages (prose)",
+    "proposed": "Keep numerals in chips and metadata rows, words in running prose, and say so once in the style note: \"10 languages\" on a chip, \"ten languages\" in a sentence. The same rule already fits the age treatment; apply it deliberately rather than by accident.",
+    "why": "The site is close to a defensible rule already. Writing it down would stop the drift, and would settle the Latin America cards on the Code page, which currently write \"Colorectal screening, 50–74\" and \"aged 30–64\" against the Europe cards' word-based ages.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "home_audience",
+    "context": "The home page audience line uses a serial comma. The tool descriptions immediately below it do not: \"heart disease, stroke, type 2 diabetes, dementia, cancer and other major chronic conditions\"; and explorer.html has \"chance, bias and other explanations\".",
+    "current": "For the curious public, patients, doctors, journalists, and the people who write health policy.",
+    "proposed": "For the curious public, patients, doctors, journalists and the people who write health policy.",
+    "why": "Serial comma usage across the English pages is split roughly down the middle. The house voice is British and the majority of the copy drops it, so dropping it here is the smaller edit. Whichever way it goes, one rule should govern all five pages and en.json.",
+    "severity": "medium",
+    "category": "style"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_t1_btn_about / inst_t2_btn_about",
+    "context": "The two tool cards each carry a button reading \"About this tool\". The first goes to explorer.html, a page on this site. The second goes to https://tools.epidetective.com/chronic/#methods, a section inside the tool itself, on another domain.",
+    "current": "About this tool (× 2, different destinations, no distinguishing text)",
+    "proposed": "Label the second one \"Read the methods\" and mark it as leaving the site, or build the chronic tool a companion page to match explorer.html.",
+    "why": "Two identically labelled controls that behave differently. A screen reader user listing the links hears \"About this tool\" twice with nothing to tell them apart, and the second one takes them off the site into a dense methods section.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_t1_btn_open / home_games_btn",
+    "context": "The home page contains two buttons reading \"Open it →\" and three reading \"Play it →\". The neighbouring thumbnails carry aria-labels, but the buttons themselves do not.",
+    "current": "Open it → (× 2) / Play it → (× 3)",
+    "proposed": "\"Open the Cancer Evidence Explorer →\", \"Open the Chronic Disease Evidence Explorer →\", \"Play Sol & the UV Shield Quest →\", and so on — or keep the short label visible and add an aria-label carrying the full name.",
+    "why": "Out of context these tell a reader nothing. explorer.html already does this correctly in its CTA band: \"Open the Cancer Evidence Explorer →\". The home page is the page where it matters most.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "home_games_btn",
+    "context": "The three game cards on the home page are labelled \"Play it →\" and link to games.html#sun-safety and friends, which is a description page with a screenshot and a separate Play button.",
+    "current": "Play it →  (href=\"games.html#sun-safety\")",
+    "proposed": "See the game →   — or link straight to games/sun-safety/, as the cards on games.html itself do.",
+    "why": "The label promises the game and delivers a page about the game. The equivalent cards on games.html link directly to the playable build, so the home page is the odd one out.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/about.html",
+    "i18n_key": null,
+    "context": "The How to cite section. It has a .label div but no heading element, so the page's heading outline runs h1 (About the developer) then h2 (Get in touch), skipping the section in between. timeline/index.html links to about.html#cite by name.",
+    "current": "<div class=\"sec-head\"><div class=\"label\">How to cite</div></div>",
+    "proposed": "<div class=\"sec-head\"><div class=\"label\">How to cite</div><h2>How to cite this site.</h2></div>",
+    "why": "A named, deep-linked section that a reader navigating by headings cannot find. The Contact section directly below it has both a label and an h2, so the pattern already exists on the page.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": null,
+    "context": "Page h1, at the top of the overview section.",
+    "current": "Three are <b>open now</b>: one each for skin, lung and breast.",
+    "proposed": "Three cancer awareness games: one each for <b>skin, lung and breast</b>.",
+    "why": "\"Three are open now\" does not say three what. It works on the home page, where the section heading above it supplies the noun, but as the h1 of a standalone page it is the first and sometimes only line a reader or a screen reader gets.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "games_g3_sub / games_g3_step1",
+    "context": "The A Town of 1,000 description. The game's own title screen reads \"One town, one thousand women, followed from their twenties to 75\", and the board is headed \"Projected to age 75\".",
+    "current": "A choices game in which a town council follows 1,000 women from their twenties to their sixties ... You sit as the council of a town whose 1,000 women you will follow for forty years, one chapter for each decade of their lives.",
+    "proposed": "A choices game in which a town council follows 1,000 women from their twenties onward and sees, dot by dot, what prevention changes by the time they are 75 ... one chapter for each decade from their twenties to their sixties, with the outcome counted at 75.",
+    "why": "The decisions run across five decades, from the twenties to the sixties, but the outcome the dots show is diagnoses and deaths by age 75. \"To their sixties\" describes the decisions and leaves the reader expecting the count to stop there. \"Forty years\" then sits awkwardly beside \"one chapter for each decade\", which is five.",
+    "severity": "medium",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "games_g1_label",
+    "context": "The three game descriptions carry kicker labels. The lung and breast games are labelled by form and topic; the sun game is labelled with the section name.",
+    "current": "Cancer awareness games (sun) / Investigation game · lung cancer / Choices game · breast cancer",
+    "proposed": "Platform game · skin cancer / Investigation game · lung cancer / Choices game · breast cancer",
+    "why": "Two of the three follow a clear pattern and the third repeats the page label, which already appears twice above it. The card copy calls it \"a platform adventure\", so the form is available.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_cac_desc",
+    "context": "en.json carries a description for the Code Against Cancer, but no page renders it: index.html's rack holds two <article class=\"inst\"> cards and nothing else. The Code Against Cancer reaches readers only through a nav link.",
+    "current": "Key inst_cac_desc: \"The official, evidence-based recommendations for lowering your own cancer risk, from the regional Codes Against Cancer coordinated by IARC (WHO) and its partners. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.\"",
+    "proposed": "Either restore a card for it on the home page, updated to \"Fourteen actions for Europe, seventeen for Latin America and the Caribbean, and ten more taking shape for Asia\", or remove the orphaned key so the four translated copies stop being maintained for nothing.",
+    "why": "A substantial page with three regional Codes sits behind a single nav word while two explorers and three games all get cards. The stranded key also omits Asia, so if it were ever restored it would ship an incomplete count.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_chip_review",
+    "context": "en.json defines a chip label that no English page uses.",
+    "current": "\"inst_chip_review\": \"In revision\"",
+    "proposed": "Remove it, or use it.",
+    "why": "Dead string. It is carried through every translation and reviewed each time for no purpose.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "The page head carries a title and a description and nothing else. Every other English page carries canonical, hreflang alternates, Open Graph and Twitter tags.",
+    "current": "No <link rel=\"canonical\">, no hreflang, no og:type / og:site_name / og:url / og:title / og:description / og:image, no twitter card.",
+    "proposed": "Add canonical https://epidetective.com/code-against-cancer/ and the Open Graph and Twitter set. hreflang is genuinely hard here because the page switches language by query string, so either add hreflang entries for ?lang=zh, fr, es and ru, or leave it and accept English as the indexed version.",
+    "why": "This page is in the sitemap and is the site's most shareable page: when it is posted to social media it will render with no title card and no image. timeline/index.html has the same gap minus the canonical and og:image.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": "kinds.talk",
+    "context": "The kind label printed on each individual entry's meta line, beside the date. Its siblings are all singular: paper → Paper, tool → Tool, role → Role, milestone → Milestone.",
+    "current": "kinds:{... talk:\"Conferences\", press:\"Press &amp; commentary\"}",
+    "proposed": "kinds:{... talk:\"Conference\", press:\"Press\"}",
+    "why": "Each entry reads \"2023 · Conferences\", plural, for one item. The filter chip above is correctly plural because it counts several. The press label meanwhile reads \"Press & commentary\" on the entry and \"Press\" on the chip, so the same category answers to two names on one screen.",
+    "severity": "medium",
+    "category": "grammar"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/404.html",
+    "i18n_key": null,
+    "context": "The 404 page footer carries the nav and the wordmark only. index.html, about.html and games.html carry the population disclaimer and the affiliation disclaimer; explorer.html carries the affiliation disclaimer.",
+    "current": "Footer with wordmark, tagline and nav; no disclaimer blocks.",
+    "proposed": "Carry at least the affiliation disclaimer, as the other pages do.",
+    "why": "Four English pages, three different footer treatments. GitHub Pages serves this file for any missing path at any depth, so it is a page real readers land on.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/404.html",
+    "i18n_key": null,
+    "context": "The 404 page has no language navigation, although it is served for missing paths under /fr/, /es/, /zh/ and /ru/ as well.",
+    "current": "The link may be out of date, or the page may have moved. Everything on this site is reachable from the home page.",
+    "proposed": "Keep the English copy and add the language row the other pages carry, so a reader who mistyped a path under /fr/ can get back to a French page.",
+    "why": "A French or Russian reader who hits a bad URL lands on an English dead end with no visible way back to their own language.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_h2",
+    "context": "The heading over the tools rack.",
+    "current": "Two are <b>open now</b>. More are being built.",
+    "proposed": "Two are <b>open now</b>, with more in the workshop.",
+    "why": "\"More are being built\" is a promise with no date attached and no place for a reader to go and check. It has to be reviewed every time the site is touched. A lighter phrasing makes the same point without committing to a delivery.",
+    "severity": "medium",
+    "category": "style"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_read1_p",
+    "context": "The first of the three limits. This is the page's first and only use of the Group vocabulary.",
+    "current": "A Group 1 classification means an exposure can cause cancer under some conditions.",
+    "proposed": "IARC's strongest category, Group 1, means an exposure can cause cancer under some conditions.",
+    "why": "\"Group 1\" arrives without introduction. The page has spent its whole length on a different scale — Established link and Suspected link, from sufficient and limited evidence — and never mentions that agents also carry a Group. A reader meeting \"Group 1\" cold will assume it belongs to the two-bar chart above.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_crumb_current",
+    "context": "The breadcrumb above the hero.",
+    "current": "Tools · Tool 01 — open now",
+    "proposed": "Tools · Cancer Evidence Explorer",
+    "why": "\"Tool 01\" implies a numbered series, and there is no Tool 02: the Chronic Disease Evidence Explorer has no page of its own on this site. A breadcrumb should name where the reader is.",
+    "severity": "medium",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": "frameworkP / partner fields",
+    "context": "Running prose and the coordinating-partner lines use an ampersand where the site elsewhere writes \"and\". The sources list at the foot of the same page writes the region out in full.",
+    "current": "Europe and Latin America & the Caribbean are published; Asia is in development. ... IARC & the European Commission ... IARC & PAHO (Pan American Health Organization) ... IARC & ANCCA",
+    "proposed": "Europe and Latin America and the Caribbean are published; Asia is in development. ... IARC and the European Commission ... IARC and PAHO (the Pan American Health Organization) ... IARC and ANCCA",
+    "why": "The region is called \"Latin America & the Caribbean\" on the tab and \"Latin America and the Caribbean Code Against Cancer\" in the sources list eight lines below. An ampersand in running prose also sits oddly against the plain house voice.",
+    "severity": "medium",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": "inst_t2_m5",
+    "context": "The fifth metadata chip on the chronic tool card. The other tool's card carries four chips; this one carries five, and the fifth is a compressed citation.",
+    "current": "GBD · Lancet Commissions · meta-analyses · v1.4 · Sep 2026",
+    "proposed": "Split it: keep \"v1.4 · Sep 2026\" as the chip, and let the card's prose carry the sources, which the chronic tool states in full as \"GBD Burden of Proof · Lancet Commissions · pooled cohort consortia · published meta-analyses\".",
+    "why": "The chip row is a place for counts, and this one is doing citation work in five abbreviations. It also drops \"pooled cohort consortia\" and shortens \"GBD Burden of Proof\" to \"GBD\", both of which the tool names in full. Figures all check out.",
+    "severity": "medium",
+    "category": "style"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "The language switcher renders as EN / 中文 / FR / ES / RU. The main site's switcher reads English / 中文 / Français / Español / Русский.",
+    "current": "var LANG_LIST = [[\"en\",\"EN\"],[\"zh\",\"中文\"],[\"fr\",\"FR\"],[\"es\",\"ES\"],[\"ru\",\"RU\"]];",
+    "proposed": "var LANG_LIST = [[\"en\",\"English\"],[\"zh\",\"中文\"],[\"fr\",\"Français\"],[\"es\",\"Español\"],[\"ru\",\"Русский\"]];",
+    "why": "Native names are both friendlier and more accessible: a screen reader announcing \"E N\" tells a reader far less than \"English\". One language in the list is already a native name, which makes the mixture visible. timeline/index.html has the same EN / 中文 pairing.",
+    "severity": "medium",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": null,
+    "context": "The region list in the sun-safety section, line 139, and the same name in the game's own region data.",
+    "current": "<li>Sports & Mountain <span>UV 8</span></li>",
+    "proposed": "<li>Sports and Mountain <span>UV 8</span></li>",
+    "why": "A bare & in HTML text. It renders, but it is invalid and the neighbouring occurrences of the character on this page are all written &amp;. The UV values 5, 3, 7, 8 and 6 all match the game's own region data exactly.",
+    "severity": "low",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/about.html",
+    "i18n_key": "about_p3",
+    "context": "About page, third paragraph. timeline/index.html describes the same consortium as pooling \"about ten cohorts\".",
+    "current": "OPICO, the international opioid cohort consortium, which brings ten cohorts from three continents together",
+    "proposed": "OPICO, the international opioid cohort consortium, which brings about ten cohorts from three continents together",
+    "why": "One page hedges the count, the other states it flat. The timeline's figure is the more careful of the two and the two pages are one click apart.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/about.html",
+    "i18n_key": null,
+    "context": "The JSON-LD block on about.html lists two alumniOf entries and omits ORCID from sameAs. timeline/index.html lists three (adding Sichuan Agricultural University) and includes ORCID 0000-0002-1957-4034.",
+    "current": "alumniOf: Utrecht University, University of Bristol. sameAs: Google Scholar, LinkedIn, GitHub.",
+    "proposed": "Match the timeline's block: add Sichuan Agricultural University and the ORCID URL.",
+    "why": "Two structured-data descriptions of the same person disagreeing. ORCID is the stronger identifier of the set and is the one missing from the page search engines will treat as canonical for the person.",
+    "severity": "low",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games/sun-safety/index.html",
+    "i18n_key": null,
+    "context": "The sun-safety game page head, set against its two siblings. lung-detective and town-of-1000 both carry og:type, og:site_name and og:url.",
+    "current": "og:title and og:description only.",
+    "proposed": "Add og:type, og:site_name and og:url, matching the other two games.",
+    "why": "The oldest of the three game pages has not caught up with the pattern the other two established.",
+    "severity": "low",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games/sun-safety/index.html",
+    "i18n_key": null,
+    "context": "Meta description of the game page, against the shield kit the game actually tracks (Cover-up, Broad hat, SPF 30+, Shade) and the kit games.html lists.",
+    "current": "...check the UV Index, find shade, cover up, wear a hat and sunglasses, use SPF 30+ sunscreen correctly.",
+    "proposed": "...check the UV Index, find shade, cover up, wear a hat, use SPF 30+ sunscreen correctly.",
+    "why": "Sunglasses appear in the quiz bank but are not one of the four pieces of the shield kit the game tracks, and games.html lists the kit as \"hat, cover-up, shade and sunscreen\". A small over-promise, easily removed.",
+    "severity": "low",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "games_g3_step2",
+    "context": "Step two of how to play A Town of 1,000. The game itself is specific: \"each decade you have three points of effort\", and the HUD shows 3/3.",
+    "current": "Each chapter deals two decision cards and gives you a small effort budget.",
+    "proposed": "Each chapter deals two decision cards and gives you three points of effort.",
+    "why": "\"A small effort budget\" appears three times across the card, the description and the how-to. The game states the number plainly, and the number is more useful than the adjective.",
+    "severity": "low",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": null,
+    "context": "The section id and the label above it disagree, and the nav points at the id.",
+    "current": "nav href=\"index.html#instruments\" → <section id=\"instruments\"> → <div class=\"label\">The tools</div>. timeline/index.html carries the same split: \"The sister instrument for everything beyond cancer\" and a link labelled \"The instruments\".",
+    "proposed": "Settle on \"tools\", which is what the nav, the tagline (\"Open tools for reading health evidence\") and the citation line all use, and let \"instrument\" go.",
+    "why": "Two words for the same family of things, one of them visible to readers on the timeline. The URL fragment is cosmetic but it keeps the older word alive in the codebase.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": null,
+    "context": "The explorer footer carries the affiliation disclaimer but not the population disclaimer that index.html, about.html and games.html carry. The equivalent text does appear inside the CTA band above it.",
+    "current": "Footer: affiliation disclaimer only.",
+    "proposed": "Either carry both blocks as the other pages do, or accept the CTA-band wording as the substitute and note the decision.",
+    "why": "Defensible as it stands, since the page says the same thing higher up, but it makes the footer the fourth variant across four pages.",
+    "severity": "low",
+    "category": "consistency"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "<html lang=\"en\"> with no dir attribute. index.html, about.html, explorer.html, games.html and 404.html all use <html lang=\"en\" dir=\"ltr\">.",
+    "current": "<html lang=\"en\">",
+    "proposed": "<html lang=\"en\" dir=\"ltr\">",
+    "why": "Harmless in practice, since ltr is the default, but the site otherwise declares it everywhere. timeline/index.html and the three game pages have the same omission.",
+    "severity": "low",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": "games_g3_p1",
+    "context": "The list of what the decision cards cover, in the A Town of 1,000 description.",
+    "current": "alcohol, physical activity, weight after the menopause, breastfeeding, menopausal hormone therapy, screening",
+    "proposed": "alcohol, physical activity, weight after the menopause, breastfeeding, menopausal hormone therapy and screening",
+    "why": "A six-item list with no conjunction, so it reads as though it has been cut short. All six are correct: they match the model's five factors plus screening.",
+    "severity": "low",
+    "category": "grammar"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": null,
+    "context": "The three game thumbnails on the home page carry the game's name as their accessible name but link to a description page.",
+    "current": "<a class=\"gc-thumb\" href=\"games.html#sun-safety\" aria-label=\"Sol &amp; the UV Shield Quest\">",
+    "proposed": "aria-label=\"About Sol & the UV Shield Quest\"",
+    "why": "A link announced as the game's title that opens a page about the game. Minor, and it resolves itself if the cards are pointed straight at the playable build.",
+    "severity": "low",
+    "category": "microcopy"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/games.html",
+    "i18n_key": null,
+    "context": "og:image and twitter:image on the games overview page.",
+    "current": "https://epidetective.com/assets/games/sun-safety-poster.jpg",
+    "proposed": "A composite showing all three games, or at least a neutral card.",
+    "why": "The page covers three games and shares as one. The two newer games each have their own screenshot asset already.",
+    "severity": "low",
+    "category": "furniture"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/timeline/index.html",
+    "i18n_key": null,
+    "context": "The timeline entry for the EpiDetective launch describes the platform's language coverage.",
+    "current": "Five languages, an ink-on-paper design, and a standing rule that every number links to its source",
+    "proposed": "(no change needed)",
+    "why": "Checked and correct: the site shell ships in English, Chinese, French, Spanish and Russian, while the two explorers carry ten languages each and the timeline and Code Against Cancer pages carry two and five. Recorded here so the figure is not queried again.",
+    "severity": "note",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/explorer.html",
+    "i18n_key": "exp_fig4",
+    "context": "The fourth figure in the What is in here block.",
+    "current": "1–141 Monograph volumes",
+    "proposed": "(no change needed, but worth knowing)",
+    "why": "Correct for the source table, which covers Volumes 1–141 with a last update of 18 May 2026. The tool's own currency anchor, however, reads \"IARC Agents Classified by the IARC Monographs page (Vols 1–142) ... updated 3 July 2026\", so Volume 142 exists and the by-site table has yet to absorb it. The figure is right; the gap is one to watch when the table next updates.",
+    "severity": "note",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/code-against-cancer/index.html",
+    "i18n_key": null,
+    "context": "The brief states that the English recommendation texts on this page are EpiDetective summaries. The page's own data disagrees, and so does a second file in the repo.",
+    "current": "REGIONS[0].officialLangs = [\"en\",\"fr\",\"es\"], so the summary note never shows for Europe in English. The fourteen English detail texts match, word for word, the strings in design/games/town-of-1000/game.js, whose comment reads: \"European Code Against Cancer, 5th edition. Only the t strings are the official wording, quoted verbatim\".",
+    "proposed": "(nothing to change here, but please confirm before anyone edits these fourteen strings)",
+    "why": "This matters for how the page is edited. The fourteen Europe detail texts appear to be official ECAC 5th-edition wording carried verbatim, which means they should not be rewritten for style. The card titles above them — \"Check your radon exposure\", \"Vaccinate against infections\" — are EpiDetective's own short labels and can be edited freely. The seventeen Latin America texts read as genuine summaries (\"Eat well, avoid very hot drinks\", \"Limit time outdoors when air is bad\") yet officialLangs lists \"en\" for that region too, so they are presented without a summary note. That pairing is worth a second look.",
+    "severity": "note",
+    "category": "factual"
+  },
+  {
+    "file": "/Users/wenxin/Claude/Code/IARC_monograph/design/index.html",
+    "i18n_key": null,
+    "context": "Every count on every English page, checked against the two tools' embedded DATA objects and the three games' own source.",
+    "current": "185 exposures, 68 cancer types, 469 links; 249 established and 220 suspected; 53.1% and 46.9% bar widths; 124 risk factors, 45 diseases, 434 graded links, v1.4, Sep 2026, 513 sources; 10 languages for both tools; three games; 5 regions, 30 questions, 5 per run, 9 sun stars, UV 5/3/7/8/6; 3 scenes, 12 clues; 5 chapters, 10 cards, 3 points of effort, about 94 and about 15 per 1,000.",
+    "proposed": "(no change)",
+    "why": "All of them agree with the data. deploy/index.html: exposures 185, cancers 68, links 469, evidence split 249 Sufficient and 220 Limited, LANGS carries ten entries. deploy/chronic/index.html: risks 124, diseases 45, links 434, meta.version 1.4, meta.built 2026-09-19, T carries ten language keys, and the distinct source ids referenced by links number 513, which is exactly what the tool prints in its own seal. Note that DATA.sources holds 566 entries, of which 53 are unreferenced, so anyone recomputing this figure should count referenced sources rather than the dictionary.",
+    "severity": "note",
+    "category": "factual"
+  }
+]
