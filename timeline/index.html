@@ -84,7 +84,7 @@
   body.zh .lede{max-width:36em}
   .lede a{text-underline-offset:3px}
 
-  /* the evidence stroke: EpiDetective's signature mark, a small brand flourish here */
+  /* the evidence stroke: EpiDetective’s signature mark, a small brand flourish here */
   .stroke{margin:30px 0 0;height:26px}
 
   .filters{display:flex;gap:8px;flex-wrap:wrap;padding-block:22px 6px}
@@ -175,7 +175,7 @@
     .year{position:static;font-size:1.5rem;padding:18px 0 0}
     .items{border-left:none;padding-left:0}
     .item::before{display:none}
-    /* Compact mode's single-line title truncation exists to keep desktop rows
+    /* Compact mode’s single-line title truncation exists to keep desktop rows
        to one line; on a phone the stacked head has no such row to protect, so
        let titles wrap instead of running past the viewport edge. */
     .mode-compact .items{padding-left:0}
@@ -202,7 +202,7 @@
 <main>
   <section class="hero">
     <div class="wrap">
-      <div class="eyebrow" id="eyebrow">EpiDetective · The developer's record</div>
+      <div class="eyebrow" id="eyebrow">EpiDetective · The developer’s record</div>
       <h1 id="h1"></h1>
       <p class="lede" id="lede"></p>
       <svg class="stroke" width="240" height="26" viewBox="0 0 240 26" aria-hidden="true">
@@ -231,7 +231,7 @@
 var STRINGS = {
   en: {
     back:"← About the developer",
-    eyebrow:"EpiDetective · The developer's record",
+    eyebrow:"EpiDetective · The developer’s record",
     h1:'Me, and <i>the work</i>',
     lede:'Where I have been and what I have made — degrees and moves, papers, consortium roles, tools, conference records and the coverage they drew — most recent first. Skim the whole record in one view, open any entry for the detail, or filter to one kind at a time. Each entry links to its primary source, so any claim here can be traced back and checked: the same standard <a href="../">EpiDetective</a> asks of health evidence. Assembled by Wenxin Wan; the record itself lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
     cats:{all:"All",paper:"Papers",tool:"Tools",role:"Roles",milestone:"Milestones",talk:"Conferences",press:"Press"},
@@ -260,15 +260,14 @@ var STRINGS = {
 /* Each entry: k=kind, sel=selected, date {en,zh}, note (extra meta tag, per lang),
    t {en,zh} title, d {en,zh} description, links [[{en,zh} label, href], ...] */
 var GROUPS = [
-  { y:{en:"Next",zh:"即将"}, cls:"next", items:[
-    { k:"milestone", date:{en:"28 Sep 2026",zh:"2026年9月28日"}, note:"upcoming",
+  { y:{en:"2026",zh:"2026"}, cls:"now", tag:{en:"in progress",zh:"进行中"}, items:[
+    { k:"milestone", sel:true, date:{en:"28 Sep 2026",zh:"2026年9月28日"},
       t:{en:"Public defence of the doctoral thesis, Utrecht University",
          zh:"乌得勒支大学博士论文公开答辩"},
-      d:{en:"The formal defence ceremony of <i>Mapping the Occupational Exposome for Respiratory Health</i>, after which the thesis joins the Utrecht University repository.",
-         zh:"《Mapping the Occupational Exposome for Respiratory Health》的正式答辩仪式，此后论文将收入乌得勒支大学论文库。"},
-      links:[[{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] }
-  ]},
-  { y:{en:"2026",zh:"2026"}, cls:"now", tag:{en:"in progress",zh:"进行中"}, items:[
+      d:{en:"The formal defence of <i>Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology</i>. The thesis is now in the Utrecht University repository, open to read.",
+         zh:"《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》的正式答辩。论文现已收入乌得勒支大学论文库，可公开查阅。"},
+      links:[[{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"],
+             [{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"EpiDetective launches",zh:"EpiDetective 上线"},
       d:{en:"A personal, independent platform with one purpose: evidence that never leaves the literature has done less than half its job. Five languages, an ink-on-paper design, and a standing rule that every number links to its source — plus a Code Against Cancer page carrying the official IARC prevention guidance.",
@@ -276,7 +275,7 @@ var GROUPS = [
       links:[[{en:"epidetective.com",zh:"epidetective.com"},"../"],[{en:"Code Against Cancer",zh:"防癌守则"},"../code-against-cancer/"]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Cancer Evidence Explorer",zh:"癌症证据探索器"},
-      d:{en:"The IARC Monographs' by-site evidence table — 185 exposures, 68 cancer sites, 469 evaluated links — made explorable in ten languages, with each exposure's scientific record (volume, year, citations) one click away.",
+      d:{en:"The IARC Monographs' by-site evidence table — 185 exposures, 68 cancer sites, 469 evaluated links — made explorable in ten languages, with each exposure’s scientific record (volume, year, citations) one click away.",
          zh:"把 IARC《致癌物专论》的按部位证据表变成可探索的工具——185 种暴露、68 个癌症部位、469 条经评估的关联，十种语言，每种暴露的科学档案（卷号、年份、文献）一键可达。"},
       links:[[{en:"How it works",zh:"工具说明"},"../explorer.html"]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
@@ -304,14 +303,14 @@ var GROUPS = [
       links:[[{en:"opico.iarc.who.int",zh:"opico.iarc.who.int"},"https://opico.iarc.who.int"]] },
     { k:"milestone", date:{en:"Jan 2026",zh:"2026年1月"},
       t:{en:"Postdoctoral researcher at IARC / WHO, Lyon",zh:"加入里昂 IARC / 世界卫生组织，任博士后研究员"},
-      d:{en:"Joining the World Health Organization's cancer agency — the place whose Monographs the Cancer Evidence Explorer would later put in the public's hands — to work on pharmaco-epidemiology and cancer risk at population scale.",
+      d:{en:"Joining the World Health Organization’s cancer agency — the place whose Monographs the Cancer Evidence Explorer would later put in the public’s hands — to work on pharmaco-epidemiology and cancer risk at population scale.",
          zh:"加入世界卫生组织的癌症研究机构——癌症证据探索器后来正是把这里的《致癌物专论》交到公众手中——在人群尺度上研究药物流行病学与癌症风险。"},
       links:[[{en:"iarc.who.int",zh:"iarc.who.int"},"https://www.iarc.who.int"]] }
   ]},
   { y:{en:"2025",zh:"2025"}, cls:"", items:[
     { k:"talk", date:{en:"2025",zh:"2025年"},
-      t:{en:"EPICOH, Utrecht — and the year's conference record",zh:"EPICOH（乌得勒支）——以及全年会议记录"},
-      d:{en:"An invited talk on occupational-exposome methods at the international occupational-epidemiology congress, alongside the consortium abstracts of the year: the EPHOR project's overall lessons, the exposome and COPD, and the Danish interstitial-lung-disease study presented at ERS and published in French in the Revue des Maladies Respiratoires Actualités.",
+      t:{en:"EPICOH, Utrecht — and the year’s conference record",zh:"EPICOH（乌得勒支）——以及全年会议记录"},
+      d:{en:"An invited talk on occupational-exposome methods at the international occupational-epidemiology congress, alongside the consortium abstracts of the year: the EPHOR project’s overall lessons, the exposome and COPD, and the Danish interstitial-lung-disease study presented at ERS and published in French in the Revue des Maladies Respiratoires Actualités.",
          zh:"在国际职业流行病学大会作特邀报告，讲职业暴露组方法；同年的联盟摘要一并在列：EPHOR 项目的整体经验、暴露组与 COPD，以及在 ERS 报告并以法语发表于《Revue des Maladies Respiratoires Actualités》的丹麦间质性肺病研究。"},
       links:[[{en:"EPICOH · exposome analyses (lead)",zh:"EPICOH · 暴露组分析（第一作者）"},"https://doi.org/10.1136/oemed-2025-epicohabstracts.114"],
              [{en:"EPICOH · EPHOR lessons",zh:"EPICOH · EPHOR 经验"},"https://doi.org/10.1136/oemed-2025-epicohabstracts.115"],
@@ -328,7 +327,7 @@ var GROUPS = [
     { k:"paper", sel:true, date:{en:"Dec 2024",zh:"2024年12月"}, note:"lead",
       t:{en:"Occupational benzene exposure and lung cancer in human studies: a systematic review and meta-analysis",
          zh:"Occupational benzene exposure and lung cancer in human studies: a systematic review and meta-analysis"},
-      d:{en:"The other half of the argument: a led-from-scratch systematic review of 13 human studies covering roughly 367,000 people, with dose–response meta-analysis and open R code. Pooled analysis plus systematic review together now make the case that benzene's lung-cancer evidence deserves re-evaluation. <i>Environmental Health Perspectives</i>.",
+      d:{en:"The other half of the argument: a led-from-scratch systematic review of 13 human studies covering roughly 367,000 people, with dose–response meta-analysis and open R code. Pooled analysis plus systematic review together now make the case that benzene’s lung-cancer evidence deserves re-evaluation. <i>Environmental Health Perspectives</i>.",
          zh:"论证的另一半：从零开始领导的系统综述，纳入 13 项人群研究、约 36.7 万人，含剂量—反应 Meta 分析并公开 R 代码。汇总分析与系统综述合在一起，说明苯的肺癌证据值得重新评估。《Environmental Health Perspectives》。"},
       links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.1289/EHP15086"],
              [{en:"Response to comments (2025)",zh:"对评论的回应（2025）"},"https://doi.org/10.1289/EHP17293"]] },
@@ -342,7 +341,7 @@ var GROUPS = [
     { k:"talk", date:{en:"Sep &amp; Nov 2024",zh:"2024年9月与11月"},
       t:{en:"European Respiratory Society Congress, Vienna — and the early-career EPICOH, Barcelona",
          zh:"欧洲呼吸学会大会（维也纳）与 EPICOH 青年学者会议（巴塞罗那）"},
-      d:{en:"Invited talks a season apart: the occupational-exposome and lung-function line at ERS in September and, as an oral, at the EPICOH early-career congress in November. The year's abstract record, all linked: two ERS abstracts, the Barcelona oral and poster, and an ISEE abstract on work factors and type 2 diabetes.",
+      d:{en:"Invited talks a season apart: the occupational-exposome and lung-function line at ERS in September and, as an oral, at the EPICOH early-career congress in November. The year’s abstract record, all linked: two ERS abstracts, the Barcelona oral and poster, and an ISEE abstract on work factors and type 2 diabetes.",
          zh:"相隔一季的两场特邀报告：九月在 ERS、十一月在 EPICOH 青年学者大会（口头报告）讲职业暴露组与肺功能。全年摘要记录一并链接：两篇 ERS 摘要、巴塞罗那的口头报告与海报，以及一篇关于工作因素与 2 型糖尿病的 ISEE 摘要。"},
       links:[[{en:"ERS · lung function (lead)",zh:"ERS · 肺功能（第一作者）"},"https://doi.org/10.1183/13993003.congress-2024.OA975"],
              [{en:"ERS · COPD ExWAS",zh:"ERS · COPD 全暴露组关联研究"},"https://doi.org/10.1183/13993003.congress-2024.OA974"],
@@ -352,7 +351,7 @@ var GROUPS = [
     { k:"paper", sel:true, date:{en:"Jan 2024",zh:"2024年1月"}, note:"lead",
       t:{en:"Occupational benzene exposure and lung cancer risk: a pooled analysis of 14 case–control studies",
          zh:"Occupational benzene exposure and lung cancer risk: a pooled analysis of 14 case–control studies"},
-      d:{en:"The flagship. Benzene's role in leukaemia was settled science; its role in lung cancer was officially \"limited evidence\". This analysis of 12,329 cases and 15,719 controls found risk rising with cumulative exposure and duration — across subtypes, and in people who never smoked. <i>American Journal of Respiratory and Critical Care Medicine</i>.",
+      d:{en:"The flagship. Benzene’s role in leukaemia was settled science; its role in lung cancer was officially \"limited evidence\". This analysis of 12,329 cases and 15,719 controls found risk rising with cumulative exposure and duration — across subtypes, and in people who never smoked. <i>American Journal of Respiratory and Critical Care Medicine</i>.",
          zh:"代表作。苯致白血病早成定论，它与肺癌的关系却停留在“证据有限”。这项对 12,329 例病例与 15,719 名对照的分析发现，风险随累积暴露量和暴露时长上升——各亚型一致，且在从不吸烟者中同样存在。《American Journal of Respiratory and Critical Care Medicine》。"},
       links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.1164/rccm.202306-0942OC"],
              [{en:"Free full text",zh:"免费全文"},"https://pmc.ncbi.nlm.nih.gov/articles/PMC10806413/"]] }
@@ -387,7 +386,7 @@ var GROUPS = [
     { k:"role", date:{en:"Mar 2021 – Jun 2025",zh:"2021年3月 – 2025年6月"},
       t:{en:"Methods and statistics consultant, EU Exposome Project for Health and Occupational Research (EPHOR)",
          zh:"欧盟职业暴露组研究联盟（EPHOR）方法学与统计顾问"},
-      d:{en:"Built the consortium's methodological backbone for multi-exposure analysis: inventories of 49 multi-pollutant and 27 exposure–time–response models, open R tutorials for LASSO, random forests and BKMR, and more than ten workshops training 40+ epidemiologists across Europe — including talks at the European Human Exposome Network flagship meetings in Brussels (2023, 2024).",
+      d:{en:"Built the consortium’s methodological backbone for multi-exposure analysis: inventories of 49 multi-pollutant and 27 exposure–time–response models, open R tutorials for LASSO, random forests and BKMR, and more than ten workshops training 40+ epidemiologists across Europe — including talks at the European Human Exposome Network flagship meetings in Brussels (2023, 2024).",
          zh:"为联盟搭建多暴露分析的方法学骨架：整理 49 类多污染物模型与 27 类暴露—时间—反应模型的清单，公开 LASSO、随机森林与 BKMR 的 R 教程，主导十余场工作坊、为全欧 40 余名流行病学研究者授课——并在欧洲人类暴露组网络（EHEN）旗舰会议（布鲁塞尔，2023、2024）报告。"},
       links:[[{en:"ephor-project.eu",zh:"ephor-project.eu"},"https://www.ephor-project.eu"]] }
   ]},
@@ -395,7 +394,7 @@ var GROUPS = [
     { k:"paper", date:{en:"Published 2022–23",zh:"2022–23年发表"}, note:"coauthor",
       t:{en:"What has Mendelian randomization told us about adiposity and health? A systematic review",
          zh:"What has Mendelian randomization told us about adiposity and health? A systematic review"},
-      d:{en:"The master's work in print: grown out of the Bristol training in Mendelian randomization, a systematic map of what genetic causal-inference studies collectively say about body weight and health outcomes. <i>Wellcome Open Research</i>.",
+      d:{en:"The master’s work in print: grown out of the Bristol training in Mendelian randomization, a systematic map of what genetic causal-inference studies collectively say about body weight and health outcomes. <i>Wellcome Open Research</i>.",
          zh:"硕士阶段的工作成文：源于布里斯托的孟德尔随机化训练，系统梳理遗传因果推断研究对体重与健康结局的整体回答。《Wellcome Open Research》。"},
       links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.12688/wellcomeopenres.18657.2"]] },
     { k:"milestone", date:{en:"Sep 2020",zh:"2020年9月"},

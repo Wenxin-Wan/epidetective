@@ -179,9 +179,9 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 
 .sec{padding-block:clamp(62px,9vh,112px)}
 .sec-head{margin-bottom:34px}
-.sec-head h2{margin:14px 0 16px;max-width:21ch}
+.sec-head h2{margin:14px 0 16px;max-width:27ch}
 /* a page whose title sits in a section head: h1 in the outline, h2 in scale */
-.sec-head h1.page-h{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12;margin:14px 0 16px;max-width:21ch}
+.sec-head h1.page-h{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12;margin:14px 0 16px;max-width:27ch}
 html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-width:15em}
 
 /* ---------- hero (platform) ---------- */
@@ -277,7 +277,7 @@ html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-wi
    clustered layout rather than the same free-floating one */
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
 /* a game's thumbnail is a frame of the game itself; Sol is the default */
-.thumb-game{background-image:url(assets/games/sun-safety-shot.jpg);background-size:cover}
+.thumb-game{background-image:url(assets/games/sun-safety-card.jpg);background-size:cover}
 .thumb-game.thumb-lung{background-image:url(assets/games/lung-detective-card.jpg)}
 .thumb-game.thumb-town{background-image:url(assets/games/town-of-1000-card.jpg)}
 /* the shelf section on the home page sits under the tools rack; no extra top padding */
@@ -493,3 +493,10 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
   color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:2px}
 .back-all:hover{color:var(--ink);border-bottom-color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.game-card{transition:none}.game-card:hover{transform:none}}
+
+/* ---- the guide (reading.html) and its band on the home page */
+.tool-hero.plain .wrap{padding-block:clamp(48px,8vh,92px)}
+.tool-hero.plain h1{max-width:20ch}
+.sec.guide{padding-top:0;padding-bottom:clamp(48px,7vh,84px)}
+.guide + .shelf::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:clamp(48px,7vh,84px)}
+.guide .lede{margin:0 0 22px}

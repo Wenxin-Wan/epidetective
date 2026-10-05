@@ -23,7 +23,7 @@ TPL = os.path.join(HERE, "templates")
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
 PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about",
-         "games.html": "games"}
+         "games.html": "games", "reading.html": "reading"}
 SITE_URL = "https://epidetective.com"
 # og:image must be an absolute URL on a raster format; social scrapers ignore SVG
 OG_IMAGE = SITE_URL + "/assets/og.png"
@@ -183,6 +183,7 @@ def main():
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_GAMES"] = url(lang, "games.html", lang)
+            ctx["URL_READING"] = url(lang, "reading.html", lang)
             ctx["URL_GAME1"] = ctx["PREFIX"] + GAME1_PATH
             ctx["URL_GAME2"] = ctx["PREFIX"] + GAME2_PATH
             ctx["URL_GAME3"] = ctx["PREFIX"] + GAME3_PATH

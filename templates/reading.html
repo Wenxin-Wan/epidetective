@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_reading_title}}</title>
+<meta name="description" content="{{meta_reading_desc}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_reading_title}}">
+<meta property="og:description" content="{{meta_reading_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_reading_title}}">
+<meta name="twitter:description" content="{{meta_reading_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<!-- A short guide: the six ideas the tools and the games lean on. It has no
+     picture of its own, so the hero is type on paper. -->
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
+      <span>{{read_label}}</span></div>
+    <h1>{{read_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{read_lede}}</p>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <div class="reads" style="margin-top:0">
+    <div class="read">
+      <div class="tag">{{read_1_tag}}</div>
+      <div>
+        <h3>{{read_1_h3}}</h3>
+        <p>{{read_1_p}}</p>
+      </div>
+    </div>
+    <div class="read">
+      <div class="tag">{{read_2_tag}}</div>
+      <div>
+        <h3>{{read_2_h3}}</h3>
+        <p>{{read_2_p}}</p>
+      </div>
+    </div>
+    <div class="read">
+      <div class="tag">{{read_3_tag}}</div>
+      <div>
+        <h3>{{read_3_h3}}</h3>
+        <p>{{read_3_p}}</p>
+      </div>
+    </div>
+    <div class="read">
+      <div class="tag">{{read_4_tag}}</div>
+      <div>
+        <h3>{{read_4_h3}}</h3>
+        <p>{{read_4_p}}</p>
+      </div>
+    </div>
+    <div class="read">
+      <div class="tag">{{read_5_tag}}</div>
+      <div>
+        <h3>{{read_5_h3}}</h3>
+        <p>{{read_5_p}}</p>
+      </div>
+    </div>
+    <div class="read">
+      <div class="tag">{{read_6_tag}}</div>
+      <div>
+        <h3>{{read_6_h3}}</h3>
+        <p>{{read_6_p}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="label">{{read_cta_label}}</div>
+    <h2 style="margin:14px 0 0">{{read_cta_h2}}</h2>
+    <div class="inst-actions" style="margin-top:30px">
+      <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst_t1_name}} &rarr;</a>
+      <a class="btn btn-ghost" href="{{URL_TOOL2}}">{{inst_t2_name}} &rarr;</a>
+      <a class="btn btn-ghost" href="{{URL_GAMES}}">{{nav_games}} &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+    </div>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+</body>
+</html>

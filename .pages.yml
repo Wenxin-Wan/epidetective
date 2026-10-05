@@ -142,6 +142,12 @@ content:
       - name: "about_cred2_value"
         label: "ABOUT — credential 2: value"
         type: string
+      - name: "about_cred_msc_label"
+        label: "about_cred_msc_label"
+        type: string
+      - name: "about_cred_msc_value"
+        label: "about_cred_msc_value"
+        type: string
       - name: "about_cred3_label"
         label: "ABOUT — credential 3: label"
         type: string
@@ -159,6 +165,15 @@ content:
         type: string
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
+        type: string
+      - name: "about_photo_alt"
+        label: "about_photo_alt"
+        type: string
+      - name: "about_timeline_label"
+        label: "about_timeline_label"
+        type: string
+      - name: "about_timeline_link"
+        label: "about_timeline_link"
         type: string
       - name: "contact_label"
         label: "CONTACT — small section label"
@@ -283,6 +298,354 @@ content:
       - name: "exp_cta_source"
         label: "EXPLORER — cta source"
         type: text
+      - name: "meta_about_title"
+        label: "meta_about_title"
+        type: string
+      - name: "meta_about_desc"
+        label: "meta_about_desc"
+        type: string
+      - name: "cite_label"
+        label: "cite_label"
+        type: string
+      - name: "cite_p"
+        label: "cite_p"
+        type: string
+      - name: "inst_cac_desc"
+        label: "inst_cac_desc"
+        type: string
+      - name: "inst_t2_m5"
+        label: "inst_t2_m5"
+        type: string
+      - name: "nav_games"
+        label: "nav_games"
+        type: string
+      - name: "meta_games_title"
+        label: "meta_games_title"
+        type: string
+      - name: "meta_games_desc"
+        label: "meta_games_desc"
+        type: string
+      - name: "games_label"
+        label: "games_label"
+        type: string
+      - name: "games_sub"
+        label: "games_sub"
+        type: string
+      - name: "games_p1"
+        label: "games_p1"
+        type: string
+      - name: "games_p2"
+        label: "games_p2"
+        type: string
+      - name: "games_fact_age"
+        label: "games_fact_age"
+        type: string
+      - name: "games_fact_regions"
+        label: "games_fact_regions"
+        type: string
+      - name: "games_fact_questions"
+        label: "games_fact_questions"
+        type: string
+      - name: "games_fact_time"
+        label: "games_fact_time"
+        type: string
+      - name: "games_howto_h"
+        label: "games_howto_h"
+        type: string
+      - name: "games_step1"
+        label: "games_step1"
+        type: string
+      - name: "games_step2"
+        label: "games_step2"
+        type: string
+      - name: "games_step3"
+        label: "games_step3"
+        type: string
+      - name: "games_step4"
+        label: "games_step4"
+        type: string
+      - name: "games_step5"
+        label: "games_step5"
+        type: string
+      - name: "games_regions_h"
+        label: "games_regions_h"
+        type: string
+      - name: "games_region1"
+        label: "games_region1"
+        type: string
+      - name: "games_region2"
+        label: "games_region2"
+        type: string
+      - name: "games_region3"
+        label: "games_region3"
+        type: string
+      - name: "games_region4"
+        label: "games_region4"
+        type: string
+      - name: "games_region5"
+        label: "games_region5"
+        type: string
+      - name: "games_fine"
+        label: "games_fine"
+        type: string
+      - name: "games_play"
+        label: "games_play"
+        type: string
+      - name: "games_open_full"
+        label: "games_open_full"
+        type: string
+      - name: "games_cap"
+        label: "games_cap"
+        type: string
+      - name: "games_shot_alt"
+        label: "games_shot_alt"
+        type: string
+      - name: "games_shelf_label"
+        label: "games_shelf_label"
+        type: string
+      - name: "games_shelf_h2"
+        label: "games_shelf_h2"
+        type: string
+      - name: "games_g1_desc"
+        label: "games_g1_desc"
+        type: string
+      - name: "games_g1_m1"
+        label: "games_g1_m1"
+        type: string
+      - name: "games_g1_m2"
+        label: "games_g1_m2"
+        type: string
+      - name: "games_g1_m3"
+        label: "games_g1_m3"
+        type: string
+      - name: "games_g1_btn"
+        label: "games_g1_btn"
+        type: string
+      - name: "games_on_stage"
+        label: "games_on_stage"
+        type: string
+      - name: "games_over_lede"
+        label: "games_over_lede"
+        type: string
+      - name: "games_g1_topic"
+        label: "games_g1_topic"
+        type: string
+      - name: "games_g2_topic"
+        label: "games_g2_topic"
+        type: string
+      - name: "games_g3_topic"
+        label: "games_g3_topic"
+        type: string
+      - name: "games_back_all"
+        label: "games_back_all"
+        type: string
+      - name: "games_g2_label"
+        label: "games_g2_label"
+        type: string
+      - name: "games_g2_sub"
+        label: "games_g2_sub"
+        type: string
+      - name: "games_g2_p1"
+        label: "games_g2_p1"
+        type: string
+      - name: "games_g2_p2"
+        label: "games_g2_p2"
+        type: string
+      - name: "games_g2_fact_scenes"
+        label: "games_g2_fact_scenes"
+        type: string
+      - name: "games_g2_fact_clues"
+        label: "games_g2_fact_clues"
+        type: string
+      - name: "games_g2_step1"
+        label: "games_g2_step1"
+        type: string
+      - name: "games_g2_step2"
+        label: "games_g2_step2"
+        type: string
+      - name: "games_g2_step3"
+        label: "games_g2_step3"
+        type: string
+      - name: "games_g2_step4"
+        label: "games_g2_step4"
+        type: string
+      - name: "games_g2_step5"
+        label: "games_g2_step5"
+        type: string
+      - name: "games_g2_fine"
+        label: "games_g2_fine"
+        type: string
+      - name: "games_g2_desc"
+        label: "games_g2_desc"
+        type: string
+      - name: "games_g2_m1"
+        label: "games_g2_m1"
+        type: string
+      - name: "games_g2_m2"
+        label: "games_g2_m2"
+        type: string
+      - name: "games_g2_m3"
+        label: "games_g2_m3"
+        type: string
+      - name: "games_g2_cap"
+        label: "games_g2_cap"
+        type: string
+      - name: "games_g2_shot_alt"
+        label: "games_g2_shot_alt"
+        type: string
+      - name: "games_g3_label"
+        label: "games_g3_label"
+        type: string
+      - name: "games_g3_sub"
+        label: "games_g3_sub"
+        type: string
+      - name: "games_g3_p1"
+        label: "games_g3_p1"
+        type: string
+      - name: "games_g3_p2"
+        label: "games_g3_p2"
+        type: string
+      - name: "games_g3_fact_chapters"
+        label: "games_g3_fact_chapters"
+        type: string
+      - name: "games_g3_fact_cards"
+        label: "games_g3_fact_cards"
+        type: string
+      - name: "games_g3_step1"
+        label: "games_g3_step1"
+        type: string
+      - name: "games_g3_step2"
+        label: "games_g3_step2"
+        type: string
+      - name: "games_g3_step3"
+        label: "games_g3_step3"
+        type: string
+      - name: "games_g3_step4"
+        label: "games_g3_step4"
+        type: string
+      - name: "games_g3_step5"
+        label: "games_g3_step5"
+        type: string
+      - name: "games_g3_fine"
+        label: "games_g3_fine"
+        type: string
+      - name: "games_g3_desc"
+        label: "games_g3_desc"
+        type: string
+      - name: "games_g3_m1"
+        label: "games_g3_m1"
+        type: string
+      - name: "games_g3_m2"
+        label: "games_g3_m2"
+        type: string
+      - name: "games_g3_m3"
+        label: "games_g3_m3"
+        type: string
+      - name: "games_g3_cap"
+        label: "games_g3_cap"
+        type: string
+      - name: "games_g3_shot_alt"
+        label: "games_g3_shot_alt"
+        type: string
+      - name: "home_games_label"
+        label: "home_games_label"
+        type: string
+      - name: "home_games_h2"
+        label: "home_games_h2"
+        type: string
+      - name: "home_games_btn"
+        label: "home_games_btn"
+        type: string
+      - name: "home_games_more"
+        label: "home_games_more"
+        type: string
+      - name: "inst_chip_review"
+        label: "inst_chip_review"
+        type: string
+      - name: "meta_reading_title"
+        label: "meta_reading_title"
+        type: string
+      - name: "meta_reading_desc"
+        label: "meta_reading_desc"
+        type: string
+      - name: "read_label"
+        label: "read_label"
+        type: string
+      - name: "read_h1"
+        label: "read_h1"
+        type: string
+      - name: "read_lede"
+        label: "read_lede"
+        type: string
+      - name: "read_1_tag"
+        label: "read_1_tag"
+        type: string
+      - name: "read_1_h3"
+        label: "read_1_h3"
+        type: string
+      - name: "read_1_p"
+        label: "read_1_p"
+        type: string
+      - name: "read_2_tag"
+        label: "read_2_tag"
+        type: string
+      - name: "read_2_h3"
+        label: "read_2_h3"
+        type: string
+      - name: "read_2_p"
+        label: "read_2_p"
+        type: string
+      - name: "read_3_tag"
+        label: "read_3_tag"
+        type: string
+      - name: "read_3_h3"
+        label: "read_3_h3"
+        type: string
+      - name: "read_3_p"
+        label: "read_3_p"
+        type: string
+      - name: "read_4_tag"
+        label: "read_4_tag"
+        type: string
+      - name: "read_4_h3"
+        label: "read_4_h3"
+        type: string
+      - name: "read_4_p"
+        label: "read_4_p"
+        type: string
+      - name: "read_5_tag"
+        label: "read_5_tag"
+        type: string
+      - name: "read_5_h3"
+        label: "read_5_h3"
+        type: string
+      - name: "read_5_p"
+        label: "read_5_p"
+        type: string
+      - name: "read_6_tag"
+        label: "read_6_tag"
+        type: string
+      - name: "read_6_h3"
+        label: "read_6_h3"
+        type: string
+      - name: "read_6_p"
+        label: "read_6_p"
+        type: string
+      - name: "read_cta_label"
+        label: "read_cta_label"
+        type: string
+      - name: "read_cta_h2"
+        label: "read_cta_h2"
+        type: string
+      - name: "read_home_h2"
+        label: "read_home_h2"
+        type: string
+      - name: "read_home_lede"
+        label: "read_home_lede"
+        type: string
+      - name: "read_home_btn"
+        label: "read_home_btn"
+        type: string
 
   - name: zh
     label: "中文"
@@ -419,6 +782,12 @@ content:
       - name: "about_cred2_value"
         label: "ABOUT — credential 2: value"
         type: string
+      - name: "about_cred_msc_label"
+        label: "about_cred_msc_label"
+        type: string
+      - name: "about_cred_msc_value"
+        label: "about_cred_msc_value"
+        type: string
       - name: "about_cred3_label"
         label: "ABOUT — credential 3: label"
         type: string
@@ -436,6 +805,15 @@ content:
         type: string
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
+        type: string
+      - name: "about_photo_alt"
+        label: "about_photo_alt"
+        type: string
+      - name: "about_timeline_label"
+        label: "about_timeline_label"
+        type: string
+      - name: "about_timeline_link"
+        label: "about_timeline_link"
         type: string
       - name: "contact_label"
         label: "CONTACT — small section label"
@@ -560,6 +938,354 @@ content:
       - name: "exp_cta_source"
         label: "EXPLORER — cta source"
         type: text
+      - name: "meta_about_title"
+        label: "meta_about_title"
+        type: string
+      - name: "meta_about_desc"
+        label: "meta_about_desc"
+        type: string
+      - name: "cite_label"
+        label: "cite_label"
+        type: string
+      - name: "cite_p"
+        label: "cite_p"
+        type: string
+      - name: "inst_cac_desc"
+        label: "inst_cac_desc"
+        type: string
+      - name: "inst_t2_m5"
+        label: "inst_t2_m5"
+        type: string
+      - name: "nav_games"
+        label: "nav_games"
+        type: string
+      - name: "meta_games_title"
+        label: "meta_games_title"
+        type: string
+      - name: "meta_games_desc"
+        label: "meta_games_desc"
+        type: string
+      - name: "games_label"
+        label: "games_label"
+        type: string
+      - name: "games_sub"
+        label: "games_sub"
+        type: string
+      - name: "games_p1"
+        label: "games_p1"
+        type: string
+      - name: "games_p2"
+        label: "games_p2"
+        type: string
+      - name: "games_fact_age"
+        label: "games_fact_age"
+        type: string
+      - name: "games_fact_regions"
+        label: "games_fact_regions"
+        type: string
+      - name: "games_fact_questions"
+        label: "games_fact_questions"
+        type: string
+      - name: "games_fact_time"
+        label: "games_fact_time"
+        type: string
+      - name: "games_howto_h"
+        label: "games_howto_h"
+        type: string
+      - name: "games_step1"
+        label: "games_step1"
+        type: string
+      - name: "games_step2"
+        label: "games_step2"
+        type: string
+      - name: "games_step3"
+        label: "games_step3"
+        type: string
+      - name: "games_step4"
+        label: "games_step4"
+        type: string
+      - name: "games_step5"
+        label: "games_step5"
+        type: string
+      - name: "games_regions_h"
+        label: "games_regions_h"
+        type: string
+      - name: "games_region1"
+        label: "games_region1"
+        type: string
+      - name: "games_region2"
+        label: "games_region2"
+        type: string
+      - name: "games_region3"
+        label: "games_region3"
+        type: string
+      - name: "games_region4"
+        label: "games_region4"
+        type: string
+      - name: "games_region5"
+        label: "games_region5"
+        type: string
+      - name: "games_fine"
+        label: "games_fine"
+        type: string
+      - name: "games_play"
+        label: "games_play"
+        type: string
+      - name: "games_open_full"
+        label: "games_open_full"
+        type: string
+      - name: "games_cap"
+        label: "games_cap"
+        type: string
+      - name: "games_shot_alt"
+        label: "games_shot_alt"
+        type: string
+      - name: "games_shelf_label"
+        label: "games_shelf_label"
+        type: string
+      - name: "games_shelf_h2"
+        label: "games_shelf_h2"
+        type: string
+      - name: "games_g1_desc"
+        label: "games_g1_desc"
+        type: string
+      - name: "games_g1_m1"
+        label: "games_g1_m1"
+        type: string
+      - name: "games_g1_m2"
+        label: "games_g1_m2"
+        type: string
+      - name: "games_g1_m3"
+        label: "games_g1_m3"
+        type: string
+      - name: "games_g1_btn"
+        label: "games_g1_btn"
+        type: string
+      - name: "games_on_stage"
+        label: "games_on_stage"
+        type: string
+      - name: "games_over_lede"
+        label: "games_over_lede"
+        type: string
+      - name: "games_g1_topic"
+        label: "games_g1_topic"
+        type: string
+      - name: "games_g2_topic"
+        label: "games_g2_topic"
+        type: string
+      - name: "games_g3_topic"
+        label: "games_g3_topic"
+        type: string
+      - name: "games_back_all"
+        label: "games_back_all"
+        type: string
+      - name: "games_g2_label"
+        label: "games_g2_label"
+        type: string
+      - name: "games_g2_sub"
+        label: "games_g2_sub"
+        type: string
+      - name: "games_g2_p1"
+        label: "games_g2_p1"
+        type: string
+      - name: "games_g2_p2"
+        label: "games_g2_p2"
+        type: string
+      - name: "games_g2_fact_scenes"
+        label: "games_g2_fact_scenes"
+        type: string
+      - name: "games_g2_fact_clues"
+        label: "games_g2_fact_clues"
+        type: string
+      - name: "games_g2_step1"
+        label: "games_g2_step1"
+        type: string
+      - name: "games_g2_step2"
+        label: "games_g2_step2"
+        type: string
+      - name: "games_g2_step3"
+        label: "games_g2_step3"
+        type: string
+      - name: "games_g2_step4"
+        label: "games_g2_step4"
+        type: string
+      - name: "games_g2_step5"
+        label: "games_g2_step5"
+        type: string
+      - name: "games_g2_fine"
+        label: "games_g2_fine"
+        type: string
+      - name: "games_g2_desc"
+        label: "games_g2_desc"
+        type: string
+      - name: "games_g2_m1"
+        label: "games_g2_m1"
+        type: string
+      - name: "games_g2_m2"
+        label: "games_g2_m2"
+        type: string
+      - name: "games_g2_m3"
+        label: "games_g2_m3"
+        type: string
+      - name: "games_g2_cap"
+        label: "games_g2_cap"
+        type: string
+      - name: "games_g2_shot_alt"
+        label: "games_g2_shot_alt"
+        type: string
+      - name: "games_g3_label"
+        label: "games_g3_label"
+        type: string
+      - name: "games_g3_sub"
+        label: "games_g3_sub"
+        type: string
+      - name: "games_g3_p1"
+        label: "games_g3_p1"
+        type: string
+      - name: "games_g3_p2"
+        label: "games_g3_p2"
+        type: string
+      - name: "games_g3_fact_chapters"
+        label: "games_g3_fact_chapters"
+        type: string
+      - name: "games_g3_fact_cards"
+        label: "games_g3_fact_cards"
+        type: string
+      - name: "games_g3_step1"
+        label: "games_g3_step1"
+        type: string
+      - name: "games_g3_step2"
+        label: "games_g3_step2"
+        type: string
+      - name: "games_g3_step3"
+        label: "games_g3_step3"
+        type: string
+      - name: "games_g3_step4"
+        label: "games_g3_step4"
+        type: string
+      - name: "games_g3_step5"
+        label: "games_g3_step5"
+        type: string
+      - name: "games_g3_fine"
+        label: "games_g3_fine"
+        type: string
+      - name: "games_g3_desc"
+        label: "games_g3_desc"
+        type: string
+      - name: "games_g3_m1"
+        label: "games_g3_m1"
+        type: string
+      - name: "games_g3_m2"
+        label: "games_g3_m2"
+        type: string
+      - name: "games_g3_m3"
+        label: "games_g3_m3"
+        type: string
+      - name: "games_g3_cap"
+        label: "games_g3_cap"
+        type: string
+      - name: "games_g3_shot_alt"
+        label: "games_g3_shot_alt"
+        type: string
+      - name: "home_games_label"
+        label: "home_games_label"
+        type: string
+      - name: "home_games_h2"
+        label: "home_games_h2"
+        type: string
+      - name: "home_games_btn"
+        label: "home_games_btn"
+        type: string
+      - name: "home_games_more"
+        label: "home_games_more"
+        type: string
+      - name: "inst_chip_review"
+        label: "inst_chip_review"
+        type: string
+      - name: "meta_reading_title"
+        label: "meta_reading_title"
+        type: string
+      - name: "meta_reading_desc"
+        label: "meta_reading_desc"
+        type: string
+      - name: "read_label"
+        label: "read_label"
+        type: string
+      - name: "read_h1"
+        label: "read_h1"
+        type: string
+      - name: "read_lede"
+        label: "read_lede"
+        type: string
+      - name: "read_1_tag"
+        label: "read_1_tag"
+        type: string
+      - name: "read_1_h3"
+        label: "read_1_h3"
+        type: string
+      - name: "read_1_p"
+        label: "read_1_p"
+        type: string
+      - name: "read_2_tag"
+        label: "read_2_tag"
+        type: string
+      - name: "read_2_h3"
+        label: "read_2_h3"
+        type: string
+      - name: "read_2_p"
+        label: "read_2_p"
+        type: string
+      - name: "read_3_tag"
+        label: "read_3_tag"
+        type: string
+      - name: "read_3_h3"
+        label: "read_3_h3"
+        type: string
+      - name: "read_3_p"
+        label: "read_3_p"
+        type: string
+      - name: "read_4_tag"
+        label: "read_4_tag"
+        type: string
+      - name: "read_4_h3"
+        label: "read_4_h3"
+        type: string
+      - name: "read_4_p"
+        label: "read_4_p"
+        type: string
+      - name: "read_5_tag"
+        label: "read_5_tag"
+        type: string
+      - name: "read_5_h3"
+        label: "read_5_h3"
+        type: string
+      - name: "read_5_p"
+        label: "read_5_p"
+        type: string
+      - name: "read_6_tag"
+        label: "read_6_tag"
+        type: string
+      - name: "read_6_h3"
+        label: "read_6_h3"
+        type: string
+      - name: "read_6_p"
+        label: "read_6_p"
+        type: string
+      - name: "read_cta_label"
+        label: "read_cta_label"
+        type: string
+      - name: "read_cta_h2"
+        label: "read_cta_h2"
+        type: string
+      - name: "read_home_h2"
+        label: "read_home_h2"
+        type: string
+      - name: "read_home_lede"
+        label: "read_home_lede"
+        type: string
+      - name: "read_home_btn"
+        label: "read_home_btn"
+        type: string
 
   - name: fr
     label: "Français"
@@ -696,6 +1422,12 @@ content:
       - name: "about_cred2_value"
         label: "ABOUT — credential 2: value"
         type: string
+      - name: "about_cred_msc_label"
+        label: "about_cred_msc_label"
+        type: string
+      - name: "about_cred_msc_value"
+        label: "about_cred_msc_value"
+        type: string
       - name: "about_cred3_label"
         label: "ABOUT — credential 3: label"
         type: string
@@ -713,6 +1445,15 @@ content:
         type: string
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
+        type: string
+      - name: "about_photo_alt"
+        label: "about_photo_alt"
+        type: string
+      - name: "about_timeline_label"
+        label: "about_timeline_label"
+        type: string
+      - name: "about_timeline_link"
+        label: "about_timeline_link"
         type: string
       - name: "contact_label"
         label: "CONTACT — small section label"
@@ -837,6 +1578,354 @@ content:
       - name: "exp_cta_source"
         label: "EXPLORER — cta source"
         type: text
+      - name: "meta_about_title"
+        label: "meta_about_title"
+        type: string
+      - name: "meta_about_desc"
+        label: "meta_about_desc"
+        type: string
+      - name: "cite_label"
+        label: "cite_label"
+        type: string
+      - name: "cite_p"
+        label: "cite_p"
+        type: string
+      - name: "inst_cac_desc"
+        label: "inst_cac_desc"
+        type: string
+      - name: "inst_t2_m5"
+        label: "inst_t2_m5"
+        type: string
+      - name: "nav_games"
+        label: "nav_games"
+        type: string
+      - name: "meta_games_title"
+        label: "meta_games_title"
+        type: string
+      - name: "meta_games_desc"
+        label: "meta_games_desc"
+        type: string
+      - name: "games_label"
+        label: "games_label"
+        type: string
+      - name: "games_sub"
+        label: "games_sub"
+        type: string
+      - name: "games_p1"
+        label: "games_p1"
+        type: string
+      - name: "games_p2"
+        label: "games_p2"
+        type: string
+      - name: "games_fact_age"
+        label: "games_fact_age"
+        type: string
+      - name: "games_fact_regions"
+        label: "games_fact_regions"
+        type: string
+      - name: "games_fact_questions"
+        label: "games_fact_questions"
+        type: string
+      - name: "games_fact_time"
+        label: "games_fact_time"
+        type: string
+      - name: "games_howto_h"
+        label: "games_howto_h"
+        type: string
+      - name: "games_step1"
+        label: "games_step1"
+        type: string
+      - name: "games_step2"
+        label: "games_step2"
+        type: string
+      - name: "games_step3"
+        label: "games_step3"
+        type: string
+      - name: "games_step4"
+        label: "games_step4"
+        type: string
+      - name: "games_step5"
+        label: "games_step5"
+        type: string
+      - name: "games_regions_h"
+        label: "games_regions_h"
+        type: string
+      - name: "games_region1"
+        label: "games_region1"
+        type: string
+      - name: "games_region2"
+        label: "games_region2"
+        type: string
+      - name: "games_region3"
+        label: "games_region3"
+        type: string
+      - name: "games_region4"
+        label: "games_region4"
+        type: string
+      - name: "games_region5"
+        label: "games_region5"
+        type: string
+      - name: "games_fine"
+        label: "games_fine"
+        type: string
+      - name: "games_play"
+        label: "games_play"
+        type: string
+      - name: "games_open_full"
+        label: "games_open_full"
+        type: string
+      - name: "games_cap"
+        label: "games_cap"
+        type: string
+      - name: "games_shot_alt"
+        label: "games_shot_alt"
+        type: string
+      - name: "games_shelf_label"
+        label: "games_shelf_label"
+        type: string
+      - name: "games_shelf_h2"
+        label: "games_shelf_h2"
+        type: string
+      - name: "games_g1_desc"
+        label: "games_g1_desc"
+        type: string
+      - name: "games_g1_m1"
+        label: "games_g1_m1"
+        type: string
+      - name: "games_g1_m2"
+        label: "games_g1_m2"
+        type: string
+      - name: "games_g1_m3"
+        label: "games_g1_m3"
+        type: string
+      - name: "games_g1_btn"
+        label: "games_g1_btn"
+        type: string
+      - name: "games_on_stage"
+        label: "games_on_stage"
+        type: string
+      - name: "games_over_lede"
+        label: "games_over_lede"
+        type: string
+      - name: "games_g1_topic"
+        label: "games_g1_topic"
+        type: string
+      - name: "games_g2_topic"
+        label: "games_g2_topic"
+        type: string
+      - name: "games_g3_topic"
+        label: "games_g3_topic"
+        type: string
+      - name: "games_back_all"
+        label: "games_back_all"
+        type: string
+      - name: "games_g2_label"
+        label: "games_g2_label"
+        type: string
+      - name: "games_g2_sub"
+        label: "games_g2_sub"
+        type: string
+      - name: "games_g2_p1"
+        label: "games_g2_p1"
+        type: string
+      - name: "games_g2_p2"
+        label: "games_g2_p2"
+        type: string
+      - name: "games_g2_fact_scenes"
+        label: "games_g2_fact_scenes"
+        type: string
+      - name: "games_g2_fact_clues"
+        label: "games_g2_fact_clues"
+        type: string
+      - name: "games_g2_step1"
+        label: "games_g2_step1"
+        type: string
+      - name: "games_g2_step2"
+        label: "games_g2_step2"
+        type: string
+      - name: "games_g2_step3"
+        label: "games_g2_step3"
+        type: string
+      - name: "games_g2_step4"
+        label: "games_g2_step4"
+        type: string
+      - name: "games_g2_step5"
+        label: "games_g2_step5"
+        type: string
+      - name: "games_g2_fine"
+        label: "games_g2_fine"
+        type: string
+      - name: "games_g2_desc"
+        label: "games_g2_desc"
+        type: string
+      - name: "games_g2_m1"
+        label: "games_g2_m1"
+        type: string
+      - name: "games_g2_m2"
+        label: "games_g2_m2"
+        type: string
+      - name: "games_g2_m3"
+        label: "games_g2_m3"
+        type: string
+      - name: "games_g2_cap"
+        label: "games_g2_cap"
+        type: string
+      - name: "games_g2_shot_alt"
+        label: "games_g2_shot_alt"
+        type: string
+      - name: "games_g3_label"
+        label: "games_g3_label"
+        type: string
+      - name: "games_g3_sub"
+        label: "games_g3_sub"
+        type: string
+      - name: "games_g3_p1"
+        label: "games_g3_p1"
+        type: string
+      - name: "games_g3_p2"
+        label: "games_g3_p2"
+        type: string
+      - name: "games_g3_fact_chapters"
+        label: "games_g3_fact_chapters"
+        type: string
+      - name: "games_g3_fact_cards"
+        label: "games_g3_fact_cards"
+        type: string
+      - name: "games_g3_step1"
+        label: "games_g3_step1"
+        type: string
+      - name: "games_g3_step2"
+        label: "games_g3_step2"
+        type: string
+      - name: "games_g3_step3"
+        label: "games_g3_step3"
+        type: string
+      - name: "games_g3_step4"
+        label: "games_g3_step4"
+        type: string
+      - name: "games_g3_step5"
+        label: "games_g3_step5"
+        type: string
+      - name: "games_g3_fine"
+        label: "games_g3_fine"
+        type: string
+      - name: "games_g3_desc"
+        label: "games_g3_desc"
+        type: string
+      - name: "games_g3_m1"
+        label: "games_g3_m1"
+        type: string
+      - name: "games_g3_m2"
+        label: "games_g3_m2"
+        type: string
+      - name: "games_g3_m3"
+        label: "games_g3_m3"
+        type: string
+      - name: "games_g3_cap"
+        label: "games_g3_cap"
+        type: string
+      - name: "games_g3_shot_alt"
+        label: "games_g3_shot_alt"
+        type: string
+      - name: "home_games_label"
+        label: "home_games_label"
+        type: string
+      - name: "home_games_h2"
+        label: "home_games_h2"
+        type: string
+      - name: "home_games_btn"
+        label: "home_games_btn"
+        type: string
+      - name: "home_games_more"
+        label: "home_games_more"
+        type: string
+      - name: "inst_chip_review"
+        label: "inst_chip_review"
+        type: string
+      - name: "meta_reading_title"
+        label: "meta_reading_title"
+        type: string
+      - name: "meta_reading_desc"
+        label: "meta_reading_desc"
+        type: string
+      - name: "read_label"
+        label: "read_label"
+        type: string
+      - name: "read_h1"
+        label: "read_h1"
+        type: string
+      - name: "read_lede"
+        label: "read_lede"
+        type: string
+      - name: "read_1_tag"
+        label: "read_1_tag"
+        type: string
+      - name: "read_1_h3"
+        label: "read_1_h3"
+        type: string
+      - name: "read_1_p"
+        label: "read_1_p"
+        type: string
+      - name: "read_2_tag"
+        label: "read_2_tag"
+        type: string
+      - name: "read_2_h3"
+        label: "read_2_h3"
+        type: string
+      - name: "read_2_p"
+        label: "read_2_p"
+        type: string
+      - name: "read_3_tag"
+        label: "read_3_tag"
+        type: string
+      - name: "read_3_h3"
+        label: "read_3_h3"
+        type: string
+      - name: "read_3_p"
+        label: "read_3_p"
+        type: string
+      - name: "read_4_tag"
+        label: "read_4_tag"
+        type: string
+      - name: "read_4_h3"
+        label: "read_4_h3"
+        type: string
+      - name: "read_4_p"
+        label: "read_4_p"
+        type: string
+      - name: "read_5_tag"
+        label: "read_5_tag"
+        type: string
+      - name: "read_5_h3"
+        label: "read_5_h3"
+        type: string
+      - name: "read_5_p"
+        label: "read_5_p"
+        type: string
+      - name: "read_6_tag"
+        label: "read_6_tag"
+        type: string
+      - name: "read_6_h3"
+        label: "read_6_h3"
+        type: string
+      - name: "read_6_p"
+        label: "read_6_p"
+        type: string
+      - name: "read_cta_label"
+        label: "read_cta_label"
+        type: string
+      - name: "read_cta_h2"
+        label: "read_cta_h2"
+        type: string
+      - name: "read_home_h2"
+        label: "read_home_h2"
+        type: string
+      - name: "read_home_lede"
+        label: "read_home_lede"
+        type: string
+      - name: "read_home_btn"
+        label: "read_home_btn"
+        type: string
 
   - name: es
     label: "Español"
@@ -973,6 +2062,12 @@ content:
       - name: "about_cred2_value"
         label: "ABOUT — credential 2: value"
         type: string
+      - name: "about_cred_msc_label"
+        label: "about_cred_msc_label"
+        type: string
+      - name: "about_cred_msc_value"
+        label: "about_cred_msc_value"
+        type: string
       - name: "about_cred3_label"
         label: "ABOUT — credential 3: label"
         type: string
@@ -990,6 +2085,15 @@ content:
         type: string
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
+        type: string
+      - name: "about_photo_alt"
+        label: "about_photo_alt"
+        type: string
+      - name: "about_timeline_label"
+        label: "about_timeline_label"
+        type: string
+      - name: "about_timeline_link"
+        label: "about_timeline_link"
         type: string
       - name: "contact_label"
         label: "CONTACT — small section label"
@@ -1114,6 +2218,354 @@ content:
       - name: "exp_cta_source"
         label: "EXPLORER — cta source"
         type: text
+      - name: "meta_about_title"
+        label: "meta_about_title"
+        type: string
+      - name: "meta_about_desc"
+        label: "meta_about_desc"
+        type: string
+      - name: "cite_label"
+        label: "cite_label"
+        type: string
+      - name: "cite_p"
+        label: "cite_p"
+        type: string
+      - name: "inst_cac_desc"
+        label: "inst_cac_desc"
+        type: string
+      - name: "inst_t2_m5"
+        label: "inst_t2_m5"
+        type: string
+      - name: "nav_games"
+        label: "nav_games"
+        type: string
+      - name: "meta_games_title"
+        label: "meta_games_title"
+        type: string
+      - name: "meta_games_desc"
+        label: "meta_games_desc"
+        type: string
+      - name: "games_label"
+        label: "games_label"
+        type: string
+      - name: "games_sub"
+        label: "games_sub"
+        type: string
+      - name: "games_p1"
+        label: "games_p1"
+        type: string
+      - name: "games_p2"
+        label: "games_p2"
+        type: string
+      - name: "games_fact_age"
+        label: "games_fact_age"
+        type: string
+      - name: "games_fact_regions"
+        label: "games_fact_regions"
+        type: string
+      - name: "games_fact_questions"
+        label: "games_fact_questions"
+        type: string
+      - name: "games_fact_time"
+        label: "games_fact_time"
+        type: string
+      - name: "games_howto_h"
+        label: "games_howto_h"
+        type: string
+      - name: "games_step1"
+        label: "games_step1"
+        type: string
+      - name: "games_step2"
+        label: "games_step2"
+        type: string
+      - name: "games_step3"
+        label: "games_step3"
+        type: string
+      - name: "games_step4"
+        label: "games_step4"
+        type: string
+      - name: "games_step5"
+        label: "games_step5"
+        type: string
+      - name: "games_regions_h"
+        label: "games_regions_h"
+        type: string
+      - name: "games_region1"
+        label: "games_region1"
+        type: string
+      - name: "games_region2"
+        label: "games_region2"
+        type: string
+      - name: "games_region3"
+        label: "games_region3"
+        type: string
+      - name: "games_region4"
+        label: "games_region4"
+        type: string
+      - name: "games_region5"
+        label: "games_region5"
+        type: string
+      - name: "games_fine"
+        label: "games_fine"
+        type: string
+      - name: "games_play"
+        label: "games_play"
+        type: string
+      - name: "games_open_full"
+        label: "games_open_full"
+        type: string
+      - name: "games_cap"
+        label: "games_cap"
+        type: string
+      - name: "games_shot_alt"
+        label: "games_shot_alt"
+        type: string
+      - name: "games_shelf_label"
+        label: "games_shelf_label"
+        type: string
+      - name: "games_shelf_h2"
+        label: "games_shelf_h2"
+        type: string
+      - name: "games_g1_desc"
+        label: "games_g1_desc"
+        type: string
+      - name: "games_g1_m1"
+        label: "games_g1_m1"
+        type: string
+      - name: "games_g1_m2"
+        label: "games_g1_m2"
+        type: string
+      - name: "games_g1_m3"
+        label: "games_g1_m3"
+        type: string
+      - name: "games_g1_btn"
+        label: "games_g1_btn"
+        type: string
+      - name: "games_on_stage"
+        label: "games_on_stage"
+        type: string
+      - name: "games_over_lede"
+        label: "games_over_lede"
+        type: string
+      - name: "games_g1_topic"
+        label: "games_g1_topic"
+        type: string
+      - name: "games_g2_topic"
+        label: "games_g2_topic"
+        type: string
+      - name: "games_g3_topic"
+        label: "games_g3_topic"
+        type: string
+      - name: "games_back_all"
+        label: "games_back_all"
+        type: string
+      - name: "games_g2_label"
+        label: "games_g2_label"
+        type: string
+      - name: "games_g2_sub"
+        label: "games_g2_sub"
+        type: string
+      - name: "games_g2_p1"
+        label: "games_g2_p1"
+        type: string
+      - name: "games_g2_p2"
+        label: "games_g2_p2"
+        type: string
+      - name: "games_g2_fact_scenes"
+        label: "games_g2_fact_scenes"
+        type: string
+      - name: "games_g2_fact_clues"
+        label: "games_g2_fact_clues"
+        type: string
+      - name: "games_g2_step1"
+        label: "games_g2_step1"
+        type: string
+      - name: "games_g2_step2"
+        label: "games_g2_step2"
+        type: string
+      - name: "games_g2_step3"
+        label: "games_g2_step3"
+        type: string
+      - name: "games_g2_step4"
+        label: "games_g2_step4"
+        type: string
+      - name: "games_g2_step5"
+        label: "games_g2_step5"
+        type: string
+      - name: "games_g2_fine"
+        label: "games_g2_fine"
+        type: string
+      - name: "games_g2_desc"
+        label: "games_g2_desc"
+        type: string
+      - name: "games_g2_m1"
+        label: "games_g2_m1"
+        type: string
+      - name: "games_g2_m2"
+        label: "games_g2_m2"
+        type: string
+      - name: "games_g2_m3"
+        label: "games_g2_m3"
+        type: string
+      - name: "games_g2_cap"
+        label: "games_g2_cap"
+        type: string
+      - name: "games_g2_shot_alt"
+        label: "games_g2_shot_alt"
+        type: string
+      - name: "games_g3_label"
+        label: "games_g3_label"
+        type: string
+      - name: "games_g3_sub"
+        label: "games_g3_sub"
+        type: string
+      - name: "games_g3_p1"
+        label: "games_g3_p1"
+        type: string
+      - name: "games_g3_p2"
+        label: "games_g3_p2"
+        type: string
+      - name: "games_g3_fact_chapters"
+        label: "games_g3_fact_chapters"
+        type: string
+      - name: "games_g3_fact_cards"
+        label: "games_g3_fact_cards"
+        type: string
+      - name: "games_g3_step1"
+        label: "games_g3_step1"
+        type: string
+      - name: "games_g3_step2"
+        label: "games_g3_step2"
+        type: string
+      - name: "games_g3_step3"
+        label: "games_g3_step3"
+        type: string
+      - name: "games_g3_step4"
+        label: "games_g3_step4"
+        type: string
+      - name: "games_g3_step5"
+        label: "games_g3_step5"
+        type: string
+      - name: "games_g3_fine"
+        label: "games_g3_fine"
+        type: string
+      - name: "games_g3_desc"
+        label: "games_g3_desc"
+        type: string
+      - name: "games_g3_m1"
+        label: "games_g3_m1"
+        type: string
+      - name: "games_g3_m2"
+        label: "games_g3_m2"
+        type: string
+      - name: "games_g3_m3"
+        label: "games_g3_m3"
+        type: string
+      - name: "games_g3_cap"
+        label: "games_g3_cap"
+        type: string
+      - name: "games_g3_shot_alt"
+        label: "games_g3_shot_alt"
+        type: string
+      - name: "home_games_label"
+        label: "home_games_label"
+        type: string
+      - name: "home_games_h2"
+        label: "home_games_h2"
+        type: string
+      - name: "home_games_btn"
+        label: "home_games_btn"
+        type: string
+      - name: "home_games_more"
+        label: "home_games_more"
+        type: string
+      - name: "inst_chip_review"
+        label: "inst_chip_review"
+        type: string
+      - name: "meta_reading_title"
+        label: "meta_reading_title"
+        type: string
+      - name: "meta_reading_desc"
+        label: "meta_reading_desc"
+        type: string
+      - name: "read_label"
+        label: "read_label"
+        type: string
+      - name: "read_h1"
+        label: "read_h1"
+        type: string
+      - name: "read_lede"
+        label: "read_lede"
+        type: string
+      - name: "read_1_tag"
+        label: "read_1_tag"
+        type: string
+      - name: "read_1_h3"
+        label: "read_1_h3"
+        type: string
+      - name: "read_1_p"
+        label: "read_1_p"
+        type: string
+      - name: "read_2_tag"
+        label: "read_2_tag"
+        type: string
+      - name: "read_2_h3"
+        label: "read_2_h3"
+        type: string
+      - name: "read_2_p"
+        label: "read_2_p"
+        type: string
+      - name: "read_3_tag"
+        label: "read_3_tag"
+        type: string
+      - name: "read_3_h3"
+        label: "read_3_h3"
+        type: string
+      - name: "read_3_p"
+        label: "read_3_p"
+        type: string
+      - name: "read_4_tag"
+        label: "read_4_tag"
+        type: string
+      - name: "read_4_h3"
+        label: "read_4_h3"
+        type: string
+      - name: "read_4_p"
+        label: "read_4_p"
+        type: string
+      - name: "read_5_tag"
+        label: "read_5_tag"
+        type: string
+      - name: "read_5_h3"
+        label: "read_5_h3"
+        type: string
+      - name: "read_5_p"
+        label: "read_5_p"
+        type: string
+      - name: "read_6_tag"
+        label: "read_6_tag"
+        type: string
+      - name: "read_6_h3"
+        label: "read_6_h3"
+        type: string
+      - name: "read_6_p"
+        label: "read_6_p"
+        type: string
+      - name: "read_cta_label"
+        label: "read_cta_label"
+        type: string
+      - name: "read_cta_h2"
+        label: "read_cta_h2"
+        type: string
+      - name: "read_home_h2"
+        label: "read_home_h2"
+        type: string
+      - name: "read_home_lede"
+        label: "read_home_lede"
+        type: string
+      - name: "read_home_btn"
+        label: "read_home_btn"
+        type: string
 
   - name: ru
     label: "Русский"
@@ -1250,6 +2702,12 @@ content:
       - name: "about_cred2_value"
         label: "ABOUT — credential 2: value"
         type: string
+      - name: "about_cred_msc_label"
+        label: "about_cred_msc_label"
+        type: string
+      - name: "about_cred_msc_value"
+        label: "about_cred_msc_value"
+        type: string
       - name: "about_cred3_label"
         label: "ABOUT — credential 3: label"
         type: string
@@ -1267,6 +2725,15 @@ content:
         type: string
       - name: "about_cred5_value"
         label: "ABOUT — credential 5: value"
+        type: string
+      - name: "about_photo_alt"
+        label: "about_photo_alt"
+        type: string
+      - name: "about_timeline_label"
+        label: "about_timeline_label"
+        type: string
+      - name: "about_timeline_link"
+        label: "about_timeline_link"
         type: string
       - name: "contact_label"
         label: "CONTACT — small section label"
@@ -1391,3 +2858,351 @@ content:
       - name: "exp_cta_source"
         label: "EXPLORER — cta source"
         type: text
+      - name: "meta_about_title"
+        label: "meta_about_title"
+        type: string
+      - name: "meta_about_desc"
+        label: "meta_about_desc"
+        type: string
+      - name: "cite_label"
+        label: "cite_label"
+        type: string
+      - name: "cite_p"
+        label: "cite_p"
+        type: string
+      - name: "inst_cac_desc"
+        label: "inst_cac_desc"
+        type: string
+      - name: "inst_t2_m5"
+        label: "inst_t2_m5"
+        type: string
+      - name: "nav_games"
+        label: "nav_games"
+        type: string
+      - name: "meta_games_title"
+        label: "meta_games_title"
+        type: string
+      - name: "meta_games_desc"
+        label: "meta_games_desc"
+        type: string
+      - name: "games_label"
+        label: "games_label"
+        type: string
+      - name: "games_sub"
+        label: "games_sub"
+        type: string
+      - name: "games_p1"
+        label: "games_p1"
+        type: string
+      - name: "games_p2"
+        label: "games_p2"
+        type: string
+      - name: "games_fact_age"
+        label: "games_fact_age"
+        type: string
+      - name: "games_fact_regions"
+        label: "games_fact_regions"
+        type: string
+      - name: "games_fact_questions"
+        label: "games_fact_questions"
+        type: string
+      - name: "games_fact_time"
+        label: "games_fact_time"
+        type: string
+      - name: "games_howto_h"
+        label: "games_howto_h"
+        type: string
+      - name: "games_step1"
+        label: "games_step1"
+        type: string
+      - name: "games_step2"
+        label: "games_step2"
+        type: string
+      - name: "games_step3"
+        label: "games_step3"
+        type: string
+      - name: "games_step4"
+        label: "games_step4"
+        type: string
+      - name: "games_step5"
+        label: "games_step5"
+        type: string
+      - name: "games_regions_h"
+        label: "games_regions_h"
+        type: string
+      - name: "games_region1"
+        label: "games_region1"
+        type: string
+      - name: "games_region2"
+        label: "games_region2"
+        type: string
+      - name: "games_region3"
+        label: "games_region3"
+        type: string
+      - name: "games_region4"
+        label: "games_region4"
+        type: string
+      - name: "games_region5"
+        label: "games_region5"
+        type: string
+      - name: "games_fine"
+        label: "games_fine"
+        type: string
+      - name: "games_play"
+        label: "games_play"
+        type: string
+      - name: "games_open_full"
+        label: "games_open_full"
+        type: string
+      - name: "games_cap"
+        label: "games_cap"
+        type: string
+      - name: "games_shot_alt"
+        label: "games_shot_alt"
+        type: string
+      - name: "games_shelf_label"
+        label: "games_shelf_label"
+        type: string
+      - name: "games_shelf_h2"
+        label: "games_shelf_h2"
+        type: string
+      - name: "games_g1_desc"
+        label: "games_g1_desc"
+        type: string
+      - name: "games_g1_m1"
+        label: "games_g1_m1"
+        type: string
+      - name: "games_g1_m2"
+        label: "games_g1_m2"
+        type: string
+      - name: "games_g1_m3"
+        label: "games_g1_m3"
+        type: string
+      - name: "games_g1_btn"
+        label: "games_g1_btn"
+        type: string
+      - name: "games_on_stage"
+        label: "games_on_stage"
+        type: string
+      - name: "games_over_lede"
+        label: "games_over_lede"
+        type: string
+      - name: "games_g1_topic"
+        label: "games_g1_topic"
+        type: string
+      - name: "games_g2_topic"
+        label: "games_g2_topic"
+        type: string
+      - name: "games_g3_topic"
+        label: "games_g3_topic"
+        type: string
+      - name: "games_back_all"
+        label: "games_back_all"
+        type: string
+      - name: "games_g2_label"
+        label: "games_g2_label"
+        type: string
+      - name: "games_g2_sub"
+        label: "games_g2_sub"
+        type: string
+      - name: "games_g2_p1"
+        label: "games_g2_p1"
+        type: string
+      - name: "games_g2_p2"
+        label: "games_g2_p2"
+        type: string
+      - name: "games_g2_fact_scenes"
+        label: "games_g2_fact_scenes"
+        type: string
+      - name: "games_g2_fact_clues"
+        label: "games_g2_fact_clues"
+        type: string
+      - name: "games_g2_step1"
+        label: "games_g2_step1"
+        type: string
+      - name: "games_g2_step2"
+        label: "games_g2_step2"
+        type: string
+      - name: "games_g2_step3"
+        label: "games_g2_step3"
+        type: string
+      - name: "games_g2_step4"
+        label: "games_g2_step4"
+        type: string
+      - name: "games_g2_step5"
+        label: "games_g2_step5"
+        type: string
+      - name: "games_g2_fine"
+        label: "games_g2_fine"
+        type: string
+      - name: "games_g2_desc"
+        label: "games_g2_desc"
+        type: string
+      - name: "games_g2_m1"
+        label: "games_g2_m1"
+        type: string
+      - name: "games_g2_m2"
+        label: "games_g2_m2"
+        type: string
+      - name: "games_g2_m3"
+        label: "games_g2_m3"
+        type: string
+      - name: "games_g2_cap"
+        label: "games_g2_cap"
+        type: string
+      - name: "games_g2_shot_alt"
+        label: "games_g2_shot_alt"
+        type: string
+      - name: "games_g3_label"
+        label: "games_g3_label"
+        type: string
+      - name: "games_g3_sub"
+        label: "games_g3_sub"
+        type: string
+      - name: "games_g3_p1"
+        label: "games_g3_p1"
+        type: string
+      - name: "games_g3_p2"
+        label: "games_g3_p2"
+        type: string
+      - name: "games_g3_fact_chapters"
+        label: "games_g3_fact_chapters"
+        type: string
+      - name: "games_g3_fact_cards"
+        label: "games_g3_fact_cards"
+        type: string
+      - name: "games_g3_step1"
+        label: "games_g3_step1"
+        type: string
+      - name: "games_g3_step2"
+        label: "games_g3_step2"
+        type: string
+      - name: "games_g3_step3"
+        label: "games_g3_step3"
+        type: string
+      - name: "games_g3_step4"
+        label: "games_g3_step4"
+        type: string
+      - name: "games_g3_step5"
+        label: "games_g3_step5"
+        type: string
+      - name: "games_g3_fine"
+        label: "games_g3_fine"
+        type: string
+      - name: "games_g3_desc"
+        label: "games_g3_desc"
+        type: string
+      - name: "games_g3_m1"
+        label: "games_g3_m1"
+        type: string
+      - name: "games_g3_m2"
+        label: "games_g3_m2"
+        type: string
+      - name: "games_g3_m3"
+        label: "games_g3_m3"
+        type: string
+      - name: "games_g3_cap"
+        label: "games_g3_cap"
+        type: string
+      - name: "games_g3_shot_alt"
+        label: "games_g3_shot_alt"
+        type: string
+      - name: "home_games_label"
+        label: "home_games_label"
+        type: string
+      - name: "home_games_h2"
+        label: "home_games_h2"
+        type: string
+      - name: "home_games_btn"
+        label: "home_games_btn"
+        type: string
+      - name: "home_games_more"
+        label: "home_games_more"
+        type: string
+      - name: "inst_chip_review"
+        label: "inst_chip_review"
+        type: string
+      - name: "meta_reading_title"
+        label: "meta_reading_title"
+        type: string
+      - name: "meta_reading_desc"
+        label: "meta_reading_desc"
+        type: string
+      - name: "read_label"
+        label: "read_label"
+        type: string
+      - name: "read_h1"
+        label: "read_h1"
+        type: string
+      - name: "read_lede"
+        label: "read_lede"
+        type: string
+      - name: "read_1_tag"
+        label: "read_1_tag"
+        type: string
+      - name: "read_1_h3"
+        label: "read_1_h3"
+        type: string
+      - name: "read_1_p"
+        label: "read_1_p"
+        type: string
+      - name: "read_2_tag"
+        label: "read_2_tag"
+        type: string
+      - name: "read_2_h3"
+        label: "read_2_h3"
+        type: string
+      - name: "read_2_p"
+        label: "read_2_p"
+        type: string
+      - name: "read_3_tag"
+        label: "read_3_tag"
+        type: string
+      - name: "read_3_h3"
+        label: "read_3_h3"
+        type: string
+      - name: "read_3_p"
+        label: "read_3_p"
+        type: string
+      - name: "read_4_tag"
+        label: "read_4_tag"
+        type: string
+      - name: "read_4_h3"
+        label: "read_4_h3"
+        type: string
+      - name: "read_4_p"
+        label: "read_4_p"
+        type: string
+      - name: "read_5_tag"
+        label: "read_5_tag"
+        type: string
+      - name: "read_5_h3"
+        label: "read_5_h3"
+        type: string
+      - name: "read_5_p"
+        label: "read_5_p"
+        type: string
+      - name: "read_6_tag"
+        label: "read_6_tag"
+        type: string
+      - name: "read_6_h3"
+        label: "read_6_h3"
+        type: string
+      - name: "read_6_p"
+        label: "read_6_p"
+        type: string
+      - name: "read_cta_label"
+        label: "read_cta_label"
+        type: string
+      - name: "read_cta_h2"
+        label: "read_cta_h2"
+        type: string
+      - name: "read_home_h2"
+        label: "read_home_h2"
+        type: string
+      - name: "read_home_lede"
+        label: "read_home_lede"
+        type: string
+      - name: "read_home_btn"
+        label: "read_home_btn"
+        type: string

@@ -37,19 +37,24 @@
   /* header */
   .top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
        backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
-  .mark{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-.015em;text-decoration:none}
-  .mark span{font-weight:400;font-style:italic}
-  .top-right{display:flex;align-items:center;gap:12px}
-  .back{font-size:.82rem;text-decoration:none;color:var(--ink-soft)}
-  .back:hover{color:var(--ink);text-decoration:underline}
-  .langs{display:flex;gap:11px;flex-wrap:wrap;align-items:baseline}
-  /* phone: wordmark and way back on one line, languages on their own line below */
-  @media (max-width:560px){
-    .top .wrap{flex-wrap:wrap;gap:6px 16px;padding-block:11px 9px}
-    .top-right{flex:1 1 auto;justify-content:space-between;flex-wrap:wrap;gap:6px 16px}
-    .back{white-space:nowrap}
-    .langs{flex-wrap:nowrap;flex-basis:100%}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:14px}
+  .mark{font-family:var(--serif);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;text-decoration:none}
+  .mark span{font-weight:450;font-style:italic}
+  .top-right{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
+  .menu{display:flex;gap:22px;flex-wrap:wrap}
+  .menu a{text-decoration:none;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
+          padding-bottom:3px;border-bottom:1.5px solid transparent}
+  .menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+  body.zh .menu a{letter-spacing:0}
+  .langs{display:flex;gap:11px;flex-wrap:wrap;align-items:baseline;padding-left:20px;border-left:1px solid var(--rule)}
+  /* phone: the menu wraps under the wordmark and the bar scrolls away with the page */
+  @media (max-width:700px){
+    .top{position:static}
+    .top .wrap{gap:8px 20px;padding-block:12px 10px}
+    .top-right{gap:8px 20px}
+    .menu{gap:2px 18px}
+    .menu a{font-size:.92rem;padding-block:5px 3px}
+    .langs{padding-left:0;border-left:0}
   }
   .langs button{border:0;background:none;padding:0;cursor:pointer;font-family:inherit;
                 font-size:.76rem;letter-spacing:.03em;color:var(--ink-faint);
@@ -131,9 +136,9 @@
 <body class="lang-en">
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="../">Epi<span>Detective</span></a>
+    <a class="mark" id="homeLink" href="../">Epi<span>Detective</span></a>
     <div class="top-right">
-      <a class="back" href="../">&#8592; <span data-i18n="back">Back to EpiDetective</span></a>
+      <nav class="menu" id="siteNav" aria-label="EpiDetective"></nav>
       <nav class="langs" id="langNav" aria-label="Language"></nav>
     </div>
   </div>
@@ -195,11 +200,19 @@
 "use strict";
 /* Five-language text store (en / zh / fr / es / ru — the same set as the main
    site). Recommendation texts: Europe fr+es and LAC es carry the official IARC
-   wording; where no official edition exists in the reader's language (zh and ru
+   wording; where no official edition exists in the reader’s language (zh and ru
    everywhere, fr for LAC), the cards are EpiDetective summaries and a note above
    the list says so. Everything visible is swapped by data-i18n keys; the
    recommendations live in REGIONS and are rendered by build(). */
-var LANG_LIST = [["en","EN"],["zh","中文"],["fr","FR"],["es","ES"],["ru","RU"]];
+var LANG_LIST = [["en","English"],["zh","中文"],["fr","Français"],["es","Español"],["ru","Русский"]];
+/* The site menu, as it reads on every other page: tools, this page, games, about, contact. */
+var SITE_NAV = {
+  en:["Tools","Code Against Cancer","Cancer awareness games","About","Contact"],
+  zh:["工具","防癌守则","防癌小游戏","关于","联系"],
+  fr:["Outils","Code contre le cancer","Jeux de sensibilisation","À propos","Contact"],
+  es:["Herramientas","Código contra el cáncer","Juegos de prevención","Acerca de","Contacto"],
+  ru:["Инструменты","Кодекс против рака","Игры о профилактике","Об авторе","Контакты"]
+};
 
 var STRINGS = {
   en: {
@@ -222,7 +235,7 @@ var STRINGS = {
     footNote:"Compiled by EpiDetective from IARC / PAHO / ANCCA public materials. Please refer to the official sources above for the definitive wording and updates.",
     officialSite:"Read the official Code",
     summaryNote:"The official Code has no English edition; below is an EpiDetective summary.",
-    devNote:"No Asian Code has been published yet. The ten points below are EpiDetective's summary of the themes mapped by IARC and ANCCA.",
+    devNote:"No Asian Code has been published yet. The ten points below are EpiDetective’s summary of the themes mapped by IARC and ANCCA.",
     affiliation:"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization."
   },
   zh: {
@@ -251,25 +264,25 @@ var STRINGS = {
   fr: {
     back:"Retour à EpiDetective", eyebrow:"Recommandations officielles de prévention du cancer",
     title:"Code contre le cancer",
-    lede:"Des gestes concrets, fondés sur des preuves, pour réduire votre propre risque de cancer — tirés des Codes régionaux contre le cancer élaborés par le CIRC (l'agence de l'OMS spécialisée dans le cancer) et ses partenaires.",
+    lede:"Des gestes concrets, fondés sur des preuves, pour réduire votre propre risque de cancer — tirés des Codes régionaux contre le cancer élaborés par le CIRC (l’agence de l’OMS spécialisée dans le cancer) et ses partenaires.",
     statV:"≈ 40 %", statL:"des cancers sont liés à des causes évitables",
     frameworkH:"Le cadre mondial des Codes contre le cancer",
-    frameworkP:"Une même méthode d'évaluation des preuves, adaptée région par région. Chaque Code régional est élaboré par le CIRC avec un partenaire de coordination régional, puis ajusté aux profils de cancer et aux conditions de vie locales. Les Codes de l'Europe et de l'Amérique latine et des Caraïbes sont publiés ; celui de l'Asie est en cours d'élaboration.",
+    frameworkP:"Une même méthode d’évaluation des preuves, adaptée région par région. Chaque Code régional est élaboré par le CIRC avec un partenaire de coordination régional, puis ajusté aux profils de cancer et aux conditions de vie locales. Les Codes de l’Europe et de l’Amérique latine et des Caraïbes sont publiés ; celui de l’Asie est en cours d’élaboration.",
     regionsLabel:"Choisissez une région",
-    published:"Publié", developing:"En cours d'élaboration",
+    published:"Publié", developing:"En cours d’élaboration",
     coordinated:"Coordination",
     recs:"recommandations",
     disclaimerH:"Comment utiliser cette page.",
-    disclaimerP:"Cette page résume des recommandations officielles à titre d'information. Elle ne constitue pas un avis médical. Les âges de dépistage, les calendriers vaccinaux et les règles applicables au travail varient selon les pays — suivez le programme en vigueur là où vous vivez. Pour toute question concernant votre santé, parlez-en à un médecin.",
+    disclaimerP:"Cette page résume des recommandations officielles à titre d’information. Elle ne constitue pas un avis médical. Les âges de dépistage, les calendriers vaccinaux et les règles applicables au travail varient selon les pays — suivez le programme en vigueur là où vous vivez. Pour toute question concernant votre santé, parlez-en à un médecin.",
     sourcesH:"Sources officielles",
     srcEurope:"Code européen contre le cancer (5e édition)",
-    srcLac:"Code contre le cancer pour l'Amérique latine et les Caraïbes",
+    srcLac:"Code contre le cancer pour l’Amérique latine et les Caraïbes",
     srcAsia:"Vers un Code asiatique contre le cancer (ANCCA · CIRC)",
-    footNote:"Compilé par EpiDetective à partir des documents publics du CIRC, de l'OPS et de l'ANCCA. Pour la formulation définitive et les mises à jour, reportez-vous aux sources officielles ci-dessus.",
+    footNote:"Compilé par EpiDetective à partir des documents publics du CIRC, de l’OPS et de l’ANCCA. Pour la formulation définitive et les mises à jour, reportez-vous aux sources officielles ci-dessus.",
     officialSite:"Lire le Code officiel",
-    summaryNote:"Le Code officiel de cette région n'est pas publié en français ; ce qui suit est un résumé d'EpiDetective.",
-    devNote:"Aucun Code asiatique n'est encore publié. Les dix points ci-dessous résument les thèmes recensés par le CIRC et l'ANCCA.",
-    affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d'aucune approbation du Centre international de Recherche sur le Cancer ni de l'Organisation mondiale de la Santé."
+    summaryNote:"Le Code officiel de cette région n’est pas publié en français ; ce qui suit est un résumé d’EpiDetective.",
+    devNote:"Aucun Code asiatique n’est encore publié. Les dix points ci-dessous résument les thèmes recensés par le CIRC et l’ANCCA.",
+    affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Il ne bénéficie d’aucune approbation du Centre international de Recherche sur le Cancer ni de l’Organisation mondiale de la Santé."
   },
   es: {
     back:"Volver a EpiDetective", eyebrow:"Recomendaciones oficiales para la prevención del cáncer",
@@ -401,7 +414,7 @@ var REGIONS = [
         {
           "en": "Take action to avoid or manage overweight and obesity: Limit food high in calories, sugar, fat, and salt. Limit drinks high in sugar. Drink mostly water and unsweetened drinks. Limit ultra-processed foods.",
           "zh": "采取行动避免或管理超重和肥胖：少吃高热量、高糖、高脂、高盐食物；少喝含糖饮料；少吃超加工食品。",
-          "fr": "Prenez des mesures pour éviter ou gérer le surpoids et l'obésité : Limitez les aliments riches en calories, en sucres, en matières grasses et en sel. Limitez les boissons riches en sucres. Buvez principalement de l'eau et des boissons non sucrées. Limitez les aliments ultratransformés.",
+          "fr": "Prenez des mesures pour éviter ou gérer le surpoids et l’obésité : Limitez les aliments riches en calories, en sucres, en matières grasses et en sel. Limitez les boissons riches en sucres. Buvez principalement de l’eau et des boissons non sucrées. Limitez les aliments ultratransformés.",
           "es": "Tome medidas para evitar o reducir el sobrepeso y la obesidad: Limite los alimentos con alto contenido calórico, azúcares, grasas y sal. Limite las bebidas con alto contenido de azúcar. Beba principalmente agua y bebidas sin azúcar. Limite los alimentos ultraprocesados.",
           "ru": "Предупреждайте и корректируйте избыточный вес: ограничьте продукты с высоким содержанием калорий, сахара, жира и соли; ограничьте сладкие напитки и пейте в основном воду и напитки без сахара; ограничьте ультрапереработанные продукты."
         }
@@ -442,7 +455,7 @@ var REGIONS = [
         {
           "en": "Avoid alcohol",
           "zh": "避免饮酒",
-          "fr": "Évitez l'alcool",
+          "fr": "Évitez l’alcool",
           "es": "Evite el alcohol",
           "ru": "Откажитесь от алкоголя"
         },
@@ -474,14 +487,14 @@ var REGIONS = [
         {
           "en": "Avoid too much sun",
           "zh": "避免过度日晒",
-          "fr": "Évitez l'excès de soleil",
+          "fr": "Évitez l’excès de soleil",
           "es": "Evite el exceso de sol",
           "ru": "Избегайте избытка солнца"
         },
         {
           "en": "Avoid too much sun exposure, especially for children. Use sun protection. Never use sunbeds.",
           "zh": "避免过度日晒，尤其是儿童；做好防晒；绝不使用日光浴床。",
-          "fr": "Évitez une exposition excessive au soleil, surtout chez les enfants. Utilisez une protection solaire. N'utilisez jamais d'appareils de bronzage.",
+          "fr": "Évitez une exposition excessive au soleil, surtout chez les enfants. Utilisez une protection solaire. N’utilisez jamais d’appareils de bronzage.",
           "es": "Evite una exposición excesiva al sol, sobre todo en los niños. Utilice protección solar. No utilice camas solares.",
           "ru": "Избегайте чрезмерного пребывания на солнце; особенно берегите от него детей. Пользуйтесь солнцезащитными средствами. Никогда не пользуйтесь солярием."
         }
@@ -513,7 +526,7 @@ var REGIONS = [
         {
           "en": "Inform yourself about radon gas levels in your area by checking a local radon map. Seek professional help to measure levels in your home and, if necessary, reduce them.",
           "zh": "通过当地氡气地图了解所在地区的氡气水平；请专业人员测量家中氡气，必要时采取措施降低。",
-          "fr": "Informez-vous sur les niveaux de radon dans votre région en consultant une carte locale sur la présence de radon. Demandez l'aide d'un professionnel pour mesurer les niveaux de radon à votre domicile et pour les réduire si nécessaire.",
+          "fr": "Informez-vous sur les niveaux de radon dans votre région en consultant une carte locale sur la présence de radon. Demandez l’aide d’un professionnel pour mesurer les niveaux de radon à votre domicile et pour les réduire si nécessaire.",
           "es": "Infórmese sobre los niveles de gas radón en su zona mediante un mapa local de concentraciones de radón. Busque ayuda profesional para medir los niveles en su hogar y, si es necesario, reducirlos.",
           "ru": "Узнайте по местной карте об уровнях радона в вашем районе. При необходимости пригласите специалиста, чтобы измерить уровень радона дома и снизить его."
         }
@@ -522,14 +535,14 @@ var REGIONS = [
         {
           "en": "Reduce air pollution exposure",
           "zh": "减少空气污染暴露",
-          "fr": "Réduisez la pollution de l'air",
+          "fr": "Réduisez la pollution de l’air",
           "es": "Reduzca su exposición a la contaminación del aire",
           "ru": "Меньше загрязнённого воздуха"
         },
         {
           "en": "Take action to reduce exposure to air pollution by: Using public transportation, and walking or cycling instead of using a car. Choosing low-traffic routes when walking, cycling, or exercising. Keeping your home free of smoke by not burning materials such as coal or wood. Supporting policies that improve air quality.",
           "zh": "多乘公共交通、步行或骑车代替开车；选择车流量小的路线；保持家中无烟；支持改善空气质量的公共政策。",
-          "fr": "Prenez des mesures visant à réduire l'exposition à la pollution atmosphérique : Prenez les transports en commun ou déplacez-vous à pied ou à vélo au lieu d'utiliser la voiture. Choisissez des itinéraires où il y a peu de circulation lorsque vous vous déplacez à pied et à vélo ou lorsque vous faites de l'exercice. Maintenez votre maison exempte de fumée en ne brûlant pas de matériaux tels que du charbon ou du bois. Favorisez les politiques qui améliorent la qualité de l'air.",
+          "fr": "Prenez des mesures visant à réduire l’exposition à la pollution atmosphérique : Prenez les transports en commun ou déplacez-vous à pied ou à vélo au lieu d’utiliser la voiture. Choisissez des itinéraires où il y a peu de circulation lorsque vous vous déplacez à pied et à vélo ou lorsque vous faites de l’exercice. Maintenez votre maison exempte de fumée en ne brûlant pas de matériaux tels que du charbon ou du bois. Favorisez les politiques qui améliorent la qualité de l’air.",
           "es": "Tome medidas para reducir su exposición a la contaminación atmosférica de las siguientes maneras: Utilizando el transporte público y caminando o utilizando la bicicleta en lugar del coche. Eligiendo rutas con poco tráfico cuando camine, se desplace en bicicleta o haga ejercicio. Manteniendo su hogar libre de humo evitando quemar materiales como el carbón o la madera. Apoyando las políticas que mejoran la calidad del aire.",
           "ru": "Пользуйтесь общественным транспортом, ходите пешком или ездите на велосипеде вместо автомобиля; выбирайте маршруты с небольшим движением; не сжигайте дома уголь и дрова; поддерживайте меры по улучшению качества воздуха."
         }
@@ -545,7 +558,7 @@ var REGIONS = [
         {
           "en": "Vaccinate girls and boys against hepatitis B virus and human papillomavirus (HPV) at the age recommended in your country. Take part in testing and treatment for hepatitis B and C viruses, human immunodeficiency virus (HIV), and Helicobacter pylori, as recommended in your country.",
           "zh": "按本国建议年龄为女孩和男孩接种乙肝疫苗和 HPV 疫苗；并按建议参与乙肝、丙肝、HIV 和幽门螺杆菌的检测与治疗。",
-          "fr": "Il est nécessaire de vacciner les filles et les garçons contre le virus de l'hépatite B et le papillomavirus humain (HPV) à l'âge recommandé dans votre pays. Participez au dépistage et au traitement des virus de l'hépatite B et C, du virus de l'immunodéficience humaine (VIH) et de Helicobacter pylori, tel que recommandé dans votre pays.",
+          "fr": "Il est nécessaire de vacciner les filles et les garçons contre le virus de l’hépatite B et le papillomavirus humain (HPV) à l’âge recommandé dans votre pays. Participez au dépistage et au traitement des virus de l’hépatite B et C, du virus de l’immunodéficience humaine (VIH) et de Helicobacter pylori, tel que recommandé dans votre pays.",
           "es": "Vacune a niñas y niños frente al virus de la hepatitis B y el virus del papiloma humano (VPH) a la edad recomendada en su país. Participe en las pruebas para la detección de los virus de las hepatitis B y C, el virus de la inmunodeficiencia humana (VIH) y Helicobacter pylori, y reciba el tratamiento correspondiente, conforme a lo recomendado en su país.",
           "ru": "Прививайте девочек и мальчиков от гепатита B и вируса папилломы человека (ВПЧ) в возрасте, рекомендованном в вашей стране. Проходите рекомендованные обследования и лечение гепатитов B и C, ВИЧ и Helicobacter pylori."
         }
@@ -577,7 +590,7 @@ var REGIONS = [
         {
           "en": "Take part in organized cancer screening programmes, as recommended in your country, for: Bowel cancer. Breast cancer. Cervical cancer. Lung cancer.",
           "zh": "参加本国建议的有组织癌症筛查：结直肠癌、乳腺癌、宫颈癌和肺癌。",
-          "fr": "Participez à des programmes de dépistage organisé du cancer, comme recommandé dans votre pays, pour : le cancer colorectal ; le cancer du sein ; le cancer du col de l'utérus ; le cancer du poumon.",
+          "fr": "Participez à des programmes de dépistage organisé du cancer, comme recommandé dans votre pays, pour : le cancer colorectal ; le cancer du sein ; le cancer du col de l’utérus ; le cancer du poumon.",
           "es": "Participe, conforme a lo recomendado en su país, en programas organizados de cribado de los siguientes tipos de cáncer: Cáncer colorrectal. Cáncer de mama. Cáncer cervicouterino. Cáncer de pulmón.",
           "ru": "Участвуйте в организованных программах скрининга рака — колоректального, молочной железы, шейки матки и лёгкого, — как рекомендовано в вашей стране."
         }
@@ -621,14 +634,14 @@ var REGIONS = [
         {
           "en": "Do not smoke or use tobacco",
           "zh": "不要吸烟或使用烟草",
-          "fr": "Ne fumez pas, n'utilisez pas de tabac",
+          "fr": "Ne fumez pas, n’utilisez pas de tabac",
           "es": "No fume ni use tabaco",
           "ru": "Не курите и не употребляйте табак"
         },
         {
           "en": "Do not use any type of tobacco, and do not use e-cigarettes, which can lead to tobacco use.",
           "zh": "不要使用任何形式的烟草，也不要使用可能诱导吸烟的电子烟。",
-          "fr": "N'utilisez aucun type de tabac ni de cigarettes électroniques, qui peuvent conduire au tabagisme.",
+          "fr": "N’utilisez aucun type de tabac ni de cigarettes électroniques, qui peuvent conduire au tabagisme.",
           "es": "No fume ni use ningún tipo de tabaco. Si lo hace, es posible dejarlo; de ser necesario, con ayuda profesional. Tampoco use cigarrillos electrónicos, ya que conducen al consumo de tabaco.",
           "ru": "Не употребляйте табак ни в каком виде и не пользуйтесь электронными сигаретами, которые ведут к курению."
         }
@@ -701,14 +714,14 @@ var REGIONS = [
         {
           "en": "Avoid alcohol",
           "zh": "避免饮酒",
-          "fr": "Évitez l'alcool",
+          "fr": "Évitez l’alcool",
           "es": "Evite el alcohol",
           "ru": "Откажитесь от алкоголя"
         },
         {
           "en": "Avoid drinking alcoholic beverages — there is no safe level of alcohol in relation to cancer risk.",
           "zh": "避免饮酒——就癌症风险而言，酒精没有安全剂量。",
-          "fr": "Évitez les boissons alcoolisées — du point de vue du risque de cancer, il n'existe pas de niveau de consommation sûr.",
+          "fr": "Évitez les boissons alcoolisées — du point de vue du risque de cancer, il n’existe pas de niveau de consommation sûr.",
           "es": "Evite el consumo de bebidas alcohólicas para ayudar a prevenir varios tipos de cáncer.",
           "ru": "Избегайте алкогольных напитков — безопасной для риска рака дозы алкоголя не существует."
         }
@@ -724,7 +737,7 @@ var REGIONS = [
         {
           "en": "Breastfeed your baby — the more months, the better.",
           "zh": "母乳喂养宝宝——时间越长越好。",
-          "fr": "Allaitez votre bébé — plus longtemps, mieux c'est.",
+          "fr": "Allaitez votre bébé — plus longtemps, mieux c’est.",
           "es": "Amamante, cuantos más meses mejor, para ayudar a prevenir el cáncer de mama y el exceso de peso en el niño o la niña.",
           "ru": "Кормите ребёнка грудью — чем дольше, тем лучше."
         }
@@ -740,7 +753,7 @@ var REGIONS = [
         {
           "en": "Protect yourself from direct sun exposure during peak sunlight hours.",
           "zh": "在日照最强的时段避免直接暴晒。",
-          "fr": "Protégez-vous de l'exposition directe au soleil aux heures où il est le plus intense.",
+          "fr": "Protégez-vous de l’exposition directe au soleil aux heures où il est le plus intense.",
           "es": "Protéjase de la exposición directa al sol en las horas de mayor intensidad solar para ayudar a prevenir el cáncer de piel.",
           "ru": "Защищайтесь от прямого солнца в часы его наибольшей активности."
         }
@@ -749,14 +762,14 @@ var REGIONS = [
         {
           "en": "Avoid indoor smoke from fuel",
           "zh": "避免室内燃料烟雾",
-          "fr": "Évitez les fumées de combustible à l'intérieur",
+          "fr": "Évitez les fumées de combustible à l’intérieur",
           "es": "Evite el humo de leña o carbón en casa",
           "ru": "Без дыма от топлива в доме"
         },
         {
           "en": "If you cook or heat your home with coal or firewood, make sure the smoke does not build up indoors — indoor burning causes lung cancer.",
           "zh": "若用煤或柴做饭取暖，注意排烟、避免室内烟雾积聚——室内燃烧会导致肺癌。",
-          "fr": "Si vous cuisinez ou chauffez au charbon ou au bois, évitez que la fumée ne s'accumule à l'intérieur — la combustion en intérieur cause le cancer du poumon.",
+          "fr": "Si vous cuisinez ou chauffez au charbon ou au bois, évitez que la fumée ne s’accumule à l’intérieur — la combustion en intérieur cause le cancer du poumon.",
           "es": "Si cocina o calienta su hogar con carbón o leña, evite la acumulación de humo dentro de su casa.",
           "ru": "Если вы готовите или отапливаете дом углём или дровами, не допускайте скопления дыма в помещении — он вызывает рак лёгкого."
         }
@@ -765,14 +778,14 @@ var REGIONS = [
         {
           "en": "Limit time outdoors when air is bad",
           "zh": "空气差时减少外出",
-          "fr": "Limitez le temps dehors quand l'air est pollué",
+          "fr": "Limitez le temps dehors quand l’air est pollué",
           "es": "Limite el tiempo al aire libre si hay contaminación",
           "ru": "Меньше на улице в дни смога"
         },
         {
           "en": "If outdoor air pollution is high, limit your time outdoors — it is causally linked to lung cancer.",
           "zh": "户外空气污染严重时，减少户外活动——空气污染与肺癌存在因果关系。",
-          "fr": "Quand la pollution de l'air extérieur est élevée, limitez le temps passé dehors — c'est une cause avérée de cancer du poumon.",
+          "fr": "Quand la pollution de l’air extérieur est élevée, limitez le temps passé dehors — c’est une cause avérée de cancer du poumon.",
           "es": "Si existe alta contaminación del aire en su entorno, limite el tiempo que pasa al aire libre.",
           "ru": "Когда воздух на улице сильно загрязнён, сокращайте время, проводимое вне дома, — такое загрязнение вызывает рак лёгкого."
         }
@@ -804,7 +817,7 @@ var REGIONS = [
         {
           "en": "Learn about screening for and treatment of Helicobacter pylori infection, which can cause stomach cancer.",
           "zh": "了解可导致胃癌的幽门螺杆菌感染的筛查与治疗。",
-          "fr": "Renseignez-vous sur le dépistage et le traitement de l'infection à Helicobacter pylori, qui peut causer le cancer de l'estomac.",
+          "fr": "Renseignez-vous sur le dépistage et le traitement de l’infection à Helicobacter pylori, qui peut causer le cancer de l’estomac.",
           "es": "La infección por la bacteria Helicobacter pylori puede causar cáncer de estómago. Consulte con profesionales de la salud para conocer si podría beneficiarse de la detección y el tratamiento de la infección.",
           "ru": "Узнайте о выявлении и лечении инфекции Helicobacter pylori, которая может вызывать рак желудка."
         }
@@ -836,7 +849,7 @@ var REGIONS = [
         {
           "en": "Do not use hormone replacement therapy for menopause unless directed by a health professional.",
           "zh": "除非医生建议，不要使用更年期激素替代疗法。",
-          "fr": "N'utilisez pas de traitement hormonal de la ménopause, sauf sur avis d'un professionnel de santé.",
+          "fr": "N’utilisez pas de traitement hormonal de la ménopause, sauf sur avis d’un professionnel de santé.",
           "es": "No use reemplazo hormonal para la menopausia, a menos que se lo indique su profesional médico.",
           "ru": "Не применяйте заместительную гормональную терапию при менопаузе без назначения врача."
         }
@@ -884,7 +897,7 @@ var REGIONS = [
         {
           "en": "If you are aged 30–64, ask for a molecular HPV test at least every 5–10 years for early detection of cervical cancer.",
           "zh": "30–64 岁者，应至少每 5–10 年做一次 HPV 分子检测，以便早期发现宫颈癌。",
-          "fr": "Entre 30 et 64 ans, demandez un test moléculaire du VPH au moins tous les 5 à 10 ans pour détecter tôt le cancer du col de l'utérus.",
+          "fr": "Entre 30 et 64 ans, demandez un test moléculaire du VPH au moins tous les 5 à 10 ans pour détecter tôt le cancer du col de l’utérus.",
           "es": "Si tiene entre 30 y 64 años, solicite una prueba molecular del VPH al menos cada 5–10 años para la detección temprana del cáncer de cuello uterino.",
           "ru": "В возрасте 30–64 лет сдавайте молекулярный тест на ВПЧ не реже чем раз в 5–10 лет для раннего выявления рака шейки матки."
         }
@@ -904,14 +917,14 @@ var REGIONS = [
     "partner": {
       "en": "IARC & ANCCA (Asian National Cancer Centers Alliance)",
       "zh": "IARC 与亚洲国家癌症中心联盟（ANCCA）",
-      "fr": "CIRC et ANCCA (Alliance des centres nationaux du cancer d'Asie)",
+      "fr": "CIRC et ANCCA (Alliance des centres nationaux du cancer d’Asie)",
       "es": "CIIC y ANCCA (Alianza de Centros Nacionales del Cáncer de Asia)",
       "ru": "МАИР и ANCCA (Альянс национальных онкологических центров Азии)"
     },
     "status": {
       "en": "In development",
       "zh": "制定中",
-      "fr": "En cours d'élaboration",
+      "fr": "En cours d’élaboration",
       "es": "En desarrollo",
       "ru": "Разрабатывается"
     },
@@ -984,14 +997,14 @@ var REGIONS = [
         {
           "en": "Avoid or minimise alcohol",
           "zh": "不饮酒或尽量少饮",
-          "fr": "Peu ou pas d'alcool",
+          "fr": "Peu ou pas d’alcool",
           "es": "Evite o minimice el alcohol",
           "ru": "Минимум алкоголя"
         },
         {
           "en": "Avoid or minimise alcohol intake.",
           "zh": "避免饮酒或尽量减少饮酒。",
-          "fr": "Évitez l'alcool ou réduisez-en la consommation au minimum.",
+          "fr": "Évitez l’alcool ou réduisez-en la consommation au minimum.",
           "es": "Evite o reduzca al mínimo el consumo de alcohol.",
           "ru": "Избегайте алкоголя или сведите его употребление к минимуму."
         }
@@ -1007,7 +1020,7 @@ var REGIONS = [
         {
           "en": "Avoid or reduce exposure to workplace carcinogens and use personal protective equipment.",
           "zh": "减少或避免接触职业致癌物，并佩戴个人防护用品。",
-          "fr": "Évitez ou réduisez l'exposition aux cancérogènes professionnels et utilisez des équipements de protection individuelle.",
+          "fr": "Évitez ou réduisez l’exposition aux cancérogènes professionnels et utilisez des équipements de protection individuelle.",
           "es": "Evite o reduzca la exposición a cancerígenos en el trabajo y use equipo de protección personal.",
           "ru": "Избегайте или сокращайте контакт с производственными канцерогенами и используйте средства индивидуальной защиты."
         }
@@ -1023,7 +1036,7 @@ var REGIONS = [
         {
           "en": "Reduce exposure to environmental pollutants, including air pollution, pesticides and radiation.",
           "zh": "减少接触环境污染物，包括空气污染、农药和辐射。",
-          "fr": "Réduisez l'exposition aux polluants de l'environnement, dont la pollution de l'air, les pesticides et les rayonnements.",
+          "fr": "Réduisez l’exposition aux polluants de l’environnement, dont la pollution de l’air, les pesticides et les rayonnements.",
           "es": "Reduzca la exposición a contaminantes ambientales, incluidos la contaminación del aire, los plaguicidas y la radiación.",
           "ru": "Сокращайте воздействие загрязнителей окружающей среды, включая загрязнение воздуха, пестициды и радиацию."
         }
@@ -1064,14 +1077,14 @@ var REGIONS = [
         {
           "en": "Promote breastfeeding",
           "zh": "提倡母乳喂养",
-          "fr": "Soutenez l'allaitement",
+          "fr": "Soutenez l’allaitement",
           "es": "Apoye la lactancia materna",
           "ru": "Поддерживайте грудное вскармливание"
         },
         {
           "en": "Promote and support breastfeeding.",
           "zh": "提倡并支持母乳喂养。",
-          "fr": "Encouragez et soutenez l'allaitement maternel.",
+          "fr": "Encouragez et soutenez l’allaitement maternel.",
           "es": "Promueva y apoye la lactancia materna.",
           "ru": "Поощряйте и поддерживайте грудное вскармливание."
         }
@@ -1094,6 +1107,16 @@ function build(lang){
   document.title = i18n("title", lang) + " — EpiDetective";
   var md = document.querySelector('meta[name="description"]');
   if (md) md.setAttribute("content", i18n("lede", lang));
+
+  /* site menu: the links lead to this language's own pages */
+  var base = lang === "en" ? "../" : "../" + lang + "/", labels = SITE_NAV[lang] || SITE_NAV.en;
+  document.getElementById("homeLink").setAttribute("href", base + "index.html");
+  document.getElementById("siteNav").innerHTML =
+    '<a href="'+base+'index.html#instruments">'+esc(labels[0])+'</a>'+
+    '<a href="./" aria-current="page">'+esc(labels[1])+'</a>'+
+    '<a href="'+base+'games.html">'+esc(labels[2])+'</a>'+
+    '<a href="'+base+'about.html">'+esc(labels[3])+'</a>'+
+    '<a href="'+base+'about.html#contact">'+esc(labels[4])+'</a>';
 
   /* language switcher */
   var nav = document.getElementById("langNav");
@@ -1141,7 +1164,7 @@ function build(lang){
       '<span class="partner">'+i18n("coordinated",lang)+(lang==="zh"?"：":lang==="fr"?"\u202f: ":": ")+esc(pick(r.partner,lang))+'</span>'+official+'</div>';
 
     /* published Codes without an official edition in this language get the
-       summary notice; the in-development region's badge already says enough */
+       summary notice; the in-development region’s badge already says enough */
     var note = r.dev
       ? '<p class="summary-note">'+esc(i18n("devNote",lang))+'</p>'
       : (r.officialLangs && r.officialLangs.indexOf(lang) < 0)
