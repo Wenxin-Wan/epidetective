@@ -233,9 +233,9 @@ var STRINGS = {
     back:"← About the developer",
     eyebrow:"EpiDetective · The developer’s record",
     h1:'Me, and <i>the work</i>',
-    lede:'Where I have been and what I have made — degrees and moves, papers, consortium roles, tools, conference records and the coverage they drew — most recent first. Skim the whole record in one view, open any entry for the detail, or filter to one kind at a time. Each entry links to its primary source, so any claim here can be traced back and checked: the same standard <a href="../">EpiDetective</a> asks of health evidence. Assembled by Wenxin Wan; the record itself lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
-    cats:{all:"All",paper:"Papers",tool:"Tools",role:"Roles",milestone:"Milestones",talk:"Conferences",press:"Press"},
-    kinds:{paper:"Paper",tool:"Tool",role:"Role",milestone:"Milestone",talk:"Conferences",press:"Press &amp; commentary"},
+    lede:'Where I have been and what I have made — degrees and positions, papers, consortium roles, tools, conference records and the coverage they drew — most recent first. Skim the whole record in one view, open any entry for the detail, or filter to one kind at a time. Each entry links to its primary source, so any claim here can be traced back and checked: the same standard <a href="../">EpiDetective</a> asks of health evidence. Assembled by Wenxin Wan; the record itself lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
+    cats:{all:"All",paper:"Papers",tool:"Tools",job:"Positions",role:"Consortium roles",milestone:"Degrees",talk:"Conferences",press:"Press"},
+    kinds:{paper:"Paper",tool:"Tool",job:"Position",role:"Consortium role",milestone:"Degree",talk:"Conferences",press:"Press &amp; commentary"},
     lead:"lead author", coauthor:"co-author", selected:"selected", upcoming:"upcoming",
     preview:"in gated preview", present:"present", nextLabel:"Next",
     viewLabel:"Show", viewCompact:"Overview", viewFull:"In full",
@@ -247,8 +247,8 @@ var STRINGS = {
     eyebrow:"EPIDETECTIVE · 开发者档案",
     h1:'我，和<b>我的工作</b>',
     lede:'我走过的路与做过的工作——学位与迁徙、论文、国际联盟职责、工具、会议记录，以及它们获得的报道——最新的排在最上面。既可以一眼扫完整个年表，也可以点开任何一条深入细节，或用筛选只看某一类。每一条都链接到原始来源，任何说法都可以回溯核查：这也是 <a href="../zh/">EpiDetective</a> 对健康证据的一贯要求。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
-    cats:{all:"全部",paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"报道"},
-    kinds:{paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"媒体与评论"},
+    cats:{all:"全部",paper:"论文",tool:"工具",job:"任职",role:"联盟职责",milestone:"学位",talk:"会议",press:"报道"},
+    kinds:{paper:"论文",tool:"工具",job:"任职",role:"联盟职责",milestone:"学位",talk:"会议",press:"媒体与评论"},
     lead:"第一作者", coauthor:"共同作者", selected:"精选", upcoming:"即将进行",
     preview:"预览 · 审校中", present:"至今", nextLabel:"即将",
     viewLabel:"显示", viewCompact:"总览", viewFull:"全部展开",
@@ -257,16 +257,17 @@ var STRINGS = {
   }
 };
 
-/* Each entry: k=kind, sel=selected, date {en,zh}, note (extra meta tag, per lang),
+/* Each entry: k=kind (paper, tool, job = a paid position, role = a consortium role,
+   milestone = a degree, talk, press), sel=selected, date {en,zh}, note (extra meta tag, per lang),
    t {en,zh} title, d {en,zh} description, links [[{en,zh} label, href], ...];
    an href may itself be {en,zh} when the page it points to exists in both */
 var GROUPS = [
   { y:{en:"2026",zh:"2026"}, cls:"now", tag:{en:"in progress",zh:"进行中"}, items:[
     { k:"milestone", sel:true, date:{en:"28 Sep 2026",zh:"2026年9月28日"},
-      t:{en:"Public defence of the doctoral thesis, Utrecht University",
-         zh:"乌得勒支大学博士论文公开答辩"},
-      d:{en:"The formal defence of <i>Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology</i>. The thesis is now in the Utrecht University repository, open to read.",
-         zh:"《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》的正式答辩。论文现已收入乌得勒支大学论文库，可公开查阅。"},
+      t:{en:"PhD in Epidemiology: public defence of the doctoral thesis, Utrecht University",
+         zh:"流行病学博士：乌得勒支大学博士论文公开答辩"},
+      d:{en:"The formal defence of <i>Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology</i>, supervised by Prof. Roel Vermeulen. It binds the benzene, solvents, job-coding and exposome work into one argument about how occupational epidemiology should ask its questions. The thesis is in the Utrecht University repository, open to read.",
+         zh:"《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》的正式答辩，导师 Roel Vermeulen 教授。论文把苯、溶剂、职业编码与暴露组的研究织成一个关于职业流行病学应当如何提问的完整论证，现已收入乌得勒支大学论文库，可公开查阅。"},
       links:[[{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"],
              [{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] },
     { k:"paper", date:{en:"Sep 2026",zh:"2026年9月"}, note:"coauthor",
@@ -314,8 +315,8 @@ var GROUPS = [
       d:{en:"Does long-term opioid use carry a cancer risk? OPICO pools about ten cohorts and thirty harmonised real-world data sources — electronic health records, prescriptions, insurance claims — covering roughly 1.2 million people across the US, UK, Australia and France, with 20+ collaborating institutions. Alongside: scientific advisor to the Lung Cancer Cohort Consortium (LC3) on carrying occupational-exposure evidence into lung-cancer screening.",
          zh:"长期使用阿片类药物是否带来癌症风险？OPICO 汇集约十项队列、约三十个经统一协调的真实世界数据源——电子健康记录、处方与保险理赔——覆盖美、英、澳、法约 120 万人，20 余家合作机构。同时担任国际肺癌队列联盟（LC3）科学顾问，把职业暴露证据引入肺癌筛查。"},
       links:[[{en:"opico.iarc.who.int",zh:"opico.iarc.who.int"},"https://opico.iarc.who.int"]] },
-    { k:"milestone", date:{en:"Jan 2026",zh:"2026年1月"},
-      t:{en:"Postdoctoral researcher at IARC / WHO, Lyon",zh:"加入里昂 IARC / 世界卫生组织，任博士后研究员"},
+    { k:"job", sel:true, date:{en:"Jan 2026 – present",zh:"2026年1月 – 至今"},
+      t:{en:"Postdoctoral researcher at IARC / WHO, Lyon",zh:"里昂 IARC / 世界卫生组织博士后研究员"},
       d:{en:"Joining the World Health Organization’s cancer agency — the place whose Monographs the Cancer Evidence Explorer would later put in the public’s hands — to work on pharmaco-epidemiology and cancer risk at population scale.",
          zh:"加入世界卫生组织的癌症研究机构——癌症证据探索器后来正是把这里的《致癌物专论》交到公众手中——在人群尺度上研究药物流行病学与癌症风险。"},
       links:[[{en:"iarc.who.int",zh:"iarc.who.int"},"https://www.iarc.who.int"]] }
@@ -329,13 +330,7 @@ var GROUPS = [
              [{en:"EPICOH · EPHOR lessons",zh:"EPICOH · EPHOR 经验"},"https://doi.org/10.1136/oemed-2025-epicohabstracts.115"],
              [{en:"EPICOH · COPD",zh:"EPICOH · COPD"},"https://doi.org/10.1136/oemed-2025-epicohabstracts.123"],
              [{en:"ERS · interstitial lung disease",zh:"ERS · 间质性肺病"},"https://doi.org/10.1183/13993003.congress-2025.oa1149"],
-             [{en:"RMRA (fr)",zh:"RMRA（法语）"},"https://doi.org/10.1016/j.rmra.2024.11.076"]] },
-    { k:"milestone", sel:true, date:{en:"Jun 2025",zh:"2025年6月"},
-      t:{en:"PhD in Epidemiology — IRAS, Utrecht University &amp; TNO",zh:"流行病学博士——乌得勒支大学 IRAS 与荷兰应用科学研究组织（TNO）"},
-      d:{en:"Thesis: <i>Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology</i>, supervised by Prof. Roel Vermeulen — the benzene, solvents, job-coding and exposome work bound into one argument about how occupational epidemiology should ask its questions.",
-         zh:"博士论文：《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》，导师 Roel Vermeulen 教授——把苯、溶剂、职业编码与暴露组的研究织成一个关于职业流行病学应当如何提问的完整论证。"},
-      links:[[{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"],
-             [{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] }
+             [{en:"RMRA (fr)",zh:"RMRA（法语）"},"https://doi.org/10.1016/j.rmra.2024.11.076"]] }
   ]},
   { y:{en:"2024",zh:"2024"}, cls:"", items:[
     { k:"paper", sel:true, date:{en:"Dec 2024",zh:"2024年12月"}, note:"lead",
@@ -402,7 +397,14 @@ var GROUPS = [
          zh:"欧盟职业暴露组研究联盟（EPHOR）方法学与统计顾问"},
       d:{en:"Built the consortium’s methodological backbone for multi-exposure analysis: inventories of 49 multi-pollutant and 27 exposure–time–response models, open R tutorials for LASSO, random forests and BKMR, and more than ten workshops training 40+ epidemiologists across Europe — including talks at the European Human Exposome Network flagship meetings in Brussels (2023, 2024).",
          zh:"为联盟搭建多暴露分析的方法学骨架：整理 49 类多污染物模型与 27 类暴露—时间—反应模型的清单，公开 LASSO、随机森林与 BKMR 的 R 教程，主导十余场工作坊、为全欧 40 余名流行病学研究者授课——并在欧洲人类暴露组网络（EHEN）旗舰会议（布鲁塞尔，2023、2024）报告。"},
-      links:[[{en:"ephor-project.eu",zh:"ephor-project.eu"},"https://www.ephor-project.eu"]] }
+      links:[[{en:"ephor-project.eu",zh:"ephor-project.eu"},"https://www.ephor-project.eu"]] },
+    { k:"job", sel:true, date:{en:"Mar 2021 – Jun 2025",zh:"2021年3月 – 2025年6月"},
+      t:{en:"Doctoral researcher (employed PhD candidate) — IRAS, Utrecht University &amp; TNO",
+         zh:"博士研究员（受聘博士候选人）——乌得勒支大学 IRAS 与荷兰应用科学研究组织（TNO）"},
+      d:{en:"A little over four years in employment: doctoral researcher at the Institute for Risk Assessment Sciences, Utrecht University, alongside a part-time post as applied statistician at the Netherlands Organisation for Applied Scientific Research (TNO), in a joint programme of the two. The benzene, chlorinated-solvents, job-coding and exposome work on this page was done in these posts, under Prof. Roel Vermeulen. The appointment ended in June 2025; the thesis that came out of it was defended on 28 September 2026.",
+         zh:"为期四年多的受聘研究工作：在乌得勒支大学风险评估科学研究所（IRAS）担任博士研究员，同时在荷兰应用科学研究组织（TNO）兼任应用统计师，属两家机构的联合培养项目。本页所列关于苯、氯代溶剂、职业编码与暴露组的研究，均在这两个岗位上完成，导师为 Roel Vermeulen 教授。聘期于 2025 年 6 月结束；由此写成的博士论文于 2026 年 9 月 28 日答辩。"},
+      links:[[{en:"IRAS, Utrecht University",zh:"乌得勒支大学 IRAS"},"https://www.uu.nl/en/organisation/faculty-of-veterinary-medicine/about-the-faculty/organisation/department-population-health-sciences/institute-for-risk-assessment-sciences-iras"],
+             [{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"]] }
   ]},
   { y:{en:"2020",zh:"2020"}, cls:"", items:[
     { k:"paper", date:{en:"Published 2022–23",zh:"2022–23年发表"}, note:"coauthor",
@@ -494,7 +496,7 @@ function build(lang){
 
   var filters = document.getElementById("filters");
   filters.innerHTML = "";
-  ["all","paper","tool","role","milestone","talk","press"].forEach(function(k){
+  ["all","paper","tool","job","role","milestone","talk","press"].forEach(function(k){
     var b = document.createElement("button");
     b.className = "chip" + (k==="all" ? " active" : "");
     b.setAttribute("data-k", k);
