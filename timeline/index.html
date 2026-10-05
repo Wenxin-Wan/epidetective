@@ -246,19 +246,20 @@ var STRINGS = {
     back:"← 关于开发者",
     eyebrow:"EPIDETECTIVE · 开发者档案",
     h1:'我，和<b>我的工作</b>',
-    lede:'我走过的路与做过的工作——学位与迁徙、论文、国际联盟职责、工具、会议记录，以及它们获得的报道——最新的排在最上面。既可以一眼扫完整个年表，也可以点开任何一条深入细节，或用筛选只看某一类。每一条都链接到原始来源，任何说法都可以回溯核查：这也是 <a href="../">EpiDetective</a> 对健康证据的一贯要求。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
+    lede:'我走过的路与做过的工作——学位与迁徙、论文、国际联盟职责、工具、会议记录，以及它们获得的报道——最新的排在最上面。既可以一眼扫完整个年表，也可以点开任何一条深入细节，或用筛选只看某一类。每一条都链接到原始来源，任何说法都可以回溯核查：这也是 <a href="../zh/">EpiDetective</a> 对健康证据的一贯要求。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
     cats:{all:"全部",paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"报道"},
     kinds:{paper:"论文",tool:"工具",role:"职责",milestone:"里程碑",talk:"会议",press:"媒体与评论"},
     lead:"第一作者", coauthor:"共同作者", selected:"精选", upcoming:"即将进行",
     preview:"预览 · 审校中", present:"至今", nextLabel:"即将",
     viewLabel:"显示", viewCompact:"总览", viewFull:"全部展开",
     key1:'来源说明：期刊论文以 DOI 链接；会议条目链接已发表的摘要；联盟职责链接项目官网。完整发表记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。会议摘要与审稿中的工作，仅在已有公开记录时列出。',
-    key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../about.html">关于开发者</a> · <a href="../about.html#cite">如何引用</a> · <a href="../about.html#contact">联系方式</a>'
+    key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../zh/about.html">关于开发者</a> · <a href="../zh/about.html#cite">如何引用</a> · <a href="../zh/about.html#contact">联系方式</a>'
   }
 };
 
 /* Each entry: k=kind, sel=selected, date {en,zh}, note (extra meta tag, per lang),
-   t {en,zh} title, d {en,zh} description, links [[{en,zh} label, href], ...] */
+   t {en,zh} title, d {en,zh} description, links [[{en,zh} label, href], ...];
+   an href may itself be {en,zh} when the page it points to exists in both */
 var GROUPS = [
   { y:{en:"2026",zh:"2026"}, cls:"now", tag:{en:"in progress",zh:"进行中"}, items:[
     { k:"milestone", sel:true, date:{en:"28 Sep 2026",zh:"2026年9月28日"},
@@ -268,21 +269,33 @@ var GROUPS = [
          zh:"《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》的正式答辩。论文现已收入乌得勒支大学论文库，可公开查阅。"},
       links:[[{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"],
              [{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] },
+    { k:"paper", date:{en:"Sep 2026",zh:"2026年9月"}, note:"coauthor",
+      t:{en:"Occupations and work-related factors in relation to the incidence of type 2 diabetes: an exploratory study among 274,662 Dutch workers",
+         zh:"Occupations and work-related factors in relation to the incidence of type 2 diabetes: an exploratory study among 274,662 Dutch workers"},
+      d:{en:"Which jobs carry a higher risk of type 2 diabetes? Survey answers from 274,662 Dutch workers, linked to the national register of dispensed medicines, with stability-selected LASSO models to pick out the occupations and Cox models for night shifts, job autonomy and emotional demands. First presented at the EPICOH and ISEE meetings in 2024. <i>BMJ Public Health</i>.",
+         zh:"哪些职业的 2 型糖尿病风险更高？把 274,662 名荷兰劳动者的问卷数据与全国配药登记库相链接，用带稳定性选择的 LASSO 模型筛选职业，再用 Cox 模型考察夜班、工作自主性与情绪负荷。研究结果最早于 2024 年在 EPICOH 与 ISEE 会议上报告。《BMJ Public Health》。"},
+      links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.1136/bmjph-2025-004421"]] },
+    { k:"tool", sel:true, date:{en:"Sep 2026",zh:"2026年9月"},
+      t:{en:"Three cancer awareness games",zh:"三款防癌小游戏"},
+      d:{en:"Prevention taught through play: <i>Sol &amp; the UV Shield Quest</i> on sun safety for ages 6 to 12, <i>The Lung Detective</i> on what causes lung cancer for ages 10 to 16, and <i>A Town of 1,000</i> on breast-cancer prevention for 14 and up. Every fact in them carries its source, and the European Code Against Cancer is quoted word for word.",
+         zh:"寓教于玩：《Sol &amp; the UV Shield Quest》面向 6 至 12 岁，讲防晒；《The Lung Detective》面向 10 至 16 岁，讲肺癌的成因；《A Town of 1,000》面向 14 岁以上，讲乳腺癌的预防。游戏里的每一条事实都附有来源，《欧洲防癌守则》逐字引用原文。"},
+      links:[[{en:"Play them",zh:"去玩一玩"},{en:"../games.html",zh:"../zh/games.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"EpiDetective launches",zh:"EpiDetective 上线"},
       d:{en:"A personal, independent platform with one purpose: evidence that never leaves the literature has done less than half its job. Five languages, an ink-on-paper design, and a standing rule that every number links to its source — plus a Code Against Cancer page carrying the official IARC prevention guidance.",
          zh:"一个独立的个人平台，只为一件事：停留在文献里的证据，连一半的使命都未完成。五种语言、纸墨风格的设计，以及一条不变的规则——每个数字都链接到它的来源；另设《防癌守则》页面，传达 IARC 的官方预防指南。"},
-      links:[[{en:"epidetective.com",zh:"epidetective.com"},"../"],[{en:"Code Against Cancer",zh:"防癌守则"},"../code-against-cancer/"]] },
+      links:[[{en:"epidetective.com",zh:"epidetective.com"},{en:"../",zh:"../zh/"}],[{en:"Code Against Cancer",zh:"防癌守则"},{en:"../code-against-cancer/",zh:"../code-against-cancer/?lang=zh"}],
+             [{en:"How to read the evidence",zh:"读懂证据"},{en:"../reading.html",zh:"../zh/reading.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Cancer Evidence Explorer",zh:"癌症证据探索器"},
       d:{en:"The IARC Monographs' by-site evidence table — 185 exposures, 68 cancer sites, 469 evaluated links — made explorable in ten languages, with each exposure’s scientific record (volume, year, citations) one click away.",
          zh:"把 IARC《致癌物专论》的按部位证据表变成可探索的工具——185 种暴露、68 个癌症部位、469 条经评估的关联，十种语言，每种暴露的科学档案（卷号、年份、文献）一键可达。"},
-      links:[[{en:"How it works",zh:"工具说明"},"../explorer.html"]] },
+      links:[[{en:"How it works",zh:"工具说明"},{en:"../explorer.html",zh:"../zh/explorer.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Chronic Disease Evidence Explorer",zh:"慢性病证据图谱"},
-      d:{en:"The sister instrument for everything beyond cancer: 124 risk factors, 45 diseases, 434 graded links drawn from GBD Burden of Proof, Lancet Commissions, pooled cohort consortia and published meta-analyses — forest plots on a shared axis, a per-estimate audit trail, and a 513-source reference index. Ten languages, same rule: every claim traceable.",
-         zh:"癌症之外的姊妹工具：124 个危险因素、45 种疾病、434 条分级关联，取自 GBD Burden of Proof、《柳叶刀》委员会报告、大型队列联盟与已发表的荟萃分析——共享坐标轴的森林图、逐条估计的溯源记录、513 个来源的参考文献索引。十种语言，同一条规则：每个论断皆可回溯。"},
-      links:[[{en:"The instruments",zh:"工具一览"},"../#instruments"]] },
+      d:{en:"The sister instrument for everything beyond cancer: 124 risk factors, 45 diseases, 434 graded links drawn from GBD Burden of Proof, Lancet Commissions, pooled cohort consortia and published meta-analyses — forest plots on a shared axis, a per-estimate audit trail, and a 513-source reference index. Ten languages, same rule: every claim traceable. Version 1.4 followed in September 2026, after every flagged link had been checked again against its source.",
+         zh:"癌症之外的姊妹工具：124 个危险因素、45 种疾病、434 条分级关联，取自 GBD Burden of Proof、《柳叶刀》委员会报告、大型队列联盟与已发表的荟萃分析——共享坐标轴的森林图、逐条估计的溯源记录、513 个来源的参考文献索引。十种语言，同一条规则：每个论断皆可回溯。2026 年 9 月发布 1.4 版，此前所有被标记的关联都已对照原始来源重新核查。"},
+      links:[[{en:"The instruments",zh:"工具一览"},{en:"../#instruments",zh:"../zh/#instruments"}]] },
     { k:"paper", date:{en:"Aug 2026",zh:"2026年8月"}, note:"coauthor",
       t:{en:"The occupational exposome and new-onset COPD: longitudinal analyses of two European cohorts",
          zh:"The occupational exposome and new-onset COPD: longitudinal analyses of two European cohorts"},
@@ -290,8 +303,8 @@ var GROUPS = [
          zh:"暴露组框架应用于慢性肺病：两项欧洲队列的纵向分析。《Annals of Work Exposures and Health》。"},
       links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.1093/annweh/wxag065"]] },
     { k:"paper", date:{en:"Jan 2026",zh:"2026年1月"}, note:"lead",
-      t:{en:"Occupational exposure to chlorinated solvents and lung cancer: the SYNERGY case–control study",
-         zh:"Occupational exposure to chlorinated solvents and lung cancer: the SYNERGY case–control study"},
+      t:{en:"Occupational exposure to chlorinated solvents and lung cancer: results of the SYNERGY case–control study",
+         zh:"Occupational exposure to chlorinated solvents and lung cancer: results of the SYNERGY case–control study"},
       d:{en:"The SYNERGY database turned on a new family of suspects: dose–response and subgroup analyses of chlorinated solvents, run independently end to end. <i>Occupational and Environmental Medicine</i>.",
          zh:"SYNERGY 数据库转向新的嫌疑对象：对氯代溶剂开展剂量—反应与亚组分析，全程独立完成。《Occupational and Environmental Medicine》。"},
       links:[[{en:"DOI",zh:"DOI"},"https://doi.org/10.1136/oemed-2025-110129"]] },
@@ -321,7 +334,8 @@ var GROUPS = [
       t:{en:"PhD in Epidemiology — IRAS, Utrecht University &amp; TNO",zh:"流行病学博士——乌得勒支大学 IRAS 与荷兰应用科学研究组织（TNO）"},
       d:{en:"Thesis: <i>Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology</i>, supervised by Prof. Roel Vermeulen — the benzene, solvents, job-coding and exposome work bound into one argument about how occupational epidemiology should ask its questions.",
          zh:"博士论文：《Mapping the Occupational Exposome for Respiratory Health: Bridging Hypothesis-driven and Discovery-driven Epidemiology》，导师 Roel Vermeulen 教授——把苯、溶剂、职业编码与暴露组的研究织成一个关于职业流行病学应当如何提问的完整论证。"},
-      links:[[{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] }
+      links:[[{en:"Thesis · DOI",zh:"论文 · DOI"},"https://doi.org/10.33540/3504"],
+             [{en:"Utrecht research portal",zh:"乌得勒支科研门户"},"https://research-portal.uu.nl/en/persons/wenxin-wan/"]] }
   ]},
   { y:{en:"2024",zh:"2024"}, cls:"", items:[
     { k:"paper", sel:true, date:{en:"Dec 2024",zh:"2024年12月"}, note:"lead",
@@ -463,7 +477,10 @@ function build(lang){
     nav.appendChild(b);
   });
 
-  document.getElementById("backLink").textContent = S.back;
+  var site = lang === "zh" ? "../zh/" : "../";
+  var back = document.getElementById("backLink");
+  back.textContent = S.back; back.setAttribute("href", site + "about.html");
+  document.querySelector(".top .mark").setAttribute("href", site);
   document.getElementById("eyebrow").textContent = S.eyebrow;
   document.getElementById("h1").innerHTML = S.h1;
   document.getElementById("lede").innerHTML = S.lede;
@@ -511,8 +528,9 @@ function build(lang){
     yg.className = "yeargroup" + (g.cls ? " " + g.cls : "");
     var itemsHtml = g.items.map(function(it){
       var links = it.links.map(function(l){
-        var ext = /^https?:/.test(l[1]) ? ' rel="noopener"' : '';
-        return '<a href="' + l[1] + '"' + ext + '>' + pick(l[0],lang) + '</a>';
+        var href = typeof l[1] === "string" ? l[1] : pick(l[1],lang);
+        var ext = /^https?:/.test(href) ? ' rel="noopener"' : '';
+        return '<a href="' + href + '"' + ext + '>' + pick(l[0],lang) + '</a>';
       }).join("");
       return '<article class="item' + (it.sel ? ' sel' : '') + '" data-k="' + it.k + '">' +
         '<span class="tog" aria-hidden="true">+</span>' +

@@ -44,6 +44,7 @@
     "url": "https://epidetective.com/about.html",
     "sameAs": [
       "https://scholar.google.com/citations?user=xkxHpUsAAAAJ",
+      "https://orcid.org/0000-0002-1957-4034",
       "https://www.linkedin.com/in/wenxin-wan1",
       "https://github.com/Wenxin-Wan"
     ]
@@ -71,24 +72,16 @@
 
 <div id="page">
 
+<!-- Two rows on a desktop. Row one: the headline, level with the portrait.
+     Row two: the prose beside the record card and the credentials, sharing a
+     top and a bottom edge. On a phone the four parts stack in this order. -->
 <section class="sec wrap" id="about">
   <div class="about">
-    <div>
-      <div class="sec-head">
-        <div class="label">{{about_label}}</div>
-        <h1 class="page-h">{{about_h2}}</h1>
-      </div>
-      <p>{{about_p1}}</p>
-      <p>{{about_p2}}</p>
-      <p>{{about_p3}}</p>
-      <p>{{about_p4}}</p>
-      <div class="inline-links">
-        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
-        <a href="https://github.com/Wenxin-Wan">GitHub</a>
-      </div>
+    <div class="about-head sec-head">
+      <div class="label">{{about_label}}</div>
+      <h1 class="page-h">{{about_h2}}</h1>
     </div>
-    <div class="side">
+    <div class="about-photo">
       <picture>
         <source type="image/webp" srcset="{{PREFIX}}assets/portrait-300.webp 1x,
                                           {{PREFIX}}assets/portrait-600.webp 2x">
@@ -96,6 +89,20 @@
              srcset="{{PREFIX}}assets/portrait-300.jpg 1x, {{PREFIX}}assets/portrait-600.jpg 2x"
              width="300" height="375" decoding="async" alt="{{about_photo_alt}}">
       </picture>
+    </div>
+    <div class="about-text">
+      <p class="about-lead">{{about_p1}}</p>
+      <p>{{about_p2}}</p>
+      <p>{{about_p3}}</p>
+      <p>{{about_p4}}</p>
+      <div class="inline-links">
+        <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://orcid.org/0000-0002-1957-4034">ORCID</a>
+        <a href="https://www.linkedin.com/in/wenxin-wan1">LinkedIn</a>
+        <a href="https://github.com/Wenxin-Wan">GitHub</a>
+      </div>
+    </div>
+    <div class="about-facts">
       <a class="tl-card" href="{{URL_TIMELINE}}">
         <span class="tl-txt">
           <span class="r">{{about_timeline_label}}</span>

@@ -294,31 +294,51 @@ html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-wi
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
 .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 
-/* ---------- about strip ---------- */
-.about{display:grid;gap:34px}
-/* Prose length varies a lot by language (CJK runs markedly shorter per word
-   than Latin scripts), while the sidebar's credential values stay close to
-   Latin-length in every language -- so the two columns are rarely the same
-   natural height. On desktop both are stretched to the row: the prose column
-   keeps its text at the top and pushes the profile links to its bottom edge,
-   the sidebar spreads portrait, timeline card and credentials over the same
-   span -- so the two columns share their top and bottom edges in every
-   language, without a per-language override. */
+/* ---------- about ---------- */
+/* Four parts in a two-by-two grid on a desktop:
+     headline        | portrait
+     prose and links | record card and credentials
+   The headline sits level with the middle of the portrait. In the second row
+   both cells take the row's full height, so the prose and the credentials share
+   a top and a bottom edge in every language. Prose length varies a lot by
+   language (Chinese runs far shorter than French), so whichever cell is the
+   shorter one spreads its own parts evenly: the paragraphs open up a little, or
+   the credential rows grow a little. Neither leaves a hole. */
+.about{display:grid;gap:26px}
+.about-head{margin:0}
+.about-head h1.page-h{margin-bottom:0}
+.about-photo picture{display:block}
+.about-text,.about-facts{display:grid;gap:14px;align-content:start}
+.about-facts{gap:22px}
 @media (min-width:900px){
-  .about{grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:stretch}
-  .about>div:first-child{display:flex;flex-direction:column}
-  .about>div:first-child .inline-links{margin-top:auto;padding-top:20px}
-  .side{display:flex;flex-direction:column;justify-content:space-between;gap:22px}
-  .side .portrait,.side .tl-card{margin-bottom:0}
+  .about{grid-template-columns:minmax(0,1fr) 300px;column-gap:56px;row-gap:40px}
+  .about-head,.about-photo{align-self:center}
+  .about-head h1.page-h{font-size:clamp(1.7rem,3.3vw,2.7rem);max-width:21ch}
+  .about-text{display:flex;flex-direction:column;justify-content:space-between}
+  .about-facts{display:flex;flex-direction:column}
+  .about-facts .creds{flex:1;display:flex;flex-direction:column}
+  .about-facts .cred{flex:1 1 auto;align-content:center}
 }
-.about p{color:var(--ink-soft);margin:0 0 14px;max-width:56ch}
+.about p{color:var(--ink-soft);margin:0;max-width:60ch}
+/* the opening sentence is set a step larger; its measure is trimmed by the same
+   ratio so that it ends on the same line edge as the paragraphs below it */
+.about .about-lead{color:var(--ink);font-size:1.05rem;max-width:57.1ch}
+html[lang="zh"] .about-text p{max-width:31em}
+html[lang="zh"] .about-text .about-lead{max-width:29.5em}
+/* a linked title stays on one line, and no value ends on a stranded word */
+.about-text p a{white-space:nowrap}
+.cred .w,.about-text p{text-wrap:pretty}
+/* a narrow desktop gives the prose a little more of the width */
+@media (min-width:900px) and (max-width:1079px){
+  .about{grid-template-columns:minmax(0,1fr) 270px;column-gap:40px}
+}
 .creds{display:grid;border-top:1px solid var(--rule);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
 .cred dd{margin:0}
 .cred .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 .cred .w{font-size:.92rem}
-.inline-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.inline-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .inline-links a{text-decoration:none;border:1px solid var(--rule);padding:8px 13px;
                 font-size:.79rem;letter-spacing:.04em;
                 transition:border-color .16s ease,color .16s ease}
@@ -326,11 +346,10 @@ html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-wi
 /* The portrait is an engraved line screen: a high-frequency pattern, so each
    density is delivered at its own size via srcset rather than rescaled. */
 .portrait{display:block;width:100%;max-width:220px;height:auto;
-  border-radius:14px;margin:0 auto 22px}
-.side picture{display:block}
+  border-radius:14px;margin:0 auto}
 .tl-card{display:flex;align-items:center;justify-content:space-between;gap:16px;
   background:var(--ink);color:var(--chalk);border-radius:16px;
-  padding:18px 20px;text-decoration:none;margin-bottom:24px}
+  padding:18px 20px;text-decoration:none}
 .tl-txt{min-width:0}
 .tl-card .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
   font-weight:600;color:#B9BDB2;display:block}
