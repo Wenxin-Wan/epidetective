@@ -32,6 +32,7 @@
         <button type="button" class="btn" id="btn-settings">Settings</button>
       </div>
       <p class="fine">Ages 10 to 16 · about 10 minutes · keyboard, mouse or touch. Sources are shown with every clue.</p>
+      <p class="fine" id="best-line" hidden></p>
     </div>
     <div class="title-art" aria-hidden="true"><svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs>
@@ -103,7 +104,11 @@
 
     <div class="stage-wrap">
       <div class="scene" id="scene" aria-label="Scene"></div>
-      <p class="hint" id="scene-hint">Look for the pulsing rings. Click one, or press Tab to reach it and Enter to inspect.</p>
+      <div class="tools">
+        <ol class="notebook" id="notebook" aria-label="Detective’s notebook: what has been found in this case"></ol>
+        <button type="button" class="btn small" id="btn-hint">Give me a hint</button>
+      </div>
+      <p class="hint" id="scene-hint">Search the picture: a ring appears when your pointer passes over a clue. Click or tap it to open its file.</p>
     </div>
 
     <!-- Case-file panel -->
@@ -122,7 +127,8 @@
   <section class="screen report" id="screen-report" hidden>
     <div class="report-card">
       <p class="kicker">Case closed</p>
-      <h2>Detective's report</h1>
+      <h2>Detective’s report</h2>
+      <p class="rank" id="report-rank"></p>
       <div class="report-grid" id="report-grid"></div>
       <div id="report-body"></div>
       <div class="title-actions">
@@ -137,11 +143,11 @@
     <div class="modal-card">
       <div class="panel-head"><h2 id="how-title">How to play</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
       <ol class="steps">
-        <li>Each scene hides <b>four clues</b>, marked with a pulsing ring. Click one to open its case file.</li>
-        <li>Decide how to file it: a <b>known cause</b> of lung cancer (IARC Group 1), a <b>probable cause</b> (Group 2A), or <b>no evidence</b>. A wrong choice costs nothing: you get the explanation and can try again.</li>
-        <li>Real hazards can be <b>fixed</b>. Every fix raises the clean-air score.</li>
-        <li>Somebody in each scene wants to talk. Pick the reply you think is right.</li>
-        <li>When all clues are filed, the case closes and the next one opens. Three cases, then your report.</li>
+        <li>Each scene hides <b>four clues</b>. Search the picture: a ring appears when your pointer passes over one. On a phone, tap anything that looks suspicious; a miss tells you whether you are warm or cold. The hint button shows one clue if you are stuck.</li>
+        <li>Open a clue and decide how to file it: a <b>known cause</b> of lung cancer (IARC Group 1), a <b>probable cause</b> (Group 2A), or <b>no evidence</b>. A wrong choice costs nothing: you get a nudge and try again.</li>
+        <li>Real hazards can be <b>fixed</b>. Each fix raises the clean-air score, and you can watch the smoke or dust clear from the picture.</li>
+        <li>Somebody in each scene wants to talk. Pick the reply the evidence supports.</li>
+        <li>When all the clues are filed, the case closes and the next one opens. After the third comes <b>the line-up</b>: six clues to file again from memory. Then your report, and your detective rank.</li>
       </ol>
       <p class="fine">The game shows whether something <b>can</b> cause lung cancer in people in general. It cannot tell anyone what caused their own illness, and most people with these exposures never develop lung cancer.</p>
     </div>
@@ -155,6 +161,8 @@
       <label class="opt"><input type="checkbox" id="opt-large"> Larger text</label>
       <label class="opt"><input type="checkbox" id="opt-font"> Wider, easier-to-read letters</label>
       <label class="opt"><input type="checkbox" id="opt-motion"> Reduce motion</label>
+      <label class="opt"><input type="checkbox" id="opt-mute"> Mute sound</label>
+      <label class="opt"><input type="checkbox" id="opt-reveal"> Show where the clues are</label>
       <p class="fine">Settings are kept on this device only.</p>
     </div>
   </div>

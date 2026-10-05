@@ -181,9 +181,18 @@ const BADGES = {
 };
 
 /* ------------------------------------------------------------------ state */
-const KEY = 'epi-town-of-1000';
-const state = { chapter: 0, picks: {}, shown: { cases: MODEL.baseCases, deaths: MODEL.baseDeaths }, settings: {} };
-let dotsMain = [], dotsFinal = [];
+const KEY = 'epi-town-of-1000', BEST = 'epi-town-of-1000-best';
+const state = { chapter: 0, picks: {}, forecasts: [], hits: 0, shown: { cases: MODEL.baseCases, deaths: MODEL.baseDeaths }, settings: {} };
+let dotsMain = [], dotsFinal = [], audio = null;
+/* The council’s forecast: before each count, a guess at what the decade’s choices did to the number diagnosed. */
+const FORECAST = [
+  { id: 'up',   label: 'More than before',   test: d => d < 0 },
+  { id: 'same', label: 'No change',          test: d => d === 0 },
+  { id: 'few',  label: '1 or 2 fewer',       test: d => d >= 1 && d <= 2 },
+  { id: 'some', label: '3 to 5 fewer',       test: d => d >= 3 && d <= 5 },
+  { id: 'many', label: '6 to 10 fewer',      test: d => d >= 6 && d <= 10 },
+  { id: 'lots', label: 'More than 10 fewer', test: d => d > 10 },
+];
 
 function loadSettings() {
   try { Object.assign(state.settings, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
@@ -192,11 +201,32 @@ function loadSettings() {
   app.classList.toggle('large', !!state.settings.large);
   app.classList.toggle('wide', !!state.settings.font);
   app.classList.toggle('still', !!state.settings.motion);
-  ['contrast', 'large', 'font', 'motion'].forEach(k => { $('#opt-' + k).checked = !!state.settings[k]; });
+  ['contrast', 'large', 'font', 'motion', 'mute'].forEach(k => { $('#opt-' + k).checked = !!state.settings[k]; });
 }
 function saveSettings() { try { localStorage.setItem(KEY, JSON.stringify(state.settings)); } catch (e) {} }
 function isStill() {
   return $('#app').classList.contains('still') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+/* Short synthesised sounds; nothing is downloaded. */
+function sfx(kind) {
+  if (state.settings.mute) return;
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    const tone = (f0, f1, dur, type = 'sine', vol = .05, delay = 0) => {
+      const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime + delay;
+      o.type = type; o.connect(g); g.connect(audio.destination);
+      o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur); o.start(t); o.stop(t + dur + .02);
+    };
+    const play = {
+      pick: () => tone(420, 520, .06, 'triangle', .035),
+      count: () => [0, 1, 2, 3].forEach(i => tone(700 + i * 90, 700 + i * 90, .05, 'sine', .03, i * .12)),
+      hit: () => { tone(520, 780, .14); tone(780, 1170, .2, 'sine', .045, .1); },
+      off: () => tone(300, 240, .18, 'triangle', .04),
+      end: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, .18, 'sine', .05, i * .14)),
+    }[kind];
+    if (play) play();
+  } catch (e) {}
 }
 function show(screen) {
   $('#app').dataset.screen = screen;
@@ -210,12 +240,12 @@ function cardsUpTo(upto) {
   for (let c = 0; c <= upto && c < CHAPTERS.length; c++) CHAPTERS[c].cards.forEach(card => out.push(card));
   return out;
 }
-function pickOf(card) { const i = state.picks[card.id]; return i == null ? null : card.options[i]; }
-function town(upto) {
+function pickOf(card, picks = state.picks) { const i = picks[card.id]; return i == null ? null : card.options[i]; }
+function town(upto, picks = state.picks) {
   const p = {}; FACTOR_ORDER.forEach(k => { p[k] = MODEL.factors[k].p0; });
   let s = MODEL.s0;
   cardsUpTo(upto).forEach(card => {
-    const o = pickOf(card); if (!o) return;
+    const o = pickOf(card, picks); if (!o) return;
     const e = o.effect;
     if (e.factor && e.delta != null) p[e.factor] = clamp01(p[e.factor] + e.delta);
     if (e.factor && e.set != null) p[e.factor] = e.set;
@@ -223,8 +253,8 @@ function town(upto) {
   });
   return { p, s };
 }
-function project(upto) {
-  const { p, s } = town(upto);
+function project(upto, picks = state.picks) {
+  const { p, s } = town(upto, picks);
   let ratio = 1;
   FACTOR_ORDER.forEach(k => {
     const f = MODEL.factors[k];
@@ -242,6 +272,27 @@ function deltaText(n, base) {
   return (d > 0 ? '+' : '−') + Math.abs(d) + ' vs the baseline';
 }
 function deltaClass(n, base) { return n < base ? 'down' : n > base ? 'up' : ''; }
+/* What lay within any council’s reach: the lowest counts over every affordable set of choices, and the counts if nothing is done. */
+function reach() {
+  const lists = CHAPTERS.map(ch => {
+    const out = [];
+    const rec = (i, picks, cost) => {
+      if (i === ch.cards.length) { out.push(picks); return; }
+      ch.cards[i].options.forEach((o, k) => { if (cost + o.cost <= BUDGET) rec(i + 1, Object.assign({}, picks, { [ch.cards[i].id]: k }), cost + o.cost); });
+    };
+    rec(0, {}, 0); return out;
+  });
+  const best = { cases: Infinity, deaths: Infinity }, last = CHAPTERS.length - 1;
+  const walk = (c, picks) => {
+    if (c === lists.length) { const r = project(last, picks); best.cases = Math.min(best.cases, r.cases); best.deaths = Math.min(best.deaths, r.deaths); return; }
+    lists[c].forEach(p => walk(c + 1, Object.assign({}, picks, p)));
+  };
+  walk(0, {});
+  const none = {}; CHAPTERS.forEach(ch => ch.cards.forEach(card => { none[card.id] = 0; }));
+  const nothing = project(last, none);
+  return { best, nothing: { cases: nothing.cases, deaths: nothing.deaths } };
+}
+const changeText = d => d > 0 ? `${d} fewer` : d < 0 ? `${-d} more` : 'no change';
 
 /* ------------------------------------------------------------------ dots */
 function buildDots(container) {
@@ -260,7 +311,7 @@ function paintDots(dots, container, cases, deaths, animate) {
   let k = 0;
   dots.forEach((el, i) => {
     const cls = i < deaths ? 'die' : i < cases ? 'case' : '';
-    // baseline ghost: rings where the baseline count reached and the town's count does not, or beyond it
+    // baseline ghost: rings where the baseline count reached and the town’s count does not, or beyond it
     const ghost = (i >= deaths && i < B.baseDeaths) ? 'die' : (i >= cases && i < B.baseCases) ? 'case' : (i >= B.baseCases && i < cases) ? 'over' : '';
     const cur = el.getAttribute('data-s') || '';
     if (ghost) el.setAttribute('data-g', ghost); else el.removeAttribute('data-g');
@@ -360,7 +411,7 @@ function renderChapter() {
   $$('#cards .choice').forEach(btn => btn.addEventListener('click', () => {
     const id = btn.dataset.card, i = +btn.dataset.i;
     if (state.picks[id] === i) delete state.picks[id]; else state.picks[id] = i;
-    updateEffort();
+    sfx('pick'); updateEffort(); hideForecast();
   }));
   updateEffort();
   const wrap = $('.cards'); wrap.classList.remove('enter'); void wrap.offsetWidth; wrap.classList.add('enter');
@@ -384,17 +435,35 @@ function updateEffort() {
   const allPicked = ch.cards.every(card => state.picks[card.id] != null);
   const ready = allPicked || left === 0;
   $('#btn-close-chapter').disabled = !ready;
-  $('#close-hint').textContent = ready ? 'You can still change your mind before you close the chapter.'
+  $('#close-hint').textContent = ready ? 'You can still change your mind. Closing the chapter asks for the council’s forecast first.'
     : left === 0 ? '' : 'Pick an option on each card.';
 }
 
 /* ------------------------------------------------------------------ closing a chapter */
-function closeChapter() {
+function hideForecast() { $('#forecast').hidden = true; $('.close-row').hidden = false; }
+/* Step one: the council says what it expects. Step two, closeChapter, runs the count. */
+function askForecast() {
+  const f = $('#forecast');
+  $('#forecast-q').textContent = 'Before the count: what will this decade’s choices do to the number of women diagnosed by 75?';
+  $('#forecast-opts').innerHTML = FORECAST.map(o => `<button type="button" class="fc" data-f="${o.id}">${o.label}</button>`).join('');
+  $$('#forecast-opts .fc').forEach(b => b.addEventListener('click', () => { closeChapter(b.dataset.f); }));
+  $('.close-row').hidden = true; f.hidden = false;
+  f.scrollIntoView({ behavior: isStill() ? 'auto' : 'smooth', block: 'nearest' });
+  const first = f.querySelector('.fc'); if (first) first.focus({ preventScroll: true });
+}
+function closeChapter(forecastId) {
   const ch = chapter();
   ch.cards.forEach(card => { if (state.picks[card.id] == null) state.picks[card.id] = 0; });
   const before = state.shown;
   const next = project(state.chapter);
+  const fewer = before.cases - next.cases;
+  const guess = FORECAST.find(o => o.id === forecastId), truth = FORECAST.find(o => o.test(fewer));
+  const hit = !!guess && guess.id === truth.id;
+  state.forecasts[state.chapter] = { guess: guess ? guess.id : null, hit };
+  if (hit) state.hits++;
+  hideForecast();
   renderTown(next, true);
+  sfx('count'); setTimeout(() => sfx(hit ? 'hit' : 'off'), 600);
   $('#town-status').textContent = `After ${ch.name.toLowerCase()}: about ${next.cases} of 1,000 diagnosed by 75, about ${next.deaths} die of it.`;
   const last = state.chapter === CHAPTERS.length - 1;
   const codes = []; ch.cards.forEach(card => card.code.forEach(k => { if (!codes.includes(k)) codes.push(k); }));
@@ -411,6 +480,7 @@ function closeChapter() {
     ? 'The projection for the town is where it was at the start of the decade.'
     : 'The projection for the town moved this decade.';
   $('#panel-body').innerHTML = `
+    ${guess ? `<div class="fc-result ${hit ? 'ok' : 'no'}"><p class="kicker">The council’s forecast · ${hit ? 'on target' : 'off target'}</p><p>You expected <b>${esc(guess.label.toLowerCase())}</b> among the diagnosed. The count: <b>${esc(changeText(fewer))}</b>.${hit ? '' : fewer <= 2 && ['some', 'many', 'lots'].includes(guess.id) ? ' Shifts this small are the point: the effect sizes come from pooled studies, and they are modest.' : ''}</p></div>` : ''}
     <div class="shift">
       <div><b>about ${before.cases} → ${next.cases}</b><span>of 1,000 diagnosed by 75 · ${esc(deltaText(next.cases, MODEL.baseCases))}</span></div>
       <div><b>about ${before.deaths} → ${next.deaths}</b><span>of 1,000 die of it · ${esc(deltaText(next.deaths, MODEL.baseDeaths))}</span></div>
@@ -456,6 +526,7 @@ function ending() {
     [`<small>about</small> ${fin.deaths}`, `of 1,000 die of it · ${deltaText(fin.deaths, MODEL.baseDeaths)}`],
     [`${spent}<small>/${BUDGET * CHAPTERS.length}</small>`, 'effort points spent'],
     [`${wasted}`, wasted === 1 ? 'effort point spent without evidence' : 'effort points spent without evidence'],
+    [`${state.hits}<small>/${CHAPTERS.length}</small>`, 'forecasts on target'],
   ].map(([b, s]) => `<div><b>${b}</b><span>${esc(s)}</span></div>`).join('');
   if (!dotsFinal.length) dotsFinal = buildDots($('#dots-final'));
   paintDots(dotsFinal, $('#dots-final'), fin.cases, fin.deaths, false);
@@ -468,7 +539,18 @@ function ending() {
     return `<li class="${e.wasted ? 'wasted' : ''}"><div><span class="ch">${esc(card.title)}</span><em>${esc(o.label)}</em></div>${costHtml(o.cost)}</li>`;
   }).join('')}</ul></div></li>`).join('');
   const codes = []; CHAPTERS.forEach(ch => ch.cards.forEach(card => card.code.forEach(k => { if (!codes.includes(k)) codes.push(k); })));
-  $('#report-body').innerHTML = `
+  const R = reach();
+  const got = { cases: R.nothing.cases - fin.cases, deaths: R.nothing.deaths - fin.deaths }, room = { cases: R.nothing.cases - R.best.cases, deaths: R.nothing.deaths - R.best.deaths };
+  const yardRow = (k, label) => `<tr><th scope="row">${label}</th><td>about ${R.nothing[k]}</td><td class="you">about ${fin[k]}</td><td>about ${R.best[k]}</td></tr>`;
+  let best = null; try { best = JSON.parse(localStorage.getItem(BEST) || 'null'); } catch (e) {}
+  const record = !best || fin.deaths < best.deaths || (fin.deaths === best.deaths && fin.cases < best.cases);
+  if (record) { try { localStorage.setItem(BEST, JSON.stringify({ cases: fin.cases, deaths: fin.deaths })); } catch (e) {} }
+  const yardHtml = `
+    <p class="kicker" style="margin-top:22px">Within the council’s reach${record && best ? ' · your best town so far' : ''}</p>
+    <table class="yard"><thead><tr><td></td><th scope="col">If the council did nothing</th><th scope="col" class="you">Your council</th><th scope="col">The most any council could do</th></tr></thead>
+      <tbody>${yardRow('cases', 'Diagnosed by 75, of 1,000')}${yardRow('deaths', 'Die of it, of 1,000')}</tbody></table>
+    <p class="fine">Of the ${room.cases} ${room.cases === 1 ? 'diagnosis' : 'diagnoses'} and ${room.deaths} ${room.deaths === 1 ? 'death' : 'deaths'} that the cards could spare, your council spared ${Math.max(0, got.cases)} and ${Math.max(0, got.deaths)}. The lowest counts are worked out by trying every set of choices the effort budget allows; the two columns on the right may need different choices. ${state.hits === CHAPTERS.length ? 'Every forecast was on target.' : `${state.hits} of ${CHAPTERS.length} forecasts were on target.`}</p>`;
+  $('#report-body').innerHTML = `${yardHtml}
     <p class="kicker" style="margin-top:18px">Badges</p>
     <div class="badges">${badgeHtml || '<span class="fine">No badges this time.</span>'}</div>
     ${Object.keys(BADGES).filter(k => badges[k]).map(k => `<p class="fine"><b>${esc(BADGES[k].label)}.</b> ${esc(BADGES[k].sub)}</p>`).join('')}
@@ -491,8 +573,8 @@ function ending() {
     <div class="actions"><button type="button" class="btn" id="btn-about-3">About the numbers</button></div>
     ${srcHtml(['gco', 'bagnardi', 'pizot', 'kyu', 'fat', 'bf', 'mht', 'screen', 'mirick', 'm100e', 'chen', 'code'])}`;
   $('#btn-about-3').addEventListener('click', () => openAbout());
-  show('report'); window.scrollTo({ top: 0 });
-  $('#screen-report h1').setAttribute('tabindex', '-1'); $('#screen-report h1').focus({ preventScroll: true });
+  show('report'); window.scrollTo({ top: 0 }); sfx('end'); bestLine();
+  $('#report-title').focus({ preventScroll: true });
 }
 
 /* ------------------------------------------------------------------ about the numbers */
@@ -531,11 +613,16 @@ function aboutHtml() {
     <p class="fine">The effects are deliberately modest. They are meant to show the shape of population prevention, where a small change in a common exposure adds up across many people, and to be honest about how small the changes are for any one town.</p>
   </div>`;
 }
+function bestLine() {
+  let best = null; try { best = JSON.parse(localStorage.getItem(BEST) || 'null'); } catch (e) {}
+  const el = $('#best-line'); if (!el) return;
+  el.hidden = !best; if (best) el.textContent = `Your best town so far: about ${best.cases} diagnosed and about ${best.deaths} deaths per 1,000.`;
+}
 function openAbout() { $('#about-body').innerHTML = aboutHtml(); openModal('#modal-about'); }
 
 /* ------------------------------------------------------------------ reset and wiring */
 function reset() {
-  state.chapter = 0; state.picks = {};
+  state.chapter = 0; state.picks = {}; state.forecasts = []; state.hits = 0;
   state.shown = { cases: MODEL.baseCases, deaths: MODEL.baseDeaths };
   if (!dotsMain.length) dotsMain = buildDots($('#dots'));
   paintDots(dotsMain, $('#dots'), MODEL.baseCases, MODEL.baseDeaths, false);
@@ -543,7 +630,7 @@ function reset() {
   $('#fig-cases-d').textContent = 'the baseline'; $('#fig-cases-d').className = 'delta';
   $('#fig-deaths-d').textContent = 'the baseline'; $('#fig-deaths-d').className = 'delta';
   $('#town-status').textContent = '';
-  $('#panel').hidden = true;
+  $('#panel').hidden = true; hideForecast();
   renderSkyline(0, {}, false);
 }
 function start() { reset(); show('play'); renderChapter(); }
@@ -556,11 +643,12 @@ $('#btn-about').addEventListener('click', openAbout);
 $('#btn-about-2').addEventListener('click', openAbout);
 $('#btn-settings').addEventListener('click', () => openModal('#modal-settings'));
 $('#btn-settings-2').addEventListener('click', () => openModal('#modal-settings'));
-$('#btn-close-chapter').addEventListener('click', closeChapter);
+$('#btn-close-chapter').addEventListener('click', askForecast);
+$('#btn-forecast-back').addEventListener('click', hideForecast);
 $$('[data-close]').forEach(b => b.addEventListener('click', closeModals));
 $$('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModals(); }));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(); });
-['contrast', 'large', 'font', 'motion'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
+['contrast', 'large', 'font', 'motion', 'mute'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
 loadSettings();
 if (window.TownArt) {
   document.body.insertAdjacentHTML('afterbegin', window.TownArt.defs());
@@ -568,5 +656,6 @@ if (window.TownArt) {
 }
 dotsMain = buildDots($('#dots'));
 paintDots(dotsMain, $('#dots'), MODEL.baseCases, MODEL.baseDeaths, false);
+bestLine();
 show('title');
 })();

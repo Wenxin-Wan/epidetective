@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A Town of 1,000 — a breast-cancer prevention game on EpiDetective</title>
-<meta name="description" content="A choices game for ages 14 and up: sit on the council of a town of 1,000 women, spend three points of effort each decade, and watch how the town's projected breast-cancer outcome changes. Every number carries its source.">
+<meta name="description" content="A choices game for ages 14 and up: sit on the council of a town of 1,000 women, spend three points of effort each decade, and watch how the town’s projected breast-cancer outcome changes. Every number carries its source.">
 <link rel="canonical" href="https://epidetective.com/games/town-of-1000/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:title" content="A Town of 1,000">
-<meta property="og:description" content="Sit on the council of a town of 1,000 women. Spend three points of effort each decade and see how the town's breast-cancer outcome changes, with the evidence behind every card.">
+<meta property="og:description" content="Sit on the council of a town of 1,000 women. Spend three points of effort each decade and see how the town’s breast-cancer outcome changes, with the evidence behind every card.">
 <meta property="og:url" content="https://epidetective.com/games/town-of-1000/">
 <meta property="og:image" content="https://epidetective.com/assets/games/town-of-1000-card.jpg">
 <link rel="stylesheet" href="game.css">
@@ -23,7 +23,7 @@
     <div class="title-card">
       <p class="kicker">EpiDetective · cancer awareness game</p>
       <h1>A Town of <em>1,000</em></h1>
-      <p class="lede">One town, one thousand women, followed from their twenties to 75. You sit on the council, and each decade you have three points of effort to spend on the things that shape breast-cancer risk across a whole population. The town's projected outcome updates as you go. The effects come from published studies, and they are modest; that is part of the point.</p>
+      <p class="lede">One town, one thousand women, followed from their twenties to 75. You sit on the council, and each decade you have three points of effort to spend on the things that shape breast-cancer risk across a whole population. The town’s projected outcome updates as you go. The effects come from published studies, and they are modest; that is part of the point.</p>
       <div class="title-actions">
         <button type="button" class="btn primary" id="btn-start">Start</button>
         <button type="button" class="btn" id="btn-how">How to play</button>
@@ -31,6 +31,7 @@
         <button type="button" class="btn" id="btn-settings">Settings</button>
       </div>
       <p class="fine">Ages 14 and up · about 8 minutes · keyboard, mouse or touch. Sources are shown with every card.</p>
+      <p class="fine" id="best-line" hidden></p>
     </div>
     <div class="title-art" id="title-art"></div>
   </section>
@@ -62,7 +63,7 @@
         <div class="skyline" id="skyline" aria-hidden="true"></div>
         <div class="dots-card">
           <div class="dots-head">
-            <p class="kicker">The town's 1,000 women</p>
+            <p class="kicker">The town’s 1,000 women</p>
             <h2 class="dots-title">Projected to age 75</h2>
           </div>
           <div class="dots" id="dots"></div>
@@ -97,6 +98,12 @@
           <button type="button" class="btn primary" id="btn-close-chapter" disabled>Close the chapter</button>
           <span class="fine" id="close-hint">Pick an option on each card.</span>
         </div>
+        <div class="forecast" id="forecast" hidden>
+          <p class="kicker">The council’s forecast</p>
+          <h3 id="forecast-q"></h3>
+          <div class="fc-opts" id="forecast-opts" role="group" aria-labelledby="forecast-q"></div>
+          <p class="fine">Pick one to run the count. <button type="button" class="linkish" id="btn-forecast-back">Change the cards instead</button></p>
+        </div>
       </div>
     </div>
 
@@ -114,7 +121,7 @@
     <div class="report-card file">
       <div class="skyline final" id="skyline-final" aria-hidden="true"></div>
       <div class="file-tab"><span class="kicker">Council file · the cohort at 75</span></div>
-      <h2>How the town did</h1>
+      <h2 id="report-title" tabindex="-1">How the town did</h2>
       <p class="headline" id="report-headline"></p>
       <div class="report-grid" id="report-grid"></div>
       <div class="dots ending-dots" id="dots-final"></div>
@@ -139,11 +146,11 @@
       <ol class="steps">
         <li>The town follows <b>1,000 women</b> from their twenties to age 75. The grid of dots shows how many are projected to be diagnosed with breast cancer by 75 (red) and how many to die of it (ink). It starts from the Western European figures.</li>
         <li>Each decade brings <b>two decision cards</b>. Every option has an effort cost of 0, 1 or 2, and the council has <b>3 points of effort</b> per decade, so you cannot do everything.</li>
-        <li>Pick one option on each card, then <b>close the chapter</b>. The projection updates and you see what changed, with the evidence and the matching recommendation from the European Code Against Cancer.</li>
+        <li>Pick one option on each card, then <b>close the chapter</b>. First the council makes its <b>forecast</b>: how far will this decade’s choices move the number diagnosed? Then the projection updates and you see what changed, with the evidence and the matching recommendation from the European Code Against Cancer.</li>
         <li>Some cards test judgement more than budget. Effort spent on something without evidence changes nothing in the town.</li>
-        <li>After five decades you see how the town did, and what the game can and cannot say.</li>
+        <li>After five decades you see how the town did, how it compares with doing nothing and with the most any council could do, and what the game can and cannot say.</li>
       </ol>
-      <p class="fine">The numbers are population averages from pooled studies. They describe what tends to happen across a thousand women and cannot predict any one woman's future.</p>
+      <p class="fine">The numbers are population averages from pooled studies. They describe what tends to happen across a thousand women and cannot predict any one woman’s future.</p>
     </div>
   </div>
 
@@ -163,6 +170,7 @@
       <label class="opt"><input type="checkbox" id="opt-large"> Larger text</label>
       <label class="opt"><input type="checkbox" id="opt-font"> Wider, easier-to-read letters</label>
       <label class="opt"><input type="checkbox" id="opt-motion"> Reduce motion</label>
+      <label class="opt"><input type="checkbox" id="opt-mute"> Mute sound</label>
       <p class="fine">Settings are kept on this device only.</p>
     </div>
   </div>

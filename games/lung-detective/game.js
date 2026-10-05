@@ -375,18 +375,20 @@ function welder(x, y, o = {}) {
 
 /* Hotspot: keeps the contract the logic relies on (.hot > .halo, art, .ring, .badge)
    and adds a hover/focus tooltip (.tip) plus a second, static ring. */
-function hot(id, cx, cy, r, inner, label) {
+function hot(id, cx, cy, r, inner, label, badgeLeft = false) {
   const short = label.replace(/^Inspect:\s*/i, '').replace(/^\w/, c => c.toUpperCase());
   const w = Math.round(short.length * 6.9 + 22);
   const above = cy - r - 34 > 8;
   const ty = above ? cy - r - 30 : cy + r + 20;
   const tx = Math.max(w / 2 + 6, Math.min(960 - w / 2 - 6, cx));
-  return `<g class="hot" data-id="${id}" tabindex="0" role="button" aria-label="${esc(label)}">
+  // the "filed" badge sits upper right, unless something drawn later would cover it there
+  const bx = badgeLeft ? cx - r * .7 - 46 : Math.min(cx + r * .7, 960 - 58);
+  return `<g class="hot" data-id="${id}" data-cx="${cx}" data-cy="${cy}" data-r="${r}" tabindex="0" role="button" aria-label="${esc(label)}">
     <circle class="halo" cx="${cx}" cy="${cy}" r="${r + 26}" fill="url(#halo)"/>${inner}
     <circle class="ring2" cx="${cx}" cy="${cy}" r="${r}"/>
     <circle class="ring" cx="${cx}" cy="${cy}" r="${r}"/>
     <g class="tip" transform="translate(${tx} ${ty})"><path d="M-5 ${above ? 10 : -10} l5 ${above ? 6 : -6} l5 ${above ? -6 : 6}z" fill="#161713"/><rect x="${-w / 2}" y="-10" width="${w}" height="20" rx="10" fill="#161713"/><text x="0" y="4" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing=".08em" fill="#F5F4F0">${esc(short.toUpperCase())}</text></g>
-    <g class="badge" transform="translate(${cx + r * .7} ${cy - r * .7})"><g class="badge-in"><rect x="-6" y="-11" width="58" height="22" rx="11" fill="#161713"/><circle cx="6" cy="0" r="7" fill="#F5F4F0"/><path d="M2 0 l3 3 l5 -6" fill="none" stroke="#161713" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="17" y="4" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" letter-spacing=".1em" fill="#F5F4F0">FILED</text></g></g>
+    <g class="badge" transform="translate(${bx} ${cy - r * .7})"><g class="badge-in"><rect x="-6" y="-11" width="58" height="22" rx="11" fill="#161713"/><circle cx="6" cy="0" r="7" fill="#F5F4F0"/><path d="M2 0 l3 3 l5 -6" fill="none" stroke="#161713" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="17" y="4" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" letter-spacing=".1em" fill="#F5F4F0">FILED</text></g></g>
   </g>`;
 }
 function label(x, y, text, cls = 'txt small') { return `<text class="${cls}" x="${x}" y="${y}">${esc(text)}</text>`; }
@@ -453,7 +455,7 @@ function sceneFlat() {
     <g transform="rotate(-6 400 352)"><rect x="378" y="342" width="48" height="16" rx="2" fill="#F5F4F0" stroke="#B9B0A0"/><rect x="384" y="346" width="18" height="8" fill="${P.teal}"/><path d="M406 348 h14 M406 352 h12" stroke="#B9B0A0" stroke-width="1.5"/></g>
     <rect x="520" y="336" width="22" height="22" rx="4" fill="#F5F4F0" stroke="#B9B0A0"/><path d="M542 342 q10 3 0 12" fill="none" stroke="#B9B0A0" stroke-width="3"/><ellipse cx="531" cy="338" rx="8" ry="2.5" fill="#6B4A32"/>
     <rect x="490" y="348" width="9" height="16" rx="2" fill="${P.terra}" transform="rotate(20 494 356)"/>
-    ${hot('ashtray', 446, 344, 34, `<ellipse cx="446" cy="352" rx="30" ry="10" fill="#4E4E4A"/><ellipse cx="446" cy="348" rx="24" ry="7" fill="#8C8F87"/><ellipse cx="446" cy="348" rx="14" ry="4" fill="#5D5F5C"/><g fill="#F5F4F0"><rect x="428" y="342" width="12" height="3" rx="1" transform="rotate(-30 434 343)"/><rect x="440" y="340" width="10" height="3" rx="1" transform="rotate(20 445 341)"/><rect x="452" y="346" width="9" height="3" rx="1" transform="rotate(-70 456 347)"/></g><g transform="rotate(-22 470 343)"><rect x="458" y="341" width="30" height="4.5" rx="2" fill="#F5F4F0"/><rect x="458" y="341" width="7" height="4.5" rx="2" fill="#D9A35B"/><rect x="484" y="341" width="4" height="4.5" fill="#E1502E"/></g>${wisps(486, 330, { n: 3, h: 70, col: '#9A9A94', gap: 7 })}`, 'Inspect: ashtray on the coffee table')}
+    ${hot('ashtray', 446, 344, 34, `<ellipse cx="446" cy="352" rx="30" ry="10" fill="#4E4E4A"/><ellipse cx="446" cy="348" rx="24" ry="7" fill="#8C8F87"/><ellipse cx="446" cy="348" rx="14" ry="4" fill="#5D5F5C"/><g fill="#F5F4F0"><rect x="428" y="342" width="12" height="3" rx="1" transform="rotate(-30 434 343)"/><rect x="440" y="340" width="10" height="3" rx="1" transform="rotate(20 445 341)"/><rect x="452" y="346" width="9" height="3" rx="1" transform="rotate(-70 456 347)"/></g><g transform="rotate(-22 470 343)"><rect x="458" y="341" width="30" height="4.5" rx="2" fill="#F5F4F0"/><rect x="458" y="341" width="7" height="4.5" rx="2" fill="#D9A35B"/><rect x="484" y="341" width="4" height="4.5" fill="#E1502E"/></g><g data-haz="ashtray">${wisps(486, 330, { n: 3, h: 70, col: '#9A9A94', gap: 7 })}</g><g data-fix="ashtray" transform="translate(356 104)"><circle r="16" fill="#F5F4F0" stroke="#ba4c38" stroke-width="3.5"/><rect x="-9" y="-2.5" width="15" height="5" rx="1" fill="#454740"/><rect x="6" y="-2.5" width="4" height="5" fill="#d27a35"/><path d="M-11 -11 L11 11" stroke="#ba4c38" stroke-width="3.5" stroke-linecap="round"/></g>`, 'Inspect: ashtray on the coffee table')}
     </g>
     <!-- books and mug by the sofa -->
     <g transform="translate(70 500)">${shadow(30, 34, 34, 5, .14)}<rect x="0" y="18" width="56" height="10" rx="2" fill="${P.teal}"/><rect x="6" y="8" width="48" height="10" rx="2" fill="${P.ochre}"/><rect x="2" y="-2" width="50" height="10" rx="2" fill="#F5F4F0" stroke="#B9B0A0"/><rect x="66" y="8" width="18" height="20" rx="3" fill="#F5F4F0" stroke="#B9B0A0"/><path d="M84 12 q8 4 0 12" fill="none" stroke="#B9B0A0" stroke-width="2.5"/></g>
@@ -466,7 +468,7 @@ function sceneFlat() {
     <text x="677" y="232" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" font-weight="700" letter-spacing="2" fill="#F5F4F0" opacity=".9">BASEMENT</text><path d="M677 240 v18 m-5 -6 l5 6 l5 -6" fill="none" stroke="#F5F4F0" stroke-width="2" stroke-linecap="round" opacity=".9"/>
     <circle cx="710" cy="306" r="5" fill="#D9A35B"/><rect x="706" y="316" width="8" height="10" rx="2" fill="#2B2B28"/>
     <rect x="630" y="398" width="94" height="6" fill="#161713" opacity=".6"/>
-    ${hot('radon', 677, 300, 50, `<g class="radon">${wisps(660, 398, { n: 2, h: 90, col: '#9A8FBF', gap: 10, w: 2.4, op: .55 })}${wisps(700, 398, { n: 2, h: 72, col: '#9A8FBF', gap: 10, w: 2.4, op: .55 })}<ellipse cx="677" cy="396" rx="40" ry="8" fill="#9A8FBF" opacity=".3" filter="url(#${p}-soft)"/></g>`, 'Inspect: the basement door')}
+    ${hot('radon', 677, 300, 50, `<g data-fix="radon"><rect x="738" y="250" width="7" height="154" rx="2" fill="#B9B0A0"/><rect x="732" y="236" width="19" height="18" rx="3" fill="#8C949A"/><circle cx="741.5" cy="245" r="5.5" fill="#43494E"/><path d="M741.5 240 v10 M736.5 245 h10" stroke="#D6D5CE" stroke-width="1.6"/></g><g class="radon" data-haz="radon">${wisps(660, 398, { n: 2, h: 90, col: '#9A8FBF', gap: 10, w: 2.4, op: .55 })}${wisps(700, 398, { n: 2, h: 72, col: '#9A8FBF', gap: 10, w: 2.4, op: .55 })}<ellipse cx="677" cy="396" rx="40" ry="8" fill="#9A8FBF" opacity=".3" filter="url(#${p}-soft)"/></g>`, 'Inspect: the basement door', true)}
     <!-- kitchen corner -->
     <rect x="745" y="196" width="215" height="104" fill="#D5E1DE"/>${tiles}
     <rect x="745" y="304" width="215" height="100" fill="#E7E1D4"/><path d="M805 304 v100 M865 304 v100 M925 304 v100 M745 340 h215" stroke="#D2C9B8" stroke-width="2"/>
@@ -478,7 +480,7 @@ function sceneFlat() {
     <rect x="790" y="187" width="82" height="9" rx="2" fill="#43494E"/><circle cx="866" cy="191.5" r="3" fill="#E1502E"/><text x="852" y="194.5" text-anchor="end" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="7" letter-spacing="1" fill="#F5F4F0">OFF</text>
     <!-- hob and pan -->
     <rect x="768" y="290" width="124" height="8" rx="2" fill="#2B2B28"/><circle cx="800" cy="294" r="14" fill="none" stroke="#5D5F5C" stroke-width="1.5"/><circle cx="852" cy="294" r="12" fill="none" stroke="#5D5F5C" stroke-width="1.5"/>
-    ${hot('frying', 814, 262, 38, `<g class="flame"><path d="M786 292 q4 -10 8 0 q4 -8 8 0 q4 -10 8 0 q4 -8 8 0 q4 -10 8 0 q4 -8 8 0" fill="none" stroke="#F2A14E" stroke-width="3" stroke-linecap="round"/><path d="M790 292 q3 -6 6 0 q3 -5 6 0 q3 -6 6 0 q3 -5 6 0 q3 -6 6 0" fill="none" stroke="#7FB2C9" stroke-width="2" stroke-linecap="round"/></g><path d="M782 266 h62 v14 q0 8 -8 8 h-46 q-8 0 -8 -8z" fill="#3B3A36"/><ellipse cx="813" cy="268" rx="31" ry="7" fill="#57554F"/><ellipse cx="813" cy="269" rx="24" ry="4.5" fill="#D9A35B"/><ellipse cx="808" cy="268" rx="10" ry="2" fill="#F2C14E" opacity=".8"/><g transform="rotate(-10 844 272)"><rect x="842" y="268" width="46" height="7" rx="3.5" fill="#2B2B28"/><rect x="876" y="267" width="12" height="9" rx="3" fill="#43494E"/></g><g class="shimmer">${wisps(812, 258, { n: 4, h: 78, col: '#A6A6A0', gap: 9, w: 2.6, op: .55 })}</g><ellipse cx="816" cy="226" rx="34" ry="14" fill="#B9B9B3" opacity=".3" filter="url(#${p}-soft)"/>`, 'Inspect: the pan on the stove')}
+    ${hot('frying', 814, 262, 38, `<g class="flame"><path d="M786 292 q4 -10 8 0 q4 -8 8 0 q4 -10 8 0 q4 -8 8 0 q4 -10 8 0 q4 -8 8 0" fill="none" stroke="#F2A14E" stroke-width="3" stroke-linecap="round"/><path d="M790 292 q3 -6 6 0 q3 -5 6 0 q3 -6 6 0 q3 -5 6 0 q3 -6 6 0" fill="none" stroke="#7FB2C9" stroke-width="2" stroke-linecap="round"/></g><path d="M782 266 h62 v14 q0 8 -8 8 h-46 q-8 0 -8 -8z" fill="#3B3A36"/><ellipse cx="813" cy="268" rx="31" ry="7" fill="#57554F"/><ellipse cx="813" cy="269" rx="24" ry="4.5" fill="#D9A35B"/><ellipse cx="808" cy="268" rx="10" ry="2" fill="#F2C14E" opacity=".8"/><g transform="rotate(-10 844 272)"><rect x="842" y="268" width="46" height="7" rx="3.5" fill="#2B2B28"/><rect x="876" y="267" width="12" height="9" rx="3" fill="#43494E"/></g><g data-haz="frying"><g class="shimmer">${wisps(812, 258, { n: 4, h: 78, col: '#A6A6A0', gap: 9, w: 2.6, op: .55 })}</g><ellipse cx="816" cy="226" rx="34" ry="14" fill="#B9B9B3" opacity=".3" filter="url(#${p}-soft)"/></g><g data-fix="frying"><rect x="790" y="187" width="82" height="9" rx="2" fill="#43494E"/><circle cx="866" cy="191.5" r="3" fill="#5FBF7A"/><text x="852" y="194.5" text-anchor="end" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="7" letter-spacing="1" fill="#F5F4F0">ON</text><g stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".75" fill="none"><path d="M800 250 q-4 -20 6 -44"/><path d="M814 248 v-44"/><path d="M828 250 q4 -20 -6 -44"/></g></g>`, 'Inspect: the pan on the stove')}
     <!-- coffee machine with the note -->
     ${hot('coffee', 920, 262, 32, `<g transform="translate(-6 0)"><rect x="902" y="232" width="50" height="66" rx="6" fill="#2E2E2B"/><rect x="908" y="222" width="38" height="14" rx="3" fill="#55554F"/><rect x="908" y="288" width="38" height="8" rx="2" fill="#43494E"/><rect x="898" y="258" width="14" height="6" rx="3" fill="#2B2B28"/><rect x="884" y="256" width="18" height="6" rx="3" fill="#8C8F87"/><rect x="918" y="278" width="14" height="10" rx="2" fill="#F5F4F0"/><path d="M932 281 q5 2 0 6" fill="none" stroke="#F5F4F0" stroke-width="2"/><rect x="922" y="264" width="6" height="14" fill="#8C8F87"/><circle cx="944" cy="240" r="2" fill="#7FB2C9"/><g transform="rotate(5 928 254)"><rect x="906" y="240" width="44" height="30" fill="#FFF8DC" filter="url(#${p}-shadow)"/><rect x="920" y="236" width="16" height="7" fill="#FFFFFF" opacity=".5"/><text x="928" y="253" text-anchor="middle" font-family="'Bradley Hand','Segoe Print','Comic Sans MS',cursive" font-size="8.5" font-style="italic" fill="#161713">coffee causes</text><text x="928" y="264" text-anchor="middle" font-family="'Bradley Hand','Segoe Print','Comic Sans MS',cursive" font-size="9" font-weight="700" font-style="italic" fill="${P.terra}">CANCER!!</text></g></g>`, 'Inspect: the coffee machine')}
     <!-- foreground plant -->
@@ -561,11 +563,11 @@ function sceneStreet() {
       ${sit(318, 404, { seat: 40, f: -1, arms: 'cup', style: 'long', hair: P.hairDark, top: P.terra, bottom: '#5E6E82', face: 'worried', skin: P.skin3 })}
       ${stand(258, 404, { s: .6, r: 18, f: -1, arms: 'wave', style: 'bob', hair: P.hairDark, top: P.sage, bottom: P.denim, face: 'o', skin: P.skin3, sh: false })}
       <path d="M239 316 q-4 -30 0 -60" stroke="#161713" stroke-width="1" fill="none"/><ellipse cx="240" cy="246" rx="12" ry="15" fill="${P.terra}"/><path d="M240 260 l-3 5 h6z" fill="${P.terra}"/>
-      ${smoke(78, 262, { n: 5, col: '#A6A6A0', dx: 70, dy: -40, r: 6, dur: 6, op: .5, grow: 2.6, p })}
+      <g data-haz="terrace">${smoke(78, 262, { n: 5, col: '#A6A6A0', dx: 70, dy: -40, r: 6, dur: 6, op: .5, grow: 2.6, p })}</g>
     `, 'Inspect: the café terrace')}
     <!-- corner house with the wood stove -->
     <rect x="478" y="60" width="30" height="120" fill="${P.brickDeep}"/><rect x="474" y="56" width="38" height="10" fill="#8F5F4C"/><rect x="482" y="48" width="8" height="10" fill="#5D5F5C"/><rect x="496" y="48" width="8" height="10" fill="#5D5F5C"/>
-    ${smoke(493, 48, { n: 5, col: '#7F7F78', dx: 44, dy: -46, r: 9, dur: 6, op: .6, grow: 3, p })}
+    <g data-haz="woodsmoke">${smoke(493, 48, { n: 5, col: '#7F7F78', dx: 44, dy: -46, r: 9, dur: 6, op: .6, grow: 3, p })}</g>
     <rect x="322" y="172" width="226" height="158" fill="${P.brick}"/>${courses}
     <path d="M312 176 L435 66 L558 176 Z" fill="${P.slate}"/><path d="M318 174 L435 72 L552 174" fill="none" stroke="#7B868A" stroke-width="3"/>
     ${[100, 122, 144].map(y => `<path d="M${435 - (y - 66) * 1.1} ${y} H${435 + (y - 66) * 1.1}" stroke="#4E585C" stroke-width="1.2" opacity=".8"/>`).join('')}
@@ -574,7 +576,7 @@ function sceneStreet() {
     ${hot('woodsmoke', 411, 268, 52, `<rect x="362" y="228" width="98" height="84" fill="#F5F4F0" filter="url(#${p}-shadow)"/><rect x="368" y="234" width="86" height="72" fill="#5A4034"/>
       <rect x="402" y="234" width="6" height="30" fill="#2B2B28"/><path d="M386 262 q0 -8 8 -8 h26 q8 0 8 8 v36 h-42z" fill="#2B2B28"/><rect x="392" y="266" width="30" height="20" rx="2" fill="url(#${p}-ember)"/><rect x="392" y="266" width="30" height="20" rx="2" fill="none" stroke="#5D5F5C" stroke-width="2"/><rect x="384" y="298" width="46" height="4" fill="#43494E"/><rect x="388" y="302" width="6" height="6" fill="#2B2B28"/><rect x="420" y="302" width="6" height="6" fill="#2B2B28"/>
       <ellipse cx="426" cy="248" rx="30" ry="12" fill="#B5B1A8" opacity=".55" filter="url(#${p}-soft)"/><ellipse cx="392" cy="242" rx="24" ry="10" fill="#B5B1A8" opacity=".5" filter="url(#${p}-soft)"/>
-      ${wisps(426, 270, { n: 3, h: 40, col: '#C9C5BC', gap: 8, w: 2, op: .7 })}
+      <g data-haz="woodsmoke">${wisps(426, 270, { n: 3, h: 40, col: '#C9C5BC', gap: 8, w: 2, op: .7 })}</g>
       <rect x="368" y="234" width="86" height="72" fill="url(#${p}-glass)" opacity=".2"/><path d="M411 234 v72" stroke="#F5F4F0" stroke-width="3"/>
       <path d="M368 234 h22 v60 q-6 6 -22 4z" fill="#C48B72" opacity=".9"/><path d="M454 234 h-22 v60 q6 6 22 4z" fill="#C48B72" opacity=".9"/>
       <rect x="358" y="312" width="106" height="8" rx="2" fill="${P.terraDeep}"/><g fill="${P.sageDeep}"><circle cx="376" cy="310" r="5"/><circle cx="392" cy="308" r="5"/><circle cx="430" cy="308" r="5"/><circle cx="446" cy="310" r="5"/></g><g fill="${P.ochre}"><circle cx="384" cy="306" r="3.5"/><circle cx="438" cy="306" r="3.5"/></g>`, 'Inspect: the wood stove and its chimney')}
@@ -619,8 +621,8 @@ function sceneStreet() {
     </g>
     <!-- buses on the road -->
     ${bus(252, 414, { w: 334, num: '7', dest: 'STATION', col: '#3E5C7A', p })}
-    ${smoke(246, 500, { n: 4, col: '#4E4E4A', dx: -50, dy: -28, r: 7, dur: 3.2, op: .55, grow: 2.4, p })}
-    ${hot('bus', 706, 462, 56, `${bus(600, 414, { w: 340, num: '12', dest: 'RING ROAD', col: '#3E5C7A', p })}<g class="exhaust">${smoke(592, 500, { n: 5, col: '#4E4E4A', dx: -60, dy: -30, r: 8, dur: 3, op: .6, grow: 2.6, p })}</g>`, 'Inspect: the buses at the stop')}
+    <g data-haz="bus">${smoke(246, 500, { n: 4, col: '#4E4E4A', dx: -50, dy: -28, r: 7, dur: 3.2, op: .55, grow: 2.4, p })}</g>
+    ${hot('bus', 706, 462, 56, `${bus(600, 414, { w: 340, num: '12', dest: 'RING ROAD', col: '#3E5C7A', p })}<g class="exhaust" data-haz="bus">${smoke(592, 500, { n: 5, col: '#4E4E4A', dx: -60, dy: -30, r: 8, dur: 3, op: .6, grow: 2.6, p })}</g>`, 'Inspect: the buses at the stop')}
     ${grain(p)}${vignette()}
   </svg>`;
 }
@@ -667,8 +669,9 @@ function sceneYard() {
     ${[344, 386, 428, 470, 512].map(x => `<path d="M${x} 176 v74" stroke="#6E7478" stroke-width="1.5" opacity=".7"/>`).join('')}
     ${hot('asbestos', 494, 226, 54, `<g transform="rotate(-24 546 246)"><rect x="500" y="200" width="60" height="50" fill="#A8AEAE"/>${Array.from({ length: 4 }, (_, i) => `<path d="M${508 + i * 14} 202 v46" stroke="#7F878C" stroke-width="1.5"/><path d="M${515 + i * 14} 202 v46" stroke="#C4CACD" stroke-width="1.5"/>`).join('')}<path d="M500 200 h60 v50 h-60z" fill="none" stroke="#6E7478" stroke-width="2"/><path d="M528 200 l6 14 l-8 10 l10 12 l-6 14" fill="none" stroke="#5D5F5C" stroke-width="1.5"/></g>
       ${kneel(470, 232, { s: .88, vest: true, top: P.sageDeep, bottom: P.denim, hat: 'hard', hatCol: '#F5F4F0', skin: P.skin2, face: 'flat' })}
-      <g class="dust" opacity=".7"><ellipse cx="536" cy="240" rx="26" ry="10" fill="#C9CBC6" filter="url(#${p}-blur)"/><ellipse cx="560" cy="226" rx="20" ry="8" fill="#C9CBC6" filter="url(#${p}-blur)"/></g>
-      ${[[530, 230], [548, 222], [560, 238], [574, 226], [542, 248]].map(([x, y]) => `<path d="M${x} ${y} l4 -3 l3 3" stroke="#F5F4F0" stroke-width="1.2" fill="none" opacity=".9"/>`).join('')}`, 'Inspect: the roof being stripped')}
+      <g data-fix="asbestos"><path d="M430 264 L612 256" stroke="#F2C14E" stroke-width="7"/><path d="M430 264 L612 256" stroke="#161713" stroke-width="7" stroke-dasharray="10 12"/><g transform="translate(520 250)"><rect x="-22" y="-11" width="44" height="18" rx="2" fill="#ba4c38"/><text y="2.5" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9" font-weight="700" letter-spacing="1" fill="#F5F4F0">STOP</text></g></g>
+      <g data-haz="asbestos"><g class="dust" opacity=".7"><ellipse cx="536" cy="240" rx="26" ry="10" fill="#C9CBC6" filter="url(#${p}-blur)"/><ellipse cx="560" cy="226" rx="20" ry="8" fill="#C9CBC6" filter="url(#${p}-blur)"/></g>
+      ${[[530, 230], [548, 222], [560, 238], [574, 226], [542, 248]].map(([x, y]) => `<path d="M${x} ${y} l4 -3 l3 3" stroke="#F5F4F0" stroke-width="1.2" fill="none" opacity=".9"/>`).join('')}</g>`, 'Inspect: the roof being stripped')}
     <g transform="translate(600 250)"><rect x="6" y="0" width="5" height="150" fill="${P.wood}" transform="skewX(-8)"/><rect x="34" y="0" width="5" height="150" fill="${P.wood}" transform="skewX(-8)"/>${[16, 40, 64, 88, 112, 136].map(y => `<rect x="${7 - y * .14}" y="${y}" width="32" height="4" fill="${P.woodDeep}"/>`).join('')}</g>
     <g transform="translate(560 366)">${shadow(36, 34, 46, 6, .2)}<path d="M0 26 l6 -18 h62 l6 18z" fill="#9AA0A0"/><path d="M4 12 l6 -14 h50 l8 14z" fill="#A8AEAE"/><path d="M20 -2 l30 -10 l12 12 l-30 10z" fill="#9AA0A0"/><path d="M0 26 h74 M8 20 h60" stroke="#6E7478" stroke-width="1.5"/><path d="M28 0 l8 -6 M40 4 l8 -6 M52 8 l8 -6" stroke="#C4CACD" stroke-width="1.5"/></g>
     <!-- cutting bench, worker, dust -->
@@ -680,7 +683,7 @@ function sceneYard() {
       <rect x="106" y="338" width="204" height="14" rx="2" fill="${P.wood}"/><path d="M106 350 h204" stroke="${P.woodDeep}" stroke-width="3"/>
       <rect x="150" y="322" width="112" height="16" fill="#A8AEAE"/><path d="M150 338 h112" stroke="#6E7478" stroke-width="2"/><path d="M228 322 v16" stroke="#5D5F5C" stroke-width="2"/>
       <g transform="translate(244 310)"><circle cx="0" cy="0" r="27" fill="#43494E"/><circle cx="0" cy="0" r="27" fill="none" stroke="#C4CACD" stroke-width="3" stroke-dasharray="4 5"/><circle cx="0" cy="0" r="6" fill="#8C949A"/><path d="M-30 -4 A30 30 0 0 1 30 -4 L30 6 A30 30 0 0 0 -30 6z" fill="#F08A3E"/><rect x="-42" y="-24" width="40" height="22" rx="6" fill="#F08A3E"/><rect x="-38" y="-20" width="14" height="8" rx="2" fill="#2B2B28"/><rect x="-62" y="-14" width="26" height="9" rx="4" fill="#2B2B28"/><rect x="-30" y="-2" width="10" height="20" rx="3" fill="#2B2B28"/></g>
-      ${dustCloud(276, 312, { s: 1.15, op: .95, p, col: '#EEE9DE' })}
+      <g data-haz="silica">${dustCloud(276, 312, { s: 1.15, op: .95, p, col: '#EEE9DE' })}</g><g data-fix="silica"><g stroke="#7FB2C9" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M270 316 l12 5 M274 306 h14 M268 326 l10 9"/></g><ellipse cx="286" cy="404" rx="30" ry="5" fill="#7FB2C9" opacity=".45"/></g>
     `, 'Inspect: the worker cutting stone')}
     <!-- welding shed, door shut -->
     <g transform="translate(-22 0)">
@@ -691,8 +694,8 @@ function sceneYard() {
     ${hot('welding', 738, 264, 50, `<g transform="translate(-22 0)"><rect x="716" y="220" width="84" height="84" fill="#1B2124"/>
       <circle cx="778" cy="276" r="46" fill="url(#${p}-arc)" class="arc" opacity=".9"/>
       ${welder(742, 300, { s: .62 })}
-      <ellipse cx="750" cy="236" rx="30" ry="10" fill="#8C8F87" opacity=".55" filter="url(#${p}-soft)"/><ellipse cx="776" cy="228" rx="22" ry="8" fill="#8C8F87" opacity=".5" filter="url(#${p}-soft)"/>
-      ${smoke(770, 270, { n: 3, col: '#9A9A94', dx: -10, dy: -40, r: 6, dur: 4, op: .45, grow: 2, p })}
+      <g data-haz="welding"><ellipse cx="750" cy="236" rx="30" ry="10" fill="#8C8F87" opacity=".55" filter="url(#${p}-soft)"/><ellipse cx="776" cy="228" rx="22" ry="8" fill="#8C8F87" opacity=".5" filter="url(#${p}-soft)"/>
+      ${smoke(770, 270, { n: 3, col: '#9A9A94', dx: -10, dy: -40, r: 6, dur: 4, op: .45, grow: 2, p })}</g>
       <g class="arc">${sparks}<circle cx="778" cy="276" r="5" fill="#FFFFFF"/></g>
       <rect x="716" y="220" width="84" height="84" fill="url(#${p}-glass)" opacity=".12"/><path d="M758 220 v84 M716 262 h84" stroke="#2E3438" stroke-width="4"/><rect x="712" y="216" width="92" height="92" fill="none" stroke="#2E3438" stroke-width="6"/>
       <path d="M716 304 L700 342 H816 L800 304z" fill="#DDF3FF" opacity=".16" class="arc"/></g>`, 'Inspect: the welding shed')}
@@ -707,8 +710,8 @@ function sceneYard() {
       <path class="flame" d="M868 332 q4 -12 8 0 q4 -10 8 0 q4 -12 8 0 q4 -10 8 0 q4 -12 8 0" fill="none" stroke="#7FB2C9" stroke-width="3" stroke-linecap="round"/>
       <circle cx="868" cy="340" r="11" fill="#2B2B28"/><circle cx="868" cy="340" r="4" fill="#8C949A"/><circle cx="926" cy="340" r="11" fill="#2B2B28"/><circle cx="926" cy="340" r="4" fill="#8C949A"/><path d="M850 300 l-22 30" stroke="#43494E" stroke-width="5" stroke-linecap="round"/>
       <rect x="936" y="300" width="18" height="44" rx="4" fill="#F08A3E"/><rect x="941" y="294" width="8" height="8" fill="#43494E"/>
-      ${smoke(892, 254, { n: 5, col: '#5A534A', dx: 26, dy: -80, r: 9, dur: 4.5, op: .6, grow: 2.6, p })}
-      ${smoke(934, 208, { n: 3, col: '#5A534A', dx: 18, dy: -60, r: 6, dur: 4, op: .5, grow: 2.2, p })}
+      <g data-haz="bitumen" class="less">${smoke(892, 254, { n: 5, col: '#5A534A', dx: 26, dy: -80, r: 9, dur: 4.5, op: .6, grow: 2.6, p })}
+      ${smoke(934, 208, { n: 3, col: '#5A534A', dx: 18, dy: -60, r: 6, dur: 4, op: .5, grow: 2.2, p })}</g>
     `, 'Inspect: the bitumen kettle')}
     <!-- foreground: wheelbarrow, cable reel, cone, pallet, and the foreman -->
     <g transform="translate(40 440)">${shadow(40, 76, 44, 6, .2)}<circle cx="40" cy="40" r="36" fill="${P.wood}"/><circle cx="40" cy="40" r="36" fill="none" stroke="${P.woodDeep}" stroke-width="4"/><circle cx="40" cy="40" r="22" fill="${P.woodLight}"/><circle cx="40" cy="40" r="6" fill="${P.woodDeep}"/><path d="M40 4 v72 M4 40 h72 M15 15 l50 50 M65 15 l-50 50" stroke="${P.woodDeep}" stroke-width="2.5"/><rect x="36" y="30" width="44" height="22" rx="3" fill="#2B2B28" opacity=".85"/><rect x="42" y="36" width="34" height="10" rx="2" fill="#F08A3E"/></g>
@@ -723,9 +726,9 @@ function sceneYard() {
 const ART = [sceneFlat, sceneStreet, sceneYard];
 
 /* ------------------------------------------------------------------ state */
-const KEY = 'epi-lung-detective';
-const state = { scene: 0, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false, settings: {} };
-let activeHotspot = null;
+const KEY = 'epi-lung-detective', BEST = 'epi-lung-detective-best';
+const state = { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null, settings: {} };
+let activeHotspot = null, audio = null;
 
 function loadSettings() {
   try { Object.assign(state.settings, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
@@ -734,9 +737,36 @@ function loadSettings() {
   app.classList.toggle('large', !!state.settings.large);
   app.classList.toggle('wide', !!state.settings.font);
   app.classList.toggle('still', !!state.settings.motion);
-  ['contrast', 'large', 'font', 'motion'].forEach(k => { $('#opt-' + k).checked = !!state.settings[k]; });
+  ['contrast', 'large', 'font', 'motion', 'mute', 'reveal'].forEach(k => { $('#opt-' + k).checked = !!state.settings[k]; });
+  if (state.settings.reveal) $$('#scene .hot.unspotted').forEach(el => spot(el.dataset.id, el, true));
 }
 function saveSettings() { try { localStorage.setItem(KEY, JSON.stringify(state.settings)); } catch (e) {} }
+const isStill = () => $('#app').classList.contains('still') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+/* Short synthesised sounds; nothing is downloaded. */
+function sfx(kind) {
+  if (state.settings.mute) return;
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    const tone = (f0, f1, dur, type = 'sine', vol = .06, delay = 0) => {
+      const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime + delay;
+      o.type = type; o.connect(g); g.connect(audio.destination);
+      o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur); o.start(t); o.stop(t + dur + .02);
+    };
+    const play = {
+      spot: () => tone(880, 1320, .09, 'sine', .04),
+      open: () => tone(300, 220, .07, 'triangle', .04),
+      right: () => { tone(160, 90, .09, 'square', .05); tone(660, 990, .18, 'sine', .05, .08); },
+      wrong: () => tone(220, 150, .2, 'sawtooth', .035),
+      fix: () => { tone(440, 660, .14); tone(660, 990, .2, 'sine', .05, .12); },
+      clear: () => tone(700, 1400, .5, 'sine', .03),
+      miss: () => tone(240, 200, .06, 'triangle', .03),
+      close: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, .16, 'sine', .055, i * .13)),
+    }[kind];
+    if (play) play();
+  } catch (e) {}
+}
 
 function show(screen) {
   $('#app').dataset.screen = screen;
@@ -748,24 +778,79 @@ function renderScene() {
   const s = SCENES[state.scene];
   $('#hud-scene').textContent = s.name;
   $('#scene').innerHTML = ART[state.scene]();
-  $('#scene-hint').textContent = s.intro + ' Click a pulsing ring, or press Tab to reach it and Enter to inspect.';
+  $('#scene-hint').textContent = s.intro + ' Search the picture: a ring appears when your pointer passes over a clue. Click or tap it to open its file.';
   $$('#scene .hot').forEach(el => {
-    const id = el.dataset.id;
+    const id = el.dataset.id, talk = !!TALKS[id];
     if (state.filed[id] || state.talked[id]) el.classList.add('done');
-    const open = () => { activeHotspot = el; TALKS[id] ? openTalk(id) : openClue(id); };
-    el.addEventListener('click', open);
+    if (talk || state.settings.reveal) state.spotted[id] = true;
+    if (!state.spotted[id]) el.classList.add('unspotted');
+    const open = () => { spot(id, el, true); activeHotspot = el; sfx('open'); talk ? openTalk(id) : openClue(id); };
+    el.addEventListener('click', e => { e.stopPropagation(); open(); });
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    el.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') spot(id, el); });
+    el.addEventListener('focus', () => spot(id, el));
   });
+  $('#scene').onclick = miss;
+  CLUE_ORDER[state.scene].forEach(id => { if (state.fixed[id]) showFixed(id); });
   updateHud();
 }
+/* A clue is spotted when the pointer or the keyboard focus reaches it, or when it is tapped. */
+function spot(id, el, quiet) {
+  if (state.spotted[id]) return;
+  state.spotted[id] = true;
+  el.classList.remove('unspotted'); el.classList.add('found');
+  if (!quiet) sfx('spot');
+  updateHud();
+}
+/* A click on the empty picture: say how far the nearest hidden clue is. */
+function miss(e) {
+  const svg = $('#scene svg'); if (!svg || e.target.closest('.hot')) return;
+  const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+  const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+  let best = Infinity;
+  $$('#scene .hot.unspotted').forEach(el => { best = Math.min(best, Math.hypot(q.x - el.dataset.cx, q.y - el.dataset.cy) - el.dataset.r); });
+  const word = best === Infinity ? '' : best < 70 ? 'Very warm' : best < 180 ? 'Warm' : 'Cold';
+  const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  g.setAttribute('class', 'miss'); g.setAttribute('transform', `translate(${q.x.toFixed(1)} ${q.y.toFixed(1)})`);
+  const ly = q.y < 60 ? 30 : -26, lx = Math.max(50 - q.x, Math.min(910 - q.x, 0));
+  g.innerHTML = `<circle r="10"/>${word ? `<g><g transform="translate(${lx} ${ly})"><rect x="-44" y="-11" width="88" height="20" rx="10"/><text y="4" text-anchor="middle">${word.toUpperCase()}</text></g></g>` : ''}`;
+  svg.appendChild(g); setTimeout(() => g.remove(), 950);
+  sfx('miss');
+}
+function hint() {
+  const hidden = $$('#scene .hot.unspotted');
+  let el = hidden[0];
+  if (el) { state.hints++; spot(el.dataset.id, el); }
+  else el = $$('#scene .hot').find(h => !h.classList.contains('done'));
+  if (!el) return;
+  el.classList.add('nudge'); setTimeout(() => el.classList.remove('nudge'), 2200);
+  if (el.scrollIntoView) el.scrollIntoView({ behavior: isStill() ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+}
+/* What a fix changes in the picture: the hazard fades, and what was installed appears. */
+function showFixed(id) {
+  $$(`#scene [data-haz="${id}"]`).forEach(el => el.classList.add('gone'));
+  $$(`#scene [data-fix="${id}"]`).forEach(el => el.classList.add('shown'));
+}
 function updateHud() {
-  const ids = CLUE_ORDER[state.scene];
+  const ids = CLUE_ORDER[state.scene], talk = TALK_ORDER[state.scene];
   $('#hud-found').textContent = ids.filter(id => state.filed[id]).length;
   $('#hud-total').textContent = ids.length;
   const fixable = Object.values(CLUES).filter(c => c.fix).length;
   const fixed = Object.keys(state.fixed).length;
   $('#hud-air').textContent = fixed + '/' + fixable;
   $('#hud-air-bar').style.width = Math.round(100 * fixed / fixable) + '%';
+  // the notebook under the picture: what has been found, and how it was filed
+  $('#notebook').innerHTML = ids.map(id => {
+    const c = CLUES[id];
+    if (state.filed[id]) return `<li class="note filed ${c.bin}"><button type="button" data-open="${id}"><i></i>${esc(c.name)}</button></li>`;
+    if (state.spotted[id]) return `<li class="note spotted"><button type="button" data-open="${id}"><i></i>${esc(c.name)}</button></li>`;
+    return `<li class="note unknown"><span><i></i>Not found yet</span></li>`;
+  }).join('') + `<li class="note talk ${state.talked[talk] ? 'filed' : 'spotted'}"><button type="button" data-open="${talk}"><i></i>${esc(TALKS[talk].who)}</button></li>`;
+  $$('#notebook [data-open]').forEach(b => b.addEventListener('click', () => {
+    const el = $(`#scene .hot[data-id="${b.dataset.open}"]`); if (el) el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  }));
+  const left = ids.filter(id => !state.spotted[id]).length;
+  $('#btn-hint').textContent = left ? `Give me a hint (${left} still hidden)` : 'What is left?';
 }
 
 /* ------------------------------------------------------------------ panel */
@@ -775,7 +860,7 @@ function srcHtml(keys) {
 function codeHtml(k) {
   if (!k) return '';
   const c = CODE[k];
-  // The heading is this game's own label; only the sentence below it is the Code's official wording.
+  // The heading is this game’s own label; only the sentence below it is the Code’s official wording.
   return `<div class="code"><p class="kicker">European Code Against Cancer · recommendation ${c.n} · ${esc(c.h)}</p><p class="code-t">${esc(c.t)}</p></div>`;
 }
 function openPanel(kicker, title, text, body) {
@@ -788,17 +873,23 @@ function openPanel(kicker, title, text, body) {
 }
 function closePanel() {
   $('#panel').hidden = true;
-  if (activeHotspot) { activeHotspot.classList.toggle('done', !!(state.filed[activeHotspot.dataset.id] || state.talked[activeHotspot.dataset.id])); activeHotspot.focus(); }
-  checkScene();
+  if (state.lineup && !state.lineup.done) { state.lineup.done = true; return report(); }
+  if (activeHotspot) { activeHotspot.classList.toggle('done', !!(state.filed[activeHotspot.dataset.id] || state.talked[activeHotspot.dataset.id])); activeHotspot.focus({ preventScroll: true }); }
+  // a fix made in the file plays out in the picture once the file is closed
+  if (state.pendingFx.length) {
+    const ids = state.pendingFx.splice(0);
+    setTimeout(() => { ids.forEach(showFixed); sfx('clear'); }, 200);
+    setTimeout(checkScene, isStill() ? 0 : 2100);
+  } else checkScene();
 }
 
-function binsHtml(clue) {
+function binsHtml() {
   return `<p class="kicker" style="margin-top:14px">How do you file it?</p><div class="bins">${BINS.map(b =>
     `<button type="button" class="choice ${b.id}" data-bin="${b.id}"><b>${b.label}</b><span>${b.sub}</span></button>`).join('')}</div>`;
 }
 function openClue(id) {
   const c = CLUES[id];
-  if (state.filed[id]) { return openPanel('Case file · filed', c.name, c.desc, verdictHtml(c, id, true)); }
+  if (state.filed[id]) { openPanel('Case file · filed', c.name, c.desc, verdictHtml(c, id, true)); return wireFix(c, id); }
   if (c.special === 'radon' && !state.radonRead) {
     openPanel('Case file', c.name, c.desc, `<div class="actions"><button type="button" class="btn primary" id="btn-measure">Place the detector</button></div>`);
     $('#btn-measure').addEventListener('click', () => {
@@ -806,18 +897,18 @@ function openClue(id) {
       animateReading(340, () => {
         $('#rd-note').textContent = '340 Bq/m³. Above the WHO reference level of 100, and above the 300 that WHO says national reference levels should not exceed.';
         state.radonRead = true;
-        $('#panel-body').insertAdjacentHTML('beforeend', binsHtml(c));
+        $('#panel-body').insertAdjacentHTML('beforeend', binsHtml());
         wireBins(c, id);
       });
     });
     return;
   }
-  openPanel('Case file', c.name, c.desc, binsHtml(c));
+  openPanel('Case file', c.name, c.desc, binsHtml());
   wireBins(c, id);
 }
 function animateReading(target, done) {
-  const el = $('#rd'), pin = $('#rd-pin'); const t0 = performance.now(); const still = $('#app').classList.contains('still');
-  const dur = still ? 0 : 1400;
+  const el = $('#rd'), pin = $('#rd-pin'); const t0 = performance.now();
+  const dur = isStill() ? 0 : 1400;
   const f = now => { const t = dur ? Math.min(1, (now - t0) / dur) : 1; const e = 1 - Math.pow(1 - t, 3); const v = Math.round(target * e);
     el.textContent = v; pin.style.left = Math.min(100, v / 4) + '%'; if (t < 1) requestAnimationFrame(f); else done(); };
   requestAnimationFrame(f);
@@ -829,34 +920,42 @@ function wireBins(c, id) {
       if (state.tries[id] === 1) state.firstRight++;
       state.filed[id] = true;
       $$('#panel .choice').forEach(b => { b.disabled = true; b.classList.toggle('right', b === btn); });
+      const n = $('#panel .nudge'); if (n) n.remove();
       $('#panel-body').insertAdjacentHTML('beforeend', verdictHtml(c, id, false));
       wireFix(c, id);
-      updateHud();
+      updateHud(); sfx('right');
       const v = $('#panel .verdict'); if (v) v.scrollIntoView({ block: 'nearest' });
     } else {
-      btn.classList.add('wrong'); btn.disabled = true;
+      btn.classList.add('wrong'); btn.disabled = true; sfx('wrong');
       let n = $('#panel .nudge'); if (!n) { n = document.createElement('div'); n.className = 'verdict no nudge'; $('#panel-body').appendChild(n); }
       n.innerHTML = `<h3>Not that one.</h3><p>${esc(c.hint)} Try again.</p>`;
     }
   }));
 }
+function fixedHtml(c, fresh) {
+  const extra = c.special === 'radon' ? `<div class="reading"><span>60</span> <small>Bq/m³ after the fix</small></div><div class="gauge"><i style="left:15%"></i></div>` : '';
+  return `<div class="verdict ok fixed"><h3>${fresh ? 'Fixed. Clean-air score +1.' : 'Fixed.'}</h3>${extra}<p>${esc(c.fix.result)}</p>${fresh ? '<p class="fine">Go back to the scene to see the difference.</p>' : ''}</div>`;
+}
 function verdictHtml(c, id, filedBefore) {
   const bin = BINS.find(b => b.id === c.bin);
-  const fixPart = c.fix ? (state.fixed[id]
-    ? `<div class="verdict ok"><h3>Fixed.</h3><p>${esc(c.fix.result)}</p></div>`
-    : `<div class="actions"><button type="button" class="btn primary" id="btn-fix">${esc(c.fix.label)}</button></div>`)
-    : '';
+  const fixPart = c.fix ? (state.fixed[id] ? fixedHtml(c, false)
+    : `<div class="actions"><button type="button" class="btn primary" id="btn-fix">${esc(c.fix.label)}</button></div>`) : '';
   return `<div class="verdict ok"><h3>${filedBefore ? 'Filed as' : 'Correct:'} ${esc(bin.label)}. <span class="tally ${c.bin}">${esc(bin.sub)}</span></h3><p>${esc(c.why)}</p></div>
     ${codeHtml(c.code)}${fixPart}${srcHtml(c.src)}
     <div class="actions"><button type="button" class="btn" id="btn-back">Back to the scene</button></div>`;
 }
+/* Fixing takes a moment: the button fills while the work is done. */
 function wireFix(c, id) {
   const b = $('#btn-fix');
   if (b) b.addEventListener('click', () => {
-    state.fixed[id] = true; updateHud();
-    let extra = '';
-    if (c.special === 'radon') extra = `<div class="reading"><span>60</span> <small>Bq/m³ after the fix</small></div><div class="gauge"><i style="left:15%"></i></div>`;
-    b.closest('.actions').outerHTML = `<div class="verdict ok"><h3>Fixed. Clean-air score +1.</h3>${extra}<p>${esc(c.fix.result)}</p></div>`;
+    b.closest('.actions').outerHTML = `<div class="fixing" id="fixing" role="status"><i></i><span>${esc(c.fix.label)}…</span></div>`;
+    sfx('fix');
+    setTimeout(() => {
+      state.fixed[id] = true; state.pendingFx.push(id); updateHud();
+      const f = $('#fixing'); if (!f) return;
+      f.outerHTML = fixedHtml(c, true);
+      const back = $('#btn-back'); if (back) { back.classList.add('primary'); back.focus(); }
+    }, isStill() ? 0 : 950);
   });
   const back = $('#btn-back'); if (back) back.addEventListener('click', closePanel);
 }
@@ -875,43 +974,80 @@ function openTalk(id) {
       if (state.tries[id] === 1) state.firstRight++;
       state.talked[id] = true;
       $$('#panel .choice').forEach(b => { b.disabled = true; b.classList.toggle('right', b === btn); });
+      const n = $('#panel .nudge'); if (n) n.remove();
       $('#panel-body').insertAdjacentHTML('beforeend', talkVerdict(t, ch));
       $('#btn-back').addEventListener('click', closePanel);
+      updateHud(); sfx('right');
     } else {
-      btn.classList.add('wrong'); btn.disabled = true;
+      btn.classList.add('wrong'); btn.disabled = true; sfx('wrong');
       let n = $('#panel .nudge'); if (!n) { n = document.createElement('div'); n.className = 'verdict no nudge'; $('#panel-body').appendChild(n); }
       n.innerHTML = `<h3>Hmm.</h3><p>${esc(ch.fb)} Try another reply.</p>`;
     }
   }));
 }
 function talkVerdict(t, ch) {
-  return `<div class="verdict ok"><h3>That’s the one.</h3><p>${esc(ch.fb)}</p></div>${codeHtml(t.code)}${srcHtml(t.src)}<div class="actions"><button type="button" class="btn" id="btn-back">Back to the scene</button></div>`;
+  return `<div class="verdict ok talked"><h3>That’s the one.</h3><p>${esc(ch.fb)}</p></div>${codeHtml(t.code)}${srcHtml(t.src)}<div class="actions"><button type="button" class="btn" id="btn-back">Back to the scene</button></div>`;
 }
 
 /* ------------------------------------------------------------------ progression */
 function checkScene() {
+  if (!$('#panel').hidden || $('#screen-play').hidden) return;
   const ids = CLUE_ORDER[state.scene];
   const talk = TALK_ORDER[state.scene];
   if (!ids.every(id => state.filed[id]) || !state.talked[talk]) return;
   const fixedHere = ids.filter(id => state.fixed[id]).length, fixable = ids.filter(id => CLUES[id].fix).length;
   const last = state.scene === SCENES.length - 1;
   const counts = { known: 0, probable: 0, none: 0 }; ids.forEach(id => counts[CLUES[id].bin]++);
+  sfx('close');
   openPanel('Case closed', SCENES[state.scene].name,
     `Four clues filed: ${counts.known} known cause${counts.known === 1 ? '' : 's'}, ${counts.probable} probable, ${counts.none} with no evidence. ${fixedHere} of ${fixable} hazards fixed.`,
-    `<div class="actions"><button type="button" class="btn primary" id="btn-next">${last ? 'Read the report' : 'Open the next case'}</button></div>`);
+    `${fixedHere < fixable ? `<p class="fine">${fixable - fixedHere === 1 ? 'One hazard is' : `${fixable - fixedHere} hazards are`} still there. Close this file to go back and fix ${fixable - fixedHere === 1 ? 'it' : 'them'}, or move on.</p>` : ''}
+    <div class="actions"><button type="button" class="btn primary" id="btn-next">${last ? 'One last test: the line-up' : 'Open the next case'}</button></div>`);
   $('#btn-next').addEventListener('click', () => {
     $('#panel').hidden = true;
-    if (last) return report();
-    state.scene++; renderScene(); window.scrollTo({ top: 0 });
+    if (last) return lineup();
+    state.scene++; activeHotspot = null; renderScene(); window.scrollTo({ top: 0 });
   });
+}
+/* The line-up: six of the twelve clues come back, one at a time, to be filed from memory. */
+function lineup() {
+  const ids = Object.keys(CLUES);
+  for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [ids[i], ids[j]] = [ids[j], ids[i]]; }
+  state.lineup = { ids: ids.slice(0, 6), i: 0, right: 0, done: false };
+  lineupCard();
+}
+function lineupCard() {
+  const L = state.lineup, c = CLUES[L.ids[L.i]], bin = BINS.find(b => b.id === c.bin);
+  openPanel(`The line-up · ${L.i + 1} of ${L.ids.length}`, c.name, 'From memory: how did the evidence file this one?', binsHtml());
+  $$('#panel .choice').forEach(btn => btn.addEventListener('click', () => {
+    const ok = btn.dataset.bin === c.bin; if (ok) L.right++;
+    $$('#panel .choice').forEach(b => { b.disabled = true; b.classList.toggle('right', b.dataset.bin === c.bin); b.classList.toggle('wrong', b === btn && !ok); });
+    sfx(ok ? 'right' : 'wrong');
+    const last = L.i === L.ids.length - 1;
+    $('#panel-body').insertAdjacentHTML('beforeend', `<div class="verdict ${ok ? 'ok' : 'no'} quick"><h3>${ok ? 'Right.' : 'Not quite.'}</h3><p>${esc(bin.label)}. ${esc(bin.sub)}.</p></div>
+      <div class="actions"><button type="button" class="btn primary" id="btn-lineup">${last ? 'Read the report' : 'Next'}</button></div>`);
+    const next = $('#btn-lineup'); next.focus();
+    next.addEventListener('click', () => { if (last) { L.done = true; $('#panel').hidden = true; report(); } else { L.i++; lineupCard(); } });
+  }));
 }
 function report() {
   const clueIds = Object.keys(CLUES); const fixable = clueIds.filter(id => CLUES[id].fix).length;
   const fixed = Object.keys(state.fixed).length;
   const total = clueIds.length + Object.keys(TALKS).length;
+  const L = state.lineup || { right: 0, ids: [] };
+  // out of 98: four for each first-time answer, two for each fix, three for each line-up card, less two for each hint
+  const score = Math.max(0, state.firstRight * 4 + fixed * 2 + L.right * 3 - state.hints * 2);
+  const rank = score >= 86 ? ['Chief inspector', 'Nothing in the air gets past you.']
+    : score >= 66 ? ['Senior detective', 'A sharp eye, and the evidence to back it.']
+    : score >= 44 ? ['Detective', 'The cases are closed. A second look would sharpen the files.']
+    : ['Trainee detective', 'Every detective starts here. Open the cases again and see what you remember.'];
+  let best = null; try { best = JSON.parse(localStorage.getItem(BEST) || 'null'); } catch (e) {}
+  const record = !best || score > best.score;
+  if (record) { try { localStorage.setItem(BEST, JSON.stringify({ score, rank: rank[0] })); } catch (e) {} }
+  $('#report-rank').innerHTML = `<span class="kicker">Rank${record && best ? ' · your best so far' : ''}</span><b>${esc(rank[0])}</b><em>${esc(rank[1])}</em>`;
   $('#report-grid').innerHTML = [
-    ['12', 'clues filed'], [state.firstRight + '/' + total, 'right first time'], [fixed + '/' + fixable, 'hazards fixed'],
-    [Math.round(100 * fixed / fixable) + '%', 'clean-air score']].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
+    [state.firstRight + '/' + total, 'right first time'], [fixed + '/' + fixable, 'hazards fixed'],
+    [L.right + '/' + (L.ids.length || 6), 'line-up from memory'], [String(state.hints), state.hints === 1 ? 'hint used' : 'hints used']].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
   const learned = [
     'Smoking causes most lung cancers, and stopping helps at every age: in a UK study, men who stopped at 50 lowered their risk of lung cancer by age 75 from about 16% to 6%.',
     'People who never smoked but live with a smoker have a risk about 20 to 30% higher. A smoke-free home and car protects everyone in them.',
@@ -924,25 +1060,33 @@ function report() {
     ${codeHtml('c1')}${codeHtml('c14')}
     <p class="fine">This game shows whether something can cause lung cancer in people in general, a population-level hazard. It cannot tell anyone what caused their own illness, and most people with these exposures never develop lung cancer. Classifications are those of the IARC Monographs; the recommendations are the official wording of the European Code Against Cancer, 5th edition.</p>
     ${srcHtml(['who', 'm100e', 'm83', 'darby', 'whoRadon', 'peto', 'few', 'cutdown', 'light', 'whoEcig', 'loomis', 'm105', 'm95', 'm100c', 'm118', 'm103', 'coffee', 'stress', 'code'])}`;
-  show('report'); window.scrollTo({ top: 0 });
+  show('report'); window.scrollTo({ top: 0 }); sfx('close'); bestLine();
+}
+function bestLine() {
+  let best = null; try { best = JSON.parse(localStorage.getItem(BEST) || 'null'); } catch (e) {}
+  const el = $('#best-line'); if (!el) return;
+  el.hidden = !best; if (best) el.textContent = `Your best rank so far: ${best.rank}.`;
 }
 function reset() {
-  Object.assign(state, { scene: 0, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false });
+  Object.assign(state, { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null });
+  activeHotspot = null;
 }
 
 /* ------------------------------------------------------------------ wiring */
 function openModal(id) { $(id).hidden = false; const f = $(id).querySelector('input, button'); if (f) f.focus(); }
 function closeModals() { $$('.modal').forEach(m => { m.hidden = true; }); }
-$('#btn-start').addEventListener('click', () => { reset(); show('play'); renderScene(); });
+$('#btn-start').addEventListener('click', () => { reset(); show('play'); renderScene(); sfx('open'); });
 $('#btn-again').addEventListener('click', () => { reset(); show('play'); renderScene(); window.scrollTo({ top: 0 }); });
 $('#btn-how').addEventListener('click', () => openModal('#modal-how'));
 $('#btn-settings').addEventListener('click', () => openModal('#modal-settings'));
 $('#btn-settings-2').addEventListener('click', () => openModal('#modal-settings'));
+$('#btn-hint').addEventListener('click', hint);
 $$('[data-close]').forEach(b => b.addEventListener('click', closeModals));
 $$('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModals(); }));
 $('#panel-close').addEventListener('click', closePanel);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModals(); if (!$('#panel').hidden) closePanel(); } });
-['contrast', 'large', 'font', 'motion'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { const open = $$('.modal').some(m => !m.hidden); closeModals(); if (!open && !$('#panel').hidden) closePanel(); } });
+['contrast', 'large', 'font', 'motion', 'mute', 'reveal'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
 loadSettings();
+bestLine();
 show('title');
 })();
