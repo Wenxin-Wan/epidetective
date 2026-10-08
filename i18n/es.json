@@ -66,6 +66,7 @@
   "exp_leg_est": "Vínculo establecido",
   "exp_leg_sus": "Vínculo sospechado",
   "exp_leg_can": "Localización del cáncer",
+  "exp_leg_exp": "Exposure",
   "exp_whatsin_label": "Qué hay aquí",
   "exp_whatsin_h2": "Las exposiciones que el CIIC ha vinculado a un c&aacute;ncer, <b>graduadas por la solidez de la evidencia</b>.",
   "exp_fig1": "Exposiciones",

@@ -66,6 +66,7 @@
   "exp_leg_est": "Lien établi",
   "exp_leg_sus": "Lien suspecté",
   "exp_leg_can": "Localisation du cancer",
+  "exp_leg_exp": "Exposure",
   "exp_whatsin_label": "Ce que l’on trouve ici",
   "exp_whatsin_h2": "Les expositions que le CIRC a associ&eacute;es &agrave; un cancer, <b>class&eacute;es selon la solidit&eacute; des preuves</b>.",
   "exp_fig1": "Expositions",

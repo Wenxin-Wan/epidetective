@@ -610,7 +610,7 @@ function aboutHtml() {
     ${now ? `<p class="fine">Screening participation now: about ${pct(now.s)} in 100 (reference about ${pct(MODEL.s0)} in 100). Incidence ratio ${now.ratio.toFixed(2)}; projected about ${now.cases} diagnosed and about ${now.deaths} deaths per 1,000.</p>` : ''}
     <h3>What each card does</h3>
     <table class="tbl"><thead><tr><th>Card</th><th>Option</th><th>Effort</th><th>Effect in the model</th></tr></thead><tbody>${effects.join('')}</tbody></table>
-    <p class="fine">The effects are deliberately modest. They are meant to show the shape of population prevention, where a small change in a common exposure adds up across many people, and to be honest about how small the changes are for any one town.</p>
+    <p class="fine">The effects are deliberately modest. They are meant to show the shape of population prevention, where a small change in a common exposure adds up across many people, and to show how small the changes are for any one town.</p>
   </div>`;
 }
 function bestLine() {

@@ -192,8 +192,10 @@ vw = max(p["sx"] + p["R"] * k for p in P) + PAD - vx0
 vh = max(p["sy"] + p["R"] * k for p in P) + PAD - vy0
 out = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="%.1f %.1f %.1f %.1f" '
        'width="%.0f" height="%.0f" '
-       'role="img" aria-label="Clustered network of 359 graded links between 95 risk '
-       'factors and 31 chronic diseases">' % (vx0, vy0, vw, vh, vw, vh)]
+       'role="img" aria-label="Clustered network of %d graded links between %d risk '
+       'factors and %d chronic diseases">'
+       % (vx0, vy0, vw, vh, vw, vh, len(links),
+          sum(1 for n in nodes if n["t"] == "r"), sum(1 for n in nodes if n["t"] == "d"))]
 
 # cluster blobs
 for gk, g in groups.items():

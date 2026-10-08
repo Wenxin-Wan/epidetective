@@ -17,7 +17,7 @@ random.seed(SEED)
 W, H = 1600, 1000
 PAL = {
     "established": "#A33526",
-    "suspected": "#8C9A8E",
+    "suspected": "#B4681F",
     "cancer": "#1F5B55",
     "exposure": "#171814",
 }
@@ -110,8 +110,9 @@ vh = max(p["sy"] + p["R"] for p in P) + PAD - vy0
 out = [
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="%.1f %.1f %.1f %.1f" '
     'width="%.0f" height="%.0f" role="img" '
-    'aria-label="Network of 460 documented links between 185 exposures and 68 cancer types">'
-    % (vx0, vy0, vw, vh, vw, vh)
+    'aria-label="Network of %d links between %d exposures and %d cancer types">'
+    % (vx0, vy0, vw, vh, vw, vh, len(links),
+       sum(1 for n in nodes if n["t"] == "e"), sum(1 for n in nodes if n["t"] == "c"))
 ]
 out.append('<g stroke="%s" stroke-width="1.5" opacity=".5" fill="none">' % PAL["suspected"])
 for a, b, ev in E:

@@ -66,6 +66,7 @@
   "exp_leg_est": "已确认的关联",
   "exp_leg_sus": "疑似关联",
   "exp_leg_can": "癌症部位",
+  "exp_leg_exp": "Exposure",
   "exp_whatsin_label": "这里有什么",
   "exp_whatsin_h2": "IARC 认定与癌症存在关联的暴露因素，<b>并按证据的确定程度分级</b>。",
   "exp_fig1": "暴露",
