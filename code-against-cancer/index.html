@@ -73,7 +73,10 @@
   .statrow{margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
   .stat{background:var(--ink);color:var(--chalk);border-radius:16px;padding:16px 22px}
   .stat b{font-family:var(--serif);font-size:2.2rem;line-height:1;font-weight:600}
-  .stat span{display:block;font-size:.8rem;color:#B9BDB2;margin-top:5px;max-width:30ch}
+  .stat span{display:block;font-size:.8rem;color:#B9BDB2;margin-top:5px;max-width:36ch}
+  .statsrc{display:block;margin-top:10px;font-size:.78rem;color:var(--ink-soft);max-width:62ch}
+  .statsrc a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+  .statsrc a:hover{color:var(--ink)}
 
   /* framework blurb */
   .framework{padding-block:44px}
@@ -151,8 +154,9 @@
       <h1 data-i18n="title">Code Against Cancer</h1>
       <p class="lede" data-i18n="lede">What you can do to lower your own risk of cancer, according to the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.</p>
       <div class="statrow">
-        <div class="stat"><b data-i18n="statV">≈40%</b><span data-i18n="statL">of cancers are linked to preventable causes</span></div>
+        <div class="stat"><b data-i18n="statV">≈38%</b><span data-i18n="statL">of cancers can currently be prevented by avoiding risk factors and using existing evidence-based prevention strategies</span></div>
       </div>
+      <p class="statsrc"><a href="https://www.who.int/news-room/fact-sheets/detail/cancer" rel="noopener" data-i18n="statSrc">Source: WHO, Cancer fact sheet, 3 July 2026. Checked 20 October 2026.</a></p>
     </div>
   </section>
 
@@ -219,7 +223,8 @@ var STRINGS = {
     back:"Back to EpiDetective", eyebrow:"Official cancer-prevention guidance",
     title:"Code Against Cancer",
     lede:"What you can do to lower your own risk of cancer, according to the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.",
-    statV:"≈40%", statL:"of cancers are linked to preventable causes",
+    statV:"≈38%", statL:"of cancers can currently be prevented by avoiding risk factors and using existing evidence-based prevention strategies",
+    statSrc:"Source: WHO, Cancer fact sheet, 3 July 2026. Checked 20 October 2026.",
     frameworkH:"The World Code Against Cancer Framework",
     frameworkP:"One evidence-review method, adapted region by region. Each regional Code is developed by IARC together with a regional coordinating partner, then tailored to local cancer patterns and living conditions. Europe and Latin America & the Caribbean are published; Asia is in development.",
     regionsLabel:"Choose a region",
@@ -242,7 +247,8 @@ var STRINGS = {
     back:"返回 EpiDetective", eyebrow:"官方防癌指南",
     title:"防癌守则",
     lede:"根据 IARC（世界卫生组织国际癌症研究机构）及其合作伙伴制定的各区域《防癌守则》，你可以这样降低自己患癌的风险。",
-    statV:"约 40%", statL:"的癌症与可预防的成因相关",
+    statV:"约 38%", statL:"的癌症目前可通过避免危险因素和采取现有的循证预防策略加以预防",
+    statSrc:"来源：世界卫生组织《癌症》情况说明书（英文），2026 年 7 月 3 日。2026 年 10 月 20 日核查。",
     frameworkH:"世界防癌守则框架",
     frameworkP:"同一套证据评估方法，逐区域本土化。每一部区域守则都由 IARC 与区域协调伙伴共同制定，再根据当地癌症谱和生活方式调整。欧洲、拉丁美洲及加勒比已发布；亚洲正在制定中。",
     regionsLabel:"选择地区",
@@ -265,7 +271,8 @@ var STRINGS = {
     back:"Retour à EpiDetective", eyebrow:"Recommandations officielles de prévention du cancer",
     title:"Code contre le cancer",
     lede:"Ce que vous pouvez faire pour réduire votre propre risque de cancer, d’après les Codes régionaux contre le cancer élaborés par le CIRC (l’agence de l’OMS spécialisée dans le cancer) et ses partenaires.",
-    statV:"≈ 40 %", statL:"des cancers sont liés à des causes évitables",
+    statV:"≈ 38 %", statL:"des cancers peuvent actuellement être évités en écartant les facteurs de risque et en appliquant les stratégies de prévention existantes fondées sur les preuves",
+    statSrc:"Source : OMS, fiche d’information « Cancer » (en anglais), 3 juillet 2026. Consultée le 20 octobre 2026.",
     frameworkH:"Le cadre mondial des Codes contre le cancer",
     frameworkP:"Une même méthode d’évaluation des preuves, adaptée région par région. Chaque Code régional est élaboré par le CIRC avec un partenaire de coordination régional, puis ajusté aux profils de cancer et aux conditions de vie locales. Les Codes de l’Europe et de l’Amérique latine et des Caraïbes sont publiés ; celui de l’Asie est en cours d’élaboration.",
     regionsLabel:"Choisissez une région",
@@ -288,7 +295,8 @@ var STRINGS = {
     back:"Volver a EpiDetective", eyebrow:"Recomendaciones oficiales para la prevención del cáncer",
     title:"Código contra el cáncer",
     lede:"Lo que puedes hacer para reducir tu propio riesgo de cáncer, según los Códigos regionales contra el cáncer elaborados por el CIIC (la agencia de la OMS especializada en el cáncer) y sus socios.",
-    statV:"≈ 40 %", statL:"de los cánceres están relacionados con causas evitables",
+    statV:"≈ 38 %", statL:"de los cánceres pueden prevenirse actualmente evitando los factores de riesgo y aplicando las estrategias de prevención existentes basadas en la evidencia",
+    statSrc:"Fuente: OMS, nota descriptiva «Cáncer» (en inglés), 3 de julio de 2026. Consultada el 20 de octubre de 2026.",
     frameworkH:"El marco mundial de los Códigos contra el cáncer",
     frameworkP:"Un mismo método de revisión de la evidencia, adaptado región por región. Cada Código regional es elaborado por el CIIC junto con un socio coordinador regional y luego se ajusta a los patrones de cáncer y las condiciones de vida locales. Los Códigos de Europa y de América Latina y el Caribe ya están publicados; el de Asia está en desarrollo.",
     regionsLabel:"Elige una región",
@@ -311,7 +319,8 @@ var STRINGS = {
     back:"Назад к EpiDetective", eyebrow:"Официальные рекомендации по профилактике рака",
     title:"Кодекс против рака",
     lede:"Что можно сделать, чтобы снизить собственный риск рака, по рекомендациям региональных Кодексов против рака, разработанных МАИР (агентством ВОЗ по изучению рака) и его партнёрами.",
-    statV:"≈ 40 %", statL:"случаев рака связаны с предотвратимыми причинами",
+    statV:"≈ 38 %", statL:"случаев рака сейчас можно предотвратить, избегая факторов риска и применяя существующие профилактические стратегии, основанные на доказательствах",
+    statSrc:"Источник: ВОЗ, информационный бюллетень «Рак» (на английском языке), 3 июля 2026 г. Проверено 20 октября 2026 г.",
     frameworkH:"Всемирная рамочная программа Кодексов против рака",
     frameworkP:"Единый метод оценки доказательств, адаптируемый для каждого региона. Каждый региональный Кодекс разрабатывается МАИР вместе с региональным партнёром-координатором и затем учитывает местную структуру заболеваемости и условия жизни. Кодексы для Европы и для Латинской Америки и Карибского бассейна опубликованы; Кодекс для Азии разрабатывается.",
     regionsLabel:"Выберите регион",

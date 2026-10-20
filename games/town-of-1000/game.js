@@ -19,7 +19,7 @@ const SRC = {
   mht:      { t: 'Collaborative Group on Hormonal Factors in Breast Cancer, Lancet 2019;394:1159: current use of combined oestrogen-progestogen menopausal hormone therapy, years 1 to 4 RR 1.60, years 5 to 14 RR 2.08', u: 'https://doi.org/10.1016/S0140-6736(19)31709-X' },
   screen:   { t: 'Lauby-Secretan et al., N Engl J Med 2015;372:2353 (IARC Handbook 15): mammography screening at ages 50 to 69 reduces breast-cancer deaths by about 40% among women who attend, 23% among all women invited', u: 'https://doi.org/10.1056/NEJMsr1504363' },
   mirick:   { t: 'Mirick et al., J Natl Cancer Inst 2002;94:1578: a population-based study found no increase in breast-cancer risk with antiperspirant or deodorant use', u: 'https://doi.org/10.1093/jnci/94.20.1578' },
-  m100e:    { t: 'IARC Monographs Vol. 100E (2012): tobacco smoking is carcinogenic to humans (Group 1); for breast cancer a positive association has been observed, classed as limited evidence', u: IARC_LIST },
+  m100e:    { t: 'IARC Monographs Vol. 100E (evaluated 2009, published 2012): tobacco smoking is carcinogenic to humans (Group 1); for breast cancer a positive association has been observed, classed as limited evidence', u: IARC_LIST },
   chen:     { t: 'Chen et al., Cancer Epidemiol Biomarkers Prev 2014;23:2181: among postmenopausal women, no aspect of bra wearing was associated with breast cancer', u: 'https://doi.org/10.1158/1055-9965.EPI-14-0414' },
   code:     { t: 'European Code Against Cancer, 5th edition (IARC / WHO)', u: 'https://cancer-code-europe.iarc.who.int/' },
 };
