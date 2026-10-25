@@ -247,6 +247,10 @@
     "label": "EXPLORER — leg can",
     "type": "string"
   },
+  "exp_leg_exp": {
+    "label": "EXPLORER — leg exp",
+    "type": "string"
+  },
   "exp_whatsin_label": {
     "label": "EXPLORER — whatsin label",
     "type": "string"

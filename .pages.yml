@@ -214,6 +214,9 @@ content:
       - name: "exp_leg_can"
         label: "EXPLORER — leg can"
         type: string
+      - name: "exp_leg_exp"
+        label: "EXPLORER — leg exp"
+        type: string
       - name: "exp_whatsin_label"
         label: "EXPLORER — whatsin label"
         type: string
@@ -853,6 +856,9 @@ content:
         type: string
       - name: "exp_leg_can"
         label: "EXPLORER — leg can"
+        type: string
+      - name: "exp_leg_exp"
+        label: "EXPLORER — leg exp"
         type: string
       - name: "exp_whatsin_label"
         label: "EXPLORER — whatsin label"
@@ -1494,6 +1500,9 @@ content:
       - name: "exp_leg_can"
         label: "EXPLORER — leg can"
         type: string
+      - name: "exp_leg_exp"
+        label: "EXPLORER — leg exp"
+        type: string
       - name: "exp_whatsin_label"
         label: "EXPLORER — whatsin label"
         type: string
@@ -2134,6 +2143,9 @@ content:
       - name: "exp_leg_can"
         label: "EXPLORER — leg can"
         type: string
+      - name: "exp_leg_exp"
+        label: "EXPLORER — leg exp"
+        type: string
       - name: "exp_whatsin_label"
         label: "EXPLORER — whatsin label"
         type: string
@@ -2773,6 +2785,9 @@ content:
         type: string
       - name: "exp_leg_can"
         label: "EXPLORER — leg can"
+        type: string
+      - name: "exp_leg_exp"
+        label: "EXPLORER — leg exp"
         type: string
       - name: "exp_whatsin_label"
         label: "EXPLORER — whatsin label"
