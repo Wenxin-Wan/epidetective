@@ -123,6 +123,14 @@
     "label": "Tool 2 — stat 4 (languages)",
     "type": "string"
   },
+  "inst_t2_m5": {
+    "label": "Tool 2 — stat 5 (sources and version)",
+    "type": "string"
+  },
+  "inst_t2_m6": {
+    "label": "Tool 2 — stat 6 (related-outcome links)",
+    "type": "string"
+  },
   "inst_t2_btn_open": {
     "label": "Tool 2 — primary button",
     "type": "string"

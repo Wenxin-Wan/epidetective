@@ -317,7 +317,10 @@ content:
         label: "inst_cac_desc"
         type: string
       - name: "inst_t2_m5"
-        label: "inst_t2_m5"
+        label: "Tool 2 — stat 5 (sources and version)"
+        type: string
+      - name: "inst_t2_m6"
+        label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
         label: "nav_games"
@@ -960,7 +963,10 @@ content:
         label: "inst_cac_desc"
         type: string
       - name: "inst_t2_m5"
-        label: "inst_t2_m5"
+        label: "Tool 2 — stat 5 (sources and version)"
+        type: string
+      - name: "inst_t2_m6"
+        label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
         label: "nav_games"
@@ -1603,7 +1609,10 @@ content:
         label: "inst_cac_desc"
         type: string
       - name: "inst_t2_m5"
-        label: "inst_t2_m5"
+        label: "Tool 2 — stat 5 (sources and version)"
+        type: string
+      - name: "inst_t2_m6"
+        label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
         label: "nav_games"
@@ -2246,7 +2255,10 @@ content:
         label: "inst_cac_desc"
         type: string
       - name: "inst_t2_m5"
-        label: "inst_t2_m5"
+        label: "Tool 2 — stat 5 (sources and version)"
+        type: string
+      - name: "inst_t2_m6"
+        label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
         label: "nav_games"
@@ -2889,7 +2901,10 @@ content:
         label: "inst_cac_desc"
         type: string
       - name: "inst_t2_m5"
-        label: "inst_t2_m5"
+        label: "Tool 2 — stat 5 (sources and version)"
+        type: string
+      - name: "inst_t2_m6"
+        label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
         label: "nav_games"

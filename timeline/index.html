@@ -24,7 +24,7 @@
     "@type": "Person",
     "name": "Wenxin Wan",
     "alternateName": "万汶鑫",
-    "jobTitle": "Postdoctoral researcher in cancer epidemiology",
+    "jobTitle": "Postdoctoral scientist in cancer epidemiology",
     "worksFor": { "@type": "Organization", "name": "International Agency for Research on Cancer (IARC / WHO)" },
     "alumniOf": [
       { "@type": "CollegeOrUniversity", "name": "Utrecht University" },
@@ -93,7 +93,7 @@
   body.zh .chip{font-family:inherit;letter-spacing:0}
   .chip:hover{border-color:var(--ink);color:var(--ink)}
   .chip.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-  .chip .n{color:inherit;opacity:.55;margin-left:4px;font-family:var(--mono)}
+  .chip .n{color:inherit;opacity:.8;margin-left:4px;font-family:var(--mono)}
 
   .tl{padding-block:14px 30px}
   .yeargroup{display:grid;grid-template-columns:110px 1fr;gap:0 28px;margin-top:10px}
@@ -130,6 +130,11 @@
   .item.open .tog{color:var(--ink)}
   .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
   .body>.inner{overflow:hidden;min-width:0}
+  /* A collapsed entry keeps its links in the DOM, so hide them from keyboard focus
+     once the collapse animation (.28s) has finished, and show them at once on open. */
+  .item:not(.open) .body>.inner{visibility:hidden;transition:visibility 0s .28s}
+  .item.open .body>.inner{visibility:visible;transition-delay:0s}
+  .mode-full .item .body>.inner{visibility:visible;transition-delay:0s}
   .body p{padding-top:2px}
   .item.open .body,.mode-full .body{grid-template-rows:1fr}
   .mode-full .tog{display:none}
@@ -289,13 +294,13 @@ var GROUPS = [
              [{en:"How to read the evidence",zh:"读懂证据"},{en:"../reading.html",zh:"../zh/reading.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Cancer Evidence Explorer",zh:"癌症证据探索器"},
-      d:{en:"The IARC Monographs' by-site evidence table (185 exposures, 68 cancer sites, 469 evaluated links) made explorable in ten languages, with each exposure’s scientific record (volume, year, citations) one click away. Counted here: every agent for which IARC’s cancer-site table lists at least limited evidence in people for a named cancer (Volumes 1 to 141), adapted as the tool describes.",
-         zh:"把 IARC《致癌物专论》的按部位证据表（185 种暴露、68 个癌症部位、469 条经评估的关联）变成可探索的工具，提供十种语言，每种暴露的科学档案（卷号、年份、文献）一键可达。统计范围：凡是 IARC 按癌症部位分类的表格（第 1 至 141 卷）对某一种具体癌症列出了至少达到“有限”级别的人类证据的因素，都计入在内，并按本工具的说明作了调整。"},
+      d:{en:"The IARC Monographs' by-site evidence table (185 exposures, 68 cancer types, 469 links) made explorable in ten languages, with each exposure’s scientific record (volume, year, citations) one click away. Counted here: every agent for which IARC’s cancer-site table lists at least limited evidence in people for a named cancer (Volumes 1 to 141), adapted as the tool describes.",
+         zh:"把 IARC《致癌物专论》的按部位证据表（185 种暴露、68 种癌症、469 条关联）变成可探索的工具，提供十种语言，每种暴露的科学档案（卷号、年份、文献）一键可达。统计范围：凡是 IARC 按癌症部位分类的表格（第 1 至 141 卷）对某一种具体癌症列出了至少达到“有限”级别的人类证据的因素，都计入在内，并按本工具的说明作了调整。"},
       links:[[{en:"How it works",zh:"工具说明"},{en:"../explorer.html",zh:"../zh/explorer.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Chronic Disease Evidence Explorer",zh:"慢性病证据图谱"},
-      d:{en:"The sister instrument for everything beyond cancer: 124 risk factors, 45 diseases, 431 graded links drawn from GBD Burden of Proof, Lancet Commissions, pooled cohort consortia and published meta-analyses — forest plots on a shared axis, a per-estimate audit trail, and a 641-source reference index. It is in ten languages and every claim links to its source. Version 1.4 followed in September 2026, after every flagged link had been checked again against its source. Version 2.0 (October 2026) added an operational grading table, a related-outcome layer, a stated review-counting rule and a per-link changelog.",
-         zh:"癌症之外的姊妹工具：124 个危险因素、45 种疾病、431 条分级关联，取自 GBD Burden of Proof、《柳叶刀》委员会报告、大型队列联盟与已发表的荟萃分析——共享坐标轴的森林图、逐条估计的溯源记录、641 个来源的参考文献索引。提供十种语言，每个论断都链接到出处。2026 年 9 月发布 1.4 版，此前所有被标记的关联都已对照原始来源重新核查。2026 年 10 月发布 2.0 版，新增可操作的分级规则表、相关结局层、明确的综述计数规则和逐条关联的更新记录。"},
+      d:{en:"The sister instrument for everything beyond cancer: 124 risk factors, 45 diseases, 356 graded links and 75 related-outcome links shown for context, drawn from GBD Burden of Proof, Lancet Commissions, pooled cohort consortia and published meta-analyses — forest plots on a shared axis, a per-estimate audit trail, and a 641-source reference index. It is in ten languages and every claim links to its source. Version 1.4 followed in September 2026, after every flagged link had been checked again against its source. Version 2.0 (October 2026) added an operational grading table, a related-outcome layer, a stated review-counting rule and a per-link changelog.",
+         zh:"癌症之外的姊妹工具：124 个危险因素、45 种疾病、356 条分级关联和 75 条仅供参考的相关结局关联，取自 GBD Burden of Proof、《柳叶刀》委员会报告、大型队列联盟与已发表的荟萃分析——共享坐标轴的森林图、逐条估计的溯源记录、641 个来源的参考文献索引。提供十种语言，每个论断都链接到出处。2026 年 9 月发布 1.4 版，此前所有被标记的关联都已对照原始来源重新核查。2026 年 10 月发布 2.0 版，新增可操作的分级规则表、相关结局层、明确的综述计数规则和逐条关联的更新记录。"},
       links:[[{en:"The instruments",zh:"工具一览"},{en:"../#instruments",zh:"../zh/#instruments"}]] },
     { k:"paper", date:{en:"Aug 2026",zh:"2026年8月"}, note:"coauthor",
       t:{en:"The occupational exposome and new-onset COPD: longitudinal analyses of two European cohorts",
@@ -316,7 +321,7 @@ var GROUPS = [
          zh:"长期使用阿片类药物是否带来癌症风险？OPICO 汇集约十项队列、约三十个经统一协调的真实世界数据源——电子健康记录、处方与保险理赔——覆盖美、英、澳、法约 120 万人，20 余家合作机构。同时担任国际肺癌队列联盟（LC3）科学顾问，把职业暴露证据引入肺癌筛查。"},
       links:[[{en:"opico.iarc.who.int",zh:"opico.iarc.who.int"},"https://opico.iarc.who.int"]] },
     { k:"job", sel:true, date:{en:"Jan 2026 – present",zh:"2026年1月 – 至今"},
-      t:{en:"Postdoctoral researcher at IARC / WHO, Lyon",zh:"里昂 IARC / 世界卫生组织博士后研究员"},
+      t:{en:"Postdoctoral scientist at IARC / WHO, Lyon",zh:"里昂 IARC / 世界卫生组织博士后科学家"},
       d:{en:"Joining the World Health Organization’s cancer agency to work on medicines and cancer risk in large populations. Its Monographs are the source of the Cancer Evidence Explorer.",
          zh:"加入世界卫生组织的癌症研究机构，在大规模人群中研究药物与癌症风险。癌症证据探索器的数据正是来自该机构的《IARC 致癌物专论》。"},
       links:[[{en:"iarc.who.int",zh:"iarc.who.int"},"https://www.iarc.who.int"]] }
@@ -356,7 +361,7 @@ var GROUPS = [
              [{en:"ERS · COPD ExWAS",zh:"ERS · COPD 全暴露组关联研究"},"https://doi.org/10.1183/13993003.congress-2024.OA974"],
              [{en:"EPICOH oral (lead)",zh:"EPICOH 口头报告（第一作者）"},"https://doi.org/10.1136/oemed-2024-epicohabstracts.8"],
              [{en:"EPICOH poster · T2D",zh:"EPICOH 海报 · 2型糖尿病"},"https://doi.org/10.1136/oemed-2024-epicohabstracts.116"],
-             [{en:"ISEE · T2D",zh:"ISEE · 2型糖尿病"},"https://doi.org/10.1289/isee.2024.1283"]] },
+             [{en:"ISEE · T2D",zh:"ISEE · 2型糖尿病"},"http://web.archive.org/web/20250404174225/https://ehp.niehs.nih.gov/doi/abs/10.1289/isee.2024.1283"]] },
     { k:"paper", sel:true, date:{en:"Jan 2024",zh:"2024年1月"}, note:"lead",
       t:{en:"Occupational benzene exposure and lung cancer risk: a pooled analysis of 14 case–control studies",
          zh:"Occupational benzene exposure and lung cancer risk: a pooled analysis of 14 case–control studies"},
