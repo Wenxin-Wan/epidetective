@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>如何读懂健康证据｜EpiDetective</title>
-<meta name="description" content="读懂健康新闻的六个概念：危害与风险、相对风险与绝对风险、关联与因果、估计值的区间、“没有证据”的含义，以及人群与个人。">
+<meta name="description" content="读懂健康新闻的七个概念：危害与风险、相对风险与绝对风险、关联与因果、偶然与偏倚、估计值的区间、“没有证据”的含义，以及人群与个人。附一个完整的示例，以及两个工具所用标签的对照。">
 <link rel="canonical" href="https://epidetective.com/zh/reading.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/reading.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/zh/reading.html">
 <meta property="og:title" content="如何读懂健康证据｜EpiDetective">
-<meta property="og:description" content="读懂健康新闻的六个概念：危害与风险、相对风险与绝对风险、关联与因果、估计值的区间、“没有证据”的含义，以及人群与个人。">
+<meta property="og:description" content="读懂健康新闻的七个概念：危害与风险、相对风险与绝对风险、关联与因果、偶然与偏倚、估计值的区间、“没有证据”的含义，以及人群与个人。附一个完整的示例，以及两个工具所用标签的对照。">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="如何读懂健康证据｜EpiDetective">
-<meta name="twitter:description" content="读懂健康新闻的六个概念：危害与风险、相对风险与绝对风险、关联与因果、估计值的区间、“没有证据”的含义，以及人群与个人。">
+<meta name="twitter:description" content="读懂健康新闻的七个概念：危害与风险、相对风险与绝对风险、关联与因果、偶然与偏倚、估计值的区间、“没有证据”的含义，以及人群与个人。附一个完整的示例，以及两个工具所用标签的对照。">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -52,55 +52,172 @@
   <div class="wrap">
     <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
       <span>读懂证据</span></div>
-    <h1>六个概念，让健康证据<b>读得懂</b>。</h1>
+    <h1>七个概念，让健康证据<b>读得懂</b>。</h1>
     <p class="lede" style="margin-top:24px">本站工具里的每一个数字，都建立在流行病学的几个基本概念之上。它们都不需要数学。读过一遍，再看到健康新闻的标题，就容易掂量得多。</p>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="reads" style="margin-top:0">
-    <div class="read">
+    <div class="read" id="hazard">
       <div class="tag">危害与风险</div>
       <div>
-        <h3>危害是可能造成伤害的东西，风险是伤害发生的可能性有多大。</h3>
+        <h2>危害是可能造成伤害的东西，风险是伤害发生的可能性有多大。</h2>
         <p>阳光、酒精和石棉都是危害：每一种都可能致癌。具体到某一个人，可能性有多大，取决于接触了多少、持续多久、在什么年龄。《IARC 致癌物专论》识别的是危害，风险的大小则留给其他研究去回答。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Solar%20radiation">太阳辐射（紫外线）</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Alcoholic%20beverages">酒精饮料</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Asbestos%20%28all%20forms%29">石棉</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="relative-absolute">
       <div class="tag">相对风险与绝对风险</div>
       <div>
-        <h3>“风险翻倍”说明不了什么，除非知道原来是多少。</h3>
+        <h2>“风险翻倍”说明不了什么，除非知道原来是多少。</h2>
         <p>相对风险比较的是两组人，绝对风险说的是有多少人受到影响。万分之一的风险翻一倍，每 1 万人里多 1 例；十分之一的风险上升 10%，同样 1 万人里多 100 例。两个数字都要问。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=zh#how">两个数字，各自的含义</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="association-cause">
       <div class="tag">关联与因果</div>
       <div>
-        <h3>两件事可以一同增加，而彼此并无因果。</h3>
+        <h2>两件事可以一同增加，而彼此并无因果。</h2>
         <p>随身带打火机的人更容易得肺癌，打火机却是无辜的：两者都由吸烟造成。流行病学家把这种情况称为混杂。在认定因果之前，研究者要看多项研究是否得出同样的结果，暴露越多疾病是否越多，以及暴露是否发生在疾病之前。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Tobacco%20smoking">吸烟</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="chance-bias">
+      <div class="tag">偶然与偏倚</div>
+      <div>
+        <h2>一个结果可能出于偶然，也可能因为研究的做法而偏向一边。</h2>
+        <p><b>偶然。</b>每项研究看的都只是一部分人；样本小，就可能纯粹因为运气而显示出某种关联，或者掩盖某种关联。把一枚均匀的硬币抛 10 次，得到 7 次或更多正面的情况，大约每 6 轮就会出现 1 次；抛 1,000 次，正面的比例会稳定在一半左右。所以，一项小型研究很少能下定论。</p>
+        <p><b>偏倚。</b>研究的做法也可能让结果偏向一边。Interphone 研究请受访者回忆过去的手机使用情况，使用最多的人往往高估自己的使用量。IARC 指出，偶然因素或偏倚可能解释使用最多的人群中较高的胶质瘤（一种脑肿瘤）风险。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Radiofrequency%20electromagnetic%20fields%20%28glioma%2C%20acoustic%20neuroma%29">射频电磁场（如手机辐射）</a></p>
+      </div>
+    </div>
+    <div class="read" id="range">
       <div class="tag">估计值的区间</div>
       <div>
-        <h3>每个估计值都带有一个区间，区间本身就是结果的一部分。</h3>
+        <h2>每个估计值都带有一个区间，区间本身就是结果的一部分。</h2>
         <p>一项研究可能报告相对风险为 1.2，95% 置信区间为 0.9 至 1.6。这些数据与风险小幅升高相符，也同样与毫无影响相符，因为区间包含了 1。来自大型研究的窄区间，比来自小型研究的宽区间更值得重视。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=zh#link=red_meat%7Cchd">未加工红肉与冠心病</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="no-evidence">
       <div class="tag">没有证据，与证明无害</div>
       <div>
-        <h3>“无法判断”和“它是安全的”，是两种不同的结论。</h3>
+        <h2>“无法判断”和“它是安全的”，是两种不同的结论。</h2>
         <p>IARC 把某种因素列为 3 类（“无法分类”），往往是因为研究太少或太弱，朝哪个方向都无法下结论。这说的是证据的状况。当有力证据表明某因素在动物身上致癌的机制在人体内不起作用，且没有其他证据支持更高的类别时，也会列入 3 类。自 2019 年版《序言》起，IARC 不再设 4 类（“很可能不致癌”），原本可能归入 4 类的因素现在归入 3 类。要证明某样东西安全，需要大规模、严谨的研究去寻找危害，并且确实没有发现。</p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="populations">
       <div class="tag">人群与个人</div>
       <div>
-        <h3>这些数字描述的是群体，解释不了某一个人为什么生病。</h3>
+        <h2>这些数字描述的是群体，解释不了某一个人为什么生病。</h2>
         <p>一个危险因素改变的是成千上万人当中的概率。有某种暴露的人，大多数不会得这种病；没有这种暴露的人，也有人会得。关于你自己的健康，有任何问题都请咨询为你诊治的医生。</p>
+        <p class="see"><span class="k">查看证据</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=zh#cancer=Lung">肺癌</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec wrap ex" id="worked-example">
+  <div class="sec-head">
+    <div class="label">示例</div>
+    <h2>用<b>七个概念</b>读一条新闻标题。</h2>
+  </div>
+  <p class="ex-head">“世卫组织：加工肉类致癌”</p>
+  <p class="lede">2015 年 10 月 IARC 评估红肉和加工肉类之后，出现了许多这样的标题。下面用每个概念依次读一读这条新闻。</p>
+  <ol class="ex-steps">
+    <li><span class="tag">危害与风险</span><p>IARC 把加工肉类列为 1 类，也就是它把握最大的一类，因为人群研究中关于肠癌的证据充分。这回答的是它能不能致癌；它会让风险升高多少，是另一个问题。</p></li>
+    <li><span class="tag">相对风险与绝对风险</span><p>工具中的条目写道：“每天每多吃 50 克，患肠癌的风险就增加 18%。”这是相对风险。吸烟也属于 1 类，它的条目给出了绝对数字：“欧洲的数据显示，到 75 岁时，每 100 名吸烟者中约有 10 至 12 人患肺癌；终生不吸烟者中，每 1,000 人约有 4 至 5 人患肺癌。”确定程度相同，风险大小却相差悬殊。</p></li>
+    <li><span class="tag">关联与因果</span><p>常吃加工肉类的人，在其他方面可能也有不同，比如吸烟多少、运动多少。“证据充分”的结论意味着，IARC 工作组有合理把握认为，这些差异解释不了这一关联。</p></li>
+    <li><span class="tag">偶然与偏倚</span><p>同一个结论也意味着，偶然因素和偏倚同样可以有合理把握地排除。这个判断权衡的是全部研究，单独一项小型研究承担不了。</p></li>
+    <li><span class="tag">估计值的区间</span><p>18% 是汇总多项研究得到的中心估计值；和所有估计值一样，它也带有一个区间。在掂量这个数字之前，先问一问区间：如果区间包含“没有影响”，那么数据同样与风险完全没有升高相符。</p></li>
+    <li><span class="tag">没有证据，与证明无害</span><p>IARC 的结论涉及加工肉类，以及列为 2A 类的红肉。其他食物不在这次评估范围内，所以这条标题对它们是否安全什么也没说。</p></li>
+    <li><span class="tag">人群与个人</span><p>这些数字描述的是大规模人群，无法告诉任何人，某一例肠癌是不是吃火腿引起的。吃加工肉类的人，大多数一辈子都不会得肠癌；从不吃的人，也有人会得。</p></li>
+  </ol>
+  <p class="see"><span class="k">查看证据</span>
+    <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat">加工肉类</a>
+    <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Tobacco%20smoking">吸烟</a></p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">标签的含义</div>
+    <h2>两个工具中的标签，<b>放在一起看</b>。</h2>
+  </div>
+  <p class="lede">两个工具用三套标签回答“证据有多确定？”。下表逐一说明每个标签表达了什么、没有表达什么，以及它背后的官方术语。</p>
+  <div class="tbl-wrap" role="region" tabindex="0" aria-labelledby="lbl-h">
+    <table class="lbl-table">
+      <caption id="lbl-h" class="vh">标签的含义</caption>
+      <colgroup><col class="c-label"><col class="c-says"><col class="c-not"><col class="c-term"></colgroup>
+      <thead>
+        <tr><th scope="col">标签</th><th scope="col">它表达什么</th>
+            <th scope="col">它没有表达什么</th><th scope="col">官方术语</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">癌症证据探索器</span> IARC 对某种因素能否致癌有多大把握</span></th></tr>
+        <tr><th scope="row"><span class="sw g1" aria-hidden="true"></span>已知致癌</th>
+            <td>该因素能使人患癌。这是 IARC 把握最大的一类。</td><td>风险有多大，或在什么剂量下才有风险。加工肉类和吸烟都属于 1 类，风险却相差悬殊。</td><td>对人类致癌（1 类）</td></tr>
+        <tr><th scope="row"><span class="sw g2a" aria-hidden="true"></span>很可能致癌</th>
+            <td>该因素很可能使人患癌。证据达不到 1 类的标准，最常见的原因是人群研究的证据有限。</td><td>它在人们通常接触的水平下会致癌，或者风险有多大。</td><td>对人类很可能致癌（2A 类）</td></tr>
+        <tr><th scope="row"><span class="sw g2b" aria-hidden="true"></span>可能致癌</th>
+            <td>该因素可能使人患癌。有一种证据指向这个方向，例如人群证据有限，或动物证据充分。</td><td>它很可能致癌，或者接触它的人面临风险。</td><td>对人类可能致癌（2B 类）</td></tr>
+        <tr><th scope="row"><span class="sw g3" aria-hidden="true"></span>无法分类</th>
+            <td>证据达不到其他任何一类的标准，通常是因为证据太少。</td><td>它是安全的。3 类描述的是证据的状况。</td><td>对人类致癌性尚无法分类（3 类）</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">癌症证据探索器</span> 人群研究对某一种癌症显示了什么</span></th></tr>
+        <tr><th scope="row"><span class="ln est" aria-hidden="true"></span>已确认关联</th>
+            <td>人群研究表明它会导致这种癌症，并且可以有合理把握地排除偶然因素、偏倚和混杂。</td><td>风险有多大，或者某个人的癌症是否由它引起。</td><td>对人类致癌性证据充分</td></tr>
+        <tr><th scope="row"><span class="ln sus" aria-hidden="true"></span>疑似关联</th>
+            <td>人群研究显示它与这种癌症存在关联，把这一关联解释为因果关系是可信的，但还不能排除偶然因素、偏倚或混杂。</td><td>它会导致这种癌症。今后的研究可能证实这一关联，也可能推翻它。</td><td>对人类致癌性证据有限</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">慢性病证据图谱</span> 证据在多大程度上表明某个危险因素会导致某种疾病</span></th></tr>
+        <tr><th scope="row"><span class="sw strong" aria-hidden="true"></span>强</th>
+            <td>多种不同类型的证据一致表明这是病因，结论被推翻的可能性很小。</td><td>效应有多大。等级为“强”的关联，效应也可能很小；效应大小要看面板中的估计值。</td>
+            <td rowspan="5">没有官方术语。这五个等级是慢性病证据图谱自己的分级，定义见其方法框架；它们都不是 IARC 的类别。
+              <a class="term-link" href="../chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">方法框架第 3.1 节（英文） &rarr;</a></td></tr>
+        <tr><th scope="row"><span class="sw moderate" aria-hidden="true"></span>中等</th>
+            <td>多半是病因：各项研究一致，并显示剂量反应关系或已知机制，但还缺一环证据。</td><td>问题已经有了定论。缺少的那一环证据，可能证实这一关联，也可能推翻它。</td></tr>
+        <tr><th scope="row"><span class="sw suggestive" aria-hidden="true"></span>提示性</th>
+            <td>关联一致，但混杂或反向因果尚未排除。</td><td>这个因素会导致这种疾病。这一关联可能来自另一个因素，也可能是疾病的早期阶段本身造成的。</td></tr>
+        <tr><th scope="row"><span class="sw weak" aria-hidden="true"></span>弱</th>
+            <td>信号来自少量、结果不一致或易受偏倚影响的研究，可能经不起检验。</td><td>这个因素没有影响。研究太少、结果不一致或容易受偏倚影响，无论朝哪个方向都说明不了多少。</td></tr>
+        <tr><th scope="row"><span class="sw conflicting" aria-hidden="true"></span>相互矛盾</th>
+            <td>高质量证据指向相反方向，常见于观察性研究与试验或遗传学研究互相矛盾。</td><td>哪一方是对的。面板会显示哪类研究指向哪个方向。</td></tr>
+        <tr class="old"><th scope="row">旧名称</th>
+            <td>证据确凿 → 强 · 很可能 → 中等 · 证据有限 → 弱 · 存在争议 → 相互矛盾。“提示性”名称不变。</td><td>某条关联的等级保持不变。2.0 版也重新评定了部分关联的等级，更新记录逐条列出。</td><td>2.0 版（2026 年 10 月 23 日发布）之前使用的名称</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lbl-note">“危害”（hazard）说的是某样东西能否造成伤害。“风险比”（hazard ratio）是研究中的一个数字，比较两组人中伤害发生得有多快。这两个词在英文里很像，含义却不同。</p>
+</section>
+
+<section class="sec wrap" id="go-further">
+  <div class="sec-head">
+    <div class="label">延伸阅读</div>
+    <h2>继续阅读，并<b>自测一下</b>。</h2>
+  </div>
+  <ul class="more-list">
+    <li><a href="https://monographs.iarc.who.int/iarc-monographs-preamble-preamble-to-the-iarc-monographs/" rel="noopener"><b>《IARC 致癌物专论》序言</b>（2019 年 1 月修订版）：IARC 权衡证据、确定类别所遵循的规则（英文）。</a></li>
+    <li><a href="https://miguelhernan.org/whatifbook" rel="noopener"><b>Causal Inference: What If</b>，Miguel A. Hernán 与 James M. Robins 著（2020 年）：一本免费的教科书，讲如何区分因果与关联（英文）。</a></li>
+  </ul>
+  <h3 class="quiz-h">五道自测题</h3>
+  <p class="quiz-hint">先想好答案，再点开题目对照。</p>
+  <div class="quiz">
+    <details><summary>阳光和加工肉类都属于 IARC 的 1 类。它们同样危险吗？</summary><p>不是。1 类说明的是，两者能致癌的证据同样确定。各自会让风险升高多少是另一个问题，答案相差很大。</p></details>
+    <details><summary>某条标题说，一种食物会让一种罕见癌症的风险“翻倍”。在担心之前，你需要知道什么？</summary><p>这种癌症本来有多常见。万分之一的风险翻一倍，每 1 万人里只多 1 例。</p></details>
+    <details><summary>冰淇淋卖得越多的城镇，溺水事件也越多。冰淇淋会导致溺水吗？</summary><p>不会。炎热的天气同时带来了这两件事：人们吃更多冰淇淋，也更多地去游泳。同时推动两件事的第三个因素，叫作混杂因素。</p></details>
+    <details><summary>某项研究报告相对风险为 1.3，95% 置信区间为 0.8 至 2.1。它是否证明了风险会升高？</summary><p>没有。区间包含 1，所以数据同样与风险没有变化相符。更大规模的研究会让区间变窄。</p></details>
+    <details><summary>IARC 把某种因素列为 3 类（“无法分类”）。你能说它是安全的吗？</summary><p>不能。3 类意味着证据太有限，无法下结论。要证明某样东西安全，需要大规模的研究去寻找危害，并且确实没有发现。</p></details>
   </div>
 </section>
 
@@ -109,8 +226,8 @@
     <div class="label">现在用起来</div>
     <h2 style="margin:14px 0 0">打开一个工具，<b>自己去读证据</b>。</h2>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">癌症证据探索器 &rarr;</a>
-      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/">慢性病证据图谱 &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=zh">癌症证据探索器 &rarr;</a>
+      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/?lang=zh">慢性病证据图谱 &rarr;</a>
       <a class="btn btn-ghost" href="games.html">防癌小游戏 &rarr;</a>
     </div>
   </div>
@@ -129,6 +246,7 @@
         <a href="games.html">防癌小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
+        <a href="how-we-check.html">我们如何核查</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书，所表达的观点仅代表作者个人。所依据的科学来源均已注明并可以独立核查。</div>

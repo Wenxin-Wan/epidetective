@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как мы проверяем данные · EpiDetective</title>
+<meta name="description" content="Откуда берутся данные двух инструментов EpiDetective, как их проверяли, какая версия сейчас опубликована и как сообщить об ошибке. Личный проект Вэньсинь Вань.">
+<link rel="canonical" href="https://epidetective.com/ru/how-we-check.html">
+<link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html">
+<link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html">
+<link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html">
+<link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html">
+<link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html">
+<link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="https://epidetective.com/ru/how-we-check.html">
+<meta property="og:title" content="Как мы проверяем данные · EpiDetective">
+<meta property="og:description" content="Откуда берутся данные двух инструментов EpiDetective, как их проверяли, какая версия сейчас опубликована и как сообщить об ошибке. Личный проект Вэньсинь Вань.">
+<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Как мы проверяем данные · EpiDetective">
+<meta name="twitter:description" content="Откуда берутся данные двух инструментов EpiDetective, как их проверяли, какая версия сейчас опубликована и как сообщить об ошибке. Личный проект Вэньсинь Вань.">
+<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="index.html#instruments">Инструменты</a>
+        <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
+        <a href="games.html">Игры о профилактике</a>
+        <a href="about.html">Об авторе</a>
+        <a href="about.html#contact">Контакты</a>
+      </nav>
+      <nav class="langs" aria-label="Язык"><a href="../how-we-check.html" hreflang="en">English</a><a href="../zh/how-we-check.html" hreflang="zh">中文</a><a href="../fr/how-we-check.html" hreflang="fr">Français</a><a href="../es/how-we-check.html" hreflang="es">Español</a><span class="lang-cur" aria-current="true">Русский</span></nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
+      <span>Как мы проверяем</span></div>
+    <h1>Откуда берутся данные, как их проверяли и <b>как сообщить об ошибке</b>.</h1>
+    <p class="lede" style="margin-top:24px">EpiDetective является личным проектом Вэньсинь Вань. На этой странице перечислены источники обоих инструментов, проверки, через которые они прошли, и версии, опубликованные сейчас. Если вы нашли ошибку, в последнем разделе сказано, как о ней сообщить.</p>
+  </div>
+</section>
+
+<section class="sec wrap" id="sources">
+  <div class="sec-head">
+    <div class="label">Источники</div>
+    <h2>Откуда берутся данные.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer">
+      <h3>Атлас доказательств — рак</h3>
+      <ul>
+        <li>Монографии МАИР, таблица «Классификации по локализации рака», тома 1–141 (последнее обновление 18 мая 2026 года): 185 факторов, для которых есть хотя бы ограниченные доказательства связи с конкретным видом рака у людей, и их 469 связей с 68 видами рака. Адаптировано из Schubauer-Berigan et al., <i>JNCI Monographs</i> 2026 и дополнено более поздними оценками, а также отдельными типами ВПЧ, названными в томе 100B.</li>
+        <li>Монографии МАИР, список классификаций (List of Classifications), тома 1–142 (последнее обновление 23 июля 2026 года): группа каждого фактора и 874 фактора, которые МАИР оценило, не назвав локализацию рака.</li>
+        <li>Раздел оценки в томе Монографий, посвящённом каждому фактору: выводы МАИР по исследованиям на людях, по исследованиям на экспериментальных животных и по данным о том, как фактор действует в организме.</li>
+      </ul>
+      <p class="hwc-links"><a href="explorer.html">Об этом инструменте &rarr;</a></p>
+    </div>
+    <div class="hwc-card" id="chronic">
+      <h3>Атлас доказательств — хронические болезни</h3>
+      <ul>
+        <li>Систематические обзоры с метаанализом, объединённые когортные консорциумы и экспертные обобщения, например анализы Burden of Proof проекта GBD и комиссии журнала Lancet. Отдельное исследование используется только как рандомизированное или генетическое доказательство, которое подтверждает или опровергает вывод наблюдательных исследований.</li>
+        <li>В указателе литературы собраны опубликованные источники, на которых построены связи (641), со ссылкой на каждую статью.</li>
+      </ul>
+      <p class="hwc-links"><a href="../chronic-disease-explorer/references.html">Указатель литературы (на английском)</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="checks">
+  <div class="sec-head">
+    <div class="label">Проверки</div>
+    <h2>Как проверяли данные.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer-checks">
+      <h3>Атлас доказательств — рак</h3>
+      <ul>
+        <li>Каждую связь сверили с таблицей МАИР по локализациям рака. Если таблица называет вид рака, которого нет в тексте оценки соответствующего тома, в карточке это отмечено.</li>
+        <li>Том и год каждой классификации сверили со списком классификаций МАИР и томами Монографий в ходе двух независимых проверок (октябрь 2026 года). Данные у людей, у животных и о механизме действия каждого фактора взяты из оценок самого МАИР, перепроверены во второй раз, и каждая цитата сверена с источником.</li>
+        <li>Список классификаций МАИР последний раз сверяли с инструментом 28 октября 2026 года. С обновления МАИР от 23 июля 2026 года он не менялся.</li>
+      </ul>
+    </div>
+    <div class="hwc-card" id="chronic-checks">
+      <h3>Атлас доказательств — хронические болезни</h3>
+      <ul>
+        <li>Каждую оценку эффекта сверили со статьёй, на которую она ссылается, для точно указанного сравнения (август 2026 года). В сентябре 2026 года при повторной проверке 100 отмеченных связей снова сверили со статьями. Каждый уровень доказательности присваивается по письменной таблице решений из методической основы.</li>
+        <li>Журнал изменений фиксирует каждое изменение каждой связи с первой опубликованной версии (24 августа 2026 года). Из 431 связи, которые сейчас есть в инструменте, у 343 в журнале есть хотя бы одна датированная проверка или правка за сентябрь или октябрь 2026 года. В журнал попадают только изменения: связь, которую проверили и признали верной, не оставляет в нём строки, поэтому проверено больше связей, чем показывает это число.</li>
+      </ul>
+      <p class="hwc-links"><a href="../chronic-disease-explorer/changelog.html">Журнал изменений (на английском)</a>
+        <a href="../chronic-disease-explorer/framework.html#13-what-has-been-checked-and-what-has-not">Методическая основа: что проверено и что нет (на английском)</a></p>
+    </div>
+  </div>
+  <p class="hwc-ai">Проверки провёл автор с помощью ИИ: модели ИИ сверяли каждое значение с источником, а автор просматривал результаты и вносил исправления. Оценки и уровни доказательности атласа хронических болезней пока не проверял ни один внешний эксперт.</p>
+</section>
+
+<section class="sec wrap" id="versions">
+  <div class="sec-head">
+    <div class="label">Версии</div>
+    <h2>Какая версия опубликована.</h2>
+  </div>
+  <dl class="hwc-ver">
+    <div>
+      <dt>Атлас доказательств — рак</dt>
+      <dd><span class="v">Версия 1.0 (дата сборки 28 октября 2026 г.).</span> Данные: таблица МАИР по локализациям рака, последнее обновление 18 мая 2026 года; список классификаций МАИР, последнее обновление 23 июля 2026 года.</dd>
+    </div>
+    <div>
+      <dt>Атлас доказательств — хронические болезни</dt>
+      <dd><span class="v">Версия 2.0 (дата сборки 21 октября 2026 г.).</span> 356 связей с оценкой доказательности и 75 связей со смежными исходами. В версии 2.0 уровни переименованы, и каждый из них присваивается по письменной таблице решений.
+        <span class="hwc-links"><a href="../chronic-disease-explorer/changelog.html">Журнал изменений (на английском)</a>
+          <a href="../chronic-disease-explorer/framework.html">Методическая основа (на английском)</a>
+          <a href="../chronic-disease-explorer/references.html">Указатель литературы (на английском)</a></span></dd>
+    </div>
+  </dl>
+  <p class="hwc-cite"><a href="about.html#cite">Как цитировать каждый инструмент &rarr;</a></p>
+</section>
+
+<section class="sec wrap" id="not">
+  <div class="sec-head">
+    <div class="label">Чем это не является</div>
+    <h2>Чем это не является.</h2>
+  </div>
+  <p class="lede hwc-not">Это личный проект. Это не продукт МАИР или ВОЗ, не оценка риска и не медицинская консультация.</p>
+  <p class="lede">Инструменты показывают, что опубликованные исследования говорят о больших группах людей. Они не могут сказать, что вызвало болезнь у конкретного человека. По вопросам собственного здоровья обращайтесь к врачу.</p>
+</section>
+
+<section class="sec wrap" id="report">
+  <div class="sec-head">
+    <div class="label">Сообщить об ошибке</div>
+    <h2>Нашли ошибку? <b>Сообщите нам.</b></h2>
+  </div>
+  <p class="lede">Напишите на epidetective@gmail.com. Кнопка ниже открывает письмо с четырьмя строками для заполнения:</p>
+  <ol class="hwc-fields">
+    <li>Страница или инструмент</li>
+    <li>Запись (название или ссылка)</li>
+    <li>Что не так</li>
+    <li>Источник, который это подтверждает</li>
+  </ol>
+  <div class="inst-actions"><a class="btn btn-solid" href="mailto:epidetective@gmail.com?subject=EpiDetective%20correction&amp;body=%D0%A1%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BB%D0%B8%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%3A%20%0D%0A%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%28%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B8%D0%BB%D0%B8%20%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0%29%3A%20%0D%0A%D0%A7%D1%82%D0%BE%20%D0%BD%D0%B5%20%D1%82%D0%B0%D0%BA%3A%20%0D%0A%D0%98%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%2C%20%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9%20%D1%8D%D1%82%D0%BE%20%D0%BF%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B6%D0%B4%D0%B0%D0%B5%D1%82%3A%20%0D%0A">Написать письмо &rarr;</a></div>
+  <p class="hwc-reply">Вы получите ответ, обычно в течение двух недель.</p>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">Открытые инструменты для чтения научных данных о здоровье.</p>
+      </div>
+      <nav class="menu">
+        <a href="index.html#instruments">Инструменты</a>
+        <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
+        <a href="games.html">Игры о профилактике</a>
+        <a href="about.html">Об авторе</a>
+        <a href="about.html#contact">Контакты</a>
+        <a href="how-we-check.html">Как мы проверяем</a>
+      </nav>
+    </div>
+    <div class="disc">EpiDetective публикует инструменты для чтения данных о целых популяциях. Они показывают закономерности в больших группах людей. По любым вопросам о вашем собственном здоровье обращайтесь к врачу. Каждый инструмент указывает свои источники.</div>
+    <div class="disc affil">EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения, и высказанные здесь взгляды принадлежат исключительно автору. Использованные научные источники указаны, чтобы каждый мог проверить их самостоятельно.</div>
+    <div class="foot-bot">
+      <span>Создано Вэньсинь Вань &mdash; Лион, Франция</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

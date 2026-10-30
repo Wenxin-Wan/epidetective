@@ -85,6 +85,32 @@
       <p class="bar-note">{{exp_bar2_note}}</p>
     </div>
   </div>
+  <!-- since 23 Oct 2026: the 874 evaluated agents in search, and IARC's three
+       evidence streams in every entry -->
+  <p class="exp-more">{{exp_eval_p}}</p>
+  <p class="exp-more">{{exp_streams_p}}</p>
+</section>
+
+<!-- IARC's four groups with IARC's own totals (List of Classifications,
+     review-2026-10-11/ref/iarc_loc.json, unchanged when checked on 28 Oct
+     2026: 135 / 98 / 329 / 498). The full table is reading.html#labels. -->
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">{{exp_lbl_label}}</div>
+    <h2>{{exp_lbl_h2}}</h2>
+  </div>
+  <p class="lede">{{exp_lbl_p}}</p>
+  <div class="figs lbl-figs">
+    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>{{lbl_g1}} &middot; {{GRP_1}}</div></div>
+    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>{{lbl_g2a}} &middot; {{GRP_2A}}</div></div>
+    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>{{lbl_g2b}} &middot; {{GRP_2B}}</div></div>
+    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>{{lbl_g3}} &middot; {{GRP_3}}</div></div>
+  </div>
+  <p class="exp-more">{{exp_lbl_totals}}</p>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="{{URL_READING}}#labels">{{exp_lbl_more}}</a>
+    <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">{{exp_lbl_iarc}}</a>
+  </div>
 </section>
 
 <section class="sec wrap">
@@ -143,6 +169,7 @@
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
       </nav>
     </div>
     <div class="disc affil">{{foot_affiliation}}</div>

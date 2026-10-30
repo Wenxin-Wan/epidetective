@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How we check · EpiDetective</title>
+<meta name="description" content="Where the data in EpiDetective’s two tools come from, how they were checked, which version is online, and how to report an error. A personal project by Wenxin Wan.">
+<link rel="canonical" href="https://epidetective.com/how-we-check.html">
+<link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html">
+<link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html">
+<link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html">
+<link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html">
+<link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html">
+<link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="https://epidetective.com/how-we-check.html">
+<meta property="og:title" content="How we check · EpiDetective">
+<meta property="og:description" content="Where the data in EpiDetective’s two tools come from, how they were checked, which version is online, and how to report an error. A personal project by Wenxin Wan.">
+<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How we check · EpiDetective">
+<meta name="twitter:description" content="Where the data in EpiDetective’s two tools come from, how they were checked, which version is online, and how to report an error. A personal project by Wenxin Wan.">
+<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="index.html#instruments">Tools</a>
+        <a href="code-against-cancer/">Code Against Cancer</a>
+        <a href="games.html">Cancer awareness games</a>
+        <a href="about.html">About</a>
+        <a href="about.html#contact">Contact</a>
+      </nav>
+      <nav class="langs" aria-label="Language"><span class="lang-cur" aria-current="true">English</span><a href="zh/how-we-check.html" hreflang="zh">中文</a><a href="fr/how-we-check.html" hreflang="fr">Français</a><a href="es/how-we-check.html" hreflang="es">Español</a><a href="ru/how-we-check.html" hreflang="ru">Русский</a></nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
+      <span>How we check</span></div>
+    <h1>Where the data come from, how they were checked, and <b>how to report an error</b>.</h1>
+    <p class="lede" style="margin-top:24px">EpiDetective is a personal project by Wenxin Wan. This page lists the sources behind the two tools, the checks they went through and the versions now online. If you find a mistake, the last section says how to report it.</p>
+  </div>
+</section>
+
+<section class="sec wrap" id="sources">
+  <div class="sec-head">
+    <div class="label">Sources</div>
+    <h2>Where the data come from.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer">
+      <h3>Cancer Evidence Explorer</h3>
+      <ul>
+        <li>IARC Monographs, table “Classifications by cancer site”, Volumes 1–141 (last update 18 May 2026): the 185 agents with at least limited evidence in people for a named cancer, and their 469 links to 68 types of cancer. Adapted from Schubauer-Berigan et al., <i>JNCI Monographs</i> 2026, and augmented for later evaluations and for the single HPV types named in Volume 100B.</li>
+        <li>IARC Monographs, List of Classifications, Volumes 1–142 (last updated 23 July 2026): the group of each agent, and the 874 agents IARC evaluated without naming a cancer site.</li>
+        <li>The evaluation in each agent’s Monograph volume: what IARC found in studies of people, in studies of experimental animals and on how the agent acts in the body.</li>
+      </ul>
+      <p class="hwc-links"><a href="explorer.html">About this tool &rarr;</a></p>
+    </div>
+    <div class="hwc-card" id="chronic">
+      <h3>Chronic Disease Evidence Explorer</h3>
+      <ul>
+        <li>Systematic reviews with meta-analysis, pooled cohort consortia and expert syntheses, such as the GBD Burden of Proof analyses and the Lancet Commissions. A single study is used only as randomised or genetic evidence that supports or contradicts a finding from observational studies.</li>
+        <li>The reference index lists the 641 published sources behind the links, each with a link to the paper.</li>
+      </ul>
+      <p class="hwc-links"><a href="chronic-disease-explorer/references.html">Reference index</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="checks">
+  <div class="sec-head">
+    <div class="label">Checks</div>
+    <h2>How the data were checked.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer-checks">
+      <h3>Cancer Evidence Explorer</h3>
+      <ul>
+        <li>Every link was compared with IARC’s cancer-site table. Where the table lists a cancer that the evaluation text of the volume does not name, the entry says so.</li>
+        <li>The volume and year behind each classification were checked against IARC’s List of Classifications and the Monograph volumes, in two independent passes (October 2026). The evidence in people, in animals and on how each agent acts was taken from IARC’s own evaluations, checked in a second pass, and every quote compared with its source.</li>
+        <li>IARC’s List of Classifications was last compared with the tool on 28 October 2026. It had not changed since IARC’s update of 23 July 2026.</li>
+      </ul>
+    </div>
+    <div class="hwc-card" id="chronic-checks">
+      <h3>Chronic Disease Evidence Explorer</h3>
+      <ul>
+        <li>Every effect estimate was compared with the paper it cites, for the exact comparison stated (August 2026). In September 2026 a second pass checked 100 flagged links against their papers again. Each grade follows the written decision table of the framework.</li>
+        <li>The change log records every change to every link since the first published version (24 August 2026). In it, 343 of the 431 links now in the tool have at least one dated check or correction from September or October 2026. The log lists changes only, so a link that was checked and found correct leaves no row: more links were checked than this count shows.</li>
+      </ul>
+      <p class="hwc-links"><a href="chronic-disease-explorer/changelog.html">Change log</a>
+        <a href="chronic-disease-explorer/framework.html#13-what-has-been-checked-and-what-has-not">Framework: what has been checked and what has not</a></p>
+    </div>
+  </div>
+  <p class="hwc-ai">The author ran the checks with AI-assisted verification: AI models compared each value with its source, and the author reviewed the results and made the corrections. No outside expert has reviewed the Chronic Disease Evidence Explorer’s estimates or grades.</p>
+</section>
+
+<section class="sec wrap" id="versions">
+  <div class="sec-head">
+    <div class="label">Versions</div>
+    <h2>Which version is online.</h2>
+  </div>
+  <dl class="hwc-ver">
+    <div>
+      <dt>Cancer Evidence Explorer</dt>
+      <dd><span class="v">Version 1.0, built 28 October 2026.</span> Data: IARC’s cancer-site table, last update 18 May 2026, and IARC’s List of Classifications, last updated 23 July 2026.</dd>
+    </div>
+    <div>
+      <dt>Chronic Disease Evidence Explorer</dt>
+      <dd><span class="v">Version 2.0, built 21 October 2026.</span> 356 graded links and 75 related-outcome links. Version 2.0 renamed the grades and sets each one by a written decision table.
+        <span class="hwc-links"><a href="chronic-disease-explorer/changelog.html">Change log</a>
+          <a href="chronic-disease-explorer/framework.html">Framework (methods)</a>
+          <a href="chronic-disease-explorer/references.html">Reference index</a></span></dd>
+    </div>
+  </dl>
+  <p class="hwc-cite"><a href="about.html#cite">How to cite each tool &rarr;</a></p>
+</section>
+
+<section class="sec wrap" id="not">
+  <div class="sec-head">
+    <div class="label">What this is not</div>
+    <h2>What this is not.</h2>
+  </div>
+  <p class="lede hwc-not">It is a personal project. It is no IARC or WHO product, no risk assessment, and no medical advice.</p>
+  <p class="lede">The tools show what published research says about large groups of people. They cannot tell you what caused any one person’s illness. For your own health, talk to a doctor.</p>
+</section>
+
+<section class="sec wrap" id="report">
+  <div class="sec-head">
+    <div class="label">Report an error</div>
+    <h2>Found an error? <b>Please tell us.</b></h2>
+  </div>
+  <p class="lede">Write to epidetective@gmail.com. The button below opens an email with four lines to fill in:</p>
+  <ol class="hwc-fields">
+    <li>Page or tool</li>
+    <li>Entry (its name or link)</li>
+    <li>What is wrong</li>
+    <li>A source that shows it</li>
+  </ol>
+  <div class="inst-actions"><a class="btn btn-solid" href="mailto:epidetective@gmail.com?subject=EpiDetective%20correction&amp;body=Page%20or%20tool%3A%20%0D%0AEntry%20%28its%20name%20or%20link%29%3A%20%0D%0AWhat%20is%20wrong%3A%20%0D%0AA%20source%20that%20shows%20it%3A%20%0D%0A">Write an email &rarr;</a></div>
+  <p class="hwc-reply">You will get an answer, usually within two weeks.</p>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">Open tools for reading health evidence.</p>
+      </div>
+      <nav class="menu">
+        <a href="index.html#instruments">Tools</a>
+        <a href="code-against-cancer/">Code Against Cancer</a>
+        <a href="games.html">Cancer awareness games</a>
+        <a href="about.html">About</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">How we check</a>
+      </nav>
+    </div>
+    <div class="disc">EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.</div>
+    <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>
+    <div class="foot-bot">
+      <span>Created by Wenxin Wan &mdash; Lyon, France</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

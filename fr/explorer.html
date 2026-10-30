@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Explorateur des preuves sur le cancer — EpiDetective</title>
-<meta name="description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Fondé sur les Monographies du CIRC (OMS).">
+<meta name="description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Données : Monographies du CIRC, Classifications par site de cancer (volumes 1 à 141). Un projet personnel de Wenxin Wan.">
 <link rel="canonical" href="https://epidetective.com/fr/explorer.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/explorer.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/explorer.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/fr/explorer.html">
 <meta property="og:title" content="Explorateur des preuves sur le cancer — EpiDetective">
-<meta property="og:description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Fondé sur les Monographies du CIRC (OMS).">
+<meta property="og:description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Données : Monographies du CIRC, Classifications par site de cancer (volumes 1 à 141). Un projet personnel de Wenxin Wan.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Explorateur des preuves sur le cancer — EpiDetective">
-<meta name="twitter:description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Fondé sur les Monographies du CIRC (OMS).">
+<meta name="twitter:description" content="Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Données : Monographies du CIRC, Classifications par site de cancer (volumes 1 à 141). Un projet personnel de Wenxin Wan.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -55,7 +55,7 @@
     <div class="crumb"><a href="index.html#instruments">Outils</a> &middot;
       <span>Outil 01 &mdash; ouvert</span></div>
     <h1>Certaines expositions sont connues pour causer des cancers. D’autres sont seulement soupçonnées. <b>Cette carte montre lesquelles.</b></h1>
-    <p class="lede" style="margin-top:24px">Les points et les traits derrière ce titre sont le jeu de données lui-même : 185 expositions, 68 types de cancer et les 469 liens entre eux, tels que les a consignés l’agence du cancer de l’Organisation mondiale de la Santé, le CIRC. Sont comptés ici tous les agents pour lesquels le tableau du CIRC par site de cancer indique au moins des preuves limitées chez l’être humain pour un cancer précis (volumes 1 à 141), adaptés comme l’outil le décrit.</p>
+    <p class="lede" style="margin-top:24px">Les points et les traits derrière ce titre sont le jeu de données lui-même : 185 expositions, 68 types de cancer et les 469 liens entre eux, tirés du tableau « Classifications par site de cancer » des Monographies du CIRC. Sont comptés ici tous les agents pour lesquels ce tableau indique au moins des preuves limitées chez l’être humain pour un cancer précis (volumes 1 à 141), adaptés comme l’outil le décrit.</p>
     <div class="legend">
       <span class="leg est"><i></i>Lien établi</span>
       <span class="leg sus"><i></i>Lien suspecté</span>
@@ -89,6 +89,27 @@
       <div class="bar sus"><i style="width:46.9%"></i></div>
       <p class="bar-note">Un lien de cause à effet est crédible, mais le hasard, les biais ou les facteurs de confusion n’ont pas pu être écartés avec une confiance raisonnable. De nouveaux travaux pourraient trancher dans un sens comme dans l’autre.</p>
     </div>
+  </div>
+  <p class="exp-more">La recherche trouve aussi les 874 autres agents que le CIRC a évalués sans désigner de localisation de cancer, comme le café (groupe 3). Chacun indique son groupe, le volume et l’année de l’évaluation, et un lien vers la liste du CIRC.</p>
+  <p class="exp-more">Chacune des 185 fiches présente aussi les trois types de preuves que le CIRC pèse : les études chez l’être humain, les études chez l’animal de laboratoire et les données sur la façon dont l’agent agit dans l’organisme.</p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">Ce que signifient les étiquettes</div>
+    <h2>Chaque fiche porte l’un des <b>quatre groupes du CIRC</b>.</h2>
+  </div>
+  <p class="lede">Le groupe indique à quel point le CIRC est sûr qu’un agent peut causer un cancer chez l’être humain. Il ne dit rien de l’ampleur du risque, qui dépend de la dose et des circonstances.</p>
+  <div class="figs lbl-figs">
+    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>Cause avérée &middot; groupe 1</div></div>
+    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>Cause probable &middot; groupe 2A</div></div>
+    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>Cause possible &middot; groupe 2B</div></div>
+    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>Inclassable &middot; groupe 3</div></div>
+  </div>
+  <p class="exp-more">Les totaux du CIRC pour tous les agents qu’il a classés, d’après sa liste des classifications (volumes 1 à 142, dernière mise à jour le 23 juillet 2026). La carte réunit des agents des groupes 1, 2A et 2B ; les agents du groupe 3 se trouvent par la recherche.</p>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="reading.html#labels">Toutes les étiquettes, côte à côte &rarr;</a>
+    <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">La liste des classifications du CIRC (en anglais) &rarr;</a>
   </div>
 </section>
 
@@ -129,7 +150,7 @@
     <h2 style="margin:14px 0 0">Partez d’un <b>cancer</b> ou d’une <b>exposition</b>, ou ouvrez la carte entière.</h2>
     <p class="lede">Gratuit, en dix langues. Faites glisser la carte, zoomez et concentrez-vous sur la partie du réseau qui vous intéresse.</p>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Ouvrir l’Explorateur &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=fr">Ouvrir l’Explorateur &rarr;</a>
     </div>
     <div class="disc">Source : Monographies du CIRC, « Classifications par site de cancer », volumes 1 à 141 (dernière mise à jour le 18 mai 2026), adapté de Schubauer-Berigan et al., JNCI Monographs 2026, et complété pour les évaluations ultérieures et pour les types de HPV nommés individuellement dans le volume 100B. Cet outil identifie des dangers à l’échelle de populations entières. Pour toute question concernant votre propre santé, adressez-vous à un médecin.</div>
   </div>
@@ -148,6 +169,7 @@
         <a href="games.html">Jeux de sensibilisation</a>
         <a href="about.html">À propos</a>
         <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">Comment nous vérifions</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé, et les opinions exprimées ici n’engagent que leur auteur. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.</div>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_hwc_title}}</title>
+<meta name="description" content="{{meta_hwc_desc}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_hwc_title}}">
+<meta property="og:description" content="{{meta_hwc_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_hwc_title}}">
+<meta name="twitter:description" content="{{meta_hwc_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<!-- How we check: five blocks. Sources, the checks, the versions online, what
+     this is not, and how to report an error. Linked from every footer
+     (foot_hwc) and from About; the tools' footers link it from Batch 4.
+     #cancer and #chronic are the per-tool source cards, so a link can open
+     the card of one tool. -->
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
+      <span>{{hwc_label}}</span></div>
+    <h1>{{hwc_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{hwc_lede}}</p>
+  </div>
+</section>
+
+<section class="sec wrap" id="sources">
+  <div class="sec-head">
+    <div class="label">{{hwc_src_label}}</div>
+    <h2>{{hwc_src_h2}}</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer">
+      <h3>{{inst_t1_name}}</h3>
+      <ul>
+        <li>{{hwc_src_c1}}</li>
+        <li>{{hwc_src_c2}}</li>
+        <li>{{hwc_src_c3}}</li>
+      </ul>
+      <p class="hwc-links"><a href="{{URL_EXPLORER}}">{{inst_t1_btn_about}} &rarr;</a></p>
+    </div>
+    <div class="hwc-card" id="chronic">
+      <h3>{{inst_t2_name}}</h3>
+      <ul>
+        <li>{{hwc_src_k1}}</li>
+        <li>{{hwc_src_k2}}</li>
+      </ul>
+      <p class="hwc-links"><a href="{{PREFIX}}chronic-disease-explorer/references.html">{{hwc_link_refs}}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="checks">
+  <div class="sec-head">
+    <div class="label">{{hwc_chk_label}}</div>
+    <h2>{{hwc_chk_h2}}</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer-checks">
+      <h3>{{inst_t1_name}}</h3>
+      <ul>
+        <li>{{hwc_chk_c1}}</li>
+        <li>{{hwc_chk_c2}}</li>
+        <li>{{hwc_chk_c3}}</li>
+      </ul>
+    </div>
+    <div class="hwc-card" id="chronic-checks">
+      <h3>{{inst_t2_name}}</h3>
+      <ul>
+        <li>{{hwc_chk_k1}}</li>
+        <li>{{hwc_chk_k2}}</li>
+      </ul>
+      <p class="hwc-links"><a href="{{PREFIX}}chronic-disease-explorer/changelog.html">{{hwc_link_changelog}}</a>
+        <a href="{{PREFIX}}chronic-disease-explorer/framework.html#13-what-has-been-checked-and-what-has-not">{{hwc_link_framework}}</a></p>
+    </div>
+  </div>
+  <p class="hwc-ai">{{hwc_chk_ai}}</p>
+</section>
+
+<section class="sec wrap" id="versions">
+  <div class="sec-head">
+    <div class="label">{{hwc_ver_label}}</div>
+    <h2>{{hwc_ver_h2}}</h2>
+  </div>
+  <dl class="hwc-ver">
+    <div>
+      <dt>{{inst_t1_name}}</dt>
+      <dd><span class="v">{{hwc_ver_c}}</span> {{hwc_ver_c_data}}</dd>
+    </div>
+    <div>
+      <dt>{{inst_t2_name}}</dt>
+      <dd><span class="v">{{hwc_ver_k}}</span> {{hwc_ver_k_data}}
+        <span class="hwc-links"><a href="{{PREFIX}}chronic-disease-explorer/changelog.html">{{hwc_link_changelog}}</a>
+          <a href="{{PREFIX}}chronic-disease-explorer/framework.html">{{hwc_link_framework_all}}</a>
+          <a href="{{PREFIX}}chronic-disease-explorer/references.html">{{hwc_link_refs}}</a></span></dd>
+    </div>
+  </dl>
+  <p class="hwc-cite"><a href="{{URL_ABOUT}}#cite">{{hwc_ver_cite}}</a></p>
+</section>
+
+<section class="sec wrap" id="not">
+  <div class="sec-head">
+    <div class="label">{{hwc_not_label}}</div>
+    <h2>{{hwc_not_h2}}</h2>
+  </div>
+  <p class="lede hwc-not">{{hwc_not_p}}</p>
+  <p class="lede">{{hwc_not_p2}}</p>
+</section>
+
+<!-- The mailto carries subject "EpiDetective correction" and a body with the
+     four lines below (build_site.py mailto_report). -->
+<section class="sec wrap" id="report">
+  <div class="sec-head">
+    <div class="label">{{hwc_rep_label}}</div>
+    <h2>{{hwc_rep_h2}}</h2>
+  </div>
+  <p class="lede">{{hwc_rep_p}}</p>
+  <ol class="hwc-fields">
+    <li>{{hwc_rep_i1}}</li>
+    <li>{{hwc_rep_i2}}</li>
+    <li>{{hwc_rep_i3}}</li>
+    <li>{{hwc_rep_i4}}</li>
+  </ol>
+  <div class="inst-actions"><a class="btn btn-solid" href="{{MAILTO_REPORT}}">{{hwc_rep_btn}}</a></div>
+  <p class="hwc-reply">{{hwc_rep_reply}}</p>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
+      </nav>
+    </div>
+    <div class="disc">{{foot_disclaimer}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+</body>
+</html>

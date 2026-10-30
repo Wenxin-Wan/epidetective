@@ -7,13 +7,13 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="description" content="Official, evidence-based ways to reduce your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners in Europe, Latin America and the Caribbean, and Asia.">
+<meta name="description" content="A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.">
 <link rel="canonical" href="https://epidetective.com/code-against-cancer/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/code-against-cancer/">
 <meta property="og:title" content="Code Against Cancer — EpiDetective">
-<meta property="og:description" content="Official, evidence-based ways to lower your own cancer risk, from the regional Codes Against Cancer developed by IARC (WHO) and its partners.">
+<meta property="og:description" content="A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap');
@@ -70,6 +70,7 @@
   .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,6vw,3.8rem);
            line-height:1.04;letter-spacing:-.02em;margin:14px 0 0}
   .hero p.lede{color:var(--ink-soft);max-width:62ch;font-size:1.05rem;margin:20px 0 0}
+  .hero p.personal{color:var(--ink-soft);max-width:62ch;font-size:.92rem;margin:12px 0 0}
   .statrow{margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
   .stat{background:var(--ink);color:var(--chalk);border-radius:16px;padding:16px 22px}
   .stat b{font-family:var(--serif);font-size:2.2rem;line-height:1;font-weight:600}
@@ -150,9 +151,10 @@
 <main>
   <section class="hero">
     <div class="wrap">
-      <div class="eyebrow" data-i18n="eyebrow">Official cancer-prevention guidance</div>
+      <div class="eyebrow" data-i18n="eyebrow">Summary of the official Codes</div>
       <h1 data-i18n="title">Code Against Cancer</h1>
       <p class="lede" data-i18n="lede">What you can do to lower your own risk of cancer, according to the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.</p>
+      <p class="personal" data-i18n="personal">A personal project by Wenxin Wan. Where a Code is published in your language, its text is quoted as published; otherwise this page gives EpiDetective’s summary. Follow the links to the Codes themselves.</p>
       <div class="statrow">
         <div class="stat"><b data-i18n="statV">≈38%</b><span data-i18n="statL">of cancers can currently be prevented by avoiding risk factors and using existing evidence-based prevention strategies</span></div>
       </div>
@@ -220,9 +222,11 @@ var SITE_NAV = {
 
 var STRINGS = {
   en: {
-    back:"Back to EpiDetective", eyebrow:"Official cancer-prevention guidance",
+    back:"Back to EpiDetective", eyebrow:"Summary of the official Codes",
     title:"Code Against Cancer",
     lede:"What you can do to lower your own risk of cancer, according to the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.",
+    personal:"A personal project by Wenxin Wan. Where a Code is published in your language, its text is quoted as published; otherwise this page gives EpiDetective’s summary. Follow the links to the Codes themselves.",
+    metaDesc:"A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.",
     statV:"≈38%", statL:"of cancers can currently be prevented by avoiding risk factors and using existing evidence-based prevention strategies",
     statSrc:"Source: WHO, Cancer fact sheet, 3 July 2026. Checked 20 October 2026.",
     frameworkH:"The World Code Against Cancer Framework",
@@ -244,9 +248,11 @@ var STRINGS = {
     affiliation:"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization."
   },
   zh: {
-    back:"返回 EpiDetective", eyebrow:"官方防癌指南",
+    back:"返回 EpiDetective", eyebrow:"官方防癌守则摘要",
     title:"防癌守则",
     lede:"根据 IARC（世界卫生组织国际癌症研究机构）及其合作伙伴制定的各区域《防癌守则》，你可以这样降低自己患癌的风险。",
+    personal:"这是万汶鑫的个人项目。某部守则若有官方中文版，本页按其发布的原文引用；若没有，本页给出 EpiDetective 编写的摘要。想阅读守则本身，请点击页面中的链接。",
+    metaDesc:"IARC 及其合作伙伴制定的各区域《防癌守则》摘要：你可以怎样降低自己的患癌风险。",
     statV:"约 38%", statL:"的癌症目前可通过避免危险因素和采取现有的循证预防策略加以预防",
     statSrc:"来源：世界卫生组织《癌症》情况说明书（英文），2026 年 7 月 3 日。2026 年 10 月 20 日核查。",
     frameworkH:"世界防癌守则框架",
@@ -268,9 +274,11 @@ var STRINGS = {
     affiliation:"EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书。"
   },
   fr: {
-    back:"Retour à EpiDetective", eyebrow:"Recommandations officielles de prévention du cancer",
+    back:"Retour à EpiDetective", eyebrow:"Résumé des Codes officiels",
     title:"Code contre le cancer",
     lede:"Ce que vous pouvez faire pour réduire votre propre risque de cancer, d’après les Codes régionaux contre le cancer élaborés par le CIRC (l’agence de l’OMS spécialisée dans le cancer) et ses partenaires.",
+    personal:"Un projet personnel de Wenxin Wan. Quand un Code est publié dans votre langue, son texte est cité tel que publié ; sinon, cette page en donne un résumé d’EpiDetective. Suivez les liens pour lire les Codes eux-mêmes.",
+    metaDesc:"Un résumé des Codes régionaux contre le cancer élaborés par le CIRC et ses partenaires : ce que vous pouvez faire pour réduire votre propre risque de cancer.",
     statV:"≈ 38 %", statL:"des cancers peuvent actuellement être évités en écartant les facteurs de risque et en appliquant les stratégies de prévention existantes fondées sur les preuves",
     statSrc:"Source : OMS, fiche d’information « Cancer » (en anglais), 3 juillet 2026. Consultée le 20 octobre 2026.",
     frameworkH:"Le cadre mondial des Codes contre le cancer",
@@ -292,9 +300,11 @@ var STRINGS = {
     affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé."
   },
   es: {
-    back:"Volver a EpiDetective", eyebrow:"Recomendaciones oficiales para la prevención del cáncer",
+    back:"Volver a EpiDetective", eyebrow:"Resumen de los Códigos oficiales",
     title:"Código contra el cáncer",
     lede:"Lo que puedes hacer para reducir tu propio riesgo de cáncer, según los Códigos regionales contra el cáncer elaborados por el CIIC (la agencia de la OMS especializada en el cáncer) y sus socios.",
+    personal:"Un proyecto personal de Wenxin Wan. Cuando un Código se publica en tu idioma, su texto se cita tal como se publicó; si no, esta página ofrece un resumen de EpiDetective. Sigue los enlaces para llegar a los propios Códigos.",
+    metaDesc:"Un resumen de los Códigos regionales contra el cáncer elaborados por el CIIC y sus socios: lo que puedes hacer para reducir tu propio riesgo de cáncer.",
     statV:"≈ 38 %", statL:"de los cánceres pueden prevenirse actualmente evitando los factores de riesgo y aplicando las estrategias de prevención existentes basadas en la evidencia",
     statSrc:"Fuente: OMS, nota descriptiva «Cáncer» (en inglés), 3 de julio de 2026. Consultada el 20 de octubre de 2026.",
     frameworkH:"El marco mundial de los Códigos contra el cáncer",
@@ -316,9 +326,11 @@ var STRINGS = {
     affiliation:"EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud."
   },
   ru: {
-    back:"Назад к EpiDetective", eyebrow:"Официальные рекомендации по профилактике рака",
+    back:"Назад к EpiDetective", eyebrow:"Краткое изложение официальных Кодексов",
     title:"Кодекс против рака",
     lede:"Что можно сделать, чтобы снизить собственный риск рака, по рекомендациям региональных Кодексов против рака, разработанных МАИР (агентством ВОЗ по изучению рака) и его партнёрами.",
+    personal:"Личный проект Вэньсинь Вань. Если Кодекс опубликован на вашем языке, его текст приводится так, как он опубликован; если нет, на этой странице дано краткое изложение, подготовленное EpiDetective. Перейдите по ссылкам к самим Кодексам.",
+    metaDesc:"Краткое изложение региональных Кодексов против рака, разработанных МАИР и его партнёрами: что можно сделать, чтобы снизить собственный риск рака.",
     statV:"≈ 38 %", statL:"случаев рака сейчас можно предотвратить, избегая факторов риска и применяя существующие профилактические стратегии, основанные на доказательствах",
     statSrc:"Источник: ВОЗ, информационный бюллетень «Рак» (на английском языке), 3 июля 2026 г. Проверено 20 октября 2026 г.",
     frameworkH:"Всемирная рамочная программа Кодексов против рака",
@@ -1115,7 +1127,7 @@ function build(lang){
   document.documentElement.lang = lang;
   document.title = i18n("title", lang) + " — EpiDetective";
   var md = document.querySelector('meta[name="description"]');
-  if (md) md.setAttribute("content", i18n("lede", lang));
+  if (md) md.setAttribute("content", i18n("metaDesc", lang));
 
   /* site menu: the links lead to this language's own pages */
   var base = lang === "en" ? "../" : "../" + lang + "/", labels = SITE_NAV[lang] || SITE_NAV.en;

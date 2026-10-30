@@ -226,6 +226,96 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/reading.html"/>
   </url>
   <url>
+    <loc>https://epidetective.com/how-we-check.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/zh/how-we-check.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/fr/how-we-check.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/es/how-we-check.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/ru/how-we-check.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/work.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/work.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/zh/work.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/work.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/fr/work.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/work.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/es/work.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/work.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://epidetective.com/ru/work.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://epidetective.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/work.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://epidetective.com/es/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://epidetective.com/work.html"/>
+  </url>
+  <url>
     <loc>https://epidetective.com/code-against-cancer/</loc>
   </url>
   <url>

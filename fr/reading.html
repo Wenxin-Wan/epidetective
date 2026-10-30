@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Comment lire les preuves en santé — EpiDetective</title>
-<meta name="description" content="Six idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus.">
+<meta name="description" content="Sept idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, hasard et biais, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus. Avec un exemple commenté et les étiquettes des deux outils côte à côte.">
 <link rel="canonical" href="https://epidetective.com/fr/reading.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/reading.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/fr/reading.html">
 <meta property="og:title" content="Comment lire les preuves en santé — EpiDetective">
-<meta property="og:description" content="Six idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus.">
+<meta property="og:description" content="Sept idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, hasard et biais, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus. Avec un exemple commenté et les étiquettes des deux outils côte à côte.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Comment lire les preuves en santé — EpiDetective">
-<meta name="twitter:description" content="Six idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus.">
+<meta name="twitter:description" content="Sept idées pour mieux évaluer un titre de presse sur la santé : danger et risque, risque relatif et risque absolu, association et cause, hasard et biais, l’intervalle autour d’une estimation, ce que signifie « pas de preuve », et populations et individus. Avec un exemple commenté et les étiquettes des deux outils côte à côte.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -52,55 +52,172 @@
   <div class="wrap">
     <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
       <span>Lire les preuves</span></div>
-    <h1>Six idées pour rendre les preuves en santé <b>lisibles</b>.</h1>
+    <h1>Sept idées pour rendre les preuves en santé <b>lisibles</b>.</h1>
     <p class="lede" style="margin-top:24px">Chaque chiffre des outils de ce site repose sur quelques idées d’épidémiologie. Aucune ne demande de mathématiques. Lisez-les une fois, et un titre de presse sur la santé devient bien plus facile à évaluer.</p>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="reads" style="margin-top:0">
-    <div class="read">
+    <div class="read" id="hazard">
       <div class="tag">Danger et risque</div>
       <div>
-        <h3>Un danger est ce qui peut nuire. Le risque est la probabilité que cela arrive.</h3>
+        <h2>Un danger est ce qui peut nuire. Le risque est la probabilité que cela arrive.</h2>
         <p>Le soleil, l’alcool et l’amiante sont tous des dangers : chacun peut causer un cancer. La probabilité, pour une personne donnée, dépend de la dose, de la durée et de l’âge. Les Monographies du CIRC identifient les dangers et laissent à d’autres études le soin de mesurer le risque.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Solar%20radiation">Rayonnement solaire (UV)</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Alcoholic%20beverages">Boissons alcoolisées</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Asbestos%20%28all%20forms%29">Amiante</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="relative-absolute">
       <div class="tag">Risque relatif et risque absolu</div>
       <div>
-        <h3>« Deux fois plus de risque » ne dit pas grand-chose tant qu’on ignore par rapport à quoi.</h3>
+        <h2>« Deux fois plus de risque » ne dit pas grand-chose tant qu’on ignore par rapport à quoi.</h2>
         <p>Un risque relatif compare deux groupes. Un risque absolu dit combien de personnes sont touchées. Doubler un risque de 1 sur 10 000 ajoute un cas pour 10 000 personnes ; une hausse de 10 % d’un risque de 1 sur 10 en ajoute cent pour ces mêmes 10 000. Demandez les deux chiffres.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=fr#how">Deux nombres, et ce que chacun signifie</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="association-cause">
       <div class="tag">Association et cause</div>
       <div>
-        <h3>Deux choses peuvent augmenter ensemble sans que l’une cause l’autre.</h3>
+        <h2>Deux choses peuvent augmenter ensemble sans que l’une cause l’autre.</h2>
         <p>Les personnes qui ont un briquet en poche développent plus de cancers du poumon, et le briquet n’y est pour rien : le tabac explique les deux. Les épidémiologistes parlent de facteur de confusion. Avant de conclure à une cause, ils cherchent le même résultat dans de nombreuses études, une maladie plus fréquente quand l’exposition augmente, et une exposition qui précède la maladie.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Tobacco%20smoking">Tabagisme</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="chance-bias">
+      <div class="tag">Hasard et biais</div>
+      <div>
+        <h2>Un résultat peut venir du hasard, ou pencher d’un côté à cause de la façon dont l’étude a été menée.</h2>
+        <p><b>Le hasard.</b> Toute étude porte sur un échantillon de personnes, et un petit échantillon peut faire apparaître un lien, ou en masquer un, par simple hasard. Lancez dix fois une pièce bien équilibrée : vous obtiendrez sept « pile » ou plus environ une fois sur six. Lancez-la mille fois, et la part de « pile » restera proche de la moitié. C’est pourquoi une seule petite étude tranche rarement une question.</p>
+        <p><b>Les biais.</b> Une étude peut pencher d’un côté à cause de la façon dont elle a été menée. L’étude Interphone a demandé aux participants de se rappeler leur usage passé du téléphone portable, et les gros utilisateurs avaient tendance à surestimer le leur. Le CIRC a indiqué que le hasard ou un biais pouvait expliquer le risque plus élevé de gliome, une tumeur du cerveau, observé chez les plus gros utilisateurs.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Radiofrequency%20electromagnetic%20fields%20%28glioma%2C%20acoustic%20neuroma%29">Champs électromagnétiques de radiofréquences (par exemple, téléphones mobiles)</a></p>
+      </div>
+    </div>
+    <div class="read" id="range">
       <div class="tag">L’intervalle autour d’un chiffre</div>
       <div>
-        <h3>Toute estimation s’accompagne d’un intervalle, et cet intervalle fait partie du résultat.</h3>
+        <h2>Toute estimation s’accompagne d’un intervalle, et cet intervalle fait partie du résultat.</h2>
         <p>Une étude peut rapporter un risque relatif de 1,2 avec un intervalle de confiance à 95 % allant de 0,9 à 1,6. Les données sont compatibles avec une légère hausse, et tout autant avec l’absence d’effet, puisque l’intervalle contient 1. Un intervalle étroit issu d’une grande étude pèse plus qu’un intervalle large issu d’une petite.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=fr#link=red_meat%7Cchd">Viande rouge non transformée et maladie coronarienne</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="no-evidence">
       <div class="tag">Absence de preuve et preuve d’absence</div>
       <div>
-        <h3>« On ne sait pas » et « c’est sans danger » sont deux conclusions différentes.</h3>
+        <h2>« On ne sait pas » et « c’est sans danger » sont deux conclusions différentes.</h2>
         <p>Quand le CIRC place un agent dans le Groupe 3, « inclassable », c’est le plus souvent que les études étaient trop rares ou trop fragiles pour trancher dans un sens ou dans l’autre. Cela décrit l’état des preuves. Le Groupe 3 sert aussi lorsque des preuves solides montrent que le mécanisme par lequel un agent provoque des cancers chez l’animal ne s’exerce pas chez l’être humain, et que rien d’autre ne justifie un groupe supérieur. Depuis le Préambule de 2019, le CIRC n’a plus de Groupe 4 (« probablement pas cancérogène »), et les agents qui y auraient été placés vont désormais dans le Groupe 3. Montrer qu’une chose est sans danger exige de grandes études rigoureuses qui ont cherché un effet nocif et n’en ont pas trouvé.</p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="populations">
       <div class="tag">Populations et individus</div>
       <div>
-        <h3>Ces chiffres décrivent des groupes. Ils n’expliquent pas la maladie d’une personne.</h3>
+        <h2>Ces chiffres décrivent des groupes. Ils n’expliquent pas la maladie d’une personne.</h2>
         <p>Un facteur de risque déplace les probabilités sur des milliers de personnes. La plupart des personnes exposées ne développent jamais la maladie, et certaines personnes qui n’ont pas été exposées la développent. Pour tout ce qui touche à votre propre santé, adressez-vous aux professionnels qui vous soignent.</p>
+        <p class="see"><span class="k">Voir les preuves</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=fr#cancer=Lung">Cancer du poumon</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec wrap ex" id="worked-example">
+  <div class="sec-head">
+    <div class="label">Exemple commenté</div>
+    <h2>Un titre de presse, lu avec <b>les sept idées</b>.</h2>
+  </div>
+  <p class="ex-head">« La viande transformée cause le cancer, selon l’OMS »</p>
+  <p class="lede">Des titres de ce genre ont suivi l’évaluation de la viande rouge et de la viande transformée par le CIRC en octobre 2015. Voici la même nouvelle, lue avec chaque idée tour à tour.</p>
+  <ol class="ex-steps">
+    <li><span class="tag">Danger et risque</span><p>Le CIRC a classé la viande transformée dans le groupe 1, celui où sa certitude est la plus grande, parce que les preuves chez l’être humain sont suffisantes pour le cancer de l’intestin. Cela répond à la question de savoir si elle peut causer un cancer. De combien elle augmente le risque est une autre question.</p></li>
+    <li><span class="tag">Risque relatif et risque absolu</span><p>Selon la fiche de l’outil, chaque portion de 50 grammes consommée chaque jour augmente de 18 % le risque de cancer de l’intestin. C’est un risque relatif. Le tabagisme est lui aussi dans le groupe 1, et sa fiche donne des chiffres absolus : selon des données européennes, environ 10 à 12 fumeurs sur 100 ont un cancer du poumon avant 75 ans, contre 4 à 5 sur 1 000 personnes qui n’ont jamais fumé. Même certitude, ampleur très différente.</p></li>
+    <li><span class="tag">Association et cause</span><p>Les gros consommateurs de viande transformée peuvent aussi différer sur d’autres points, par exemple leur consommation de tabac ou leur activité physique. Un verdict de preuves suffisantes signifie que le groupe de travail du CIRC a jugé, avec une confiance raisonnable, que ces différences n’expliquent pas le lien.</p></li>
+    <li><span class="tag">Hasard et biais</span><p>Le même verdict signifie que le hasard et les biais ont eux aussi été écartés avec une confiance raisonnable. Ce jugement pèse l’ensemble des études. Une seule petite étude ne suffirait pas à le fonder.</p></li>
+    <li><span class="tag">L’intervalle autour d’un chiffre</span><p>Les 18 % sont une estimation centrale tirée d’études regroupées, et comme toute estimation elle s’accompagne d’un intervalle. Demandez cet intervalle avant de juger le chiffre : s’il inclut l’absence d’effet, les données sont aussi compatibles avec une absence totale de hausse.</p></li>
+    <li><span class="tag">Absence de preuve et preuve d’absence</span><p>Le verdict du CIRC porte sur la viande transformée et, dans le groupe 2A, sur la viande rouge. Les autres aliments n’entraient pas dans cette évaluation : le titre ne dit donc rien de leur innocuité.</p></li>
+    <li><span class="tag">Populations et individus</span><p>Ces chiffres décrivent de grands groupes. Ils ne peuvent dire à personne si un cancer de l’intestin donné a été causé par le jambon. La plupart des personnes qui mangent de la viande transformée n’ont jamais de cancer de l’intestin, et certaines qui n’en mangent jamais en ont un.</p></li>
+  </ol>
+  <p class="see"><span class="k">Voir les preuves</span>
+    <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Processed%20meat">Viande transformée</a>
+    <a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Tobacco%20smoking">Tabagisme</a></p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">Ce que signifient les étiquettes</div>
+    <h2>Les étiquettes des deux outils, <b>côte à côte</b>.</h2>
+  </div>
+  <p class="lede">Les deux outils répondent à la question « les preuves sont-elles solides ? » avec trois jeux d’étiquettes. Pour chacune, le tableau indique ce qu’elle affirme, ce qu’elle laisse ouvert et le terme officiel qui la fonde.</p>
+  <div class="tbl-wrap" role="region" tabindex="0" aria-labelledby="lbl-h">
+    <table class="lbl-table">
+      <caption id="lbl-h" class="vh">Ce que signifient les étiquettes</caption>
+      <colgroup><col class="c-label"><col class="c-says"><col class="c-not"><col class="c-term"></colgroup>
+      <thead>
+        <tr><th scope="col">Étiquette</th><th scope="col">Ce qu’elle dit</th>
+            <th scope="col">Ce qu’elle ne dit pas</th><th scope="col">Terme officiel</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Explorateur des preuves sur le cancer</span> À quel point le CIRC est sûr qu’un agent peut causer un cancer</span></th></tr>
+        <tr><th scope="row"><span class="sw g1" aria-hidden="true"></span>Cause avérée</th>
+            <td>L’agent peut causer un cancer chez l’être humain. C’est le groupe où le CIRC est le plus sûr.</td><td>Ni l’ampleur du risque, ni la dose à partir de laquelle il apparaît. La viande transformée et le tabagisme sont tous deux dans le groupe 1, avec des risques très différents.</td><td>Cancérogène pour l’homme (groupe 1)</td></tr>
+        <tr><th scope="row"><span class="sw g2a" aria-hidden="true"></span>Cause probable</th>
+            <td>L’agent cause probablement un cancer chez l’être humain. Les preuves restent en deçà du groupe 1, le plus souvent parce que les études chez l’être humain sont limitées.</td><td>Ni qu’il cause un cancer aux niveaux auxquels on est habituellement exposé, ni l’ampleur d’un éventuel risque.</td><td>Probablement cancérogène pour l’homme (groupe 2A)</td></tr>
+        <tr><th scope="row"><span class="sw g2b" aria-hidden="true"></span>Cause possible</th>
+            <td>Il se pourrait que l’agent cause un cancer chez l’être humain. Un seul type de preuves va dans ce sens, par exemple des preuves limitées chez l’être humain ou suffisantes chez l’animal.</td><td>Ni qu’il cause probablement un cancer, ni que les personnes exposées courent un risque.</td><td>Peut-être cancérogène pour l’homme (groupe 2B)</td></tr>
+        <tr><th scope="row"><span class="sw g3" aria-hidden="true"></span>Inclassable</th>
+            <td>Les preuves ne remplissent les règles d’aucun autre groupe, le plus souvent parce qu’elles sont trop peu nombreuses.</td><td>Qu’il est sans danger. Le groupe 3 décrit l’état des preuves.</td><td>Inclassable quant à sa cancérogénicité pour l’homme (groupe 3)</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Explorateur des preuves sur le cancer</span> Ce que montrent les études chez l’être humain pour un cancer donné</span></th></tr>
+        <tr><th scope="row"><span class="ln est" aria-hidden="true"></span>Lien établi</th>
+            <td>Les études chez l’être humain montrent qu’il cause ce cancer. Le hasard, les biais et les facteurs de confusion ont été écartés avec une confiance raisonnable.</td><td>Ni l’ampleur du risque, ni s’il est à l’origine du cancer d’une personne en particulier.</td><td>Preuves suffisantes de cancérogénicité chez l’être humain</td></tr>
+        <tr><th scope="row"><span class="ln sus" aria-hidden="true"></span>Lien suspecté</th>
+            <td>Les études chez l’être humain montrent un lien avec ce cancer, et un lien de cause à effet est crédible. Le hasard, les biais ou les facteurs de confusion n’ont pas pu être écartés.</td><td>Qu’il cause ce cancer. De nouvelles recherches pourraient confirmer le lien ou l’écarter.</td><td>Preuves limitées de cancérogénicité chez l’être humain</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Atlas des preuves — maladies chroniques</span> À quel point les preuves établissent qu’un facteur de risque cause une maladie</span></th></tr>
+        <tr><th scope="row"><span class="sw strong" aria-hidden="true"></span>Fort</th>
+            <td>Des preuves de natures différentes concordent : il s’agit d’une cause, et un revirement est peu probable.</td><td>L’ampleur de l’effet. Un lien de niveau Fort peut porter sur un petit effet ; l’estimation du panneau en donne la taille.</td>
+            <td rowspan="5">Pas de terme officiel. Ces cinq niveaux appartiennent à l’atlas des maladies chroniques, qui les définit dans son cadre méthodologique. Aucun n’est une catégorie du CIRC.
+              <a class="term-link" href="../chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">Cadre méthodologique, section 3.1 (en anglais) &rarr;</a></td></tr>
+        <tr><th scope="row"><span class="sw moderate" aria-hidden="true"></span>Modéré</th>
+            <td>Probablement une cause : les études concordent et montrent un gradient ou un mécanisme connu, mais il manque encore un élément de preuve.</td><td>Que la question est tranchée. L’élément de preuve qui manque pourrait confirmer le lien ou le renverser.</td></tr>
+        <tr><th scope="row"><span class="sw suggestive" aria-hidden="true"></span>Évocateur</th>
+            <td>Une association constante, mais les facteurs de confusion ou la causalité inverse n’ont pas été écartés.</td><td>Que le facteur cause la maladie. Un autre facteur, ou un stade précoce de la maladie elle-même, peut expliquer le lien.</td></tr>
+        <tr><th scope="row"><span class="sw weak" aria-hidden="true"></span>Faible</th>
+            <td>Un signal issu d’études peu nombreuses, discordantes ou sujettes aux biais. Il pourrait ne pas se confirmer.</td><td>Que le facteur n’a aucun effet. Les études sont trop rares, trop discordantes ou trop sujettes aux biais pour conclure dans un sens ou dans l’autre.</td></tr>
+        <tr><th scope="row"><span class="sw conflicting" aria-hidden="true"></span>Contradictoire</th>
+            <td>De bonnes preuves vont dans des sens opposés, souvent des études d’observation contre des essais ou des études génétiques.</td><td>Quel camp a raison. Le panneau montre quels types d’études vont dans quel sens.</td></tr>
+        <tr class="old"><th scope="row">Anciens noms</th>
+            <td>Convaincant → Fort · Probable → Modéré · Limité → Faible · Contesté → Contradictoire. Évocateur garde son nom.</td><td>Qu’un lien a gardé son niveau. La version 2.0 a aussi reclassé certains liens, et le journal des modifications les énumère un par un.</td><td>Noms en usage jusqu’à la version 2.0, publiée le 23 octobre 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lbl-note">Un danger (hazard, en anglais) indique si quelque chose peut nuire. Un rapport de risques instantanés (hazard ratio) est un chiffre d’étude qui compare la vitesse à laquelle un effet nocif survient dans deux groupes. En anglais, les deux termes se ressemblent et désignent des choses différentes.</p>
+</section>
+
+<section class="sec wrap" id="go-further">
+  <div class="sec-head">
+    <div class="label">Pour aller plus loin</div>
+    <h2>Aller plus loin, et <b>vous tester</b>.</h2>
+  </div>
+  <ul class="more-list">
+    <li><a href="https://monographs.iarc.who.int/iarc-monographs-preamble-preamble-to-the-iarc-monographs/" rel="noopener"><b>Le Préambule des Monographies du CIRC</b> (modifié en janvier 2019) : les règles que suit le CIRC pour peser les preuves et attribuer ses groupes (en anglais).</a></li>
+    <li><a href="https://miguelhernan.org/whatifbook" rel="noopener"><b>Causal Inference: What If</b>, de Miguel A. Hernán et James M. Robins (2020) : un manuel gratuit pour distinguer cause et association (en anglais).</a></li>
+  </ul>
+  <h3 class="quiz-h">Cinq questions pour vous tester</h3>
+  <p class="quiz-hint">Réfléchissez d’abord à une réponse, puis ouvrez la question pour comparer.</p>
+  <div class="quiz">
+    <details><summary>Le soleil et la viande transformée sont tous deux dans le groupe 1 du CIRC. Sont-ils aussi dangereux l’un que l’autre ?</summary><p>Non. Le groupe 1 dit que les preuves qu’ils peuvent causer un cancer sont aussi solides pour l’un que pour l’autre. De combien chacun augmente le risque est une autre question, et les réponses diffèrent beaucoup.</p></details>
+    <details><summary>Un titre affirme qu’un aliment « double le risque » d’un cancer rare. Que faut-il savoir avant de s’inquiéter ?</summary><p>La fréquence de ce cancer au départ. Doubler un risque de 1 sur 10 000 ajoute un cas pour 10 000 personnes.</p></details>
+    <details><summary>Les villes qui vendent plus de glaces comptent plus de noyades. Les glaces causent-elles les noyades ?</summary><p>Non. La chaleur explique les deux : on mange plus de glaces et on se baigne davantage. Un troisième facteur qui agit sur deux choses à la fois s’appelle un facteur de confusion.</p></details>
+    <details><summary>Une étude rapporte un risque relatif de 1,3, avec un intervalle de confiance à 95 % de 0,8 à 2,1. A-t-elle montré que le risque augmente ?</summary><p>Non. L’intervalle contient 1 : les données sont donc aussi compatibles avec un risque inchangé. Une étude plus grande resserrerait l’intervalle.</p></details>
+    <details><summary>Le CIRC place un agent dans le groupe 3, « inclassable ». Peut-on dire qu’il est sans danger ?</summary><p>Non. Le groupe 3 signifie que les preuves étaient trop limitées pour trancher. Montrer qu’une chose est sans danger exige de grandes études qui ont cherché un effet nocif et n’en ont pas trouvé.</p></details>
   </div>
 </section>
 
@@ -109,8 +226,8 @@
     <div class="label">Mettez-les en pratique</div>
     <h2 style="margin:14px 0 0">Ouvrez un outil et <b>lisez les preuves</b> par vous-même.</h2>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Explorateur des preuves sur le cancer &rarr;</a>
-      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/">Atlas des preuves — maladies chroniques &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=fr">Explorateur des preuves sur le cancer &rarr;</a>
+      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/?lang=fr">Atlas des preuves — maladies chroniques &rarr;</a>
       <a class="btn btn-ghost" href="games.html">Jeux de sensibilisation &rarr;</a>
     </div>
   </div>
@@ -129,6 +246,7 @@
         <a href="games.html">Jeux de sensibilisation</a>
         <a href="about.html">À propos</a>
         <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">Comment nous vérifions</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé, et les opinions exprimées ici n’engagent que leur auteur. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.</div>

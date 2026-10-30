@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>癌症证据探索器｜EpiDetective</title>
-<meta name="description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据取自世界卫生组织《IARC 致癌物专论》。">
+<meta name="description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据：《IARC 致癌物专论》“按癌症部位分类”（第 1–141 卷）。万汶鑫的个人项目。">
 <link rel="canonical" href="https://epidetective.com/zh/explorer.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/explorer.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/explorer.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/zh/explorer.html">
 <meta property="og:title" content="癌症证据探索器｜EpiDetective">
-<meta property="og:description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据取自世界卫生组织《IARC 致癌物专论》。">
+<meta property="og:description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据：《IARC 致癌物专论》“按癌症部位分类”（第 1–141 卷）。万汶鑫的个人项目。">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="癌症证据探索器｜EpiDetective">
-<meta name="twitter:description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据取自世界卫生组织《IARC 致癌物专论》。">
+<meta name="twitter:description" content="查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据：《IARC 致癌物专论》“按癌症部位分类”（第 1–141 卷）。万汶鑫的个人项目。">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -55,7 +55,7 @@
     <div class="crumb"><a href="index.html#instruments">工具</a> &middot;
       <span>工具 01 &middot; 已上线</span></div>
     <h1>有些暴露因素已经确认会致癌，有些只是疑似。<b>这张图帮你分清两者。</b></h1>
-    <p class="lede" style="margin-top:24px">标题背后的点和线就是数据本身：185 种暴露因素、68 种癌症，以及世界卫生组织国际癌症研究机构（IARC）记录的两者之间的 469 条关联。统计范围：凡是 IARC 按癌症部位分类的表格（第 1 至 141 卷）对某一种具体癌症列出了至少达到“有限”级别的人类证据的因素，都计入在内，并按本工具的说明作了调整。</p>
+    <p class="lede" style="margin-top:24px">标题背后的点和线就是数据本身：185 种暴露因素、68 种癌症，以及两者之间的 469 条关联，均取自《IARC 致癌物专论》中的“按癌症部位分类”表。统计范围：凡是该表（第 1 至 141 卷）对某一种具体癌症列出了至少达到“有限”级别的人类证据的因素，都计入在内，并按本工具的说明作了调整。</p>
     <div class="legend">
       <span class="leg est"><i></i>已确认的关联</span>
       <span class="leg sus"><i></i>疑似关联</span>
@@ -89,6 +89,27 @@
       <div class="bar sus"><i style="width:46.9%"></i></div>
       <p class="bar-note">把这一关联解释为因果关系是可信的，但还不能有合理把握地排除偶然因素、偏倚或混杂。今后的研究可能证实它，也可能推翻它。</p>
     </div>
+  </div>
+  <p class="exp-more">搜索还能找到 IARC 评估过、但没有指出具体癌症部位的另外 874 种因素，例如咖啡（3 类）。每一种都显示其类别、评估所在的卷号和年份，以及指向 IARC 分类清单的链接。</p>
+  <p class="exp-more">185 个条目中的每一个，还会列出 IARC 权衡的三类证据：人群研究、实验动物研究，以及该因素在体内如何起作用的证据。</p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">标签的含义</div>
+    <h2>每个条目都带有 <b>IARC 四个类别</b>之一。</h2>
+  </div>
+  <p class="lede">类别说明的是 IARC 对某种因素能否使人患癌有多大把握，并不涉及风险的大小；风险大小取决于剂量和具体情况。</p>
+  <div class="figs lbl-figs">
+    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>已知致癌 &middot; 1 类</div></div>
+    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>很可能致癌 &middot; 2A 类</div></div>
+    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>可能致癌 &middot; 2B 类</div></div>
+    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>无法分类 &middot; 3 类</div></div>
+  </div>
+  <p class="exp-more">以上是 IARC 分类清单（第 1–142 卷，最近一次更新于 2026 年 7 月 23 日）中所有已分类因素的总数。地图收录的是 1 类、2A 类和 2B 类的因素；3 类因素可以通过搜索找到。</p>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="reading.html#labels">所有标签对照 &rarr;</a>
+    <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">IARC 分类清单（英文） &rarr;</a>
   </div>
 </section>
 
@@ -129,7 +150,7 @@
     <h2 style="margin:14px 0 0">从某种<b>癌症</b>或某种<b>暴露因素</b>查起，或者直接打开整张图。</h2>
     <p class="lede">免费使用，支持十种语言。可拖动、缩放并聚焦网络的任意部分。</p>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">打开癌症证据探索器 &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=zh">打开癌症证据探索器 &rarr;</a>
     </div>
     <div class="disc">资料来源：《IARC 致癌物专论》“按癌症部位分类”第 1&ndash;141 卷（最近一次更新于 2026 年 5 月 18 日），改编自 Schubauer-Berigan 等人发表于 JNCI Monographs 2026 的论文，并补充了其后的评估结果以及第 100B 卷单独列出的 HPV 型别。本工具识别的是人群层面的危害。任何涉及你个人健康的问题，请咨询医生。</div>
   </div>
@@ -148,6 +169,7 @@
         <a href="games.html">防癌小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
+        <a href="how-we-check.html">我们如何核查</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书，所表达的观点仅代表作者个人。所依据的科学来源均已注明并可以独立核查。</div>

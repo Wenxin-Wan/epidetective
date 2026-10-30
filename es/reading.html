@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cómo leer la evidencia en salud — EpiDetective</title>
-<meta name="description" content="Seis ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas.">
+<meta name="description" content="Siete ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, azar y sesgo, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas. Con un ejemplo resuelto y las etiquetas de las dos herramientas, una junto a otra.">
 <link rel="canonical" href="https://epidetective.com/es/reading.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/reading.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/es/reading.html">
 <meta property="og:title" content="Cómo leer la evidencia en salud — EpiDetective">
-<meta property="og:description" content="Seis ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas.">
+<meta property="og:description" content="Siete ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, azar y sesgo, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas. Con un ejemplo resuelto y las etiquetas de las dos herramientas, una junto a otra.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cómo leer la evidencia en salud — EpiDetective">
-<meta name="twitter:description" content="Seis ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas.">
+<meta name="twitter:description" content="Siete ideas para sopesar mejor un titular sobre salud: peligro y riesgo, riesgo relativo y riesgo absoluto, asociación y causa, azar y sesgo, el intervalo que rodea una estimación, qué significa «sin evidencia», y poblaciones y personas. Con un ejemplo resuelto y las etiquetas de las dos herramientas, una junto a otra.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -52,55 +52,172 @@
   <div class="wrap">
     <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
       <span>Leer la evidencia</span></div>
-    <h1>Seis ideas que hacen <b>legible</b> la evidencia en salud.</h1>
+    <h1>Siete ideas que hacen <b>legible</b> la evidencia en salud.</h1>
     <p class="lede" style="margin-top:24px">Cada cifra de las herramientas de este sitio se apoya en unas pocas ideas de la epidemiología. Ninguna requiere matemáticas. Léelas una vez y te resultará mucho más fácil sopesar un titular sobre salud.</p>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="reads" style="margin-top:0">
-    <div class="read">
+    <div class="read" id="hazard">
       <div class="tag">Peligro y riesgo</div>
       <div>
-        <h3>Un peligro es lo que puede causar daño. El riesgo es la probabilidad de que ese daño ocurra.</h3>
+        <h2>Un peligro es lo que puede causar daño. El riesgo es la probabilidad de que ese daño ocurra.</h2>
         <p>El sol, el alcohol y el amianto son peligros: cada uno puede causar cáncer. La probabilidad, para una persona concreta, depende de cuánto, durante cuánto tiempo y a qué edad. Las Monografías del CIIC identifican los peligros y dejan a otros estudios la tarea de medir el riesgo.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Solar%20radiation">Radiación solar (rayos UV)</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Alcoholic%20beverages">Bebidas alcohólicas</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Asbestos%20%28all%20forms%29">Amianto (asbesto)</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="relative-absolute">
       <div class="tag">Riesgo relativo y riesgo absoluto</div>
       <div>
-        <h3>«El doble de riesgo» dice poco hasta que sabes el doble de qué.</h3>
+        <h2>«El doble de riesgo» dice poco hasta que sabes el doble de qué.</h2>
         <p>Un riesgo relativo compara dos grupos. Un riesgo absoluto dice cuántas personas resultan afectadas. Duplicar un riesgo de 1 entre 10.000 añade un caso por cada 10.000 personas; un aumento del 10 % en un riesgo de 1 entre 10 añade cien entre esas mismas 10.000. Pide las dos cifras.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=es#how">Dos números y qué significa cada uno</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="association-cause">
       <div class="tag">Asociación y causa</div>
       <div>
-        <h3>Dos cosas pueden aumentar a la vez sin que una cause la otra.</h3>
+        <h2>Dos cosas pueden aumentar a la vez sin que una cause la otra.</h2>
         <p>Quienes llevan un mechero en el bolsillo desarrollan más cáncer de pulmón, y el mechero es inocente: el tabaco explica las dos cosas. En epidemiología esto se llama confusión. Antes de hablar de causa, los investigadores buscan el mismo resultado en muchos estudios, más enfermedad cuanta más exposición, y que la exposición llegue antes que la enfermedad.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Tobacco%20smoking">Tabaquismo</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="chance-bias">
+      <div class="tag">Azar y sesgo</div>
+      <div>
+        <h2>Un resultado puede deberse a la suerte, o inclinarse hacia un lado por cómo se hizo el estudio.</h2>
+        <p><b>El azar.</b> Todo estudio observa una muestra de personas, y una muestra pequeña puede mostrar un vínculo, u ocultarlo, por pura suerte. Lanza una moneda equilibrada diez veces y obtendrás siete caras o más aproximadamente una vez de cada seis; lánzala mil veces y la proporción de caras se mantendrá cerca de la mitad. Por eso un solo estudio pequeño rara vez zanja una cuestión.</p>
+        <p><b>El sesgo.</b> Un estudio puede inclinarse hacia un lado por cómo se hizo. El estudio Interphone pidió a los participantes que recordaran su uso pasado del teléfono móvil, y quienes más lo usaban tendían a sobrestimar su uso. El CIIC señaló que el azar o el sesgo pueden explicar el mayor riesgo de glioma, un tumor cerebral, observado en quienes más lo usaban.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Radiofrequency%20electromagnetic%20fields%20%28glioma%2C%20acoustic%20neuroma%29">Campos de radiofrecuencia (p. ej., teléfonos móviles)</a></p>
+      </div>
+    </div>
+    <div class="read" id="range">
       <div class="tag">El intervalo que rodea una cifra</div>
       <div>
-        <h3>Toda estimación viene con un intervalo, y el intervalo forma parte del resultado.</h3>
+        <h2>Toda estimación viene con un intervalo, y el intervalo forma parte del resultado.</h2>
         <p>Un estudio puede informar de un riesgo relativo de 1,2 con un intervalo de confianza del 95 % de 0,9 a 1,6. Los datos son compatibles con un pequeño aumento, y también con la ausencia de efecto, porque el intervalo incluye el 1. Un intervalo estrecho de un estudio grande merece más peso que uno ancho de un estudio pequeño.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=es#link=red_meat%7Cchd">Carne roja sin procesar y cardiopatía coronaria</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="no-evidence">
       <div class="tag">Sin evidencia, y evidencia de que no hay efecto</div>
       <div>
-        <h3>«No se pudo saber» y «es seguro» son dos conclusiones distintas.</h3>
+        <h2>«No se pudo saber» y «es seguro» son dos conclusiones distintas.</h2>
         <p>Cuando el CIIC sitúa un agente en el Grupo 3, «no clasificable», suele ser porque los estudios eran demasiado escasos o demasiado débiles para decidir en un sentido u otro. Eso describe el estado de la evidencia. El Grupo 3 también se usa cuando hay evidencia sólida de que el mecanismo por el que un agente causa cáncer en animales no actúa en las personas y nada más respalda un grupo superior. Desde el Preámbulo de 2019, el CIIC ya no tiene un Grupo 4 («probablemente no carcinogénico»), y los agentes que antes habrían ido allí pasan al Grupo 3. Demostrar que algo es seguro exige estudios grandes y cuidadosos que hayan buscado el daño sin encontrarlo.</p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="populations">
       <div class="tag">Poblaciones y personas</div>
       <div>
-        <h3>Estas cifras describen grupos. No pueden explicar la enfermedad de una persona.</h3>
+        <h2>Estas cifras describen grupos. No pueden explicar la enfermedad de una persona.</h2>
         <p>Un factor de riesgo desplaza las probabilidades entre miles de personas. La mayoría de las personas expuestas nunca desarrolla la enfermedad, y algunas no expuestas sí. Para todo lo que tenga que ver con tu propia salud, pregunta a quienes te atienden.</p>
+        <p class="see"><span class="k">Ver la evidencia</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=es#cancer=Lung">Cáncer de pulmón</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec wrap ex" id="worked-example">
+  <div class="sec-head">
+    <div class="label">Ejemplo resuelto</div>
+    <h2>Un titular, leído con <b>las siete ideas</b>.</h2>
+  </div>
+  <p class="ex-head">«La carne procesada causa cáncer, según la OMS»</p>
+  <p class="lede">Titulares como este siguieron a la evaluación de la carne roja y la carne procesada que hizo el CIIC en octubre de 2015. Aquí está la misma noticia, leída a la luz de cada una de las ideas, una por una.</p>
+  <ol class="ex-steps">
+    <li><span class="tag">Peligro y riesgo</span><p>El CIIC situó la carne procesada en el Grupo 1, el grupo en el que tiene más certeza, porque la evidencia en humanos es suficiente para el cáncer de intestino. Eso responde a si puede causar cáncer. Cuánto aumenta el riesgo es otra cuestión.</p></li>
+    <li><span class="tag">Riesgo relativo y riesgo absoluto</span><p>Según la ficha de la herramienta, cada 50 gramos consumidos al día aumentan un 18 % el riesgo de cáncer de intestino. Es un riesgo relativo. El tabaquismo también está en el Grupo 1, y su ficha da cifras absolutas: según datos europeos, unas 10 a 12 de cada 100 personas fumadoras tienen cáncer de pulmón antes de los 75 años, frente a 4 o 5 de cada 1.000 que nunca han fumado. La misma certeza, un tamaño muy distinto.</p></li>
+    <li><span class="tag">Asociación y causa</span><p>Quienes comen mucha carne procesada pueden diferir también en otras cosas, por ejemplo en cuánto fuman o hacen ejercicio. Un veredicto de evidencia suficiente significa que el grupo de trabajo del CIIC juzgó, con una confianza razonable, que esas diferencias no explican el vínculo.</p></li>
+    <li><span class="tag">Azar y sesgo</span><p>El mismo veredicto significa que el azar y el sesgo también se descartaron con una confianza razonable. Ese juicio pondera el conjunto de los estudios. Un solo estudio pequeño no podría sostenerlo.</p></li>
+    <li><span class="tag">El intervalo que rodea una cifra</span><p>El 18 % es una estimación central de estudios agrupados y, como toda estimación, viene con un intervalo. Pide ese intervalo antes de sopesar la cifra: si incluye la ausencia de efecto, los datos también son compatibles con que no haya ningún aumento.</p></li>
+    <li><span class="tag">Sin evidencia, y evidencia de que no hay efecto</span><p>El veredicto del CIIC abarca la carne procesada y, en el Grupo 2A, la carne roja. Los demás alimentos quedaron fuera de esta evaluación, así que el titular no dice nada sobre si son seguros.</p></li>
+    <li><span class="tag">Poblaciones y personas</span><p>Estas cifras describen grandes grupos. No pueden decirle a nadie si un cáncer de intestino concreto se debió al jamón. La mayoría de quienes comen carne procesada nunca tiene cáncer de intestino, y algunas personas que nunca la comen sí lo tienen.</p></li>
+  </ol>
+  <p class="see"><span class="k">Ver la evidencia</span>
+    <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Processed%20meat">Carne procesada</a>
+    <a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Tobacco%20smoking">Tabaquismo</a></p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">Qué significan las etiquetas</div>
+    <h2>Las etiquetas de las dos herramientas, <b>una junto a otra</b>.</h2>
+  </div>
+  <p class="lede">Las dos herramientas responden a «¿hasta qué punto es sólida la evidencia?» con tres juegos de etiquetas. Para cada una, la tabla indica qué afirma, qué deja abierto y el término oficial en que se basa.</p>
+  <div class="tbl-wrap" role="region" tabindex="0" aria-labelledby="lbl-h">
+    <table class="lbl-table">
+      <caption id="lbl-h" class="vh">Qué significan las etiquetas</caption>
+      <colgroup><col class="c-label"><col class="c-says"><col class="c-not"><col class="c-term"></colgroup>
+      <thead>
+        <tr><th scope="col">Etiqueta</th><th scope="col">Qué dice</th>
+            <th scope="col">Qué no dice</th><th scope="col">Término oficial</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Explorador de evidencia sobre el cáncer</span> Hasta qué punto está seguro el CIIC de que un agente puede causar cáncer</span></th></tr>
+        <tr><th scope="row"><span class="sw g1" aria-hidden="true"></span>Causa conocida</th>
+            <td>El agente puede causar cáncer en las personas. Es el grupo en el que el CIIC tiene más certeza.</td><td>Ni cuánto riesgo supone ni a partir de qué dosis. La carne procesada y el tabaquismo están ambos en el Grupo 1, con riesgos muy distintos.</td><td>Carcinogénico para los seres humanos (Grupo 1)</td></tr>
+        <tr><th scope="row"><span class="sw g2a" aria-hidden="true"></span>Causa probable</th>
+            <td>El agente probablemente causa cáncer en las personas. La evidencia no llega al nivel del Grupo 1, la mayoría de las veces porque los estudios en humanos son limitados.</td><td>Ni que cause cáncer a los niveles a los que la gente suele estar expuesta ni cuánto riesgo supone.</td><td>Probablemente carcinogénico para los seres humanos (Grupo 2A)</td></tr>
+        <tr><th scope="row"><span class="sw g2b" aria-hidden="true"></span>Causa posible</th>
+            <td>Es posible que el agente cause cáncer en las personas. Un solo tipo de evidencia apunta en esa dirección, por ejemplo evidencia limitada en humanos o suficiente en animales.</td><td>Ni que probablemente cause cáncer ni que las personas expuestas corran un riesgo.</td><td>Posiblemente carcinogénico para los seres humanos (Grupo 2B)</td></tr>
+        <tr><th scope="row"><span class="sw g3" aria-hidden="true"></span>No clasificable</th>
+            <td>La evidencia no cumple las reglas de ningún otro grupo, normalmente porque es demasiado escasa.</td><td>Que sea seguro. El Grupo 3 describe el estado de la evidencia.</td><td>No clasificable en cuanto a su carcinogenicidad para los seres humanos (Grupo 3)</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Explorador de evidencia sobre el cáncer</span> Qué muestran los estudios en humanos para un cáncer concreto</span></th></tr>
+        <tr><th scope="row"><span class="ln est" aria-hidden="true"></span>Vínculo establecido</th>
+            <td>Los estudios en personas muestran que causa este cáncer. El azar, el sesgo y la confusión se descartaron con una confianza razonable.</td><td>Ni cuánto riesgo supone ni si causó el cáncer de una persona concreta.</td><td>Evidencia suficiente de carcinogenicidad en humanos</td></tr>
+        <tr><th scope="row"><span class="ln sus" aria-hidden="true"></span>Vínculo sospechado</th>
+            <td>Los estudios en personas muestran un vínculo con este cáncer, y un vínculo causal es creíble. No se pudieron descartar el azar, el sesgo o la confusión.</td><td>Que cause este cáncer. Nuevas investigaciones podrían confirmar el vínculo o descartarlo.</td><td>Evidencia limitada de carcinogenicidad en humanos</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Atlas de evidencia — enfermedades crónicas</span> Hasta qué punto es sólida la evidencia de que un factor de riesgo causa una enfermedad</span></th></tr>
+        <tr><th scope="row"><span class="sw strong" aria-hidden="true"></span>Fuerte</th>
+            <td>Distintos tipos de evidencia coinciden en que es una causa, y es poco probable que la conclusión se revierta.</td><td>El tamaño del efecto. Un vínculo Fuerte puede tener un efecto pequeño; la estimación del panel indica su tamaño.</td>
+            <td rowspan="5">Sin término oficial. Estos cinco grados pertenecen al atlas de enfermedades crónicas, que los define en su marco metodológico. Ninguno es una categoría del CIIC.
+              <a class="term-link" href="../chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">Marco metodológico, sección 3.1 (en inglés) &rarr;</a></td></tr>
+        <tr><th scope="row"><span class="sw moderate" aria-hidden="true"></span>Moderado</th>
+            <td>Probablemente es una causa: los estudios coinciden y muestran un gradiente o un mecanismo conocido, pero aún falta una línea de prueba.</td><td>Que la cuestión esté resuelta. La línea de prueba que falta podría confirmar el vínculo o desmentirlo.</td></tr>
+        <tr><th scope="row"><span class="sw suggestive" aria-hidden="true"></span>Indicativo</th>
+            <td>Una asociación consistente, pero no se han descartado la confusión ni la causalidad inversa.</td><td>Que el factor cause la enfermedad. Otro factor, o una fase temprana de la propia enfermedad, puede explicar el vínculo.</td></tr>
+        <tr><th scope="row"><span class="sw weak" aria-hidden="true"></span>Débil</th>
+            <td>Una señal procedente de pocos estudios, poco coherentes o propensos a sesgos. Puede que no se confirme.</td><td>Que el factor no tenga efecto. Los estudios son demasiado pocos, poco coherentes o propensos a sesgos para concluir en un sentido u otro.</td></tr>
+        <tr><th scope="row"><span class="sw conflicting" aria-hidden="true"></span>Contradictorio</th>
+            <td>Hay buena evidencia en sentidos opuestos, a menudo estudios observacionales frente a ensayos o estudios genéticos.</td><td>Qué lado tiene razón. El panel muestra qué tipos de estudio apuntan en cada sentido.</td></tr>
+        <tr class="old"><th scope="row">Nombres anteriores</th>
+            <td>Convincente → Fuerte · Probable → Moderado · Limitado → Débil · Cuestionado → Contradictorio. Indicativo conserva su nombre.</td><td>Que un vínculo haya conservado su grado. La versión 2.0 también recalificó algunos vínculos, y el registro de cambios los enumera uno por uno.</td><td>Nombres usados hasta la versión 2.0, publicada el 23 de octubre de 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lbl-note">Un peligro (hazard, en inglés) indica si algo puede causar daño. Una razón de riesgos instantáneos (hazard ratio) es una cifra de un estudio que compara la rapidez con que aparece un daño en dos grupos. En inglés las dos palabras se parecen y significan cosas distintas.</p>
+</section>
+
+<section class="sec wrap" id="go-further">
+  <div class="sec-head">
+    <div class="label">Para saber más</div>
+    <h2>Sigue leyendo y <b>ponte a prueba</b>.</h2>
+  </div>
+  <ul class="more-list">
+    <li><a href="https://monographs.iarc.who.int/iarc-monographs-preamble-preamble-to-the-iarc-monographs/" rel="noopener"><b>El Preámbulo de las Monografías del CIIC</b> (modificado en enero de 2019): las reglas que sigue el CIIC para sopesar la evidencia y asignar sus grupos (en inglés).</a></li>
+    <li><a href="https://miguelhernan.org/whatifbook" rel="noopener"><b>Causal Inference: What If</b>, de Miguel A. Hernán y James M. Robins (2020): un libro de texto gratuito para distinguir causa y asociación (en inglés).</a></li>
+  </ul>
+  <h3 class="quiz-h">Cinco preguntas para ponerte a prueba</h3>
+  <p class="quiz-hint">Piensa primero una respuesta y luego abre la pregunta para comparar.</p>
+  <div class="quiz">
+    <details><summary>La luz solar y la carne procesada están ambas en el Grupo 1 del CIIC. ¿Son igual de peligrosas?</summary><p>No. El Grupo 1 dice que la evidencia de que ambos pueden causar cáncer es igual de sólida. Cuánto aumenta el riesgo cada uno es otra cuestión, y las respuestas difieren mucho.</p></details>
+    <details><summary>Un titular dice que un alimento «duplica el riesgo» de un cáncer raro. ¿Qué necesitas saber antes de preocuparte?</summary><p>Lo frecuente que es ese cáncer de partida. Duplicar un riesgo de 1 entre 10.000 añade un caso por cada 10.000 personas.</p></details>
+    <details><summary>Los pueblos que venden más helados tienen más ahogamientos. ¿El helado causa ahogamientos?</summary><p>No. El calor trae las dos cosas: la gente come más helado y se baña más. Un tercer factor que impulsa dos cosas a la vez se llama factor de confusión.</p></details>
+    <details><summary>Un estudio informa de un riesgo relativo de 1,3, con un intervalo de confianza del 95 % de 0,8 a 2,1. ¿Ha demostrado que el riesgo aumenta?</summary><p>No. El intervalo incluye el 1, así que los datos también son compatibles con que el riesgo no cambie. Un estudio más grande estrecharía el intervalo.</p></details>
+    <details><summary>El CIIC sitúa un agente en el Grupo 3, «no clasificable». ¿Puedes decir que es seguro?</summary><p>No. El Grupo 3 significa que la evidencia era demasiado limitada para decidir. Demostrar que algo es seguro exige estudios grandes que hayan buscado el daño sin encontrarlo.</p></details>
   </div>
 </section>
 
@@ -109,8 +226,8 @@
     <div class="label">Ahora, úsalas</div>
     <h2 style="margin:14px 0 0">Abre una herramienta y <b>lee la evidencia</b> por tu cuenta.</h2>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Explorador de evidencia sobre el cáncer &rarr;</a>
-      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/">Atlas de evidencia — enfermedades crónicas &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=es">Explorador de evidencia sobre el cáncer &rarr;</a>
+      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/?lang=es">Atlas de evidencia — enfermedades crónicas &rarr;</a>
       <a class="btn btn-ghost" href="games.html">Juegos de prevención &rarr;</a>
     </div>
   </div>
@@ -129,6 +246,7 @@
         <a href="games.html">Juegos de prevención</a>
         <a href="about.html">Acerca de</a>
         <a href="about.html#contact">Contacto</a>
+        <a href="how-we-check.html">Cómo verificamos</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud, y las opiniones expresadas aquí son solo responsabilidad de su autor. Las fuentes científicas utilizadas están citadas para que cualquiera pueda comprobarlas de forma independiente.</div>

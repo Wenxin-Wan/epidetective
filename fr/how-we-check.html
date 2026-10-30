@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comment nous vérifions · EpiDetective</title>
+<meta name="description" content="D’où viennent les données des deux outils d’EpiDetective, comment elles ont été vérifiées, quelle version est en ligne et comment signaler une erreur. Un projet personnel de Wenxin Wan.">
+<link rel="canonical" href="https://epidetective.com/fr/how-we-check.html">
+<link rel="alternate" hreflang="en" href="https://epidetective.com/how-we-check.html">
+<link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/how-we-check.html">
+<link rel="alternate" hreflang="fr" href="https://epidetective.com/fr/how-we-check.html">
+<link rel="alternate" hreflang="es" href="https://epidetective.com/es/how-we-check.html">
+<link rel="alternate" hreflang="ru" href="https://epidetective.com/ru/how-we-check.html">
+<link rel="alternate" hreflang="x-default" href="https://epidetective.com/how-we-check.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="https://epidetective.com/fr/how-we-check.html">
+<meta property="og:title" content="Comment nous vérifions · EpiDetective">
+<meta property="og:description" content="D’où viennent les données des deux outils d’EpiDetective, comment elles ont été vérifiées, quelle version est en ligne et comment signaler une erreur. Un projet personnel de Wenxin Wan.">
+<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comment nous vérifions · EpiDetective">
+<meta name="twitter:description" content="D’où viennent les données des deux outils d’EpiDetective, comment elles ont été vérifiées, quelle version est en ligne et comment signaler une erreur. Un projet personnel de Wenxin Wan.">
+<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="index.html#instruments">Outils</a>
+        <a href="../code-against-cancer/?lang=fr">Code contre le cancer</a>
+        <a href="games.html">Jeux de sensibilisation</a>
+        <a href="about.html">À propos</a>
+        <a href="about.html#contact">Contact</a>
+      </nav>
+      <nav class="langs" aria-label="Langue"><a href="../how-we-check.html" hreflang="en">English</a><a href="../zh/how-we-check.html" hreflang="zh">中文</a><span class="lang-cur" aria-current="true">Français</span><a href="../es/how-we-check.html" hreflang="es">Español</a><a href="../ru/how-we-check.html" hreflang="ru">Русский</a></nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
+      <span>Comment nous vérifions</span></div>
+    <h1>D’où viennent les données, comment elles ont été vérifiées, et <b>comment signaler une erreur</b>.</h1>
+    <p class="lede" style="margin-top:24px">EpiDetective est un projet personnel de Wenxin Wan. Cette page présente les sources des deux outils, les vérifications qu’ils ont subies et les versions actuellement en ligne. Si vous trouvez une erreur, la dernière section explique comment la signaler.</p>
+  </div>
+</section>
+
+<section class="sec wrap" id="sources">
+  <div class="sec-head">
+    <div class="label">Sources</div>
+    <h2>D’où viennent les données.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer">
+      <h3>Explorateur des preuves sur le cancer</h3>
+      <ul>
+        <li>Monographies du CIRC, tableau « Classifications par site de cancer », volumes 1 à 141 (dernière mise à jour le 18 mai 2026) : les 185 agents pour lesquels il existe au moins des preuves limitées chez l’être humain pour un cancer précis, et leurs 469 liens avec 68 types de cancer. Adapté de Schubauer-Berigan et al., <i>JNCI Monographs</i> 2026, et complété pour les évaluations ultérieures et pour les types de HPV nommés individuellement dans le volume 100B.</li>
+        <li>Monographies du CIRC, liste des classifications (List of Classifications), volumes 1 à 142 (dernière mise à jour le 23 juillet 2026) : le groupe de chaque agent, et les 874 agents que le CIRC a évalués sans désigner de localisation de cancer.</li>
+        <li>L’évaluation publiée dans le volume des Monographies consacré à chaque agent : ce que le CIRC a conclu des études chez l’être humain, des études chez l’animal de laboratoire et des données sur la façon dont l’agent agit dans l’organisme.</li>
+      </ul>
+      <p class="hwc-links"><a href="explorer.html">À propos de cet outil &rarr;</a></p>
+    </div>
+    <div class="hwc-card" id="chronic">
+      <h3>Atlas des preuves — maladies chroniques</h3>
+      <ul>
+        <li>Des revues systématiques avec méta-analyse, des consortiums de cohortes regroupées et des synthèses d’experts, comme les analyses Burden of Proof du GBD et les commissions du Lancet. Une étude isolée n’est retenue que comme preuve randomisée ou génétique qui confirme ou contredit un résultat d’études d’observation.</li>
+        <li>L’index des références recense les 641 sources publiées sur lesquelles reposent les liens, chacune avec un lien vers l’article.</li>
+      </ul>
+      <p class="hwc-links"><a href="../chronic-disease-explorer/references.html">Index des références (en anglais)</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="checks">
+  <div class="sec-head">
+    <div class="label">Vérifications</div>
+    <h2>Comment les données ont été vérifiées.</h2>
+  </div>
+  <div class="hwc-grid">
+    <div class="hwc-card" id="cancer-checks">
+      <h3>Explorateur des preuves sur le cancer</h3>
+      <ul>
+        <li>Chaque lien a été comparé au tableau du CIRC par site de cancer. Lorsque le tableau indique un cancer que le texte d’évaluation du volume ne nomme pas, la fiche le signale.</li>
+        <li>Le volume et l’année de chaque classification ont été contrôlés sur la liste des classifications du CIRC et les volumes des Monographies, lors de deux vérifications indépendantes (octobre 2026). Les preuves chez l’être humain, chez l’animal et sur le mode d’action de chaque agent ont été tirées des évaluations du CIRC lui-même, vérifiées une seconde fois, et chaque citation a été comparée à sa source.</li>
+        <li>La liste des classifications du CIRC a été comparée à l’outil pour la dernière fois le 28 octobre 2026. Elle n’avait pas changé depuis la mise à jour du CIRC du 23 juillet 2026.</li>
+      </ul>
+    </div>
+    <div class="hwc-card" id="chronic-checks">
+      <h3>Atlas des preuves — maladies chroniques</h3>
+      <ul>
+        <li>Chaque estimation de l’effet a été comparée à l’article qu’elle cite, pour la comparaison exacte indiquée (août 2026). En septembre 2026, une seconde vérification a confronté de nouveau 100 liens signalés à leurs articles. Chaque niveau de preuve suit la table de décision écrite du cadre méthodologique.</li>
+        <li>Le journal des modifications consigne chaque changement de chaque lien depuis la première version publiée (24 août 2026). Sur les 431 liens que compte aujourd’hui l’outil, 343 y ont au moins une vérification ou une correction datée de septembre ou d’octobre 2026. Le journal ne consigne que les changements : un lien vérifié et jugé correct n’y laisse aucune ligne, si bien que davantage de liens ont été vérifiés que ce chiffre ne l’indique.</li>
+      </ul>
+      <p class="hwc-links"><a href="../chronic-disease-explorer/changelog.html">Journal des modifications (en anglais)</a>
+        <a href="../chronic-disease-explorer/framework.html#13-what-has-been-checked-and-what-has-not">Cadre méthodologique : ce qui a été vérifié et ce qui ne l’a pas été (en anglais)</a></p>
+    </div>
+  </div>
+  <p class="hwc-ai">L’auteur a mené ces vérifications avec l’aide de l’IA : des modèles d’IA ont comparé chaque valeur à sa source, et l’auteur a examiné les résultats et apporté les corrections. Aucun expert extérieur n’a encore examiné les estimations ni les niveaux de preuve de l’atlas des maladies chroniques.</p>
+</section>
+
+<section class="sec wrap" id="versions">
+  <div class="sec-head">
+    <div class="label">Versions</div>
+    <h2>Quelle version est en ligne.</h2>
+  </div>
+  <dl class="hwc-ver">
+    <div>
+      <dt>Explorateur des preuves sur le cancer</dt>
+      <dd><span class="v">Version 1.0, générée le 28 octobre 2026.</span> Données : tableau du CIRC par site de cancer, dernière mise à jour le 18 mai 2026 ; liste des classifications du CIRC, dernière mise à jour le 23 juillet 2026.</dd>
+    </div>
+    <div>
+      <dt>Atlas des preuves — maladies chroniques</dt>
+      <dd><span class="v">Version 2.0, générée le 21 octobre 2026.</span> 356 liens classés par niveau de preuve et 75 liens avec des résultats apparentés. La version 2.0 a renommé les niveaux et fixe chacun d’eux par une table de décision écrite.
+        <span class="hwc-links"><a href="../chronic-disease-explorer/changelog.html">Journal des modifications (en anglais)</a>
+          <a href="../chronic-disease-explorer/framework.html">Cadre méthodologique (en anglais)</a>
+          <a href="../chronic-disease-explorer/references.html">Index des références (en anglais)</a></span></dd>
+    </div>
+  </dl>
+  <p class="hwc-cite"><a href="about.html#cite">Comment citer chaque outil &rarr;</a></p>
+</section>
+
+<section class="sec wrap" id="not">
+  <div class="sec-head">
+    <div class="label">Ce que ce n’est pas</div>
+    <h2>Ce que ce n’est pas.</h2>
+  </div>
+  <p class="lede hwc-not">C’est un projet personnel. Ce n’est ni un produit du CIRC ou de l’OMS, ni une évaluation des risques, ni un avis médical.</p>
+  <p class="lede">Les outils montrent ce que la recherche publiée dit de grands groupes de personnes. Ils ne peuvent pas vous dire ce qui a causé la maladie d’une personne en particulier. Pour votre propre santé, parlez-en à un médecin.</p>
+</section>
+
+<section class="sec wrap" id="report">
+  <div class="sec-head">
+    <div class="label">Signaler une erreur</div>
+    <h2>Vous avez trouvé une erreur ? <b>Dites-le-nous.</b></h2>
+  </div>
+  <p class="lede">Écrivez à epidetective@gmail.com. Le bouton ci-dessous ouvre un courriel avec quatre lignes à remplir :</p>
+  <ol class="hwc-fields">
+    <li>Page ou outil</li>
+    <li>Fiche (son nom ou son lien)</li>
+    <li>Ce qui est faux</li>
+    <li>Une source qui le montre</li>
+  </ol>
+  <div class="inst-actions"><a class="btn btn-solid" href="mailto:epidetective@gmail.com?subject=EpiDetective%20correction&amp;body=Page%20ou%20outil%C2%A0%3A%20%0D%0AFiche%20%28son%20nom%20ou%20son%20lien%29%C2%A0%3A%20%0D%0ACe%20qui%20est%20faux%C2%A0%3A%20%0D%0AUne%20source%20qui%20le%20montre%C2%A0%3A%20%0D%0A">Écrire un courriel &rarr;</a></div>
+  <p class="hwc-reply">Vous recevrez une réponse, en général sous deux semaines.</p>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">Des outils ouverts pour lire les preuves en santé.</p>
+      </div>
+      <nav class="menu">
+        <a href="index.html#instruments">Outils</a>
+        <a href="../code-against-cancer/?lang=fr">Code contre le cancer</a>
+        <a href="games.html">Jeux de sensibilisation</a>
+        <a href="about.html">À propos</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">Comment nous vérifions</a>
+      </nav>
+    </div>
+    <div class="disc">EpiDetective publie des outils permettant de lire les preuves concernant des populations entières. Ils montrent des tendances au sein de grands groupes de personnes. Pour toute question concernant votre propre santé, adressez-vous à un médecin. Chaque outil indique ses sources.</div>
+    <div class="disc affil">EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé, et les opinions exprimées ici n’engagent que leur auteur. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.</div>
+    <div class="foot-bot">
+      <span>Créé par Wenxin Wan &mdash; Lyon, France</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

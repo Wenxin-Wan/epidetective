@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_work_title}}</title>
+<meta name="description" content="{{meta_work_desc}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_work_title}}">
+<meta property="og:description" content="{{meta_work_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_work_title}}">
+<meta name="twitter:description" content="{{meta_work_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<div id="page">
+
+<!-- Work and cancer. The 68 Occupational agents of the cancer tool, grouped by
+     sector (scripts/work_sectors.json, EpiDetective's grouping), rendered from
+     data/work.json (scripts/build_work_data.py) by build_site.py: WORK_TOC,
+     WORK_SECTORS, WORK_REC9 and WORK_CHRONIC. Every row links to the entry in
+     the tool. The site search box joins #find in a later batch. -->
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
+      <span>{{work_label}}</span></div>
+    <h1>{{work_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{work_lede}}</p>
+    <p class="lede work-note">{{work_note}}</p>
+  </div>
+</section>
+
+<div class="sec wrap work">
+  <nav class="work-toc" aria-labelledby="work-toc-h">
+    <div class="label" id="work-toc-h">{{work_toc}}</div>
+    {{WORK_TOC}}
+  </nav>
+
+{{WORK_SECTORS}}
+
+  <div class="work-find" id="find">
+    <p>{{work_find}}</p>
+    <a class="btn btn-ghost" href="{{URL_TOOL}}">{{inst_t1_name}} &rarr;</a>
+  </div>
+</div>
+
+<section class="sec wrap" id="what-you-can-do">
+  <div class="sec-head">
+    <div class="label">{{work_ecac_label}}</div>
+    <h2>{{work_ecac_h2}}</h2>
+  </div>
+  {{WORK_REC9}}
+</section>
+
+<section class="sec wrap" id="beyond-cancer">
+  <div class="sec-head">
+    <div class="label">{{work_beyond_label}}</div>
+    <h2>{{work_beyond_h2}}</h2>
+  </div>
+  <p class="lede">{{work_beyond_p}}</p>
+  {{WORK_CHRONIC}}
+  <div class="inst-actions" style="margin-top:26px">
+    <a class="btn btn-ghost" href="{{URL_TOOL2}}">{{inst_t2_name}} &rarr;</a>
+    <a class="btn btn-ghost" href="{{URL_READING}}#labels">{{work_beyond_lbl}}</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
+      </nav>
+    </div>
+    <div class="disc">{{foot_disclaimer}}</div>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page -->
+
+</body>
+</html>

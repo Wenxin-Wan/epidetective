@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cancer Evidence Explorer — EpiDetective</title>
-<meta name="description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Built on the WHO’s IARC Monographs.">
+<meta name="description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Data: IARC Monographs, Classifications by cancer site (Vols 1–141). A personal project by Wenxin Wan.">
 <link rel="canonical" href="https://epidetective.com/explorer.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/explorer.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/explorer.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/explorer.html">
 <meta property="og:title" content="Cancer Evidence Explorer — EpiDetective">
-<meta property="og:description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Built on the WHO’s IARC Monographs.">
+<meta property="og:description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Data: IARC Monographs, Classifications by cancer site (Vols 1–141). A personal project by Wenxin Wan.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cancer Evidence Explorer — EpiDetective">
-<meta name="twitter:description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Built on the WHO’s IARC Monographs.">
+<meta name="twitter:description" content="See which exposures have been linked to which cancers, and how strong the evidence is for each link. Data: IARC Monographs, Classifications by cancer site (Vols 1–141). A personal project by Wenxin Wan.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -55,7 +55,7 @@
     <div class="crumb"><a href="index.html#instruments">Tools</a> &middot;
       <span>Tool 01 &mdash; open now</span></div>
     <h1>Some exposures are known to cause cancer. Others are only suspected. <b>This map shows which is which.</b></h1>
-    <p class="lede" style="margin-top:24px">The dots and lines behind this heading are the dataset itself: 185 exposures, 68 types of cancer and the 469 links between them, as recorded by the World Health Organization’s cancer agency, IARC. Counted here: every agent for which IARC’s cancer-site table lists at least limited evidence in people for a named cancer (Volumes 1 to 141), adapted as the tool describes.</p>
+    <p class="lede" style="margin-top:24px">The dots and lines behind this heading are the dataset itself: 185 exposures, 68 types of cancer and the 469 links between them, taken from the IARC Monographs table “Classifications by cancer site”. Counted here: every agent for which that table lists at least limited evidence in people for a named cancer (Volumes 1 to 141), adapted as the tool describes.</p>
     <div class="legend">
       <span class="leg est"><i></i>Established link</span>
       <span class="leg sus"><i></i>Suspected link</span>
@@ -89,6 +89,27 @@
       <div class="bar sus"><i style="width:46.9%"></i></div>
       <p class="bar-note">A causal link is credible, but chance, bias or confounding could not be ruled out with reasonable confidence. More research may settle it either way.</p>
     </div>
+  </div>
+  <p class="exp-more">Search also finds the 874 other agents IARC has evaluated without naming a cancer site, such as coffee (Group 3). Each one shows its group, the volume and year of the evaluation, and a link to IARC’s list.</p>
+  <p class="exp-more">Each of the 185 entries also sets out the three kinds of evidence IARC weighs: studies in people, studies in experimental animals, and evidence on how the agent acts in the body.</p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">What the labels mean</div>
+    <h2>Every entry carries one of <b>IARC’s four groups</b>.</h2>
+  </div>
+  <p class="lede">The group says how sure IARC is that an agent can cause cancer in people. It says nothing about how large the risk is, which depends on the dose and the circumstances.</p>
+  <div class="figs lbl-figs">
+    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>Known cause &middot; Group 1</div></div>
+    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>Probable cause &middot; Group 2A</div></div>
+    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>Possible cause &middot; Group 2B</div></div>
+    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>Not classifiable &middot; Group 3</div></div>
+  </div>
+  <p class="exp-more">IARC’s own totals for every agent it has classified, from its List of Classifications (Volumes 1–142, last updated 23 July 2026). The map holds agents from Groups 1, 2A and 2B; Group 3 agents are found by search.</p>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="reading.html#labels">All the labels, side by side &rarr;</a>
+    <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">IARC’s List of Classifications &rarr;</a>
   </div>
 </section>
 
@@ -129,7 +150,7 @@
     <h2 style="margin:14px 0 0">Start from a <b>cancer</b> or an <b>exposure</b>, or open the whole map.</h2>
     <p class="lede">Free, in ten languages. Drag, zoom, and focus on any part of the network.</p>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Open the Cancer Evidence Explorer &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=en">Open the Cancer Evidence Explorer &rarr;</a>
     </div>
     <div class="disc">Source: IARC Monographs, “Classifications by cancer site”, Volumes 1&ndash;141 (last update 18 May 2026), adapted from Schubauer-Berigan et al., JNCI Monographs 2026, and augmented for later evaluations and for the single HPV types named in Volume 100B. This tool identifies hazards across whole populations. For anything concerning your own health, speak to a doctor.</div>
   </div>
@@ -148,6 +169,7 @@
         <a href="games.html">Cancer awareness games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">How we check</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>

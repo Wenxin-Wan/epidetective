@@ -43,8 +43,12 @@
 
 <div id="page">
 
-<!-- A short guide: the six ideas the tools and the games lean on. It has no
-     picture of its own, so the hero is type on paper. -->
+<!-- The guide: seven ideas the tools and the games lean on, one headline worked
+     through all of them, the labels of both tools side by side, and further
+     reading. It has no picture of its own, so the hero is type on paper.
+     Each idea has a stable id (search, the tools and the home page link them);
+     the ideas are h2 in the outline and keep the h3 scale (site.css .read h2).
+     Idea 7, chance and bias, follows idea 3 because it continues confounding. -->
 <section class="tool-hero plain">
   <div class="wrap">
     <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
@@ -56,48 +60,172 @@
 
 <section class="sec wrap">
   <div class="reads" style="margin-top:0">
-    <div class="read">
+    <div class="read" id="hazard">
       <div class="tag">{{read_1_tag}}</div>
       <div>
-        <h3>{{read_1_h3}}</h3>
+        <h2>{{read_1_h3}}</h2>
         <p>{{read_1_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_SOLAR}}">{{read_see_solar}}</a>
+          <a href="{{TL_ALCOHOL}}">{{read_see_alcohol}}</a>
+          <a href="{{TL_ASBESTOS}}">{{read_see_asbestos}}</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="relative-absolute">
       <div class="tag">{{read_2_tag}}</div>
       <div>
-        <h3>{{read_2_h3}}</h3>
+        <h2>{{read_2_h3}}</h2>
         <p>{{read_2_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_HOW}}">{{read_see_how}}</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="association-cause">
       <div class="tag">{{read_3_tag}}</div>
       <div>
-        <h3>{{read_3_h3}}</h3>
+        <h2>{{read_3_h3}}</h2>
         <p>{{read_3_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_TOBACCO}}">{{read_see_tobacco}}</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="chance-bias">
+      <div class="tag">{{read_7_tag}}</div>
+      <div>
+        <h2>{{read_7_h3}}</h2>
+        <p>{{read_7_p1}}</p>
+        <p>{{read_7_p2}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_RF}}">{{read_see_rf}}</a></p>
+      </div>
+    </div>
+    <div class="read" id="range">
       <div class="tag">{{read_4_tag}}</div>
       <div>
-        <h3>{{read_4_h3}}</h3>
+        <h2>{{read_4_h3}}</h2>
         <p>{{read_4_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_REDMEAT_CHD}}">{{read_see_redmeat}}</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="no-evidence">
       <div class="tag">{{read_5_tag}}</div>
       <div>
-        <h3>{{read_5_h3}}</h3>
+        <h2>{{read_5_h3}}</h2>
         <p>{{read_5_p}}</p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="populations">
       <div class="tag">{{read_6_tag}}</div>
       <div>
-        <h3>{{read_6_h3}}</h3>
+        <h2>{{read_6_h3}}</h2>
         <p>{{read_6_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_LUNG}}">{{read_see_lung}}</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- One headline read with each idea in turn, in the order the ideas appear.
+     The two English quotations are verbatim from the published cancer panels
+     (Processed meat, Tobacco smoking); zh quotes the panels' Chinese text. -->
+<section class="sec wrap ex" id="worked-example">
+  <div class="sec-head">
+    <div class="label">{{read_ex_label}}</div>
+    <h2>{{read_ex_h2}}</h2>
+  </div>
+  <p class="ex-head">{{read_ex_head}}</p>
+  <p class="lede">{{read_ex_lede}}</p>
+  <ol class="ex-steps">
+    <li><span class="tag">{{read_1_tag}}</span><p>{{read_ex_1}}</p></li>
+    <li><span class="tag">{{read_2_tag}}</span><p>{{read_ex_2}}</p></li>
+    <li><span class="tag">{{read_3_tag}}</span><p>{{read_ex_3}}</p></li>
+    <li><span class="tag">{{read_7_tag}}</span><p>{{read_ex_7}}</p></li>
+    <li><span class="tag">{{read_4_tag}}</span><p>{{read_ex_4}}</p></li>
+    <li><span class="tag">{{read_5_tag}}</span><p>{{read_ex_5}}</p></li>
+    <li><span class="tag">{{read_6_tag}}</span><p>{{read_ex_6}}</p></li>
+  </ol>
+  <p class="see"><span class="k">{{read_see}}</span>
+    <a href="{{TL_PROCESSED}}">{{read_see_processed}}</a>
+    <a href="{{TL_TOBACCO}}">{{read_see_tobacco}}</a></p>
+</section>
+
+<!-- The three label systems of the two tools in one table. The chronic rows'
+     "What it says" cells are the chronic tool's own grade definitions
+     (T.<lang>.gradeDesc), copied byte for byte; the cancer terms are the
+     cancer tool's officialTerm and IARC's evidence categories. -->
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">{{lbl_label}}</div>
+    <h2>{{lbl_h2}}</h2>
+  </div>
+  <p class="lede">{{lbl_lede}}</p>
+  <div class="tbl-wrap" role="region" tabindex="0" aria-labelledby="lbl-h">
+    <table class="lbl-table">
+      <caption id="lbl-h" class="vh">{{lbl_label}}</caption>
+      <colgroup><col class="c-label"><col class="c-says"><col class="c-not"><col class="c-term"></colgroup>
+      <thead>
+        <tr><th scope="col">{{lbl_th_label}}</th><th scope="col">{{lbl_th_says}}</th>
+            <th scope="col">{{lbl_th_not}}</th><th scope="col">{{lbl_th_term}}</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">{{inst_t1_name}}</span> {{lbl_cap_cause}}</span></th></tr>
+        <tr><th scope="row"><span class="sw g1" aria-hidden="true"></span>{{lbl_g1}}</th>
+            <td>{{lbl_g1_says}}</td><td>{{lbl_g1_not}}</td><td>{{lbl_g1_term}}</td></tr>
+        <tr><th scope="row"><span class="sw g2a" aria-hidden="true"></span>{{lbl_g2a}}</th>
+            <td>{{lbl_g2a_says}}</td><td>{{lbl_g2a_not}}</td><td>{{lbl_g2a_term}}</td></tr>
+        <tr><th scope="row"><span class="sw g2b" aria-hidden="true"></span>{{lbl_g2b}}</th>
+            <td>{{lbl_g2b_says}}</td><td>{{lbl_g2b_not}}</td><td>{{lbl_g2b_term}}</td></tr>
+        <tr><th scope="row"><span class="sw g3" aria-hidden="true"></span>{{lbl_g3}}</th>
+            <td>{{lbl_g3_says}}</td><td>{{lbl_g3_not}}</td><td>{{lbl_g3_term}}</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">{{inst_t1_name}}</span> {{lbl_cap_link}}</span></th></tr>
+        <tr><th scope="row"><span class="ln est" aria-hidden="true"></span>{{lbl_est}}</th>
+            <td>{{lbl_est_says}}</td><td>{{lbl_est_not}}</td><td>{{lbl_est_term}}</td></tr>
+        <tr><th scope="row"><span class="ln sus" aria-hidden="true"></span>{{lbl_sus}}</th>
+            <td>{{lbl_sus_says}}</td><td>{{lbl_sus_not}}</td><td>{{lbl_sus_term}}</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">{{inst_t2_name}}</span> {{lbl_cap_chronic}}</span></th></tr>
+        <tr><th scope="row"><span class="sw strong" aria-hidden="true"></span>{{lbl_strong}}</th>
+            <td>{{lbl_strong_says}}</td><td>{{lbl_strong_not}}</td>
+            <td rowspan="5">{{lbl_chronic_term}}
+              <a class="term-link" href="{{PREFIX}}chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">{{lbl_framework_link}}</a></td></tr>
+        <tr><th scope="row"><span class="sw moderate" aria-hidden="true"></span>{{lbl_moderate}}</th>
+            <td>{{lbl_moderate_says}}</td><td>{{lbl_moderate_not}}</td></tr>
+        <tr><th scope="row"><span class="sw suggestive" aria-hidden="true"></span>{{lbl_suggestive}}</th>
+            <td>{{lbl_suggestive_says}}</td><td>{{lbl_suggestive_not}}</td></tr>
+        <tr><th scope="row"><span class="sw weak" aria-hidden="true"></span>{{lbl_weak}}</th>
+            <td>{{lbl_weak_says}}</td><td>{{lbl_weak_not}}</td></tr>
+        <tr><th scope="row"><span class="sw conflicting" aria-hidden="true"></span>{{lbl_conflicting}}</th>
+            <td>{{lbl_conflicting_says}}</td><td>{{lbl_conflicting_not}}</td></tr>
+        <tr class="old"><th scope="row">{{lbl_old}}</th>
+            <td>{{lbl_old_says}}</td><td>{{lbl_old_not}}</td><td>{{lbl_old_term}}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lbl-note">{{lbl_hazard_note}}</p>
+</section>
+
+<section class="sec wrap" id="go-further">
+  <div class="sec-head">
+    <div class="label">{{read_more_label}}</div>
+    <h2>{{read_more_h2}}</h2>
+  </div>
+  <ul class="more-list">
+    <li><a href="https://monographs.iarc.who.int/iarc-monographs-preamble-preamble-to-the-iarc-monographs/" rel="noopener">{{read_more_1}}</a></li>
+    <li><a href="https://miguelhernan.org/whatifbook" rel="noopener">{{read_more_2}}</a></li>
+  </ul>
+  <h3 class="quiz-h">{{read_quiz_h3}}</h3>
+  <p class="quiz-hint">{{read_quiz_hint}}</p>
+  <div class="quiz">
+    <details><summary>{{read_q1}}</summary><p>{{read_a1}}</p></details>
+    <details><summary>{{read_q2}}</summary><p>{{read_a2}}</p></details>
+    <details><summary>{{read_q3}}</summary><p>{{read_a3}}</p></details>
+    <details><summary>{{read_q4}}</summary><p>{{read_a4}}</p></details>
+    <details><summary>{{read_q5}}</summary><p>{{read_a5}}</p></details>
   </div>
 </section>
 
@@ -126,6 +254,7 @@
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
       </nav>
     </div>
     <div class="disc affil">{{foot_affiliation}}</div>

@@ -1,0 +1,133 @@
+{
+  "_about": [
+    "Sector grouping of the 68 agents in category Occupational of the Cancer Evidence Explorer, rendered on epidetective.com/work.html.",
+    "The grouping is EpiDetective's editorial choice (IARC lists agents alphabetically); the owner reviews it before publishing.",
+    "Each agent id is the id in the cancer tool's DATA and must appear exactly once; scripts/build_work_data.py fails otherwise.",
+    "Sector names are the i18n keys work_sec_<id>. Rows show in the order listed here (by IARC group, then by English name)."
+  ],
+  "sectors": [
+    {
+      "id": "construction",
+      "agents": [
+        "Asbestos (all forms)",
+        "Coal-tar pitch",
+        "Painter (occupational)",
+        "Pentachlorophenol",
+        "Silica dust, crystalline (quartz/cristobalite)",
+        "Wood dust",
+        "Bitumens (oxidized, roofing)",
+        "Creosotes",
+        "Bitumens (hard, mastic asphalt work)",
+        "Carpentry and joinery"
+      ]
+    },
+    {
+      "id": "metals",
+      "agents": [
+        "Acheson process (occupational)",
+        "Aluminium production",
+        "Beryllium & beryllium compounds",
+        "Cadmium & cadmium compounds",
+        "Chromium(VI) compounds",
+        "Iron and steel founding",
+        "Nickel compounds",
+        "Haematite mining (underground)",
+        "Welding fumes",
+        "Trivalent antimony",
+        "Carbon electrode manufacture",
+        "Cobalt metal with tungsten carbide"
+      ]
+    },
+    {
+      "id": "fuels",
+      "agents": [
+        "Coal gasification",
+        "Coal-tar distillation",
+        "Coke production",
+        "Mineral oils, untreated/mildly treated",
+        "Shale oils",
+        "Soot (chimney sweeps)",
+        "Petroleum refining (occupational)"
+      ]
+    },
+    {
+      "id": "chemicals",
+      "agents": [
+        "1,3-Butadiene",
+        "2-Naphthylamine",
+        "4-Aminobiphenyl",
+        "Acrylonitrile",
+        "Auramine production",
+        "Benzidine",
+        "Bis(chloromethyl)ether; chloromethyl methyl ether",
+        "Isopropyl alcohol manufacture (strong acids)",
+        "Magenta production",
+        "ortho-Toluidine",
+        "Rubber manufacturing industry",
+        "Acid mists, strong inorganic",
+        "Sulfur mustard",
+        "Trichloroethylene",
+        "Vinyl chloride",
+        "1,1,1-Trichloroethane",
+        "2-Mercaptobenzothiazole",
+        "4-Chloro-ortho-toluidine",
+        "alpha-Chlorinated toluenes & benzoyl chloride",
+        "Dichloromethane",
+        "N,N-Dimethylformamide",
+        "Hydrazine",
+        "Styrene",
+        "Polychlorophenols & sodium salts (mixed)",
+        "Silicon carbide, fibrous"
+      ]
+    },
+    {
+      "id": "cleaning",
+      "agents": [
+        "Ethylene oxide",
+        "Formaldehyde",
+        "Tetrachloroethylene",
+        "Dry cleaning"
+      ]
+    },
+    {
+      "id": "printing",
+      "agents": [
+        "1,2-Dichloropropane",
+        "Leather dust",
+        "Art glass / glass containers / pressed ware manufacture",
+        "Printing processes",
+        "Textile manufacturing industry"
+      ]
+    },
+    {
+      "id": "beauty",
+      "agents": [
+        "Hairdresser or barber (occupational)"
+      ]
+    },
+    {
+      "id": "emergency",
+      "agents": [
+        "Firefighter (occupational)"
+      ]
+    },
+    {
+      "id": "shift",
+      "agents": [
+        "Night shift work"
+      ]
+    },
+    {
+      "id": "farming",
+      "agents": [
+        "Non-arsenical insecticides (application)"
+      ]
+    },
+    {
+      "id": "parents",
+      "agents": [
+        "Painter (maternal occupational)"
+      ]
+    }
+  ]
+}

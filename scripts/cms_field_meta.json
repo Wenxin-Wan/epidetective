@@ -203,6 +203,14 @@
     "label": "ABOUT — credential 5: value",
     "type": "string"
   },
+  "cite_label": {
+    "label": "ABOUT — how to cite: small section label",
+    "type": "string"
+  },
+  "cite_p": {
+    "label": "ABOUT — how to cite: two citations and a closing note",
+    "type": "text"
+  },
   "contact_label": {
     "label": "CONTACT — small section label",
     "type": "string"
@@ -370,5 +378,761 @@
   "exp_cta_source": {
     "label": "EXPLORER — cta source",
     "type": "text"
+  },
+  "foot_hwc": {
+    "label": "FOOTER — How we check link",
+    "type": "string"
+  },
+  "about_hwc": {
+    "label": "ABOUT — contact: link to How we check",
+    "type": "string"
+  },
+  "meta_hwc_title": {
+    "label": "HOW WE CHECK — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_hwc_desc": {
+    "label": "HOW WE CHECK — Google result description",
+    "type": "text"
+  },
+  "hwc_label": {
+    "label": "HOW WE CHECK — crumb label",
+    "type": "string"
+  },
+  "hwc_h1": {
+    "label": "HOW WE CHECK — headline",
+    "type": "string"
+  },
+  "hwc_lede": {
+    "label": "HOW WE CHECK — lede",
+    "type": "text"
+  },
+  "hwc_src_label": {
+    "label": "HOW WE CHECK — 1 Sources: small label",
+    "type": "string"
+  },
+  "hwc_src_h2": {
+    "label": "HOW WE CHECK — 1 Sources: heading",
+    "type": "string"
+  },
+  "hwc_src_c1": {
+    "label": "HOW WE CHECK — 1 Sources: cancer tool, IARC cancer-site table",
+    "type": "text"
+  },
+  "hwc_src_c2": {
+    "label": "HOW WE CHECK — 1 Sources: cancer tool, IARC List of Classifications",
+    "type": "text"
+  },
+  "hwc_src_c3": {
+    "label": "HOW WE CHECK — 1 Sources: cancer tool, evaluation texts",
+    "type": "text"
+  },
+  "hwc_src_k1": {
+    "label": "HOW WE CHECK — 1 Sources: chronic tool, kinds of source",
+    "type": "text"
+  },
+  "hwc_src_k2": {
+    "label": "HOW WE CHECK — 1 Sources: chronic tool, reference index",
+    "type": "text"
+  },
+  "hwc_link_refs": {
+    "label": "HOW WE CHECK — link to the chronic reference index",
+    "type": "string"
+  },
+  "hwc_chk_label": {
+    "label": "HOW WE CHECK — 2 Checks: small label",
+    "type": "string"
+  },
+  "hwc_chk_h2": {
+    "label": "HOW WE CHECK — 2 Checks: heading",
+    "type": "string"
+  },
+  "hwc_chk_c1": {
+    "label": "HOW WE CHECK — 2 Checks: cancer tool, links against IARC's table",
+    "type": "text"
+  },
+  "hwc_chk_c2": {
+    "label": "HOW WE CHECK — 2 Checks: cancer tool, volumes, years and evidence streams",
+    "type": "text"
+  },
+  "hwc_chk_c3": {
+    "label": "HOW WE CHECK — 2 Checks: cancer tool, IARC list compared",
+    "type": "text"
+  },
+  "hwc_chk_k1": {
+    "label": "HOW WE CHECK — 2 Checks: chronic tool, estimates against papers",
+    "type": "text"
+  },
+  "hwc_chk_k2": {
+    "label": "HOW WE CHECK — 2 Checks: chronic tool, links checked in 2026 (change log)",
+    "type": "text"
+  },
+  "hwc_link_changelog": {
+    "label": "HOW WE CHECK — link to the chronic change log",
+    "type": "string"
+  },
+  "hwc_link_framework": {
+    "label": "HOW WE CHECK — link to framework section 13 (what has been checked)",
+    "type": "string"
+  },
+  "hwc_link_framework_all": {
+    "label": "HOW WE CHECK — link to the chronic framework (methods)",
+    "type": "string"
+  },
+  "hwc_chk_ai": {
+    "label": "HOW WE CHECK — 2 Checks: who ran the checks (AI-assisted)",
+    "type": "text"
+  },
+  "hwc_ver_label": {
+    "label": "HOW WE CHECK — 3 Versions: small label",
+    "type": "string"
+  },
+  "hwc_ver_h2": {
+    "label": "HOW WE CHECK — 3 Versions: heading",
+    "type": "string"
+  },
+  "hwc_ver_c": {
+    "label": "HOW WE CHECK — 3 Versions: cancer tool version ({cancerBuilt} is filled at publish)",
+    "type": "string"
+  },
+  "hwc_ver_c_data": {
+    "label": "HOW WE CHECK — 3 Versions: cancer tool data dates",
+    "type": "text"
+  },
+  "hwc_ver_k": {
+    "label": "HOW WE CHECK — 3 Versions: chronic tool version",
+    "type": "string"
+  },
+  "hwc_ver_k_data": {
+    "label": "HOW WE CHECK — 3 Versions: chronic tool contents",
+    "type": "text"
+  },
+  "hwc_ver_cite": {
+    "label": "HOW WE CHECK — 3 Versions: link to the citations on About",
+    "type": "string"
+  },
+  "hwc_not_label": {
+    "label": "HOW WE CHECK — 4 What this is not: small label",
+    "type": "string"
+  },
+  "hwc_not_h2": {
+    "label": "HOW WE CHECK — 4 What this is not: heading",
+    "type": "string"
+  },
+  "hwc_not_p": {
+    "label": "HOW WE CHECK — 4 What this is not: statement",
+    "type": "text"
+  },
+  "hwc_not_p2": {
+    "label": "HOW WE CHECK — 4 What this is not: populations",
+    "type": "text"
+  },
+  "hwc_rep_label": {
+    "label": "HOW WE CHECK — 5 Report an error: small label",
+    "type": "string"
+  },
+  "hwc_rep_h2": {
+    "label": "HOW WE CHECK — 5 Report an error: heading",
+    "type": "string"
+  },
+  "hwc_rep_p": {
+    "label": "HOW WE CHECK — 5 Report an error: where to write",
+    "type": "string"
+  },
+  "hwc_rep_i1": {
+    "label": "HOW WE CHECK — 5 Report an error: line 1 (also in the email body)",
+    "type": "string"
+  },
+  "hwc_rep_i2": {
+    "label": "HOW WE CHECK — 5 Report an error: line 2 (also in the email body)",
+    "type": "string"
+  },
+  "hwc_rep_i3": {
+    "label": "HOW WE CHECK — 5 Report an error: line 3 (also in the email body)",
+    "type": "string"
+  },
+  "hwc_rep_i4": {
+    "label": "HOW WE CHECK — 5 Report an error: line 4 (also in the email body)",
+    "type": "string"
+  },
+  "hwc_rep_btn": {
+    "label": "HOW WE CHECK — 5 Report an error: button",
+    "type": "string"
+  },
+  "hwc_rep_reply": {
+    "label": "HOW WE CHECK — 5 Report an error: reply time",
+    "type": "string"
+  },
+  "meta_work_title": {
+    "label": "WORK — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_work_desc": {
+    "label": "WORK — Google result description",
+    "type": "text"
+  },
+  "work_label": {
+    "label": "WORK — crumb label",
+    "type": "string"
+  },
+  "work_h1": {
+    "label": "WORK — headline",
+    "type": "string"
+  },
+  "work_lede": {
+    "label": "WORK — lede",
+    "type": "text"
+  },
+  "work_note": {
+    "label": "WORK — note under the lede (label and own risk)",
+    "type": "text"
+  },
+  "work_toc": {
+    "label": "WORK — sector index label",
+    "type": "string"
+  },
+  "work_th_agent": {
+    "label": "WORK — table column: agent or job",
+    "type": "string"
+  },
+  "work_th_label": {
+    "label": "WORK — table column: IARC label",
+    "type": "string"
+  },
+  "work_th_est": {
+    "label": "WORK — table column: established links",
+    "type": "string"
+  },
+  "work_th_sus": {
+    "label": "WORK — table column: suspected links",
+    "type": "string"
+  },
+  "work_th_eval": {
+    "label": "WORK — table column: IARC evaluation (volume, year)",
+    "type": "string"
+  },
+  "work_vol": {
+    "label": "WORK — volume and year ({n} volume, {year} year)",
+    "type": "string"
+  },
+  "work_sup": {
+    "label": "WORK — supplement and year ({n} number, {year} year)",
+    "type": "string"
+  },
+  "work_sec_construction": {
+    "label": "WORK — sector name: construction",
+    "type": "string"
+  },
+  "work_sec_metals": {
+    "label": "WORK — sector name: metals",
+    "type": "string"
+  },
+  "work_sec_fuels": {
+    "label": "WORK — sector name: coal, coke, oil and gas",
+    "type": "string"
+  },
+  "work_sec_chemicals": {
+    "label": "WORK — sector name: chemicals",
+    "type": "string"
+  },
+  "work_sec_cleaning": {
+    "label": "WORK — sector name: cleaning and health care",
+    "type": "string"
+  },
+  "work_sec_printing": {
+    "label": "WORK — sector name: printing, textiles, leather and glass",
+    "type": "string"
+  },
+  "work_sec_beauty": {
+    "label": "WORK — sector name: hair and beauty",
+    "type": "string"
+  },
+  "work_sec_emergency": {
+    "label": "WORK — sector name: emergency services",
+    "type": "string"
+  },
+  "work_sec_shift": {
+    "label": "WORK — sector name: shift work",
+    "type": "string"
+  },
+  "work_sec_farming": {
+    "label": "WORK — sector name: farming",
+    "type": "string"
+  },
+  "work_sec_parents": {
+    "label": "WORK — sector name: parents' work and children",
+    "type": "string"
+  },
+  "work_find": {
+    "label": "WORK — pointer to the cancer tool's search",
+    "type": "text"
+  },
+  "work_ecac_label": {
+    "label": "WORK — European Code: small label",
+    "type": "string"
+  },
+  "work_ecac_h2": {
+    "label": "WORK — European Code: heading",
+    "type": "string"
+  },
+  "work_ecac_official": {
+    "label": "WORK — European Code: note shown where the text is official (en, fr, es)",
+    "type": "string"
+  },
+  "work_ecac_rendering": {
+    "label": "WORK — European Code: note shown where no official edition exists (zh, ru)",
+    "type": "text"
+  },
+  "work_ecac_why": {
+    "label": "WORK — European Code: label before the justification paper",
+    "type": "string"
+  },
+  "work_ecac_link": {
+    "label": "WORK — European Code: link to the official Code",
+    "type": "string"
+  },
+  "work_beyond_label": {
+    "label": "WORK — Beyond cancer: small label",
+    "type": "string"
+  },
+  "work_beyond_h2": {
+    "label": "WORK — Beyond cancer: heading",
+    "type": "string"
+  },
+  "work_beyond_p": {
+    "label": "WORK — Beyond cancer: paragraph",
+    "type": "text"
+  },
+  "work_beyond_rel": {
+    "label": "WORK — Beyond cancer: related-outcome count ({n})",
+    "type": "string"
+  },
+  "work_beyond_lbl": {
+    "label": "WORK — Beyond cancer: link to the label table",
+    "type": "string"
+  },
+  "lbl_label": {
+    "label": "LABELS — small label (reading guide #labels)",
+    "type": "string"
+  },
+  "lbl_h2": {
+    "label": "LABELS — heading",
+    "type": "string"
+  },
+  "lbl_lede": {
+    "label": "LABELS — lede",
+    "type": "text"
+  },
+  "lbl_th_label": {
+    "label": "LABELS — column: label",
+    "type": "string"
+  },
+  "lbl_th_says": {
+    "label": "LABELS — column: what it says",
+    "type": "string"
+  },
+  "lbl_th_not": {
+    "label": "LABELS — column: what it does not say",
+    "type": "string"
+  },
+  "lbl_th_term": {
+    "label": "LABELS — column: official term",
+    "type": "string"
+  },
+  "lbl_cap_cause": {
+    "label": "LABELS — group row: IARC groups",
+    "type": "string"
+  },
+  "lbl_cap_link": {
+    "label": "LABELS — group row: cancer links",
+    "type": "string"
+  },
+  "lbl_cap_chronic": {
+    "label": "LABELS — group row: chronic grades",
+    "type": "string"
+  },
+  "lbl_grp": {
+    "label": "LABELS — IARC group code ({g} = 1, 2A, 2B, 3)",
+    "type": "string"
+  },
+  "lbl_g1": {
+    "label": "LABELS — Known cause: label (as the cancer tool prints it)",
+    "type": "string"
+  },
+  "lbl_g1_says": {
+    "label": "LABELS — Known cause: what it says",
+    "type": "string"
+  },
+  "lbl_g1_not": {
+    "label": "LABELS — Known cause: what it does not say",
+    "type": "text"
+  },
+  "lbl_g1_term": {
+    "label": "LABELS — Known cause: official term",
+    "type": "string"
+  },
+  "lbl_g2a": {
+    "label": "LABELS — Probable cause: label",
+    "type": "string"
+  },
+  "lbl_g2a_says": {
+    "label": "LABELS — Probable cause: what it says",
+    "type": "text"
+  },
+  "lbl_g2a_not": {
+    "label": "LABELS — Probable cause: what it does not say",
+    "type": "string"
+  },
+  "lbl_g2a_term": {
+    "label": "LABELS — Probable cause: official term",
+    "type": "string"
+  },
+  "lbl_g2b": {
+    "label": "LABELS — Possible cause: label",
+    "type": "string"
+  },
+  "lbl_g2b_says": {
+    "label": "LABELS — Possible cause: what it says",
+    "type": "text"
+  },
+  "lbl_g2b_not": {
+    "label": "LABELS — Possible cause: what it does not say",
+    "type": "string"
+  },
+  "lbl_g2b_term": {
+    "label": "LABELS — Possible cause: official term",
+    "type": "string"
+  },
+  "lbl_g3": {
+    "label": "LABELS — Not classifiable: label",
+    "type": "string"
+  },
+  "lbl_g3_says": {
+    "label": "LABELS — Not classifiable: what it says",
+    "type": "text"
+  },
+  "lbl_g3_not": {
+    "label": "LABELS — Not classifiable: what it does not say",
+    "type": "string"
+  },
+  "lbl_g3_term": {
+    "label": "LABELS — Not classifiable: official term",
+    "type": "string"
+  },
+  "lbl_est": {
+    "label": "LABELS — Established link: label",
+    "type": "string"
+  },
+  "lbl_est_says": {
+    "label": "LABELS — Established link: what it says",
+    "type": "text"
+  },
+  "lbl_est_not": {
+    "label": "LABELS — Established link: what it does not say",
+    "type": "string"
+  },
+  "lbl_est_term": {
+    "label": "LABELS — Established link: official term",
+    "type": "string"
+  },
+  "lbl_sus": {
+    "label": "LABELS — Suspected link: label",
+    "type": "string"
+  },
+  "lbl_sus_says": {
+    "label": "LABELS — Suspected link: what it says",
+    "type": "text"
+  },
+  "lbl_sus_not": {
+    "label": "LABELS — Suspected link: what it does not say",
+    "type": "string"
+  },
+  "lbl_sus_term": {
+    "label": "LABELS — Suspected link: official term",
+    "type": "string"
+  },
+  "lbl_strong": {
+    "label": "LABELS — Strong: grade name (as the chronic tool prints it)",
+    "type": "string"
+  },
+  "lbl_strong_says": {
+    "label": "LABELS — Strong: what it says (copy of the chronic tool's gradeDesc)",
+    "type": "string"
+  },
+  "lbl_strong_not": {
+    "label": "LABELS — Strong: what it does not say",
+    "type": "text"
+  },
+  "lbl_moderate": {
+    "label": "LABELS — Moderate: grade name (as the chronic tool prints it)",
+    "type": "string"
+  },
+  "lbl_moderate_says": {
+    "label": "LABELS — Moderate: what it says (copy of the chronic tool's gradeDesc)",
+    "type": "text"
+  },
+  "lbl_moderate_not": {
+    "label": "LABELS — Moderate: what it does not say",
+    "type": "string"
+  },
+  "lbl_suggestive": {
+    "label": "LABELS — Suggestive: grade name (as the chronic tool prints it)",
+    "type": "string"
+  },
+  "lbl_suggestive_says": {
+    "label": "LABELS — Suggestive: what it says (copy of the chronic tool's gradeDesc)",
+    "type": "string"
+  },
+  "lbl_suggestive_not": {
+    "label": "LABELS — Suggestive: what it does not say",
+    "type": "text"
+  },
+  "lbl_weak": {
+    "label": "LABELS — Weak: grade name (as the chronic tool prints it)",
+    "type": "string"
+  },
+  "lbl_weak_says": {
+    "label": "LABELS — Weak: what it says (copy of the chronic tool's gradeDesc)",
+    "type": "string"
+  },
+  "lbl_weak_not": {
+    "label": "LABELS — Weak: what it does not say",
+    "type": "text"
+  },
+  "lbl_conflicting": {
+    "label": "LABELS — Conflicting: grade name (as the chronic tool prints it)",
+    "type": "string"
+  },
+  "lbl_conflicting_says": {
+    "label": "LABELS — Conflicting: what it says (copy of the chronic tool's gradeDesc)",
+    "type": "text"
+  },
+  "lbl_conflicting_not": {
+    "label": "LABELS — Conflicting: what it does not say",
+    "type": "string"
+  },
+  "lbl_chronic_term": {
+    "label": "LABELS — chronic grades: official term cell",
+    "type": "text"
+  },
+  "lbl_framework_link": {
+    "label": "LABELS — chronic grades: link to framework section 3.1",
+    "type": "string"
+  },
+  "lbl_old": {
+    "label": "LABELS — older chronic grade names: label",
+    "type": "string"
+  },
+  "lbl_old_says": {
+    "label": "LABELS — older chronic grade names: old to new",
+    "type": "text"
+  },
+  "lbl_old_not": {
+    "label": "LABELS — older chronic grade names: what it does not say",
+    "type": "text"
+  },
+  "lbl_old_term": {
+    "label": "LABELS — older chronic grade names: when",
+    "type": "string"
+  },
+  "lbl_hazard_note": {
+    "label": "LABELS — note: hazard and hazard ratio",
+    "type": "text"
+  },
+  "read_7_tag": {
+    "label": "READING — idea 7 (chance and bias): tag",
+    "type": "string"
+  },
+  "read_7_h3": {
+    "label": "READING — idea 7: heading",
+    "type": "string"
+  },
+  "read_7_p1": {
+    "label": "READING — idea 7: paragraph on chance",
+    "type": "text"
+  },
+  "read_7_p2": {
+    "label": "READING — idea 7: paragraph on bias",
+    "type": "text"
+  },
+  "read_see": {
+    "label": "READING — label before the links into the tools",
+    "type": "string"
+  },
+  "read_see_solar": {
+    "label": "READING — link: Solar radiation (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_alcohol": {
+    "label": "READING — link: Alcoholic beverages (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_asbestos": {
+    "label": "READING — link: Asbestos (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_how": {
+    "label": "READING — link: chronic tool section 'Two numbers'",
+    "type": "string"
+  },
+  "read_see_tobacco": {
+    "label": "READING — link: Tobacco smoking (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_redmeat": {
+    "label": "READING — link: red meat and coronary heart disease (chronic tool)",
+    "type": "string"
+  },
+  "read_see_lung": {
+    "label": "READING — link: Lung cancer (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_rf": {
+    "label": "READING — link: Radiofrequency fields (cancer tool name)",
+    "type": "string"
+  },
+  "read_see_processed": {
+    "label": "READING — link: Processed meat (cancer tool name)",
+    "type": "string"
+  },
+  "read_ex_label": {
+    "label": "READING — worked example: small label",
+    "type": "string"
+  },
+  "read_ex_h2": {
+    "label": "READING — worked example: heading",
+    "type": "string"
+  },
+  "read_ex_head": {
+    "label": "READING — worked example: the headline",
+    "type": "string"
+  },
+  "read_ex_lede": {
+    "label": "READING — worked example: lede",
+    "type": "text"
+  },
+  "read_ex_1": {
+    "label": "READING — worked example: hazard and risk",
+    "type": "text"
+  },
+  "read_ex_2": {
+    "label": "READING — worked example: relative and absolute risk (English quotes are verbatim from the cancer tool)",
+    "type": "text"
+  },
+  "read_ex_3": {
+    "label": "READING — worked example: association and cause",
+    "type": "text"
+  },
+  "read_ex_7": {
+    "label": "READING — worked example: chance and bias",
+    "type": "text"
+  },
+  "read_ex_4": {
+    "label": "READING — worked example: the range around a number",
+    "type": "text"
+  },
+  "read_ex_5": {
+    "label": "READING — worked example: no evidence",
+    "type": "text"
+  },
+  "read_ex_6": {
+    "label": "READING — worked example: populations and people",
+    "type": "text"
+  },
+  "read_more_label": {
+    "label": "READING — Go further: small label",
+    "type": "string"
+  },
+  "read_more_h2": {
+    "label": "READING — Go further: heading",
+    "type": "string"
+  },
+  "read_more_1": {
+    "label": "READING — Go further: the IARC Preamble",
+    "type": "text"
+  },
+  "read_more_2": {
+    "label": "READING — Go further: Hernán and Robins, Causal Inference: What If",
+    "type": "text"
+  },
+  "read_quiz_h3": {
+    "label": "READING — self-check: heading",
+    "type": "string"
+  },
+  "read_quiz_hint": {
+    "label": "READING — self-check: how to use",
+    "type": "string"
+  },
+  "read_q1": {
+    "label": "READING — self-check: question 1",
+    "type": "text"
+  },
+  "read_a1": {
+    "label": "READING — self-check: answer 1",
+    "type": "text"
+  },
+  "read_q2": {
+    "label": "READING — self-check: question 2",
+    "type": "text"
+  },
+  "read_a2": {
+    "label": "READING — self-check: answer 2",
+    "type": "text"
+  },
+  "read_q3": {
+    "label": "READING — self-check: question 3",
+    "type": "string"
+  },
+  "read_a3": {
+    "label": "READING — self-check: answer 3",
+    "type": "text"
+  },
+  "read_q4": {
+    "label": "READING — self-check: question 4",
+    "type": "text"
+  },
+  "read_a4": {
+    "label": "READING — self-check: answer 4",
+    "type": "text"
+  },
+  "read_q5": {
+    "label": "READING — self-check: question 5",
+    "type": "string"
+  },
+  "read_a5": {
+    "label": "READING — self-check: answer 5",
+    "type": "text"
+  },
+  "exp_eval_p": {
+    "label": "EXPLORER — 874 evaluated agents in search",
+    "type": "text"
+  },
+  "exp_streams_p": {
+    "label": "EXPLORER — three kinds of evidence in every entry",
+    "type": "text"
+  },
+  "exp_lbl_label": {
+    "label": "EXPLORER — labels block: small label",
+    "type": "string"
+  },
+  "exp_lbl_h2": {
+    "label": "EXPLORER — labels block: heading",
+    "type": "string"
+  },
+  "exp_lbl_p": {
+    "label": "EXPLORER — labels block: what a group says",
+    "type": "text"
+  },
+  "exp_lbl_totals": {
+    "label": "EXPLORER — labels block: IARC's totals and the list date",
+    "type": "text"
+  },
+  "exp_lbl_more": {
+    "label": "EXPLORER — labels block: link to the label table",
+    "type": "string"
+  },
+  "exp_lbl_iarc": {
+    "label": "EXPLORER — labels block: link to IARC's list",
+    "type": "string"
   }
 }

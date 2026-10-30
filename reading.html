@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How to read health evidence — EpiDetective</title>
-<meta name="description" content="Six ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, the range around an estimate, what “no evidence” means, and populations and people.">
+<meta name="description" content="Seven ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, chance and bias, the range around an estimate, what “no evidence” means, and populations and people. With a worked example and the labels of both tools side by side.">
 <link rel="canonical" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/reading.html">
@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/reading.html">
 <meta property="og:title" content="How to read health evidence — EpiDetective">
-<meta property="og:description" content="Six ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, the range around an estimate, what “no evidence” means, and populations and people.">
+<meta property="og:description" content="Seven ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, chance and bias, the range around an estimate, what “no evidence” means, and populations and people. With a worked example and the labels of both tools side by side.">
 <meta property="og:image" content="https://epidetective.com/assets/og.png">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How to read health evidence — EpiDetective">
-<meta name="twitter:description" content="Six ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, the range around an estimate, what “no evidence” means, and populations and people.">
+<meta name="twitter:description" content="Seven ideas that make a health headline easier to weigh: hazard and risk, relative and absolute risk, association and cause, chance and bias, the range around an estimate, what “no evidence” means, and populations and people. With a worked example and the labels of both tools side by side.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
@@ -52,55 +52,172 @@
   <div class="wrap">
     <div class="crumb"><a href="index.html">EpiDetective</a> &middot;
       <span>Reading the evidence</span></div>
-    <h1>Six ideas that make health evidence <b>readable</b>.</h1>
+    <h1>Seven ideas that make health evidence <b>readable</b>.</h1>
     <p class="lede" style="margin-top:24px">Every number in the tools on this site rests on a few ideas from epidemiology. None of them needs mathematics. Read them once and a health headline becomes much easier to weigh.</p>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="reads" style="margin-top:0">
-    <div class="read">
+    <div class="read" id="hazard">
       <div class="tag">Hazard and risk</div>
       <div>
-        <h3>A hazard is something that can cause harm. Risk is how likely the harm is.</h3>
+        <h2>A hazard is something that can cause harm. Risk is how likely the harm is.</h2>
         <p>Sunlight, alcohol and asbestos are all hazards: each can cause cancer. How likely that is for any one person depends on how much, for how long and at what age. The IARC Monographs identify hazards and leave the size of the risk to other studies.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Solar%20radiation">Sunlight (UV radiation)</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Alcoholic%20beverages">Alcoholic drinks</a>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Asbestos%20%28all%20forms%29">Asbestos</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="relative-absolute">
       <div class="tag">Relative and absolute risk</div>
       <div>
-        <h3>“Twice the risk” means little until you know twice what.</h3>
+        <h2>“Twice the risk” means little until you know twice what.</h2>
         <p>A relative risk compares two groups. An absolute risk says how many people are affected. Doubling a risk of 1 in 10,000 adds one case among 10,000 people; a 10% rise in a risk of 1 in 10 adds a hundred among the same 10,000. Ask for both numbers.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=en#how">Two numbers, and what each one means</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="association-cause">
       <div class="tag">Association and cause</div>
       <div>
-        <h3>Two things can rise together without one causing the other.</h3>
+        <h2>Two things can rise together without one causing the other.</h2>
         <p>People who carry a lighter develop more lung cancer, and the lighter is innocent: smoking explains both. Epidemiologists call this confounding. Before they call a link causal, they look for the same result across many studies, for more disease where there is more exposure, and for the exposure coming first.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Tobacco%20smoking">Tobacco smoking</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="chance-bias">
+      <div class="tag">Chance and bias</div>
+      <div>
+        <h2>A result can come from luck, or lean one way because of how the study was run.</h2>
+        <p><b>Chance.</b> Every study looks at a sample of people, and a small sample can show a link, or hide one, by luck alone. Toss a fair coin ten times and you get seven heads or more about one time in six; toss it a thousand times and the share of heads stays close to half. That is why one small study rarely settles a question.</p>
+        <p><b>Bias.</b> A study can lean one way because of how it was run. The Interphone study asked people to recall their past mobile phone use, and heavy users tended to overestimate theirs. IARC said chance or bias may explain the higher risk of glioma, a brain tumour, seen in the heaviest users.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Radiofrequency%20electromagnetic%20fields%20%28glioma%2C%20acoustic%20neuroma%29">Radiofrequency fields (e.g. mobile phones)</a></p>
+      </div>
+    </div>
+    <div class="read" id="range">
       <div class="tag">The range around a number</div>
       <div>
-        <h3>Every estimate comes with a range, and the range is part of the result.</h3>
+        <h2>Every estimate comes with a range, and the range is part of the result.</h2>
         <p>A study might report a relative risk of 1.2 with a 95% confidence interval from 0.9 to 1.6. The data fit a small increase, and they fit no effect at all just as well, because the interval includes 1. A narrow interval from a large study deserves more weight than a wide one from a small study.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/chronic/?lang=en#link=red_meat%7Cchd">Unprocessed red meat and coronary heart disease</a></p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="no-evidence">
       <div class="tag">No evidence, and evidence of no effect</div>
       <div>
-        <h3>“We could not tell” and “it is safe” are two different findings.</h3>
+        <h2>“We could not tell” and “it is safe” are two different findings.</h2>
         <p>When IARC places an agent in Group 3, “not classifiable”, the studies were usually too few or too weak to decide either way. That describes the state of the evidence. Group 3 is also used when strong evidence shows that the way an agent causes cancer in animals does not operate in people, and nothing else supports a higher group. Since the 2019 Preamble, IARC no longer has a Group 4 (“probably not carcinogenic”), and agents that would once have gone there now go in Group 3. Showing that something is safe takes large, careful studies that looked for harm and found none.</p>
       </div>
     </div>
-    <div class="read">
+    <div class="read" id="populations">
       <div class="tag">Populations and people</div>
       <div>
-        <h3>These numbers describe groups. They cannot explain one person’s illness.</h3>
+        <h2>These numbers describe groups. They cannot explain one person’s illness.</h2>
         <p>A risk factor shifts the odds across thousands of people. Most people with a given exposure never develop the disease, and some people without it do. For anything about your own health, ask the people treating you.</p>
+        <p class="see"><span class="k">See the evidence</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=en#cancer=Lung">Lung cancer</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec wrap ex" id="worked-example">
+  <div class="sec-head">
+    <div class="label">Worked example</div>
+    <h2>One headline, read with <b>the seven ideas</b>.</h2>
+  </div>
+  <p class="ex-head">“Processed meat causes cancer, says WHO”</p>
+  <p class="lede">Headlines like this one followed IARC’s evaluation of red and processed meat in October 2015. Here is the same news, read with each idea in turn.</p>
+  <ol class="ex-steps">
+    <li><span class="tag">Hazard and risk</span><p>IARC placed processed meat in Group 1, its most certain group, because the evidence in people is sufficient for bowel cancer. That answers whether it can cause cancer. How much it raises the risk is a separate question.</p></li>
+    <li><span class="tag">Relative and absolute risk</span><p>The tool’s entry says: “Each 50 grams eaten every day raises the risk of bowel cancer by 18%.” That is a relative risk. Tobacco smoking is in Group 1 too, and its entry gives absolute numbers: “In European data, about 10 to 12 in 100 smokers get lung cancer by age 75, compared with 4 to 5 in 1,000 lifelong non-smokers.” Same certainty, very different size.</p></li>
+    <li><span class="tag">Association and cause</span><p>People who eat a lot of processed meat may also differ in other ways, for example in how much they smoke or exercise. A verdict of sufficient evidence means IARC’s Working Group judged, with reasonable confidence, that such differences do not explain the link.</p></li>
+    <li><span class="tag">Chance and bias</span><p>The same verdict means chance and bias were ruled out with reasonable confidence too. That judgement weighs the whole body of studies. A single small study could not carry it.</p></li>
+    <li><span class="tag">The range around a number</span><p>The 18% is a central estimate from pooled studies, and like every estimate it comes with a range. Ask for the range before you weigh the number: if it includes no effect, the data also fit no rise at all.</p></li>
+    <li><span class="tag">No evidence, and evidence of no effect</span><p>IARC’s verdict covers processed meat and, in Group 2A, red meat. Other foods were outside this evaluation, so the headline says nothing about whether they are safe.</p></li>
+    <li><span class="tag">Populations and people</span><p>These figures describe large groups. They cannot tell anyone whether a particular bowel cancer came from eating ham. Most people who eat processed meat never get bowel cancer, and some who never eat it do.</p></li>
+  </ol>
+  <p class="see"><span class="k">See the evidence</span>
+    <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat">Processed meat</a>
+    <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Tobacco%20smoking">Tobacco smoking</a></p>
+</section>
+
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">What the labels mean</div>
+    <h2>The labels in both tools, <b>side by side</b>.</h2>
+  </div>
+  <p class="lede">The two tools answer “how sure is the evidence?” with three sets of labels. For each label, the table says what it claims, what it leaves open and the official term behind it.</p>
+  <div class="tbl-wrap" role="region" tabindex="0" aria-labelledby="lbl-h">
+    <table class="lbl-table">
+      <caption id="lbl-h" class="vh">What the labels mean</caption>
+      <colgroup><col class="c-label"><col class="c-says"><col class="c-not"><col class="c-term"></colgroup>
+      <thead>
+        <tr><th scope="col">Label</th><th scope="col">What it says</th>
+            <th scope="col">What it does not say</th><th scope="col">Official term</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Cancer Evidence Explorer</span> How sure IARC is that an agent can cause cancer</span></th></tr>
+        <tr><th scope="row"><span class="sw g1" aria-hidden="true"></span>Known cause</th>
+            <td>The agent can cause cancer in people. This is the group in which IARC is most certain.</td><td>How large the risk is, or at what dose. Processed meat and tobacco smoking are both in Group 1, with very different risks.</td><td>Carcinogenic to humans (Group 1)</td></tr>
+        <tr><th scope="row"><span class="sw g2a" aria-hidden="true"></span>Probable cause</th>
+            <td>The agent probably causes cancer in people. The evidence falls short of Group 1, most often because the studies in people are limited.</td><td>That it causes cancer at the levels people usually meet, or how large any risk is.</td><td>Probably carcinogenic to humans (Group 2A)</td></tr>
+        <tr><th scope="row"><span class="sw g2b" aria-hidden="true"></span>Possible cause</th>
+            <td>The agent may cause cancer in people. One kind of evidence points that way, such as limited evidence in people or sufficient evidence in animals.</td><td>That it probably causes cancer, or that people exposed to it are at risk.</td><td>Possibly carcinogenic to humans (Group 2B)</td></tr>
+        <tr><th scope="row"><span class="sw g3" aria-hidden="true"></span>Not classifiable</th>
+            <td>The evidence does not meet the rules for any other group, usually because there is too little of it.</td><td>That it is safe. Group 3 describes the state of the evidence.</td><td>Not classifiable as to its carcinogenicity to humans (Group 3)</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Cancer Evidence Explorer</span> What studies in people show for one cancer</span></th></tr>
+        <tr><th scope="row"><span class="ln est" aria-hidden="true"></span>Established link</th>
+            <td>Studies in people show that it causes this cancer. Chance, bias and confounding were ruled out with reasonable confidence.</td><td>How large the risk is, or whether it caused a particular person’s cancer.</td><td>Sufficient evidence of carcinogenicity in humans</td></tr>
+        <tr><th scope="row"><span class="ln sus" aria-hidden="true"></span>Suspected link</th>
+            <td>Studies in people show a link with this cancer, and a causal link is credible. Chance, bias or confounding could not be ruled out.</td><td>That it causes this cancer. More research may confirm the link or rule it out.</td><td>Limited evidence of carcinogenicity in humans</td></tr>
+      </tbody>
+      <tbody>
+        <tr class="grp"><th colspan="4"><span class="gh"><span class="tool">Chronic Disease Evidence Explorer</span> How sure the evidence is that a risk factor causes a disease</span></th></tr>
+        <tr><th scope="row"><span class="sw strong" aria-hidden="true"></span>Strong</th>
+            <td>Different kinds of evidence agree that this is a cause, and a reversal is unlikely.</td><td>How large the effect is. A Strong link can carry a small effect; the estimate in the panel gives the size.</td>
+            <td rowspan="5">No official term. These five grades belong to the Chronic Disease Evidence Explorer, which defines them in its framework. None of them is an IARC category.
+              <a class="term-link" href="chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">Framework, section 3.1 &rarr;</a></td></tr>
+        <tr><th scope="row"><span class="sw moderate" aria-hidden="true"></span>Moderate</th>
+            <td>Probably a cause: studies agree and show a gradient or a known mechanism, but one strand of proof is still missing.</td><td>That the question is settled. The missing strand of proof could confirm the link or overturn it.</td></tr>
+        <tr><th scope="row"><span class="sw suggestive" aria-hidden="true"></span>Suggestive</th>
+            <td>A consistent association, but confounding or reverse causation has not been ruled out.</td><td>That the factor causes the disease. Another factor, or an early stage of the disease itself, may explain the link.</td></tr>
+        <tr><th scope="row"><span class="sw weak" aria-hidden="true"></span>Weak</th>
+            <td>A signal from few, inconsistent or bias-prone studies. It may not hold up.</td><td>That the factor has no effect. The studies are too few, too inconsistent or too prone to bias to say much either way.</td></tr>
+        <tr><th scope="row"><span class="sw conflicting" aria-hidden="true"></span>Conflicting</th>
+            <td>Good evidence points in opposite directions, often observational studies against trials or genetic studies.</td><td>Which side is right. The panel shows which kinds of study point which way.</td></tr>
+        <tr class="old"><th scope="row">Older names</th>
+            <td>Convincing → Strong · Probable → Moderate · Limited → Weak · Contested → Conflicting. Suggestive kept its name.</td><td>That a link kept its grade. Version 2.0 also re-graded some links, and the change log lists each one.</td><td>Names used until version 2.0, published on 23 October 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lbl-note">A hazard says whether something can cause harm. A hazard ratio is a study’s number comparing how fast harm happens in two groups. The words look alike and mean different things.</p>
+</section>
+
+<section class="sec wrap" id="go-further">
+  <div class="sec-head">
+    <div class="label">Go further</div>
+    <h2>Read further, and <b>test yourself</b>.</h2>
+  </div>
+  <ul class="more-list">
+    <li><a href="https://monographs.iarc.who.int/iarc-monographs-preamble-preamble-to-the-iarc-monographs/" rel="noopener"><b>The IARC Monographs Preamble</b> (amended January 2019): the rules IARC follows to weigh the evidence and assign its groups.</a></li>
+    <li><a href="https://miguelhernan.org/whatifbook" rel="noopener"><b>Causal Inference: What If</b>, by Miguel A. Hernán and James M. Robins (2020): a free textbook on telling cause from association.</a></li>
+  </ul>
+  <h3 class="quiz-h">Five questions to test yourself</h3>
+  <p class="quiz-hint">Think of an answer first, then open the question to compare.</p>
+  <div class="quiz">
+    <details><summary>Sunlight and processed meat are both in IARC’s Group 1. Are they equally dangerous?</summary><p>No. Group 1 says the evidence that each can cause cancer is equally sure. How much each one raises the risk is a separate question, and the answers differ widely.</p></details>
+    <details><summary>A headline says a food “doubles the risk” of a rare cancer. What do you need to know before you worry?</summary><p>How common the cancer is to begin with. Doubling a risk of 1 in 10,000 adds one case among 10,000 people.</p></details>
+    <details><summary>Towns that sell more ice cream have more drownings. Does ice cream cause drowning?</summary><p>No. Hot weather brings both: people eat more ice cream and swim more. A third factor that drives two things at once is called a confounder.</p></details>
+    <details><summary>A study reports a relative risk of 1.3, with a 95% confidence interval from 0.8 to 2.1. Has it shown that the risk goes up?</summary><p>No. The interval includes 1, so the data also fit no change in risk. A larger study would narrow the range.</p></details>
+    <details><summary>IARC places an agent in Group 3, “not classifiable”. Can you say it is safe?</summary><p>No. Group 3 means the evidence was too limited to decide. Showing that something is safe takes large studies that looked for harm and found none.</p></details>
   </div>
 </section>
 
@@ -109,8 +226,8 @@
     <div class="label">Now use them</div>
     <h2 style="margin:14px 0 0">Open a tool and <b>read the evidence</b> for yourself.</h2>
     <div class="inst-actions" style="margin-top:30px">
-      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/">Cancer Evidence Explorer &rarr;</a>
-      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/">Chronic Disease Evidence Explorer &rarr;</a>
+      <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=en">Cancer Evidence Explorer &rarr;</a>
+      <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/?lang=en">Chronic Disease Evidence Explorer &rarr;</a>
       <a class="btn btn-ghost" href="games.html">Cancer awareness games &rarr;</a>
     </div>
   </div>
@@ -129,6 +246,7 @@
         <a href="games.html">Cancer awareness games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
+        <a href="how-we-check.html">How we check</a>
       </nav>
     </div>
     <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>
