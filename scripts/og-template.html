@@ -1,0 +1,279 @@
+<!doctype html>
+<!--
+  Share-image template: one 1200x630 card, filled by window.renderCard(card).
+
+  scripts/make_og.mjs serves design/ on a private port, opens this file there
+  and calls renderCard() once per card, then screenshots #card. Open it through
+  a server rooted at design/ (the fonts, the network art and the game images are
+  root-relative: /assets/...), for example `python3 -m http.server` inside design/
+  and http://localhost:8000/scripts/og-template.html . With no data it shows a
+  sample card.
+
+  Look: the site's own. Ink on laboratory paper, Literata for the wordmark and
+  the title, IBM Plex Mono for the labels. The only colour is the faint
+  network behind the title (as on the site's hero) and, on the games card, the
+  games' own scenes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>EpiDetective share card</title>
+<style>
+/* The same faces the site self-hosts (site.css). */
+@font-face{font-family:"Literata";src:url(/assets/literata-latin.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:block;
+           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Literata";src:url(/assets/literata-latin-italic.woff2) format("woff2");
+           font-weight:400 800;font-style:italic;font-display:block;
+           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Literata";src:url(/assets/literata-latinext.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:block;
+           unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Literata";src:url(/assets/literata-cyr.woff2) format("woff2");
+           font-weight:400 800;font-style:normal;font-display:block;
+           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Literata";src:url(/assets/literata-cyr-italic.woff2) format("woff2");
+           font-weight:400 800;font-style:italic;font-display:block;
+           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"PlexMono";src:url(/assets/plexmono-400.woff2) format("woff2");
+           font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:"PlexMono";src:url(/assets/plexmono-600.woff2) format("woff2");
+           font-weight:600;font-style:normal;font-display:block}
+
+:root{
+  --chalk:#F5F4F0; --chalk-deep:#EBEAE3;
+  --ink:#161713; --ink-soft:#454740; --ink-faint:#6B6E65;
+  --rule:rgba(22,23,19,.14);
+  --display:"Literata",Georgia,serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
+  --mono:"PlexMono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --track:-.012em;
+  --padx:72px;       /* left and right margin of every text block */
+  --hd:96px;         /* header band */
+  --ft:140px;        /* footer band */
+}
+/* Chinese: the site's own stacks. Han glyphs carry weight at a smaller size
+   than Latin and take no tracking. */
+html[lang^="zh"]{
+  --display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","Hiragino Sans GB",serif;
+  --body:"PingFang SC","Noto Sans SC","Source Han Sans SC","Hiragino Sans GB",sans-serif;
+  --track:0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:1200px;height:630px;overflow:hidden;background:var(--chalk)}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* make_og.mjs hides the text to find, from the pixels, where the text really is */
+body.notext .mark,body.notext .dom,body.notext .kick,body.notext .t,body.notext .pers,body.notext .src{visibility:hidden}
+
+#card{position:relative;width:1200px;height:630px;overflow:hidden;background:var(--chalk);
+      color:var(--ink);font-family:var(--body)}
+
+/* header band: the wordmark and the address, as in the site's header */
+.hd{position:absolute;left:0;right:0;top:0;height:var(--hd);z-index:4;background:var(--chalk);
+    border-bottom:1px solid var(--rule);padding:0 var(--padx);
+    display:flex;align-items:center;justify-content:space-between}
+/* the wordmark stays Latin in every language: it is the brand */
+.mark{font-family:"Literata",Georgia,serif;font-size:50px;line-height:1;font-weight:700;
+      letter-spacing:-.01em;white-space:nowrap}
+.mark span{font-weight:450;font-style:italic}
+.dom{font-family:var(--mono);font-size:22px;line-height:1;letter-spacing:.02em;color:var(--ink-faint);
+     white-space:nowrap}
+
+/* the network behind the title: the site's hero art, framed by the two bands */
+.net{position:absolute;left:0;right:0;top:calc(var(--hd) + 1px);bottom:calc(var(--ft) + 1px);
+     z-index:0;overflow:hidden}
+.net .art{position:absolute;inset:0;background-repeat:no-repeat;background-position:right -4% center;
+          background-size:auto 150%;opacity:.42}
+.net .veil{position:absolute;inset:0;
+           background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.97) 36%,
+                      rgba(245,244,240,.58) 64%,rgba(245,244,240,.12) 100%)}
+#card[data-art="cancer"] .net .art{background-image:url(/assets/network.svg)}
+#card[data-art="chronic"] .net .art{background-image:url(/assets/chronic-network.svg);
+                                    background-size:auto 142%;background-position:right -7% center;opacity:.55}
+#card[data-art="none"] .net,#card[data-art="games"] .net{display:none}
+
+/* title block */
+.main{position:absolute;left:var(--padx);right:var(--padx);top:calc(var(--hd) + 1px);
+      bottom:calc(var(--ft) + 1px);z-index:2;display:flex;flex-direction:column;justify-content:center}
+.kick{font-family:var(--mono);font-weight:600;font-size:24px;line-height:1.25;letter-spacing:.09em;
+      text-transform:uppercase;color:var(--ink-faint);margin:0 0 20px}
+.kick:empty{display:none}
+html[lang^="zh"] .kick{letter-spacing:.04em;font-family:var(--body);font-size:26px;text-transform:none}
+h1.t{font-family:var(--display);font-weight:450;letter-spacing:var(--track);line-height:1.07;margin:0;
+     text-wrap:balance;overflow-wrap:normal;word-break:normal;max-width:900px;color:var(--ink)}
+h1.t i{font-style:italic;font-weight:inherit}
+h1.t.keep i{white-space:nowrap}                 /* the emphasised words stay on one line when they can */
+html[lang^="zh"] h1.t{line-height:1.22;text-wrap:pretty;font-weight:400}
+html[lang^="zh"] h1.t i{font-style:normal;font-weight:700}
+
+/* the games card: the three scenes in a row under the title */
+.row{display:none;margin-top:26px;gap:24px}
+#card[data-art="games"] .row{display:flex}
+.row img{display:block;width:336px;height:189px;flex:none;border:1px solid rgba(22,23,19,.22);
+         background:var(--chalk-deep);box-shadow:0 8px 20px rgba(22,23,19,.12)}
+
+/* footer band: who made it, and where the data come from */
+.ft{position:absolute;left:0;right:0;bottom:0;height:var(--ft);z-index:4;background:var(--chalk);
+    border-top:1px solid var(--rule);padding:0 var(--padx);
+    display:flex;flex-direction:column;justify-content:center;gap:10px}
+.pers{font-size:34px;line-height:1.2;color:var(--ink);font-weight:500}
+.src{font-family:var(--mono);font-size:21px;line-height:1.3;letter-spacing:.05em;text-transform:uppercase;
+     color:var(--ink-faint)}
+.src:empty{display:none}
+html[lang^="zh"] .src{font-family:var(--body);font-size:25px;letter-spacing:.02em;text-transform:none}
+</style>
+</head>
+<body>
+<div id="card" data-art="cancer">
+  <div class="net" aria-hidden="true"><div class="art"></div><div class="veil"></div></div>
+  <header class="hd">
+    <div class="mark">Epi<span>Detective</span></div>
+    <div class="dom" id="dom">epidetective.com</div>
+  </header>
+  <main class="main">
+    <div class="kick" id="kick"></div>
+    <h1 class="t keep" id="title">What causes cancer and other chronic diseases, and <i>how sure the evidence is</i></h1>
+    <div class="row" id="row" aria-hidden="true"></div>
+  </main>
+  <footer class="ft">
+    <div class="pers" id="pers">A personal project by Wenxin Wan</div>
+    <div class="src" id="src">Data: IARC Monographs, published reviews and meta-analyses</div>
+  </footer>
+</div>
+<script>
+/* renderCard(card) fills the template and fits the title. card:
+     lang      html lang (en, zh, fr, es, ru)
+     art       cancer | chronic | games | none
+     kicker    small label above the title (may be empty)
+     title     HTML; <i> marks the emphasised words, <br> a line break
+     personal  text of the personal-project line
+     source    text of the data-source line (may be empty)
+     domain    address shown top right
+     maxSize   largest title size to try (default 88)
+     capMulti  largest size for a title of three lines or more (default 74)
+     maxLines  most lines the title may take (default 4)
+     air       space kept above and below the block, px (default 36)
+     titleMax  width of the title box in px (default 900)
+     row       for art "games": three image URLs shown under the title
+   It resolves with the measurements make_og.mjs checks. */
+(function () {
+  var TITLE_MIN = 52;
+
+  function $(id) { return document.getElementById(id); }
+
+  function rect(el) {
+    var r = el.getBoundingClientRect();
+    return { x: r.left, y: r.top, w: r.width, h: r.height, r: r.right, b: r.bottom };
+  }
+
+  function lineCount(el) {
+    var range = document.createRange(), tops = [];
+    range.selectNodeContents(el);
+    var rs = range.getClientRects();
+    for (var i = 0; i < rs.length; i++) {
+      if (!rs[i].width) continue;
+      var t = Math.round(rs[i].top), seen = false;
+      for (var k = 0; k < tops.length; k++) if (Math.abs(tops[k] - t) < Math.max(8, rs[i].height * 0.45)) { seen = true; break; }
+      if (!seen) tops.push(t);
+    }
+    return tops.length;
+  }
+
+  function loadFonts(card) {
+    var jobs = [];
+    var text = (card.title || '').replace(/<[^>]+>/g, '') + (card.kicker || '') + (card.personal || '') + (card.source || '');
+    ['400', '450', '700'].forEach(function (w) {
+      jobs.push(document.fonts.load(w + ' 40px Literata', text + 'EpiDetective'));
+      jobs.push(document.fonts.load('italic ' + w + ' 40px Literata', text + 'EpiDetective'));
+    });
+    jobs.push(document.fonts.load('400 20px PlexMono', text + 'epidetective.com'));
+    jobs.push(document.fonts.load('600 20px PlexMono', text));
+    return Promise.all(jobs).then(function () { return document.fonts.ready; });
+  }
+
+  window.renderCard = function (card) {
+    var root = document.documentElement, el = $('card'), t = $('title'), row = $('row');
+    root.lang = card.lang || 'en';
+    el.setAttribute('data-art', card.art || 'cancer');
+    $('kick').textContent = card.kicker || '';
+    t.innerHTML = card.title;
+    t.style.maxWidth = (card.titleMax || 900) + 'px';
+    $('pers').textContent = card.personal || '';
+    $('src').textContent = card.source || '';
+    $('dom').textContent = card.domain || 'epidetective.com';
+
+    row.innerHTML = '';
+    var loads = [];
+    if (card.art === 'games' && card.row) {
+      card.row.forEach(function (src) {
+        var im = new Image();
+        im.alt = '';
+        loads.push(new Promise(function (ok) { im.onload = im.onerror = ok; }));
+        im.src = src;
+        row.appendChild(im);
+      });
+    }
+
+    return Promise.all([loadFonts(card), Promise.all(loads)]).then(function () {
+      var main = document.querySelector('.main'), mr = rect(main);
+      var maxBlock = mr.h - (card.air || 36) * 2;  /* air above and below the block */
+      var maxLines = card.maxLines || 4;
+      var lo = TITLE_MIN, hi = card.maxSize || 88;
+      if (/^zh/.test(root.lang)) hi = Math.min(hi + 6, 92);
+
+      function blockHeight() {
+        var h = rect(t).h;
+        if ($('kick').textContent) h += rect($('kick')).h + 20;
+        if (card.art === 'games') h += rect(row).h + 26;
+        return h;
+      }
+      function fitsAt(size) {
+        t.style.fontSize = size + 'px';
+        return lineCount(t) <= maxLines && blockHeight() <= maxBlock && t.scrollWidth <= t.clientWidth + 1;
+      }
+      /* largest size that fits; first with the emphasised words kept whole, then without */
+      function search() {
+        for (var s = hi; s >= lo; s -= 1) if (fitsAt(s)) return s;
+        return 0;
+      }
+      t.classList.add('keep');
+      var size = search();
+      if (size < 60) { t.classList.remove('keep'); var s2 = search(); if (s2 > size) size = s2; else t.classList.add('keep'); }
+      var fits = size > 0;
+      if (!fits) size = lo;
+      t.style.fontSize = size + 'px';
+      var lines = lineCount(t);
+      /* a title of three or more lines is set a little smaller, for air */
+      var cap = card.capMulti || 74;
+      if (lines >= 3 && size > cap) { size = cap; t.style.fontSize = size + 'px'; lines = lineCount(t); }
+
+      return new Promise(function (done) {
+        requestAnimationFrame(function () { requestAnimationFrame(function () {
+          done({
+            size: size, lines: lines, fits: fits, keep: t.classList.contains('keep'),
+            titleBox: rect(t), titleScrollW: t.scrollWidth, titleClientW: t.clientWidth,
+            main: rect(main),
+            row: Array.prototype.map.call(row.querySelectorAll('img'), function (im) {
+              var r = rect(im); r.ok = im.complete && im.naturalWidth > 0; return r; }),
+            fonts: Array.from(document.fonts).filter(function (f) { return f.status === 'loaded'; })
+                        .map(function (f) { return f.family + ' ' + f.style + ' ' + f.weight + ' ' + String(f.unicodeRange).slice(0, 18); })
+          });
+        }); });
+      });
+    });
+  };
+
+  /* with no host script: show the sample that is in the markup */
+  window.addEventListener('load', function () {
+    if (!window.__host) window.renderCard({
+      lang: 'en', art: 'cancer', kicker: '',
+      title: 'What causes cancer and other chronic diseases, and <i>how sure the evidence is</i>',
+      personal: 'A personal project by Wenxin Wan',
+      source: 'Data: IARC Monographs, published reviews and meta-analyses', domain: 'epidetective.com'
+    });
+  });
+})();
+</script>
+</body>
+</html>

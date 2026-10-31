@@ -9,6 +9,7 @@
   --shadow:0 1px 2px rgba(22,23,19,.06),0 10px 30px rgba(22,23,19,.10);
   --shadow-sm:0 1px 2px rgba(22,23,19,.06),0 4px 12px rgba(22,23,19,.08);
   --display:"Literata",Georgia,"Times New Roman",serif;--body:-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;
+  --gx-h:40px;
   --fs:1rem;
 }
 *{box-sizing:border-box}
@@ -41,12 +42,13 @@ p{margin:0 0 .8em}
 .file-tab .kicker{color:var(--paper);margin:0;opacity:.9}
 
 /* ---- screens */
-.screen{min-height:100vh}
+.screen{min-height:calc(100vh - var(--gx-h))}
 .screen[hidden]{display:none}
-.title{display:grid;grid-template-columns:1fr;gap:28px;padding:clamp(20px,5vw,56px);align-items:center;max-width:1280px;margin:0 auto}
+.title{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;padding:clamp(20px,5vw,56px);align-items:center;max-width:1280px;margin:0 auto}
 @media(min-width:900px){.title{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
 .title-card{max-width:60ch}
 .title h1{font-size:clamp(2.5rem,5vw,3.9rem);margin:.15em 0 .3em;white-space:nowrap}
+@media(max-width:420px){.title h1{white-space:normal}}
 .lede{font-size:1.1rem;color:var(--ink-soft);max-width:52ch}
 .title-actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
 .title-art{aspect-ratio:800/560;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:var(--sky);position:relative}
@@ -83,7 +85,9 @@ p{margin:0 0 .8em}
 .dots-card{position:relative;margin:-18px 14px 0;background:var(--chalk);border-radius:14px;padding:12px 14px 10px;box-shadow:0 -6px 18px rgba(22,23,19,.06),0 1px 0 rgba(22,23,19,.05);border:1px solid var(--rule)}
 .dots-card::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:1px;background:var(--rule)}
 .town .dots-card{margin-bottom:14px}
-.dots-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.dots-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 12px;margin-bottom:8px}
+.dots-sub{display:flex;flex-direction:column;align-items:flex-end;gap:1px;text-align:right}
+.dots-sub .fine{font-size:.78rem;line-height:1.35}
 .dots-head .kicker{margin:0}
 .dots-title{font-size:.95rem;margin:0;color:var(--ink-soft);font-weight:500}
 .dots{border-radius:10px;background:var(--paper);padding:8px;border:1px solid var(--rule)}
@@ -215,7 +219,7 @@ p{margin:0 0 .8em}
 .steps{padding-left:1.3em;color:var(--ink-soft)}
 .steps li{margin-bottom:.6em}
 .opt{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule)}
-.opt input{width:18px;height:18px}
+.opt input{width:24px;height:24px}
 .about h3{font-size:1.1rem;margin:1.1em 0 .4em}
 .about p{color:var(--ink-soft)}
 .formula{font-family:var(--mono);font-size:.82rem;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:10px 12px;margin:8px 0;overflow:auto;color:var(--ink)}
@@ -250,3 +254,14 @@ p{margin:0 0 .8em}
 .yard tbody tr:last-child .you{border-radius:0 0 10px 10px}
 @media(max-width:560px){.yard th,.yard td{padding:8px 6px}.yard tbody td{font-size:.92rem}}
 h2[tabindex="-1"]:focus{outline:none}
+
+/* ---- links to the rest of EpiDetective: the games page above every screen, the evidence for adults under the title and the report */
+.gx-nav{display:flex;align-items:center;min-height:var(--gx-h);padding:0 clamp(12px,3vw,28px)}
+.gx-nav a{display:inline-flex;align-items:center;min-height:32px;padding:0 4px;margin-left:-4px;color:var(--ink-soft);font-size:.88rem;font-weight:600;text-decoration:none}
+.gx-nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.gx-nav a:focus-visible,.adults a:focus-visible{outline:3px solid var(--probable);outline-offset:2px}
+.adults{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center;margin:8px 0 0;font-size:.92rem}
+.adults a{display:inline-flex;align-items:center;min-height:32px;color:var(--ink);font-weight:600;text-underline-offset:3px}
+.adults .adults-more{color:var(--ink-soft);font-weight:500}
+.report-card .adults{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+@media(max-width:480px){.dots-sub{align-items:flex-start;text-align:left}}

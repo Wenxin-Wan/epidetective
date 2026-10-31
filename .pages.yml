@@ -34,6 +34,9 @@ content:
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
+      - name: "skip_link"
+        label: "ALL PAGES — skip link for keyboard users (Skip to content)"
+        type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
@@ -49,11 +52,119 @@ content:
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
+      - name: "home_personal"
+        label: "HOME — Personal-project line under the headline"
+        type: text
       - name: "home_audience"
         label: "HOME — Audience line (bold)"
         type: string
-      - name: "home_lede"
-        label: "HOME — Description"
+      - name: "search_label"
+        label: "SEARCH — label above the box"
+        type: string
+      - name: "search_placeholder"
+        label: "SEARCH — hint inside the box (no straight double quote, no &)"
+        type: string
+      - name: "search_try"
+        label: "SEARCH — word before the three examples"
+        type: string
+      - name: "search_ex1"
+        label: "SEARCH — example 1 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex2"
+        label: "SEARCH — example 2 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex3"
+        label: "SEARCH — example 3 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_group_cancer"
+        label: "SEARCH — results heading: cancer tool"
+        type: string
+      - name: "search_group_chronic"
+        label: "SEARCH — results heading: chronic tool"
+        type: string
+      - name: "search_group_site"
+        label: "SEARCH — results heading: pages on this site"
+        type: string
+      - name: "search_none"
+        label: "SEARCH — message when nothing is found"
+        type: string
+      - name: "search_loading"
+        label: "SEARCH — message while the index loads"
+        type: string
+      - name: "search_lbl_group_1"
+        label: "SEARCH — result label: IARC Group 1"
+        type: string
+      - name: "search_lbl_group_2A"
+        label: "SEARCH — result label: IARC Group 2A"
+        type: string
+      - name: "search_lbl_group_2B"
+        label: "SEARCH — result label: IARC Group 2B"
+        type: string
+      - name: "search_lbl_group_3"
+        label: "SEARCH — result label: IARC Group 3"
+        type: string
+      - name: "search_lbl_eval"
+        label: "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})"
+        type: string
+      - name: "search_lbl_links"
+        label: "SEARCH — result label: number of links (keep {n})"
+        type: string
+      - name: "qa_label"
+        label: "HOME — Four questions: small heading"
+        type: string
+      - name: "qa_q1"
+        label: "HOME — Question 1 (aspartame)"
+        type: string
+      - name: "qa_a1"
+        label: "HOME — Answer 1: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go1"
+        label: "HOME — Answer 1: link to the entry"
+        type: string
+      - name: "qa_q2"
+        label: "HOME — Question 2 (processed meat and smoking)"
+        type: string
+      - name: "qa_k2"
+        label: "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a2"
+        label: "HOME — Answer 2: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go2"
+        label: "HOME — Answer 2: link to the entry"
+        type: string
+      - name: "qa_go2b"
+        label: "HOME — Answer 2: link to the reading guide (relative and absolute risk)"
+        type: string
+      - name: "qa_q3"
+        label: "HOME — Question 3 (job)"
+        type: string
+      - name: "qa_k3"
+        label: "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a3"
+        label: "HOME — Answer 3: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go3"
+        label: "HOME — Answer 3: link to Work and cancer"
+        type: string
+      - name: "qa_q4"
+        label: "HOME — Question 4 (stroke)"
+        type: string
+      - name: "qa_k4"
+        label: "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a4"
+        label: "HOME — Answer 4: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go4"
+        label: "HOME — Answer 4: link to the entry"
+        type: string
+      - name: "qa_from_cancer"
+        label: "HOME — Answers 1 to 3: where the quote comes from"
+        type: string
+      - name: "qa_from_chronic"
+        label: "HOME — Answer 4: where the quote comes from"
         type: string
       - name: "inst_label"
         label: "TOOLS — small section label"
@@ -81,6 +192,9 @@ content:
         type: string
       - name: "inst_t1_m4"
         label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst_t1_m5"
+        label: "Tool 1 — stat 5 (evaluated agents in search)"
         type: string
       - name: "inst_t1_btn_about"
         label: "Tool 1 — secondary button"
@@ -316,6 +430,12 @@ content:
       - name: "inst_cac_desc"
         label: "inst_cac_desc"
         type: string
+      - name: "code_home_label"
+        label: "HOME — Code card: small label"
+        type: string
+      - name: "code_home_btn"
+        label: "HOME — Code card: button"
+        type: string
       - name: "inst_t2_m5"
         label: "Tool 2 — stat 5 (sources and version)"
         type: string
@@ -323,7 +443,7 @@ content:
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
-        label: "nav_games"
+        label: "MENU — Games"
         type: string
       - name: "meta_games_title"
         label: "meta_games_title"
@@ -405,9 +525,6 @@ content:
         type: string
       - name: "games_shot_alt"
         label: "games_shot_alt"
-        type: string
-      - name: "games_shelf_label"
-        label: "games_shelf_label"
         type: string
       - name: "games_shelf_h2"
         label: "games_shelf_h2"
@@ -553,8 +670,20 @@ content:
       - name: "games_g3_shot_alt"
         label: "games_g3_shot_alt"
         type: string
+      - name: "games_adults"
+        label: "GAMES — link for adults: the evidence behind the game"
+        type: string
+      - name: "games_g1_card_alt"
+        label: "GAMES — card picture, described for screen readers: Sol"
+        type: text
+      - name: "games_g2_card_alt"
+        label: "GAMES — card picture, described for screen readers: The Lung Detective"
+        type: text
+      - name: "games_g3_card_alt"
+        label: "GAMES — card picture, described for screen readers: A Town of 1,000"
+        type: text
       - name: "home_games_label"
-        label: "home_games_label"
+        label: "HOME — Games section: small label"
         type: string
       - name: "home_games_h2"
         label: "home_games_h2"
@@ -565,9 +694,6 @@ content:
       - name: "home_games_more"
         label: "home_games_more"
         type: string
-      - name: "inst_chip_review"
-        label: "inst_chip_review"
-        type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
         type: string
@@ -575,7 +701,7 @@ content:
         label: "meta_reading_desc"
         type: string
       - name: "read_label"
-        label: "read_label"
+        label: "MENU and READING — Reading the evidence (menu entry, small label)"
         type: string
       - name: "read_h1"
         label: "read_h1"
@@ -652,8 +778,32 @@ content:
       - name: "read_home_btn"
         label: "read_home_btn"
         type: string
+      - name: "hwc_home_h2"
+        label: "HOME — How we check band: heading"
+        type: string
+      - name: "hwc_home_btn"
+        label: "HOME — How we check band: button"
+        type: string
+      - name: "news_label"
+        label: "HOME — What's new: small heading"
+        type: string
+      - name: "news_1"
+        label: "HOME — What's new: item 1 (date · text; shown second)"
+        type: text
+      - name: "news_2"
+        label: "HOME — What's new: item 2 (date · text; shown third)"
+        type: text
+      - name: "news_3"
+        label: "HOME — What's new: item 3, the newest (date · text; shown first)"
+        type: text
       - name: "foot_hwc"
         label: "FOOTER — How we check link"
+        type: string
+      - name: "foot_cite"
+        label: "FOOTER — How to cite link"
+        type: string
+      - name: "foot_report"
+        label: "FOOTER — Report an error link (also on the home page)"
         type: string
       - name: "about_hwc"
         label: "ABOUT — contact: link to How we check"
@@ -1113,6 +1263,9 @@ content:
         type: string
       - name: "read_see_processed"
         label: "READING — link: Processed meat (cancer tool name)"
+        type: string
+      - name: "read_see_coffee"
+        label: "READING — link: Coffee (cancer tool search, Group 3)"
         type: string
       - name: "read_ex_label"
         label: "READING — worked example: small label"
@@ -1247,6 +1400,9 @@ content:
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
+      - name: "skip_link"
+        label: "ALL PAGES — skip link for keyboard users (Skip to content)"
+        type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
@@ -1262,11 +1418,119 @@ content:
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
+      - name: "home_personal"
+        label: "HOME — Personal-project line under the headline"
+        type: text
       - name: "home_audience"
         label: "HOME — Audience line (bold)"
         type: string
-      - name: "home_lede"
-        label: "HOME — Description"
+      - name: "search_label"
+        label: "SEARCH — label above the box"
+        type: string
+      - name: "search_placeholder"
+        label: "SEARCH — hint inside the box (no straight double quote, no &)"
+        type: string
+      - name: "search_try"
+        label: "SEARCH — word before the three examples"
+        type: string
+      - name: "search_ex1"
+        label: "SEARCH — example 1 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex2"
+        label: "SEARCH — example 2 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex3"
+        label: "SEARCH — example 3 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_group_cancer"
+        label: "SEARCH — results heading: cancer tool"
+        type: string
+      - name: "search_group_chronic"
+        label: "SEARCH — results heading: chronic tool"
+        type: string
+      - name: "search_group_site"
+        label: "SEARCH — results heading: pages on this site"
+        type: string
+      - name: "search_none"
+        label: "SEARCH — message when nothing is found"
+        type: string
+      - name: "search_loading"
+        label: "SEARCH — message while the index loads"
+        type: string
+      - name: "search_lbl_group_1"
+        label: "SEARCH — result label: IARC Group 1"
+        type: string
+      - name: "search_lbl_group_2A"
+        label: "SEARCH — result label: IARC Group 2A"
+        type: string
+      - name: "search_lbl_group_2B"
+        label: "SEARCH — result label: IARC Group 2B"
+        type: string
+      - name: "search_lbl_group_3"
+        label: "SEARCH — result label: IARC Group 3"
+        type: string
+      - name: "search_lbl_eval"
+        label: "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})"
+        type: string
+      - name: "search_lbl_links"
+        label: "SEARCH — result label: number of links (keep {n})"
+        type: string
+      - name: "qa_label"
+        label: "HOME — Four questions: small heading"
+        type: string
+      - name: "qa_q1"
+        label: "HOME — Question 1 (aspartame)"
+        type: string
+      - name: "qa_a1"
+        label: "HOME — Answer 1: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go1"
+        label: "HOME — Answer 1: link to the entry"
+        type: string
+      - name: "qa_q2"
+        label: "HOME — Question 2 (processed meat and smoking)"
+        type: string
+      - name: "qa_k2"
+        label: "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a2"
+        label: "HOME — Answer 2: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go2"
+        label: "HOME — Answer 2: link to the entry"
+        type: string
+      - name: "qa_go2b"
+        label: "HOME — Answer 2: link to the reading guide (relative and absolute risk)"
+        type: string
+      - name: "qa_q3"
+        label: "HOME — Question 3 (job)"
+        type: string
+      - name: "qa_k3"
+        label: "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a3"
+        label: "HOME — Answer 3: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go3"
+        label: "HOME — Answer 3: link to Work and cancer"
+        type: string
+      - name: "qa_q4"
+        label: "HOME — Question 4 (stroke)"
+        type: string
+      - name: "qa_k4"
+        label: "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a4"
+        label: "HOME — Answer 4: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go4"
+        label: "HOME — Answer 4: link to the entry"
+        type: string
+      - name: "qa_from_cancer"
+        label: "HOME — Answers 1 to 3: where the quote comes from"
+        type: string
+      - name: "qa_from_chronic"
+        label: "HOME — Answer 4: where the quote comes from"
         type: string
       - name: "inst_label"
         label: "TOOLS — small section label"
@@ -1294,6 +1558,9 @@ content:
         type: string
       - name: "inst_t1_m4"
         label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst_t1_m5"
+        label: "Tool 1 — stat 5 (evaluated agents in search)"
         type: string
       - name: "inst_t1_btn_about"
         label: "Tool 1 — secondary button"
@@ -1529,6 +1796,12 @@ content:
       - name: "inst_cac_desc"
         label: "inst_cac_desc"
         type: string
+      - name: "code_home_label"
+        label: "HOME — Code card: small label"
+        type: string
+      - name: "code_home_btn"
+        label: "HOME — Code card: button"
+        type: string
       - name: "inst_t2_m5"
         label: "Tool 2 — stat 5 (sources and version)"
         type: string
@@ -1536,7 +1809,7 @@ content:
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
-        label: "nav_games"
+        label: "MENU — Games"
         type: string
       - name: "meta_games_title"
         label: "meta_games_title"
@@ -1618,9 +1891,6 @@ content:
         type: string
       - name: "games_shot_alt"
         label: "games_shot_alt"
-        type: string
-      - name: "games_shelf_label"
-        label: "games_shelf_label"
         type: string
       - name: "games_shelf_h2"
         label: "games_shelf_h2"
@@ -1766,8 +2036,20 @@ content:
       - name: "games_g3_shot_alt"
         label: "games_g3_shot_alt"
         type: string
+      - name: "games_adults"
+        label: "GAMES — link for adults: the evidence behind the game"
+        type: string
+      - name: "games_g1_card_alt"
+        label: "GAMES — card picture, described for screen readers: Sol"
+        type: text
+      - name: "games_g2_card_alt"
+        label: "GAMES — card picture, described for screen readers: The Lung Detective"
+        type: text
+      - name: "games_g3_card_alt"
+        label: "GAMES — card picture, described for screen readers: A Town of 1,000"
+        type: text
       - name: "home_games_label"
-        label: "home_games_label"
+        label: "HOME — Games section: small label"
         type: string
       - name: "home_games_h2"
         label: "home_games_h2"
@@ -1778,9 +2060,6 @@ content:
       - name: "home_games_more"
         label: "home_games_more"
         type: string
-      - name: "inst_chip_review"
-        label: "inst_chip_review"
-        type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
         type: string
@@ -1788,7 +2067,7 @@ content:
         label: "meta_reading_desc"
         type: string
       - name: "read_label"
-        label: "read_label"
+        label: "MENU and READING — Reading the evidence (menu entry, small label)"
         type: string
       - name: "read_h1"
         label: "read_h1"
@@ -1865,8 +2144,32 @@ content:
       - name: "read_home_btn"
         label: "read_home_btn"
         type: string
+      - name: "hwc_home_h2"
+        label: "HOME — How we check band: heading"
+        type: string
+      - name: "hwc_home_btn"
+        label: "HOME — How we check band: button"
+        type: string
+      - name: "news_label"
+        label: "HOME — What's new: small heading"
+        type: string
+      - name: "news_1"
+        label: "HOME — What's new: item 1 (date · text; shown second)"
+        type: text
+      - name: "news_2"
+        label: "HOME — What's new: item 2 (date · text; shown third)"
+        type: text
+      - name: "news_3"
+        label: "HOME — What's new: item 3, the newest (date · text; shown first)"
+        type: text
       - name: "foot_hwc"
         label: "FOOTER — How we check link"
+        type: string
+      - name: "foot_cite"
+        label: "FOOTER — How to cite link"
+        type: string
+      - name: "foot_report"
+        label: "FOOTER — Report an error link (also on the home page)"
         type: string
       - name: "about_hwc"
         label: "ABOUT — contact: link to How we check"
@@ -2326,6 +2629,9 @@ content:
         type: string
       - name: "read_see_processed"
         label: "READING — link: Processed meat (cancer tool name)"
+        type: string
+      - name: "read_see_coffee"
+        label: "READING — link: Coffee (cancer tool search, Group 3)"
         type: string
       - name: "read_ex_label"
         label: "READING — worked example: small label"
@@ -2460,6 +2766,9 @@ content:
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
+      - name: "skip_link"
+        label: "ALL PAGES — skip link for keyboard users (Skip to content)"
+        type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
@@ -2475,11 +2784,119 @@ content:
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
+      - name: "home_personal"
+        label: "HOME — Personal-project line under the headline"
+        type: text
       - name: "home_audience"
         label: "HOME — Audience line (bold)"
         type: string
-      - name: "home_lede"
-        label: "HOME — Description"
+      - name: "search_label"
+        label: "SEARCH — label above the box"
+        type: string
+      - name: "search_placeholder"
+        label: "SEARCH — hint inside the box (no straight double quote, no &)"
+        type: string
+      - name: "search_try"
+        label: "SEARCH — word before the three examples"
+        type: string
+      - name: "search_ex1"
+        label: "SEARCH — example 1 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex2"
+        label: "SEARCH — example 2 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex3"
+        label: "SEARCH — example 3 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_group_cancer"
+        label: "SEARCH — results heading: cancer tool"
+        type: string
+      - name: "search_group_chronic"
+        label: "SEARCH — results heading: chronic tool"
+        type: string
+      - name: "search_group_site"
+        label: "SEARCH — results heading: pages on this site"
+        type: string
+      - name: "search_none"
+        label: "SEARCH — message when nothing is found"
+        type: string
+      - name: "search_loading"
+        label: "SEARCH — message while the index loads"
+        type: string
+      - name: "search_lbl_group_1"
+        label: "SEARCH — result label: IARC Group 1"
+        type: string
+      - name: "search_lbl_group_2A"
+        label: "SEARCH — result label: IARC Group 2A"
+        type: string
+      - name: "search_lbl_group_2B"
+        label: "SEARCH — result label: IARC Group 2B"
+        type: string
+      - name: "search_lbl_group_3"
+        label: "SEARCH — result label: IARC Group 3"
+        type: string
+      - name: "search_lbl_eval"
+        label: "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})"
+        type: string
+      - name: "search_lbl_links"
+        label: "SEARCH — result label: number of links (keep {n})"
+        type: string
+      - name: "qa_label"
+        label: "HOME — Four questions: small heading"
+        type: string
+      - name: "qa_q1"
+        label: "HOME — Question 1 (aspartame)"
+        type: string
+      - name: "qa_a1"
+        label: "HOME — Answer 1: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go1"
+        label: "HOME — Answer 1: link to the entry"
+        type: string
+      - name: "qa_q2"
+        label: "HOME — Question 2 (processed meat and smoking)"
+        type: string
+      - name: "qa_k2"
+        label: "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a2"
+        label: "HOME — Answer 2: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go2"
+        label: "HOME — Answer 2: link to the entry"
+        type: string
+      - name: "qa_go2b"
+        label: "HOME — Answer 2: link to the reading guide (relative and absolute risk)"
+        type: string
+      - name: "qa_q3"
+        label: "HOME — Question 3 (job)"
+        type: string
+      - name: "qa_k3"
+        label: "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a3"
+        label: "HOME — Answer 3: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go3"
+        label: "HOME — Answer 3: link to Work and cancer"
+        type: string
+      - name: "qa_q4"
+        label: "HOME — Question 4 (stroke)"
+        type: string
+      - name: "qa_k4"
+        label: "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a4"
+        label: "HOME — Answer 4: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go4"
+        label: "HOME — Answer 4: link to the entry"
+        type: string
+      - name: "qa_from_cancer"
+        label: "HOME — Answers 1 to 3: where the quote comes from"
+        type: string
+      - name: "qa_from_chronic"
+        label: "HOME — Answer 4: where the quote comes from"
         type: string
       - name: "inst_label"
         label: "TOOLS — small section label"
@@ -2507,6 +2924,9 @@ content:
         type: string
       - name: "inst_t1_m4"
         label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst_t1_m5"
+        label: "Tool 1 — stat 5 (evaluated agents in search)"
         type: string
       - name: "inst_t1_btn_about"
         label: "Tool 1 — secondary button"
@@ -2742,6 +3162,12 @@ content:
       - name: "inst_cac_desc"
         label: "inst_cac_desc"
         type: string
+      - name: "code_home_label"
+        label: "HOME — Code card: small label"
+        type: string
+      - name: "code_home_btn"
+        label: "HOME — Code card: button"
+        type: string
       - name: "inst_t2_m5"
         label: "Tool 2 — stat 5 (sources and version)"
         type: string
@@ -2749,7 +3175,7 @@ content:
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
-        label: "nav_games"
+        label: "MENU — Games"
         type: string
       - name: "meta_games_title"
         label: "meta_games_title"
@@ -2831,9 +3257,6 @@ content:
         type: string
       - name: "games_shot_alt"
         label: "games_shot_alt"
-        type: string
-      - name: "games_shelf_label"
-        label: "games_shelf_label"
         type: string
       - name: "games_shelf_h2"
         label: "games_shelf_h2"
@@ -2979,8 +3402,20 @@ content:
       - name: "games_g3_shot_alt"
         label: "games_g3_shot_alt"
         type: string
+      - name: "games_adults"
+        label: "GAMES — link for adults: the evidence behind the game"
+        type: string
+      - name: "games_g1_card_alt"
+        label: "GAMES — card picture, described for screen readers: Sol"
+        type: text
+      - name: "games_g2_card_alt"
+        label: "GAMES — card picture, described for screen readers: The Lung Detective"
+        type: text
+      - name: "games_g3_card_alt"
+        label: "GAMES — card picture, described for screen readers: A Town of 1,000"
+        type: text
       - name: "home_games_label"
-        label: "home_games_label"
+        label: "HOME — Games section: small label"
         type: string
       - name: "home_games_h2"
         label: "home_games_h2"
@@ -2991,9 +3426,6 @@ content:
       - name: "home_games_more"
         label: "home_games_more"
         type: string
-      - name: "inst_chip_review"
-        label: "inst_chip_review"
-        type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
         type: string
@@ -3001,7 +3433,7 @@ content:
         label: "meta_reading_desc"
         type: string
       - name: "read_label"
-        label: "read_label"
+        label: "MENU and READING — Reading the evidence (menu entry, small label)"
         type: string
       - name: "read_h1"
         label: "read_h1"
@@ -3078,8 +3510,32 @@ content:
       - name: "read_home_btn"
         label: "read_home_btn"
         type: string
+      - name: "hwc_home_h2"
+        label: "HOME — How we check band: heading"
+        type: string
+      - name: "hwc_home_btn"
+        label: "HOME — How we check band: button"
+        type: string
+      - name: "news_label"
+        label: "HOME — What's new: small heading"
+        type: string
+      - name: "news_1"
+        label: "HOME — What's new: item 1 (date · text; shown second)"
+        type: text
+      - name: "news_2"
+        label: "HOME — What's new: item 2 (date · text; shown third)"
+        type: text
+      - name: "news_3"
+        label: "HOME — What's new: item 3, the newest (date · text; shown first)"
+        type: text
       - name: "foot_hwc"
         label: "FOOTER — How we check link"
+        type: string
+      - name: "foot_cite"
+        label: "FOOTER — How to cite link"
+        type: string
+      - name: "foot_report"
+        label: "FOOTER — Report an error link (also on the home page)"
         type: string
       - name: "about_hwc"
         label: "ABOUT — contact: link to How we check"
@@ -3539,6 +3995,9 @@ content:
         type: string
       - name: "read_see_processed"
         label: "READING — link: Processed meat (cancer tool name)"
+        type: string
+      - name: "read_see_coffee"
+        label: "READING — link: Coffee (cancer tool search, Group 3)"
         type: string
       - name: "read_ex_label"
         label: "READING — worked example: small label"
@@ -3673,6 +4132,9 @@ content:
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
+      - name: "skip_link"
+        label: "ALL PAGES — skip link for keyboard users (Skip to content)"
+        type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
@@ -3688,11 +4150,119 @@ content:
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
+      - name: "home_personal"
+        label: "HOME — Personal-project line under the headline"
+        type: text
       - name: "home_audience"
         label: "HOME — Audience line (bold)"
         type: string
-      - name: "home_lede"
-        label: "HOME — Description"
+      - name: "search_label"
+        label: "SEARCH — label above the box"
+        type: string
+      - name: "search_placeholder"
+        label: "SEARCH — hint inside the box (no straight double quote, no &)"
+        type: string
+      - name: "search_try"
+        label: "SEARCH — word before the three examples"
+        type: string
+      - name: "search_ex1"
+        label: "SEARCH — example 1 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex2"
+        label: "SEARCH — example 2 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex3"
+        label: "SEARCH — example 3 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_group_cancer"
+        label: "SEARCH — results heading: cancer tool"
+        type: string
+      - name: "search_group_chronic"
+        label: "SEARCH — results heading: chronic tool"
+        type: string
+      - name: "search_group_site"
+        label: "SEARCH — results heading: pages on this site"
+        type: string
+      - name: "search_none"
+        label: "SEARCH — message when nothing is found"
+        type: string
+      - name: "search_loading"
+        label: "SEARCH — message while the index loads"
+        type: string
+      - name: "search_lbl_group_1"
+        label: "SEARCH — result label: IARC Group 1"
+        type: string
+      - name: "search_lbl_group_2A"
+        label: "SEARCH — result label: IARC Group 2A"
+        type: string
+      - name: "search_lbl_group_2B"
+        label: "SEARCH — result label: IARC Group 2B"
+        type: string
+      - name: "search_lbl_group_3"
+        label: "SEARCH — result label: IARC Group 3"
+        type: string
+      - name: "search_lbl_eval"
+        label: "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})"
+        type: string
+      - name: "search_lbl_links"
+        label: "SEARCH — result label: number of links (keep {n})"
+        type: string
+      - name: "qa_label"
+        label: "HOME — Four questions: small heading"
+        type: string
+      - name: "qa_q1"
+        label: "HOME — Question 1 (aspartame)"
+        type: string
+      - name: "qa_a1"
+        label: "HOME — Answer 1: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go1"
+        label: "HOME — Answer 1: link to the entry"
+        type: string
+      - name: "qa_q2"
+        label: "HOME — Question 2 (processed meat and smoking)"
+        type: string
+      - name: "qa_k2"
+        label: "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a2"
+        label: "HOME — Answer 2: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go2"
+        label: "HOME — Answer 2: link to the entry"
+        type: string
+      - name: "qa_go2b"
+        label: "HOME — Answer 2: link to the reading guide (relative and absolute risk)"
+        type: string
+      - name: "qa_q3"
+        label: "HOME — Question 3 (job)"
+        type: string
+      - name: "qa_k3"
+        label: "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a3"
+        label: "HOME — Answer 3: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go3"
+        label: "HOME — Answer 3: link to Work and cancer"
+        type: string
+      - name: "qa_q4"
+        label: "HOME — Question 4 (stroke)"
+        type: string
+      - name: "qa_k4"
+        label: "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a4"
+        label: "HOME — Answer 4: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go4"
+        label: "HOME — Answer 4: link to the entry"
+        type: string
+      - name: "qa_from_cancer"
+        label: "HOME — Answers 1 to 3: where the quote comes from"
+        type: string
+      - name: "qa_from_chronic"
+        label: "HOME — Answer 4: where the quote comes from"
         type: string
       - name: "inst_label"
         label: "TOOLS — small section label"
@@ -3720,6 +4290,9 @@ content:
         type: string
       - name: "inst_t1_m4"
         label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst_t1_m5"
+        label: "Tool 1 — stat 5 (evaluated agents in search)"
         type: string
       - name: "inst_t1_btn_about"
         label: "Tool 1 — secondary button"
@@ -3955,6 +4528,12 @@ content:
       - name: "inst_cac_desc"
         label: "inst_cac_desc"
         type: string
+      - name: "code_home_label"
+        label: "HOME — Code card: small label"
+        type: string
+      - name: "code_home_btn"
+        label: "HOME — Code card: button"
+        type: string
       - name: "inst_t2_m5"
         label: "Tool 2 — stat 5 (sources and version)"
         type: string
@@ -3962,7 +4541,7 @@ content:
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
-        label: "nav_games"
+        label: "MENU — Games"
         type: string
       - name: "meta_games_title"
         label: "meta_games_title"
@@ -4044,9 +4623,6 @@ content:
         type: string
       - name: "games_shot_alt"
         label: "games_shot_alt"
-        type: string
-      - name: "games_shelf_label"
-        label: "games_shelf_label"
         type: string
       - name: "games_shelf_h2"
         label: "games_shelf_h2"
@@ -4192,8 +4768,20 @@ content:
       - name: "games_g3_shot_alt"
         label: "games_g3_shot_alt"
         type: string
+      - name: "games_adults"
+        label: "GAMES — link for adults: the evidence behind the game"
+        type: string
+      - name: "games_g1_card_alt"
+        label: "GAMES — card picture, described for screen readers: Sol"
+        type: text
+      - name: "games_g2_card_alt"
+        label: "GAMES — card picture, described for screen readers: The Lung Detective"
+        type: text
+      - name: "games_g3_card_alt"
+        label: "GAMES — card picture, described for screen readers: A Town of 1,000"
+        type: text
       - name: "home_games_label"
-        label: "home_games_label"
+        label: "HOME — Games section: small label"
         type: string
       - name: "home_games_h2"
         label: "home_games_h2"
@@ -4204,9 +4792,6 @@ content:
       - name: "home_games_more"
         label: "home_games_more"
         type: string
-      - name: "inst_chip_review"
-        label: "inst_chip_review"
-        type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
         type: string
@@ -4214,7 +4799,7 @@ content:
         label: "meta_reading_desc"
         type: string
       - name: "read_label"
-        label: "read_label"
+        label: "MENU and READING — Reading the evidence (menu entry, small label)"
         type: string
       - name: "read_h1"
         label: "read_h1"
@@ -4291,8 +4876,32 @@ content:
       - name: "read_home_btn"
         label: "read_home_btn"
         type: string
+      - name: "hwc_home_h2"
+        label: "HOME — How we check band: heading"
+        type: string
+      - name: "hwc_home_btn"
+        label: "HOME — How we check band: button"
+        type: string
+      - name: "news_label"
+        label: "HOME — What's new: small heading"
+        type: string
+      - name: "news_1"
+        label: "HOME — What's new: item 1 (date · text; shown second)"
+        type: text
+      - name: "news_2"
+        label: "HOME — What's new: item 2 (date · text; shown third)"
+        type: text
+      - name: "news_3"
+        label: "HOME — What's new: item 3, the newest (date · text; shown first)"
+        type: text
       - name: "foot_hwc"
         label: "FOOTER — How we check link"
+        type: string
+      - name: "foot_cite"
+        label: "FOOTER — How to cite link"
+        type: string
+      - name: "foot_report"
+        label: "FOOTER — Report an error link (also on the home page)"
         type: string
       - name: "about_hwc"
         label: "ABOUT — contact: link to How we check"
@@ -4752,6 +5361,9 @@ content:
         type: string
       - name: "read_see_processed"
         label: "READING — link: Processed meat (cancer tool name)"
+        type: string
+      - name: "read_see_coffee"
+        label: "READING — link: Coffee (cancer tool search, Group 3)"
         type: string
       - name: "read_ex_label"
         label: "READING — worked example: small label"
@@ -4886,6 +5498,9 @@ content:
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
+      - name: "skip_link"
+        label: "ALL PAGES — skip link for keyboard users (Skip to content)"
+        type: string
       - name: "nav_instruments"
         label: "Menu — Tools"
         type: string
@@ -4901,11 +5516,119 @@ content:
       - name: "home_h1"
         label: "HOME — Headline"
         type: string
+      - name: "home_personal"
+        label: "HOME — Personal-project line under the headline"
+        type: text
       - name: "home_audience"
         label: "HOME — Audience line (bold)"
         type: string
-      - name: "home_lede"
-        label: "HOME — Description"
+      - name: "search_label"
+        label: "SEARCH — label above the box"
+        type: string
+      - name: "search_placeholder"
+        label: "SEARCH — hint inside the box (no straight double quote, no &)"
+        type: string
+      - name: "search_try"
+        label: "SEARCH — word before the three examples"
+        type: string
+      - name: "search_ex1"
+        label: "SEARCH — example 1 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex2"
+        label: "SEARCH — example 2 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_ex3"
+        label: "SEARCH — example 3 (one word, no & # % or quotes; must find something)"
+        type: string
+      - name: "search_group_cancer"
+        label: "SEARCH — results heading: cancer tool"
+        type: string
+      - name: "search_group_chronic"
+        label: "SEARCH — results heading: chronic tool"
+        type: string
+      - name: "search_group_site"
+        label: "SEARCH — results heading: pages on this site"
+        type: string
+      - name: "search_none"
+        label: "SEARCH — message when nothing is found"
+        type: string
+      - name: "search_loading"
+        label: "SEARCH — message while the index loads"
+        type: string
+      - name: "search_lbl_group_1"
+        label: "SEARCH — result label: IARC Group 1"
+        type: string
+      - name: "search_lbl_group_2A"
+        label: "SEARCH — result label: IARC Group 2A"
+        type: string
+      - name: "search_lbl_group_2B"
+        label: "SEARCH — result label: IARC Group 2B"
+        type: string
+      - name: "search_lbl_group_3"
+        label: "SEARCH — result label: IARC Group 3"
+        type: string
+      - name: "search_lbl_eval"
+        label: "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})"
+        type: string
+      - name: "search_lbl_links"
+        label: "SEARCH — result label: number of links (keep {n})"
+        type: string
+      - name: "qa_label"
+        label: "HOME — Four questions: small heading"
+        type: string
+      - name: "qa_q1"
+        label: "HOME — Question 1 (aspartame)"
+        type: string
+      - name: "qa_a1"
+        label: "HOME — Answer 1: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go1"
+        label: "HOME — Answer 1: link to the entry"
+        type: string
+      - name: "qa_q2"
+        label: "HOME — Question 2 (processed meat and smoking)"
+        type: string
+      - name: "qa_k2"
+        label: "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a2"
+        label: "HOME — Answer 2: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go2"
+        label: "HOME — Answer 2: link to the entry"
+        type: string
+      - name: "qa_go2b"
+        label: "HOME — Answer 2: link to the reading guide (relative and absolute risk)"
+        type: string
+      - name: "qa_q3"
+        label: "HOME — Question 3 (job)"
+        type: string
+      - name: "qa_k3"
+        label: "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a3"
+        label: "HOME — Answer 3: quoted word for word from the tool entries (en, zh)"
+        type: text
+      - name: "qa_go3"
+        label: "HOME — Answer 3: link to Work and cancer"
+        type: string
+      - name: "qa_q4"
+        label: "HOME — Question 4 (stroke)"
+        type: string
+      - name: "qa_k4"
+        label: "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)"
+        type: text
+      - name: "qa_a4"
+        label: "HOME — Answer 4: quoted word for word from the tool entry (en, zh)"
+        type: text
+      - name: "qa_go4"
+        label: "HOME — Answer 4: link to the entry"
+        type: string
+      - name: "qa_from_cancer"
+        label: "HOME — Answers 1 to 3: where the quote comes from"
+        type: string
+      - name: "qa_from_chronic"
+        label: "HOME — Answer 4: where the quote comes from"
         type: string
       - name: "inst_label"
         label: "TOOLS — small section label"
@@ -4933,6 +5656,9 @@ content:
         type: string
       - name: "inst_t1_m4"
         label: "Tool 1 — stat 4 (languages)"
+        type: string
+      - name: "inst_t1_m5"
+        label: "Tool 1 — stat 5 (evaluated agents in search)"
         type: string
       - name: "inst_t1_btn_about"
         label: "Tool 1 — secondary button"
@@ -5168,6 +5894,12 @@ content:
       - name: "inst_cac_desc"
         label: "inst_cac_desc"
         type: string
+      - name: "code_home_label"
+        label: "HOME — Code card: small label"
+        type: string
+      - name: "code_home_btn"
+        label: "HOME — Code card: button"
+        type: string
       - name: "inst_t2_m5"
         label: "Tool 2 — stat 5 (sources and version)"
         type: string
@@ -5175,7 +5907,7 @@ content:
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
       - name: "nav_games"
-        label: "nav_games"
+        label: "MENU — Games"
         type: string
       - name: "meta_games_title"
         label: "meta_games_title"
@@ -5257,9 +5989,6 @@ content:
         type: string
       - name: "games_shot_alt"
         label: "games_shot_alt"
-        type: string
-      - name: "games_shelf_label"
-        label: "games_shelf_label"
         type: string
       - name: "games_shelf_h2"
         label: "games_shelf_h2"
@@ -5405,8 +6134,20 @@ content:
       - name: "games_g3_shot_alt"
         label: "games_g3_shot_alt"
         type: string
+      - name: "games_adults"
+        label: "GAMES — link for adults: the evidence behind the game"
+        type: string
+      - name: "games_g1_card_alt"
+        label: "GAMES — card picture, described for screen readers: Sol"
+        type: text
+      - name: "games_g2_card_alt"
+        label: "GAMES — card picture, described for screen readers: The Lung Detective"
+        type: text
+      - name: "games_g3_card_alt"
+        label: "GAMES — card picture, described for screen readers: A Town of 1,000"
+        type: text
       - name: "home_games_label"
-        label: "home_games_label"
+        label: "HOME — Games section: small label"
         type: string
       - name: "home_games_h2"
         label: "home_games_h2"
@@ -5417,9 +6158,6 @@ content:
       - name: "home_games_more"
         label: "home_games_more"
         type: string
-      - name: "inst_chip_review"
-        label: "inst_chip_review"
-        type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
         type: string
@@ -5427,7 +6165,7 @@ content:
         label: "meta_reading_desc"
         type: string
       - name: "read_label"
-        label: "read_label"
+        label: "MENU and READING — Reading the evidence (menu entry, small label)"
         type: string
       - name: "read_h1"
         label: "read_h1"
@@ -5504,8 +6242,32 @@ content:
       - name: "read_home_btn"
         label: "read_home_btn"
         type: string
+      - name: "hwc_home_h2"
+        label: "HOME — How we check band: heading"
+        type: string
+      - name: "hwc_home_btn"
+        label: "HOME — How we check band: button"
+        type: string
+      - name: "news_label"
+        label: "HOME — What's new: small heading"
+        type: string
+      - name: "news_1"
+        label: "HOME — What's new: item 1 (date · text; shown second)"
+        type: text
+      - name: "news_2"
+        label: "HOME — What's new: item 2 (date · text; shown third)"
+        type: text
+      - name: "news_3"
+        label: "HOME — What's new: item 3, the newest (date · text; shown first)"
+        type: text
       - name: "foot_hwc"
         label: "FOOTER — How we check link"
+        type: string
+      - name: "foot_cite"
+        label: "FOOTER — How to cite link"
+        type: string
+      - name: "foot_report"
+        label: "FOOTER — Report an error link (also on the home page)"
         type: string
       - name: "about_hwc"
         label: "ABOUT — contact: link to How we check"
@@ -5965,6 +6727,9 @@ content:
         type: string
       - name: "read_see_processed"
         label: "READING — link: Processed meat (cancer tool name)"
+        type: string
+      - name: "read_see_coffee"
+        label: "READING — link: Coffee (cancer tool search, Group 3)"
         type: string
       - name: "read_ex_label"
         label: "READING — worked example: small label"

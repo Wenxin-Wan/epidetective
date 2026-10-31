@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /assets/search/
+Disallow: /templates/
+Disallow: /editorial-2026-09-20/
+Disallow: /scripts/
+Disallow: /i18n/
+Disallow: /data/
 
 Sitemap: https://epidetective.com/sitemap.xml

@@ -649,6 +649,11 @@ $$('[data-close]').forEach(b => b.addEventListener('click', closeModals));
 $$('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModals(); }));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(); });
 ['contrast', 'large', 'font', 'motion', 'mute'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
+/* Inside the games page's frame, links leave the frame: the games page replaces the page, the evidence opens in a new tab. */
+if (window.top !== window.self) {
+  $$('.gx-nav a, a[href$="games.html"]').forEach(a => { a.target = '_top'; });
+  $$('.adults a').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+}
 loadSettings();
 if (window.TownArt) {
   document.body.insertAdjacentHTML('afterbegin', window.TownArt.defs());

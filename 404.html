@@ -3,17 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — EpiDetective</title>
-<meta name="description" content="This page is not on EpiDetective. Everything on the site is reachable from the home page.">
+<title>Page not found · EpiDetective</title>
+<meta name="description" content="This page is not on EpiDetective. Search the site, or start from the home page.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F4F0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:title" content="Page not found · EpiDetective">
+<meta property="og:description" content="This page is not on EpiDetective. Search the site, or start from the home page.">
+<meta property="og:image" content="https://epidetective.com/assets/og/home-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. What causes cancer and other chronic diseases, and how sure the evidence is. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/home-en.png">
+<meta name="twitter:image:alt" content="EpiDetective. What causes cancer and other chronic diseases, and how sure the evidence is. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
 <!-- GitHub Pages serves this file for a missing path at any depth, so every
-     link and asset here has to be root-absolute rather than relative. -->
+     link and asset here has to be root-absolute rather than relative. It is not
+     built from the templates: keep its menu, search box and footer in step with
+     templates/index.html by hand (English only). -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header class="top">
   <div class="wrap">
@@ -22,7 +39,8 @@
       <nav class="menu">
         <a href="/#instruments">Tools</a>
         <a href="/code-against-cancer/">Code Against Cancer</a>
-        <a href="/games.html">Cancer awareness games</a>
+        <a href="/reading.html">Reading the evidence</a>
+        <a href="/games.html">Games</a>
         <a href="/about.html">About</a>
         <a href="/about.html#contact">Contact</a>
       </nav>
@@ -30,22 +48,47 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
-<section class="sec wrap" style="padding-top:12vh;padding-bottom:14vh">
+<section class="sec wrap page-404">
   <div class="sec-head">
     <div class="label">404</div>
     <h1 class="page-h">That page is not here.</h1>
   </div>
   <p class="lede" style="max-width:52ch">
-    The link may be out of date, or the page may have moved. Everything on this
-    site is reachable from the home page.
+    The link may be out of date, or the page may have moved. Search for what
+    you were looking for, or start from the home page.
   </p>
+  <!-- Site search: the markup of templates/index.html with English text
+       (records/b6-search-markup.html); assets/search.js reads it. -->
+  <div class="search" data-search data-lang="en" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+       data-loading="Loading…" data-none="Nothing found. Try a shorter or simpler word."
+       data-group-cancer="Cancer Evidence Explorer" data-group-chronic="Chronic Disease Evidence Explorer" data-group-site="On this site"
+       data-lbl-1="Known cause (Group 1)" data-lbl-2a="Probable cause (Group 2A)" data-lbl-2b="Possible cause (Group 2B)" data-lbl-3="Not classifiable (Group 3)"
+       data-lbl-eval="Evaluated by IARC, no cancer site named ({vol}, {year})" data-lbl-links="Links: {n}">
+    <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+      <label class="label search-label" id="site-search-label" for="site-search-q">Look something up</label>
+      <div class="search-box">
+        <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="Search a cancer, an exposure, a disease or a risk factor… e.g. aspartame, stroke, coffee">
+        <input type="hidden" name="lang" value="en">
+        <button class="search-go" type="submit"><span class="vh">Look something up</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+        <p class="search-msg" role="status"></p>
+      </div>
+    </form>
+    <p class="search-try"><span class="label">Try</span>
+      <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=aspartame&amp;lang=en" data-q="aspartame">aspartame</a>
+      <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=stroke&amp;lang=en" data-q="stroke">stroke</a>
+      <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=coffee&amp;lang=en" data-q="coffee">coffee</a>
+    </p>
+  </div>
   <div class="inst-actions" style="margin-top:30px">
     <a class="btn btn-solid" href="/">Go to the home page</a>
     <a class="btn btn-ghost" href="/#instruments">See the tools</a>
   </div>
 </section>
+
+</main>
 
 <footer class="foot">
   <div class="wrap">
@@ -57,15 +100,16 @@
       <nav class="menu">
         <a href="/#instruments">Tools</a>
         <a href="/code-against-cancer/">Code Against Cancer</a>
-        <a href="/games.html">Cancer awareness games</a>
+        <a href="/reading.html">Reading the evidence</a>
+        <a href="/games.html">Games</a>
         <a href="/about.html">About</a>
         <a href="/about.html#contact">Contact</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="/how-we-check.html">How we check</a><a href="/about.html#cite">How to cite</a><a href="/how-we-check.html#report">Report an error</a></p>
   </div>
 </footer>
 
-</div><!-- /#page -->
-
+<script src="/assets/search.js" defer></script>
 </body>
 </html>

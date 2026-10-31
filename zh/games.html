@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>防癌小游戏｜皮肤癌、肺癌与乳腺癌｜EpiDetective</title>
 <meta name="description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/zh/games.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/games.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/games.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/zh/games.html">
 <meta property="og:title" content="防癌小游戏｜皮肤癌、肺癌与乳腺癌｜EpiDetective">
 <meta property="og:description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
-<meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta property="og:image" content="https://epidetective.com/assets/og/games.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective。皮肤癌、肺癌与乳腺癌。防癌小游戏。万汶鑫的个人项目。来源：IARC、WHO、《欧洲防癌守则》和已发表的研究。">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="防癌小游戏｜皮肤癌、肺癌与乳腺癌｜EpiDetective">
 <meta name="twitter:description" content="三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（乳腺癌，14 岁以上）。无需下载，不收集任何数据。">
-<meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/games.png">
+<meta name="twitter:image:alt" content="EpiDetective。皮肤癌、肺癌与乳腺癌。防癌小游戏。万汶鑫的个人项目。来源：IARC、WHO、《欧洲防癌守则》和已发表的研究。">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="../assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">跳到正文</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
         <a href="../code-against-cancer/?lang=zh">防癌守则</a>
-        <a href="games.html" aria-current="page">防癌小游戏</a>
+        <a href="reading.html">读懂证据</a>
+        <a href="games.html" aria-current="page">小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="wrap games-over" id="games">
   <div class="sec-head">
@@ -56,7 +65,7 @@
   </div>
   <div class="game-grid">
     <article class="game-card" data-game="sun-safety">
-      <a class="gc-thumb thumb-game" href="../games/sun-safety/" data-select="sun-safety" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <a class="gc-thumb" href="../games/sun-safety/" data-select="sun-safety"><img src="../assets/games/sun-safety-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="Sol &amp; the UV Shield Quest：小主角 Sol 有一头根根竖起的橙色头发，站在草地平台上，周围是太阳金币和一颗星星，旁边立着一顶草帽，天上挂着一轮大太阳。"></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">皮肤癌</span><span class="chip on-stage">当前展示</span></div>
         <h2>Sol &amp; the UV Shield Quest</h2>
@@ -66,17 +75,17 @@
       </div>
     </article>
     <article class="game-card" data-game="lung-detective">
-      <a class="gc-thumb thumb-game thumb-lung" href="../games/lung-detective/" data-select="lung-detective" aria-label="The Lung Detective"></a>
+      <a class="gc-thumb" href="../games/lung-detective/" data-select="lung-detective"><img src="../assets/games/lung-detective-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="The Lung Detective：一间温馨的公寓，沙发上的人拿着手机，茶几上有烟灰缸，炉灶上有一口锅，还有一扇写着“Basement”（地下室）的门。"></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">肺癌</span><span class="chip on-stage">当前展示</span></div>
         <h2>The Lung Detective</h2>
-        <p>一款关于肺癌成因的调查类游戏，适合 10 至 16 岁。三个场景，十二条线索要归档为已确认病因、很可能的病因或没有证据，一个氡探测器要读数，还有三个人要说服。</p>
+        <p>一款关于肺癌成因的调查类游戏，适合 10 至 16 岁。三个场景，十二条线索要归档为已确认病因、很可能的病因、可能的病因或无法分类，一个氡探测器要读数，还有三个人要说服。</p>
         <div class="inst-meta"><span>10–16 岁</span><span>鼠标、触屏、键盘</span><span>英文</span></div>
         <div class="inst-actions"><a class="btn btn-solid" href="../games/lung-detective/" data-select="lung-detective">开始游戏 &rarr;</a></div>
       </div>
     </article>
     <article class="game-card" data-game="town-of-1000">
-      <a class="gc-thumb thumb-game thumb-town" href="../games/town-of-1000/" data-select="town-of-1000" aria-label="A Town of 1,000"></a>
+      <a class="gc-thumb" href="../games/town-of-1000/" data-select="town-of-1000"><img src="../assets/games/town-of-1000-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="A Town of 1,000：河边的一座小镇，淡彩色的房子围着一座钟楼，前景的小路上有行人，其中有骑自行车的人和推婴儿车的人。"></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">乳腺癌</span><span class="chip on-stage">当前展示</span></div>
         <h2>A Town of 1,000</h2>
@@ -141,14 +150,15 @@
       </ul>
 
       <p class="fine">游戏角色与美术均为原创。源代码公开于 github.com/Wenxin-Wan/sun-safety-adventure。防晒建议依据《欧洲防癌守则》及世界卫生组织关于紫外线防护的指导。</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Solar%20radiation">给成年人：这款游戏背后的证据 &rarr;</a> <a href="reading.html">读懂证据</a></p>
     </div>
 
     <div class="game-intro" data-game="lung-detective" data-url="../games/lung-detective/" data-shot="../assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="The Lung Detective 游戏画面：三个场景之一，圆环标出已经找到的线索，下方是侦探的记事本。" data-cap="The Lung Detective 运行时的实际截图" hidden>
       <div class="label">调查类游戏 · 肺癌</div>
       <h2>The Lung Detective</h2>
-      <p><b>一场横跨公寓、街道和工地的调查，每条线索都按 IARC 归档证据的方式归档。</b></p>
-      <p>大多数肺癌由吸烟引起，而无论在什么年龄戒烟都有好处。这是案卷里的第一条发现，之后的整个调查都建立在它之上。玩家搜查三个场景：一套公寓、一条街道和一处工地，找出十二条线索。每条线索都要按 IARC 评估证据的方式归类：已确认的肺癌病因（1 类）、很可能的病因（2A 类），或者并无证据支持。随后可以消除真正的危害，每消除一项，清洁空气得分就上升一格。</p>
-      <p>线索涉及二手烟；家中的氡（附带一个小型探测器游戏，围绕世界卫生组织 100 Bq/m³ 的参考水平展开）；室外空气污染与柴油尾气；木柴烟和高温煎炸；以及工地上的硅尘、石棉和焊接烟尘。沥青屋面归入“很可能”一类，咖啡和压力则完全没有证据支持。三段对话推动整个论证：一位“每天只抽几根”的室友、一位说电子烟无害的电子烟店主，以及一位认为抽了二十年再戒也没用的工头。每条线索都注明来源，并附有《欧洲防癌守则》的官方原文。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
+      <p><b>一场横跨公寓、街道和工地的调查，每条线索都归入 IARC 的某个类别。</b></p>
+      <p>大多数肺癌由吸烟引起，而无论在什么年龄戒烟都有好处。这是案卷里的第一条发现，之后的整个调查都建立在它之上。玩家搜查三个场景：一套公寓、一条街道和一处工地，找出十二条线索。每条线索都要归入 IARC 给它的类别：已确认的肺癌病因（1 类）、很可能的病因（2A 类）、可能的病因（2B 类），或者无法分类，也就是证据太有限，无法判断（3 类）。随后可以消除真正的危害，每消除一项，清洁空气得分就上升一格。</p>
+      <p>线索涉及二手烟；家中的氡（附带一个小型探测器游戏，围绕世界卫生组织 100 Bq/m³ 的参考水平展开）；室外空气污染与柴油尾气；木柴烟和高温煎炸；以及工地上的硅尘、石棉和焊接烟尘。沥青屋面归入“很可能”一类，铺在人行道上的热玛蹄脂沥青归入“可能”一类。咖啡无法分类，因为证据太有限，无法判断。一张声称压力会致癌的海报是个需要核实的误区：IARC 从未评估过压力，一项针对大量劳动者的大型研究也没有发现压力与肺癌有明确关联。三段对话推动整个论证：一位“每天只抽几根”的室友、一位说电子烟无害的电子烟店主，以及一位认为抽了二十年再戒也没用的工头。每条线索都注明来源，并附有《欧洲防癌守则》的官方原文。游戏在浏览器中运行，手机也能玩，不收集任何数据。游戏语言为英文。</p>
 
       <div class="game-facts">
         <div><b>10&ndash;16</b><span>建议年龄</span></div>
@@ -160,13 +170,14 @@
       <h3>怎么玩</h3>
       <ol class="howto">
         <li><span>点击<b>开始游戏</b>，然后在每个场景里找出四条线索。指针移到线索上时会出现圆环；在手机上，点一点看起来可疑的东西，没点中时会提示离线索是近还是远。也可以用 <kbd>Tab</kbd> 和 <kbd>Enter</kbd> 操作，提示按钮会指出一条线索。</span></li>
-        <li><span>把每条线索放进三个抽屉之一：已确认病因（1 类）、很可能的病因（2A 类）或没有证据。放错的抽屉会变灰，可以再试；放对后会显示来源和《欧洲防癌守则》的原文。</span></li>
+        <li><span>把每条线索放进四个抽屉之一，依据 IARC 的类别：已确认病因（1 类）、很可能的病因（2A 类）、可能的病因（2B 类）或无法分类（3 类）。放错的抽屉会变灰，可以再试；放对后会显示来源和《欧洲防癌守则》的原文。街道上还有一个需要核实的误区，它没有抽屉：读完点“Noted”（已记下）即可。</span></li>
         <li><span>消除能够消除的危害，每消除一项，清洁空气得分就上升。公寓里的氡探测器是一个独立的小游戏：世界卫生组织的参考水平是 100 Bq/m³，并建议各国的参考水平不超过 300 Bq/m³。</span></li>
         <li><span>和遇到的三个人谈谈：室友、电子烟店主和工头。每个人都有怀疑的理由，你要用证据来回答他们。</span></li>
         <li><span>第三个案子结束后是“列队辨认”：凭记忆把六条线索重新归档。随后的报告会给出你的侦探等级和清洁空气得分。齿轮图标打开设置：高对比度、更大字号、更宽更易读的字母、减少动效、声音，以及直接显示线索位置的选项。</span></li>
       </ol>
 
       <p class="fine">游戏中每条线索都注明来源。分类依据 IARC 专论，预防建议采用《欧洲防癌守则》的原文，氡的参考水平采用世界卫生组织的标准（100 Bq/m³）。“任何年龄戒烟都有好处”这一发现来自 Peto 等人（BMJ，2000）。</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=zh#cancer=Lung">给成年人：这款游戏背后的证据 &rarr;</a> <a href="reading.html">读懂证据</a></p>
     </div>
 
     <div class="game-intro" data-game="town-of-1000" data-url="../games/town-of-1000/" data-shot="../assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="A Town of 1,000 游戏画面：1,000 个点组成的点阵图，标出受影响的女性，下方是本章的两张决策卡。" data-cap="A Town of 1,000 运行时的实际截图" hidden>
@@ -193,10 +204,13 @@
       </ol>
 
       <p class="fine">基线数据为西欧（GLOBOCAN 2024 估计值）。效应量来自关于饮酒、身体活动、绝经后体重、母乳喂养、绝经激素治疗和筛查参与的汇总研究。预防建议依据《欧洲防癌守则》。</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=zh#cancer=Breast">给成年人：这款游戏背后的证据 &rarr;</a> <a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Alcoholic%20beverages">酒精饮料</a> <a href="reading.html">读懂证据</a></p>
     </div>
 
   </div>
 </section>
+
+</main>
 
 <footer class="foot">
   <div class="wrap">
@@ -208,12 +222,13 @@
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
         <a href="../code-against-cancer/?lang=zh">防癌守则</a>
-        <a href="games.html">防癌小游戏</a>
+        <a href="reading.html">读懂证据</a>
+        <a href="games.html">小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
-        <a href="how-we-check.html">我们如何核查</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">我们如何核查</a><a href="about.html#cite">如何引用</a><a href="how-we-check.html#report">报告错误</a></p>
     <div class="disc">EpiDetective 发布的工具，用于阅读人群层面的证据。它们呈现的是大规模人群中的规律。任何涉及你个人健康的问题，请咨询医生。每个工具都会标明各自的资料来源。</div>
     <div class="disc affil">EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书，所表达的观点仅代表作者个人。所依据的科学来源均已注明并可以独立核查。</div>
     <div class="foot-bot">
@@ -222,7 +237,6 @@
   </div>
 </footer>
 
-</div>
 <script>
 (function(){
   var play=document.getElementById('play'), stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
@@ -246,7 +260,6 @@
     var g=intros[current]; if(!g) return;
     var f=document.createElement('iframe');
     f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
-    f.setAttribute('allowfullscreen','');
     stop(); frame.appendChild(f); stage.classList.add('is-playing');
     // keyboard control goes to the game straight away
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{meta_work_title}}</title>
 <meta name="description" content="{{meta_work_desc}}">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="{{CANONICAL}}">
 {{HREFLANG}}
 <meta property="og:type" content="website">
@@ -13,17 +14,24 @@
 <meta property="og:title" content="{{meta_work_title}}">
 <meta property="og:description" content="{{meta_work_desc}}">
 <meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="{{OG_IMAGE_W}}">
+<meta property="og:image:height" content="{{OG_IMAGE_H}}">
+<meta property="og:image:type" content="{{OG_IMAGE_TYPE}}">
+<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
 <meta property="og:locale" content="{{OG_LOCALE}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{meta_work_title}}">
 <meta name="twitter:description" content="{{meta_work_desc}}">
 <meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:image:alt" content="{{OG_IMAGE_ALT}}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="{{PREFIX}}assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 </head>
 <body>
+<a class="skip" href="#content">{{skip_link}}</a>
 
 <header class="top">
   <div class="wrap">
@@ -32,6 +40,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
@@ -41,13 +50,13 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <!-- Work and cancer. The 68 Occupational agents of the cancer tool, grouped by
      sector (scripts/work_sectors.json, EpiDetective's grouping), rendered from
      data/work.json (scripts/build_work_data.py) by build_site.py: WORK_TOC,
      WORK_SECTORS, WORK_REC9 and WORK_CHRONIC. Every row links to the entry in
-     the tool. The site search box joins #find in a later batch. -->
+     the tool. #find holds the site search box (assets/search.js). -->
 <section class="tool-hero plain">
   <div class="wrap">
     <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
@@ -68,7 +77,27 @@
 
   <div class="work-find" id="find">
     <p>{{work_find}}</p>
-    <a class="btn btn-ghost" href="{{URL_TOOL}}">{{inst_t1_name}} &rarr;</a>
+    <div class="search" data-search data-lang="{{LANG}}" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+         data-loading="{{search_loading}}" data-none="{{search_none}}"
+         data-group-cancer="{{search_group_cancer}}" data-group-chronic="{{search_group_chronic}}" data-group-site="{{search_group_site}}"
+         data-lbl-1="{{search_lbl_group_1}}" data-lbl-2a="{{search_lbl_group_2A}}" data-lbl-2b="{{search_lbl_group_2B}}" data-lbl-3="{{search_lbl_group_3}}"
+         data-lbl-eval="{{search_lbl_eval}}" data-lbl-links="{{search_lbl_links}}">
+      <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+        <label class="label search-label" id="site-search-label" for="site-search-q">{{search_label}}</label>
+        <div class="search-box">
+          <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="{{search_placeholder}}">
+          <input type="hidden" name="lang" value="{{LANG}}">
+          <button class="search-go" type="submit"><span class="vh">{{search_label}}</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+          <p class="search-msg" role="status"></p>
+        </div>
+      </form>
+      <p class="search-try"><span class="label">{{search_try}}</span>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX1}}&amp;lang={{LANG}}" data-q="{{search_ex1}}">{{search_ex1}}</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX2}}&amp;lang={{LANG}}" data-q="{{search_ex2}}">{{search_ex2}}</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX3}}&amp;lang={{LANG}}" data-q="{{search_ex3}}">{{search_ex3}}</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -93,6 +122,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -103,12 +134,13 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
-        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="{{URL_HWC}}">{{foot_hwc}}</a><a href="{{URL_ABOUT}}#cite">{{foot_cite}}</a><a href="{{URL_HWC}}#report">{{foot_report}}</a></p>
     <div class="disc">{{foot_disclaimer}}</div>
     <div class="disc affil">{{foot_affiliation}}</div>
     <div class="foot-bot">
@@ -117,7 +149,6 @@
   </div>
 </footer>
 
-</div><!-- /#page -->
-
+<script src="{{PREFIX}}assets/search.js" defer></script>
 </body>
 </html>

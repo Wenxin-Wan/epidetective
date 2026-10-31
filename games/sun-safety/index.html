@@ -5,17 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sol & the UV Shield Quest — a sun-safety game on EpiDetective</title>
 <meta name="description" content="A side-scrolling platform game for children aged 6 to 12 about smart sun-safe habits: check the UV Index, find shade, cover up, wear a hat and sunglasses, use SPF 30+ sunscreen correctly.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/games/sun-safety/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
 <meta property="og:title" content="Sol & the UV Shield Quest">
 <meta property="og:description" content="Run, jump, explore, and learn how to enjoy the outdoors safely. A sun-safety game on EpiDetective.">
+<meta property="og:url" content="https://epidetective.com/games/sun-safety/">
 <meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Sol &amp; the UV Shield Quest. A sun-safety adventure for ages 6 to 12. A cancer awareness game on epidetective.com. In a sunny cartoon landscape, Sol, a child with spiky orange hair, stands on a grassy platform among sun coins and a star, with a glowing straw hat nearby and a big yellow sun in the sky.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta name="twitter:image:alt" content="Sol &amp; the UV Shield Quest. A sun-safety adventure for ages 6 to 12. A cancer awareness game on epidetective.com. In a sunny cartoon landscape, Sol, a child with spiky orange hair, stands on a grassy platform among sun coins and a star, with a glowing straw hat nearby and a big yellow sun in the sky.">
 <link rel="stylesheet" href="game.css">
+<style>
+  /* links to the rest of EpiDetective: a bar above the title card and the finish card, added by links.js */
+  .gx-modal{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+  .gx-modal>.title-card,.gx-modal>.finish-card{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
+  .gx-bar{flex:none;width:min(560px,100%);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 14px}
+  .gx-bar a{display:inline-flex;align-items:center;min-height:32px;padding:0 6px;margin-left:-6px;color:#fff9e8;font-size:14px;font-weight:800;text-underline-offset:3px}
+  .gx-bar .gx-back{text-decoration:none}
+  .gx-bar .gx-adults{display:flex;flex-wrap:wrap;gap:0 10px}
+  .gx-bar .gx-more{font-weight:600;color:#eadfbd}
+  .gx-bar a:hover,.gx-bar a:focus-visible{text-decoration:underline}
+  .gx-bar a:focus-visible{outline:3px solid #fff9e8;outline-offset:2px;border-radius:4px}
+</style>
 </head>
 <body>
 <h1 class="sr-only">Sol &amp; the UV Shield Quest — a sun-safety game</h1>
 <div id="root"></div>
 <script>if(self!==top||/embed=1/.test(location.search))document.documentElement.classList.add('embedded');</script>
 <script src="game.js"></script>
+<script src="links.js"></script>
 </body>
 </html>

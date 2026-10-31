@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travail et cancer · EpiDetective</title>
 <meta name="description" content="68 agents et métiers du monde du travail que le CIRC a liés à un cancer, regroupés par secteur, avec la classification du CIRC, les cancers concernés et un lien vers chaque fiche. Un projet personnel de Wenxin Wan.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/fr/work.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/work.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/fr/work.html">
 <meta property="og:title" content="Travail et cancer · EpiDetective">
 <meta property="og:description" content="68 agents et métiers du monde du travail que le CIRC a liés à un cancer, regroupés par secteur, avec la classification du CIRC, les cancers concernés et un lien vers chaque fiche. Un projet personnel de Wenxin Wan.">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/work.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Ce que le CIRC a établi, secteur par secteur. Travail et cancer. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC.">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Travail et cancer · EpiDetective">
 <meta name="twitter:description" content="68 agents et métiers du monde du travail que le CIRC a liés à un cancer, regroupés par secteur, avec la classification du CIRC, les cancers concernés et un lien vers chaque fiche. Un projet personnel de Wenxin Wan.">
-<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/work.png">
+<meta name="twitter:image:alt" content="EpiDetective. Ce que le CIRC a établi, secteur par secteur. Travail et cancer. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="../assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Aller au contenu</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Outils</a>
         <a href="../code-against-cancer/?lang=fr">Code contre le cancer</a>
-        <a href="games.html">Jeux de sensibilisation</a>
+        <a href="reading.html">Lire les preuves</a>
+        <a href="games.html">Jeux</a>
         <a href="about.html">À propos</a>
         <a href="about.html#contact">Contact</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="tool-hero plain">
   <div class="wrap">
@@ -266,7 +275,27 @@
 
   <div class="work-find" id="find">
     <p>Introuvable sur cette page ? La recherche de l’outil sur le cancer couvre les 185 agents de la carte, et les 874 autres que le CIRC a évalués sans désigner de localisation de cancer.</p>
-    <a class="btn btn-ghost" href="https://tools.epidetective.com/cancer/?lang=fr">Explorateur des preuves sur le cancer &rarr;</a>
+    <div class="search" data-search data-lang="fr" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+         data-loading="Chargement…" data-none="Aucun résultat. Essayez un mot plus court ou plus simple."
+         data-group-cancer="Explorateur des preuves sur le cancer" data-group-chronic="Atlas des preuves : maladies chroniques" data-group-site="Sur ce site"
+         data-lbl-1="Cause avérée (groupe 1)" data-lbl-2a="Cause probable (groupe 2A)" data-lbl-2b="Cause possible (groupe 2B)" data-lbl-3="Inclassable (groupe 3)"
+         data-lbl-eval="Évalué par le CIRC, sans localisation de cancer indiquée ({vol}, {year})" data-lbl-links="Liens : {n}">
+      <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+        <label class="label search-label" id="site-search-label" for="site-search-q">Chercher un sujet</label>
+        <div class="search-box">
+          <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="Cherchez un cancer, une exposition, une maladie ou un facteur de risque… par exemple : aspartame, AVC, café">
+          <input type="hidden" name="lang" value="fr">
+          <button class="search-go" type="submit"><span class="vh">Chercher un sujet</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+          <p class="search-msg" role="status"></p>
+        </div>
+      </form>
+      <p class="search-try"><span class="label">Essayez</span>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=aspartame&amp;lang=fr" data-q="aspartame">aspartame</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=AVC&amp;lang=fr" data-q="AVC">AVC</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=caf%C3%A9&amp;lang=fr" data-q="café">café</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -306,6 +335,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -316,12 +347,13 @@
       <nav class="menu">
         <a href="index.html#instruments">Outils</a>
         <a href="../code-against-cancer/?lang=fr">Code contre le cancer</a>
-        <a href="games.html">Jeux de sensibilisation</a>
+        <a href="reading.html">Lire les preuves</a>
+        <a href="games.html">Jeux</a>
         <a href="about.html">À propos</a>
         <a href="about.html#contact">Contact</a>
-        <a href="how-we-check.html">Comment nous vérifions</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">Comment nous vérifions</a><a href="about.html#cite">Comment citer</a><a href="how-we-check.html#report">Signaler une erreur</a></p>
     <div class="disc">EpiDetective publie des outils permettant de lire les preuves concernant des populations entières. Ils montrent des tendances au sein de grands groupes de personnes. Pour toute question concernant votre propre santé, adressez-vous à un médecin. Chaque outil indique ses sources.</div>
     <div class="disc affil">EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé, et les opinions exprimées ici n’engagent que leur auteur. Les sources scientifiques utilisées sont citées afin que chacun puisse les vérifier de façon indépendante.</div>
     <div class="foot-bot">
@@ -330,6 +362,6 @@
   </div>
 </footer>
 
-</div>
+<script src="../assets/search.js" defer></script>
 </body>
 </html>

@@ -8,13 +8,25 @@
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="A timeline of Wenxin Wan and the work — degrees, moves, papers, consortium roles, tools and coverage, newest first, each entry linked to its primary source.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/timeline/">
+<link rel="alternate" hreflang="en" href="https://epidetective.com/timeline/">
+<link rel="alternate" hreflang="zh" href="https://epidetective.com/timeline/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://epidetective.com/timeline/">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/timeline/">
 <meta property="og:title" content="Timeline — Wenxin Wan">
 <meta property="og:description" content="Me, and the work: every degree, paper, role, tool and conference record, newest first, linked to primary sources.">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/about.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Cancer epidemiologist. About Wenxin Wan. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/about.png">
+<meta name="twitter:image:alt" content="EpiDetective. Cancer epidemiologist. About Wenxin Wan. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
+<link rel="preload" href="/assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,13 +55,32 @@
 }
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  /* Self-hosted fonts: the same faces as site.css. Literata carries Latin, Latin-ext and Cyrillic; unicode-range keeps the Cyrillic files out of Latin pages. */
+  @font-face{font-family:"Literata";src:url(/assets/literata-latin.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Literata";src:url(/assets/literata-latin-italic.woff2) format("woff2");
+             font-weight:400 800;font-style:italic;font-display:swap;
+             unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Literata";src:url(/assets/literata-latinext.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:"Literata";src:url(/assets/literata-cyr.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Literata";src:url(/assets/literata-cyr-italic.woff2) format("woff2");
+             font-weight:400 800;font-style:italic;font-display:swap;
+             unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"PlexMono";src:url(/assets/plexmono-400.woff2) format("woff2");
+             font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"PlexMono";src:url(/assets/plexmono-600.woff2) format("woff2");
+             font-weight:600;font-style:normal;font-display:swap}
   :root{
     --paper:#F5F4F0;--card:#FFFFFF;--ink:#161713;--ink-soft:#454740;--faint:#6B6E65;
     --rule:rgba(22,23,19,.14);
     --serif:'Literata',Georgia,serif;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --mono:'PlexMono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
@@ -60,20 +91,26 @@
   a{color:inherit}
   .wrap{max-width:960px;margin:0 auto;padding:0 24px}
   :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .skip{position:absolute;top:8px;left:8px;z-index:300;background:var(--ink);color:#fff;padding:8px 14px;font-size:14px;font-weight:600;text-decoration:none}
+  .skip:not(:focus){width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
+  /* header: the wordmark and the languages on the first row, a compact site menu on the second */
   .top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
        backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
-  .mark{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-.015em;text-decoration:none}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:0 16px;flex-wrap:wrap;padding-block:6px}
+  .top-right{display:contents}
+  .mark{display:inline-flex;align-items:center;min-height:32px;font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:-.015em;text-decoration:none}
   .mark span{font-weight:400;font-style:italic}
-  .top-right{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;justify-content:flex-end}
-  .back{font-size:.82rem;text-decoration:none;color:var(--ink-soft)}
-  .back:hover{color:var(--ink);text-decoration:underline}
-  .langs{display:flex;gap:11px;align-items:baseline}
-  .langs button{border:0;background:none;padding:0;cursor:pointer;font-family:inherit;
-                font-size:.76rem;letter-spacing:.03em;color:var(--faint);border-bottom:1px solid transparent}
-  .langs button:hover{color:var(--ink);border-bottom-color:var(--ink)}
-  .langs button[aria-current="true"]{color:var(--ink);font-weight:700;border-bottom:2px solid var(--ink);cursor:default}
+  .langs{margin-left:auto;display:flex;gap:0 2px;align-items:center}
+  .langs button{display:inline-flex;align-items:center;min-height:32px;padding:0 8px;border:0;background:none;cursor:pointer;font-family:inherit;
+                font-size:.8rem;letter-spacing:.03em;color:var(--ink-soft)}
+  .langs button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+  .langs button[aria-current="true"]{color:var(--ink);font-weight:700;text-decoration:underline;
+                text-decoration-thickness:2px;text-underline-offset:5px;cursor:default}
+  .menu{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:0 4px;margin-left:-6px}
+  .menu a{display:inline-flex;align-items:center;min-height:30px;padding:0 6px;font-size:.88rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);text-decoration:none}
+  .menu a:hover{color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px}
+  body.zh .menu a{letter-spacing:0}
 
   .hero .wrap{padding-block:clamp(44px,8vh,76px) 8px}
   .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--faint)}
@@ -82,7 +119,7 @@
   h1 i{font-weight:400}
   .lede{color:var(--ink-soft);max-width:66ch;font-size:1.02rem;margin:18px 0 0}
   body.zh .lede{max-width:36em}
-  .lede a{text-underline-offset:3px}
+  .lede a{display:inline-block;text-underline-offset:3px}
 
   /* the evidence stroke: EpiDetective’s signature mark, a small brand flourish here */
   .stroke{margin:30px 0 0;height:26px}
@@ -98,7 +135,7 @@
   .tl{padding-block:14px 30px}
   .yeargroup{display:grid;grid-template-columns:110px 1fr;gap:0 28px;margin-top:10px}
   .year{font-family:var(--serif);font-weight:600;font-size:1.9rem;letter-spacing:-.02em;
-        color:var(--ink);padding-top:18px;position:sticky;top:64px;align-self:start;line-height:1}
+        color:var(--ink);padding-top:18px;position:sticky;top:78px;align-self:start;line-height:1}
   .ytag{display:inline-block;margin-top:7px;font-family:var(--mono);
         font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
         color:var(--ink-soft);border:1px solid var(--rule);border-radius:999px;padding:3px 9px}
@@ -116,9 +153,9 @@
   .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;font-weight:600;color:var(--faint)}
   body.zh .meta{letter-spacing:.02em}
   .meta b{color:var(--ink);font-weight:600}
-  .item h3{font-size:1.04rem;margin:6px 0 4px;font-weight:700;line-height:1.35}
-  .item h3 button{all:unset;cursor:pointer;display:block;width:100%}
-  .item h3 button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .item h2{font-size:1.04rem;margin:6px 0 4px;font-weight:700;line-height:1.35}
+  .item h2 button{all:unset;cursor:pointer;display:block;width:100%;padding-block:2px;box-sizing:border-box}
+  .item h2 button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   .item p{color:var(--ink-soft);margin:0;font-size:.9rem}
 
   /* overview <-> in-full: the scaling trick. Bodies collapse via the 0fr/1fr
@@ -146,8 +183,8 @@
   .mode-compact .item:not(.open)::before{top:14px}
   .mode-compact .item:not(.open) .head{display:flex;align-items:baseline;gap:12px;min-width:0}
   .mode-compact .item:not(.open) .meta{flex:none;white-space:nowrap;font-size:.66rem}
-  .mode-compact .item:not(.open) h3{flex:1 1 auto;min-width:0;margin:0;font-size:.94rem}
-  .mode-compact .item:not(.open) h3 button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mode-compact .item:not(.open) h2{flex:1 1 auto;min-width:0;margin:0;font-size:.94rem}
+  .mode-compact .item:not(.open) h2 button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.45}
   .mode-compact .item:not(.open) .tog{top:9px}
   /* A segmented control, not another loose chip: joined pill, hairline
      divider, ink-filled active half — a different shape so it reads as a
@@ -163,19 +200,23 @@
   .seg-btn+.seg-btn{border-left:1px solid var(--ink)}
   .seg-btn:hover{color:var(--ink)}
   .seg-btn.active{background:var(--ink);color:var(--paper);cursor:default}
-  .links{margin-top:9px;display:flex;gap:14px;flex-wrap:wrap}
-  .links a{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em;
+  .links{margin-top:5px;display:flex;gap:0 10px;flex-wrap:wrap;margin-left:-4px}
+  .links a{display:inline-flex;align-items:center;min-height:28px;padding-inline:4px;font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.03em;
            text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
   body.zh .links a{font-family:inherit;letter-spacing:0}
   .links a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
 
   .keyline{border-top:1px solid var(--rule);margin-top:26px;padding-block:26px 60px}
-  .keyline p{color:var(--faint);font-size:.8rem;max-width:76ch;margin:0 0 8px}
-  .keyline a{text-underline-offset:3px}
+  .keyline p{color:var(--faint);font-size:.8rem;line-height:1.9;max-width:76ch;margin:0 0 8px}
+  .keyline a{display:inline-block;text-underline-offset:3px}
 
+  @media (max-width:900px){
+    .top{position:static}
+    .year{top:8px}
+  }
   @media (max-width:700px){
-    .top .wrap{padding-block:11px}
-    .back{font-size:.78rem}
+    .menu a{min-height:28px;padding:0 5px;font-size:.85rem}
+    .langs button{min-height:28px}
     .yeargroup{grid-template-columns:1fr;gap:0}
     .year{position:static;font-size:1.5rem;padding:18px 0 0}
     .items{border-left:none;padding-left:0}
@@ -186,25 +227,26 @@
     .mode-compact .items{padding-left:0}
     .mode-compact .item:not(.open) .head{display:block}
     .mode-compact .item:not(.open) .meta{white-space:normal}
-    .mode-compact .item:not(.open) h3{white-space:normal}
-    .mode-compact .item:not(.open) h3 button{overflow:visible;text-overflow:clip;
+    .mode-compact .item:not(.open) h2{white-space:normal}
+    .mode-compact .item:not(.open) h2 button{overflow:visible;text-overflow:clip;
       white-space:normal;text-align:left}
     .view{margin-left:0;width:100%}
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#content" id="skipLink">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="../">Epi<span>Detective</span></a>
+    <a class="mark" id="homeLink" href="../">Epi<span>Detective</span></a>
     <div class="top-right">
-      <a class="back" href="../about.html" id="backLink">&#8592; About the developer</a>
       <nav class="langs" id="langNav" aria-label="Language"></nav>
+      <nav class="menu" id="siteNav" aria-label="EpiDetective"></nav>
     </div>
   </div>
 </header>
 
-<main>
+<main id="content">
   <section class="hero">
     <div class="wrap">
       <div class="eyebrow" id="eyebrow">EpiDetective · The developer’s record</div>
@@ -235,7 +277,9 @@
 
 var STRINGS = {
   en: {
-    back:"← About the developer",
+    skip:"Skip to content",
+    ogAlt:"EpiDetective. Cancer epidemiologist. About Wenxin Wan. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+    nav:["Tools","Code Against Cancer","Reading the evidence","Games","About","Contact"],
     eyebrow:"EpiDetective · The developer’s record",
     h1:'Me, and <i>the work</i>',
     lede:'Degrees, positions, papers, consortium roles, tools, conference records and press coverage, most recent first. Open any entry for the detail, or filter to one kind. Each entry links to its source. Assembled by Wenxin Wan; the full record is at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
@@ -248,7 +292,9 @@ var STRINGS = {
     key2:'EpiDetective is a personal project by Wenxin Wan, independent of IARC and WHO. <a href="../about.html">About the developer</a> · <a href="../about.html#cite">How to cite</a> · <a href="../about.html#contact">Contact</a>'
   },
   zh: {
-    back:"← 关于开发者",
+    skip:"跳到正文",
+    ogAlt:"EpiDetective。癌症流行病学研究者。关于万汶鑫。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+    nav:["工具","防癌守则","读懂证据","小游戏","关于","联系"],
     eyebrow:"EPIDETECTIVE · 开发者档案",
     h1:'我，和<b>我的工作</b>',
     lede:'学位、任职、论文、国际联盟职责、工具、会议记录和媒体报道，按时间倒序排列。点开任意一条可查看详情，也可以只看某一类。每一条都链接到出处。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
@@ -296,12 +342,12 @@ var GROUPS = [
       t:{en:"Cancer Evidence Explorer",zh:"癌症证据探索器"},
       d:{en:"The IARC Monographs' by-site evidence table (185 exposures, 68 cancer types, 469 links) made explorable in ten languages, with each exposure’s scientific record (volume, year, citations) one click away. Counted here: every agent for which IARC’s cancer-site table lists at least limited evidence in people for a named cancer (Volumes 1 to 141), adapted as the tool describes. Search also finds the 874 other agents IARC has evaluated without naming a cancer site, such as coffee (Group 3).",
          zh:"把 IARC《致癌物专论》的按部位证据表（185 种暴露、68 种癌症、469 条关联）变成可探索的工具，提供十种语言，每种暴露的科学档案（卷号、年份、文献）一键可达。统计范围：凡是 IARC 按癌症部位分类的表格（第 1 至 141 卷）对某一种具体癌症列出了至少达到“有限”级别的人类证据的因素，都计入在内，并按本工具的说明作了调整。搜索还能找到 IARC 评估过、但没有指出具体癌症部位的另外 874 种因素，例如咖啡（3 类）。"},
-      links:[[{en:"How it works",zh:"工具说明"},{en:"../explorer.html",zh:"../zh/explorer.html"}]] },
+      links:[[{en:"Open the tool",zh:"打开工具"},{en:"https://tools.epidetective.com/cancer/?lang=en",zh:"https://tools.epidetective.com/cancer/?lang=zh"}],[{en:"How it works",zh:"工具说明"},{en:"../explorer.html",zh:"../zh/explorer.html"}]] },
     { k:"tool", sel:true, date:{en:"Aug 2026",zh:"2026年8月"},
       t:{en:"Chronic Disease Evidence Explorer",zh:"慢性病证据图谱"},
       d:{en:"The sister instrument for everything beyond cancer: 124 risk factors, 45 diseases, 356 graded links and 75 related-outcome links shown for context, drawn from GBD Burden of Proof, Lancet Commissions, pooled cohort consortia and published meta-analyses — forest plots on a shared axis, a per-estimate audit trail, and a 641-source reference index. It is in ten languages and every claim links to its source. Version 1.4 followed in September 2026, after every flagged link had been checked again against its source. Version 2.0 (October 2026) added an operational grading table, a related-outcome layer, a stated review-counting rule and a per-link changelog.",
          zh:"癌症之外的姊妹工具：124 个危险因素、45 种疾病、356 条分级关联和 75 条仅供参考的相关结局关联，取自 GBD Burden of Proof、《柳叶刀》委员会报告、大型队列联盟与已发表的荟萃分析——共享坐标轴的森林图、逐条估计的溯源记录、641 个来源的参考文献索引。提供十种语言，每个论断都链接到出处。2026 年 9 月发布 1.4 版，此前所有被标记的关联都已对照原始来源重新核查。2026 年 10 月发布 2.0 版，新增可操作的分级规则表、相关结局层、明确的综述计数规则和逐条关联的更新记录。"},
-      links:[[{en:"The instruments",zh:"工具一览"},{en:"../#instruments",zh:"../zh/#instruments"}]] },
+      links:[[{en:"Open the tool",zh:"打开工具"},{en:"https://tools.epidetective.com/chronic/?lang=en",zh:"https://tools.epidetective.com/chronic/?lang=zh"}],[{en:"The instruments",zh:"工具一览"},{en:"../#instruments",zh:"../zh/#instruments"}]] },
     { k:"paper", date:{en:"Aug 2026",zh:"2026年8月"}, note:"coauthor",
       t:{en:"The occupational exposome and new-onset COPD: longitudinal analyses of two European cohorts",
          zh:"The occupational exposome and new-onset COPD: longitudinal analyses of two European cohorts"},
@@ -485,9 +531,23 @@ function build(lang){
   });
 
   var site = lang === "zh" ? "../zh/" : "../";
-  var back = document.getElementById("backLink");
-  back.textContent = S.back; back.setAttribute("href", site + "about.html");
-  document.querySelector(".top .mark").setAttribute("href", site);
+  document.getElementById("homeLink").setAttribute("href", site);
+  document.getElementById("skipLink").textContent = S.skip;
+  document.getElementById("siteNav").innerHTML =
+    '<a href="' + site + 'index.html#instruments">' + S.nav[0] + '</a>' +
+    '<a href="../code-against-cancer/' + (lang === "zh" ? '?lang=zh' : '') + '">' + S.nav[1] + '</a>' +
+    '<a href="' + site + 'reading.html">' + S.nav[2] + '</a>' +
+    '<a href="' + site + 'games.html">' + S.nav[3] + '</a>' +
+    '<a href="' + site + 'about.html">' + S.nav[4] + '</a>' +
+    '<a href="' + site + 'about.html#contact">' + S.nav[5] + '</a>';
+  /* each language is its own address: one canonical, the one that names this version */
+  var here = lang === "zh" ? "https://epidetective.com/timeline/?lang=zh" : "https://epidetective.com/timeline/";
+  var cn = document.querySelector('link[rel="canonical"]'); if (cn) cn.setAttribute("href", here);
+  var ou = document.querySelector('meta[property="og:url"]'); if (ou) ou.setAttribute("content", here);
+  /* the share card (the About card) is one image; its description follows the language */
+  ['meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]'].forEach(function(q){
+    var el = document.querySelector(q); if (el) el.setAttribute("content", S.ogAlt);
+  });
   document.getElementById("eyebrow").textContent = S.eyebrow;
   document.getElementById("h1").innerHTML = S.h1;
   document.getElementById("lede").innerHTML = S.lede;
@@ -543,7 +603,7 @@ function build(lang){
         '<span class="tog" aria-hidden="true">+</span>' +
         '<div class="head">' +
         '<div class="meta">' + pick(it.date,lang) + ' · <b>' + S.kinds[it.k] + '</b>' + noteText(it, S) + '</div>' +
-        '<h3><button type="button" aria-expanded="false">' + pick(it.t,lang) + '</button></h3>' +
+        '<h2><button type="button" aria-expanded="false">' + pick(it.t,lang) + '</button></h2>' +
         '</div>' +
         '<div class="body"><div class="inner">' +
         '<p>' + pick(it.d,lang) + '</p>' +
@@ -562,7 +622,7 @@ function build(lang){
       var it = h.closest(".item");
       var open = it.classList.toggle("open");
       it.querySelector(".tog").textContent = open ? "\u2212" : "+";
-      it.querySelector("h3 button").setAttribute("aria-expanded", open ? "true" : "false");
+      it.querySelector("h2 button").setAttribute("aria-expanded", open ? "true" : "false");
     });
   });
   applyMode();
@@ -618,6 +678,11 @@ function setLang(l){
   if (VALID.indexOf(l) < 0 || l === lang) return;
   lang = l;
   try { localStorage.setItem("tl-lang", lang); } catch(e){}
+  /* the address follows the language, so a copied link opens the same version */
+  try {
+    var p = new URLSearchParams(location.search); p.set("lang", l);
+    history.replaceState(null, "", location.pathname + "?" + p.toString() + location.hash);
+  } catch(e){}
   build(lang);
 }
 

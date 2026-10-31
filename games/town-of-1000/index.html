@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A Town of 1,000 — a breast-cancer prevention game on EpiDetective</title>
 <meta name="description" content="A choices game for ages 14 and up: sit on the council of a town of 1,000 women, spend three points of effort each decade, and watch how the town’s projected breast-cancer outcome changes. Every number carries its source.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/games/town-of-1000/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -12,11 +13,19 @@
 <meta property="og:title" content="A Town of 1,000">
 <meta property="og:description" content="Sit on the council of a town of 1,000 women. Spend three points of effort each decade and see how the town’s breast-cancer outcome changes, with the evidence behind every card.">
 <meta property="og:url" content="https://epidetective.com/games/town-of-1000/">
-<meta property="og:image" content="https://epidetective.com/assets/games/town-of-1000-card.jpg">
+<meta property="og:image" content="https://epidetective.com/assets/og/games.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/games.png">
+<meta name="twitter:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
 <link rel="stylesheet" href="game.css">
 </head>
 <body>
-<div id="app" class="app" data-screen="title">
+<nav class="gx-nav" aria-label="EpiDetective"><a href="../../games.html">&larr; EpiDetective games</a></nav>
+<main id="app" class="app" data-screen="title">
 
   <!-- Title -->
   <section class="screen title" id="screen-title">
@@ -32,6 +41,7 @@
       </div>
       <p class="fine">Ages 14 and up · about 8 minutes · keyboard, mouse or touch. Sources are shown with every card.</p>
       <p class="fine" id="best-line" hidden></p>
+      <p class="adults"><a class="adults-main" href="https://tools.epidetective.com/cancer/?lang=en#cancer=Breast" rel="noopener">For adults: the evidence behind this game &rarr;</a> <a class="adults-more" href="https://tools.epidetective.com/cancer/?lang=en#exposure=Alcoholic%20beverages" rel="noopener">Alcoholic drinks</a> <a class="adults-more" href="../../reading.html">Reading the evidence</a></p>
     </div>
     <div class="title-art" id="title-art"></div>
   </section>
@@ -64,7 +74,10 @@
         <div class="dots-card">
           <div class="dots-head">
             <p class="kicker">The town’s 1,000 women</p>
-            <h2 class="dots-title">Projected to age 75</h2>
+            <div class="dots-sub">
+              <h2 class="dots-title">Projected to age 75</h2>
+              <span class="fine">Illustrative model. It forecasts nothing.</span>
+            </div>
           </div>
           <div class="dots" id="dots"></div>
           <div class="figures">
@@ -134,8 +147,9 @@
       <div id="report-body"></div>
       <div class="title-actions">
         <button type="button" class="btn primary" id="btn-again">Play again</button>
-        <a class="btn" href="../../games.html">Back to the games</a>
+        <a class="btn" href="../../games.html">&larr; EpiDetective games</a>
       </div>
+      <p class="adults"><a class="adults-main" href="https://tools.epidetective.com/cancer/?lang=en#cancer=Breast" rel="noopener">For adults: the evidence behind this game &rarr;</a> <a class="adults-more" href="https://tools.epidetective.com/cancer/?lang=en#exposure=Alcoholic%20beverages" rel="noopener">Alcoholic drinks</a> <a class="adults-more" href="../../reading.html">Reading the evidence</a></p>
     </div>
   </section>
 
@@ -175,7 +189,7 @@
     </div>
   </div>
 
-</div>
+</main>
 <script src="art.js"></script>
 <script src="game.js"></script>
 </body>

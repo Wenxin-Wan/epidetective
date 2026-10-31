@@ -4,27 +4,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Lung Detective — a lung-cancer awareness game on EpiDetective</title>
-<meta name="description" content="An investigation game for ages 10 to 16: find the sources of lung-cancer risk in a flat, a street and a building yard, file each one the way IARC does, and fix what can be fixed.">
+<meta name="description" content="An investigation game for ages 10 to 16: find the sources of lung-cancer risk in a flat, a street and a building yard, file each one in the IARC group it belongs to, and fix what can be fixed.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/games/lung-detective/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:title" content="The Lung Detective">
-<meta property="og:description" content="Find the sources of lung-cancer risk in a flat, a street and a building yard. File each one the way IARC does. Fix what can be fixed.">
+<meta property="og:description" content="Find the sources of lung-cancer risk in a flat, a street and a building yard. File each one in its IARC group. Fix what can be fixed.">
 <meta property="og:url" content="https://epidetective.com/games/lung-detective/">
-<meta property="og:image" content="https://epidetective.com/assets/games/lung-detective-card.jpg">
+<meta property="og:image" content="https://epidetective.com/assets/og/games.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/games.png">
+<meta name="twitter:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
 <link rel="stylesheet" href="game.css">
 </head>
 <body>
-<div id="app" class="app" data-screen="title">
+<nav class="gx-nav" aria-label="EpiDetective"><a href="../../games.html">&larr; EpiDetective games</a></nav>
+<main id="app" class="app" data-screen="title">
 
   <!-- Title -->
   <section class="screen title" id="screen-title">
     <div class="title-card">
       <p class="kicker">EpiDetective · cancer awareness game</p>
       <h1>The Lung <em>Detective</em></h1>
-      <p class="subtitle">An investigation in three cases, filed the way IARC files them.</p>
-      <p class="lede">Three places. Twelve clues. Some of them cause lung cancer, some probably do, and some only sound as if they do. Your job: find each one, file it the way scientists at IARC do, and fix what can be fixed.</p>
+      <p class="subtitle">An investigation in three cases, filed by IARC’s groups.</p>
+      <p class="lede">Three places. Twelve clues. Some cause lung cancer, some probably do, one possibly does, and for one the evidence is too thin to say. Your job: find each one, file it the way scientists at IARC do, and fix what can be fixed.</p>
       <ul class="cases" aria-label="The three cases"><li><i>1</i>The flat</li><li><i>2</i>The street</li><li><i>3</i>The building yard</li></ul>
       <div class="title-actions">
         <button type="button" class="btn primary" id="btn-start">Start the investigation</button>
@@ -33,6 +42,7 @@
       </div>
       <p class="fine">Ages 10 to 16 · about 10 minutes · keyboard, mouse or touch. Sources are shown with every clue.</p>
       <p class="fine" id="best-line" hidden></p>
+      <p class="adults"><a class="adults-main" href="https://tools.epidetective.com/cancer/?lang=en#cancer=Lung" rel="noopener">For adults: the evidence behind this game &rarr;</a> <a class="adults-more" href="../../reading.html">Reading the evidence</a></p>
     </div>
     <div class="title-art" aria-hidden="true"><svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs>
@@ -103,7 +113,7 @@
     </header>
 
     <div class="stage-wrap">
-      <div class="scene" id="scene" aria-label="Scene"></div>
+      <div class="scene" id="scene" role="group" aria-label="Scene"></div>
       <div class="tools">
         <ol class="notebook" id="notebook" aria-label="Detective’s notebook: what has been found in this case"></ol>
         <button type="button" class="btn small" id="btn-hint">Give me a hint</button>
@@ -133,8 +143,9 @@
       <div id="report-body"></div>
       <div class="title-actions">
         <button type="button" class="btn primary" id="btn-again">Play again</button>
-        <a class="btn" href="../../games.html">Back to the games</a>
+        <a class="btn" href="../../games.html">&larr; EpiDetective games</a>
       </div>
+      <p class="adults"><a class="adults-main" href="https://tools.epidetective.com/cancer/?lang=en#cancer=Lung" rel="noopener">For adults: the evidence behind this game &rarr;</a> <a class="adults-more" href="../../reading.html">Reading the evidence</a></p>
     </div>
   </section>
 
@@ -144,7 +155,8 @@
       <div class="panel-head"><h2 id="how-title">How to play</h2><button type="button" class="close" data-close aria-label="Close">×</button></div>
       <ol class="steps">
         <li>Each scene hides <b>four clues</b>. Search the picture: a ring appears when your pointer passes over one. On a phone, tap anything that looks suspicious; a miss tells you whether you are warm or cold. The hint button shows one clue if you are stuck.</li>
-        <li>Open a clue and decide how to file it: a <b>known cause</b> of lung cancer (IARC Group 1), a <b>probable cause</b> (Group 2A), or <b>no evidence</b>. A wrong choice costs nothing: you get a nudge and try again.</li>
+        <li>Open a clue and decide how to file it, by IARC’s groups: a <b>known cause</b> of lung cancer (Group 1), a <b>probable cause</b> (Group 2A), a <b>possible cause</b> (Group 2B) or <b>not classifiable</b> (Group 3: the evidence is too limited to say). A wrong choice costs nothing: you get a nudge and try again.</li>
+        <li>Beyond the twelve clues, the street has one myth to check. Open it, read what the evidence says and press <b>Noted</b>.</li>
         <li>Real hazards can be <b>fixed</b>. Each fix raises the clean-air score, and you can watch the smoke or dust clear from the picture.</li>
         <li>Somebody in each scene wants to talk. Pick the reply the evidence supports.</li>
         <li>When all the clues are filed, the case closes and the next one opens. After the third comes <b>the line-up</b>: six clues to file again from memory. Then your report, and your detective rank.</li>
@@ -167,7 +179,7 @@
     </div>
   </div>
 
-</div>
+</main>
 <script src="game.js"></script>
 </body>
 </html>

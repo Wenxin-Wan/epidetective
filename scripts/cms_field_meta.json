@@ -51,10 +51,6 @@
     "label": "HOME — Audience line (bold)",
     "type": "string"
   },
-  "home_lede": {
-    "label": "HOME — Description",
-    "type": "string"
-  },
   "inst_label": {
     "label": "TOOLS — small section label",
     "type": "string"
@@ -1133,6 +1129,234 @@
   },
   "exp_lbl_iarc": {
     "label": "EXPLORER — labels block: link to IARC's list",
+    "type": "string"
+  },
+  "home_personal": {
+    "label": "HOME — Personal-project line under the headline",
+    "type": "text"
+  },
+  "search_label": {
+    "label": "SEARCH — label above the box",
+    "type": "string"
+  },
+  "search_placeholder": {
+    "label": "SEARCH — hint inside the box (no straight double quote, no &)",
+    "type": "string"
+  },
+  "search_try": {
+    "label": "SEARCH — word before the three examples",
+    "type": "string"
+  },
+  "search_ex1": {
+    "label": "SEARCH — example 1 (one word, no & # % or quotes; must find something)",
+    "type": "string"
+  },
+  "search_ex2": {
+    "label": "SEARCH — example 2 (one word, no & # % or quotes; must find something)",
+    "type": "string"
+  },
+  "search_ex3": {
+    "label": "SEARCH — example 3 (one word, no & # % or quotes; must find something)",
+    "type": "string"
+  },
+  "search_group_cancer": {
+    "label": "SEARCH — results heading: cancer tool",
+    "type": "string"
+  },
+  "search_group_chronic": {
+    "label": "SEARCH — results heading: chronic tool",
+    "type": "string"
+  },
+  "search_group_site": {
+    "label": "SEARCH — results heading: pages on this site",
+    "type": "string"
+  },
+  "search_none": {
+    "label": "SEARCH — message when nothing is found",
+    "type": "string"
+  },
+  "search_loading": {
+    "label": "SEARCH — message while the index loads",
+    "type": "string"
+  },
+  "search_lbl_group_1": {
+    "label": "SEARCH — result label: IARC Group 1",
+    "type": "string"
+  },
+  "search_lbl_group_2A": {
+    "label": "SEARCH — result label: IARC Group 2A",
+    "type": "string"
+  },
+  "search_lbl_group_2B": {
+    "label": "SEARCH — result label: IARC Group 2B",
+    "type": "string"
+  },
+  "search_lbl_group_3": {
+    "label": "SEARCH — result label: IARC Group 3",
+    "type": "string"
+  },
+  "search_lbl_eval": {
+    "label": "SEARCH — result label: agent evaluated without a cancer site (keep {vol} and {year})",
+    "type": "string"
+  },
+  "search_lbl_links": {
+    "label": "SEARCH — result label: number of links (keep {n})",
+    "type": "string"
+  },
+  "qa_label": {
+    "label": "HOME — Four questions: small heading",
+    "type": "string"
+  },
+  "qa_q1": {
+    "label": "HOME — Question 1 (aspartame)",
+    "type": "string"
+  },
+  "qa_a1": {
+    "label": "HOME — Answer 1: quoted word for word from the tool entry (en, zh)",
+    "type": "text"
+  },
+  "qa_go1": {
+    "label": "HOME — Answer 1: link to the entry",
+    "type": "string"
+  },
+  "qa_q2": {
+    "label": "HOME — Question 2 (processed meat and smoking)",
+    "type": "string"
+  },
+  "qa_k2": {
+    "label": "HOME — Question 2: EpiDetective's short answer above the quote (one or two sentences)",
+    "type": "text"
+  },
+  "qa_a2": {
+    "label": "HOME — Answer 2: quoted word for word from the tool entries (en, zh)",
+    "type": "text"
+  },
+  "qa_go2": {
+    "label": "HOME — Answer 2: link to the entry",
+    "type": "string"
+  },
+  "qa_go2b": {
+    "label": "HOME — Answer 2: link to the reading guide (relative and absolute risk)",
+    "type": "string"
+  },
+  "qa_q3": {
+    "label": "HOME — Question 3 (job)",
+    "type": "string"
+  },
+  "qa_k3": {
+    "label": "HOME — Question 3: EpiDetective's short answer above the quote (one or two sentences)",
+    "type": "text"
+  },
+  "qa_a3": {
+    "label": "HOME — Answer 3: quoted word for word from the tool entries (en, zh)",
+    "type": "text"
+  },
+  "qa_go3": {
+    "label": "HOME — Answer 3: link to Work and cancer",
+    "type": "string"
+  },
+  "qa_q4": {
+    "label": "HOME — Question 4 (stroke)",
+    "type": "string"
+  },
+  "qa_k4": {
+    "label": "HOME — Question 4: EpiDetective's short answer above the quote (one or two sentences)",
+    "type": "text"
+  },
+  "qa_a4": {
+    "label": "HOME — Answer 4: quoted word for word from the tool entry (en, zh)",
+    "type": "text"
+  },
+  "qa_go4": {
+    "label": "HOME — Answer 4: link to the entry",
+    "type": "string"
+  },
+  "qa_from_cancer": {
+    "label": "HOME — Answers 1 to 3: where the quote comes from",
+    "type": "string"
+  },
+  "qa_from_chronic": {
+    "label": "HOME — Answer 4: where the quote comes from",
+    "type": "string"
+  },
+  "inst_t1_m5": {
+    "label": "Tool 1 — stat 5 (evaluated agents in search)",
+    "type": "string"
+  },
+  "code_home_label": {
+    "label": "HOME — Code card: small label",
+    "type": "string"
+  },
+  "code_home_btn": {
+    "label": "HOME — Code card: button",
+    "type": "string"
+  },
+  "hwc_home_h2": {
+    "label": "HOME — How we check band: heading",
+    "type": "string"
+  },
+  "hwc_home_btn": {
+    "label": "HOME — How we check band: button",
+    "type": "string"
+  },
+  "news_label": {
+    "label": "HOME — What's new: small heading",
+    "type": "string"
+  },
+  "news_1": {
+    "label": "HOME — What's new: item 1 (date · text; shown second)",
+    "type": "text"
+  },
+  "news_2": {
+    "label": "HOME — What's new: item 2 (date · text; shown third)",
+    "type": "text"
+  },
+  "news_3": {
+    "label": "HOME — What's new: item 3, the newest (date · text; shown first)",
+    "type": "text"
+  },
+  "skip_link": {
+    "label": "ALL PAGES — skip link for keyboard users (Skip to content)",
+    "type": "string"
+  },
+  "foot_cite": {
+    "label": "FOOTER — How to cite link",
+    "type": "string"
+  },
+  "foot_report": {
+    "label": "FOOTER — Report an error link (also on the home page)",
+    "type": "string"
+  },
+  "read_see_coffee": {
+    "label": "READING — link: Coffee (cancer tool search, Group 3)",
+    "type": "string"
+  },
+  "games_adults": {
+    "label": "GAMES — link for adults: the evidence behind the game",
+    "type": "string"
+  },
+  "games_g1_card_alt": {
+    "label": "GAMES — card picture, described for screen readers: Sol",
+    "type": "text"
+  },
+  "games_g2_card_alt": {
+    "label": "GAMES — card picture, described for screen readers: The Lung Detective",
+    "type": "text"
+  },
+  "games_g3_card_alt": {
+    "label": "GAMES — card picture, described for screen readers: A Town of 1,000",
+    "type": "text"
+  },
+  "nav_games": {
+    "label": "MENU — Games",
+    "type": "string"
+  },
+  "read_label": {
+    "label": "MENU and READING — Reading the evidence (menu entry, small label)",
+    "type": "string"
+  },
+  "home_games_label": {
+    "label": "HOME — Games section: small label",
     "type": "string"
   }
 }

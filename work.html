@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Work and cancer · EpiDetective</title>
 <meta name="description" content="68 workplace agents and jobs that IARC has linked to a cancer, grouped by sector, with IARC’s label, the cancers concerned and a link to each entry. A personal project by Wenxin Wan.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/work.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/work.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/work.html">
 <meta property="og:title" content="Work and cancer · EpiDetective">
 <meta property="og:description" content="68 workplace agents and jobs that IARC has linked to a cancer, grouped by sector, with IARC’s label, the cancers concerned and a link to each entry. A personal project by Wenxin Wan.">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/work.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. What IARC has found, sector by sector. Work and cancer. A personal project by Wenxin Wan. Data: IARC Monographs.">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Work and cancer · EpiDetective">
 <meta name="twitter:description" content="68 workplace agents and jobs that IARC has linked to a cancer, grouped by sector, with IARC’s label, the cancers concerned and a link to each entry. A personal project by Wenxin Wan.">
-<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/work.png">
+<meta name="twitter:image:alt" content="EpiDetective. What IARC has found, sector by sector. Work and cancer. A personal project by Wenxin Wan. Data: IARC Monographs.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
         <a href="code-against-cancer/">Code Against Cancer</a>
-        <a href="games.html">Cancer awareness games</a>
+        <a href="reading.html">Reading the evidence</a>
+        <a href="games.html">Games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="tool-hero plain">
   <div class="wrap">
@@ -266,7 +275,27 @@
 
   <div class="work-find" id="find">
     <p>Not on this page? The cancer tool’s search covers all 185 agents on the map, and the 874 others IARC evaluated without naming a cancer site.</p>
-    <a class="btn btn-ghost" href="https://tools.epidetective.com/cancer/?lang=en">Cancer Evidence Explorer &rarr;</a>
+    <div class="search" data-search data-lang="en" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+         data-loading="Loading…" data-none="Nothing found. Try a shorter or simpler word."
+         data-group-cancer="Cancer Evidence Explorer" data-group-chronic="Chronic Disease Evidence Explorer" data-group-site="On this site"
+         data-lbl-1="Known cause (Group 1)" data-lbl-2a="Probable cause (Group 2A)" data-lbl-2b="Possible cause (Group 2B)" data-lbl-3="Not classifiable (Group 3)"
+         data-lbl-eval="Evaluated by IARC, no cancer site named ({vol}, {year})" data-lbl-links="Links: {n}">
+      <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+        <label class="label search-label" id="site-search-label" for="site-search-q">Look something up</label>
+        <div class="search-box">
+          <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="Search a cancer, an exposure, a disease or a risk factor… e.g. aspartame, stroke, coffee">
+          <input type="hidden" name="lang" value="en">
+          <button class="search-go" type="submit"><span class="vh">Look something up</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+          <p class="search-msg" role="status"></p>
+        </div>
+      </form>
+      <p class="search-try"><span class="label">Try</span>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=aspartame&amp;lang=en" data-q="aspartame">aspartame</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=stroke&amp;lang=en" data-q="stroke">stroke</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=coffee&amp;lang=en" data-q="coffee">coffee</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -306,6 +335,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -316,12 +347,13 @@
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
         <a href="code-against-cancer/">Code Against Cancer</a>
-        <a href="games.html">Cancer awareness games</a>
+        <a href="reading.html">Reading the evidence</a>
+        <a href="games.html">Games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
-        <a href="how-we-check.html">How we check</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">How we check</a><a href="about.html#cite">How to cite</a><a href="how-we-check.html#report">Report an error</a></p>
     <div class="disc">EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.</div>
     <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>
     <div class="foot-bot">
@@ -330,6 +362,6 @@
   </div>
 </footer>
 
-</div>
+<script src="assets/search.js" defer></script>
 </body>
 </html>

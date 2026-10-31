@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>工作与癌症｜EpiDetective</title>
 <meta name="description" content="IARC 认定与癌症相关的 68 种工作场所因素和职业，按行业分组，列出 IARC 的类别、涉及的癌症，以及每个条目的链接。万汶鑫的个人项目。">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/zh/work.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/work.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/work.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/zh/work.html">
 <meta property="og:title" content="工作与癌症｜EpiDetective">
 <meta property="og:description" content="IARC 认定与癌症相关的 68 种工作场所因素和职业，按行业分组，列出 IARC 的类别、涉及的癌症，以及每个条目的链接。万汶鑫的个人项目。">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/work.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective。IARC 的结论，按行业一览。工作与癌症。万汶鑫的个人项目。数据：《IARC 致癌物专论》。">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="工作与癌症｜EpiDetective">
 <meta name="twitter:description" content="IARC 认定与癌症相关的 68 种工作场所因素和职业，按行业分组，列出 IARC 的类别、涉及的癌症，以及每个条目的链接。万汶鑫的个人项目。">
-<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/work.png">
+<meta name="twitter:image:alt" content="EpiDetective。IARC 的结论，按行业一览。工作与癌症。万汶鑫的个人项目。数据：《IARC 致癌物专论》。">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="../assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">跳到正文</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
         <a href="../code-against-cancer/?lang=zh">防癌守则</a>
-        <a href="games.html">防癌小游戏</a>
+        <a href="reading.html">读懂证据</a>
+        <a href="games.html">小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="tool-hero plain">
   <div class="wrap">
@@ -266,7 +275,27 @@
 
   <div class="work-find" id="find">
     <p>这里没有列出？癌症工具的搜索涵盖地图上的全部 185 种因素，以及 IARC 评估过、但没有指出癌症部位的另外 874 种因素。</p>
-    <a class="btn btn-ghost" href="https://tools.epidetective.com/cancer/?lang=zh">癌症证据探索器 &rarr;</a>
+    <div class="search" data-search data-lang="zh" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+         data-loading="加载中……" data-none="没有找到。试试更短或更简单的词。"
+         data-group-cancer="癌症证据探索器" data-group-chronic="慢性病证据图谱" data-group-site="本站内容"
+         data-lbl-1="已知致癌（1 类）" data-lbl-2a="很可能致癌（2A 类）" data-lbl-2b="可能致癌（2B 类）" data-lbl-3="无法分类（3 类）"
+         data-lbl-eval="IARC 已评估，未指出癌症部位（{vol}，{year} 年）" data-lbl-links="{n} 条关联">
+      <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+        <label class="label search-label" id="site-search-label" for="site-search-q">查一查</label>
+        <div class="search-box">
+          <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="搜索癌症、暴露因素、疾病或风险因素……例如：阿斯巴甜、中风、咖啡">
+          <input type="hidden" name="lang" value="zh">
+          <button class="search-go" type="submit"><span class="vh">查一查</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+          <p class="search-msg" role="status"></p>
+        </div>
+      </form>
+      <p class="search-try"><span class="label">试试</span>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=%E9%98%BF%E6%96%AF%E5%B7%B4%E7%94%9C&amp;lang=zh" data-q="阿斯巴甜">阿斯巴甜</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=%E4%B8%AD%E9%A3%8E&amp;lang=zh" data-q="中风">中风</a>
+        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q=%E5%92%96%E5%95%A1&amp;lang=zh" data-q="咖啡">咖啡</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -306,6 +335,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -316,12 +347,13 @@
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
         <a href="../code-against-cancer/?lang=zh">防癌守则</a>
-        <a href="games.html">防癌小游戏</a>
+        <a href="reading.html">读懂证据</a>
+        <a href="games.html">小游戏</a>
         <a href="about.html">关于</a>
         <a href="about.html#contact">联系</a>
-        <a href="how-we-check.html">我们如何核查</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">我们如何核查</a><a href="about.html#cite">如何引用</a><a href="how-we-check.html#report">报告错误</a></p>
     <div class="disc">EpiDetective 发布的工具，用于阅读人群层面的证据。它们呈现的是大规模人群中的规律。任何涉及你个人健康的问题，请咨询医生。每个工具都会标明各自的资料来源。</div>
     <div class="disc affil">EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书，所表达的观点仅代表作者个人。所依据的科学来源均已注明并可以独立核查。</div>
     <div class="foot-bot">
@@ -330,6 +362,6 @@
   </div>
 </footer>
 
-</div>
+<script src="../assets/search.js" defer></script>
 </body>
 </html>

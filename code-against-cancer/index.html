@@ -8,24 +8,59 @@
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/code-against-cancer/">
+<link rel="alternate" hreflang="en" href="https://epidetective.com/code-against-cancer/">
+<link rel="alternate" hreflang="zh" href="https://epidetective.com/code-against-cancer/?lang=zh">
+<link rel="alternate" hreflang="fr" href="https://epidetective.com/code-against-cancer/?lang=fr">
+<link rel="alternate" hreflang="es" href="https://epidetective.com/code-against-cancer/?lang=es">
+<link rel="alternate" hreflang="ru" href="https://epidetective.com/code-against-cancer/?lang=ru">
+<link rel="alternate" hreflang="x-default" href="https://epidetective.com/code-against-cancer/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EpiDetective">
 <meta property="og:url" content="https://epidetective.com/code-against-cancer/">
 <meta property="og:title" content="Code Against Cancer — EpiDetective">
 <meta property="og:description" content="A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/code.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Summary of the official Codes. Code Against Cancer. A personal project by Wenxin Wan. Source: the official Codes Against Cancer (IARC and partners).">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/code.png">
+<meta name="twitter:image:alt" content="EpiDetective. Summary of the official Codes. Code Against Cancer. A personal project by Wenxin Wan. Source: the official Codes Against Cancer (IARC and partners).">
+<link rel="preload" href="/assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  /* Self-hosted fonts: the same faces as site.css. Literata carries Latin, Latin-ext and Cyrillic; unicode-range keeps the Cyrillic files out of Latin pages. */
+  @font-face{font-family:"Literata";src:url(/assets/literata-latin.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Literata";src:url(/assets/literata-latin-italic.woff2) format("woff2");
+             font-weight:400 800;font-style:italic;font-display:swap;
+             unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Literata";src:url(/assets/literata-latinext.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:"Literata";src:url(/assets/literata-cyr.woff2) format("woff2");
+             font-weight:400 800;font-style:normal;font-display:swap;
+             unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Literata";src:url(/assets/literata-cyr-italic.woff2) format("woff2");
+             font-weight:400 800;font-style:italic;font-display:swap;
+             unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"PlexMono";src:url(/assets/plexmono-400.woff2) format("woff2");
+             font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"PlexMono";src:url(/assets/plexmono-600.woff2) format("woff2");
+             font-weight:600;font-style:normal;font-display:swap}
   :root{
     --chalk:#F5F4F0;--chalk-deep:#EBEAE3;--card:#FFFFFF;--ink:#161713;
     --ink-soft:#454740;--ink-faint:#6B6E65;--madder:#9E2F23;--teal:#161713;
     --teal-soft:#EBEAE3;--rule:rgba(22,23,19,.14);
     --serif:'Literata',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --mono:'PlexMono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--sans);
        font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   body.zh{font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif}
@@ -33,35 +68,36 @@
   a{color:inherit}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
   :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .skip{position:absolute;top:8px;left:8px;z-index:300;background:var(--ink);color:#fff;padding:8px 14px;font-size:14px;font-weight:600;text-decoration:none}
+  .skip:not(:focus){width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-  /* header */
+  /* header: the wordmark and the languages on the first row, the site menu on the second */
   .top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
        backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:14px}
-  .mark{font-family:var(--serif);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;text-decoration:none}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:0 20px;flex-wrap:wrap;padding-block:6px}
+  .top-right{display:contents}
+  .mark{display:inline-flex;align-items:center;min-height:32px;font-family:var(--serif);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;text-decoration:none}
   .mark span{font-weight:450;font-style:italic}
-  .top-right{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
-  .menu{display:flex;gap:22px;flex-wrap:wrap}
-  .menu a{text-decoration:none;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
-          padding-bottom:3px;border-bottom:1.5px solid transparent}
-  .menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+  .langs{margin-left:auto;display:flex;gap:0 2px;flex-wrap:wrap;align-items:center}
+  .menu{flex:1 0 100%;display:flex;gap:0 6px;flex-wrap:wrap;margin-left:-6px}
+  .menu a{display:inline-flex;align-items:center;min-height:32px;padding:0 6px;text-decoration:none;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
+          text-decoration-thickness:1.5px;text-underline-offset:7px}
+  .menu a:hover,.menu a[aria-current]{color:var(--ink);text-decoration:underline}
   body.zh .menu a{letter-spacing:0}
-  .langs{display:flex;gap:11px;flex-wrap:wrap;align-items:baseline;padding-left:20px;border-left:1px solid var(--rule)}
-  /* phone: the menu wraps under the wordmark and the bar scrolls away with the page */
-  @media (max-width:700px){
+  .langs button{display:inline-flex;align-items:center;min-height:32px;border:0;background:none;padding:0 6px;cursor:pointer;font-family:inherit;
+                font-size:.8rem;letter-spacing:.03em;color:var(--ink-soft)}
+  .langs button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+  .langs button[aria-current="true"]{color:var(--ink);font-weight:700;text-decoration:underline;
+                text-decoration-thickness:2px;text-underline-offset:5px;cursor:default}
+  /* below 900px the bar scrolls away with the page; on a phone the rows are tighter */
+  @media (max-width:900px){
     .top{position:static}
-    .top .wrap{gap:8px 20px;padding-block:12px 10px}
-    .top-right{gap:8px 20px}
-    .menu{gap:2px 18px}
-    .menu a{font-size:.92rem;padding-block:5px 3px}
-    .langs{padding-left:0;border-left:0}
   }
-  .langs button{border:0;background:none;padding:0;cursor:pointer;font-family:inherit;
-                font-size:.76rem;letter-spacing:.03em;color:var(--ink-faint);
-                border-bottom:1px solid transparent}
-  .langs button:hover{color:var(--ink);border-bottom-color:var(--ink)}
-  .langs button[aria-current="true"]{color:var(--ink);font-weight:700;
-                border-bottom:2px solid var(--ink);cursor:default}
+  @media (max-width:700px){
+    .menu a{min-height:28px;padding:0 5px;font-size:.9rem}
+    .langs{margin-left:-3px;gap:0}
+    .langs button{min-height:28px;padding:0 3px;font-size:.78rem}
+  }
 
   /* hero */
   .hero{border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
@@ -76,7 +112,7 @@
   .stat b{font-family:var(--serif);font-size:2.2rem;line-height:1;font-weight:600}
   .stat span{display:block;font-size:.8rem;color:#B9BDB2;margin-top:5px;max-width:36ch}
   .statsrc{display:block;margin-top:10px;font-size:.78rem;color:var(--ink-soft);max-width:62ch}
-  .statsrc a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+  .statsrc a{display:inline-block;padding-block:4px;color:inherit;text-decoration:underline;text-underline-offset:3px}
   .statsrc a:hover{color:var(--ink)}
 
   /* framework blurb */
@@ -87,7 +123,7 @@
 
   /* region tabs */
   .regions{padding-bottom:20px}
-  .regions-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .regions-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px;scroll-margin-top:84px}
   .regions-head h2{font-family:var(--serif);font-size:1.3rem;margin:0}
   .tabs{display:flex;gap:8px;flex-wrap:wrap}
   .tab{border:1px solid var(--rule);background:transparent;color:var(--ink-soft);border-radius:999px;
@@ -102,7 +138,7 @@
   .region-meta b{font-family:var(--serif);font-size:1.25rem}
   .region-meta .sub{color:var(--ink-faint);font-size:.82rem;display:block;margin-top:3px}
   .region-meta .partner{color:var(--teal);font-size:.82rem;font-weight:600;display:block;margin-top:5px}
-  .region-meta .official{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:.76rem;font-weight:600;
+  .region-meta .official{display:inline-block;margin-top:5px;padding-block:4px;font-family:var(--mono);font-size:.76rem;font-weight:600;
     letter-spacing:.04em;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
   .region-meta .official:hover{background:var(--ink);color:var(--chalk);text-decoration:none}
   .summary-note{margin:0 0 16px;padding:10px 14px;border:1px dashed var(--rule);border-radius:10px;
@@ -112,13 +148,26 @@
   .badge.dev{color:var(--ink-faint)}
   .badge.pub{color:var(--ink)}
 
-  .recs{display:grid;gap:10px}
+  .recs{display:grid;gap:14px}
+  .rec-item{scroll-margin-top:96px}
+  .rec-item.is-target .rec{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
   .rec{display:grid;grid-template-columns:34px 1fr;gap:14px;background:var(--card);
        border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
   .rec .n{width:34px;height:34px;border-radius:10px;background:var(--teal-soft);color:var(--teal);
           display:grid;place-items:center;font-weight:700;font-size:.82rem}
   .rec h3{font-size:1.02rem;margin:0 0 3px;font-weight:700}
   .rec p{color:var(--ink-soft);margin:0;font-size:.9rem}
+  /* what EpiDetective adds under a card; the card above it is the official text or EpiDetective's summary of it */
+  .links-note{margin:0 0 16px;max-width:70ch;font-size:.8rem;line-height:1.5;color:var(--ink-faint)}
+  .rec-links{margin:6px 0 0;padding:0 4px 0 66px;display:flex;flex-wrap:wrap;gap:2px 20px;font-size:.82rem;line-height:1.45;color:var(--ink-soft)}
+  .rec-links .rl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+  .rec-links b{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink-faint)}
+  body.zh .rec-links b{font-family:inherit;font-size:.78rem;letter-spacing:.02em;text-transform:none}
+  .rec-links a{display:inline-flex;align-items:center;min-height:26px;padding:2px 10px;border:1px solid var(--rule);border-radius:14px;color:var(--ink);text-decoration:none;font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}
+  .rec-links a:hover{border-color:var(--ink);background:var(--card)}
+  .rec-links .why a{padding:2px 0;border:0;border-radius:0;text-decoration:underline;text-underline-offset:3px}
+  .rec-links .why a:hover{background:none;text-decoration-thickness:2px}
+  .rec-links .tag{margin-left:5px;color:var(--ink-faint);font-size:.74rem}
 
   /* disclaimer + sources */
   .disclaimer{border-top:1px solid var(--rule);padding-block:40px 60px}
@@ -128,27 +177,32 @@
   .sources{margin-top:22px}
   .sources h2{font-family:var(--serif);font-size:1.05rem;margin:0 0 10px}
   .sources ul{margin:0;padding-left:18px;display:grid;gap:6px}
-  .sources a{color:var(--teal);text-underline-offset:3px}
+  .sources a{display:inline-block;padding-block:3px;color:var(--teal);text-underline-offset:3px}
   .sources a:hover{color:var(--ink);text-decoration:underline}
   .foot-note{font-size:.78rem;color:var(--ink-faint);margin-top:26px}
 
   @media (max-width:640px){
     .rec{grid-template-columns:30px 1fr;padding:14px}
+    .rec-links{padding-left:58px}
+  }
+  @media (max-width:480px){
+    .rec-links{padding-left:0}
   }
 </style>
 </head>
 <body class="lang-en">
+<a class="skip" href="#content" data-i18n="skip">Skip to content</a>
 <header class="top">
   <div class="wrap">
     <a class="mark" id="homeLink" href="../">Epi<span>Detective</span></a>
     <div class="top-right">
-      <nav class="menu" id="siteNav" aria-label="EpiDetective"></nav>
       <nav class="langs" id="langNav" aria-label="Language"></nav>
+      <nav class="menu" id="siteNav" aria-label="EpiDetective"></nav>
     </div>
   </div>
 </header>
 
-<main>
+<main id="content">
   <section class="hero">
     <div class="wrap">
       <div class="eyebrow" data-i18n="eyebrow">Summary of the official Codes</div>
@@ -173,7 +227,7 @@
 
   <section class="regions">
     <div class="wrap">
-      <div class="regions-head">
+      <div class="regions-head" id="choose">
         <h2 data-i18n="regionsLabel">Choose a region</h2>
         <div class="tabs" id="tabs"></div>
       </div>
@@ -211,13 +265,13 @@
    the list says so. Everything visible is swapped by data-i18n keys; the
    recommendations live in REGIONS and are rendered by build(). */
 var LANG_LIST = [["en","English"],["zh","中文"],["fr","Français"],["es","Español"],["ru","Русский"]];
-/* The site menu, as it reads on every other page: tools, this page, games, about, contact. */
+/* The site menu, as it reads on every other page: tools, this page, the reading guide, games, about, contact. */
 var SITE_NAV = {
-  en:["Tools","Code Against Cancer","Cancer awareness games","About","Contact"],
-  zh:["工具","防癌守则","防癌小游戏","关于","联系"],
-  fr:["Outils","Code contre le cancer","Jeux de sensibilisation","À propos","Contact"],
-  es:["Herramientas","Código contra el cáncer","Juegos de prevención","Acerca de","Contacto"],
-  ru:["Инструменты","Кодекс против рака","Игры о профилактике","Об авторе","Контакты"]
+  en:["Tools","Code Against Cancer","Reading the evidence","Games","About","Contact"],
+  zh:["工具","防癌守则","读懂证据","小游戏","关于","联系"],
+  fr:["Outils","Code contre le cancer","Lire les preuves","Jeux","À propos","Contact"],
+  es:["Herramientas","Código contra el cáncer","Leer la evidencia","Juegos","Acerca de","Contacto"],
+  ru:["Инструменты","Кодекс против рака","Как читать научные данные","Игры","Об авторе","Контакты"]
 };
 
 var STRINGS = {
@@ -227,6 +281,7 @@ var STRINGS = {
     lede:"What you can do to lower your own risk of cancer, according to the regional Codes Against Cancer developed by IARC (the WHO cancer agency) and its partners.",
     personal:"A personal project by Wenxin Wan. Where a Code is published in your language, its text is quoted as published; otherwise this page gives EpiDetective’s summary. Follow the links to the Codes themselves.",
     metaDesc:"A summary of the regional Codes Against Cancer developed by IARC and its partners: what you can do to lower your own cancer risk.",
+    ogAlt:"EpiDetective. Summary of the official Codes. Code Against Cancer. A personal project by Wenxin Wan. Source: the official Codes Against Cancer (IARC and partners).",
     statV:"≈38%", statL:"of cancers can currently be prevented by avoiding risk factors and using existing evidence-based prevention strategies",
     statSrc:"Source: WHO, Cancer fact sheet, 3 July 2026. Checked 20 October 2026.",
     frameworkH:"The World Code Against Cancer Framework",
@@ -245,7 +300,10 @@ var STRINGS = {
     officialSite:"Read the official Code",
     summaryNote:"The official Code has no English edition; below is an EpiDetective summary.",
     devNote:"No Asian Code has been published yet. The ten points below are EpiDetective’s summary of the themes mapped by IARC and ANCCA.",
-    affiliation:"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization."
+    affiliation:"EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization.",
+    skip:"Skip to content", why:"Why", evidence:"See the evidence", tagCancer:"cancer", tagChronic:"chronic disease",
+    noteEu:"The links under each recommendation are EpiDetective’s additions. “Why” opens the scientific paper behind the recommendation (Molecular Oncology, 2026, in English). “See the evidence” opens the matching entry in one of EpiDetective’s two tools.",
+    note:"The links under each recommendation are EpiDetective’s additions. “See the evidence” opens the matching entry in one of EpiDetective’s two tools."
   },
   zh: {
     back:"返回 EpiDetective", eyebrow:"官方防癌守则摘要",
@@ -253,6 +311,7 @@ var STRINGS = {
     lede:"根据 IARC（世界卫生组织国际癌症研究机构）及其合作伙伴制定的各区域《防癌守则》，你可以这样降低自己患癌的风险。",
     personal:"这是万汶鑫的个人项目。某部守则若有官方中文版，本页按其发布的原文引用；若没有，本页给出 EpiDetective 编写的摘要。想阅读守则本身，请点击页面中的链接。",
     metaDesc:"IARC 及其合作伙伴制定的各区域《防癌守则》摘要：你可以怎样降低自己的患癌风险。",
+    ogAlt:"EpiDetective。官方防癌守则摘要。防癌守则。万汶鑫的个人项目。来源：官方防癌守则（IARC 及其合作伙伴）。",
     statV:"约 38%", statL:"的癌症目前可通过避免危险因素和采取现有的循证预防策略加以预防",
     statSrc:"来源：世界卫生组织《癌症》情况说明书（英文），2026 年 7 月 3 日。2026 年 10 月 20 日核查。",
     frameworkH:"世界防癌守则框架",
@@ -271,7 +330,10 @@ var STRINGS = {
     officialSite:"阅读官方守则",
     summaryNote:"官方守则未发布中文版，以下为 EpiDetective 编写的中文摘要。",
     devNote:"亚洲守则尚未发布。以下十条是 EpiDetective 对 IARC 与 ANCCA 已梳理主题的摘要。",
-    affiliation:"EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书。"
+    affiliation:"EpiDetective 是万汶鑫的个人项目，以个人身份创建和维护。本站内容未经国际癌症研究机构（IARC）或世界卫生组织（WHO）审核或背书。",
+    skip:"跳到正文", why:"为什么", evidence:"查看证据", tagCancer:"癌症", tagChronic:"慢性病",
+    noteEu:"每条建议下方的链接由 EpiDetective 添加。“为什么”打开该条建议背后的科学论文（《Molecular Oncology》，2026 年，英文）。“查看证据”打开 EpiDetective 两个工具之一中的对应条目。",
+    note:"每条建议下方的链接由 EpiDetective 添加。“查看证据”打开 EpiDetective 两个工具之一中的对应条目。"
   },
   fr: {
     back:"Retour à EpiDetective", eyebrow:"Résumé des Codes officiels",
@@ -279,6 +341,7 @@ var STRINGS = {
     lede:"Ce que vous pouvez faire pour réduire votre propre risque de cancer, d’après les Codes régionaux contre le cancer élaborés par le CIRC (l’agence de l’OMS spécialisée dans le cancer) et ses partenaires.",
     personal:"Un projet personnel de Wenxin Wan. Quand un Code est publié dans votre langue, son texte est cité tel que publié ; sinon, cette page en donne un résumé d’EpiDetective. Suivez les liens pour lire les Codes eux-mêmes.",
     metaDesc:"Un résumé des Codes régionaux contre le cancer élaborés par le CIRC et ses partenaires : ce que vous pouvez faire pour réduire votre propre risque de cancer.",
+    ogAlt:"EpiDetective. Résumé des Codes officiels. Code contre le cancer. Un projet personnel de Wenxin Wan. Source\u00a0: les Codes officiels contre le cancer (CIRC et partenaires).",
     statV:"≈ 38 %", statL:"des cancers peuvent actuellement être évités en écartant les facteurs de risque et en appliquant les stratégies de prévention existantes fondées sur les preuves",
     statSrc:"Source : OMS, fiche d’information « Cancer » (en anglais), 3 juillet 2026. Consultée le 20 octobre 2026.",
     frameworkH:"Le cadre mondial des Codes contre le cancer",
@@ -297,7 +360,10 @@ var STRINGS = {
     officialSite:"Lire le Code officiel",
     summaryNote:"Le Code officiel de cette région n’est pas publié en français ; ce qui suit est un résumé d’EpiDetective.",
     devNote:"Aucun Code asiatique n’est encore publié. Les dix points ci-dessous résument les thèmes recensés par le CIRC et l’ANCCA.",
-    affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé."
+    affiliation:"EpiDetective est un projet personnel de Wenxin Wan, mené à titre personnel. Ni le Centre international de recherche sur le cancer ni l’Organisation mondiale de la Santé ne l’ont approuvé.",
+    skip:"Aller au contenu", why:"Pourquoi", evidence:"Voir les preuves", tagCancer:"cancer", tagChronic:"maladies chroniques",
+    noteEu:"Les liens sous chaque recommandation ont été ajoutés par EpiDetective. « Pourquoi » ouvre l’article scientifique qui étaye la recommandation (Molecular Oncology, 2026, en anglais). « Voir les preuves » ouvre l’entrée correspondante dans l’un des deux outils d’EpiDetective.",
+    note:"Les liens sous chaque recommandation ont été ajoutés par EpiDetective. « Voir les preuves » ouvre l’entrée correspondante dans l’un des deux outils d’EpiDetective."
   },
   es: {
     back:"Volver a EpiDetective", eyebrow:"Resumen de los Códigos oficiales",
@@ -305,6 +371,7 @@ var STRINGS = {
     lede:"Lo que puedes hacer para reducir tu propio riesgo de cáncer, según los Códigos regionales contra el cáncer elaborados por el CIIC (la agencia de la OMS especializada en el cáncer) y sus socios.",
     personal:"Un proyecto personal de Wenxin Wan. Cuando un Código se publica en tu idioma, su texto se cita tal como se publicó; si no, esta página ofrece un resumen de EpiDetective. Sigue los enlaces para llegar a los propios Códigos.",
     metaDesc:"Un resumen de los Códigos regionales contra el cáncer elaborados por el CIIC y sus socios: lo que puedes hacer para reducir tu propio riesgo de cáncer.",
+    ogAlt:"EpiDetective. Resumen de los Códigos oficiales. Código contra el cáncer. Un proyecto personal de Wenxin Wan. Fuente: los Códigos oficiales contra el Cáncer (CIIC y socios).",
     statV:"≈ 38 %", statL:"de los cánceres pueden prevenirse actualmente evitando los factores de riesgo y aplicando las estrategias de prevención existentes basadas en la evidencia",
     statSrc:"Fuente: OMS, nota descriptiva «Cáncer» (en inglés), 3 de julio de 2026. Consultada el 20 de octubre de 2026.",
     frameworkH:"El marco mundial de los Códigos contra el cáncer",
@@ -323,7 +390,10 @@ var STRINGS = {
     officialSite:"Leer el Código oficial",
     summaryNote:"El Código oficial de esta región no se publica en español; lo que sigue es un resumen de EpiDetective.",
     devNote:"Todavía no se ha publicado ningún Código asiático. Los diez puntos siguientes resumen los temas identificados por el CIIC y la ANCCA.",
-    affiliation:"EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud."
+    affiliation:"EpiDetective es un proyecto personal de Wenxin Wan, realizado a título personal. No cuenta con el respaldo del Centro Internacional de Investigaciones sobre el Cáncer ni de la Organización Mundial de la Salud.",
+    skip:"Ir al contenido", why:"Por qué", evidence:"Ver la evidencia", tagCancer:"cáncer", tagChronic:"enfermedades crónicas",
+    noteEu:"Los enlaces bajo cada recomendación los ha añadido EpiDetective. «Por qué» abre el artículo científico en que se apoya la recomendación (Molecular Oncology, 2026, en inglés). «Ver la evidencia» abre la entrada correspondiente en una de las dos herramientas de EpiDetective.",
+    note:"Los enlaces bajo cada recomendación los ha añadido EpiDetective. «Ver la evidencia» abre la entrada correspondiente en una de las dos herramientas de EpiDetective."
   },
   ru: {
     back:"Назад к EpiDetective", eyebrow:"Краткое изложение официальных Кодексов",
@@ -331,6 +401,7 @@ var STRINGS = {
     lede:"Что можно сделать, чтобы снизить собственный риск рака, по рекомендациям региональных Кодексов против рака, разработанных МАИР (агентством ВОЗ по изучению рака) и его партнёрами.",
     personal:"Личный проект Вэньсинь Вань. Если Кодекс опубликован на вашем языке, его текст приводится так, как он опубликован; если нет, на этой странице дано краткое изложение, подготовленное EpiDetective. Перейдите по ссылкам к самим Кодексам.",
     metaDesc:"Краткое изложение региональных Кодексов против рака, разработанных МАИР и его партнёрами: что можно сделать, чтобы снизить собственный риск рака.",
+    ogAlt:"EpiDetective. Краткое изложение официальных кодексов. Кодекс против рака. Личный проект Вэньсинь Вань. Источник: официальные кодексы против рака (МАИР и партнёры).",
     statV:"≈ 38 %", statL:"случаев рака сейчас можно предотвратить, избегая факторов риска и применяя существующие профилактические стратегии, основанные на доказательствах",
     statSrc:"Источник: ВОЗ, информационный бюллетень «Рак» (на английском языке), 3 июля 2026 г. Проверено 20 октября 2026 г.",
     frameworkH:"Всемирная рамочная программа Кодексов против рака",
@@ -349,7 +420,10 @@ var STRINGS = {
     officialSite:"Читать официальный Кодекс",
     summaryNote:"Официальный Кодекс не публикуется на русском языке; ниже — краткое изложение, подготовленное EpiDetective.",
     devNote:"Азиатский кодекс ещё не опубликован. Десять пунктов ниже — краткое изложение тем, намеченных МАИР и ANCCA.",
-    affiliation:"EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения."
+    affiliation:"EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения.",
+    skip:"Перейти к содержимому", why:"Почему", evidence:"Посмотреть данные", tagCancer:"рак", tagChronic:"хронические болезни",
+    noteEu:"Ссылки под каждой рекомендацией добавлены EpiDetective. «Почему» открывает научную статью, на которой основана рекомендация (Molecular Oncology, 2026, на английском). «Посмотреть данные» открывает соответствующую запись в одном из двух инструментов EpiDetective.",
+    note:"Ссылки под каждой рекомендацией добавлены EpiDetective. «Посмотреть данные» открывает соответствующую запись в одном из двух инструментов EpiDetective."
   }
 };
 
@@ -1114,12 +1188,166 @@ var REGIONS = [
   }
 ];
 
+/* REC-LINKS:BEGIN generated by records/b7-pages/gen_rec_links.py: the links EpiDetective adds under each card. They are not part of the official texts in REGIONS. */
+var WHY = {
+  tob:{doi:"10.1002/1878-0261.70177",t:{"en":"Tobacco, nicotine products, second-hand smoke and alcohol","zh":"烟草与含尼古丁的产品、二手烟和酒精","fr":"Tabac et produits contenant de la nicotine, tabagisme passif et alcool","es":"Tabaco y productos con nicotina, humo de tabaco ajeno y alcohol","ru":"Табак, никотинсодержащие продукты, пассивное курение и алкоголь"}},
+  diet:{doi:"10.1002/1878-0261.70201",t:{"en":"Diet, body weight, physical activity, sitting and breastfeeding","zh":"饮食、体重、身体活动、久坐和母乳喂养","fr":"Alimentation, poids corporel, activité physique, sédentarité et allaitement","es":"Dieta, peso corporal, actividad física, sedentarismo y lactancia materna","ru":"Питание, масса тела, физическая активность, сидячий образ жизни и грудное вскармливание"}},
+  uv:{doi:"10.1002/1878-0261.70171",t:{"en":"Ultraviolet radiation and radon","zh":"紫外线辐射与氡","fr":"Rayonnement ultraviolet et radon","es":"Radiación ultravioleta y radón","ru":"Ультрафиолетовое излучение и радон"}},
+  occ:{doi:"10.1002/1878-0261.70174",t:{"en":"Exposures at work","zh":"工作场所的暴露","fr":"Expositions professionnelles","es":"Exposiciones laborales","ru":"Воздействия на рабочем месте"}},
+  air:{doi:"10.1002/1878-0261.70184",t:{"en":"Outdoor and indoor air pollution","zh":"室外与室内空气污染","fr":"Pollution de l’air extérieur et intérieur","es":"Contaminación del aire exterior e interior","ru":"Загрязнение наружного и внутреннего воздуха"}},
+  inf:{doi:"10.1002/1878-0261.70172",t:{"en":"Infections that cause cancer, and how to prevent or treat them","zh":"致癌的感染，及其预防与治疗","fr":"Infections qui causent des cancers, et comment les prévenir ou les traiter","es":"Infecciones que causan cáncer, y cómo prevenirlas o tratarlas","ru":"Инфекции, вызывающие рак, и способы их профилактики и лечения"}},
+  hrt:{doi:"10.1002/1878-0261.70158",t:{"en":"Hormone replacement therapy and other common medical treatments","zh":"激素替代疗法与其他常用药物治疗","fr":"Traitement hormonal substitutif et autres traitements médicaux courants","es":"Terapia hormonal sustitutiva y otros tratamientos médicos frecuentes","ru":"Заместительная гормональная терапия и другие распространённые виды лечения"}},
+  scr:{doi:"10.1002/1878-0261.70197",t:{"en":"Organised cancer screening programmes","zh":"有组织的癌症筛查项目","fr":"Programmes organisés de dépistage du cancer","es":"Programas organizados de cribado del cáncer","ru":"Организованные программы скрининга рака"}}
+};
+/* entry key -> [tool, kind, id, name per language]; tool "site" is a page of this site */
+var EV = {
+  tobacco:["cancer","exposure","Tobacco smoking",{"en":"Tobacco smoking","zh":"吸烟","fr":"Tabagisme","es":"Tabaquismo","ru":"Курение табака"}],
+  shs_c:["cancer","exposure","Tobacco smoke, secondhand",{"en":"Secondhand smoke","zh":"二手烟","fr":"Tabagisme passif","es":"Humo de tabaco ajeno","ru":"Вторичный табачный дым"}],
+  smoking:["chronic","risk","smoking",{"en":"Current cigarette smoking","zh":"现在吸烟","fr":"Tabagisme actuel","es":"Tabaquismo actual","ru":"Текущее курение сигарет"}],
+  shs:["chronic","risk","shs",{"en":"Secondhand smoke","zh":"二手烟","fr":"Tabagisme passif","es":"Humo de tabaco ajeno","ru":"Пассивное курение"}],
+  ecigs:["chronic","risk","ecigs",{"en":"E-cigarette use","zh":"使用电子烟","fr":"Usage de la cigarette électronique","es":"Uso de cigarrillos electrónicos","ru":"Использование электронных сигарет"}],
+  bmi:["chronic","risk","high_bmi",{"en":"High body-mass index","zh":"体质指数偏高","fr":"IMC élevé","es":"Índice de masa corporal (IMC) alto","ru":"Высокий индекс массы тела"}],
+  pa:["chronic","risk","low_pa",{"en":"Low physical activity","zh":"身体活动不足","fr":"Activité physique insuffisante","es":"Actividad física insuficiente","ru":"Недостаток физической активности"}],
+  sedentary:["chronic","risk","sedentary",{"en":"Sedentary behaviour","zh":"久坐行为","fr":"Sédentarité","es":"Sedentarismo","ru":"Сидячий образ жизни"}],
+  procmeat:["cancer","exposure","Processed meat",{"en":"Processed meat","zh":"加工肉类","fr":"Viande transformée","es":"Carne procesada","ru":"Обработанное мясо"}],
+  redmeat:["cancer","exposure","Red meat",{"en":"Red meat","zh":"红肉","fr":"Viande rouge","es":"Carne roja","ru":"Красное мясо"}],
+  wholegrain:["chronic","risk","low_wholegrain",{"en":"Low whole grain intake","zh":"全谷物摄入不足","fr":"Faible apport en céréales complètes","es":"Bajo consumo de cereales integrales","ru":"Низкое потребление цельнозерновых продуктов"}],
+  alcohol:["cancer","exposure","Alcoholic beverages",{"en":"Alcoholic drinks","zh":"酒精饮料","fr":"Boissons alcoolisées","es":"Bebidas alcohólicas","ru":"Алкогольные напитки"}],
+  alcohol_heavy:["chronic","risk","alcohol_heavy",{"en":"Heavy alcohol use","zh":"大量饮酒","fr":"Consommation excessive d’alcool","es":"Consumo elevado de alcohol","ru":"Чрезмерное употребление алкоголя"}],
+  breastfeeding:["chronic","risk","breastfeeding",{"en":"Breastfeeding","zh":"母乳喂养","fr":"Allaitement","es":"Lactancia materna","ru":"Грудное вскармливание"}],
+  solar:["cancer","exposure","Solar radiation",{"en":"Sunlight (UV radiation)","zh":"太阳辐射（紫外线）","fr":"Rayonnement solaire (UV)","es":"Radiación solar (rayos UV)","ru":"Солнечное излучение (УФ)"}],
+  tanning:["cancer","exposure","UV-emitting tanning devices",{"en":"Tanning beds (UV)","zh":"日光浴床（紫外线美黑设备）","fr":"Cabines de bronzage UV","es":"Camas solares (UV)","ru":"Солярии (УФ-излучение)"}],
+  work:["site","page","work.html",{"en":"Work and cancer","zh":"工作与癌症","fr":"Travail et cancer","es":"Trabajo y cáncer","ru":"Работа и рак"}],
+  asbestos:["cancer","exposure","Asbestos (all forms)",{"en":"Asbestos","zh":"石棉","fr":"Amiante","es":"Amianto (asbesto)","ru":"Асбест"}],
+  silica:["cancer","exposure","Silica dust, crystalline (quartz/cristobalite)",{"en":"Silica dust (quartz or cristobalite)","zh":"结晶型二氧化硅粉尘（石英或方石英）","fr":"Poussière de silice cristalline (quartz ou cristobalite)","es":"Polvo de sílice cristalina (cuarzo o cristobalita)","ru":"Кристаллическая кремнезёмная пыль (кварц или кристобалит)"}],
+  radon:["cancer","exposure","Radon-222 & decay products",{"en":"Radon gas","zh":"氡气","fr":"Radon","es":"Gas radón","ru":"Радон (газ)"}],
+  airpoll:["cancer","exposure","Outdoor air pollution",{"en":"Outdoor air pollution","zh":"室外空气污染","fr":"Pollution atmosphérique extérieure","es":"Contaminación del aire exterior","ru":"Загрязнение атмосферного воздуха"}],
+  pm25:["chronic","risk","pm25",{"en":"Fine particulate air pollution","zh":"细颗粒物空气污染","fr":"Particules fines (PM2,5)","es":"Contaminación por partículas finas (PM2,5)","ru":"Мелкодисперсные частицы (PM2,5)"}],
+  hpv:["cancer","exposure","Human papillomavirus (types 16,18,31,33,35,39,45,51,52,56,58,59)",{"en":"High-risk HPV","zh":"高危型人乳头瘤病毒（HPV）","fr":"HPV à haut risque","es":"VPH de alto riesgo","ru":"ВПЧ высокого онкогенного риска"}],
+  hbv:["cancer","exposure","Hepatitis B virus (chronic)",{"en":"Hepatitis B virus (long-term)","zh":"慢性乙型肝炎病毒感染","fr":"Virus de l'hépatite B (chronique)","es":"Virus de la hepatitis B (crónica)","ru":"Вирус гепатита B (хроническая инфекция)"}],
+  hcv:["cancer","exposure","Hepatitis C virus (chronic)",{"en":"Hepatitis C virus (long-term)","zh":"慢性丙型肝炎病毒感染","fr":"Virus de l'hépatite C (chronique)","es":"Virus de la hepatitis C (crónica)","ru":"Вирус гепатита C (хроническая инфекция)"}],
+  hiv:["cancer","exposure","Human immunodeficiency virus type 1",{"en":"HIV-1","zh":"人类免疫缺陷病毒1型（HIV-1）","fr":"VIH-1","es":"VIH-1","ru":"ВИЧ-1"}],
+  hrt:["cancer","exposure","Estrogen-progestogen menopausal therapy",{"en":"Combined HRT (menopause)","zh":"绝经激素治疗（雌孕激素联合）","fr":"Traitement hormonal de la ménopause (œstrogènes et progestatif)","es":"Terapia hormonal combinada (menopausia)","ru":"Комбинированная гормонотерапия (менопауза)"}],
+  mht:["chronic","risk","mht",{"en":"Menopausal hormone therapy","zh":"绝经激素治疗","fr":"Traitement hormonal de la ménopause","es":"Terapia hormonal de la menopausia","ru":"Менопаузальная гормональная терапия"}],
+  hotdrinks:["cancer","exposure","Very hot beverages (>65C)",{"en":"Very hot drinks (above ~65°C)","zh":"很烫的饮品（约65°C以上）","fr":"Boissons très chaudes (plus de 65 °C)","es":"Bebidas muy calientes (más de 65 °C)","ru":"Очень горячие напитки (выше 65 °C)"}],
+  upf:["chronic","risk","upf",{"en":"Ultra-processed food","zh":"超加工食品","fr":"Aliments ultra-transformés","es":"Alimentos ultraprocesados","ru":"Ультрапереработанные продукты"}],
+  ssb:["chronic","risk","ssb",{"en":"Sugar-sweetened drinks","zh":"含糖饮料","fr":"Boissons sucrées","es":"Bebidas azucaradas","ru":"Сладкие напитки"}],
+  coal:["cancer","exposure","Coal, indoor emissions from household combustion",{"en":"Indoor coal smoke","zh":"室内燃煤烟雾","fr":"Fumée de charbon en intérieur","es":"Humo de carbón en interiores","ru":"Дым от сжигания угля в помещении"}],
+  wood:["cancer","exposure","Biomass fuel (wood), indoor combustion emissions",{"en":"Indoor wood smoke","zh":"室内燃木烟雾","fr":"Fumée de bois en intérieur","es":"Humo de leña en interiores","ru":"Дым от сжигания дров в помещении"}],
+  hap:["chronic","risk","hap",{"en":"Household air pollution","zh":"家庭空气污染","fr":"Pollution de l’air à l’intérieur des logements","es":"Contaminación del aire doméstico","ru":"Загрязнение воздуха в жилище"}],
+  hpylori:["cancer","exposure","Helicobacter pylori",{"en":"Helicobacter pylori (stomach bacterium)","zh":"幽门螺杆菌（胃部细菌）","fr":"Helicobacter pylori (bactérie de l'estomac)","es":"Helicobacter pylori (bacteria del estómago)","ru":"Helicobacter pylori (бактерия желудка)"}],
+  saltfish:["cancer","exposure","Salted fish, Chinese-style",{"en":"Chinese-style salted fish","zh":"中式咸鱼","fr":"Poisson salé à la chinoise","es":"Pescado salado al estilo chino","ru":"Солёная рыба по-китайски"}],
+  pesticides:["chronic","risk","pesticides",{"en":"Pesticide exposure","zh":"农药暴露","fr":"Exposition aux pesticides","es":"Exposición a plaguicidas","ru":"Воздействие пестицидов"}]
+};
+/* per region, one entry per card in card order: [why key or null, [entry keys]] */
+var REC_LINKS = {
+  europe:[
+    ["tob",["tobacco","smoking","ecigs"]],
+    ["tob",["shs_c","shs"]],
+    ["diet",["bmi"]],
+    ["diet",["pa","sedentary"]],
+    ["diet",["procmeat","redmeat","wholegrain"]],
+    ["tob",["alcohol","alcohol_heavy"]],
+    ["diet",["breastfeeding"]],
+    ["uv",["solar","tanning"]],
+    ["occ",["work","asbestos","silica"]],
+    ["uv",["radon"]],
+    ["air",["airpoll","pm25"]],
+    ["inf",["hpv","hbv"]],
+    ["hrt",["hrt","mht"]],
+    ["scr",[]]
+  ],
+  lac:[
+    [null,["tobacco","smoking","ecigs"]],
+    [null,["shs_c","shs"]],
+    [null,["bmi"]],
+    [null,["pa","sedentary"]],
+    [null,["hotdrinks","upf","ssb"]],
+    [null,["alcohol","alcohol_heavy"]],
+    [null,["breastfeeding"]],
+    [null,["solar"]],
+    [null,["coal","wood","hap"]],
+    [null,["airpoll","pm25"]],
+    [null,["work","asbestos","silica"]],
+    [null,["hpylori"]],
+    [null,["hbv","hcv","hpv","hiv"]],
+    [null,["hrt","mht"]],
+    [null,[]],
+    [null,[]],
+    [null,[]]
+  ],
+  asia:[
+    [null,["tobacco","shs_c","smoking"]],
+    [null,["bmi"]],
+    [null,["pa","sedentary"]],
+    [null,["procmeat","redmeat","saltfish"]],
+    [null,["alcohol","alcohol_heavy"]],
+    [null,["work","asbestos","silica"]],
+    [null,["airpoll","pesticides","radon"]],
+    [null,["hpv","hbv"]],
+    [null,[]],
+    [null,["breastfeeding"]]
+  ]
+};
+/* REC-LINKS:END */
+
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function escA(s){return esc(s).replace(/"/g,"&quot;");}
 function i18n(key,lang){
   var t = STRINGS[lang] || STRINGS.en;
   return t[key] != null ? t[key] : STRINGS.en[key];
 }
 function pick(o,lang){return o[lang] != null ? o[lang] : o.en;}
+
+var VALID = ["en","zh","fr","es","ru"];
+var PAGE = "https://epidetective.com/code-against-cancer/";
+/* The address of this page in a language: the canonical URL of that version. English has no query. */
+function langUrl(l){ return l === "en" ? PAGE : PAGE + "?lang=" + l; }
+
+/* Links into the tools: the hash form plus ?lang=, written the way tool_link() in build_site.py writes it
+   (everything after the # is percent-encoded). Both tools read this form, now and after they gain path routes. */
+var TOOL_ROOT = { cancer: "https://tools.epidetective.com/cancer/", chronic: "https://tools.epidetective.com/chronic/" };
+function enc(s){ return encodeURIComponent(s).replace(/[!'()*]/g, function(c){ return "%" + c.charCodeAt(0).toString(16).toUpperCase(); }); }
+function toolUrl(tool, kind, id, lang){ return TOOL_ROOT[tool] + "?lang=" + lang + "#" + kind + "=" + enc(id); }
+
+/* The line of links under one card. n counts from 1. It is built apart from the card, so the official card HTML stays as it was. */
+function recLinks(rid, n, lang, base){
+  var spec = (REC_LINKS[rid] || [])[n-1];
+  if (!spec) return "";
+  var out = "", w = spec[0] && WHY[spec[0]], ev = spec[1] || [];
+  if (w) {
+    out += '<span class="rl why"><b>'+esc(i18n("why",lang))+'</b>'+
+      '<a href="https://doi.org/'+w.doi+'" target="_blank" rel="noopener" data-doi="'+w.doi+'"><span>'+esc(pick(w.t,lang))+'<span aria-hidden="true"> ↗</span></span></a></span>';
+  }
+  if (ev.length) {
+    out += '<span class="rl ev"><b>'+esc(i18n("evidence",lang))+'</b>'+ev.map(function(k){
+      var e = EV[k], site = e[0] === "site";
+      var href = site ? base + e[2] : toolUrl(e[0], e[1], e[2], lang);
+      var tag = site ? "" : ' <span class="tag">· '+esc(i18n(e[0] === "cancer" ? "tagCancer" : "tagChronic", lang))+'</span>';
+      return '<a href="'+escA(href)+'" data-tool="'+e[0]+'" data-kind="'+e[1]+'" data-id="'+escA(e[2])+'"><span>'+esc(pick(e[3],lang))+tag+'<span aria-hidden="true"> →</span></span></a>';
+    }).join("")+'</span>';
+  }
+  return out ? '<p class="rec-links">'+out+'</p>' : "";
+}
+
+function setMeta(sel, attr, val){ var el = document.querySelector(sel); if (el) el.setAttribute(attr, val); }
+
+/* The region shown, kept in the address as #europe, #lac or #asia (a card as #europe-3). */
+var current = REGIONS[0].id;
+function parseHash(){
+  var m = /^#([a-z]+)(?:-(\d+))?$/.exec(location.hash || "");
+  if (!m) return null;
+  for (var i = 0; i < REGIONS.length; i++) {
+    if (REGIONS[i].id === m[1]) {
+      var n = m[2] ? parseInt(m[2], 10) : 0;
+      return { region: m[1], card: (n >= 1 && n <= REGIONS[i].recs.length) ? n : 0 };
+    }
+  }
+  return null;
+}
+function writeUrl(search, hash){
+  try { history.replaceState(null, "", location.pathname + search + (hash ? "#" + hash : "")); } catch(e){}
+}
 
 function build(lang){
   document.body.classList.toggle("zh", lang==="zh");
@@ -1128,6 +1356,14 @@ function build(lang){
   document.title = i18n("title", lang) + " — EpiDetective";
   var md = document.querySelector('meta[name="description"]');
   if (md) md.setAttribute("content", i18n("metaDesc", lang));
+  /* each language is its own address: one canonical, the one that names this version */
+  setMeta('link[rel="canonical"]', "href", langUrl(lang));
+  setMeta('meta[property="og:url"]', "content", langUrl(lang));
+  setMeta('meta[property="og:title"]', "content", i18n("title", lang) + " — EpiDetective");
+  setMeta('meta[property="og:description"]', "content", i18n("metaDesc", lang));
+  /* the share card is the same image in every language; its description follows the language */
+  setMeta('meta[property="og:image:alt"]', "content", i18n("ogAlt", lang));
+  setMeta('meta[name="twitter:image:alt"]', "content", i18n("ogAlt", lang));
 
   /* site menu: the links lead to this language's own pages */
   var base = lang === "en" ? "../" : "../" + lang + "/", labels = SITE_NAV[lang] || SITE_NAV.en;
@@ -1135,9 +1371,10 @@ function build(lang){
   document.getElementById("siteNav").innerHTML =
     '<a href="'+base+'index.html#instruments">'+esc(labels[0])+'</a>'+
     '<a href="./" aria-current="page">'+esc(labels[1])+'</a>'+
-    '<a href="'+base+'games.html">'+esc(labels[2])+'</a>'+
-    '<a href="'+base+'about.html">'+esc(labels[3])+'</a>'+
-    '<a href="'+base+'about.html#contact">'+esc(labels[4])+'</a>';
+    '<a href="'+base+'reading.html">'+esc(labels[2])+'</a>'+
+    '<a href="'+base+'games.html">'+esc(labels[3])+'</a>'+
+    '<a href="'+base+'about.html">'+esc(labels[4])+'</a>'+
+    '<a href="'+base+'about.html#contact">'+esc(labels[5])+'</a>';
 
   /* language switcher */
   var nav = document.getElementById("langNav");
@@ -1163,6 +1400,7 @@ function build(lang){
 
   REGIONS.forEach(function(r){
     var b = document.createElement("button");
+    b.type = "button";
     b.className = "tab"; b.textContent = pick(r.name, lang);
     b.setAttribute("data-region", r.id);
     b.addEventListener("click", function(){ select(r.id); });
@@ -1182,7 +1420,7 @@ function build(lang){
       : '';
     var meta = '<div class="region-meta"><b>'+esc(pick(r.name,lang))+'</b>'+badge+
       '<span class="sub">'+esc(pick(r.status,lang))+" · "+esc(count)+'</span>'+
-      '<span class="partner">'+i18n("coordinated",lang)+(lang==="zh"?"：":lang==="fr"?"\u202f: ":": ")+esc(pick(r.partner,lang))+'</span>'+official+'</div>';
+      '<span class="partner">'+i18n("coordinated",lang)+(lang==="zh"?"：":lang==="fr"?" : ":": ")+esc(pick(r.partner,lang))+'</span>'+official+'</div>';
 
     /* published Codes without an official edition in this language get the
        summary notice; the in-development region’s badge already says enough */
@@ -1192,29 +1430,54 @@ function build(lang){
         ? '<p class="summary-note">'+esc(i18n("summaryNote",lang))+'</p>'
         : '';
 
+    /* the links under the cards are EpiDetective's own; say so once, above the list */
+    var linksNote = '<p class="links-note">'+esc(i18n(r.id === "europe" ? "noteEu" : "note", lang))+'</p>';
+
+    /* each card keeps its official markup; a separate line of links follows it, and the wrapper carries the anchor (#europe-3) */
     var cards = r.recs.map(function(rec, i){
-      return '<div class="rec"><div class="n">'+(i+1)+'</div>'+
-        '<div><h3>'+esc(pick(rec[0],lang))+'</h3><p>'+esc(pick(rec[1],lang))+'</p></div></div>';
+      return '<div class="rec-item" id="'+r.id+'-'+(i+1)+'"><div class="rec"><div class="n">'+(i+1)+'</div>'+
+        '<div><h3>'+esc(pick(rec[0],lang))+'</h3><p>'+esc(pick(rec[1],lang))+'</p></div></div>'+
+        recLinks(r.id, i+1, lang, base)+'</div>';
     }).join("");
 
-    sec.innerHTML = meta + note + '<div class="recs">'+cards+'</div>';
+    sec.innerHTML = meta + note + linksNote + '<div class="recs">'+cards+'</div>';
     holder.appendChild(sec);
   });
 
-  select(REGIONS[0].id, true);
+  select(current, true);
+  /* a language switch rebuilds the cards; the one the address names stays marked */
+  var h = parseHash();
+  if (h && h.card) { var t = document.getElementById(h.region + "-" + h.card); if (t) t.classList.add("is-target"); }
 }
 
 function select(id, silent){
+  current = id;
   REGIONS.forEach(function(r){
     var on = r.id===id;
     document.getElementById("region-"+r.id).classList.toggle("active", on);
   });
   document.querySelectorAll(".tab").forEach(function(t){
-    t.classList.toggle("active", t.getAttribute("data-region")===id);
+    var on = t.getAttribute("data-region")===id;
+    t.classList.toggle("active", on);
+    t.setAttribute("aria-pressed", on ? "true" : "false");
   });
+  if (!silent) writeUrl(location.search, id);
 }
 
-var VALID = ["en","zh","fr","es","ru"];
+/* Show what the address asks for: the region, and for #europe-3 that card, marked for a moment. */
+function showHash(first){
+  var h = parseHash();
+  if (!h) return;
+  select(h.region, true);
+  var old = document.querySelector(".rec-item.is-target");
+  if (old) old.classList.remove("is-target");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var el = h.card ? document.getElementById(h.region + "-" + h.card) : document.getElementById("choose");
+  if (!el) return;
+  if (h.card) el.classList.add("is-target");
+  el.scrollIntoView({ block: h.card ? "center" : "start", behavior: (first || reduce) ? "auto" : "smooth" });
+}
+
 var lang = "en";
 try {
   var fromQuery = new URLSearchParams(location.search).get("lang");
@@ -1232,10 +1495,17 @@ function setLang(l){
   if (VALID.indexOf(l) < 0 || l === lang) return;
   lang = l;
   try { localStorage.setItem("cac-lang", lang); } catch(e){}
+  /* the address follows the language, so a copied link opens the same version */
+  var p = new URLSearchParams(location.search); p.set("lang", l);
+  writeUrl("?" + p.toString(), location.hash.replace(/^#/, ""));
   build(lang);
 }
 
+var hash0 = parseHash();
+if (hash0) current = hash0.region;
 build(lang);
+if (hash0) showHash(true);
+window.addEventListener("hashchange", function(){ showHash(false); });
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Как читать научные данные о здоровье — EpiDetective</title>
 <meta name="description" content="Семь идей, которые помогают взвесить новость о здоровье: опасность и риск, относительный и абсолютный риск, связь и причина, случайность и систематическая ошибка, интервал вокруг оценки, что значит «нет доказательств», популяции и отдельные люди. С разобранным примером и обозначениями обоих инструментов рядом друг с другом.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/ru/reading.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/reading.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/reading.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/ru/reading.html">
 <meta property="og:title" content="Как читать научные данные о здоровье — EpiDetective">
 <meta property="og:description" content="Семь идей, которые помогают взвесить новость о здоровье: опасность и риск, относительный и абсолютный риск, связь и причина, случайность и систематическая ошибка, интервал вокруг оценки, что значит «нет доказательств», популяции и отдельные люди. С разобранным примером и обозначениями обоих инструментов рядом друг с другом.">
-<meta property="og:image" content="https://epidetective.com/assets/og.png">
+<meta property="og:image" content="https://epidetective.com/assets/og/reading.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Семь идей. Как читать научные данные о здоровье. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Как читать научные данные о здоровье — EpiDetective">
 <meta name="twitter:description" content="Семь идей, которые помогают взвесить новость о здоровье: опасность и риск, относительный и абсолютный риск, связь и причина, случайность и систематическая ошибка, интервал вокруг оценки, что значит «нет доказательств», популяции и отдельные люди. С разобранным примером и обозначениями обоих инструментов рядом друг с другом.">
-<meta name="twitter:image" content="https://epidetective.com/assets/og.png">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/reading.png">
+<meta name="twitter:image:alt" content="EpiDetective. Семь идей. Как читать научные данные о здоровье. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="../assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Перейти к содержимому</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
-        <a href="games.html">Игры о профилактике</a>
+        <a href="reading.html" aria-current="page">Как читать научные данные</a>
+        <a href="games.html">Игры</a>
         <a href="about.html">Об авторе</a>
         <a href="about.html#contact">Контакты</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="tool-hero plain">
   <div class="wrap">
@@ -112,6 +121,8 @@
       <div>
         <h2>«Установить не удалось» и «это безопасно» — два разных вывода.</h2>
         <p>Когда МАИР относит фактор к Группе 3 («не классифицируется»), обычно это значит, что исследований было слишком мало или они были слишком слабыми, чтобы сделать вывод в ту или другую сторону. Это описание состояния доказательств. Группа 3 используется и тогда, когда убедительные доказательства показывают, что механизм, которым фактор вызывает рак у животных, не действует у людей, а других оснований для более высокой группы нет. После Преамбулы 2019 года у МАИР больше нет Группы 4 («вероятно, не канцерогенен»), и факторы, которые раньше могли бы попасть туда, теперь относят к Группе 3. Чтобы показать безопасность, нужны крупные тщательные исследования, которые искали вред и не нашли его.</p>
+        <p class="see"><span class="k">Посмотреть данные</span>
+          <a href="https://tools.epidetective.com/cancer/?lang=ru&amp;q=Coffee%2C%20drinking">Кофе (группа 3)</a></p>
       </div>
     </div>
     <div class="read" id="populations">
@@ -228,10 +239,12 @@
     <div class="inst-actions" style="margin-top:30px">
       <a class="btn btn-solid" href="https://tools.epidetective.com/cancer/?lang=ru">Атлас доказательств — рак &rarr;</a>
       <a class="btn btn-ghost" href="https://tools.epidetective.com/chronic/?lang=ru">Атлас доказательств — хронические болезни &rarr;</a>
-      <a class="btn btn-ghost" href="games.html">Игры о профилактике &rarr;</a>
+      <a class="btn btn-ghost" href="games.html">Игры &rarr;</a>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="foot">
   <div class="wrap">
@@ -243,12 +256,13 @@
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
         <a href="../code-against-cancer/?lang=ru">Кодекс против рака</a>
-        <a href="games.html">Игры о профилактике</a>
+        <a href="reading.html">Как читать научные данные</a>
+        <a href="games.html">Игры</a>
         <a href="about.html">Об авторе</a>
         <a href="about.html#contact">Контакты</a>
-        <a href="how-we-check.html">Как мы проверяем</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">Как мы проверяем</a><a href="about.html#cite">Как цитировать</a><a href="how-we-check.html#report">Сообщить об ошибке</a></p>
     <div class="disc affil">EpiDetective — личный проект Вэньсинь Вань, созданный в личном качестве. Он не имеет одобрения Международного агентства по изучению рака или Всемирной организации здравоохранения, и высказанные здесь взгляды принадлежат исключительно автору. Использованные научные источники указаны, чтобы каждый мог проверить их самостоятельно.</div>
     <div class="foot-bot">
       <span>Создано Вэньсинь Вань &mdash; Лион, Франция</span>
@@ -256,6 +270,10 @@
   </div>
 </footer>
 
-</div>
+<script>
+addEventListener('beforeprint', function () {
+  Array.prototype.forEach.call(document.querySelectorAll('details'), function (d) { d.open = true; });
+});
+</script>
 </body>
 </html>

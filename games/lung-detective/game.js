@@ -10,7 +10,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 /* ------------------------------------------------------------------ sources */
 const IARC_LIST = 'https://monographs.iarc.who.int/list-of-classifications';
 const SRC = {
-  who:      { t: 'WHO fact sheet, Lung cancer (2026): tobacco accounts for 60 to 70% of preventable cases worldwide, and for a larger share in Europe', u: 'https://www.who.int/news-room/fact-sheets/detail/lung-cancer' },
+  who:      { t: 'WHO fact sheet, Lung cancer (16 April 2026): the majority of preventable lung-cancer cases are attributable to tobacco smoking (60 to 70%)', u: 'https://www.who.int/news-room/fact-sheets/detail/lung-cancer' },
   m100e:    { t: 'IARC Monographs Vol. 100E (evaluated 2009, published 2012): tobacco smoking and second-hand tobacco smoke, Group 1', u: IARC_LIST },
   m83:      { t: 'IARC Monographs Vol. 83 (evaluated 2002, published 2004): people who never smoked but live with a smoker have a lung-cancer risk about 20 to 30% higher; exposure at work raises it by about 12 to 19%', u: IARC_LIST },
   darby:    { t: 'Darby et al., BMJ 2005;330:223: radon in homes raises lung-cancer risk by about 16% for every 100 Bq/m³ of long-term average concentration; the absolute risk is about 25 times higher in smokers than in never-smokers', u: 'https://doi.org/10.1136/bmj.38308.477650.63' },
@@ -22,6 +22,7 @@ const SRC = {
   m100c:    { t: 'IARC Monographs Vol. 100C (evaluated 2009, published 2012): asbestos (all forms) and crystalline silica dust, Group 1', u: IARC_LIST },
   m118:     { t: 'IARC Monographs Vol. 118 (evaluated 2017, published 2018): welding fumes, Group 1', u: IARC_LIST },
   m103:     { t: 'IARC Monographs Vol. 103 (evaluated 2011, published 2013): exposure to oxidized bitumens and their emissions during roofing, Group 2A', u: IARC_LIST },
+  m103b:    { t: 'IARC Monographs Vol. 103 (evaluated 2011, published 2013): hard bitumens and their emissions during mastic asphalt work, Group 2B, with limited evidence in people for lung cancer; road paving is rated separately', u: IARC_LIST },
   coffee:   { t: 'Loomis et al., Lancet Oncology 2016;17:877: the evidence on coffee drinking was inadequate, so it is not classifiable as to its carcinogenicity (Group 3)', u: 'https://doi.org/10.1016/S1470-2045(16)30239-X' },
   stress:   { t: 'Heikkilä et al., BMJ 2013;346:f165: among 116,000 European workers followed for 12 years, work stress (job strain) was not significantly associated with lung cancer', u: 'https://doi.org/10.1136/bmj.f165' },
   code:     { t: 'European Code Against Cancer, 5th edition (IARC / WHO)', u: 'https://cancer-code-europe.iarc.who.int/' },
@@ -40,16 +41,17 @@ const CODE = {
   c14: { n: 14, h: 'Take part in screening', t: 'Take part in organized cancer screening programmes, as recommended in your country, for: Bowel cancer. Breast cancer. Cervical cancer. Lung cancer.' },
 };
 const BINS = [
-  { id: 'known',    label: 'Known cause',    sub: 'IARC Group 1: strong evidence in people' },
-  { id: 'probable', label: 'Probable cause', sub: 'IARC Group 2A: probably causes cancer' },
-  { id: 'none',     label: 'No evidence',    sub: 'Not shown to cause lung cancer' },
+  { id: 'known',    label: 'Known cause',      sub: 'IARC Group 1: strong evidence in people' },
+  { id: 'probable', label: 'Probable cause',   sub: 'IARC Group 2A: probably causes cancer' },
+  { id: 'possible', label: 'Possible cause',   sub: 'IARC Group 2B: a link is possible but the evidence is weak' },
+  { id: 'unclass',  label: 'Not classifiable', sub: 'IARC Group 3: evidence too limited to say' },
 ];
 
 /* ------------------------------------------------------------------ clues */
 const CLUES = {
   ashtray: { scene: 0, name: 'Ashtray on the coffee table', bin: 'known',
     desc: 'Cigarette ends, and the sofa smells of smoke. Somebody smokes in here most evenings, and everybody else in the flat breathes it.',
-    why: 'Tobacco smoke is a known cause of lung cancer, and so is breathing other people’s smoke. Smoking causes most lung cancers: WHO puts tobacco’s share at 60 to 70% of preventable cases worldwide, and in Europe it is higher. People who never smoked but live with a smoker have a risk around a fifth to a third higher.',
+    why: 'Tobacco smoke is a known cause of lung cancer, and so is breathing other people’s smoke. Smoking causes most lung cancers: WHO puts tobacco’s share at 60 to 70% of preventable cases worldwide. People who never smoked but live with a smoker have a risk around a fifth to a third higher.',
     hint: 'This is the single best-established cause of lung cancer there is.',
     src: ['who', 'm100e', 'm83'], code: 'c2',
     fix: { label: 'Make the flat smoke-free', result: 'Smoking moves outside, windows open. The flat is smoke-free for everyone who lives here.' } },
@@ -65,9 +67,9 @@ const CLUES = {
     hint: 'IARC evaluated this in 2006 and published it in 2010: strong evidence, but short of certain.',
     src: ['m95'], code: null,
     fix: { label: 'Extractor on, window open', result: 'The fumes go outside instead of into the room.' } },
-  coffee: { scene: 0, name: 'The coffee machine', bin: 'none',
+  coffee: { scene: 0, name: 'The coffee machine', bin: 'unclass',
     desc: 'A note on the machine, in the flatmate’s handwriting: “Coffee causes cancer, I read it online.”',
-    why: 'IARC reviewed more than 1,000 studies in 2016 and found the evidence inadequate to say whether drinking coffee causes cancer. It is filed as Group 3 (“not classifiable”), which is a statement about the evidence rather than a finding of safety. What IARC did flag is very hot drinks, above 65°C, as a probable cause of cancer of the oesophagus, which is about temperature and has nothing to do with lungs.',
+    why: 'IARC reviewed more than 1,000 studies in 2016. It found the evidence too limited to say whether drinking coffee causes cancer, so it files coffee in Group 3, “not classifiable”. For cancers of the pancreas, liver, breast, womb lining and prostate, the evidence suggests no link. Very hot drinks, above 65°C, are another matter: IARC rates them a probable cause of cancer of the oesophagus, which is about temperature and has nothing to do with the lungs.',
     hint: 'IARC reviewed this in 2016. Think about what they found.',
     src: ['coffee'], code: null, fix: null },
   bus: { scene: 1, name: 'Buses idling at the stop', bin: 'known',
@@ -88,11 +90,12 @@ const CLUES = {
     hint: 'IARC filed coal smoke and wood smoke differently. Which is this?',
     src: ['m95'], code: 'c11',
     fix: { label: 'Cleaner heating', result: 'The stove is replaced with a cleaner heater. No more smoke rolling down the street.' } },
-  poster: { scene: 1, name: 'Poster: “Stress gives you cancer”', bin: 'none',
-    desc: 'A poster for a relaxation app claims that stress causes cancer, lung cancer included.',
-    why: 'When 116,000 European workers were followed for 12 years, those with the most stressful jobs were no more likely, within the study’s precision, to develop lung cancer than the rest. Stress is worth managing for many reasons, and there is no good evidence that it causes lung cancer.',
-    hint: 'What happened when researchers actually followed stressed workers for years?',
-    src: ['stress'], code: null, fix: null },
+  mastic: { scene: 1, name: 'Hot mastic asphalt laid on the pavement', bin: 'possible',
+    desc: 'A crew is resurfacing the pavement outside the vape shop. A kettle of hot mastic asphalt steams beside them, and one worker spreads it by hand with a wooden float, breathing the fumes.',
+    why: 'Fumes from hard bitumen during mastic asphalt work are a possible cause of lung cancer (IARC Group 2B). IARC found limited evidence in people, from studies of roofers and mastic asphalt workers. That puts it one step below “probable”. Road paving is rated separately: for paving, IARC found the evidence in people inadequate. A cooler kettle, working upwind and a respirator reduce the exposure.',
+    hint: 'IARC evaluated bitumen work in 2011. The evidence in people was limited, one step below probable.',
+    src: ['m103b'], code: 'c9',
+    fix: { label: 'Cooler kettle, respirators', result: 'The kettle is turned down, the crew works upwind of the fumes and everyone wears a respirator. Far less fume reaches the workers.' } },
   silica: { scene: 2, name: 'Dry-cutting paving stones', bin: 'known',
     desc: 'A worker cuts paving stones with a dry saw. A cloud of fine dust drifts across the yard. No water, no extraction, no mask.',
     why: 'Fine crystalline silica dust, from cutting stone, concrete or brick, is a known cause of lung cancer. Wet cutting, dust extraction and a proper respirator keep it out of the lungs. In the EU, employers are legally required to control these exposures.',
@@ -118,7 +121,15 @@ const CLUES = {
     src: ['m103'], code: 'c9',
     fix: { label: 'Cooler kettle, respirators', result: 'Temperature down, kettle moved downwind, respirators on. Far less fume reaches the roofers.' } },
 };
-const CLUE_ORDER = { 0: ['ashtray', 'radon', 'frying', 'coffee'], 1: ['bus', 'terrace', 'woodsmoke', 'poster'], 2: ['silica', 'asbestos', 'welding', 'bitumen'] };
+const CLUE_ORDER = { 0: ['ashtray', 'radon', 'frying', 'coffee'], 1: ['bus', 'terrace', 'woodsmoke', 'mastic'], 2: ['silica', 'asbestos', 'welding', 'bitumen'] };
+/* A myth is a hotspot that is read and noted. It has no drawer, takes no part in the line-up and is not counted among the clues. */
+const MYTHS = {
+  poster: { scene: 1, name: 'Poster: “Stress gives you cancer”',
+    desc: 'A poster for a relaxation app claims that stress causes cancer, lung cancer included.',
+    verdict: 'Not evaluated by IARC.',
+    why: 'Work stress is not on IARC’s list, so it has no group. Researchers have still looked. When 116,000 European workers were followed for 12 years, those with the most stressful jobs were no more likely, within the study’s precision, to develop lung cancer than the rest. Stress is worth managing for many reasons. There is no good evidence that it causes lung cancer.',
+    src: ['stress'] },
+};
 
 /* ------------------------------------------------------------------ talks */
 const TALKS = {
@@ -376,6 +387,7 @@ function welder(x, y, o = {}) {
 /* Hotspot: keeps the contract the logic relies on (.hot > .halo, art, .ring, .badge)
    and adds a hover/focus tooltip (.tip) plus a second, static ring. */
 function hot(id, cx, cy, r, inner, label, badgeLeft = false) {
+  const myth = !!MYTHS[id];
   const short = label.replace(/^Inspect:\s*/i, '').replace(/^\w/, c => c.toUpperCase());
   const w = Math.round(short.length * 6.9 + 22);
   const above = cy - r - 34 > 8;
@@ -383,12 +395,12 @@ function hot(id, cx, cy, r, inner, label, badgeLeft = false) {
   const tx = Math.max(w / 2 + 6, Math.min(960 - w / 2 - 6, cx));
   // the "filed" badge sits upper right, unless something drawn later would cover it there
   const bx = badgeLeft ? cx - r * .7 - 46 : Math.min(cx + r * .7, 960 - 58);
-  return `<g class="hot" data-id="${id}" data-cx="${cx}" data-cy="${cy}" data-r="${r}" tabindex="0" role="button" aria-label="${esc(label)}">
+  return `<g class="hot${myth ? ' myth' : ''}" data-id="${id}" data-cx="${cx}" data-cy="${cy}" data-r="${r}" tabindex="0" role="button" aria-label="${esc(label)}">
     <circle class="halo" cx="${cx}" cy="${cy}" r="${r + 26}" fill="url(#halo)"/>${inner}
     <circle class="ring2" cx="${cx}" cy="${cy}" r="${r}"/>
     <circle class="ring" cx="${cx}" cy="${cy}" r="${r}"/>
     <g class="tip" transform="translate(${tx} ${ty})"><path d="M-5 ${above ? 10 : -10} l5 ${above ? 6 : -6} l5 ${above ? -6 : 6}z" fill="#161713"/><rect x="${-w / 2}" y="-10" width="${w}" height="20" rx="10" fill="#161713"/><text x="0" y="4" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing=".08em" fill="#F5F4F0">${esc(short.toUpperCase())}</text></g>
-    <g class="badge" transform="translate(${bx} ${cy - r * .7})"><g class="badge-in"><rect x="-6" y="-11" width="58" height="22" rx="11" fill="#161713"/><circle cx="6" cy="0" r="7" fill="#F5F4F0"/><path d="M2 0 l3 3 l5 -6" fill="none" stroke="#161713" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="17" y="4" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" letter-spacing=".1em" fill="#F5F4F0">FILED</text></g></g>
+    <g class="badge" transform="translate(${bx} ${cy - r * .7})"><g class="badge-in"><rect x="-6" y="-11" width="58" height="22" rx="11" fill="#161713"/><circle cx="6" cy="0" r="7" fill="#F5F4F0"/><path d="M2 0 l3 3 l5 -6" fill="none" stroke="#161713" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="17" y="4" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" letter-spacing=".1em" fill="#F5F4F0">${myth ? 'NOTED' : 'FILED'}</text></g></g>
   </g>`;
 }
 function label(x, y, text, cls = 'txt small') { return `<text class="${cls}" x="${x}" y="${y}">${esc(text)}</text>`; }
@@ -491,6 +503,21 @@ function sceneFlat() {
   </svg>`;
 }
 
+/* The street's fourth clue: a small crew laying hot mastic asphalt on the pavement (IARC Group 2B).
+   Origin of the drawing is the scene's own 960×540 space; the fumes carry data-haz, the respirator sign data-fix. */
+function masticCrew(p) {
+  return `${shadow(700, 404, 70, 6, .2)}
+    <path d="M652 378 H742 L754 402 H640 Z" fill="#2B2B28"/><path d="M652 378 H742 L754 402 H640 Z" fill="none" stroke="#161713" stroke-width="2" opacity=".45"/>
+    <path d="M664 386 H728 M660 394 H738" stroke="#55554F" stroke-width="2" opacity=".55"/>
+    <g transform="translate(641 406)"><path d="M0 0 l6 -22 l6 22z" fill="#E8863A"/><path d="M2.5 -10 h7" stroke="#F5F4F0" stroke-width="3"/><rect x="-2" y="-1" width="16" height="4" rx="1" fill="#2B2B28"/></g>
+    ${kneel(698, 399, { top: P.blueDeep, vest: true, hat: 'hard', hatCol: '#F5F4F0', skin: P.skin3, face: 'flat', s: .64 })}
+    <g transform="translate(726 396)"><rect x="-15" y="-2" width="30" height="5" rx="2" fill="${P.woodLight}"/><rect x="-3" y="-9" width="5" height="8" rx="1" fill="${P.woodDeep}"/></g>
+    <g>${shadow(764, 404, 26, 4, .2)}<path d="M750 394 l-12 8" stroke="#43494E" stroke-width="4" stroke-linecap="round"/><rect x="750" y="354" width="30" height="46" rx="6" fill="#3A3A36"/><rect x="750" y="372" width="30" height="4" fill="#5D5F5C"/><ellipse cx="765" cy="354" rx="15" ry="5" fill="#2B2B28"/><rect x="773" y="334" width="6" height="22" fill="#2B2B28"/><rect x="770" y="330" width="12" height="6" rx="2" fill="#43494E"/>
+      <circle cx="756" cy="402" r="6" fill="#2B2B28"/><circle cx="774" cy="402" r="6" fill="#2B2B28"/><ellipse cx="765" cy="394" rx="9" ry="4" fill="url(#${p}-ember)"/><path class="flame" d="M759 398 q3 -8 6 0 q3 -7 6 0" fill="none" stroke="#F2A14E" stroke-width="2.5" stroke-linecap="round"/></g>
+    <g data-haz="mastic">${smoke(776, 330, { n: 5, col: '#8C8F87', dx: 36, dy: -90, r: 7, dur: 4.2, op: .55, grow: 2.6, p })}${wisps(690, 380, { n: 3, h: 38, col: '#C9C5BC', gap: 14, w: 2, op: .7 })}</g>
+    <g data-fix="mastic"><rect x="660" y="352" width="3" height="28" fill="#43494E"/><circle cx="661.5" cy="346" r="12" fill="#3E5C7A"/><path d="M653 342 Q661.5 338 670 342 L668 350 Q661.5 356 655 350 Z" fill="#F5F4F0"/><circle cx="655.6" cy="349.5" r="3.2" fill="#F5F4F0" stroke="#3E5C7A" stroke-width="1.2"/><circle cx="667.4" cy="349.5" r="3.2" fill="#F5F4F0" stroke="#3E5C7A" stroke-width="1.2"/><path d="M653 342 L650.5 340 M670 342 L672.5 340" stroke="#F5F4F0" stroke-width="1.5" stroke-linecap="round"/></g>`;
+}
+
 /* ---- scene 1: the street. Afternoon sun from the upper right. */
 function bus(x, y, o = {}) {
   const { w = 344, num = '12', dest = 'RING ROAD', col = '#3E5C7A', p = 's' } = o;
@@ -527,7 +554,7 @@ function sceneStreet() {
   const scallops = Array.from({ length: 12 }, (_, i) => `<path d="M${22 + i * 24} 248 a12 8 0 0 0 24 0z" fill="${i % 2 ? P.terra : '#F5F4F0'}"/>`).join('');
   const stripes = Array.from({ length: 12 }, (_, i) => `<rect x="${22 + i * 24}" y="226" width="24" height="22" fill="${i % 2 ? P.terra : '#F5F4F0'}"/>`).join('');
   const bottles = [[578, '#7FE3D6'], [592, '#FF8FB1'], [606, '#F2C14E'], [620, '#7FB2C9'], [634, '#B5A0C8'], [648, '#7FE3D6'], [662, '#FF8FB1']].map(([x, c]) => `<rect x="${x}" y="286" width="9" height="20" rx="2" fill="${c}"/><rect x="${x + 2}" y="282" width="5" height="5" fill="#2B2B28"/>`).join('') + [[582, '#2B2B28'], [604, '#5D5F5C'], [626, '#2B2B28'], [648, '#5D5F5C']].map(([x, c]) => `<rect x="${x}" y="254" width="6" height="18" rx="2" fill="${c}"/><rect x="${x + 10}" y="258" width="12" height="14" rx="2" fill="${c}"/>`).join('');
-  return `<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A street: a café terrace where a man smokes next to a family, a corner house with a wood stove and a smoking chimney, a vape shop, a poster on a wall, and two diesel buses idling at a stop">
+  return `<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A street: a café terrace where a man smokes next to a family, a corner house with a wood stove and a smoking chimney, a vape shop, a poster on a wall, a crew laying hot mastic asphalt on the pavement, and two diesel buses idling at a stop">
     ${defs(p, `<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".6" stop-color="#FFFFFF" stop-opacity=".45"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
       <filter id="${p}-neon" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`)}
     <!-- sky, sun, clouds, distant town -->
@@ -619,6 +646,8 @@ function sceneStreet() {
       <g transform="translate(6 -2) rotate(52)"><path d="M-14 -50 Q-14 -58 -6 -58 H12 Q20 -58 20 -50 L18 -2 H-14Z" fill="${P.ochre}"/><rect x="-3" y="-66" width="10" height="14" fill="${P.skin2}"/>${head(3, -72, { skin: P.skin2, style: 'cap', hatCol: P.teal, face: 'flat' })}</g>
       <path d="M28 -34 L42 -22 L46 -12" fill="none" stroke="${P.ochre}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="47" cy="-12" r="4.5" fill="${P.skin2}"/>
     </g>
+    <!-- hot mastic asphalt on the pavement -->
+    ${hot('mastic', 700, 366, 50, masticCrew(p), 'Inspect: the crew laying hot mastic asphalt')}
     <!-- buses on the road -->
     ${bus(252, 414, { w: 334, num: '7', dest: 'STATION', col: '#3E5C7A', p })}
     <g data-haz="bus">${smoke(246, 500, { n: 4, col: '#4E4E4A', dx: -50, dy: -28, r: 7, dur: 3.2, op: .55, grow: 2.4, p })}</g>
@@ -727,7 +756,7 @@ const ART = [sceneFlat, sceneStreet, sceneYard];
 
 /* ------------------------------------------------------------------ state */
 const KEY = 'epi-lung-detective', BEST = 'epi-lung-detective-best';
-const state = { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null, settings: {} };
+const state = { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, noted: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null, settings: {} };
 let activeHotspot = null, audio = null;
 
 function loadSettings() {
@@ -778,13 +807,14 @@ function renderScene() {
   const s = SCENES[state.scene];
   $('#hud-scene').textContent = s.name;
   $('#scene').innerHTML = ART[state.scene]();
+  $('#scene').setAttribute('aria-label', 'Scene: ' + s.name);
   $('#scene-hint').textContent = s.intro + ' Search the picture: a ring appears when your pointer passes over a clue. Click or tap it to open its file.';
   $$('#scene .hot').forEach(el => {
     const id = el.dataset.id, talk = !!TALKS[id];
-    if (state.filed[id] || state.talked[id]) el.classList.add('done');
+    if (state.filed[id] || state.talked[id] || state.noted[id]) el.classList.add('done');
     if (talk || state.settings.reveal) state.spotted[id] = true;
     if (!state.spotted[id]) el.classList.add('unspotted');
-    const open = () => { spot(id, el, true); activeHotspot = el; sfx('open'); talk ? openTalk(id) : openClue(id); };
+    const open = () => { spot(id, el, true); activeHotspot = el; sfx('open'); talk ? openTalk(id) : MYTHS[id] ? openMyth(id) : openClue(id); };
     el.addEventListener('click', e => { e.stopPropagation(); open(); });
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     el.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') spot(id, el); });
@@ -808,7 +838,7 @@ function miss(e) {
   const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
   const q = pt.matrixTransform(svg.getScreenCTM().inverse());
   let best = Infinity;
-  $$('#scene .hot.unspotted').forEach(el => { best = Math.min(best, Math.hypot(q.x - el.dataset.cx, q.y - el.dataset.cy) - el.dataset.r); });
+  $$('#scene .hot.unspotted:not(.myth)').forEach(el => { best = Math.min(best, Math.hypot(q.x - el.dataset.cx, q.y - el.dataset.cy) - el.dataset.r); });
   const word = best === Infinity ? '' : best < 70 ? 'Very warm' : best < 180 ? 'Warm' : 'Cold';
   const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   g.setAttribute('class', 'miss'); g.setAttribute('transform', `translate(${q.x.toFixed(1)} ${q.y.toFixed(1)})`);
@@ -818,10 +848,10 @@ function miss(e) {
   sfx('miss');
 }
 function hint() {
-  const hidden = $$('#scene .hot.unspotted');
+  const hidden = $$('#scene .hot.unspotted:not(.myth)');
   let el = hidden[0];
   if (el) { state.hints++; spot(el.dataset.id, el); }
-  else el = $$('#scene .hot').find(h => !h.classList.contains('done'));
+  else el = $$('#scene .hot:not(.myth)').find(h => !h.classList.contains('done'));
   if (!el) return;
   el.classList.add('nudge'); setTimeout(() => el.classList.remove('nudge'), 2200);
   if (el.scrollIntoView) el.scrollIntoView({ behavior: isStill() ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
@@ -845,7 +875,9 @@ function updateHud() {
     if (state.filed[id]) return `<li class="note filed ${c.bin}"><button type="button" data-open="${id}"><i></i>${esc(c.name)}</button></li>`;
     if (state.spotted[id]) return `<li class="note spotted"><button type="button" data-open="${id}"><i></i>${esc(c.name)}</button></li>`;
     return `<li class="note unknown"><span><i></i>Not found yet</span></li>`;
-  }).join('') + `<li class="note talk ${state.talked[talk] ? 'filed' : 'spotted'}"><button type="button" data-open="${talk}"><i></i>${esc(TALKS[talk].who)}</button></li>`;
+  }).join('') + `<li class="note talk ${state.talked[talk] ? 'filed' : 'spotted'}"><button type="button" data-open="${talk}"><i></i>${esc(TALKS[talk].who)}</button></li>`
+    + Object.keys(MYTHS).filter(id => MYTHS[id].scene === state.scene && state.spotted[id]).map(id =>
+      `<li class="note myth ${state.noted[id] ? 'filed' : 'spotted'}"><button type="button" data-open="${id}"><i></i>${esc(MYTHS[id].name)}</button></li>`).join('');
   $$('#notebook [data-open]').forEach(b => b.addEventListener('click', () => {
     const el = $(`#scene .hot[data-id="${b.dataset.open}"]`); if (el) el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
   }));
@@ -874,7 +906,7 @@ function openPanel(kicker, title, text, body) {
 function closePanel() {
   $('#panel').hidden = true;
   if (state.lineup && !state.lineup.done) { state.lineup.done = true; return report(); }
-  if (activeHotspot) { activeHotspot.classList.toggle('done', !!(state.filed[activeHotspot.dataset.id] || state.talked[activeHotspot.dataset.id])); activeHotspot.focus({ preventScroll: true }); }
+  if (activeHotspot) { activeHotspot.classList.toggle('done', !!(state.filed[activeHotspot.dataset.id] || state.talked[activeHotspot.dataset.id] || state.noted[activeHotspot.dataset.id])); activeHotspot.focus({ preventScroll: true }); }
   // a fix made in the file plays out in the picture once the file is closed
   if (state.pendingFx.length) {
     const ids = state.pendingFx.splice(0);
@@ -905,6 +937,14 @@ function openClue(id) {
   }
   openPanel('Case file', c.name, c.desc, binsHtml());
   wireBins(c, id);
+}
+/* A myth card: what the poster claims, what the evidence says, one action. There is no drawer to choose and nothing to fix. */
+function openMyth(id) {
+  const m = MYTHS[id];
+  openPanel('Myth check', m.name, m.desc,
+    `<div class="verdict ok myth"><h3>${esc(m.verdict)}</h3><p>${esc(m.why)}</p></div>${srcHtml(m.src)}
+    <div class="actions"><button type="button" class="btn primary" id="btn-noted">Noted</button></div>`);
+  $('#btn-noted').addEventListener('click', () => { state.noted[id] = true; closePanel(); updateHud(); });
 }
 function animateReading(target, done) {
   const el = $('#rd'), pin = $('#rd-pin'); const t0 = performance.now();
@@ -997,10 +1037,10 @@ function checkScene() {
   if (!ids.every(id => state.filed[id]) || !state.talked[talk]) return;
   const fixedHere = ids.filter(id => state.fixed[id]).length, fixable = ids.filter(id => CLUES[id].fix).length;
   const last = state.scene === SCENES.length - 1;
-  const counts = { known: 0, probable: 0, none: 0 }; ids.forEach(id => counts[CLUES[id].bin]++);
+  const counts = { known: 0, probable: 0, possible: 0, unclass: 0 }; ids.forEach(id => counts[CLUES[id].bin]++);
   sfx('close');
   openPanel('Case closed', SCENES[state.scene].name,
-    `Four clues filed: ${counts.known} known cause${counts.known === 1 ? '' : 's'}, ${counts.probable} probable, ${counts.none} with no evidence. ${fixedHere} of ${fixable} hazards fixed.`,
+    `Four clues filed: ${tally(counts)}. ${fixedHere} of ${fixable} hazards fixed.`,
     `${fixedHere < fixable ? `<p class="fine">${fixable - fixedHere === 1 ? 'One hazard is' : `${fixable - fixedHere} hazards are`} still there. Close this file to go back and fix ${fixable - fixedHere === 1 ? 'it' : 'them'}, or move on.</p>` : ''}
     <div class="actions"><button type="button" class="btn primary" id="btn-next">${last ? 'One last test: the line-up' : 'Open the next case'}</button></div>`);
   $('#btn-next').addEventListener('click', () => {
@@ -1008,6 +1048,15 @@ function checkScene() {
     if (last) return lineup();
     state.scene++; activeHotspot = null; renderScene(); window.scrollTo({ top: 0 });
   });
+}
+/* "2 known causes, 1 probable and 1 not classifiable": the bins that have clues in this case, in IARC's order. */
+function tally(c) {
+  const parts = [];
+  if (c.known) parts.push(`${c.known} known cause${c.known === 1 ? '' : 's'}`);
+  if (c.probable) parts.push(`${c.probable} probable`);
+  if (c.possible) parts.push(`${c.possible} possible`);
+  if (c.unclass) parts.push(`${c.unclass} not classifiable`);
+  return parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1] : parts[0] || 'none';
 }
 /* The line-up: six of the twelve clues come back, one at a time, to be filed from memory. */
 function lineup() {
@@ -1035,11 +1084,11 @@ function report() {
   const fixed = Object.keys(state.fixed).length;
   const total = clueIds.length + Object.keys(TALKS).length;
   const L = state.lineup || { right: 0, ids: [] };
-  // out of 98: four for each first-time answer, two for each fix, three for each line-up card, less two for each hint
+  // out of 100: four for each first-time answer, two for each fix, three for each line-up card, less two for each hint
   const score = Math.max(0, state.firstRight * 4 + fixed * 2 + L.right * 3 - state.hints * 2);
-  const rank = score >= 86 ? ['Chief inspector', 'Nothing in the air gets past you.']
-    : score >= 66 ? ['Senior detective', 'A sharp eye, and the evidence to back it.']
-    : score >= 44 ? ['Detective', 'The cases are closed. A second look would sharpen the files.']
+  const rank = score >= 88 ? ['Chief inspector', 'Nothing in the air gets past you.']
+    : score >= 67 ? ['Senior detective', 'A sharp eye, and the evidence to back it.']
+    : score >= 45 ? ['Detective', 'The cases are closed. A second look would sharpen the files.']
     : ['Trainee detective', 'Every detective starts here. Open the cases again and see what you remember.'];
   let best = null; try { best = JSON.parse(localStorage.getItem(BEST) || 'null'); } catch (e) {}
   const record = !best || score > best.score;
@@ -1053,13 +1102,13 @@ function report() {
     'People who never smoked but live with a smoker have a risk about 20 to 30% higher. A smoke-free home and car protects everyone in them.',
     'Radon is the second most important cause in many countries. WHO recommends a reference level of 100 Bq/m³, with national levels set no higher than 300; measuring is cheap and fixing is possible.',
     'Outdoor air pollution and diesel exhaust are known causes. Wood smoke from stoves and fumes from high-temperature frying are probable ones.',
-    'At work, silica dust, asbestos and welding fumes are known causes. Employers have to control them, and in the EU the law requires it.',
-    'Neither coffee nor work stress has been shown to cause lung cancer. The evidence decides what goes in each file.',
+    'At work, silica dust, asbestos and welding fumes are known causes, and hot bitumen on a roof is a probable one. Fumes from hot mastic asphalt are a possible cause, in Group 2B, because the evidence in people is limited. Employers have to control these exposures, and in the EU the law requires it.',
+    'Coffee is in Group 3, “not classifiable”: IARC found the evidence too limited to say. The stress poster was never evaluated by IARC, and a large study of workers found no clear link between job stress and lung cancer. The evidence decides what goes in each file.',
   ];
   $('#report-body').innerHTML = `<p class="kicker">What the detective learned</p><ul class="learned">${learned.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
     ${codeHtml('c1')}${codeHtml('c14')}
     <p class="fine">This game shows whether something can cause lung cancer in people in general, a population-level hazard. It cannot tell anyone what caused their own illness, and most people with these exposures never develop lung cancer. Classifications are those of the IARC Monographs; the recommendations are the official wording of the European Code Against Cancer, 5th edition.</p>
-    ${srcHtml(['who', 'm100e', 'm83', 'darby', 'whoRadon', 'peto', 'few', 'cutdown', 'light', 'whoEcig', 'loomis', 'm105', 'm95', 'm100c', 'm118', 'm103', 'coffee', 'stress', 'code'])}`;
+    ${srcHtml(['who', 'm100e', 'm83', 'darby', 'whoRadon', 'peto', 'few', 'cutdown', 'light', 'whoEcig', 'loomis', 'm105', 'm95', 'm100c', 'm118', 'm103', 'm103b', 'coffee', 'stress', 'code'])}`;
   show('report'); window.scrollTo({ top: 0 }); sfx('close'); bestLine();
 }
 function bestLine() {
@@ -1068,7 +1117,7 @@ function bestLine() {
   el.hidden = !best; if (best) el.textContent = `Your best rank so far: ${best.rank}.`;
 }
 function reset() {
-  Object.assign(state, { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null });
+  Object.assign(state, { scene: 0, spotted: {}, filed: {}, fixed: {}, talked: {}, noted: {}, tries: {}, firstRight: 0, radonRead: false, hints: 0, pendingFx: [], lineup: null });
   activeHotspot = null;
 }
 
@@ -1086,6 +1135,11 @@ $$('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m)
 $('#panel-close').addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { const open = $$('.modal').some(m => !m.hidden); closeModals(); if (!open && !$('#panel').hidden) closePanel(); } });
 ['contrast', 'large', 'font', 'motion', 'mute', 'reveal'].forEach(k => $('#opt-' + k).addEventListener('change', e => { state.settings[k] = e.target.checked; saveSettings(); loadSettings(); }));
+/* Inside the games page's frame, links leave the frame: the games page replaces the page, the evidence opens in a new tab. */
+if (window.top !== window.self) {
+  $$('.gx-nav a, a[href$="games.html"]').forEach(a => { a.target = '_top'; });
+  $$('.adults a').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+}
 loadSettings();
 bestLine();
 show('title');

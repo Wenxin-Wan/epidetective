@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{meta_reading_title}}</title>
 <meta name="description" content="{{meta_reading_desc}}">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="{{CANONICAL}}">
 {{HREFLANG}}
 <meta property="og:type" content="website">
@@ -13,17 +14,24 @@
 <meta property="og:title" content="{{meta_reading_title}}">
 <meta property="og:description" content="{{meta_reading_desc}}">
 <meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="{{OG_IMAGE_W}}">
+<meta property="og:image:height" content="{{OG_IMAGE_H}}">
+<meta property="og:image:type" content="{{OG_IMAGE_TYPE}}">
+<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
 <meta property="og:locale" content="{{OG_LOCALE}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{meta_reading_title}}">
 <meta name="twitter:description" content="{{meta_reading_desc}}">
 <meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:image:alt" content="{{OG_IMAGE_ALT}}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="{{PREFIX}}assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 </head>
 <body>
+<a class="skip" href="#content">{{skip_link}}</a>
 
 <header class="top">
   <div class="wrap">
@@ -32,6 +40,7 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}" aria-current="page">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
@@ -41,7 +50,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <!-- The guide: seven ideas the tools and the games lean on, one headline worked
      through all of them, the labels of both tools side by side, and further
@@ -113,6 +122,8 @@
       <div>
         <h2>{{read_5_h3}}</h2>
         <p>{{read_5_p}}</p>
+        <p class="see"><span class="k">{{read_see}}</span>
+          <a href="{{TL_COFFEE}}">{{read_see_coffee}}</a></p>
       </div>
     </div>
     <div class="read" id="populations">
@@ -241,6 +252,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
@@ -251,12 +264,13 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
         <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
-        <a href="{{URL_HWC}}">{{foot_hwc}}</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="{{URL_HWC}}">{{foot_hwc}}</a><a href="{{URL_ABOUT}}#cite">{{foot_cite}}</a><a href="{{URL_HWC}}#report">{{foot_report}}</a></p>
     <div class="disc affil">{{foot_affiliation}}</div>
     <div class="foot-bot">
       <span>{{foot_created}}</span>
@@ -264,7 +278,10 @@
   </div>
 </footer>
 
-</div><!-- /#page -->
-
+<script>
+addEventListener('beforeprint', function () {
+  Array.prototype.forEach.call(document.querySelectorAll('details'), function (d) { d.open = true; });
+});
+</script>
 </body>
 </html>

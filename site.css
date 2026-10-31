@@ -21,6 +21,15 @@
            font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"PlexMono";src:url(assets/plexmono-600.woff2) format("woff2");
            font-weight:600;font-style:normal;font-display:swap}
+/* While Literata loads (font-display:swap), Georgia stands in, scaled to
+   Literata's measure so the swap does not reflow the page: size-adjust is the
+   ratio of the two fonts' average lowercase widths, the overrides are Literata's
+   ascent and descent (from the font files, 31 Oct 2026). The pages preload
+   literata-latin.woff2. */
+@font-face{font-family:"Literata Fallback";src:local("Georgia");font-style:normal;
+           size-adjust:108.6%;ascent-override:108.4%;descent-override:28.4%;line-gap-override:0%}
+@font-face{font-family:"Literata Fallback";src:local("Georgia Italic"),local("Georgia-Italic");font-style:italic;
+           size-adjust:108.6%;ascent-override:108.4%;descent-override:28.4%;line-gap-override:0%}
 
 :root{
   /* "The Instrument": ink on laboratory paper. Colour appears only where it
@@ -35,7 +44,7 @@
   --teal:#161713;             /* entity marks (cancers, diseases) set in ink */
   --veil:rgba(245,244,240,.88);
   --rule:rgba(22,23,19,.14);
-  --display:"Literata",Georgia,serif;
+  --display:"Literata","Literata Fallback",Georgia,serif;
   --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
   --mono:"PlexMono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --wonk:normal;
@@ -51,7 +60,7 @@
 /* Han text can break between any two characters, and `balance` happily splits a
    two-character word (证|据) to even the lines up. `pretty` respects the comma
    instead, so the headline breaks where the sentence does. */
-html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:13em;
+html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:14em;
                          text-wrap:pretty}
 /* Han has no true italic and synthesised oblique is a typographic error; in
    Chinese the display emphasis carries by weight instead. */
@@ -59,6 +68,15 @@ html[lang="zh"] .hero h1 b,
 html[lang="zh"] .sec-head h2 b,
 html[lang="zh"] .sec-head h1 b,
 html[lang="zh"] .tool-hero h1 b{font-style:normal;font-weight:700}
+/* Russian: the Cyrillic italic is a second font file (48 KB) that only the
+   emphasis in the display headings asks for. The home page has a budget of 9
+   requests and 300 KB (Batch 6), so in Russian that emphasis is carried by
+   weight, as in Chinese. Italic in running text (em) is unchanged. */
+html[lang="ru"] .hero h1 b,
+html[lang="ru"] .sec-head h2 b,
+html[lang="ru"] .sec-head h1 b,
+html[lang="ru"] .tool-hero h1 b,
+html[lang="ru"] .trust-hwc h2 b{font-style:normal;font-weight:600}
 html[lang="zh"] h2{font-size:clamp(1.5rem,2.7vw,2.15rem)}
 html[lang="zh"] .sec-head h2,
 html[lang="zh"] .tool-hero h1{max-width:15em}
@@ -112,18 +130,23 @@ html[lang="zh"] h3{line-height:1.4}
 html[lang="zh"] .tool-hero h1{font-size:clamp(1.95rem,4vw,3.05rem)}
 
 *{box-sizing:border-box}
-/* Anchor smoothing works with no JavaScript, so it survives on WordPress.
-   The inertial easing below is a progressive enhancement on top of it. */
+/* Anchor links scroll smoothly with no JavaScript. The offset keeps a heading
+   clear of the header while it is sticky (900 px and wider). */
 html{scroll-behavior:smooth;scroll-padding-top:88px}
-html.inertia-scroll{scroll-behavior:auto}
-html.inertia-scroll #page{position:fixed;inset:0 0 auto;width:100%;
-                          will-change:transform;backface-visibility:hidden}
+@media (max-width:899px){html{scroll-padding-top:16px}}
 body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--body);
      font-size:clamp(15.5px,1vw,17px);line-height:1.6;-webkit-font-smoothing:antialiased;
      text-rendering:optimizeLegibility;overflow-x:hidden}
 a{color:inherit}
 img,svg{max-width:100%}
 :focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+/* first in the tab order on every page; visible only while it has focus */
+.skip{position:absolute;top:8px;left:8px;z-index:300;background:var(--ink);color:var(--chalk);
+      padding:10px 16px;font-size:.92rem;font-weight:600;text-decoration:none}
+.skip:not(:focus){width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);
+                  white-space:nowrap;border:0}
+html[dir=rtl] .skip{left:auto;right:8px}
+main:focus{outline:0}
 
 .wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--pad)}
 .label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
@@ -133,35 +156,59 @@ img,svg{max-width:100%}
 /* ---------- header ---------- */
 .top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
      backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;
-           flex-wrap:wrap;padding-block:14px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:4px 28px;
+           flex-wrap:wrap;padding-block:8px;
+           clip-path:inset(-8px calc(var(--pad) - 12px))}
 /* wordmark stays Latin in every language: it is the brand, not copy */
-.mark{font-family:"Literata",Georgia,serif;font-size:1.18rem;
+.mark{font-family:"Literata","Literata Fallback",Georgia,serif;font-size:1.18rem;
       font-weight:700;letter-spacing:-.01em;text-decoration:none}
 .mark span{font-weight:450;font-style:italic}
-.top-right{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
-.langs{display:flex;gap:11px;flex-wrap:wrap;align-items:baseline;
-       padding-left:20px;border-left:1px solid var(--rule)}
-.langs a,.langs .lang-cur{font-size:.76rem;letter-spacing:.03em;text-decoration:none}
-.langs a{color:var(--ink-faint);border-bottom:1px solid transparent}
-.langs a:hover{color:var(--ink);border-bottom-color:var(--ink)}
-.langs .lang-cur{color:var(--ink);font-weight:700;border-bottom:2px solid var(--ink)}
-@media (max-width:700px){.langs{padding-left:0;border-left:0}}
-.menu{display:flex;gap:22px;flex-wrap:wrap}
+/* the 28 px gap of the header row is for the rule before the languages; the
+   wordmark keeps its 20 px from the menu */
+.top .mark{margin-inline-end:-8px}
+/* the menu and the language links are items of the header row itself, so the
+   languages are the first to move to a second row when a language's menu is
+   long (es, ru), and the header never needs three rows on a desktop */
+.top-right{display:contents}
+.top .menu{margin-left:auto}
+/* Every menu entry and language link is a 44 px target (WCAG 2.2 asks for 24
+   at least). The underline that marks hover and the current page sits under
+   the words, not at the foot of the target. */
+/* The rule between the menu and the language links stands in the gap before
+   the languages, halfway between the last menu entry and the first language.
+   When the languages move to a row of their own (es and ru on a desktop, the
+   other languages on narrower screens), the rule would stand alone at the
+   start of that row: the header row clips whatever lies more than 8 px
+   outside the text column (clip-path on .top .wrap above), so the rule goes
+   and focus rings (6 px) stay. The -4 px lines the first language up with the
+   wordmark when the languages start a row (each language link has 4 px of
+   padding). The row is no wider than it was with the old border, so no
+   language wraps sooner. */
+.langs{display:flex;gap:0 4px;flex-wrap:wrap;align-items:center;position:relative;margin-inline-start:-4px}
+.langs::before{content:"";position:absolute;inset-inline-start:-11px;top:50%;width:1px;height:18px;
+       margin-top:-9px;background:var(--rule)}
+.langs a,.langs .lang-cur{display:inline-flex;align-items:center;min-height:44px;padding-inline:4px;
+       font-size:.76rem;letter-spacing:.03em;text-decoration:none;text-underline-offset:5px}
+.langs a{color:var(--ink-faint)}
+.langs a:hover{color:var(--ink);text-decoration-line:underline;text-decoration-thickness:1px}
+.langs .lang-cur{color:var(--ink);font-weight:700;text-decoration-line:underline;text-decoration-thickness:2px}
+.menu{display:flex;gap:0 20px;flex-wrap:wrap}
 /* Sept 2026: the menu was set at .82rem and read as small print next to the
    wordmark; a step up and a touch more weight make the entries legible at
    a glance without competing with the page titles. */
-.menu a{text-decoration:none;font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
-        padding-bottom:3px;border-bottom:1.5px solid transparent}
-.menu a:hover,.menu a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
-/* On a phone the wrapped menu made a sticky header a fifth of the screen tall;
-   it is set tighter there and scrolls away with the page. */
+.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;
+        font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
+        text-underline-offset:6px;text-decoration-thickness:1.5px}
+.menu a:hover,.menu a[aria-current]{color:var(--ink);text-decoration-line:underline}
+/* Below 900 px the menu wraps and a sticky header would cover a fifth of the
+   screen, so it scrolls away with the page (T12). */
+@media (max-width:899px){.top{position:static}}
 @media (max-width:700px){
-  .top{position:static}
-  .top .wrap{gap:8px 20px;padding-block:12px 10px}
-  .top-right{gap:8px 20px}
-  .menu{gap:2px 18px}
-  .menu a{font-size:.92rem;padding-block:5px 3px}
+  .top .wrap{gap:2px 20px;padding-block:6px 4px}
+  .top .mark{margin-inline-end:0}
+  .top .menu{margin-left:0}
+  .menu{gap:0 16px}
+  .menu a{font-size:.92rem}
 }
 
 /* ---------- type ---------- */
@@ -185,26 +232,31 @@ html[lang="zh"] em{font-style:normal;font-weight:inherit}
 html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-width:15em}
 
 /* ---------- hero (platform) ---------- */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+/* not clipped: the search result list drops below the hero; the two
+   decorative layers fill the box and need no clipping */
+.hero{position:relative;border-bottom:1px solid var(--rule)}
 .hero-net{position:absolute;inset:0;z-index:0;pointer-events:none;
           background:url(assets/network.svg) no-repeat right -6% center;
           background-size:auto 128%;opacity:.24}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
            background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
                       rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
-.hero .wrap{position:relative;z-index:2;padding-block:clamp(64px,13vh,132px)}
-@media (max-width:700px){.hero .wrap{padding-block:52px 60px}}
-/* 23ch keeps "epidemiological evidence" whole on its own line; the old 17ch was
-   set for a headline made of short words and now breaks it mid-phrase */
-.hero h1{margin:20px 0 0;max-width:23ch}
+.hero .wrap{position:relative;z-index:2;padding-block:clamp(28px,4.6vh,56px) clamp(30px,4.6vh,54px)}
+@media (max-width:700px){.hero .wrap{padding-block:30px 36px}}
+/* Oct 2026: the headline is a question the site answers, set on two lines on a
+   desktop; the search sits above the first scroll at 1440 x 900 */
+.hero h1{margin:0;max-width:38ch;font-size:clamp(2rem,4.1vw,3.25rem);line-height:1.08}
 /* emphasis inside display type: Literata speaks emphasis in italic, not bold */
 .hero h1 b,.sec-head h2 b,.sec-head h1 b,.tool-hero h1 b{font-weight:inherit;font-style:italic}
-.hero .lede{margin-top:24px;font-size:clamp(1rem,1.3vw,1.15rem)}
-/* standfirst: names the audience in full ink, then hands off to the lede that
-   explains the site. Two paragraphs, so the line breaks where each language
-   needs it to rather than at a hard-coded <br>. */
-.hero .lede-lead{color:var(--ink);font-weight:600;margin-bottom:0}
-.hero .lede-lead + .lede{margin-top:11px}
+/* who makes it (a personal project) and what it cannot do, then whom it is for */
+.hero-personal{margin:18px 0 0;max-width:62ch;color:var(--ink-soft);
+               font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.55;text-wrap:pretty}
+.hero-aud{margin:10px 0 0;max-width:62ch;color:var(--ink);font-weight:600;font-size:.95rem}
+html[lang="zh"] .hero-personal,html[lang="zh"] .hero-aud{max-width:36em}
+/* Russian words run long, so the headline is set smaller; its emphasis is
+   upright semibold (wider than the italic was), and at 2.5rem the headline
+   still sets on two lines on a desktop */
+html[lang="ru"] .hero h1{font-size:clamp(1.85rem,3.4vw,2.5rem);max-width:none}
 @media (max-width:820px){
   .hero-net{background-position:center;background-size:cover;opacity:.16}
   .hero-veil{background:linear-gradient(180deg,rgba(245,244,240,.72) 0%,var(--chalk) 78%)}
@@ -274,12 +326,10 @@ html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-wi
 .thumb{border:1px solid var(--rule);background:var(--chalk-deep) url(assets/network.svg)
        no-repeat center/cover;aspect-ratio:16/10;position:relative}
 /* the second tool's signature is the clustering, so its thumbnail is the
-   clustered layout rather than the same free-floating one */
+   clustered layout rather than the same free-floating one. The home page sets
+   this picture inline (build_site.py, THUMB_CHRONIC_BG), so there it costs no
+   request; this rule serves any other page that shows the thumbnail. */
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
-/* a game's thumbnail is a frame of the game itself; Sol is the default */
-.thumb-game{background-image:url(assets/games/sun-safety-card.jpg);background-size:cover}
-.thumb-game.thumb-lung{background-image:url(assets/games/lung-detective-card.jpg)}
-.thumb-game.thumb-town{background-image:url(assets/games/town-of-1000-card.jpg)}
 /* the shelf section on the home page sits under the tools rack; no extra top padding */
 .sec.shelf{padding-top:0}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
@@ -419,7 +469,12 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .foot .mark{color:var(--chalk);font-size:1.45rem}
 .foot .tag{color:#A7ADA2;margin:8px 0 0;max-width:42ch}
 .foot .menu a{color:#A7ADA2}
-.foot .menu a:hover{color:var(--chalk);border-bottom-color:var(--chalk)}
+.foot .menu a:hover{color:var(--chalk)}
+/* How we check, How to cite, Report an error: in every footer */
+.foot-trust{display:flex;flex-wrap:wrap;gap:0 24px;margin:18px 0 0}
+.foot-trust a{display:inline-flex;align-items:center;min-height:44px;color:var(--chalk);font-size:.92rem;
+  font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(245,244,240,.4)}
+.foot-trust a:hover{text-decoration-color:var(--chalk)}
 .foot-row{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:baseline}
 .disc{margin-top:34px;border:1px solid rgba(245,244,240,.2);padding:18px 20px;color:#A7ADA2;
       font-size:.86rem;max-width:44rem}
@@ -497,8 +552,10 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
   transition:border-color .16s ease,transform .16s ease}
 .game-card:hover{border-color:var(--ink);transform:translateY(-2px)}
 .game-card.is-on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
-.gc-thumb{display:block;aspect-ratio:16/9;background-size:cover;background-position:center top;
-  border-bottom:1px solid var(--rule)}
+/* a game's thumbnail is a frame of the game itself, an <img loading=lazy> of
+   720 x 405 (assets/games/*-card.webp), so it loads only near the screen */
+.gc-thumb{display:block;overflow:hidden;background:var(--chalk-deep);border-bottom:1px solid var(--rule)}
+.gc-thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center top}
 .gc-body{display:flex;flex-direction:column;gap:11px;padding:18px 18px 20px}
 .gc-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .game-card h2,.game-card h3{font-size:1.35rem;line-height:1.2;margin:0}
@@ -517,9 +574,12 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 /* ---- the guide (reading.html) and its band on the home page */
 .tool-hero.plain .wrap{padding-block:clamp(48px,8vh,92px)}
 .tool-hero.plain h1{max-width:20ch}
-.sec.guide{padding-top:0;padding-bottom:clamp(48px,7vh,84px)}
-.guide + .shelf::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:clamp(48px,7vh,84px)}
+.sec.guide{padding-bottom:clamp(48px,7vh,84px)}
 .guide .lede{margin:0 0 22px}
+/* a band that follows another on the home page opens with a rule across the
+   column, the space above it coming from the band before */
+.sec.sep{padding-top:0}
+.sep::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:clamp(44px,6.5vh,76px)}
 
 /* ---------- trust and understanding pages (Oct 2026) ----------
    how-we-check.html, work.html and the new parts of the reading guide and the
@@ -694,3 +754,156 @@ html[lang="zh"] .ecac-why .k{letter-spacing:0}
 .beyond .bl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:.92rem}
 .beyond .gr{font-family:var(--mono);font-size:.74rem;color:var(--ink-soft);white-space:nowrap}
 .beyond .rel{margin:6px 0 0;font-size:.82rem;color:var(--ink-faint)}
+
+/* ---------- front door (Batch 6, Oct 2026) ---------- */
+
+/* site search (assets/search.js; markup in templates/index.html, work.html and
+   404.html; records/b6-search-markup.html) */
+.search{max-width:680px}
+.hero .search{margin-top:22px}
+.search-label{display:block;margin-bottom:8px}
+.search-box{position:relative;display:flex;align-items:stretch;background:#fff;border:1px solid var(--ink)}
+.search-box:focus-within{box-shadow:inset 0 0 0 1px var(--ink)}
+.search-input{flex:1 1 auto;min-width:0;padding:14px 16px;border:0;border-radius:0;background:transparent;
+  color:var(--ink);font:inherit;font-size:1rem;line-height:1.3;text-overflow:ellipsis;-webkit-appearance:none;appearance:none}
+.search-input:focus{outline:0}
+.search-input::placeholder{color:var(--ink-faint);opacity:1}
+.search-go{flex:none;display:grid;place-items:center;width:52px;min-height:44px;border:0;border-left:1px solid var(--rule);
+  background:transparent;color:var(--ink);cursor:pointer}
+.search-go:hover{background:var(--ink);color:var(--chalk)}
+.search-go svg{display:block}
+.search-list{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;max-height:min(70vh,30rem);overflow-y:auto;
+  overscroll-behavior:contain;background:var(--chalk);border:1px solid var(--ink);border-top-color:var(--rule);
+  box-shadow:0 14px 30px rgba(22,23,19,.14)}
+.search-list[hidden]{display:none}
+.search-gh{padding:12px 16px 6px;font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:600;color:var(--ink-faint)}
+.search-opt{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;min-height:44px;
+  padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink);text-decoration:none}
+.search-opt:hover,.search-opt.is-active{background:var(--ink);color:var(--chalk)}
+.search-n{font-weight:600;overflow-wrap:anywhere}
+.search-m{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint)}
+.search-opt:hover .search-m,.search-opt.is-active .search-m{color:inherit}
+.search-msg{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;margin:0;padding:12px 16px;background:var(--chalk);
+  border:1px solid var(--rule);color:var(--ink-soft);font-size:.9rem}
+/* stays in the page so screen readers hear the text when it appears */
+.search-msg:empty{height:0;padding:0;border:0;overflow:hidden}
+.search-try{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:14px 0 0}
+.search-chip{display:inline-flex;align-items:center;min-height:36px;padding:4px 14px;border:1px solid var(--rule);
+  color:var(--ink);font-family:var(--mono);font-size:.78rem;text-decoration:none;background:var(--chalk)}
+.search-chip:hover{border-color:var(--ink)}
+html[lang="zh"] .search-gh{letter-spacing:0}
+@media (forced-colors:active){
+  .search-box:focus-within,.search-opt.is-active{outline:2px solid CanvasText;outline-offset:-2px}
+}
+.work-find .search{width:100%}
+.page-404{padding-top:10vh;padding-bottom:12vh}
+.page-404 .search{margin-top:26px}
+
+/* a small label that is a heading in the outline (the question cards, What's
+   new) keeps the label's type in every language */
+h2.label,html[lang="zh"] h2.label{font-family:var(--mono);font-size:.68rem;line-height:1.5;font-weight:600;
+  letter-spacing:.1em;max-width:none}
+html[lang="zh"] h2.label{letter-spacing:0}
+
+/* four questions, answered by sentences quoted from the tools */
+.sec.qa{padding-block:clamp(24px,3.4vh,40px) clamp(20px,3vh,36px)}
+.qa-h{margin:0 0 14px}
+html[lang="zh"] .qa-h{letter-spacing:0}
+.qa-grid{list-style:none;margin:0;padding:0;display:grid;gap:26px 22px}
+@media (min-width:640px){.qa-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1080px){.qa-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.qa-card{display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:2px solid var(--ink);min-width:0}
+.qa-card h3{font-size:clamp(1.05rem,1.35vw,1.18rem);line-height:1.25;margin:0}
+/* the kicker is EpiDetective's own short answer above the quoted one: the body
+   face at 13 px (the mono at 11.2 px fell back to a system monospace in
+   Chinese and Russian and read as small print) */
+.qa-k{margin:0;font-family:var(--body);font-size:.8125rem;line-height:1.45;color:var(--ink-soft);font-weight:600}
+.qa-a{margin:0;padding-left:12px;border-left:2px solid var(--rule)}
+.qa-a p{margin:0;font-size:.875rem;line-height:1.48;color:var(--ink-soft);text-wrap:pretty}
+.qa-src{margin:0;font-size:.74rem;line-height:1.45;color:var(--ink-faint)}
+.qa-go{margin:auto 0 0;display:flex;flex-direction:column;align-items:flex-start}
+.qa-go a{display:inline-flex;align-items:center;min-height:26px;padding-block:2px;font-size:.88rem;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(22,23,19,.4)}
+.qa-go a:hover{text-decoration-color:var(--ink)}
+.qa-go a + a{color:var(--ink-soft);font-weight:500}
+
+/* the tools follow the questions: a compact head, the buttons under each name */
+#instruments{padding-block:clamp(24px,3.4vh,44px) clamp(26px,4vh,44px)}
+#instruments .sec-head{margin-bottom:12px}
+#instruments .sec-head h2{margin-bottom:0}
+#instruments .inst{padding-block:24px}
+#instruments .sec-head h2{max-width:none}
+.inst-main > .inst-actions{margin:2px 0 4px}
+
+/* what you can do: the Code Against Cancer card */
+.sec.code-home{padding-top:clamp(30px,4.5vh,48px)}
+.code-card{display:grid;gap:16px 40px;padding:24px 26px;border:1px solid var(--ink);background:var(--chalk-deep)}
+@media (min-width:900px){.code-card{grid-template-columns:minmax(0,1fr) auto;align-items:end}}
+.code-card h2{margin:10px 0 10px;font-size:clamp(1.35rem,2.3vw,1.8rem)}
+.code-card p{margin:0;color:var(--ink-soft);max-width:64ch}
+html[lang="zh"] .code-card p{max-width:34em}
+/* the faint ink is 4.3:1 on the recessed bands (chalk-deep), under the 4.5:1
+   that small text needs, so labels and notes on them take the soft ink */
+.code-card .label,.work-find .label,.cta-band .label,.cta-band .disc{color:var(--ink-soft)}
+
+/* how we check, and what is new */
+.trust-grid{display:grid;gap:40px}
+@media (min-width:900px){.trust-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px}}
+.trust-hwc h2{margin:14px 0 14px;font-size:clamp(1.4rem,2.6vw,2.1rem);max-width:24ch}
+html[lang="zh"] .trust-hwc h2{font-size:clamp(1.35rem,2.4vw,1.9rem);max-width:14em}
+.trust-hwc h2 b{font-weight:inherit;font-style:italic}
+html[lang="zh"] .trust-hwc h2 b{font-style:normal;font-weight:700}
+.trust-hwc .lede{margin:0 0 20px}
+.trust-news .label{margin:0}
+.news{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--rule)}
+.news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.92rem;line-height:1.5}
+
+/* games page: the evidence behind each game, for adults (Batch 7) */
+.game-adults{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center;margin:10px 0 0;font-size:.92rem}
+.game-adults a{display:inline-flex;align-items:center;min-height:32px;color:var(--ink);font-weight:600;text-underline-offset:3px}
+.game-adults a+a{color:var(--ink-soft);font-weight:500}
+
+/* target size: a link that stands on its own is at least 24 px tall; a link
+   inside running text gets a little padding so its box reaches 24 px too */
+.crumb a,.see a,.more-list a,.hwc-links a,.hwc-cite a,.about-hwc a,.term-link,.ecac-src a,.back-all,
+.stage-cap a,.contact-email{display:inline-flex;align-items:center;min-height:24px}
+.contact-email{padding-top:3px}
+/* a short crumb (zh 工具) is still 24 px wide */
+.crumb a{min-width:24px;justify-content:center}
+.work-table tbody th a,.beyond a,.ecac-why a,.creds a,.cite-line a{padding-block:4px}
+
+/* ---------- print ---------- */
+/* A printed page keeps the text and the sources: no menus, search, buttons or
+   decoration, black on white, and the web address after each outside link in
+   the running text. The reading guide opens its folded answers before
+   printing (a small script on that page). */
+@media print{
+  @page{margin:16mm 15mm}
+  html{scroll-padding-top:0;scroll-behavior:auto}
+  body{background:#fff;color:#000;font-size:11pt;overflow:visible}
+  .skip,.top .top-right,.search,.inst-actions,.qa-go,.game-more,.hero-net,.hero-veil,.tool-hero .net,
+  .tool-hero .veil,.thumb,.gc-thumb,.stage,.back-row,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,
+  .game-adults,.search-try{display:none!important}
+  .top{position:static;background:none;border-bottom:1px solid #999;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .top .wrap{clip-path:none}
+  .hero,.tool-hero{border-bottom:1px solid #999}
+  .hero .wrap,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap{padding-block:14pt}
+  .sep::before{margin-bottom:14pt}
+  .wrap{max-width:none;padding-inline:0}
+  h1{font-size:24pt}
+  h2{font-size:16pt}
+  h1,h2,h3{break-after:avoid}
+  .qa-card,.inst,.hwc-card,.code-card,.game-card,.read,.ex-steps li,.beyond > li,.quiz details{break-inside:avoid}
+  .lede,.read p,.inst p,.about p,.game-intro p,.qa-a p,.news li{color:#000}
+  .code-card,.cta-band{background:none}
+  .foot{background:none;color:#000;border-top:1px solid #999}
+  .foot .wrap{padding-block:12pt 0}
+  .foot .mark,.foot .tag,.disc,.disc.affil,.foot-bot{color:#000}
+  .disc{border-color:#999}
+  .tbl-wrap{overflow:visible!important;background:none!important}
+  .lbl-table tbody th[scope="row"],.work-table tbody th{position:static!important;box-shadow:none!important}
+  .see a[href^="http"]::after,.more-list a[href^="http"]::after,.ecac-src a::after,.hwc-links a[href^="http"]::after{
+    content:" (" attr(href) ")";font-weight:400;font-size:.85em;overflow-wrap:anywhere}
+}
+

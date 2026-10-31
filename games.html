@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cancer awareness games — skin, lung and breast — EpiDetective</title>
 <meta name="description" content="Three free browser games about cancer prevention: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and breast cancer for 14 and up.">
+<meta name="theme-color" content="#F5F4F0">
 <link rel="canonical" href="https://epidetective.com/games.html">
 <link rel="alternate" hreflang="en" href="https://epidetective.com/games.html">
 <link rel="alternate" hreflang="zh" href="https://epidetective.com/zh/games.html">
@@ -17,18 +18,25 @@
 <meta property="og:url" content="https://epidetective.com/games.html">
 <meta property="og:title" content="Cancer awareness games — skin, lung and breast — EpiDetective">
 <meta property="og:description" content="Three free browser games about cancer prevention: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and breast cancer for 14 and up.">
-<meta property="og:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta property="og:image" content="https://epidetective.com/assets/og/games.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cancer awareness games — skin, lung and breast — EpiDetective">
 <meta name="twitter:description" content="Three free browser games about cancer prevention: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and breast cancer for 14 and up.">
-<meta name="twitter:image" content="https://epidetective.com/assets/games/sun-safety-poster.jpg">
+<meta name="twitter:image" content="https://epidetective.com/assets/og/games.png">
+<meta name="twitter:image:alt" content="EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header class="top">
   <div class="wrap">
@@ -37,7 +45,8 @@
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
         <a href="code-against-cancer/">Code Against Cancer</a>
-        <a href="games.html" aria-current="page">Cancer awareness games</a>
+        <a href="reading.html">Reading the evidence</a>
+        <a href="games.html" aria-current="page">Games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
       </nav>
@@ -46,7 +55,7 @@
   </div>
 </header>
 
-<div id="page">
+<main id="content" tabindex="-1">
 
 <section class="wrap games-over" id="games">
   <div class="sec-head">
@@ -56,7 +65,7 @@
   </div>
   <div class="game-grid">
     <article class="game-card" data-game="sun-safety">
-      <a class="gc-thumb thumb-game" href="games/sun-safety/" data-select="sun-safety" aria-label="Sol &amp; the UV Shield Quest"></a>
+      <a class="gc-thumb" href="games/sun-safety/" data-select="sun-safety"><img src="assets/games/sun-safety-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="Sol &amp; the UV Shield Quest: Sol, a child with spiky orange hair, stands on a grassy platform among sun coins and a star, with a straw hat on a post nearby and a big yellow sun in the sky."></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">Skin cancer</span><span class="chip on-stage">Now on stage</span></div>
         <h2>Sol &amp; the UV Shield Quest</h2>
@@ -66,17 +75,17 @@
       </div>
     </article>
     <article class="game-card" data-game="lung-detective">
-      <a class="gc-thumb thumb-game thumb-lung" href="games/lung-detective/" data-select="lung-detective" aria-label="The Lung Detective"></a>
+      <a class="gc-thumb" href="games/lung-detective/" data-select="lung-detective"><img src="assets/games/lung-detective-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="The Lung Detective: a cosy flat with a person on a sofa holding a phone, an ashtray on the coffee table, a pan on the stove and a door marked Basement."></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">Lung cancer</span><span class="chip on-stage">Now on stage</span></div>
         <h2>The Lung Detective</h2>
-        <p>An investigation game about what causes lung cancer, for ages 10 to 16. Three scenes, twelve clues to file as known cause, probable cause or no evidence, a radon detector to read, and three people to talk round.</p>
+        <p>An investigation game about what causes lung cancer, for ages 10 to 16. Three scenes, twelve clues to file as known cause, probable cause, possible cause or not classifiable, a radon detector to read, and three people to talk round.</p>
         <div class="inst-meta"><span>Ages 10–16</span><span>Mouse, touch, keyboard</span><span>English</span></div>
         <div class="inst-actions"><a class="btn btn-solid" href="games/lung-detective/" data-select="lung-detective">Play it &rarr;</a></div>
       </div>
     </article>
     <article class="game-card" data-game="town-of-1000">
-      <a class="gc-thumb thumb-game thumb-town" href="games/town-of-1000/" data-select="town-of-1000" aria-label="A Town of 1,000"></a>
+      <a class="gc-thumb" href="games/town-of-1000/" data-select="town-of-1000"><img src="assets/games/town-of-1000-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="A Town of 1,000: a small town of pastel houses around a clock tower beside a river, with people on a footpath in front, including a cyclist and a person with a pushchair."></a>
       <div class="gc-body">
         <div class="gc-top"><span class="chip live">Breast cancer</span><span class="chip on-stage">Now on stage</span></div>
         <h2>A Town of 1,000</h2>
@@ -141,14 +150,15 @@
       </ul>
 
       <p class="fine">The game uses an original character and artwork. Its source is open at github.com/Wenxin-Wan/sun-safety-adventure. The sun-safety advice follows the European Code Against Cancer and WHO guidance on UV protection.</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Solar%20radiation">For adults: the evidence behind this game &rarr;</a> <a href="reading.html">Reading the evidence</a></p>
     </div>
 
     <div class="game-intro" data-game="lung-detective" data-url="games/lung-detective/" data-shot="assets/games/lung-detective-shot" data-title="The Lung Detective" data-alt="The Lung Detective as it runs: one of the three scenes, with rings on the clues found so far and the detective’s notebook below." data-cap="Screenshot of The Lung Detective as it runs" hidden>
       <div class="label">Investigation game · lung cancer</div>
       <h2>The Lung Detective</h2>
-      <p><b>An investigation across a flat, a street and a building yard, in which every clue is filed the way IARC files evidence.</b></p>
-      <p>Smoking causes most lung cancers, and stopping helps at whatever age it happens. That is the first finding in the case file, and the rest of the investigation builds on it. The player searches three scenes, a flat, a street and a building yard, and turns up twelve clues. Each has to be filed the way IARC files evidence: a known cause of lung cancer (Group 1), a probable cause (Group 2A), or something with no evidence behind it. The real hazards can then be fixed, and a clean-air score rises with each one.</p>
-      <p>The clues cover second-hand smoke; radon in the home, with a small detector game built around the WHO reference level of 100 Bq/m³; outdoor air pollution and diesel exhaust; wood smoke and high-temperature frying; and the silica dust, asbestos and welding fumes of a building site. Bitumen roofing lands in the probable group, and coffee and stress turn out to have no evidence behind them at all. Three conversations carry the argument: a flatmate who smokes only a few a day, a vape-shop owner who calls vaping harmless, and a foreman who thinks quitting after twenty years is pointless. Every clue shows its source and the official wording of the European Code Against Cancer. The game runs in your browser, works on a phone, and collects no data. It is in English.</p>
+      <p><b>An investigation across a flat, a street and a building yard, in which every clue is filed in one of IARC’s groups.</b></p>
+      <p>Smoking causes most lung cancers, and stopping helps at whatever age it happens. That is the first finding in the case file, and the rest of the investigation builds on it. The player searches three scenes, a flat, a street and a building yard, and turns up twelve clues. Each has to be filed in the group IARC gives it: a known cause of lung cancer (Group 1), a probable cause (Group 2A), a possible cause (Group 2B), or not classifiable, which means the evidence is too limited to say (Group 3). The real hazards can then be fixed, and a clean-air score rises with each one.</p>
+      <p>The clues cover second-hand smoke; radon in the home, with a small detector game built around the WHO reference level of 100 Bq/m³; outdoor air pollution and diesel exhaust; wood smoke and high-temperature frying; and the silica dust, asbestos and welding fumes of a building site. Bitumen roofing lands in the probable group, and hot mastic asphalt laid on a pavement in the possible group. Coffee is not classifiable, because the evidence is too limited to say. A poster claiming that stress causes cancer is a myth to check: IARC has never evaluated stress, and a large study of workers found no clear link with lung cancer. Three conversations carry the argument: a flatmate who smokes only a few a day, a vape-shop owner who calls vaping harmless, and a foreman who thinks quitting after twenty years is pointless. Every clue shows its source and the official wording of the European Code Against Cancer. The game runs in your browser, works on a phone, and collects no data. It is in English.</p>
 
       <div class="game-facts">
         <div><b>10&ndash;16</b><span>recommended age</span></div>
@@ -160,13 +170,14 @@
       <h3>How to play</h3>
       <ol class="howto">
         <li><span>Press <b>Play</b>, then search each scene for its four clues. A ring appears when the pointer passes over one. On a phone, tap whatever looks suspicious: a miss tells you whether you are warm or cold. <kbd>Tab</kbd> and <kbd>Enter</kbd> work too, and a hint button shows one clue.</span></li>
-        <li><span>File each clue in one of three drawers: known cause (Group 1), probable cause (Group 2A), or no evidence. A wrong drawer is greyed out and you try again; the right one opens the source and the wording of the European Code Against Cancer.</span></li>
+        <li><span>File each clue in one of four drawers, by IARC’s groups: known cause (Group 1), probable cause (Group 2A), possible cause (Group 2B) or not classifiable (Group 3). A wrong drawer is greyed out and you try again; the right one opens the source and the wording of the European Code Against Cancer. The street also holds a myth to check. It has no drawer: you read it and press Noted.</span></li>
         <li><span>Fix the hazards that can be fixed. Each one raises the clean-air score. In the flat, the radon detector is a small game of its own: the WHO reference level is 100 Bq/m³, and WHO says national reference levels should not exceed 300.</span></li>
         <li><span>Talk to the three people you meet: the flatmate, the vape-shop owner and the foreman. Each has a reason to doubt, and you answer with the evidence.</span></li>
         <li><span>After the third case comes the line-up: six clues to file again from memory. The report then gives your detective rank and the clean-air score. The cog opens the settings: high contrast, larger text, wider and easier-to-read letters, reduced motion, sound, and an option to show where the clues are.</span></li>
       </ol>
 
       <p class="fine">Every clue in the game cites its source. The classifications follow the IARC Monographs, the prevention wording is that of the European Code Against Cancer, and the radon reference level is the WHO’s (100 Bq/m³). The finding that stopping smoking helps at any age comes from Peto and colleagues (BMJ, 2000).</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=en#cancer=Lung">For adults: the evidence behind this game &rarr;</a> <a href="reading.html">Reading the evidence</a></p>
     </div>
 
     <div class="game-intro" data-game="town-of-1000" data-url="games/town-of-1000/" data-shot="assets/games/town-of-1000-shot" data-title="A Town of 1,000" data-alt="A Town of 1,000 as it runs: the 1,000-dot array with the affected women marked, and the chapter’s two decision cards." data-cap="Screenshot of A Town of 1,000 as it runs" hidden>
@@ -193,10 +204,13 @@
       </ol>
 
       <p class="fine">Baseline figures are for Western Europe (GLOBOCAN 2024 estimates). Effect sizes come from pooled studies of alcohol, physical activity, weight after the menopause, breastfeeding, menopausal hormone therapy and screening participation. The prevention advice follows the European Code Against Cancer.</p>
+      <p class="game-adults"><a href="https://tools.epidetective.com/cancer/?lang=en#cancer=Breast">For adults: the evidence behind this game &rarr;</a> <a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Alcoholic%20beverages">Alcoholic drinks</a> <a href="reading.html">Reading the evidence</a></p>
     </div>
 
   </div>
 </section>
+
+</main>
 
 <footer class="foot">
   <div class="wrap">
@@ -208,12 +222,13 @@
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
         <a href="code-against-cancer/">Code Against Cancer</a>
-        <a href="games.html">Cancer awareness games</a>
+        <a href="reading.html">Reading the evidence</a>
+        <a href="games.html">Games</a>
         <a href="about.html">About</a>
         <a href="about.html#contact">Contact</a>
-        <a href="how-we-check.html">How we check</a>
       </nav>
     </div>
+    <p class="foot-trust"><a href="how-we-check.html">How we check</a><a href="about.html#cite">How to cite</a><a href="how-we-check.html#report">Report an error</a></p>
     <div class="disc">EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.</div>
     <div class="disc affil">EpiDetective is a personal project by Wenxin Wan, produced in a personal capacity. It carries no endorsement from the International Agency for Research on Cancer or the World Health Organization, and the views expressed here belong to the author alone. The underlying scientific sources are cited so that anyone can check them independently.</div>
     <div class="foot-bot">
@@ -222,7 +237,6 @@
   </div>
 </footer>
 
-</div>
 <script>
 (function(){
   var play=document.getElementById('play'), stage=document.getElementById('stage'), frame=document.getElementById('stage-frame'),
@@ -246,7 +260,6 @@
     var g=intros[current]; if(!g) return;
     var f=document.createElement('iframe');
     f.src=g.getAttribute('data-url'); f.title=g.getAttribute('data-title'); f.allow='fullscreen; gamepad; autoplay';
-    f.setAttribute('allowfullscreen','');
     stop(); frame.appendChild(f); stage.classList.add('is-playing');
     // keyboard control goes to the game straight away
     f.addEventListener('load', function(){ try{ f.contentWindow.focus(); }catch(e){} });

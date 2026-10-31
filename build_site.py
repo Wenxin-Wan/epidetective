@@ -16,6 +16,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+from datetime import date
 from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +27,14 @@ TPL = os.path.join(HERE, "templates")
 # (and the GitHub Action, which checks out design/ alone) reads only these.
 #   data/work.json  <- scripts/build_work_data.py   (work.html)
 WORK_JSON = os.path.join(HERE, "data", "work.json")
+# The thumbnail of the chronic tool's card on the home page (its clustered
+# network) is written into the page as a data: URL, made here from the committed
+# file, so it always shows the current drawing. A separate request for it would
+# be the tenth on the Russian home page, which also loads the Cyrillic Literata;
+# the budget is 9 requests and 300 KB (Batch 6). The thumbnail sits below the
+# first screen, so its bytes go into the page and stay out of site.css, which
+# every page waits for. Re-run this build after make_chronic_svg.py.
+CHRONIC_NET_SVG = os.path.join(HERE, "assets", "chronic-network.svg")
 
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
@@ -32,8 +42,88 @@ PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about
          "games.html": "games", "reading.html": "reading",
          "how-we-check.html": "hwc", "work.html": "work"}
 SITE_URL = "https://epidetective.com"
-# og:image must be an absolute URL on a raster format; social scrapers ignore SVG
-OG_IMAGE = SITE_URL + "/assets/og.png"
+# Share images (og:image must be an absolute URL on a raster format; social
+# scrapers ignore SVG): 1200x630 PNG cards rendered by scripts/make_og.mjs from
+# scripts/og-template.html (Playwright, run locally; the images are committed,
+# so neither this build nor the Rebuild Action renders anything). The home page
+# has one card per language, every other page one card for all five; the alt
+# text is the card's own text, in the page's language. Re-render the cards (and
+# update an alt here) when a page title on a card changes: make_og.mjs --check
+# compares the five home cards with home_h1.
+OG_BASE = SITE_URL + "/assets/og/"
+OG_W, OG_H, OG_TYPE = 1200, 630, "image/png"
+OG_IMAGES = {
+    "index.html": {
+        "file": "home-{lang}.png",
+        "alt": {
+            "en": "EpiDetective. What causes cancer and other chronic diseases, and how sure the evidence is. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。什么会导致癌症和其他慢性病，以及证据有多可靠。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Ce qui provoque le cancer et d’autres maladies chroniques, et la solidité des preuves. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Qué causa el cáncer y otras enfermedades crónicas, y qué solidez tiene la evidencia. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Что вызывает рак и другие хронические заболевания, и насколько надёжны доказательства. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+        },
+    },
+    "explorer.html": {
+        "file": "explorer.png",
+        "alt": {
+            "en": "EpiDetective. Cancer Evidence Explorer. A personal project by Wenxin Wan. Data: IARC Monographs.",
+            "zh": "EpiDetective。癌症证据探索器。万汶鑫的个人项目。数据：《IARC 致癌物专论》。",
+            "fr": "EpiDetective. Explorateur des preuves sur le cancer. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC.",
+            "es": "EpiDetective. Explorador de evidencia sobre el cáncer. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC.",
+            "ru": "EpiDetective. Атлас доказательств: рак. Личный проект Вэньсинь Вань. Данные: Монографии МАИР.",
+        },
+    },
+    "about.html": {
+        "file": "about.png",
+        "alt": {
+            "en": "EpiDetective. Cancer epidemiologist. About Wenxin Wan. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。癌症流行病学研究者。关于万汶鑫。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Épidémiologiste du cancer. À propos de Wenxin Wan. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Epidemiólogo del cáncer. Sobre Wenxin Wan. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Онкоэпидемиолог. О Вэньсинь Вань. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+        },
+    },
+    "games.html": {
+        "file": "games.png",
+        "alt": {
+            "en": "EpiDetective. Skin, lung and breast. Cancer awareness games. A personal project by Wenxin Wan. Sources: IARC, WHO, the European Code Against Cancer and published studies.",
+            "zh": "EpiDetective。皮肤癌、肺癌与乳腺癌。防癌小游戏。万汶鑫的个人项目。来源：IARC、WHO、《欧洲防癌守则》和已发表的研究。",
+            "fr": "EpiDetective. Peau, poumon et sein. Jeux de sensibilisation au cancer. Un projet personnel de Wenxin Wan. Sources : CIRC, OMS, Code européen contre le cancer et études publiées.",
+            "es": "EpiDetective. Piel, pulmón y mama. Juegos sobre el cáncer. Un proyecto personal de Wenxin Wan. Fuentes: CIIC, OMS, Código Europeo contra el Cáncer y estudios publicados.",
+            "ru": "EpiDetective. Кожа, лёгкие и грудь. Игры о профилактике рака. Личный проект Вэньсинь Вань. Источники: МАИР, ВОЗ, Европейский кодекс против рака и опубликованные исследования.",
+        },
+    },
+    "reading.html": {
+        "file": "reading.png",
+        "alt": {
+            "en": "EpiDetective. Seven ideas. How to read health evidence. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。七个概念。如何读懂健康证据。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Sept idées. Comment lire les preuves en santé. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Siete ideas. Cómo leer la evidencia en salud. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Семь идей. Как читать научные данные о здоровье. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+        },
+    },
+    "how-we-check.html": {
+        "file": "how-we-check.png",
+        "alt": {
+            "en": "EpiDetective. Sources, versions and corrections. How we check. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。来源、版本与更正。我们如何核查。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Sources, versions et corrections. Comment nous vérifions. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Fuentes, versiones y correcciones. Cómo verificamos. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Источники, версии и исправления. Как мы проверяем данные. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+        },
+    },
+    "work.html": {
+        "file": "work.png",
+        "alt": {
+            "en": "EpiDetective. What IARC has found, sector by sector. Work and cancer. A personal project by Wenxin Wan. Data: IARC Monographs.",
+            "zh": "EpiDetective。IARC 的结论，按行业一览。工作与癌症。万汶鑫的个人项目。数据：《IARC 致癌物专论》。",
+            "fr": "EpiDetective. Ce que le CIRC a établi, secteur par secteur. Travail et cancer. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC.",
+            "es": "EpiDetective. Lo que ha encontrado el CIIC, sector por sector. Trabajo y cáncer. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC.",
+            "ru": "EpiDetective. Что установило МАИР, отрасль за отраслью. Работа и рак. Личный проект Вэньсинь Вань. Данные: Монографии МАИР.",
+        },
+    },
+}
 # og:locale wants a full locale, not the bare language code
 OG_LOCALE = {"en": "en_GB", "zh": "zh_CN", "fr": "fr_FR", "es": "es_ES", "ru": "ru_RU"}
 TOOL_URL = "https://tools.epidetective.com/cancer/"
@@ -45,9 +135,11 @@ TOOL2_URL = "https://tools.epidetective.com/chronic/"
 TOOL_ROOTS = {"cancer": TOOL_URL, "chronic": TOOL2_URL}
 # The hash views each tool opens. "anchor" is a plain section id such as
 # #methods or #how.
-#   cancer   #exposure=<id>  #cancer=<id>  #map
+#   cancer   #exposure=<id>  #cancer=<id>  #map, and ?q=<text> ("query"):
+#            the search filled in, for the agents IARC evaluated without
+#            naming a cancer site (they have no entry of their own)
 #   chronic  #disease=<id>  #risk=<id>  #link=<risk>|<disease>  #map
-TOOL_KINDS = {"cancer": ("exposure", "cancer", "map", "anchor"),
+TOOL_KINDS = {"cancer": ("exposure", "cancer", "map", "anchor", "query"),
               "chronic": ("disease", "risk", "link", "map", "anchor")}
 # The Code Against Cancer reference page is likewise a self-contained directory
 # (bilingual EN/ZH inside), so it is linked with the same PREFIX join as TOOL2.
@@ -76,6 +168,11 @@ TOOL_DEEP = {
     "TL_PROCESSED": ("cancer", "exposure", "Processed meat"),
     "TL_RF": ("cancer", "exposure", "Radiofrequency electromagnetic fields (glioma, acoustic neuroma)"),
     "TL_LUNG": ("cancer", "cancer", "Lung"),
+    "TL_BREAST": ("cancer", "cancer", "Breast"),
+    "TL_ASPARTAME": ("cancer", "exposure", "Aspartame"),
+    "TL_STROKE": ("chronic", "disease", "stroke_isch"),
+    # an evaluated agent: no entry of its own, so the search opens on it
+    "TL_COFFEE": ("cancer", "query", "Coffee, drinking"),
     "TL_HOW": ("chronic", "anchor", "how"),
     "TL_REDMEAT_CHD": ("chronic", "link", ("red_meat", "chd")),
 }
@@ -146,6 +243,8 @@ def tool_link(tool, kind, id, lang):
         -> https://tools.epidetective.com/cancer/?lang=fr#exposure=Aspartame
       tool_link("chronic", "link", ("red_meat", "chd"), "en")
         -> https://tools.epidetective.com/chronic/?lang=en#link=red_meat%7Cchd
+      tool_link("cancer", "query", "Coffee, drinking", "es")
+        -> https://tools.epidetective.com/cancer/?lang=es&q=Coffee%2C%20drinking
 
     The hash form stays valid when the tools gain path routes, so no site page
     depends on the Worker. Everything after '#' is percent-encoded (spaces,
@@ -164,6 +263,10 @@ def tool_link(tool, kind, id, lang):
                          % (tool, kind, list(TOOL_KINDS[tool])))
     if kind == "map":
         return url_ + "#map"
+    if kind == "query":
+        if not id or not isinstance(id, str):
+            raise ValueError("tool_link: %s/query needs the search text" % tool)
+        return url_ + "&q=" + quote(id, safe="")
     if kind == "link" and not isinstance(id, str):
         id = "|".join(id)
     if not id or not isinstance(id, str):
@@ -172,9 +275,71 @@ def tool_link(tool, kind, id, lang):
     return url_ + "#" + (frag if kind == "anchor" else "%s=%s" % (kind, frag))
 
 
+# The person behind the site, as the About page's JSON-LD describes him; the home
+# page links its WebSite to this Person by @id.
+PERSON_ID = SITE_URL + "/about.html#person"
+PERSON_SAME_AS = [
+    "https://scholar.google.com/citations?user=xkxHpUsAAAAJ",
+    "https://orcid.org/0000-0002-1957-4034",
+    "https://www.linkedin.com/in/wenxin-wan1",
+    "https://github.com/Wenxin-Wan",
+]
+
+
+def plain(text):
+    """An i18n value as plain text: tags dropped, entities decoded."""
+    return html.unescape(re.sub(r"<[^>]+>", "", text)).strip()
+
+
+def jsonld_home(d, lang):
+    """WebSite and Person on the home page. The WebSite description is the
+    page's meta description, which opens on the personal-project status."""
+    data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": abs_url(lang, "index.html") + "#website",
+                "url": abs_url(lang, "index.html"),
+                "name": "EpiDetective",
+                "description": plain(d["meta_home_desc"]),
+                "inLanguage": lang,
+                "author": {"@id": PERSON_ID},
+                "publisher": {"@id": PERSON_ID},
+            },
+            {
+                "@type": "Person",
+                "@id": PERSON_ID,
+                "name": "Wenxin Wan",
+                "alternateName": "万汶鑫",
+                "jobTitle": "Postdoctoral scientist in cancer epidemiology",
+                "url": SITE_URL + "/about.html",
+                "sameAs": PERSON_SAME_AS,
+            },
+        ],
+    }
+    body = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return '<script type="application/ld+json">\n%s\n</script>' % body
+
+
 def esc(text):
     """Escape a data value (a name taken from the tools' DATA) for HTML."""
     return html.escape(str(text), quote=True)
+
+
+def svg_data_url(path):
+    """An SVG file as a compact data: URL for CSS: whitespace collapsed, double
+    quotes turned into single ones (when the file has none), and only the
+    characters a URL cannot carry, or that would end the CSS string or the HTML
+    attribute, percent-encoded (%, #, <, >, &, double quote, braces, controls
+    and anything outside ASCII). Gzip packs this almost as well as the file."""
+    with open(path, encoding="utf-8") as fh:
+        s = re.sub(r"\s+", " ", fh.read().strip()).replace("> <", "><")
+    if "'" not in s:
+        s = s.replace('"', "'")
+    return "data:image/svg+xml," + "".join(
+        quote(ch, safe="") if ch in '%#<>&"{}|\\^`[]' or not " " <= ch <= "~" else ch
+        for ch in s)
 
 
 def group_code(d, group):
@@ -282,41 +447,108 @@ def render_work_chronic(work, d, lang):
     return '<ul class="beyond">\n%s\n</ul>' % "\n".join(items)
 
 
+# Pages outside the build that the sitemap lists: the file (or game folder) whose
+# history dates the page, and the URL of each language it answers in. The Code
+# page localises itself from ?lang= and carries hreflang for these URLs; the
+# timeline speaks en and zh; the games are English only.
+STATIC_PAGES = [
+    (PREVENTION_PATH + "index.html",
+     dict([("en", "%s/%s" % (SITE_URL, PREVENTION_PATH))]
+          + [(l, "%s/%s?lang=%s" % (SITE_URL, PREVENTION_PATH, l)) for l in LANGS[1:]])),
+    ("timeline/index.html",
+     {"en": SITE_URL + "/timeline/", "zh": SITE_URL + "/timeline/?lang=zh"}),
+    (GAME1_PATH, {"en": "%s/%s" % (SITE_URL, GAME1_PATH)}),
+    (GAME2_PATH, {"en": "%s/%s" % (SITE_URL, GAME2_PATH)}),
+    (GAME3_PATH, {"en": "%s/%s" % (SITE_URL, GAME3_PATH)}),
+]
+
+
+def _git(*args):
+    return subprocess.run(["git"] + list(args), cwd=HERE, capture_output=True,
+                          text=True, check=True).stdout
+
+
+def dirty_paths():
+    """Paths that differ from the last commit (edited, new or just rebuilt).
+    None when there is no git checkout: then every page is dated today."""
+    try:
+        out = _git("status", "--porcelain", "-z", "--untracked-files=all")
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    paths, entries, i = set(), out.split("\0"), 0
+    while i < len(entries):
+        e = entries[i]
+        if len(e) > 3:
+            paths.add(e[3:])
+            if e[0] in "RC":      # a rename names the old path next; skip it
+                i += 1
+        i += 1
+    return paths
+
+
+def lastmod(path, dirty):
+    """Date of a page for <lastmod>: the day of the last commit that touched its
+    file (or game folder), git log -1 --format=%cs, which needs the full history
+    (rebuild.yml checks out with fetch-depth: 0). A page that differs from that
+    commit, because it was edited or this build has just rewritten it, is dated
+    today: it becomes the commit of today once pushed, so a build run on the day
+    of the commit, here or in the Rebuild Action, writes the same sitemap."""
+    if dirty is None:
+        return date.today().isoformat()
+    folder = path.endswith("/")
+    if any(p == path or (folder and p.startswith(path)) for p in dirty):
+        return date.today().isoformat()
+    try:
+        day = _git("log", "-1", "--format=%cs", "--", path).strip()
+    except (OSError, subprocess.CalledProcessError):
+        day = ""
+    return day or date.today().isoformat()
+
+
 def write_sitemap():
-    """One <url> per page per language, each listing every language as an
-    alternate. Search engines want the alternates repeated inside every entry,
-    not only on the page that happens to be canonical."""
+    """One <url> per page per language, each with its <lastmod> and every
+    language as an alternate. Search engines want the alternates repeated inside
+    every entry, not only on the page that happens to be canonical."""
+    dirty = dirty_paths()
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
            ' xmlns:xhtml="http://www.w3.org/1999/xhtml">']
-    for page in PAGES:
-        for lang in LANGS:
-            out.append("  <url>")
-            out.append("    <loc>%s</loc>" % abs_url(lang, page))
-            for other in LANGS:
-                out.append('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
-                           % (other, abs_url(other, page)))
-            out.append('    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>'
-                       % abs_url("en", page))
-            out.append("  </url>")
-    # The two tools are behind the tools.epidetective.com login gate and are no
-    # longer indexable, so neither gets a sitemap entry. The Code Against Cancer
-    # page is self-contained and bilingual and stays public.
-    out.append("  <url>")
-    out.append("    <loc>%s/%s</loc>" % (SITE_URL, PREVENTION_PATH))
-    out.append("  </url>")
-    # The developer timeline and the three games are public standalone pages.
-    for leaf in ("timeline/", GAME1_PATH, GAME2_PATH, GAME3_PATH):
+
+    def entry(loc, day, alternates):
         out.append("  <url>")
-        out.append("    <loc>%s/%s</loc>" % (SITE_URL, leaf))
+        out.append("    <loc>%s</loc>" % html.escape(loc))
+        out.append("    <lastmod>%s</lastmod>" % day)
+        if len(alternates) > 1:
+            for other, href in alternates.items():
+                out.append('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
+                           % (other, html.escape(href)))
+            out.append('    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>'
+                       % html.escape(alternates["en"]))
         out.append("  </url>")
+
+    for page in PAGES:
+        alternates = {l: abs_url(l, page) for l in LANGS}
+        for lang in LANGS:
+            path = page if lang == "en" else "%s/%s" % (lang, page)
+            entry(alternates[lang], lastmod(path, dirty), alternates)
+    # The two tools stay out of the sitemap (decision 1: noindex while in preview).
+    for path, alternates in STATIC_PAGES:
+        day = lastmod(path, dirty)
+        for lang, loc in alternates.items():
+            entry(loc, day, alternates)
     out.append("</urlset>")
     with open(os.path.join(HERE, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
 
 
 def write_robots():
-    lines = ["User-agent: *", "Allow: /", "", "Sitemap: %s/sitemap.xml" % SITE_URL]
+    """GitHub Pages serves the whole repository, so robots.txt asks crawlers to
+    leave the build inputs and internal files alone: the search index, the
+    templates, the 2026-09-20 review, the scripts, the translations and data."""
+    lines = ["User-agent: *", "Allow: /",
+             "Disallow: /assets/search/", "Disallow: /templates/", "Disallow: /editorial-2026-09-20/",
+             "Disallow: /scripts/", "Disallow: /i18n/", "Disallow: /data/",
+             "", "Sitemap: %s/sitemap.xml" % SITE_URL]
     with open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
 
@@ -340,6 +572,14 @@ def main():
     if problems:
         raise SystemExit("Translation key problems:\n  " + "\n  ".join(problems))
 
+    for page in PAGES:
+        if page not in OG_IMAGES:
+            raise SystemExit("%s has no share image in OG_IMAGES" % page)
+        for lang in LANGS:
+            f = OG_IMAGES[page]["file"].replace("{lang}", lang)
+            if not os.path.exists(os.path.join(HERE, "assets", "og", f)):
+                raise SystemExit("share image assets/og/%s is missing" % f)
+
     templates = {}
     for page in PAGES:
         with open(os.path.join(TPL, page), encoding="utf-8") as fh:
@@ -348,6 +588,9 @@ def main():
     # work.html renders the committed output of scripts/build_work_data.py
     with open(WORK_JSON, encoding="utf-8") as fh:
         work = json.load(fh)
+
+    # same picture in every language (see CHRONIC_NET_SVG)
+    thumb_chronic = "background-image:url(&quot;%s&quot;)" % svg_data_url(CHRONIC_NET_SVG)
 
     written = []
     for lang in LANGS:
@@ -366,7 +609,13 @@ def main():
             "WORK_CHRONIC": render_work_chronic(work, d, lang),
         }
         for key, (tool, kind, id_) in TOOL_DEEP.items():
-            shared[key] = tool_link(tool, kind, id_, lang)
+            shared[key] = esc(tool_link(tool, kind, id_, lang))
+        # the three example chips of the search box are links for readers
+        # without JavaScript: their word goes into a URL, percent-encoded
+        for i in (1, 2, 3):
+            shared["Q_EX%d" % i] = quote(plain(d["search_ex%d" % i]), safe="")
+        shared["JSONLD_HOME"] = jsonld_home(d, lang)
+        shared["THUMB_CHRONIC_BG"] = thumb_chronic
         for g in GROUP_KEY:
             shared["GRP_" + g] = group_code(d, g)
 
@@ -412,7 +661,10 @@ def main():
                                    + ("?lang=zh" if lang == "zh" else ""))
             ctx["URL_NOTE1"] = NOTE1_URL
             ctx["CANONICAL"] = abs_url(lang, page)
-            ctx["OG_IMAGE"] = OG_IMAGE
+            og = OG_IMAGES[page]
+            ctx["OG_IMAGE"] = OG_BASE + og["file"].replace("{lang}", lang)
+            ctx["OG_IMAGE_ALT"] = esc(og["alt"][lang])
+            ctx["OG_IMAGE_W"], ctx["OG_IMAGE_H"], ctx["OG_IMAGE_TYPE"] = OG_W, OG_H, OG_TYPE
             ctx["OG_LOCALE"] = OG_LOCALE[lang]
             ctx["LANGSWITCH"] = switch_html
             ctx["HREFLANG"] = "\n".join(alts)
