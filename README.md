@@ -93,8 +93,8 @@ before publishing.
 Both thumbnails are static renders of the real graphs, not decoration.
 
 ```bash
-python3 make_network_svg.py     # assets/network.svg          185 exposures, 68 cancers, 460 links
-python3 make_chronic_svg.py     # assets/chronic-network.svg   95 risk factors, 31 diseases, 359 links
+python3 make_network_svg.py     # assets/network.svg          185 exposures, 68 cancers, 469 links
+python3 make_chronic_svg.py     # assets/chronic-network.svg   124 risk factors, 45 diseases, 356 graded links
 ```
 
 Each runs a seeded force-directed layout, so the result is reproducible, and
