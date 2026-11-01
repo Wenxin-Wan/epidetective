@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 15 · Illustrated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* A friendly illustrated explainer for the public and for schools: flat drawings that pop in as you scroll, rounded but not childish, a typeface built for legibility. */
+:root{--bg:#E6F3EC;--card:#FFFFFF;--ink:#1C2A4A;--mute:#55627E;--coral:#FF7A59;--sun:#FFC83D;--teal:#2AA897;--sky:#BFE3F2;--navy:#1C2A4A;
+  --display:"Bricolage Grotesque","Avenir Next",sans-serif;--text:"Atkinson Hyperlegible",-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.6 var(--text)}
+a{color:inherit;text-underline-offset:4px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:18px;font-size:15px;flex-wrap:wrap}
+.mark{font:800 22px var(--display);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav{display:flex;gap:6px;flex-wrap:wrap}.nav a{text-decoration:none;padding:6px 12px;border-radius:999px;font-weight:700}.nav a:hover{background:#fff}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:40px 80px}
+.hero h1{font-size:clamp(2.3rem,5vw,4.2rem);line-height:1.02;font-weight:800}
+.hero h1 span{color:var(--coral)}
+.hero .sub{margin-top:20px;font-size:19px;max-width:32em}.hero .cav{margin-top:8px;color:var(--mute)}
+.search{margin-top:28px;display:flex;background:#fff;border-radius:20px;padding:6px;box-shadow:0 4px 0 var(--ink)}
+.search input{flex:1;min-width:0;border:0;background:transparent;padding:12px 16px;font:400 17px var(--text);color:var(--ink)}
+.search input:focus{outline:none}.search:focus-within{outline:3px solid var(--sun)}
+.search button{border:0;border-radius:14px;background:var(--coral);color:#fff;font:700 16px var(--display);padding:0 22px;cursor:pointer}
+.try{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:15px;color:var(--mute)}
+.try a{background:#fff;border-radius:999px;padding:4px 12px;text-decoration:none;color:var(--ink);font-weight:700}
+.art svg{width:100%;height:auto;display:block;overflow:visible}
+.par{will-change:transform}
+
+section.blk{padding-block:72px}
+.blk h2{font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.05;margin-bottom:14px;font-weight:800}
+.kick{display:inline-block;font:700 14px var(--display);background:var(--ink);color:#fff;border-radius:999px;padding:4px 12px;margin-bottom:14px}
+.idea{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;background:var(--card);border-radius:32px;padding:clamp(24px,5vw,56px)}
+.idea p{max-width:32em}
+.badges{display:flex;gap:16px;margin:22px 0;flex-wrap:wrap}
+.badge{background:var(--bg);border-radius:20px;padding:14px 18px;font-size:15px}
+.badge b{display:block;font:800 2rem/1 var(--display);color:var(--coral)}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tool{background:var(--card);border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+.tool .head{aspect-ratio:16/8;display:grid;place-items:center}
+.tool .head div{width:62%;aspect-ratio:1;border-radius:50%;background:#fff center/86% no-repeat;box-shadow:0 0 0 10px rgba(255,255,255,.5)}
+.tool .body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tool h3{font-size:1.7rem;line-height:1.1;font-weight:800}
+.tool p{color:var(--mute)}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.nums span{background:var(--bg);border-radius:999px;padding:4px 12px;font-size:14px}.nums b{font-weight:700}
+.acts{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.btn{background:var(--ink);color:#fff;text-decoration:none;padding:12px 20px;border-radius:16px;font:700 15px var(--display);box-shadow:0 4px 0 #0E1730}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #0E1730}
+.code{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:36px;align-items:center;background:var(--navy);color:#fff;border-radius:32px;padding:clamp(24px,4vw,48px)}
+.code p{color:#C8D1E6;max-width:32em}
+.code .btn{background:var(--sun);color:var(--ink);box-shadow:0 4px 0 #C99413}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.game{background:var(--card);border-radius:24px;overflow:hidden;text-decoration:none}
+.game img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block}
+.game div{padding:14px 18px 18px}.game b{display:block;font:800 1.15rem var(--display)}.game span{font-size:14px;color:var(--mute)}
+.foot{padding-block:40px 100px;font-size:14px;color:var(--mute)}
+.foot .links{display:flex;gap:16px;flex-wrap:wrap;color:var(--ink);font-weight:700;margin-bottom:8px}
+.pop{transition:transform .7s cubic-bezier(.34,1.56,.64,1),opacity .5s}
+.js .pop{opacity:0;transform:scale(.92) translateY(24px)}.js .pop.in{opacity:1;transform:none}
+@media (max-width:860px){.hero,.idea,.tools,.games{grid-template-columns:1fr}.code{grid-template-columns:1fr}.nav{display:none}}
+@media (prefers-reduced-motion:reduce){.js .pop{opacity:1;transform:none;transition:none}.par{transform:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="mark" href="#"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="none" stroke="#1C2A4A" stroke-width="3"/><path d="M17 17l7 7" stroke="#1C2A4A" stroke-width="3.4" stroke-linecap="round"/><circle cx="11" cy="11" r="3" fill="#FF7A59"/></svg>EpiDetective</a>
+<nav class="nav"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a><a href="#">EN</a></nav></div></header>
+<main>
+<section class="hero wrap">
+  <div>
+    <h1>What causes cancer and other chronic diseases, and <span>how sure the evidence is</span></h1>
+    <p class="sub">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+    <p class="cav">They describe whole populations, not what caused any one person’s illness.</p>
+    <form class="search" role="search" onsubmit="return false"><input id="q15" aria-label="Search" placeholder="Search a cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></form>
+    <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p>
+  </div>
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 520 440">
+      <circle class="par" data-k="-.08" cx="430" cy="70" r="46" fill="#FFC83D"/>
+      <path class="par" data-k=".05" d="M0 360 C120 300 220 330 300 350 C380 370 440 330 520 310 L520 440 L0 440Z" fill="#9FD9C4"/>
+      <path class="par" data-k=".1" d="M0 400 C100 370 200 390 290 400 C380 410 450 380 520 370 L520 440 L0 440Z" fill="#2AA897"/>
+      <g class="par" data-k="-.04">
+        <g fill="#1C2A4A" opacity=".2"><circle cx="70" cy="120" r="6"/><circle cx="120" cy="80" r="5"/><circle cx="60" cy="230" r="5"/><circle cx="420" cy="230" r="6"/><circle cx="460" cy="160" r="5"/><circle cx="390" cy="290" r="5"/></g>
+        <circle cx="240" cy="190" r="118" fill="#FFFFFF" stroke="#1C2A4A" stroke-width="14"/>
+        <path d="M325 275 L415 365" stroke="#1C2A4A" stroke-width="30" stroke-linecap="round"/>
+        <g stroke="#1C2A4A" stroke-width="2.5" opacity=".5"><path d="M190 150 L250 130 L300 180 L260 240 L190 230 Z M190 150 L260 240 M250 130 L190 230"/></g>
+        <circle cx="190" cy="150" r="13" fill="#FF7A59"/><circle cx="250" cy="130" r="10" fill="#FFC83D"/><circle cx="300" cy="180" r="13" fill="#FF7A59"/>
+        <circle cx="260" cy="240" r="10" fill="#2AA897"/><circle cx="190" cy="230" r="11" fill="#FFC83D"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="blk wrap">
+  <div class="idea pop">
+    <div><span class="kick">One idea</span><h2>Same label, very different risk</h2>
+      <p>Tobacco smoking and processed meat are both in Group 1, the label for known causes. The label tells you how sure the evidence is. It does not tell you how big the risk is.</p>
+      <div class="badges"><div class="badge"><b>10–12 in 100</b>smokers get lung cancer by age 75</div><div class="badge"><b>4–5 in 1,000</b>lifelong non-smokers do</div></div>
+      <a href="#" style="font-weight:700">Seven ideas for reading a health headline →</a></div>
+    <svg viewBox="0 0 360 260" aria-hidden="true" style="width:100%;height:auto">
+      <rect x="20" y="90" width="140" height="140" rx="18" fill="#BFE3F2"/><rect x="200" y="90" width="140" height="140" rx="18" fill="#FFE1D7"/>
+      <text x="90" y="170" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-size="15" fill="#1C2A4A">Tobacco</text>
+      <text x="90" y="190" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-size="15" fill="#1C2A4A">smoking</text>
+      <text x="270" y="170" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-size="15" fill="#1C2A4A">Processed</text>
+      <text x="270" y="190" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-size="15" fill="#1C2A4A">meat</text>
+      <path d="M90 90 L90 60 M270 90 L270 60" stroke="#1C2A4A" stroke-width="3"/>
+      <rect x="40" y="22" width="100" height="40" rx="10" fill="#1C2A4A"/><rect x="220" y="22" width="100" height="40" rx="10" fill="#1C2A4A"/>
+      <text x="90" y="48" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="17" fill="#FFC83D">Group 1</text>
+      <text x="270" y="48" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="17" fill="#FFC83D">Group 1</text>
+    </svg>
+  </div>
+</section>
+
+<section class="blk wrap" id="tools" style="padding-top:0">
+  <h2 class="pop">Pick a tool and start exploring</h2>
+  <div class="tools">
+    <article class="tool pop"><div class="head" style="background:var(--sky)"><div style="background-image:url(img/network.svg)"></div></div><div class="body">
+      <h3>Cancer Evidence Explorer</h3><p>Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+      <p class="nums"><span><b>185</b> exposures</span><span><b>68</b> cancer types</span><span><b>469</b> links</span></p>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></div></article>
+    <article class="tool pop"><div class="head" style="background:#FFE1D7"><div style="background-image:url(img/chronic-network.svg)"></div></div><div class="body">
+      <h3>Chronic Disease Evidence Explorer</h3><p>Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+      <p class="nums"><span><b>124</b> risk factors</span><span><b>45</b> diseases</span><span><b>356</b> graded links</span></p>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></div></article>
+  </div>
+</section>
+
+<section class="blk wrap" style="padding-top:0">
+  <div class="code pop">
+    <svg width="96" height="110" viewBox="0 0 96 110" aria-hidden="true"><path d="M48 4 L90 20 L90 52 C90 80 70 98 48 106 C26 98 6 80 6 52 L6 20 Z" fill="#2AA897"/><path d="M28 56 L43 71 L70 40" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><h2 style="color:#fff">Code Against Cancer</h2><p>What you can do: the official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p></div>
+    <a class="btn" href="#">Read the recommendations</a>
+  </div>
+</section>
+
+<section class="blk wrap" style="padding-top:0">
+  <h2 class="pop">Learning by playing</h2>
+  <div class="games">
+    <a class="game pop" href="#"><img src="img/sun-safety-card.webp" alt=""><div><b>Sol &amp; the UV Shield Quest</b><span>Skin cancer · ages 6–12</span></div></a>
+    <a class="game pop" href="#"><img src="img/lung-detective-card.webp" alt=""><div><b>The Lung Detective</b><span>Lung cancer · ages 10–16</span></div></a>
+    <a class="game pop" href="#"><img src="img/town-of-1000-card.webp" alt=""><div><b>A Town of 1,000</b><span>Breast cancer · ages 14+</span></div></a>
+  </div>
+</section>
+</main>
+<footer class="foot wrap"><p class="links"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></p>
+<p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></footer>
+
+<nav class="demo-nav r2" aria-label="Demos"><a href="index.html">Overview</a><a href="6-thousand.html">6</a><a href="7-powers-of-ten.html">7</a><a href="8-focus.html">8</a><a href="9-ladder.html">9</a><a href="10-exhibition.html">10</a><a href="11-manifesto.html">11</a><a href="12-card-stack.html">12</a><a href="13-instrument.html">13</a><a href="14-explorable.html">14</a><a aria-current="page" href="15-illustrated.html">15</a></nav>
+<script>
+document.documentElement.classList.add("js");
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".pop").forEach(el=>io.observe(el));
+// Gentle parallax in the hero drawing.
+const layers=[...document.querySelectorAll(".par")], still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function par(){ if(still) return; const y=scrollY; layers.forEach(l=>l.style.transform=`translateY(${y*+l.dataset.k}px)`); }
+let q=0; addEventListener("scroll",()=>{ if(!q) q=requestAnimationFrame(()=>{q=0;par();}); },{passive:true});
+</script>
+</body>
+</html>

@@ -7,3 +7,5 @@
 .demo-nav a:hover{background:#333;color:#fff}
 .demo-nav a[aria-current]{background:#fff;color:#111}
 @media print{.demo-nav{display:none}}
+.demo-nav.r2 a{padding:7px 8px}
+@media (max-width:480px){.demo-nav.r2{gap:0;padding:4px}.demo-nav.r2 a{padding:6px 5px;font-size:11px}}

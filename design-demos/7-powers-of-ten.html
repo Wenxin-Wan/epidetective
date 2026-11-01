@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 7 · Powers of Ten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* One continuous zoom: from one person to a population, the scale the evidence works at. Dark field, geometric sans, one warm accent. */
+:root{--night:#07090D;--panel:#10141B;--fg:#F2F0EA;--dim:#8D94A0;--line:rgba(242,240,234,.12);--case:#FF6B5B;--you:#FFD166;
+  --sans:"Jost","Futura","Century Gothic",sans-serif;--serif:"Crimson Pro",Georgia,serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--fg);font:400 18px/1.6 var(--sans)}
+a{color:inherit;text-underline-offset:4px;text-decoration-color:rgba(242,240,234,.4)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:20px;font-size:14px;flex-wrap:wrap;letter-spacing:.02em}
+.mark{font-weight:500;font-size:18px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.nav{display:flex;gap:22px;color:var(--dim);flex-wrap:wrap}.nav a{text-decoration:none}.nav a:hover{color:var(--fg)}
+.hero{padding-block:clamp(64px,12vw,150px) 80px;text-align:left}
+.hero h1{font-size:clamp(2.3rem,5.4vw,4.6rem);line-height:1.04;font-weight:300;max-width:17ch;letter-spacing:-.01em}
+.hero .sub{margin-top:26px;font:400 22px/1.5 var(--serif);color:#D6D3CB;max-width:32em}
+.search{margin-top:40px;max-width:620px;display:flex;gap:10px;align-items:center;border:1px solid rgba(242,240,234,.3);border-radius:999px;padding:6px 6px 6px 22px}
+.search input{flex:1;min-width:0;background:transparent;border:0;color:var(--fg);font:400 18px var(--sans);padding:10px 0}
+.search input::placeholder{color:#6D7480}.search input:focus{outline:none}.search:focus-within{border-color:var(--you)}
+.search button{border:0;border-radius:999px;background:var(--fg);color:var(--night);font:500 15px var(--sans);padding:11px 20px;cursor:pointer}
+.try{margin-top:12px;color:var(--dim);font-size:15px;display:flex;gap:14px;padding-left:22px}
+.hint{margin-top:64px;color:var(--dim);font-size:14px;letter-spacing:.04em}
+
+/* the zoom */
+.zoom{height:520vh;position:relative}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden}
+#field{position:absolute;inset:0;width:100%;height:100%}
+.stage{position:absolute;left:max(16px,6vw);bottom:10vh;max-width:32em;transition:opacity .5s;background:rgba(7,9,13,.84);padding:22px 26px 24px;border-radius:6px;box-shadow:0 0 0 1px rgba(242,240,234,.08)}
+.stage .n{font:300 clamp(3rem,9vw,7.5rem)/1 var(--sans);letter-spacing:-.02em}
+.stage p{margin-top:12px;font:400 clamp(1.15rem,2vw,1.5rem)/1.45 var(--serif);color:#E4E1D9;text-shadow:0 0 18px var(--night)}
+.stage p b{color:var(--case);font-weight:400}
+.js .stage{opacity:0}.js .stage.on{opacity:1}
+.scale{position:absolute;right:max(16px,4vw);bottom:12vh;font-size:13px;color:var(--dim);text-align:right;letter-spacing:.04em}
+.scale b{display:block;font:300 1.6rem var(--sans);color:var(--fg)}
+
+/* after */
+.rv{transition:opacity .8s,transform .8s}.js .rv{opacity:0;transform:translateY(30px)}.js .rv.in{opacity:1;transform:none}
+section.after{padding-block:100px;border-top:1px solid var(--line)}
+.eyebrow{font:400 15px var(--serif);font-style:italic;color:var(--dim);margin-bottom:10px}
+.after h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;font-weight:300;margin-bottom:36px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:14px}
+.tool h3{font-size:1.8rem;font-weight:400;line-height:1.1}
+.tool p{color:#C9C6BE;font-size:16px}
+.nums{display:flex;gap:28px}.nums b{display:block;font:300 2.8rem/1 var(--sans)}.nums span{font-size:13px;color:var(--dim)}
+.acts{display:flex;gap:18px;align-items:center;margin-top:auto;flex-wrap:wrap}
+.btn{background:var(--fg);color:var(--night);text-decoration:none;padding:11px 18px;border-radius:999px;font-weight:500;font-size:15px}
+.btn:hover{background:var(--you)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.row p{color:#C9C6BE;margin-bottom:18px}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.game{text-decoration:none}.game img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:4px;opacity:.92}
+.game b{display:block;font-weight:500;margin-top:10px}.game span{font-size:14px;color:var(--dim)}
+.foot{border-top:1px solid var(--line);padding-block:40px 100px;font-size:14px;color:var(--dim)}
+.foot .links{display:flex;gap:20px;flex-wrap:wrap;color:var(--fg);margin-bottom:10px}
+@media (max-width:820px){.tools,.row,.games{grid-template-columns:1fr}.scale{display:none}.nav{display:none}}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="mark" href="#">EpiDetective</a>
+<nav class="nav"><a href="#tools">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a><a href="#">EN</a></nav></div></header>
+<main>
+<section class="hero wrap">
+  <h1>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+  <p class="sub">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+  <form class="search" role="search" onsubmit="return false"><input id="q7" aria-label="Search" placeholder="Search a cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></form>
+  <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p>
+  <p class="hint">Scroll to zoom out ↓</p>
+</section>
+
+<section class="zoom" aria-label="From one person to a population">
+  <div class="pin">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="stage" data-a="0" data-b=".2"><p class="n">1 person</p><p>No study can tell you what caused one person’s illness.</p></div>
+    <div class="stage" data-a=".2" data-b=".45"><p class="n">10 people</p><p>Still far too few to see a pattern.</p></div>
+    <div class="stage" data-a=".45" data-b=".75"><p class="n">1,000 people</p><p>Now patterns appear. Among 1,000 smokers, about <b>100 to 120</b> get lung cancer by age 75. Among 1,000 lifelong non-smokers, 4 to 5.</p></div>
+    <div class="stage" data-a=".75" data-b="1.01"><p class="n">Millions</p><p>The evidence pools whole populations over decades. That is the scale the tools describe, and the scale at which “how sure” can be answered.</p></div>
+    <p class="scale" aria-hidden="true"><b id="cnt">1</b>people in view</p>
+  </div>
+</section>
+
+<section class="after wrap" id="tools">
+  <p class="eyebrow rv">The tools</p>
+  <h2 class="rv">Look up the evidence yourself</h2>
+  <div class="tools">
+    <article class="tool rv"><h3>Cancer Evidence Explorer</h3><p>Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+      <div class="nums"><div><b>185</b><span>exposures</span></div><div><b>68</b><span>cancer types</span></div><div><b>469</b><span>links</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></article>
+    <article class="tool rv"><h3>Chronic Disease Evidence Explorer</h3><p>Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+      <div class="nums"><div><b>124</b><span>risk factors</span></div><div><b>45</b><span>diseases</span></div><div><b>356</b><span>graded links</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></article>
+  </div>
+</section>
+<section class="after wrap">
+  <div class="row">
+    <div class="rv"><p class="eyebrow">What you can do</p><h2 style="margin-bottom:16px">Code Against Cancer</h2><p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p><a class="btn" href="#">Read the recommendations</a></div>
+    <div class="rv"><p class="eyebrow">Reading the evidence</p><h2 style="margin-bottom:16px">Seven ideas</h2><p>Hazard and risk, relative and absolute risk, association and cause, and four more. A five-minute read, with no mathematics.</p><a href="#">Read the guide →</a></div>
+  </div>
+</section>
+<section class="after wrap">
+  <p class="eyebrow rv">For schools and families</p><h2 class="rv">Learning by playing</h2>
+  <div class="games rv">
+    <a class="game" href="#"><img src="img/sun-safety-card.webp" alt=""><b>Sol &amp; the UV Shield Quest</b><span>Skin cancer · ages 6–12</span></a>
+    <a class="game" href="#"><img src="img/lung-detective-card.webp" alt=""><b>The Lung Detective</b><span>Lung cancer · ages 10–16</span></a>
+    <a class="game" href="#"><img src="img/town-of-1000-card.webp" alt=""><b>A Town of 1,000</b><span>Breast cancer · ages 14+</span></a>
+  </div>
+</section>
+</main>
+<footer class="foot"><div class="wrap"><p class="links"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></p>
+<p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div></footer>
+
+<nav class="demo-nav r2" aria-label="Demos"><a href="index.html">Overview</a><a href="6-thousand.html">6</a><a aria-current="page" href="7-powers-of-ten.html">7</a><a href="8-focus.html">8</a><a href="9-ladder.html">9</a><a href="10-exhibition.html">10</a><a href="11-manifesto.html">11</a><a href="12-card-stack.html">12</a><a href="13-instrument.html">13</a><a href="14-explorable.html">14</a><a href="15-illustrated.html">15</a></nav>
+<script>
+document.documentElement.classList.add("js");
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+
+const zoom=document.querySelector(".zoom"), cv=document.getElementById("field"), x=cv.getContext("2d"), cnt=document.getElementById("cnt");
+const stages=[...document.querySelectorAll(".stage")];
+let W,H,d; function size(){ d=Math.min(2,devicePixelRatio||1); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; draw(); }
+const hash=(i,j)=>{ let h=(i*374761393+j*668265263)^0x5bd1e995; h=Math.imul(h^(h>>>13),1274126177); return ((h^(h>>>16))>>>0)/4294967295; };
+function prog(){ const b=zoom.getBoundingClientRect(); return Math.min(1,Math.max(0,-b.top/(b.height-innerHeight))); }
+function draw(){
+  const p=prog(); x.setTransform(d,0,0,d,0,0); x.fillStyle="#07090D"; x.fillRect(0,0,W,H);
+  const sp=Math.exp(Math.log(Math.min(W,H)*.9)*(1-p)+Math.log(5)*p);   // spacing between people
+  const cx=W*.62, cy=H*.42, nx=Math.ceil(cx/sp)+1, ny=Math.ceil(Math.max(cy,H-cy)/sp)+1, rad=Math.max(.8,sp*.26);
+  const caseA=Math.min(1,Math.max(0,(p-.42)/.08));
+  for(let j=-ny;j<=ny;j++) for(let i=-nx;i<=Math.ceil((W-cx)/sp)+1;i++){
+    const px=cx+i*sp, py=cy+j*sp; if(py<-rad||py>H+rad) continue;
+    const isYou=i===0&&j===0, isCase=hash(i,j)<.11;
+    x.fillStyle= isYou?"#FFD166": (isCase&&caseA>0)?`rgba(255,107,91,${.25+.75*caseA})`:"rgba(242,240,234,.55)";
+    if(rad<2.2) x.fillRect(px-rad,py-rad,rad*2,rad*2); else { x.beginPath(); x.arc(px,py,rad,0,7); x.fill(); }
+  }
+  const n=Math.round((W/sp)*(H/sp)); cnt.textContent = n<2?"1": n<1e4? n.toLocaleString("en"): "≈ "+(Math.round(n/1000)*1000).toLocaleString("en");
+  stages.forEach(s=>s.classList.toggle("on", p>=+s.dataset.a && p<+s.dataset.b));
+}
+let q=0; addEventListener("scroll",()=>{ if(!q) q=requestAnimationFrame(()=>{q=0;draw();}); },{passive:true});
+addEventListener("resize",size); size();
+</script>
+</body>
+</html>

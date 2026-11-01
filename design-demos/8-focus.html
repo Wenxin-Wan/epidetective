@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 8 · Focus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Onest:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* Through the microscope: each section sits in a round field that comes into focus as it reaches the middle of the screen. Colours from a pathology stain (haematoxylin purple, eosin pink). */
+:root{--bg:#F2EFF4;--slide:#FBF9FC;--ink:#2B2150;--mute:#6C6587;--line:#DCD6E4;--eosin:#E07BA5;--eosin-soft:#F7DCE8;--haem:#4A3B8C;
+  --display:"Young Serif",Georgia,serif;--text:"Onest",-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.6 var(--text)}
+a{color:inherit;text-underline-offset:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+p{margin:0}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:20px;flex-wrap:wrap;font-size:15px}
+.mark{font:400 22px var(--display);text-decoration:none}
+.nav{display:flex;gap:20px;flex-wrap:wrap;color:var(--mute)}.nav a{text-decoration:none}.nav a:hover{color:var(--ink)}
+.field{border-radius:50%;overflow:hidden;background:var(--slide);box-shadow:0 0 0 10px #E6E1EC,0 0 0 11px var(--line),0 30px 60px rgba(43,33,80,.12);aspect-ratio:1;position:relative}
+.field canvas,.field .img{width:100%;height:100%;display:block;transition:filter .15s linear}
+.field .img{background:center/80% no-repeat}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:64px 96px}
+.hero h1{font-size:clamp(2.3rem,4.8vw,4.1rem);line-height:1.08}
+.hero .sub{margin-top:22px;font-size:19px;max-width:32em}
+.hero .cav{margin-top:8px;color:var(--mute)}
+.search{margin-top:32px;display:flex;background:#fff;border-radius:999px;padding:6px;box-shadow:0 0 0 1px var(--line)}
+.search input{flex:1;min-width:0;border:0;background:transparent;padding:12px 18px;font:400 17px var(--text);color:var(--ink)}
+.search input:focus{outline:none}.search:focus-within{box-shadow:0 0 0 2px var(--eosin)}
+.search button{border:0;border-radius:999px;background:var(--ink);color:#fff;font:500 15px var(--text);padding:0 22px;cursor:pointer}
+.try{margin-top:12px;color:var(--mute);font-size:15px;display:flex;gap:14px;padding-left:18px}
+
+.groups{padding-block:72px;border-top:1px solid var(--line)}
+.groups h2{font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1.1;max-width:20ch}
+.groups .lede{margin-top:14px;color:var(--mute);max-width:36em}
+.gr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:44px}
+.gr figure{margin:0;text-align:center}
+.gr .field{box-shadow:0 0 0 6px #E6E1EC,0 0 0 7px var(--line)}
+.gr figcaption{margin-top:18px;font-size:15px}.gr figcaption b{display:block;font:400 1.25rem var(--display)}
+.gr figcaption span{color:var(--mute)}
+
+.sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:64px;align-items:center;padding-block:72px;border-top:1px solid var(--line)}
+.sec.flip .field{order:2}
+.sec .field{max-width:420px;width:100%;justify-self:center}
+.kick{font-size:14px;font-weight:600;color:var(--eosin);margin-bottom:8px}
+.sec h2{font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.1;margin-bottom:14px}
+.sec p.d{max-width:32em}
+.nums{display:flex;gap:28px;margin:20px 0}.nums b{display:block;font:400 2.6rem/1 var(--display)}.nums span{font-size:14px;color:var(--mute)}
+.acts{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.btn{background:var(--ink);color:#fff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:500;font-size:15px}
+.btn:hover{background:var(--haem)}
+.big{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font:400 clamp(5rem,12vw,9rem)/1 var(--display);color:var(--eosin)}
+.big small{display:block;font:500 15px var(--text);color:var(--mute);margin-top:-1.2rem}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.trio a{text-decoration:none;text-align:center;font-size:14px}
+.trio .field{box-shadow:0 0 0 5px #E6E1EC}.trio .img{background-size:cover}
+.trio b{display:block;margin-top:12px;font-weight:600}.trio span{color:var(--mute)}
+.foot{border-top:1px solid var(--line);padding-block:36px 100px;font-size:14px;color:var(--mute)}
+.foot .links{display:flex;gap:18px;flex-wrap:wrap;color:var(--ink);font-weight:500;margin-bottom:8px}
+@media (max-width:860px){.hero,.sec{grid-template-columns:minmax(0,1fr);gap:36px}.sec.flip .field{order:0}.gr{grid-template-columns:repeat(2,1fr)}.hero .field{max-width:360px;width:100%;justify-self:center}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="mark" href="#">EpiDetective</a>
+<nav class="nav"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a><a href="#">EN</a></nav></div></header>
+<main>
+<section class="hero wrap">
+  <div>
+    <h1>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+    <p class="sub">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+    <p class="cav">They describe whole populations, not what caused any one person’s illness.</p>
+    <form class="search" role="search" onsubmit="return false"><input id="q8" aria-label="Search" placeholder="Search a cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></form>
+    <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p>
+  </div>
+  <div class="field slide" aria-hidden="true"><canvas class="cells" width="700" height="700"></canvas></div>
+</section>
+
+<section class="groups wrap">
+  <h2>How sure is the evidence? Think of it as focus.</h2>
+  <p class="lede">IARC sorts each agent into one of four groups. The sharper the picture, the surer the evidence that it can cause cancer. Focus says nothing about how big the risk is.</p>
+  <div class="gr">
+    <figure><div class="field" data-blur="0"><canvas class="cells" width="400" height="400"></canvas></div><figcaption><b>Known cause</b><span>Group 1</span></figcaption></figure>
+    <figure><div class="field" data-blur="2.5"><canvas class="cells" width="400" height="400"></canvas></div><figcaption><b>Probable cause</b><span>Group 2A</span></figcaption></figure>
+    <figure><div class="field" data-blur="5"><canvas class="cells" width="400" height="400"></canvas></div><figcaption><b>Possible cause</b><span>Group 2B</span></figcaption></figure>
+    <figure><div class="field" data-blur="10"><canvas class="cells" width="400" height="400"></canvas></div><figcaption><b>Not classifiable</b><span>Group 3, which does not mean safe</span></figcaption></figure>
+  </div>
+  <p class="acts"><a href="#">What each label says, and what it does not →</a></p>
+</section>
+
+<section class="sec wrap" id="tools">
+  <div class="field slide"><div class="img" style="background-image:url(img/network.svg)"></div></div>
+  <div><p class="kick">Tool</p><h2>Cancer Evidence Explorer</h2><p class="d">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+    <div class="nums"><div><b>185</b><span>exposures</span></div><div><b>68</b><span>cancer types</span></div><div><b>469</b><span>links</span></div></div>
+    <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></div>
+</section>
+<section class="sec wrap flip">
+  <div class="field slide"><div class="img" style="background-image:url(img/chronic-network.svg)"></div></div>
+  <div><p class="kick">Tool</p><h2>Chronic Disease Evidence Explorer</h2><p class="d">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+    <div class="nums"><div><b>124</b><span>risk factors</span></div><div><b>45</b><span>diseases</span></div><div><b>356</b><span>graded links</span></div></div>
+    <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></div>
+</section>
+<section class="sec wrap">
+  <div class="field slide"><div class="big">14<small>actions for Europe</small></div></div>
+  <div><p class="kick">What you can do</p><h2>Code Against Cancer</h2><p class="d">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. Seventeen actions for Latin America and the Caribbean.</p>
+    <div class="acts"><a class="btn" href="#">Read the recommendations</a></div></div>
+</section>
+<section class="sec wrap flip">
+  <div><p class="kick">For schools and families</p><h2>Learning by playing</h2><p class="d">Three games, one each for skin, lung and breast cancer.</p>
+    <div class="trio">
+      <a href="#"><div class="field slide"><div class="img" style="background-image:url(img/sun-safety-card.webp)"></div></div><b>Sol &amp; the UV Shield Quest</b><span>ages 6–12</span></a>
+      <a href="#"><div class="field slide"><div class="img" style="background-image:url(img/lung-detective-card.webp)"></div></div><b>The Lung Detective</b><span>ages 10–16</span></a>
+      <a href="#"><div class="field slide"><div class="img" style="background-image:url(img/town-of-1000-card.webp)"></div></div><b>A Town of 1,000</b><span>ages 14+</span></a>
+    </div></div>
+  <div></div>
+</section>
+</main>
+<footer class="foot"><div class="wrap"><p class="links"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></p>
+<p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div></footer>
+
+<nav class="demo-nav r2" aria-label="Demos"><a href="index.html">Overview</a><a href="6-thousand.html">6</a><a href="7-powers-of-ten.html">7</a><a aria-current="page" href="8-focus.html">8</a><a href="9-ladder.html">9</a><a href="10-exhibition.html">10</a><a href="11-manifesto.html">11</a><a href="12-card-stack.html">12</a><a href="13-instrument.html">13</a><a href="14-explorable.html">14</a><a href="15-illustrated.html">15</a></nav>
+<script>
+// Stained cells: pink cytoplasm, purple nuclei, drawn once per canvas from the same seed.
+document.querySelectorAll("canvas.cells").forEach(cv=>{
+  const x=cv.getContext("2d"), W=cv.width; let s=19; const r=()=>((s=(s*16807)%2147483647)/2147483647);
+  x.fillStyle="#FBF9FC"; x.fillRect(0,0,W,W);
+  for(let i=0;i<34;i++){ const cx=r()*W, cy=r()*W, rx=W*(.06+r()*.05), ry=rx*(.7+r()*.4), a=r()*3;
+    x.save(); x.translate(cx,cy); x.rotate(a);
+    x.fillStyle=`rgba(224,123,165,${.35+r()*.3})`; x.beginPath(); x.ellipse(0,0,rx,ry,0,0,7); x.fill();
+    x.fillStyle=`rgba(74,59,140,${.7+r()*.25})`; x.beginPath(); x.ellipse(rx*.12,0,rx*.38,ry*.4,0,0,7); x.fill();
+    x.restore(); }
+  for(let i=0;i<220;i++){ x.fillStyle="rgba(74,59,140,.25)"; x.fillRect(r()*W,r()*W,2,2); }
+});
+// Focus follows the scroll: a field is sharpest when its centre reaches the middle of the screen.
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const slides=[...document.querySelectorAll(".slide")], fixed=[...document.querySelectorAll("[data-blur]")];
+function focus(){
+  const mid=innerHeight/2;
+  slides.forEach(f=>{ const b=f.getBoundingClientRect(), c=b.top+b.height/2, blur=still?0:Math.min(12,Math.max(0,(Math.abs(c-mid)-innerHeight*.12)/38));
+    f.firstElementChild.style.filter=`blur(${blur.toFixed(1)}px)`; });
+  fixed.forEach(f=>{ const b=f.getBoundingClientRect(), seen=Math.min(1,Math.max(0,(innerHeight-b.top)/(innerHeight*.5)));
+    const target=+f.dataset.blur, blur= still?target: target+(1-seen)*12; f.firstElementChild.style.filter=`blur(${blur.toFixed(1)}px)`; });
+}
+let q=0; addEventListener("scroll",()=>{ if(!q) q=requestAnimationFrame(()=>{q=0;focus();}); },{passive:true});
+addEventListener("resize",focus); focus();
+</script>
+</body>
+</html>

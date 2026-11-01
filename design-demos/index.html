@@ -1,204 +1,273 @@
+<meta charset="utf-8">
 <title>EpiDetective Design Directions</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
 <style>
-/* Review document: one reading column for the argument, a two-column row per direction (picture left, reasoning right). */
+/* Decision document: argument in one column, a weighting tool that re-ranks the ten directions live, then a two-up grid of direction cards. */
 :root{
-  --bg:#FAFAF8; --surface:#FFFFFF; --fg:#17181A; --muted:#5D6067; --line:#E2E2DE; --accent:#1F4E79; --accent-soft:#E6EEF6;
+  --bg:#FAFAF8; --surface:#FFFFFF; --fg:#17181A; --muted:#5D6067; --line:#E2E2DE; --accent:#1F4E79; --accent-soft:#E6EEF6; --bar:#1F4E79; --track:#ECECE8;
   --serif:"Source Serif 4",Georgia,serif; --sans:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#141518; --surface:#1C1D21; --fg:#ECECEA; --muted:#A3A6AD; --line:#2E3036; --accent:#8DB7E2; --accent-soft:#1F2A36; color-scheme:dark}}
+  --bg:#141518; --surface:#1C1D21; --fg:#ECECEA; --muted:#A3A6AD; --line:#2E3036; --accent:#8DB7E2; --accent-soft:#1F2A36; --bar:#8DB7E2; --track:#2A2C32; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#141518; --surface:#1C1D21; --fg:#ECECEA; --muted:#A3A6AD; --line:#2E3036; --accent:#8DB7E2; --accent-soft:#1F2A36; color-scheme:dark}
+  --bg:#141518; --surface:#1C1D21; --fg:#ECECEA; --muted:#A3A6AD; --line:#2E3036; --accent:#8DB7E2; --accent-soft:#1F2A36; --bar:#8DB7E2; --track:#2A2C32; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--sans);margin:0}
-.page{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 80px}
+.page{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 80px}
 h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
-h1{font-size:clamp(2rem,4.4vw,3rem);letter-spacing:-.015em;max-width:20ch}
+h1{font-size:clamp(2rem,4.4vw,3rem);letter-spacing:-.015em;max-width:22ch}
 h2{font-size:clamp(1.45rem,2.6vw,1.9rem);margin-bottom:16px}
-h3{font-size:1.25rem}
+h3{font-size:1.3rem}
 p{margin:0}
 a{color:var(--accent);text-underline-offset:3px}
-.lede{margin-top:16px;font-size:19px;color:var(--muted);max-width:60ch}
+code{font-size:.92em}
+.lede{margin-top:16px;font-size:19px;color:var(--muted);max-width:62ch}
 section{margin-top:64px}
-.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start}
-.shot{display:block;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
-.shot img{display:block;width:100%;height:auto;aspect-ratio:3/2}
-.cap{font-size:14px;color:var(--muted);margin-top:8px}
-ul.tight{margin:0;padding-left:1.1em;display:grid;gap:8px}
-ul.tight li{max-width:62ch}
-.keep{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;padding:0;margin:0}
-.keep li{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font-size:15px;color:var(--muted)}
-.keep b{display:block;color:var(--fg);font-weight:600;margin-bottom:2px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px}
+.box h3{margin-bottom:12px;font-size:1.15rem}
+ol.flow{margin:0;padding-left:1.3em;display:grid;gap:8px}
+ol.flow li::marker{font-weight:700;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--line)}
+th{font-weight:700;color:var(--muted);font-size:14px;border-top:0}
+td:first-child{font-weight:600;width:34%}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.before{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
 
-.dir{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-block:40px;border-top:1px solid var(--line)}
-.dir:first-of-type{border-top:0;padding-top:8px}
-.dir .num{font:600 15px var(--sans);color:var(--muted)}
-.dir h3{font-size:clamp(1.5rem,2.6vw,1.9rem);margin:2px 0 8px}
-.dir .idea{font-size:18px;margin-bottom:16px}
-dl{margin:0;display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:10px 18px;font-size:15.5px}
+/* decision tool */
+.decide{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:32px;align-items:start}
+.sl{display:grid;gap:14px}
+.sl label{display:grid;grid-template-columns:minmax(0,1fr) 9em;gap:12px;align-items:center;font-size:15.5px}
+.sl label span small{display:block;color:var(--muted);font-size:13.5px;line-height:1.35}
+.sl input{width:100%;accent-color:var(--accent)}
+.sl output{display:none}
+.scale-k{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:-6px 0 0 calc(100% - 9em);width:9em}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rank li{display:grid;grid-template-columns:2em minmax(0,9em) minmax(0,1fr) 2.6em;gap:10px;align-items:center;font-size:15.5px;padding:6px 8px;border-radius:6px}
+.rank li:nth-child(-n+3){background:var(--accent-soft)}
+.rank .pos{font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.rank a{font-weight:600;text-decoration:none;color:var(--fg)}
+.rank a:hover{text-decoration:underline}
+.rank .bar{height:10px;background:var(--track);border-radius:5px;overflow:hidden}
+.rank .bar i{display:block;height:100%;background:var(--bar);border-radius:5px;transition:width .3s}
+.rank .sc{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;font-size:14px}
+.pick{margin-top:18px;font-size:15.5px;color:var(--muted)}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;scroll-margin-top:16px}
+.card .shot{display:block;position:relative;border-bottom:1px solid var(--line)}
+.card .shot img{display:block;width:100%;height:auto;aspect-ratio:1288/400}
+.card .shot span{position:absolute;bottom:6px;font-size:11px;font-weight:700;background:rgba(0,0,0,.65);color:#fff;padding:2px 7px;border-radius:3px}
+.card .shot span:first-of-type{left:6px}.card .shot span:last-of-type{left:calc(50% + 6px)}
+.card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card .hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.card .num{font-weight:700;color:var(--muted);font-size:14px}
+.card h3{font-size:1.5rem}
+.idea{font-size:16.5px}
+dl{margin:0;display:grid;grid-template-columns:6.6em minmax(0,1fr);gap:7px 14px;font-size:14.5px}
 dt{font-weight:700}
-dd{margin:0;color:var(--fg)}
+dd{margin:0}
 dd .m{color:var(--muted)}
-.sw{display:inline-flex;gap:4px;vertical-align:-3px;margin-right:8px}
-.sw i{width:16px;height:16px;border-radius:50%;border:1px solid var(--line);display:block}
-.open{display:inline-block;margin-top:18px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600;padding:10px 16px;border-radius:4px}
+.open{align-self:flex-start;margin-top:auto;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600;padding:9px 15px;border-radius:4px;font-size:15px}
 .open:hover{background:var(--accent)}
-.open:focus-visible,.shot:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-
-.rec{background:var(--accent-soft);border-radius:8px;padding:28px 30px}
-.rec p+p{margin-top:12px}
-.rec p{max-width:70ch}
-.next{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.next li{counter-increment:s;display:grid;grid-template-columns:2em minmax(0,1fr);max-width:72ch}
-.next li::before{content:counter(s) ".";font-weight:700;color:var(--muted)}
-.note{font-size:15px;color:var(--muted);max-width:72ch;margin-top:18px}
-
-@media (max-width:820px){.cols,.dir{grid-template-columns:1fr;gap:20px}.keep{grid-template-columns:1fr}dl{grid-template-columns:1fr;gap:2px 0}dd{margin-bottom:10px}}
+.open:focus-visible,.shot:focus-visible,.rank a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.rec{background:var(--accent-soft);border-radius:8px;padding:26px 28px}
+.rec p+p{margin-top:12px}.rec p{max-width:72ch}
+.note{font-size:15px;color:var(--muted);max-width:74ch;margin-top:16px}
+@media (max-width:900px){.two,.decide,.grid{grid-template-columns:1fr}}
+@media (max-width:520px){.sl label{grid-template-columns:1fr}.scale-k{margin-left:0;width:100%}.rank li{grid-template-columns:1.6em minmax(0,1fr) 2.4em}.rank .bar{display:none}dl{grid-template-columns:1fr;gap:0}dd{margin-bottom:8px}}
 </style>
 
 <main class="page">
-  <h1>Five design directions for EpiDetective</h1>
-  <p class="lede">Each demo is the English home page, with the site’s real copy, its real tools and its real numbers. Only the design changes. They are rough sketches to choose a direction from, not finished pages.</p>
+  <p><a href="round-1.html">Round 1: demos 1–5</a></p>
+  <h1>Ten more directions for EpiDetective, built around scrolling</h1>
+  <p class="lede">The front page now carries five things instead of eleven, and each one appears as you scroll. All ten demos use exactly the same shortened content, so you are comparing design, not wording. The tools, the games and Code Against Cancer are unchanged.</p>
 
-  <section class="cols" aria-labelledby="why">
-    <div>
-      <a class="shot" href="https://epidetective.com"><img src="thumbs/current.jpg" alt="The current EpiDetective home page" width="900" height="600"></a>
-      <p class="cap">The home page today.</p>
+  <section aria-labelledby="ia">
+    <h2 id="ia">The new front page</h2>
+    <div class="two">
+      <div class="box">
+        <h3>Stays on the front page, in this order</h3>
+        <ol class="flow">
+          <li><b>The question and the search.</b> The headline, one line on who makes it, one line saying it describes populations, the search box.</li>
+          <li><b>One idea.</b> Same certainty, very different size: smokers against non-smokers, both Group 1. Links to the reading guide.</li>
+          <li><b>The two tools</b>, each with three figures and an Open button.</li>
+          <li><b>Code Against Cancer</b>, as what you can do.</li>
+          <li><b>The three games.</b></li>
+          <li><b>Footer:</b> How we check, Report an error, How to cite, and a two-sentence disclaimer.</li>
+        </ol>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Moves off the front page</th><th>Where it goes</th></tr></thead>
+          <tbody>
+            <tr><td>Four questions (aspartame, processed meat, work, stroke)</td><td>A new Questions page under Reading the evidence</td></tr>
+            <tr><td>What’s new</td><td>About, or a short Changes page</td></tr>
+            <tr><td>How we check block</td><td>Navigation and footer links</td></tr>
+            <tr><td>Personal paragraph and audience line</td><td>About (one short line stays in the hero)</td></tr>
+            <tr><td>Long tool descriptions and inclusion rules</td><td>Each tool’s About page</td></tr>
+            <tr><td>Game descriptions, ages, controls</td><td>Games page</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div>
-      <h2 id="why">Why the current page feels crowded</h2>
-      <ul class="tight">
-        <li>More than a dozen small uppercase monospace labels sit above blocks and inside chips: “Four questions…”, “The tools”, “Open now”, “What you can do”, “Skin cancer”. This is the most recognisable template habit.</li>
-        <li>Seven sections use the same recipe: label, serif headline with an italic phrase, grey paragraph, two outlined buttons with arrows. At equal volume, nothing leads.</li>
-        <li>Close to 20 buttons and arrow links compete on one page.</li>
-        <li>Boxes around almost everything: chips, cards, a bordered callout, outlined buttons.</li>
-        <li>Pale cream paper, a bookish serif and a brick-red accent is currently one of the most common looks of AI-generated sites.</li>
-        <li>The figures that show the tools’ scale (185 exposures, 469 links) are set in 11-pixel grey capitals.</li>
-      </ul>
+    <div class="tablewrap" style="margin-top:24px">
+      <table>
+        <thead><tr><th>Wording, before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr><td class="before">A personal project by Wenxin Wan, a cancer epidemiologist. Free tools built from the IARC Monographs and from published reviews. They describe whole populations; they cannot tell you what caused any one person’s illness.</td><td>Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist. They describe whole populations, not what caused any one person’s illness.</td></tr>
+          <tr><td class="before">See which exposures have been linked to which cancers, and how strong the evidence is behind each link. Its data come from the IARC Monographs, in which independent Working Groups … (80 words)</td><td>Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</td></tr>
+          <tr><td class="before">Which risk factors have been linked to heart disease, stroke, type 2 diabetes, dementia and other major chronic conditions … (50 words)</td><td>Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</td></tr>
+          <tr><td class="before">Two paragraphs: disclaimer and affiliation notice (90 words)</td><td>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO. (The full notice moves to About.)</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section aria-labelledby="keep">
-    <h2 id="keep">What stays exactly as it is</h2>
-    <ul class="keep">
-      <li><b>All wording</b>Every i18n key in all five languages. The design reads from the same JSON.</li>
-      <li><b>The tools and games</b>Both explorers and all three games are untouched; only the pages around them change.</li>
-      <li><b>How the site is built</b>Static pages from <code>build_site.py</code>, no framework, self-hosted subset fonts, the home page budget of 9 requests and 300 KB.</li>
-      <li><b>Chinese and Russian</b>The CJK system stack and a Cyrillic face for every role. Where a demo face lacks Cyrillic, it is noted below.</li>
-      <li><b>Accessibility</b>Skip link, visible focus, contrast at WCAG AA, search that works without JavaScript.</li>
-      <li><b>Sources first</b>Quotes stay word for word, with their source line beside them.</li>
-    </ul>
+  <section aria-labelledby="decide">
+    <h2 id="decide">Help me decide</h2>
+    <p class="lede" style="margin:-6px 0 24px">Set how much each quality matters to you. The list re-ranks from my scores for each demo (1 to 5, my judgement after building them).</p>
+    <div class="decide">
+      <div class="box sl" id="weights"></div>
+      <div class="box">
+        <ol class="rank" id="rank" aria-live="polite"></ol>
+        <p class="pick">Scores are a starting point, not a verdict. Open your top two or three and scroll each one on a phone as well as a laptop.</p>
+      </div>
+    </div>
   </section>
 
   <section aria-labelledby="dirs">
-    <h2 id="dirs">The five directions</h2>
-
-    <article class="dir">
-      <a class="shot" href="1-monograph.html"><img src="thumbs/d1.jpg" alt="Demo 1, Monograph" width="900" height="600" loading="lazy"></a>
-      <div>
-        <p class="num">Direction 1</p>
-        <h3>Monograph</h3>
-        <p class="idea">A Swiss grid, one typeface and thick black rules. The only colour on the page is the four IARC groups, so colour always means evidence.</p>
-        <dl>
-          <dt>References</dt><dd>Josef Müller-Brockmann’s <i>Grid Systems in Graphic Design</i>; Experimental Jetset (the Whitney Museum’s Responsive W identity); Pentagram’s institutional work; the sites of type foundries such as Klim and Grilli Type.</dd>
-          <dt>Why it fits</dt><dd>The Swiss style was made for information that must read the same way to everyone. An evidence reference should look neutral and exact, and a strict grid carries over cleanly into Chinese and Russian.</dd>
-          <dt>What changes</dt><dd>No boxes or chips. The four questions become an index. Tool counts become large condensed numerals. The evidence scale runs under the headline.</dd>
-          <dt>Watch-outs</dt><dd>Can feel cold to a worried visitor. Depends on exact spacing to look deliberate.</dd>
-          <dt>Type, colour</dt><dd><span class="sw"><i style="background:#FFFFFF"></i><i style="background:#0E0E0E"></i><i style="background:#C8102E"></i><i style="background:#E8761E"></i><i style="background:#E9BE3C"></i></span>Archivo, with its narrow widths for figures. <span class="m">No Cyrillic: Russian would use Golos Text, already in the repo.</span></dd>
-        </dl>
-        <a class="open" href="1-monograph.html">Open demo 1</a>
-      </div>
-    </article>
-
-    <article class="dir">
-      <a class="shot" href="2-data-desk.html"><img src="thumbs/d2.jpg" alt="Demo 2, Data Desk" width="900" height="600" loading="lazy"></a>
-      <div>
-        <p class="num">Direction 2</p>
-        <h3>Data Desk</h3>
-        <p class="idea">The front page of a graphics desk. The hero is a chart of the site’s main lesson: two Group 1 causes with the same certainty and very different sizes, drawn as 1,000-dot icon arrays.</p>
-        <dl>
-          <dt>References</dt><dd>The New York Times graphics desk and The Upshot; Reuters Graphics; The Pudding; Our World in Data; the FT’s Visual Vocabulary; the icon-array fact boxes of the Harding Center for Risk Literacy.</dd>
-          <dt>Why it fits</dt><dd>“How sure” versus “how big” is a data story, and icon arrays are a standard way risk communicators show absolute risk. Journalists and clinicians already trust the headline, chart and sourced caption pattern.</dd>
-          <dt>What changes</dt><dd>Each question leads with its number (9–14 cans, +18%, 1.8×, 12). Group tags are colour-coded. The labels table becomes a colour scale.</dd>
-          <dt>Watch-outs</dt><dd>Charts must be updated when the numbers change. Must not drift into the urgency of a news site.</dd>
-          <dt>Type, colour</dt><dd><span class="sw"><i style="background:#FFFFFF"></i><i style="background:#141414"></i><i style="background:#B42318"></i><i style="background:#DD6B20"></i><i style="background:#FBE3B5"></i></span>Libre Franklin and Source Serif 4. <span class="m">Both have Cyrillic.</span></dd>
-        </dl>
-        <a class="open" href="2-data-desk.html">Open demo 2</a>
-      </div>
-    </article>
-
-    <article class="dir">
-      <a class="shot" href="3-quiet-clinic.html"><img src="thumbs/d3.jpg" alt="Demo 3, Quiet Clinic" width="900" height="600" loading="lazy"></a>
-      <div>
-        <p class="num">Direction 3</p>
-        <h3>Quiet Clinic</h3>
-        <p class="idea">A calm health product. The search is the front door, the four answers stay folded until asked for, and everything secondary becomes one short list.</p>
-        <dl>
-          <dt>References</dt><dd>Apple Health; One Medical; GOV.UK and NHS.UK service design (GOV.UK won the Design Museum’s Design of the Year in 2013); Google’s single search box.</dd>
-          <dt>Why it fits</dt><dd>Many visitors arrive worried about one thing, such as aspartame. The page lowers the temperature: one action, plain language, nothing shouting. It follows the GOV.UK principle “do less”.</dd>
-          <dt>What changes</dt><dd>A large search field, an accordion for the questions, two soft panels for the tools, one muted green accent.</dd>
-          <dt>Watch-outs</dt><dd>The least distinctive of the five, with some risk of looking like any health app. Clinicians and journalists may want more on screen at once.</dd>
-          <dt>Type, colour</dt><dd><span class="sw"><i style="background:#EFF2F0"></i><i style="background:#FFFFFF"></i><i style="background:#1B2621"></i><i style="background:#2D5B4F"></i></span>Newsreader and Public Sans (the typeface of the US Web Design System). <span class="m">Neither has Cyrillic: Russian would use Literata and Golos Text, both already in the repo.</span></dd>
-        </dl>
-        <a class="open" href="3-quiet-clinic.html">Open demo 3</a>
-      </div>
-    </article>
-
-    <article class="dir">
-      <a class="shot" href="4-casebook.html"><img src="thumbs/d4.jpg" alt="Demo 4, Casebook" width="900" height="600" loading="lazy"></a>
-      <div>
-        <p class="num">Direction 4</p>
-        <h3>Casebook</h3>
-        <p class="idea">A scholarly casebook built on the name EpiDetective. The opening plate follows John Snow’s 1854 cholera map. Every source sits in the margin beside the claim it supports.</p>
-        <dl>
-          <dt>References</dt><dd>John Snow’s Broad Street map; Edward Tufte’s books and their margin notes; Stripe Press; <i>Works in Progress</i>; the Wellcome Collection.</dd>
-          <dt>Why it fits</dt><dd>Epidemiology began as detective work, and Snow’s map is its founding image. Margin notes put “every entry names its sources” on the page itself. Strong for students and schools, and it ties in with The Lung Detective.</dd>
-          <dt>What changes</dt><dd>A text column with a margin, numbered figures, italic serif questions, the map as the hero.</dd>
-          <dt>Watch-outs</dt><dd>Serif-heavy and can read as historical. Margin notes need a careful phone layout. Chinese needs its own serif setting.</dd>
-          <dt>Type, colour</dt><dd><span class="sw"><i style="background:#F2F3EF"></i><i style="background:#1B2740"></i><i style="background:#5F687A"></i><i style="background:#9C2A20"></i></span>Libre Caslon Display and Text. <span class="m">No Cyrillic: Russian would use Literata.</span></dd>
-        </dl>
-        <a class="open" href="4-casebook.html">Open demo 4</a>
-      </div>
-    </article>
-
-    <article class="dir">
-      <a class="shot" href="5-atlas.html"><img src="thumbs/d5.jpg" alt="Demo 5, Atlas" width="900" height="600" loading="lazy"></a>
-      <div>
-        <p class="num">Direction 5</p>
-        <h3>Atlas</h3>
-        <p class="idea">An atlas of causes. The real cancer map, with all 185 exposures, 68 cancers and 469 links from the site’s own data, is drawn as a star chart behind the headline. Hover a point to read its name.</p>
-        <dl>
-          <dt>References</dt><dd>Moritz Stefaner’s data-art work, such as the OECD Better Life Index; Fathom Information Design; Stamen Design; Cameron Beccario’s earth.nullschool.net; engraved celestial atlases.</dd>
-          <dt>Why it fits</dt><dd>The evidence maps are EpiDetective’s most original asset. Putting the real map on the front door shows at once that these are instruments for exploring evidence.</dd>
-          <dt>What changes</dt><dd>A dark ground, a live map as the hero, the two tools presented as plates.</dd>
-          <dt>Watch-outs</dt><dd>Dark pages are harder for long reading and printing, so the inner pages would need a light theme. The canvas and 28 KB of data must fit the page budget. Closest of the five to a “tech” look.</dd>
-          <dt>Type, colour</dt><dd><span class="sw"><i style="background:#0C1320"></i><i style="background:#E8E2D4"></i><i style="background:#E0584B"></i><i style="background:#EE9A4B"></i><i style="background:#E6C86E"></i></span>Cormorant Garamond and Hanken Grotesk. <span class="m">Cormorant has Cyrillic; Russian body text would use Golos Text.</span></dd>
-        </dl>
-        <a class="open" href="5-atlas.html">Open demo 5</a>
-      </div>
-    </article>
+    <h2 id="dirs">The ten directions</h2>
+    <div class="grid" id="cards"></div>
   </section>
 
   <section aria-labelledby="rec">
     <div class="rec">
       <h2 id="rec">My recommendation</h2>
-      <p><b>Direction 2, Data Desk.</b> It is the only direction where the design itself teaches the site’s main lesson. The first thing a visitor sees is that the same certainty can mean very different risks. Its conventions are already familiar to the journalists and clinicians you write for. It also suits the long inner pages (Reading the evidence, Work and cancer, How we check), which read naturally as articles with figures.</p>
-      <p>If you want something quieter and more timeless, Direction 1, Monograph, is the safest base. Directions can also be combined, for example the Monograph grid with the Data Desk hero chart, or the Data Desk with Casebook margin notes for sources.</p>
+      <p><b>Direction 6, Thousand.</b> It does what you asked most directly: the page tells one short story as you scroll, and the story is your site’s main lesson. A field of 1,000 people changes step by step, from smokers to non-smokers to “same label, very different risk”, then the tools arrive. Dots read the same in every language, it stays light and calm for the inner pages, and it is the scrollytelling pattern journalists and clinicians already trust.</p>
+      <p>If you want it to feel more personal, Direction 14, Explorable, is the strongest alternative and is the best fit for the long reading pages. For the most memorable front page, Direction 7, Powers of Ten, makes the “populations, not persons” point unforgettable. Directions also combine well, for example Thousand on the front page with Explorable’s highlights inside Reading the evidence.</p>
     </div>
   </section>
 
   <section aria-labelledby="next">
     <h2 id="next">Once you choose</h2>
-    <ol class="next">
-      <li>I rewrite <code>site.css</code> and adjust the structure of <code>templates/*.html</code> for the chosen direction, keeping every i18n key and URL.</li>
-      <li>I carry it through every page (home, About, How we check, Reading the evidence, Work and cancer, Code Against Cancer, Games, the explorer page, 404) in all five languages.</li>
-      <li>I self-host subset fonts with Cyrillic and CJK handling, within the 9-request, 300 KB budget.</li>
-      <li>I check Chinese and Russian layouts, phone widths, keyboard focus and contrast, then rebuild with <code>build_site.py</code>.</li>
+    <ol class="flow">
+      <li>I move the sections listed above to their new pages and apply the shortened wording in all five languages (English first for your review, then the translations).</li>
+      <li>I rewrite <code>site.css</code> and the template structure for the chosen direction, keeping every URL.</li>
+      <li>I build the scroll effects with as little JavaScript as possible (CSS scroll-driven animation where browsers support it), so every page still reads fully with JavaScript off or reduced motion on.</li>
+      <li>I self-host subset fonts with Cyrillic and Chinese handled, within the 9-request, 300 KB budget, and check phones, keyboard focus and contrast.</li>
     </ol>
-    <p class="note">These demos load fonts from Google Fonts for speed and cover only the English home page. Navigation on phones is left uncollapsed, and the links inside the demos go nowhere.</p>
+    <p class="note">These demos cover only the English home page, load fonts from Google Fonts, and their links go nowhere. With reduced motion switched on, every demo shows its content without animation.</p>
   </section>
 </main>
+
+<script>
+const crit=[
+  ["teach","Teaches how to read evidence","The design itself carries the site’s lesson",3],
+  ["calm","Calm and trustworthy","Suits worried visitors and clinicians",2],
+  ["mem","Memorable","Stands out from other health sites",2],
+  ["long","Good for long inner pages","Reading guide, Work and cancer, How we check",2],
+  ["lang","Works in all five languages","Chinese and Russian layouts, fonts",2],
+  ["easy","Simple to build and maintain","Less custom code to keep working",1],
+  ["kids","Works for schools and families","Students, children, teachers",1]];
+const D=[
+ {n:6,f:"6-thousand",name:"Thousand",s:{teach:5,calm:4,mem:4,long:4,lang:5,easy:3,kids:3},
+  idea:"A field of 1,000 people stays pinned while short sentences scroll past and change it: 100 to 120 smokers with lung cancer, then 4 to 5 non-smokers.",
+  scroll:"Pinned graphic, scrolling steps (scrollytelling).",
+  refs:"The Pudding; NYT The Upshot; Nadieh Bremer (Visual Cinnamon); icon arrays of the Harding Center for Risk Literacy.",
+  fit:"Turns “how sure is not how big” into the first thing every visitor sees, drawn to scale.",
+  risk:"One story only; updating it means editing the steps. The canvas needs a static image fallback.",
+  type:"Schibsted Grotesk and Spectral. <span class='m'>Spectral has Cyrillic; Russian headings would use Golos Text.</span>"},
+ {n:7,f:"7-powers-of-ten",name:"Powers of Ten",s:{teach:5,calm:3,mem:5,long:2,lang:5,easy:3,kids:4},
+  idea:"One continuous zoom out, from one person to ten, to 1,000, to millions. Cases appear only once there are enough people to see them.",
+  scroll:"Scroll drives a zoom on a pinned canvas.",
+  refs:"Charles and Ray Eames, <i>Powers of Ten</i> (1977); Neal Agarwal’s scroll pieces on neal.fun; Cary Huang’s <i>Scale of the Universe</i>.",
+  fit:"Makes the most important caveat, populations not persons, physical and memorable.",
+  risk:"Dark and dramatic; inner pages would need a light theme. Heaviest scroll effect of the ten.",
+  type:"Jost and Crimson Pro. <span class='m'>Jost has Cyrillic; Russian body text would use Literata.</span>"},
+ {n:8,f:"8-focus",name:"Focus",s:{teach:4,calm:4,mem:5,long:3,lang:5,easy:3,kids:3},
+  idea:"Every section sits in a round microscope field that sharpens as it reaches the middle of the screen. The four IARC groups are shown as four levels of focus.",
+  scroll:"Blur-to-sharp tied to scroll position.",
+  refs:"Nikon Small World; the Wellcome Photography Prize; histology atlases (stain colours: haematoxylin purple, eosin pink).",
+  fit:"A visual metaphor for certainty that needs no words: sharp means sure. Rooted in pathology, close to your field.",
+  risk:"The metaphor must not suggest that blurry means harmless (Group 3 is “not classifiable”). Blur filters cost some performance.",
+  type:"Young Serif and Onest. <span class='m'>Onest has Cyrillic; Young Serif does not.</span>"},
+ {n:9,f:"9-ladder",name:"Ladder",s:{teach:4,calm:2,mem:4,long:2,lang:4,easy:4,kids:3},
+  idea:"One full screen per step, each a flat field of colour: red Group 1, orange 2A, yellow 2B, grey 3, then the tools. Each screen says what the label means and what it does not.",
+  scroll:"Gentle scroll-snap, one screen at a time, with a progress rail.",
+  refs:"Josef Albers, <i>Interaction of Color</i>; Apple’s product pages; Spotify Wrapped.",
+  fit:"Teaches the four labels before anyone opens a tool, using the site’s own scale as the palette.",
+  risk:"Loud for a health site. Long words in French and Russian need smaller type.",
+  type:"Epilogue. <span class='m'>No Cyrillic: Russian would use Golos Text.</span>"},
+ {n:10,f:"10-exhibition",name:"Exhibition",s:{teach:2,calm:4,mem:4,long:3,lang:3,easy:3,kids:3},
+  idea:"A title wall, then scrolling down walks you sideways through five rooms. Each tool is a framed object with a museum wall label.",
+  scroll:"Vertical scroll drives horizontal movement; stacks vertically on phones.",
+  refs:"Cooper Hewitt (Pentagram’s identity, 2014); Wellcome Collection; Tate; Google Arts &amp; Culture.",
+  fit:"Presents the tools as curated, finished works with the calm authority of a museum.",
+  risk:"Sideways scrolling can confuse some visitors and needs care with keyboards. Says less about evidence itself.",
+  type:"Sofia Sans and Sofia Sans Extra Condensed. <span class='m'>Both have Cyrillic.</span>"},
+ {n:11,f:"11-manifesto",name:"Manifesto",s:{teach:4,calm:2,mem:5,long:3,lang:2,easy:4,kids:2},
+  idea:"Three statements set huge and assembled word by word: “A hazard is not a risk.” “Sure is not big.” “A population is not a person.” Then the tools as a typographic index.",
+  scroll:"Words slide in as each pinned statement scrolls.",
+  refs:"Paula Scher’s Public Theater posters; Fabien Baron at <i>Harper’s Bazaar</i>; Richard Turley’s <i>Bloomberg Businessweek</i>.",
+  fit:"Three of the guide’s ideas in nine words. Very fast to read and very hard to forget.",
+  risk:"The wordplay does not translate neatly, and huge type suits Chinese and Russian poorly. Can read as a fashion brand.",
+  type:"Bodoni Moda and Karla. <span class='m'>Neither has Cyrillic.</span>"},
+ {n:12,f:"12-card-stack",name:"Card Stack",s:{teach:3,calm:4,mem:3,long:3,lang:5,easy:5,kids:3},
+  idea:"Each section is one card that slides up and settles on top of the last, so only one thing is in front of you at a time.",
+  scroll:"Sticky stacking cards; almost all CSS.",
+  refs:"Apple Wallet; the iOS app switcher; Are.na; the stacked-card pattern common on Awwwards sites.",
+  fit:"The simplest way to show one thing at a time. Easy to build, translate and maintain.",
+  risk:"The least original of the ten; the rounded cards can drift towards an app template.",
+  type:"Lexend (designed to improve reading fluency). <span class='m'>No Cyrillic: Russian would use Golos Text.</span>"},
+ {n:13,f:"13-instrument",name:"Instrument",s:{teach:3,calm:3,mem:4,long:2,lang:4,easy:3,kids:3},
+  idea:"The page is a stack of hardware modules with dot-matrix readouts, and a dial turns as you scroll to show which module you are on.",
+  scroll:"Modules slide in; a fixed dial tracks position.",
+  refs:"Dieter Rams’s Braun calculators; Teenage Engineering; the Nothing phone’s dot-matrix type.",
+  fit:"Your site already calls the tools instruments; this makes them feel precise and measured.",
+  risk:"Gadget-like; may feel playful rather than scientific. Weak for long text pages.",
+  type:"Albert Sans and Doto. <span class='m'>Neither has Cyrillic.</span>"},
+ {n:14,f:"14-explorable",name:"Explorable",s:{teach:5,calm:4,mem:4,long:5,lang:2,easy:3,kids:4},
+  idea:"A teacher’s annotated notebook on graph paper. Highlights, circles and handwritten margin notes draw themselves as each passage reaches you.",
+  scroll:"Annotations draw in when a passage comes into view.",
+  refs:"Bret Victor’s <i>Explorable Explanations</i>; Nicky Case; Distill; Brown University’s <i>Seeing Theory</i>.",
+  fit:"Feels personal, like the author explaining the evidence beside you. The best pattern for the long reading pages.",
+  risk:"Handwritten notes must be translated and repositioned per language; the handwriting font has no Chinese.",
+  type:"Alegreya, Alegreya Sans and Caveat. <span class='m'>All three have Cyrillic.</span>"},
+ {n:15,f:"15-illustrated",name:"Illustrated",s:{teach:3,calm:4,mem:3,long:3,lang:4,easy:3,kids:5},
+  idea:"A friendly illustrated explainer: a magnifying glass over a network, flat drawings that pop in as you scroll, a typeface built for legibility.",
+  scroll:"Drawings pop in; light parallax in the hero.",
+  refs:"Kurzgesagt; Nicky Case; Mailchimp’s illustration system; Headspace.",
+  fit:"The warmest and most approachable for the public, schools and the games’ audience.",
+  risk:"Illustrations take time to make well. May feel too light for clinicians and journalists.",
+  type:"Bricolage Grotesque and Atkinson Hyperlegible (by the Braille Institute). <span class='m'>Neither has Cyrillic.</span>"}];
+
+const W=document.getElementById("weights"), R=document.getElementById("rank"), C=document.getElementById("cards");
+const lv=["Ignore","A little","Matters","Essential"];
+crit.forEach(([k,label,hint,def])=>{
+  const l=document.createElement("label");
+  l.innerHTML=`<span>${label}<small>${hint}</small></span><input type="range" id="w-${k}" min="0" max="3" step="1" value="${def}" aria-valuetext="${lv[def]}">`;
+  W.appendChild(l);
+});
+const k=document.createElement("p"); k.className="scale-k"; k.innerHTML="<span>Ignore</span><span>Essential</span>"; W.appendChild(k);
+D.forEach(d=>{
+  const a=document.createElement("article"); a.className="card"; a.id="d"+d.n;
+  a.innerHTML=`<a class="shot" href="${d.f}.html"><img src="thumbs/${d.n}.jpg" alt="Demo ${d.n}, ${d.name}: at rest and while scrolling" width="1288" height="400" loading="lazy"><span>At rest</span><span>Scrolling</span></a>
+  <div class="body"><div class="hd"><h3>${d.name}</h3><span class="num">Demo ${d.n}</span></div>
+  <p class="idea">${d.idea}</p>
+  <dl><dt>Scrolling</dt><dd>${d.scroll}</dd><dt>References</dt><dd>${d.refs}</dd><dt>Why it fits</dt><dd>${d.fit}</dd><dt>Watch-outs</dt><dd>${d.risk}</dd><dt>Type</dt><dd>${d.type}</dd></dl>
+  <a class="open" href="${d.f}.html">Open demo ${d.n}</a></div>`;
+  C.appendChild(a);
+});
+function rank(){
+  const w={}; let tot=0; crit.forEach(([k])=>{ const el=document.getElementById("w-"+k); w[k]=+el.value; el.setAttribute("aria-valuetext",lv[w[k]]); tot+=w[k]; });
+  const sc=D.map(d=>({d, v: tot? crit.reduce((s,[k])=>s+d.s[k]*w[k],0)/tot : 0})).sort((a,b)=>b.v-a.v||a.d.n-b.d.n);
+  R.innerHTML=sc.map((x,i)=>`<li><span class="pos">${i+1}</span><a href="#d${x.d.n}">${x.d.n} · ${x.d.name}</a><span class="bar"><i style="width:${(x.v/5*100).toFixed(0)}%"></i></span><span class="sc">${x.v.toFixed(1)}</span></li>`).join("");
+}
+W.addEventListener("input",rank); rank();
+</script>

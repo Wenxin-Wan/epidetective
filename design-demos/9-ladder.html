@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 9 · Ladder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* One screen per step, each a flat field of colour: the reader walks down IARC's four groups, then reaches the tools. Scroll snaps gently to each screen. */
+:root{--white:#FAFAF9;--ink:#15171B;--g1:#B3261E;--g2a:#DE7A35;--g2b:#EBC64F;--g3:#B4B8BD;--blue:#1E3A5C;
+  --f:"Epilogue","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+html{color-scheme:light;scroll-snap-type:y proximity}
+body{margin:0;background:var(--white);color:var(--ink);font:400 18px/1.55 var(--f)}
+a{color:inherit;text-underline-offset:5px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.page{min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
+  padding-block:96px;padding-left:max(16px,7vw);padding-right:max(16px,7vw);position:relative}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;gap:20px;padding:22px max(16px,7vw);font-size:15px;flex-wrap:wrap}
+.mark{font-weight:900;font-size:20px;text-decoration:none;letter-spacing:-.02em}
+.nav{display:flex;gap:20px;flex-wrap:wrap}.nav a{text-decoration:none}
+.hero h1{font-size:clamp(2.6rem,7vw,6.4rem);line-height:.98;font-weight:900;letter-spacing:-.04em;max-width:14ch}
+.hero .sub{margin-top:28px;font-size:20px;max-width:34em}
+.search{margin-top:32px;max-width:620px;display:flex;background:#fff;border:2px solid var(--ink)}
+.search input{flex:1;min-width:0;border:0;padding:15px 16px;font:400 18px var(--f);background:transparent}
+.search input:focus{outline:none}
+.search button{border:0;background:var(--ink);color:#fff;font:700 15px var(--f);padding:0 20px;cursor:pointer}
+.try{margin-top:10px;font-size:15px;display:flex;gap:14px}
+.down{position:absolute;bottom:28px;left:max(16px,7vw);font-size:14px;font-weight:500}
+
+/* the four groups */
+.grp .tag{font-size:clamp(1rem,1.6vw,1.25rem);font-weight:700}
+.grp h2{font-size:clamp(3.2rem,11vw,10rem);line-height:.9;font-weight:900;letter-spacing:-.05em;margin-top:10px}
+.grp .says{margin-top:28px;font-size:clamp(1.25rem,2.4vw,1.9rem);line-height:1.3;font-weight:500;max-width:26em}
+.grp .not{margin-top:22px;font-size:17px;max-width:36em;opacity:.85}
+.grp .not b{font-weight:700}
+.p1{background:var(--g1);color:#fff}.p2{background:var(--g2a)}.p3{background:var(--g2b)}.p4{background:var(--g3)}
+.example{display:inline-block;margin-top:24px;font-size:15px;font-weight:700;border-bottom:2px solid currentColor;text-decoration:none}
+
+/* tools */
+.tools-page{background:var(--ink);color:#fff}
+.tools-page h2{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:44px}
+.tool{border-top:3px solid #fff;padding-top:18px}
+.tool h3{font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:700;line-height:1.1}
+.tool p{margin-top:10px;color:#C9CBD0;max-width:30em}
+.nums{display:flex;gap:28px;margin:22px 0}.nums b{display:block;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;line-height:1;letter-spacing:-.03em}.nums span{font-size:13px;color:#A6A9B0}
+.acts{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.btn{background:#fff;color:var(--ink);text-decoration:none;padding:12px 18px;font-weight:700;font-size:15px}
+.code{background:var(--blue);color:#fff}
+.code h2,.games-page h2{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:.95}
+.code p{margin-top:20px;font-size:clamp(1.15rem,2vw,1.5rem);max-width:28em}
+.code .btn{margin-top:30px;align-self:flex-start}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px}
+.game{text-decoration:none}.game img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
+.game b{display:block;margin-top:10px}.game span{font-size:14px;opacity:.7}
+.foot{margin-top:56px;font-size:14px;opacity:.75;max-width:60em}
+.foot .links{display:flex;gap:18px;flex-wrap:wrap;font-weight:700;margin-bottom:8px;opacity:1}
+
+/* progress rail: where you are on the ladder */
+.rail{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:grid;gap:8px;z-index:5}
+.rail i{width:10px;height:28px;border-radius:2px;opacity:.35;transition:opacity .3s,transform .3s;outline:1px solid rgba(0,0,0,.15)}
+.rail i.on{opacity:1;transform:scaleX(1.5)}
+
+@supports (animation-timeline: view()){
+  .page .in{animation:rise linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+  @keyframes rise{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){.page .in{animation:none!important}html{scroll-snap-type:none}}
+@media (max-width:820px){.tools,.games{grid-template-columns:1fr}.nav{display:none}.rail{display:none}}
+</style>
+</head>
+<body>
+<section class="page hero">
+  <header class="top"><a class="mark" href="#">EpiDetective</a><nav class="nav"><a href="#tools">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a><a href="#">EN</a></nav></header>
+  <h1>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+  <p class="sub">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist. They describe whole populations, not what caused any one person’s illness.</p>
+  <form class="search" role="search" onsubmit="return false"><input id="q9" aria-label="Search" placeholder="Search a cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></form>
+  <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p>
+  <p class="down">First, the four labels behind every entry ↓</p>
+</section>
+
+<section class="page grp p1" data-rail="0"><div class="in">
+  <p class="tag">Group 1</p><h2>Known cause</h2>
+  <p class="says">The agent can cause cancer in people. This is the group in which IARC is most certain.</p>
+  <p class="not"><b>It does not say</b> how large the risk is, or at what dose. Processed meat and tobacco smoking are both in Group 1, with very different risks.</p>
+  <a class="example" href="#">See how different →</a>
+</div></section>
+<section class="page grp p2" data-rail="1"><div class="in">
+  <p class="tag">Group 2A</p><h2>Probable cause</h2>
+  <p class="says">The agent probably causes cancer in people. The evidence falls short of Group 1, most often because the studies in people are limited.</p>
+  <p class="not"><b>It does not say</b> that it causes cancer at the levels people usually meet, or how large any risk is.</p>
+</div></section>
+<section class="page grp p3" data-rail="2"><div class="in">
+  <p class="tag">Group 2B</p><h2>Possible cause</h2>
+  <p class="says">The agent may cause cancer in people. One kind of evidence points that way.</p>
+  <p class="not"><b>It does not say</b> that it probably causes cancer, or that people exposed to it are at risk.</p>
+  <a class="example" href="#">Aspartame is in this group →</a>
+</div></section>
+<section class="page grp p4" data-rail="3"><div class="in">
+  <p class="tag">Group 3</p><h2>Not classifiable</h2>
+  <p class="says">The evidence does not meet the rules for any other group, usually because there is too little of it.</p>
+  <p class="not"><b>It does not say</b> that it is safe. Group 3 describes the state of the evidence.</p>
+</div></section>
+
+<section class="page tools-page" id="tools" data-rail="4"><div class="in">
+  <h2>Now look anything up</h2>
+  <div class="tools">
+    <article class="tool"><h3>Cancer Evidence Explorer</h3><p>Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+      <div class="nums"><div><b>185</b><span>exposures</span></div><div><b>68</b><span>cancer types</span></div><div><b>469</b><span>links</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></article>
+    <article class="tool"><h3>Chronic Disease Evidence Explorer</h3><p>Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+      <div class="nums"><div><b>124</b><span>risk factors</span></div><div><b>45</b><span>diseases</span></div><div><b>356</b><span>graded links</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About this tool</a></div></article>
+  </div>
+</div></section>
+
+<section class="page code"><div class="in" style="display:flex;flex-direction:column">
+  <p class="tag" style="font-weight:700">What you can do</p>
+  <h2>Code Against Cancer</h2>
+  <p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+  <a class="btn" href="#">Read the recommendations</a>
+</div></section>
+
+<section class="page games-page"><div class="in">
+  <p style="font-weight:700">For schools and families</p>
+  <h2>Learning by playing</h2>
+  <div class="games">
+    <a class="game" href="#"><img src="img/sun-safety-card.webp" alt=""><b>Sol &amp; the UV Shield Quest</b><span>Skin cancer · ages 6–12</span></a>
+    <a class="game" href="#"><img src="img/lung-detective-card.webp" alt=""><b>The Lung Detective</b><span>Lung cancer · ages 10–16</span></a>
+    <a class="game" href="#"><img src="img/town-of-1000-card.webp" alt=""><b>A Town of 1,000</b><span>Breast cancer · ages 14+</span></a>
+  </div>
+  <footer class="foot"><p class="links"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></p>
+  <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></footer>
+</div></section>
+
+<div class="rail" aria-hidden="true"><i style="background:var(--g1)"></i><i style="background:var(--g2a)"></i><i style="background:var(--g2b)"></i><i style="background:var(--g3)"></i><i style="background:var(--ink)"></i></div>
+<nav class="demo-nav r2" aria-label="Demos"><a href="index.html">Overview</a><a href="6-thousand.html">6</a><a href="7-powers-of-ten.html">7</a><a href="8-focus.html">8</a><a aria-current="page" href="9-ladder.html">9</a><a href="10-exhibition.html">10</a><a href="11-manifesto.html">11</a><a href="12-card-stack.html">12</a><a href="13-instrument.html">13</a><a href="14-explorable.html">14</a><a href="15-illustrated.html">15</a></nav>
+<script>
+const bars=[...document.querySelectorAll(".rail i")];
+const ob=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return;
+  bars.forEach(b=>b.classList.remove("on")); const k=e.target.dataset.rail; if(k!==undefined) bars[+k].classList.add("on"); }),{threshold:.55});
+document.querySelectorAll(".page").forEach(p=>ob.observe(p));
+</script>
+</body>
+</html>

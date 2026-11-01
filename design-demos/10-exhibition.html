@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 10 · Exhibition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* A small exhibition: a title wall, then scrolling down walks you sideways through five rooms, each with a framed object and a museum wall label. */
+:root{--wall:#FFFFFF;--floor:#E9E8E4;--ink:#111111;--mute:#6B6B6B;--line:#D9D8D3;--accent:#C2311F;
+  --cond:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif;--sans:"Sofia Sans",-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{color-scheme:light}
+body{margin:0;background:var(--wall);color:var(--ink);font:400 18px/1.55 var(--sans)}
+a{color:inherit;text-underline-offset:4px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:18px;font-size:15px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.mark{font:800 24px var(--cond);text-transform:uppercase;letter-spacing:.02em;text-decoration:none}
+.nav{display:flex;gap:20px;flex-wrap:wrap}.nav a{text-decoration:none}.nav a:hover{color:var(--accent)}
+.title-wall{padding-block:clamp(48px,8vw,96px) 64px}
+.title-wall h1{font:800 clamp(3rem,9.5vw,9rem)/.86 var(--cond);text-transform:uppercase;letter-spacing:-.005em;max-width:13ch}
+.title-wall .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:40px;align-items:end}
+.title-wall .sub{font-size:19px;max-width:30em}
+.title-wall .sub span{display:block;margin-top:8px;color:var(--mute)}
+.search label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.search .box{display:flex;border:1px solid var(--ink)}
+.search input{flex:1;min-width:0;border:0;padding:14px 14px;font:400 17px var(--sans)}
+.search input:focus{outline:none}
+.search button{border:0;background:var(--ink);color:#fff;font:700 15px var(--sans);padding:0 18px;cursor:pointer}
+.try{margin-top:8px;font-size:14px;color:var(--mute);display:flex;gap:14px}
+.enter{margin-top:48px;font:700 15px var(--sans)}
+
+/* the gallery */
+.gallery{position:relative}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(var(--wall) 0 78%,var(--floor) 78%)}
+.track{display:flex;height:100%;will-change:transform}
+.room{flex:none;width:min(1100px,88vw);height:100%;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center;padding:6vh 4vw 26vh;position:relative}
+.room::after{content:attr(data-room);position:absolute;left:4vw;bottom:9vh;font:700 14px var(--sans);color:var(--mute)}
+.frame{background:#fff;padding:5%;box-shadow:0 0 0 12px #1A1A1A,0 0 0 13px #000,0 24px 50px rgba(0,0,0,.25);aspect-ratio:4/3;width:100%}
+.frame .img{width:100%;height:100%;background:center/contain no-repeat}
+.label{border-left:1px solid var(--ink);padding-left:18px;max-width:22em}
+.label h2{font:700 1.6rem/1.15 var(--sans)}
+.label .meta{font-size:14px;color:var(--mute);margin:4px 0 12px}
+.label p{font-size:16px}
+.label .nums{margin-top:12px;font-size:15px}.label .nums b{font-weight:700}
+.acts{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.btn{background:var(--ink);color:#fff;text-decoration:none;padding:10px 16px;font-weight:700;font-size:15px}
+.btn:hover{background:var(--accent)}
+.walltext{grid-column:1/-1;max-width:20ch}
+.walltext h2{font:800 clamp(2.6rem,6.4vw,6rem)/.9 var(--cond);text-transform:uppercase}
+.walltext p{margin-top:20px;font-size:19px;max-width:30em}
+.walltext .acts{margin-top:22px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;grid-column:1/-1;align-items:end}
+.trio .frame{aspect-ratio:16/9;padding:0;box-shadow:0 0 0 8px #1A1A1A,0 18px 36px rgba(0,0,0,.22)}
+.trio .frame .img{background-size:cover}
+.trio .label{margin-top:26px}
+.prog{position:absolute;left:4vw;right:4vw;bottom:4vh;height:2px;background:var(--line)}
+.prog i{display:block;height:100%;background:var(--ink);width:0}
+.exit{padding-block:48px 100px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+.exit .links{display:flex;gap:18px;flex-wrap:wrap;color:var(--ink);font-weight:700;margin-bottom:8px}
+@media (max-width:860px),(prefers-reduced-motion:reduce){
+  .gallery{height:auto!important}.pin{position:static;height:auto;background:none}.track{display:block;transform:none!important}
+  .room{width:auto;height:auto;grid-template-columns:1fr;gap:28px;padding:48px max(16px,env(safe-area-inset-left,0px)) 64px;border-top:1px solid var(--line)}
+  .room::after{position:static;order:-1}.trio{grid-template-columns:1fr}.prog{display:none}
+  .title-wall .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="mark" href="#">EpiDetective</a>
+<nav class="nav"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a><a href="#">EN</a></nav></div></header>
+<main>
+<section class="title-wall wrap">
+  <h1>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+  <div class="row">
+    <p class="sub">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.<span>They describe whole populations, not what caused any one person’s illness.</span></p>
+    <form class="search" role="search" onsubmit="return false"><label for="q10">Look something up</label><div class="box"><input id="q10" placeholder="A cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></div>
+      <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p></form>
+  </div>
+  <p class="enter">Five rooms. Scroll to walk through →</p>
+</section>
+
+<section class="gallery" aria-label="The rooms">
+  <div class="pin">
+    <div class="track">
+      <div class="room" data-room="Room 1 · One idea"><div class="walltext"><h2>Same certainty, very different size</h2>
+        <p>Tobacco smoking and processed meat are both in Group 1. The evidence that each can cause cancer is equally sure. About 10 to 12 in 100 smokers get lung cancer by age 75; each 50 grams of processed meat a day raises bowel-cancer risk by 18%.</p>
+        <div class="acts"><a href="#">Seven ideas for reading a health headline →</a></div></div></div>
+      <div class="room" data-room="Room 2 · Cancer"><div class="frame"><div class="img" style="background-image:url(img/network.svg)"></div></div>
+        <div class="label"><h2>Cancer Evidence Explorer</h2><p class="meta">Interactive map, 2026. Ten languages.</p>
+        <p>Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <p class="nums"><b>185</b> exposures · <b>68</b> cancer types · <b>469</b> links</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About</a></div></div></div>
+      <div class="room" data-room="Room 3 · Chronic disease"><div class="frame"><div class="img" style="background-image:url(img/chronic-network.svg)"></div></div>
+        <div class="label"><h2>Chronic Disease Evidence Explorer</h2><p class="meta">Interactive network, version 2.0, October 2026.</p>
+        <p>Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <p class="nums"><b>124</b> risk factors · <b>45</b> diseases · <b>356</b> graded links</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a href="#">About</a></div></div></div>
+      <div class="room" data-room="Room 4 · What you can do"><div class="walltext"><h2>Code Against Cancer</h2>
+        <p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+        <div class="acts"><a class="btn" href="#">Read the recommendations</a></div></div></div>
+      <div class="room" data-room="Room 5 · For schools and families"><div class="trio">
+        <a href="#" style="text-decoration:none"><div class="frame"><div class="img" style="background-image:url(img/sun-safety-card.webp)"></div></div><div class="label"><h2 style="font-size:1.2rem">Sol &amp; the UV Shield Quest</h2><p class="meta">Skin cancer · ages 6–12</p></div></a>
+        <a href="#" style="text-decoration:none"><div class="frame"><div class="img" style="background-image:url(img/lung-detective-card.webp)"></div></div><div class="label"><h2 style="font-size:1.2rem">The Lung Detective</h2><p class="meta">Lung cancer · ages 10–16</p></div></a>
+        <a href="#" style="text-decoration:none"><div class="frame"><div class="img" style="background-image:url(img/town-of-1000-card.webp)"></div></div><div class="label"><h2 style="font-size:1.2rem">A Town of 1,000</h2><p class="meta">Breast cancer · ages 14+</p></div></a>
+      </div></div>
+    </div>
+    <div class="prog" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+</main>
+<footer class="exit"><div class="wrap"><p class="links"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></p>
+<p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div></footer>
+
+<nav class="demo-nav r2" aria-label="Demos"><a href="index.html">Overview</a><a href="6-thousand.html">6</a><a href="7-powers-of-ten.html">7</a><a href="8-focus.html">8</a><a href="9-ladder.html">9</a><a aria-current="page" href="10-exhibition.html">10</a><a href="11-manifesto.html">11</a><a href="12-card-stack.html">12</a><a href="13-instrument.html">13</a><a href="14-explorable.html">14</a><a href="15-illustrated.html">15</a></nav>
+<script>
+// Vertical scroll drives the walk: the gallery is as tall as the track is wide.
+const g=document.querySelector(".gallery"), t=document.querySelector(".track"), bar=document.querySelector(".prog i");
+const flat=matchMedia("(max-width:860px),(prefers-reduced-motion:reduce)");
+function layout(){ if(flat.matches){ g.style.height=""; return; } g.style.height=(t.scrollWidth-innerWidth+innerHeight)+"px"; move(); }
+function move(){ if(flat.matches) return; const b=g.getBoundingClientRect(), max=t.scrollWidth-innerWidth, p=Math.min(1,Math.max(0,-b.top/(g.offsetHeight-innerHeight)));
+  t.style.transform=`translateX(${-p*max}px)`; bar.style.width=(p*100)+"%"; }
+let q=0; addEventListener("scroll",()=>{ if(!q) q=requestAnimationFrame(()=>{q=0;move();}); },{passive:true});
+addEventListener("resize",layout); flat.addEventListener("change",layout); layout();
+</script>
+</body>
+</html>
