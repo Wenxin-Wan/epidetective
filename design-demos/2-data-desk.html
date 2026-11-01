@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo 2 · Data Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="demo-nav.css">
+<style>
+/* Explanatory graphics desk: the hero is a chart, every section leads with a number, serif for reading, Franklin for headlines and data. */
+:root{
+  --paper:#FFFFFF; --ink:#141414; --mute:#666A70; --line:#E3E3E0; --wash:#F4F4F1;
+  --g1:#B42318; --g2a:#DD6B20; --g2b:#D9A21B; --g3:#9AA0A6; --dot:#DADAD5;
+  --head:"Libre Franklin","Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;
+  --read:"Source Serif 4",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--read)}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--head);margin:0;text-wrap:balance}
+p{margin:0}
+
+.top{border-bottom:1px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px;flex-wrap:wrap;font-family:var(--head)}
+.mark{font-weight:900;font-size:21px;letter-spacing:-.02em;text-decoration:none}
+.mark span{color:var(--g1)}
+.nav{display:flex;gap:20px;font-size:14px;font-weight:500;flex-wrap:wrap}
+.nav a{text-decoration:none}.nav a:hover{color:var(--g1)}
+.langs{font-size:13px;color:var(--mute);display:flex;gap:10px}
+.langs a{text-decoration:none}.langs b{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;padding-block:56px 48px;align-items:start}
+.hero h1{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:1.02;font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,#FBE3B5 62%)}
+.dek{margin-top:20px;font-size:19px;color:#333;max-width:36em}
+.aud{margin-top:10px;font-family:var(--head);font-size:14px;font-weight:600;color:var(--mute)}
+.search{margin-top:28px}
+.search label{display:block;font:600 14px var(--head);margin-bottom:8px}
+.box{display:flex;border:1px solid var(--ink);border-radius:2px;background:#fff}
+.box input{flex:1;min-width:0;border:0;padding:15px 16px;font:400 17px var(--head);background:transparent}
+.box input:focus{outline:none}.box:focus-within{box-shadow:0 0 0 3px #FBE3B5}
+.box button{border:0;background:var(--ink);color:#fff;font:600 15px var(--head);padding:0 20px;cursor:pointer}
+.try{margin-top:10px;font:500 14px var(--head);color:var(--mute);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.try a{background:var(--wash);padding:4px 10px;border-radius:2px;text-decoration:none;color:var(--ink)}
+
+figure{margin:0}
+.chart h2{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.chart .sub{font:400 15px/1.45 var(--head);color:var(--mute);margin-top:6px}
+.arrays{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}
+.arr h3{font-size:14px;font-weight:600;margin-bottom:8px}
+.arr h3 b{font-weight:900;font-size:26px;display:block;letter-spacing:-.02em}
+.arr svg{width:100%;height:auto;display:block}
+.key{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font:400 13px var(--head);color:var(--mute)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px;margin-right:6px}
+figcaption{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font:400 13px/1.5 var(--head);color:var(--mute)}
+figcaption a{color:var(--ink);font-weight:600}
+
+/* section heads */
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-top:4px solid var(--ink);padding-top:12px;margin-bottom:28px;flex-wrap:wrap}
+.sh h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:800;letter-spacing:-.02em}
+.sh a{font:600 14px var(--head)}
+section.block{padding-block:40px}
+
+/* question stories */
+.stories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.story .n{font:900 clamp(2.2rem,3.6vw,3rem)/1 var(--head);letter-spacing:-.03em}
+.story .nl{font:500 13px/1.35 var(--head);color:var(--mute);margin:6px 0 16px;min-height:2.7em}
+.story h3{font-size:20px;line-height:1.15;font-weight:800;margin-bottom:10px}
+.story p{font-size:16px;line-height:1.55;color:#2A2A2A}
+.story .src{font:400 13px var(--head);color:var(--mute);margin-top:10px}
+.story .src a{color:var(--ink);font-weight:600}
+.pill{display:inline-block;font:700 11px/1 var(--head);letter-spacing:.02em;color:#fff;padding:4px 7px;border-radius:2px;margin-bottom:12px}
+
+/* tools */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.tool{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:20px;align-items:start}
+.tool h3{font-size:24px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
+.tool p{font-size:16px;color:#2A2A2A}
+.stats{display:flex;gap:22px;margin:14px 0;font-family:var(--head);flex-wrap:wrap}
+.stats b{display:block;font-weight:900;font-size:28px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:12px;color:var(--mute)}
+.thumb{width:160px;aspect-ratio:1;background:var(--wash) center/90% no-repeat;border:1px solid var(--line)}
+.acts{display:flex;gap:14px;align-items:center;font-family:var(--head);margin-top:6px;flex-wrap:wrap}
+.btn{background:var(--ink);color:#fff;text-decoration:none;padding:10px 16px;font-weight:600;font-size:15px;border-radius:2px}
+.acts .tl{font-size:15px;font-weight:600}
+
+/* labels */
+.labels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin-bottom:16px}
+.labels div{padding:14px 14px 16px;background:var(--wash);font-family:var(--head)}
+.labels div::before{content:"";display:block;height:6px;margin:-14px -14px 12px}
+.labels .l1::before{background:var(--g1)}.labels .l2::before{background:var(--g2a)}.labels .l3::before{background:var(--g2b)}.labels .l4::before{background:var(--g3)}
+.labels b{display:block;font-size:17px;font-weight:800}
+.labels span{display:block;font-size:13px;color:var(--mute);margin-top:4px;line-height:1.4}
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+.two h3{font-size:22px;font-weight:800;margin-bottom:8px}
+.two p{font-size:17px;color:#2A2A2A;margin-bottom:12px}
+.two .tl{font:600 15px var(--head)}
+.news{list-style:none;padding:0;margin:0;font-family:var(--head);font-size:15px;line-height:1.45}
+.news li{padding-block:10px;border-top:1px solid var(--line)}
+.news time{display:block;font-weight:700;font-size:13px;color:var(--mute)}
+
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.game{text-decoration:none}
+.game img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:var(--wash)}
+.game h3{font-size:19px;font-weight:800;margin:12px 0 4px}
+.game p{font-size:15px;color:#444}
+.game .for{font:600 13px var(--head);color:var(--mute);margin-top:6px}
+
+.foot{border-top:1px solid var(--ink);margin-top:40px;padding-block:32px 96px;font-family:var(--head);font-size:13px;color:var(--mute)}
+.foot .wrap{display:grid;grid-template-columns:200px 1fr;gap:24px}
+.foot p+p{margin-top:8px}
+
+@media (max-width:960px){
+  .hero,.tools,.two{grid-template-columns:1fr}
+  .stories{grid-template-columns:1fr 1fr}
+  .labels{grid-template-columns:1fr 1fr}
+  .games{grid-template-columns:1fr}
+  .foot .wrap{grid-template-columns:1fr}
+}
+@media (max-width:560px){.stories{grid-template-columns:1fr}.tool{grid-template-columns:1fr}.thumb{width:100%;max-width:220px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="mark" href="#">Epi<span>Detective</span></a>
+  <nav class="nav"><a href="#">Tools</a><a href="#">Code Against Cancer</a><a href="#">Reading the evidence</a><a href="#">Games</a><a href="#">About</a><a href="#">Contact</a></nav>
+  <nav class="langs"><b>English</b><a href="#">中文</a><a href="#">Français</a><a href="#">Español</a><a href="#">Русский</a></nav>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+  <div>
+    <h1>What causes cancer and other chronic diseases, and <em>how sure the evidence is</em></h1>
+    <p class="dek">A personal project by Wenxin Wan, a cancer epidemiologist. Free tools built from the IARC Monographs and from published reviews. They describe whole populations; they cannot tell you what caused any one person’s illness.</p>
+    <p class="aud">For the curious public, clinicians, students and journalists.</p>
+    <form class="search" role="search" onsubmit="return false">
+      <label for="q2">Look something up</label>
+      <div class="box"><input id="q2" placeholder="A cancer, an exposure, a disease or a risk factor"><button type="submit">Search</button></div>
+      <p class="try">Try <a href="#">aspartame</a><a href="#">stroke</a><a href="#">coffee</a></p>
+    </form>
+  </div>
+  <figure class="chart">
+    <h2>Same certainty (Group 1), very different size</h2>
+    <p class="sub">People who get lung cancer by age 75, out of 1,000. Each dot is one person.</p>
+    <div class="arrays">
+      <div class="arr"><h3><b>100–120</b>of 1,000 smokers</h3><svg id="a1" viewBox="0 0 244 153" role="img" aria-label="100 to 120 of 1,000 smokers"></svg></div>
+      <div class="arr"><h3><b>4–5</b>of 1,000 lifelong non-smokers</h3><svg id="a2" viewBox="0 0 244 153" role="img" aria-label="4 to 5 of 1,000 non-smokers"></svg></div>
+    </div>
+    <p class="key"><span><i style="background:var(--g1)"></i>Lower estimate</span><span><i style="background:#E8A39D"></i>Range up to upper estimate</span></p>
+    <figcaption>“In European data, about 10 to 12 in 100 smokers get lung cancer by age 75, compared with 4 to 5 in 1,000 lifelong non-smokers.” Quoted from the Cancer Evidence Explorer. <a href="#">Relative and absolute risk</a></figcaption>
+  </figure>
+</section>
+
+<section class="block">
+  <div class="sh"><h2>Four questions, answered from the tools</h2></div>
+  <div class="stories">
+    <article class="story"><span class="pill" style="background:var(--g2b);color:#141414">Group 2B</span><div class="n">9–14 cans</div><p class="nl">of diet drink a day before passing the acceptable daily intake</p><h3>Is aspartame dangerous?</h3><p>In June 2023 IARC classified aspartame as possibly carcinogenic to humans (Group 2B), a rating of hazard. WHO says a 70-kilogram adult would need more than 9 to 14 cans of diet drink a day to pass [the acceptable daily intake].</p><p class="src">Cancer Evidence Explorer · <a href="#">Aspartame entry</a></p></article>
+    <article class="story"><span class="pill" style="background:var(--g1)">Group 1</span><div class="n">+18%</div><p class="nl">bowel cancer risk for each 50 grams of processed meat a day</p><h3>Is processed meat as bad as smoking?</h3><p>Same certainty (Group 1), very different size. Each 50 grams eaten every day raises the risk of bowel cancer by 18%.</p><p class="src">Cancer Evidence Explorer · <a href="#">Processed meat entry</a></p></article>
+    <article class="story"><span class="pill" style="background:#141414">68 agents</span><div class="n">1.8×</div><p class="nl">bladder-cancer risk for painters with over 10 years in the trade</p><h3>Does my job raise my cancer risk?</h3><p>68 workplace agents and jobs are on the cancer map, from asbestos and silica dust to night-shift work and firefighting.</p><p class="src">Cancer Evidence Explorer · <a href="#">Work and cancer</a></p></article>
+    <article class="story"><span class="pill" style="background:#2F5C8A">Strong</span><div class="n">12</div><p class="nl">risk factors graded for ischaemic stroke</p><h3>What raises stroke risk?</h3><p>From blood pressure, smoking and diabetes (Strong) to depression (Suggestive). “High blood pressure is the leading cause of stroke.”</p><p class="src">Chronic Disease Evidence Explorer · <a href="#">Ischaemic stroke entry</a></p></article>
+  </div>
+</section>
+
+<section class="block">
+  <div class="sh"><h2>The tools: two are open now</h2><span style="font:500 14px var(--head);color:var(--mute)">More are being built</span></div>
+  <div class="tools">
+    <article class="tool"><div>
+      <h3>Cancer Evidence Explorer</h3>
+      <p>See which exposures have been linked to which cancers, and how strong the evidence is behind each link. Built from the IARC Monographs.</p>
+      <div class="stats"><div><b>185</b><span>exposures</span></div><div><b>68</b><span>cancer types</span></div><div><b>469</b><span>links</span></div><div><b>10</b><span>languages</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="tl" href="#">About this tool</a></div>
+    </div><div class="thumb" style="background-image:url(img/network.svg)"></div></article>
+    <article class="tool"><div>
+      <h3>Chronic Disease Evidence Explorer</h3>
+      <p>Risk factors linked to heart disease, stroke, type 2 diabetes, dementia and other chronic conditions, including where studies disagree.</p>
+      <div class="stats"><div><b>124</b><span>risk factors</span></div><div><b>45</b><span>diseases</span></div><div><b>356</b><span>graded links</span></div><div><b>10</b><span>languages</span></div></div>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="tl" href="#">About this tool</a></div>
+    </div><div class="thumb" style="background-image:url(img/chronic-network.svg)"></div></article>
+  </div>
+</section>
+
+<section class="block">
+  <div class="sh"><h2>Seven ideas that make a health headline easier to weigh</h2><a href="#">Read the guide</a></div>
+  <div class="labels">
+    <div class="l1"><b>Known cause</b><span>Group 1. Says nothing about how large the risk is.</span></div>
+    <div class="l2"><b>Probable cause</b><span>Group 2A. Studies in people are usually limited.</span></div>
+    <div class="l3"><b>Possible cause</b><span>Group 2B. One kind of evidence points that way.</span></div>
+    <div class="l4"><b>Not classifiable</b><span>Group 3. Describes the evidence, not safety.</span></div>
+  </div>
+  <div class="two" style="margin-top:40px">
+    <div>
+      <h3>Every entry names its sources. Found an error? Please tell us.</h3>
+      <p>You will get an answer, usually within two weeks.</p>
+      <a class="tl" href="#">How we check</a> &nbsp;·&nbsp; <a class="tl" href="#">Report an error</a>
+      <h3 style="margin-top:32px">Code Against Cancer</h3>
+      <p>The official, evidence-based recommendations for lowering your own cancer risk. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+      <a class="tl" href="#">Read the recommendations</a>
+    </div>
+    <div><h3>What’s new</h3><ul class="news">
+      <li><time>31 October 2026</time>Site search, four question cards, a Work and cancer page and a How we check page.</li>
+      <li><time>23 October 2026</time>Chronic Disease Evidence Explorer v2.0: grades renamed, a related-outcome layer, a change log for every link.</li>
+      <li><time>23 October 2026</time>Cancer Evidence Explorer: IARC’s evidence streams for every agent, and 874 evaluated agents searchable.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="sh"><h2>Learning by playing: three games for schools and families</h2><a href="#">About the games</a></div>
+  <div class="games">
+    <a class="game" href="#"><img src="img/sun-safety-card.webp" alt=""><h3>Sol &amp; the UV Shield Quest</h3><p>A platform adventure about sun safety, with a quiz at each checkpoint.</p><p class="for">Skin cancer · Ages 6–12</p></a>
+    <a class="game" href="#"><img src="img/lung-detective-card.webp" alt=""><h3>The Lung Detective</h3><p>Three scenes, twelve clues to file as known, probable or possible cause.</p><p class="for">Lung cancer · Ages 10–16</p></a>
+    <a class="game" href="#"><img src="img/town-of-1000-card.webp" alt=""><h3>A Town of 1,000</h3><p>Ten decision cards and 1,000 dots that show how many women a town’s choices spare.</p><p class="for">Breast cancer · Ages 14+</p></a>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div><b style="color:var(--ink);font-size:16px">EpiDetective</b><p>Open tools for reading health evidence.</p></div>
+  <div><p>EpiDetective publishes tools for reading evidence about whole populations. They show patterns across large groups of people. For anything concerning your own health, speak to a doctor. Each tool lists its own sources.</p><p>A personal project by Wenxin Wan, produced in a personal capacity, with no endorsement from IARC or WHO. Lyon, France.</p></div>
+</div></footer>
+
+<nav class="demo-nav" aria-label="Demos"><a href="index.html">Overview</a><a href="1-monograph.html">1</a><a aria-current="page" href="2-data-desk.html">2</a><a href="3-quiet-clinic.html">3</a><a href="4-casebook.html">4</a><a href="5-atlas.html">5</a></nav>
+<script>
+// 1,000-dot icon arrays drawn to scale: solid = lower estimate, light = range to the upper estimate.
+function arr(id, lo, hi){
+  const s=document.getElementById(id), ns="http://www.w3.org/2000/svg";
+  for(let i=0;i<1000;i++){
+    const c=document.createElementNS(ns,"circle"), x=i%40, y=Math.floor(i/40);
+    c.setAttribute("cx",3.1+x*6.1); c.setAttribute("cy",3.1+y*6.1);
+    c.setAttribute("r",2.3);
+    c.setAttribute("fill", i<lo ? "#B42318" : i<hi ? "#E8A39D" : "#DADAD5");
+    s.appendChild(c);
+  }
+}
+arr("a1",100,120); arr("a2",4,5);
+</script>
+</body>
+</html>
