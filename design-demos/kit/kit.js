@@ -17,7 +17,12 @@
     ["17-mineral","Mineral"],["18-ma","Ma"],["19-collection","Collection"],["20-laureate","Laureate"],
     ["21-cabinet","Cabinet"],["22-transactions","Transactions"],["23-observatory","Observatory"],["24-field-guide","Field Guide"],
     ["25-thousand","Thousand"],["26-populations","Populations"],["27-spectrum","Spectrum"],["28-charted","Charted"],
-    ["29-index","Index"],["30-living-network","Living Network"]
+    ["29-index","Index"],["30-living-network","Living Network"],
+    ["31-web-of-causation","Web of Causation"],["32-two-shores","Two Shores"],["33-certainty-filter","Certainty Filter"],["34-wheel","Wheel"],
+    ["35-matrix","Matrix"],["36-start-anywhere","Start Anywhere"],["37-two-webs","Two Webs"],["38-galaxy","Galaxy"],
+    ["39-wordweb","Wordweb"],["40-territories","Territories"],["41-ledger","Ledger"],["42-quiet-clinic","Quiet Clinic"],
+    ["43-focus","Focus"],["44-ladder","Ladder"],["45-exhibition","Exhibition"],["46-manifesto","Manifesto"],
+    ["47-card-stack","Card Stack"],["48-instrument","Instrument"],["49-explorable","Explorable"],["50-illustrated","Illustrated"]
   ];
   var root = document.documentElement;
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -113,7 +118,7 @@
     if (idx < 0 || document.querySelector(".kit-switch")) return;
     var prev = DEMOS[(idx + DEMOS.length - 1) % DEMOS.length], next = DEMOS[(idx + 1) % DEMOS.length];
     var nav = document.createElement("nav"); nav.className = "kit-switch"; nav.setAttribute("aria-label", "Design directions");
-    nav.innerHTML = '<a class="ks-all" href="index.html">All 30 directions</a>' +
+    nav.innerHTML = '<a class="ks-all" href="index.html">All 50 directions</a>' +
       '<a class="ks-arrow" href="' + prev[0] + '.html" aria-label="Previous: ' + prev[1] + '">&#8592;</a>' +
       '<span class="ks-now"><b>' + String(idx + 1).padStart(2, "0") + '</b> ' + DEMOS[idx][1] + '</span>' +
       '<a class="ks-arrow" href="' + next[0] + '.html" aria-label="Next: ' + next[1] + '">&#8594;</a>';
