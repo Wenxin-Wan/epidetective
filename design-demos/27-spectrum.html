@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>27 · Spectrum — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..700&family=Funnel+Sans:ital,wght@0,300..700;1,400&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour: ink on white; the spectrum is used only as the evidence scale */
+  --white:#FFFFFF;
+  --ink:#111317;
+  --ink-2:#565B63;          /* secondary text, AA on white */
+  --hair:#E4E6E9;
+  --hair-2:#CDD0D4;
+  --s1:#9E2A2B;             /* Group 1 end */
+  --s2:#D98C2B;             /* amber */
+  --s3:#C9CCD1;             /* Group 3 end */
+  --spectrum:linear-gradient(90deg,var(--s1) 0%,var(--s2) 45%,var(--s3) 100%);
+  --spectrum-v:linear-gradient(180deg,var(--s1) 0%,var(--s2) 45%,var(--s3) 100%);
+  /* type */
+  --display:"Funnel Display","Helvetica Neue",Arial,system-ui,sans-serif;
+  --text:"Funnel Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --t-13:13px; --t-15:15px; --t-18:18px; --t-22:22px; --t-32:clamp(26px,2.4vw,32px);
+  --t-48:clamp(34px,3.6vw,50px); --t-72:clamp(40px,5.4vw,78px); --t-96:clamp(52px,6.2vw,92px);
+  /* space */
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+  --section:clamp(96px,12vw,188px);
+  --gutter:clamp(20px,5vw,72px);
+  --max:1280px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font:400 var(--t-18)/1.6 var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 600ms var(--ease)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.link{font:500 var(--t-15)/1.3 var(--text);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.link:hover{border-bottom-color:transparent}
+.btn{display:inline-block;background:var(--ink);color:var(--white);text-decoration:none;font:500 var(--t-15)/1 var(--text);padding:17px 26px;border-radius:999px;transition:background-color 400ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:#3A3E45}
+
+/* ---------- header ---------- */
+.top-in{display:flex;align-items:center;gap:var(--s-4);min-height:76px}
+.mark{font:600 21px/1 var(--display);letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 28px;font-size:var(--t-15)}
+.nav a{text-decoration:none;color:var(--ink-2);transition:color 300ms}
+.nav a:hover,.nav a:focus-visible{color:var(--ink)}
+.lang{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-size:var(--t-13)}
+.lang a{display:block;padding:5px 7px;text-decoration:none;color:var(--ink-2);border-radius:99px}
+.lang a[aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(48px,6vw,96px) 0 var(--section)}
+.hero h1{font-size:var(--t-72);line-height:1.0;letter-spacing:-.035em;font-weight:500;max-width:15em}
+.band-wrap{position:relative;margin-top:clamp(40px,5vw,72px);--k:clamp(0,calc((var(--p,0) - .62) / .3),1)}
+.band-wrap::before{content:"";position:absolute;left:4%;right:4%;top:10%;height:var(--bh);background:var(--spectrum);filter:blur(42px);opacity:calc(.32 * (1 - var(--k)));pointer-events:none}
+.band{--bh:clamp(88px,10vw,150px);position:relative;height:var(--bh);overflow:hidden;background:var(--spectrum);
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 20%,#000 80%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 20%,#000 80%,transparent 100%);
+  transform:scaleY(calc(1 - .92 * var(--k)));transform-origin:50% 50%}
+.band-wrap{--bh:clamp(88px,10vw,150px)}
+.band i{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.85)}
+.band .sweep{position:absolute;top:0;bottom:0;left:0;width:38%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.75) 50%,rgba(255,255,255,0));mix-blend-mode:screen;transform:translateX(-110%);pointer-events:none}
+html.js:not(.still) .band .sweep{animation:sweep 2800ms var(--ease) 700ms both}
+@keyframes sweep{from{transform:translateX(-110%)}to{transform:translateX(300%)}}
+html.js:not(.still) .band{animation:dawn 1600ms var(--ease) both}
+@keyframes dawn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.band-labels{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.band-labels li{position:relative;padding:18px 16px 0 0;min-width:0}
+.band-labels li::before{content:"";position:absolute;left:0;top:0;width:1px;height:12px;background:var(--ink)}
+.band-labels span{display:block;font-size:var(--t-13);color:var(--ink-2)}
+.band-labels b{display:block;font:500 var(--t-22)/1.2 var(--display);letter-spacing:-.01em}
+.hero-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,6vw,96px);margin-top:clamp(56px,6vw,96px);align-items:start}
+.who{font-size:var(--t-18);max-width:27em}
+.caveat{margin-top:var(--s-2);font-size:var(--t-15);color:var(--ink-2);max-width:30em}
+.search label{display:block;font:500 var(--t-15)/1 var(--text);margin-bottom:14px}
+.field{display:flex;align-items:center;gap:8px;border:1px solid var(--hair-2);border-radius:999px;padding:6px 6px 6px 22px;transition:border-color 300ms,box-shadow 300ms}
+.field:focus-within{border-color:var(--ink);box-shadow:0 0 0 3px rgba(17,19,23,.08)}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:400 17px/1.3 var(--text);padding:12px 0;outline:none}
+.field input::placeholder{color:#6E737A;opacity:1}
+.field button{flex:none;border:0;background:var(--ink);color:#fff;font:500 var(--t-15)/1 var(--text);padding:14px 22px;border-radius:999px;cursor:pointer}
+.field button:hover{background:#3A3E45}
+.try{margin-top:14px;padding-left:22px;font-size:var(--t-15);color:var(--ink-2)}
+.try a{color:var(--ink)}
+
+/* ---------- the docked scale ---------- */
+.dock{position:fixed;z-index:20;left:max(18px,calc((100vw - var(--max)) / 2 - 92px));top:50%;height:min(44vh,400px);width:70px;transform:translateY(-50%);pointer-events:none;opacity:0;transition:opacity 700ms var(--ease)}
+.dock .bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:2px;background:var(--spectrum-v);clip-path:inset(0 0 100% 0);transition:clip-path 1100ms var(--ease)}
+.dock.on{opacity:1}
+.dock.on .bar{clip-path:inset(0 0 0 0)}
+.dock ol{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.dock li{position:absolute;left:14px;transform:translateY(-50%);font:500 12px/1 var(--text);color:#9A9EA5;transition:color 500ms}
+.dock li:nth-child(1){top:12.5%}.dock li:nth-child(2){top:37.5%}.dock li:nth-child(3){top:62.5%}.dock li:nth-child(4){top:87.5%}
+.dock .m{position:absolute;left:-5px;width:14px;height:14px;border-radius:50%;background:var(--white);border:2px solid var(--ink);top:calc((var(--i,0) + .5) * 25%);transform:translateY(-50%);transition:top 800ms var(--ease),opacity 500ms}
+.dock.none .m{opacity:0}
+.dock[data-i="0"] li:nth-child(1),.dock[data-i="1"] li:nth-child(2),.dock[data-i="2"] li:nth-child(3),.dock[data-i="3"] li:nth-child(4){color:var(--ink)}
+.dock.none li{color:#9A9EA5!important}
+
+/* ---------- one idea ---------- */
+.idea{padding:var(--section) 0}
+.idea-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,6vw,96px);align-items:end}
+.idea h2{font-size:var(--t-72);line-height:1.0;letter-spacing:-.035em}
+.idea-head p{font-size:var(--t-18);max-width:28em}
+.same{margin-top:clamp(56px,6vw,96px)}
+.mini{position:relative;height:10px;border-radius:5px;background:var(--spectrum)}
+.pins{position:relative;height:96px}
+.pin{position:absolute;left:12.5%;bottom:0;padding-left:14px;font:500 var(--t-15)/1.35 var(--text);white-space:nowrap}
+.pin::before{content:"";position:absolute;left:0;top:4px;bottom:-14px;width:1px;background:var(--ink)}
+.pin::after{content:"";position:absolute;left:-4px;bottom:-18px;width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.pin small{display:block;font-size:var(--t-13);font-weight:400;color:var(--ink-2)}
+.mini-labs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:10px;font-size:var(--t-13);color:var(--ink-2)}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(64px,7vw,112px);border-top:1px solid var(--ink)}
+.figs > div{padding:var(--s-3) var(--s-3) 0 0;min-width:0}
+.figs > div + div{padding-left:var(--s-3);border-left:1px solid var(--hair)}
+.fig{display:block;font:400 var(--t-96)/.9 var(--display);letter-spacing:-.05em;white-space:nowrap;font-variant-numeric:lining-nums}
+.figs p{margin-top:var(--s-3);font-size:var(--t-15);color:var(--ink-2);max-width:20em}
+.figs p b{display:block;color:var(--ink);font-weight:500;font-size:var(--t-18);margin-bottom:4px}
+.idea-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s-2) var(--s-4);margin-top:var(--s-5);font-size:var(--t-15);color:var(--ink-2)}
+
+/* ---------- reading the scale ---------- */
+.scale{padding:0 0 var(--section)}
+.scale-head{border-top:1px solid var(--hair);padding-top:var(--s-5);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(32px,6vw,96px)}
+.scale h2{font-size:var(--t-48);line-height:1.05;letter-spacing:-.03em}
+.scale-head p{color:var(--ink-2);max-width:28em;align-self:end}
+.rows{list-style:none;margin:var(--s-5) 0 0;padding:0}
+.row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,3fr) minmax(0,6fr);column-gap:clamp(24px,4vw,64px);align-items:start;padding:clamp(40px,5vw,72px) 0;border-top:1px solid var(--hair)}
+.row:last-child{border-bottom:1px solid var(--hair)}
+.row .g{font:400 clamp(56px,6.4vw,96px)/.9 var(--display);letter-spacing:-.04em}
+.row .sw{height:10px;border-radius:5px;margin-top:22px;background:var(--spectrum);background-size:400% 100%}
+.row:nth-child(1) .sw{background-position:0 0}.row:nth-child(2) .sw{background-position:33.333% 0}.row:nth-child(3) .sw{background-position:66.667% 0}.row:nth-child(4) .sw{background-position:100% 0}
+.row h3{font-size:var(--t-32);letter-spacing:-.02em;line-height:1.1}
+.row p{margin-top:12px;color:var(--ink-2);max-width:30em}
+
+/* ---------- tools ---------- */
+.tools{padding:0 0 var(--section)}
+.tools-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);flex-wrap:wrap}
+.tools-head h2{font-size:var(--t-48);letter-spacing:-.03em}
+.tools-head p{color:var(--ink-2)}
+.tool{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:clamp(32px,5vw,80px);align-items:center;padding:clamp(56px,7vw,104px) 0;border-top:1px solid var(--hair)}
+.tools-head + .tool{margin-top:var(--s-4)}
+.tool.alt .art{order:-1}
+.tool.alt{grid-template-columns:minmax(0,8fr) minmax(0,4fr)}
+.tool h3{font-size:var(--t-48);line-height:1.02;letter-spacing:-.03em}
+.tool .desc{margin-top:var(--s-3);color:var(--ink-2);max-width:26em}
+.spec{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;margin:var(--s-4) 0 0;padding:0}
+.spec div{display:flex;flex-direction:column;padding:0 clamp(16px,2vw,28px) 0 0;margin-right:clamp(16px,2vw,28px);border-right:1px solid var(--hair)}
+.spec div:last-child{border:0;margin:0;padding-right:0}
+.spec dd{order:-1;margin:0;font:400 clamp(40px,3.8vw,56px)/1 var(--display);letter-spacing:-.04em;font-variant-numeric:lining-nums tabular-nums}
+.spec dt{margin-top:8px;font-size:var(--t-13);color:var(--ink-2)}
+.langs{margin-top:var(--s-3);font-size:var(--t-15);color:var(--ink-2)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-4);margin-top:var(--s-4)}
+.art{margin:0;min-width:0}
+.art svg{width:100%;height:auto}
+.art figcaption{margin-top:var(--s-2);font-size:var(--t-13);color:var(--ink-2);max-width:52em}
+.art.sq{display:grid;place-items:center}
+.art.sq img{width:min(100%,560px);height:auto;filter:grayscale(1) contrast(1.3) brightness(.82)}
+html.js:not(.still) .rays-fig svg{transition:clip-path 2200ms var(--ease)}
+html.js:not(.still) .rays-fig:not(.is-in) svg{clip-path:inset(0 0 100% 0)}
+
+/* ---------- code ---------- */
+.code{padding:var(--section) 0;background:#F6F7F8}
+.code-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(32px,6vw,96px);align-items:center}
+.code h2{font-size:var(--t-72);line-height:1;letter-spacing:-.035em}
+.code-copy p{margin-top:var(--s-3);max-width:28em;color:var(--ink-2)}
+.code-copy .btn{margin-top:var(--s-4)}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
+.pair div{padding:var(--s-3) var(--s-3) 0 0}
+.pair div + div{padding-left:var(--s-3);border-left:1px solid var(--hair-2)}
+.pair p{margin-top:var(--s-2);font-size:var(--t-15);color:var(--ink-2);max-width:14em}
+
+/* ---------- games ---------- */
+.games{padding:var(--section) 0}
+.games-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:clamp(32px,5vw,80px)}
+.games h2{font-size:var(--t-32);letter-spacing:-.02em;line-height:1.1}
+.games-head p{margin-top:12px;color:var(--ink-2)}
+.game-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.game a{text-decoration:none;display:block}
+.shot{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#F1F2F4}
+.shot img{width:100%;height:100%;object-fit:cover;filter:saturate(.5) contrast(.95) brightness(1.04);transition:filter 800ms var(--ease),transform 1200ms var(--ease)}
+.game a:hover img,.game a:focus-visible img{filter:none;transform:scale(1.03)}
+.game h3{margin-top:14px;font-size:var(--t-18);letter-spacing:-.01em;line-height:1.3}
+.game p{margin-top:4px;font-size:var(--t-13);color:var(--ink-2)}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--hair);padding:var(--s-6) 0 var(--s-5);font-size:var(--t-15);color:var(--ink-2);position:relative}
+.foot-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:var(--s-4)}
+.foot .mark{color:var(--ink)}
+.foot .place{margin-top:12px}
+.foot p{max-width:34em}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{color:var(--ink);text-decoration:none}
+.credits{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid var(--hair);font-size:var(--t-13)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1279px){
+  /* the dock sits at the top edge instead of the side */
+  .dock{left:0;right:0;top:0;width:auto;height:30px;transform:none}
+  .dock .bar{left:0;right:0;top:0;bottom:auto;width:auto;height:4px;border-radius:0;background:var(--spectrum);clip-path:inset(0 100% 0 0)}
+  .dock.on .bar{clip-path:inset(0 0 0 0)}
+  .dock li{display:none}
+  .dock .m{top:-3px;left:calc((var(--i,0) + .5) * 25%);transform:translateX(-50%);transition:left 800ms var(--ease),opacity 500ms;width:12px;height:12px}
+}
+@media (max-width:900px){
+  .top-in{flex-wrap:wrap;gap:10px var(--s-3);padding-top:18px;padding-bottom:16px}
+  .nav{order:3;width:100%;gap:4px 20px;font-size:14px}
+  .hero-row,.idea-head,.scale-head,.code-grid,.games-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--s-4)}
+  .band-labels{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s-3)}
+  .band-labels li{padding-top:12px}
+  .band-labels li::before{display:none}
+  .figs{grid-template-columns:minmax(0,1fr)}
+  .figs > div{padding:var(--s-3) 0 var(--s-4)}
+  .figs > div + div{padding-left:0;border-left:0;border-top:1px solid var(--hair)}
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,2fr);row-gap:var(--s-2)}
+  .row .g{grid-row:1 / span 2}
+  .row .sw{grid-column:2;grid-row:1;margin-top:10px;max-width:220px}
+  .row > div:last-child{grid-column:2}
+  .tool,.tool.alt{grid-template-columns:minmax(0,1fr);row-gap:var(--s-4)}
+  .tool .art{order:-1}
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .band-labels b{font-size:18px}
+  .pins{height:110px}
+  .game-list{grid-template-columns:minmax(0,1fr);gap:0}
+  .game a{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;align-items:center;padding:12px 0;border-bottom:1px solid var(--hair)}
+  .game h3{margin-top:0}
+  .shot{border-radius:8px}
+  .spec dd{font-size:36px}
+  .lang a{padding:5px 5px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tools">Tools</a><a href="#scale">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="dock" aria-hidden="true" data-i="0">
+  <span class="bar"></span>
+  <ol><li>1</li><li>2A</li><li>2B</li><li>3</li></ol>
+  <span class="m"></span>
+</div>
+
+<main>
+  <section class="hero" aria-labelledby="h1" data-group="none">
+    <div class="wrap">
+      <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+      <div class="band-wrap" data-progress>
+        <div class="band" aria-hidden="true"><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><span class="sweep"></span></div>
+        <ol class="band-labels" aria-label="The four IARC groups, from most to least certain">
+          <li><span>Group 1</span><b>Known cause</b></li>
+          <li><span>Group 2A</span><b>Probable cause</b></li>
+          <li><span>Group 2B</span><b>Possible cause</b></li>
+          <li><span>Group 3</span><b>Not classifiable</b></li>
+        </ol>
+      </div>
+      <div class="hero-row" data-reveal="fade" style="--d:500ms">
+        <div>
+          <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+          <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+        </div>
+        <form class="search" role="search" onsubmit="return false">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="idea" id="idea" aria-labelledby="idea-h" data-group="1">
+    <div class="wrap">
+      <div class="idea-head">
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <p data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+      </div>
+      <div class="same" data-reveal="fade" aria-hidden="true">
+        <div class="pins"><span class="pin">Tobacco smoking<br>Processed meat<small>both Group 1</small></span></div>
+        <div class="mini"></div>
+        <div class="mini-labs"><span>1</span><span>2A</span><span>2B</span><span>3</span></div>
+      </div>
+      <div class="figs">
+        <div data-reveal="fade"><span class="fig">100–120</span><p><b>in 1,000 smokers</b>get lung cancer by age 75: about 10 to 12 in 100.</p></div>
+        <div data-reveal="fade" style="--d:150ms"><span class="fig">4–5</span><p><b>in 1,000 lifelong non-smokers</b>get lung cancer by age 75.</p></div>
+        <div data-reveal="fade" style="--d:300ms"><span class="fig">18%</span><p><b>higher risk of bowel cancer</b>for each 50 grams of processed meat eaten every day.</p></div>
+      </div>
+      <div class="idea-foot">
+        <span>European data. Quoted from the Cancer Evidence Explorer.</span>
+        <a class="link" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="scale" id="scale" aria-labelledby="scale-h">
+    <div class="wrap">
+      <div class="scale-head">
+        <h2 id="scale-h">Reading the evidence</h2>
+        <p>Four groups, from known cause to not classifiable.</p>
+      </div>
+      <ol class="rows">
+        <li class="row" data-group="1"><span class="g">1</span><span class="sw" aria-hidden="true"></span><div><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></div></li>
+        <li class="row" data-group="2A"><span class="g">2A</span><span class="sw" aria-hidden="true"></span><div><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></div></li>
+        <li class="row" data-group="2B"><span class="g">2B</span><span class="sw" aria-hidden="true"></span><div><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></div></li>
+        <li class="row" data-group="3"><span class="g">3</span><span class="sw" aria-hidden="true"></span><div><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="tools" id="tools" aria-labelledby="tools-h" data-group="none">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2 id="tools-h">The explorers</h2>
+        <p>Free, in 10 languages.</p>
+      </div>
+      <article class="tool" aria-labelledby="t1">
+        <div>
+          <h3 id="t1">Cancer Evidence Explorer</h3>
+          <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <dl class="spec">
+            <div><dt>exposures</dt><dd>185</dd></div><div><dt>cancer types</dt><dd>68</dd></div><div><dt>links</dt><dd>469</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+        <figure class="art rays-fig" data-reveal="fade">
+<svg viewBox="0 0 1000 560" role="img" aria-labelledby="rt"><title id="rt">The Cancer Evidence Explorer’s 469 links between 185 exposures, ordered by IARC group, and 68 cancer types</title><path d="M954.3 40C954.3 300.7 529.1 253.3 529.1 514M922.61 40C922.61 300.7 540.75 253.3 540.75 514M922.61 40C922.61 300.7 610.6 253.3 610.6 514M943.74 40C943.74 300.7 494.18 253.3 494.18 514M922.61 40C922.61 300.7 494.18 253.3 494.18 514M964.87 40C964.87 300.7 703.73 253.3 703.73 514M975.43 40C975.43 300.7 703.73 253.3 703.73 514M949.02 40C949.02 300.7 703.73 253.3 703.73 514M922.61 40C922.61 300.7 622.24 253.3 622.24 514M949.02 40C949.02 300.7 412.69 253.3 412.69 514M912.04 40C912.04 300.7 890 253.3 890 514M938.46 40C938.46 300.7 389.4 253.3 389.4 514M949.02 40C949.02 300.7 575.67 253.3 575.67 514M964.87 40C964.87 300.7 354.48 253.3 354.48 514M964.87 40C964.87 300.7 377.76 253.3 377.76 514M959.59 40C959.59 300.7 482.54 253.3 482.54 514M927.89 40C927.89 300.7 424.33 253.3 424.33 514M901.48 40C901.48 300.7 808.51 253.3 808.51 514M896.2 40C896.2 300.7 470.9 253.3 470.9 514M906.76 40C906.76 300.7 470.9 253.3 470.9 514M906.76 40C906.76 300.7 727.01 253.3 727.01 514M896.2 40C896.2 300.7 785.22 253.3 785.22 514M964.87 40C964.87 300.7 459.25 253.3 459.25 514M964.87 40C964.87 300.7 680.45 253.3 680.45 514M980.72 40C980.72 300.7 680.45 253.3 680.45 514M917.33 40C917.33 300.7 680.45 253.3 680.45 514M970.15 40C970.15 300.7 750.3 253.3 750.3 514M986 40C986 300.7 750.3 253.3 750.3 514M964.87 40C964.87 300.7 645.52 253.3 645.52 514M933.17 40C933.17 300.7 633.88 253.3 633.88 514M975.43 40C975.43 300.7 598.96 253.3 598.96 514M980.72 40C980.72 300.7 598.96 253.3 598.96 514M986 40C986 300.7 598.96 253.3 598.96 514" fill="none" stroke="#D4A060" stroke-opacity="0.42" stroke-width=".8" stroke-dasharray="2 3"/><path d="M727.15 40C727.15 300.7 529.1 253.3 529.1 514M795.83 40C795.83 300.7 529.1 253.3 529.1 514M816.96 40C816.96 300.7 540.75 253.3 540.75 514M716.59 40C716.59 300.7 540.75 253.3 540.75 514M869.78 40C869.78 300.7 540.75 253.3 540.75 514M795.83 40C795.83 300.7 610.6 253.3 610.6 514M801.11 40C801.11 300.7 610.6 253.3 610.6 514M816.96 40C816.96 300.7 494.18 253.3 494.18 514M716.59 40C716.59 300.7 494.18 253.3 494.18 514M853.93 40C853.93 300.7 703.73 253.3 703.73 514M811.67 40C811.67 300.7 703.73 253.3 703.73 514M801.11 40C801.11 300.7 505.82 253.3 505.82 514M795.83 40C795.83 300.7 622.24 253.3 622.24 514M801.11 40C801.11 300.7 622.24 253.3 622.24 514M848.65 40C848.65 300.7 412.69 253.3 412.69 514M753.57 40C753.57 300.7 412.69 253.3 412.69 514M790.54 40C790.54 300.7 412.69 253.3 412.69 514M806.39 40C806.39 300.7 435.97 253.3 435.97 514M779.98 40C779.98 300.7 389.4 253.3 389.4 514M853.93 40C853.93 300.7 354.48 253.3 354.48 514M853.93 40C853.93 300.7 377.76 253.3 377.76 514M822.24 40C822.24 300.7 482.54 253.3 482.54 514M843.37 40C843.37 300.7 482.54 253.3 482.54 514M843.37 40C843.37 300.7 401.04 253.3 401.04 514M827.52 40C827.52 300.7 808.51 253.3 808.51 514M827.52 40C827.52 300.7 831.79 253.3 831.79 514M721.87 40C721.87 300.7 831.79 253.3 831.79 514M832.8 40C832.8 300.7 831.79 253.3 831.79 514M880.35 40C880.35 300.7 831.79 253.3 831.79 514M885.63 40C885.63 300.7 831.79 253.3 831.79 514M885.63 40C885.63 300.7 773.58 253.3 773.58 514M679.61 40C679.61 300.7 564.03 253.3 564.03 514M885.63 40C885.63 300.7 564.03 253.3 564.03 514M785.26 40C785.26 300.7 517.46 253.3 517.46 514M706.02 40C706.02 300.7 878.36 253.3 878.36 514M716.59 40C716.59 300.7 470.9 253.3 470.9 514M721.87 40C721.87 300.7 470.9 253.3 470.9 514M869.78 40C869.78 300.7 470.9 253.3 470.9 514M732.43 40C732.43 300.7 470.9 253.3 470.9 514M758.85 40C758.85 300.7 470.9 253.3 470.9 514M822.24 40C822.24 300.7 738.66 253.3 738.66 514M816.96 40C816.96 300.7 761.94 253.3 761.94 514M758.85 40C758.85 300.7 761.94 253.3 761.94 514M795.83 40C795.83 300.7 761.94 253.3 761.94 514M801.11 40C801.11 300.7 761.94 253.3 761.94 514M716.59 40C716.59 300.7 552.39 253.3 552.39 514M764.13 40C764.13 300.7 552.39 253.3 552.39 514M695.46 40C695.46 300.7 459.25 253.3 459.25 514M853.93 40C853.93 300.7 459.25 253.3 459.25 514M700.74 40C700.74 300.7 680.45 253.3 680.45 514M748.28 40C748.28 300.7 680.45 253.3 680.45 514M853.93 40C853.93 300.7 680.45 253.3 680.45 514M859.22 40C859.22 300.7 680.45 253.3 680.45 514M711.3 40C711.3 300.7 680.45 253.3 680.45 514M864.5 40C864.5 300.7 680.45 253.3 680.45 514M721.87 40C721.87 300.7 680.45 253.3 680.45 514M737.72 40C737.72 300.7 680.45 253.3 680.45 514M743 40C743 300.7 680.45 253.3 680.45 514M769.41 40C769.41 300.7 680.45 253.3 680.45 514M774.7 40C774.7 300.7 680.45 253.3 680.45 514M853.93 40C853.93 300.7 645.52 253.3 645.52 514M880.35 40C880.35 300.7 692.09 253.3 692.09 514M864.5 40C864.5 300.7 633.88 253.3 633.88 514M832.8 40C832.8 300.7 633.88 253.3 633.88 514M880.35 40C880.35 300.7 633.88 253.3 633.88 514M684.89 40C684.89 300.7 598.96 253.3 598.96 514M690.17 40C690.17 300.7 598.96 253.3 598.96 514M875.07 40C875.07 300.7 598.96 253.3 598.96 514M838.09 40C838.09 300.7 598.96 253.3 598.96 514M890.91 40C890.91 300.7 598.96 253.3 598.96 514M848.65 40C848.65 300.7 680.45 253.3 680.45 514" fill="none" stroke="#D07C2B" stroke-opacity="0.42" stroke-width=".8" stroke-dasharray="2 3"/><path d="M156.63 40C156.63 300.7 214.78 253.3 214.78 514M616.22 40C616.22 300.7 796.87 253.3 796.87 514M167.2 40C167.2 300.7 249.7 253.3 249.7 514M103.8 40C103.8 300.7 133.28 253.3 133.28 514M616.22 40C616.22 300.7 820.15 253.3 820.15 514M330.96 40C330.96 300.7 529.1 253.3 529.1 514M473.59 40C473.59 300.7 529.1 253.3 529.1 514M82.67 40C82.67 300.7 529.1 253.3 529.1 514M246.43 40C246.43 300.7 529.1 253.3 529.1 514M14 40C14 300.7 540.75 253.3 540.75 514M204.17 40C204.17 300.7 540.75 253.3 540.75 514M114.37 40C114.37 300.7 540.75 253.3 540.75 514M119.65 40C119.65 300.7 540.75 253.3 540.75 514M573.96 40C573.96 300.7 540.75 253.3 540.75 514M669.04 40C669.04 300.7 540.75 253.3 540.75 514M19.28 40C19.28 300.7 610.6 253.3 610.6 514M478.87 40C478.87 300.7 610.6 253.3 610.6 514M14 40C14 300.7 494.18 253.3 494.18 514M204.17 40C204.17 300.7 494.18 253.3 494.18 514M135.5 40C135.5 300.7 494.18 253.3 494.18 514M573.96 40C573.96 300.7 494.18 253.3 494.18 514M669.04 40C669.04 300.7 494.18 253.3 494.18 514M220.02 40C220.02 300.7 703.73 253.3 703.73 514M542.26 40C542.26 300.7 703.73 253.3 703.73 514M198.89 40C198.89 300.7 505.82 253.3 505.82 514M220.02 40C220.02 300.7 505.82 253.3 505.82 514M653.2 40C653.2 300.7 505.82 253.3 505.82 514M669.04 40C669.04 300.7 505.82 253.3 505.82 514M19.28 40C19.28 300.7 622.24 253.3 622.24 514M669.04 40C669.04 300.7 622.24 253.3 622.24 514M19.28 40C19.28 300.7 412.69 253.3 412.69 514M87.96 40C87.96 300.7 412.69 253.3 412.69 514M103.8 40C103.8 300.7 412.69 253.3 412.69 514M220.02 40C220.02 300.7 412.69 253.3 412.69 514M230.59 40C230.59 300.7 412.69 253.3 412.69 514M214.74 40C214.74 300.7 412.69 253.3 412.69 514M642.63 40C642.63 300.7 715.37 253.3 715.37 514M293.98 40C293.98 300.7 342.84 253.3 342.84 514M669.04 40C669.04 300.7 435.97 253.3 435.97 514M135.5 40C135.5 300.7 272.99 253.3 272.99 514M135.5 40C135.5 300.7 226.42 253.3 226.42 514M156.63 40C156.63 300.7 226.42 253.3 226.42 514M642.63 40C642.63 300.7 587.31 253.3 587.31 514M146.07 40C146.07 300.7 354.48 253.3 354.48 514M19.28 40C19.28 300.7 377.76 253.3 377.76 514M220.02 40C220.02 300.7 377.76 253.3 377.76 514M235.87 40C235.87 300.7 377.76 253.3 377.76 514M616.22 40C616.22 300.7 657.16 253.3 657.16 514M299.26 40C299.26 300.7 482.54 253.3 482.54 514M87.96 40C87.96 300.7 424.33 253.3 424.33 514M225.3 40C225.3 300.7 424.33 253.3 424.33 514M24.57 40C24.57 300.7 401.04 253.3 401.04 514M225.3 40C225.3 300.7 401.04 253.3 401.04 514M515.85 40C515.85 300.7 808.51 253.3 808.51 514M616.22 40C616.22 300.7 808.51 253.3 808.51 514M225.3 40C225.3 300.7 808.51 253.3 808.51 514M87.96 40C87.96 300.7 284.63 253.3 284.63 514M24.57 40C24.57 300.7 284.63 253.3 284.63 514M473.59 40C473.59 300.7 284.63 253.3 284.63 514M24.57 40C24.57 300.7 447.61 253.3 447.61 514M616.22 40C616.22 300.7 831.79 253.3 831.79 514M637.35 40C637.35 300.7 831.79 253.3 831.79 514M357.37 40C357.37 300.7 831.79 253.3 831.79 514M87.96 40C87.96 300.7 564.03 253.3 564.03 514M24.57 40C24.57 300.7 564.03 253.3 564.03 514M473.59 40C473.59 300.7 564.03 253.3 564.03 514M669.04 40C669.04 300.7 564.03 253.3 564.03 514M87.96 40C87.96 300.7 121.64 253.3 121.64 514M45.7 40C45.7 300.7 470.9 253.3 470.9 514M24.57 40C24.57 300.7 470.9 253.3 470.9 514M473.59 40C473.59 300.7 470.9 253.3 470.9 514M478.87 40C478.87 300.7 470.9 253.3 470.9 514M114.37 40C114.37 300.7 470.9 253.3 470.9 514M82.67 40C82.67 300.7 470.9 253.3 470.9 514M573.96 40C573.96 300.7 470.9 253.3 470.9 514M669.04 40C669.04 300.7 470.9 253.3 470.9 514M135.5 40C135.5 300.7 179.85 253.3 179.85 514M146.07 40C146.07 300.7 179.85 253.3 179.85 514M14 40C14 300.7 761.94 253.3 761.94 514M441.89 40C441.89 300.7 761.94 253.3 761.94 514M478.87 40C478.87 300.7 761.94 253.3 761.94 514M542.26 40C542.26 300.7 761.94 253.3 761.94 514M653.2 40C653.2 300.7 761.94 253.3 761.94 514M669.04 40C669.04 300.7 761.94 253.3 761.94 514M288.7 40C288.7 300.7 552.39 253.3 552.39 514M478.87 40C478.87 300.7 552.39 253.3 552.39 514M93.24 40C93.24 300.7 552.39 253.3 552.39 514M45.7 40C45.7 300.7 727.01 253.3 727.01 514M616.22 40C616.22 300.7 727.01 253.3 727.01 514M151.35 40C151.35 300.7 459.25 253.3 459.25 514M542.26 40C542.26 300.7 459.25 253.3 459.25 514M568.67 40C568.67 300.7 459.25 253.3 459.25 514M235.87 40C235.87 300.7 459.25 253.3 459.25 514M45.7 40C45.7 300.7 680.45 253.3 680.45 514M658.48 40C658.48 300.7 680.45 253.3 680.45 514M447.17 40C447.17 300.7 750.3 253.3 750.3 514M484.15 40C484.15 300.7 750.3 253.3 750.3 514M478.87 40C478.87 300.7 692.09 253.3 692.09 514M309.83 40C309.83 300.7 692.09 253.3 692.09 514M135.5 40C135.5 300.7 633.88 253.3 633.88 514M357.37 40C357.37 300.7 633.88 253.3 633.88 514M647.91 40C647.91 300.7 633.88 253.3 633.88 514M14 40C14 300.7 366.12 253.3 366.12 514M87.96 40C87.96 300.7 366.12 253.3 366.12 514M441.89 40C441.89 300.7 366.12 253.3 366.12 514M93.24 40C93.24 300.7 366.12 253.3 366.12 514M589.8 40C589.8 300.7 366.12 253.3 366.12 514M251.72 40C251.72 300.7 331.19 253.3 331.19 514M415.48 40C415.48 300.7 598.96 253.3 598.96 514M463.02 40C463.02 300.7 598.96 253.3 598.96 514M40.41 40C40.41 300.7 598.96 253.3 598.96 514M72.11 40C72.11 300.7 598.96 253.3 598.96 514M558.11 40C558.11 300.7 598.96 253.3 598.96 514M563.39 40C563.39 300.7 680.45 253.3 680.45 514M24.57 40C24.57 300.7 680.45 253.3 680.45 514M87.96 40C87.96 300.7 470.9 253.3 470.9 514" fill="none" stroke="#A8392B" stroke-opacity="0.42" stroke-width=".8" stroke-dasharray="2 3"/><path d="M610.93 40C610.93 300.7 820.15 253.3 820.15 514M621.5 40C621.5 300.7 820.15 253.3 820.15 514M626.78 40C626.78 300.7 820.15 253.3 820.15 514M632.07 40C632.07 300.7 820.15 253.3 820.15 514M669.04 40C669.04 300.7 820.15 253.3 820.15 514M198.89 40C198.89 300.7 529.1 253.3 529.1 514M293.98 40C293.98 300.7 529.1 253.3 529.1 514M278.13 40C278.13 300.7 529.1 253.3 529.1 514M367.93 40C367.93 300.7 529.1 253.3 529.1 514M669.04 40C669.04 300.7 529.1 253.3 529.1 514M135.5 40C135.5 300.7 214.78 253.3 214.78 514M140.78 40C140.78 300.7 214.78 253.3 214.78 514M389.07 40C389.07 300.7 540.75 253.3 540.75 514M172.48 40C172.48 300.7 540.75 253.3 540.75 514M177.76 40C177.76 300.7 540.75 253.3 540.75 514M610.93 40C610.93 300.7 540.75 253.3 540.75 514M653.2 40C653.2 300.7 540.75 253.3 540.75 514M246.43 40C246.43 300.7 540.75 253.3 540.75 514M198.89 40C198.89 300.7 610.6 253.3 610.6 514M230.59 40C230.59 300.7 610.6 253.3 610.6 514M246.43 40C246.43 300.7 610.6 253.3 610.6 514M669.04 40C669.04 300.7 610.6 253.3 610.6 514M653.2 40C653.2 300.7 866.72 253.3 866.72 514M193.61 40C193.61 300.7 494.18 253.3 494.18 514M198.89 40C198.89 300.7 494.18 253.3 494.18 514M367.93 40C367.93 300.7 494.18 253.3 494.18 514M114.37 40C114.37 300.7 494.18 253.3 494.18 514M119.65 40C119.65 300.7 494.18 253.3 494.18 514M124.93 40C124.93 300.7 494.18 253.3 494.18 514M610.93 40C610.93 300.7 494.18 253.3 494.18 514M653.2 40C653.2 300.7 494.18 253.3 494.18 514M246.43 40C246.43 300.7 494.18 253.3 494.18 514M584.52 40C584.52 300.7 494.18 253.3 494.18 514M188.33 40C188.33 300.7 703.73 253.3 703.73 514M198.89 40C198.89 300.7 703.73 253.3 703.73 514M209.46 40C209.46 300.7 703.73 253.3 703.73 514M204.17 40C204.17 300.7 703.73 253.3 703.73 514M246.43 40C246.43 300.7 703.73 253.3 703.73 514M241.15 40C241.15 300.7 703.73 253.3 703.73 514M669.04 40C669.04 300.7 703.73 253.3 703.73 514M246.43 40C246.43 300.7 505.82 253.3 505.82 514M241.15 40C241.15 300.7 505.82 253.3 505.82 514M198.89 40C198.89 300.7 622.24 253.3 622.24 514M230.59 40C230.59 300.7 622.24 253.3 622.24 514M246.43 40C246.43 300.7 622.24 253.3 622.24 514M109.09 40C109.09 300.7 412.69 253.3 412.69 514M542.26 40C542.26 300.7 412.69 253.3 412.69 514M246.43 40C246.43 300.7 412.69 253.3 412.69 514M669.04 40C669.04 300.7 412.69 253.3 412.69 514M616.22 40C616.22 300.7 855.07 253.3 855.07 514M669.04 40C669.04 300.7 855.07 253.3 855.07 514M669.04 40C669.04 300.7 890 253.3 890 514M135.5 40C135.5 300.7 715.37 253.3 715.37 514M663.76 40C663.76 300.7 715.37 253.3 715.37 514M647.91 40C647.91 300.7 715.37 253.3 715.37 514M330.96 40C330.96 300.7 342.84 253.3 342.84 514M278.13 40C278.13 300.7 342.84 253.3 342.84 514M362.65 40C362.65 300.7 342.84 253.3 342.84 514M19.28 40C19.28 300.7 435.97 253.3 435.97 514M330.96 40C330.96 300.7 435.97 253.3 435.97 514M246.43 40C246.43 300.7 435.97 253.3 435.97 514M288.7 40C288.7 300.7 389.4 253.3 389.4 514M367.93 40C367.93 300.7 389.4 253.3 389.4 514M135.5 40C135.5 300.7 389.4 253.3 389.4 514M130.22 40C130.22 300.7 389.4 253.3 389.4 514M140.78 40C140.78 300.7 389.4 253.3 389.4 514M146.07 40C146.07 300.7 389.4 253.3 389.4 514M246.43 40C246.43 300.7 389.4 253.3 389.4 514M288.7 40C288.7 300.7 272.99 253.3 272.99 514M140.78 40C140.78 300.7 272.99 253.3 272.99 514M140.78 40C140.78 300.7 226.42 253.3 226.42 514M309.83 40C309.83 300.7 587.31 253.3 587.31 514M103.8 40C103.8 300.7 575.67 253.3 575.67 514M484.15 40C484.15 300.7 575.67 253.3 575.67 514M214.74 40C214.74 300.7 575.67 253.3 575.67 514M188.33 40C188.33 300.7 354.48 253.3 354.48 514M198.89 40C198.89 300.7 354.48 253.3 354.48 514M209.46 40C209.46 300.7 354.48 253.3 354.48 514M204.17 40C204.17 300.7 354.48 253.3 354.48 514M140.78 40C140.78 300.7 354.48 253.3 354.48 514M246.43 40C246.43 300.7 354.48 253.3 354.48 514M241.15 40C241.15 300.7 354.48 253.3 354.48 514M140.78 40C140.78 300.7 191.49 253.3 191.49 514M188.33 40C188.33 300.7 377.76 253.3 377.76 514M198.89 40C198.89 300.7 377.76 253.3 377.76 514M209.46 40C209.46 300.7 377.76 253.3 377.76 514M246.43 40C246.43 300.7 377.76 253.3 377.76 514M669.04 40C669.04 300.7 657.16 253.3 657.16 514M140.78 40C140.78 300.7 203.13 253.3 203.13 514M605.65 40C605.65 300.7 843.43 253.3 843.43 514M653.2 40C653.2 300.7 843.43 253.3 843.43 514M669.04 40C669.04 300.7 843.43 253.3 843.43 514M87.96 40C87.96 300.7 482.54 253.3 482.54 514M24.57 40C24.57 300.7 482.54 253.3 482.54 514M262.28 40C262.28 300.7 482.54 253.3 482.54 514M267.57 40C267.57 300.7 482.54 253.3 482.54 514M283.41 40C283.41 300.7 482.54 253.3 482.54 514M304.54 40C304.54 300.7 482.54 253.3 482.54 514M484.15 40C484.15 300.7 482.54 253.3 482.54 514M315.11 40C315.11 300.7 482.54 253.3 482.54 514M325.67 40C325.67 300.7 482.54 253.3 482.54 514M605.65 40C605.65 300.7 482.54 253.3 482.54 514M352.09 40C352.09 300.7 482.54 253.3 482.54 514M653.2 40C653.2 300.7 482.54 253.3 482.54 514M246.43 40C246.43 300.7 482.54 253.3 482.54 514M378.5 40C378.5 300.7 482.54 253.3 482.54 514M669.04 40C669.04 300.7 482.54 253.3 482.54 514M161.91 40C161.91 300.7 668.81 253.3 668.81 514M600.37 40C600.37 300.7 808.51 253.3 808.51 514M653.2 40C653.2 300.7 808.51 253.3 808.51 514M669.04 40C669.04 300.7 808.51 253.3 808.51 514M484.15 40C484.15 300.7 447.61 253.3 447.61 514M653.2 40C653.2 300.7 447.61 253.3 447.61 514M246.43 40C246.43 300.7 447.61 253.3 447.61 514M669.04 40C669.04 300.7 447.61 253.3 447.61 514M103.8 40C103.8 300.7 168.21 253.3 168.21 514M135.5 40C135.5 300.7 168.21 253.3 168.21 514M394.35 40C394.35 300.7 831.79 253.3 831.79 514M600.37 40C600.37 300.7 831.79 253.3 831.79 514M542.26 40C542.26 300.7 831.79 253.3 831.79 514M373.22 40C373.22 300.7 831.79 253.3 831.79 514M394.35 40C394.35 300.7 564.03 253.3 564.03 514M536.98 40C536.98 300.7 564.03 253.3 564.03 514M103.8 40C103.8 300.7 517.46 253.3 517.46 514M109.09 40C109.09 300.7 156.57 253.3 156.57 514M103.8 40C103.8 300.7 144.93 253.3 144.93 514M103.8 40C103.8 300.7 319.55 253.3 319.55 514M357.37 40C357.37 300.7 319.55 253.3 319.55 514M257 40C257 300.7 470.9 253.3 470.9 514M272.85 40C272.85 300.7 470.9 253.3 470.9 514M119.65 40C119.65 300.7 470.9 253.3 470.9 514M135.5 40C135.5 300.7 470.9 253.3 470.9 514M66.83 40C66.83 300.7 470.9 253.3 470.9 514M536.98 40C536.98 300.7 470.9 253.3 470.9 514M357.37 40C357.37 300.7 470.9 253.3 470.9 514M24.57 40C24.57 300.7 738.66 253.3 738.66 514M484.15 40C484.15 300.7 738.66 253.3 738.66 514M605.65 40C605.65 300.7 738.66 253.3 738.66 514M653.2 40C653.2 300.7 738.66 253.3 738.66 514M669.04 40C669.04 300.7 738.66 253.3 738.66 514M167.2 40C167.2 300.7 261.34 253.3 261.34 514M140.78 40C140.78 300.7 179.85 253.3 179.85 514M135.5 40C135.5 300.7 238.06 253.3 238.06 514M167.2 40C167.2 300.7 238.06 253.3 238.06 514M19.28 40C19.28 300.7 307.91 253.3 307.91 514M50.98 40C50.98 300.7 307.91 253.3 307.91 514M478.87 40C478.87 300.7 307.91 253.3 307.91 514M56.26 40C56.26 300.7 307.91 253.3 307.91 514M531.7 40C531.7 300.7 307.91 253.3 307.91 514M45.7 40C45.7 300.7 110 253.3 110 514M272.85 40C272.85 300.7 785.22 253.3 785.22 514M600.37 40C600.37 300.7 785.22 253.3 785.22 514M674.33 40C674.33 300.7 785.22 253.3 785.22 514M188.33 40C188.33 300.7 459.25 253.3 459.25 514M563.39 40C563.39 300.7 459.25 253.3 459.25 514M198.89 40C198.89 300.7 459.25 253.3 459.25 514M19.28 40C19.28 300.7 459.25 253.3 459.25 514M220.02 40C220.02 300.7 459.25 253.3 459.25 514M246.43 40C246.43 300.7 459.25 253.3 459.25 514M410.2 40C410.2 300.7 680.45 253.3 680.45 514M415.48 40C415.48 300.7 680.45 253.3 680.45 514M420.76 40C420.76 300.7 680.45 253.3 680.45 514M14 40C14 300.7 680.45 253.3 680.45 514M19.28 40C19.28 300.7 680.45 253.3 680.45 514M436.61 40C436.61 300.7 680.45 253.3 680.45 514M29.85 40C29.85 300.7 680.45 253.3 680.45 514M441.89 40C441.89 300.7 680.45 253.3 680.45 514M447.17 40C447.17 300.7 680.45 253.3 680.45 514M452.46 40C452.46 300.7 680.45 253.3 680.45 514M61.54 40C61.54 300.7 680.45 253.3 680.45 514M463.02 40C463.02 300.7 680.45 253.3 680.45 514M468.3 40C468.3 300.7 680.45 253.3 680.45 514M40.41 40C40.41 300.7 680.45 253.3 680.45 514M579.24 40C579.24 300.7 680.45 253.3 680.45 514M489.43 40C489.43 300.7 680.45 253.3 680.45 514M325.67 40C325.67 300.7 680.45 253.3 680.45 514M521.13 40C521.13 300.7 680.45 253.3 680.45 514M220.02 40C220.02 300.7 680.45 253.3 680.45 514M72.11 40C72.11 300.7 680.45 253.3 680.45 514M77.39 40C77.39 300.7 680.45 253.3 680.45 514M531.7 40C531.7 300.7 680.45 253.3 680.45 514M610.93 40C610.93 300.7 680.45 253.3 680.45 514M637.35 40C637.35 300.7 680.45 253.3 680.45 514M542.26 40C542.26 300.7 680.45 253.3 680.45 514M552.83 40C552.83 300.7 680.45 253.3 680.45 514M558.11 40C558.11 300.7 680.45 253.3 680.45 514M568.67 40C568.67 300.7 680.45 253.3 680.45 514M235.87 40C235.87 300.7 680.45 253.3 680.45 514M246.43 40C246.43 300.7 680.45 253.3 680.45 514M589.8 40C589.8 300.7 680.45 253.3 680.45 514M669.04 40C669.04 300.7 680.45 253.3 680.45 514M494.72 40C494.72 300.7 750.3 253.3 750.3 514M500 40C500 300.7 750.3 253.3 750.3 514M521.13 40C521.13 300.7 750.3 253.3 750.3 514M626.78 40C626.78 300.7 750.3 253.3 750.3 514M632.07 40C632.07 300.7 750.3 253.3 750.3 514M246.43 40C246.43 300.7 750.3 253.3 750.3 514M595.09 40C595.09 300.7 750.3 253.3 750.3 514M188.33 40C188.33 300.7 645.52 253.3 645.52 514M198.89 40C198.89 300.7 645.52 253.3 645.52 514M246.43 40C246.43 300.7 645.52 253.3 645.52 514M82.67 40C82.67 300.7 692.09 253.3 692.09 514M642.63 40C642.63 300.7 692.09 253.3 692.09 514M647.91 40C647.91 300.7 692.09 253.3 692.09 514M14 40C14 300.7 633.88 253.3 633.88 514M257 40C257 300.7 633.88 253.3 633.88 514M272.85 40C272.85 300.7 633.88 253.3 633.88 514M457.74 40C457.74 300.7 633.88 253.3 633.88 514M309.83 40C309.83 300.7 633.88 253.3 633.88 514M320.39 40C320.39 300.7 633.88 253.3 633.88 514M510.57 40C510.57 300.7 633.88 253.3 633.88 514M547.54 40C547.54 300.7 633.88 253.3 633.88 514M642.63 40C642.63 300.7 633.88 253.3 633.88 514M558.11 40C558.11 300.7 633.88 253.3 633.88 514M383.78 40C383.78 300.7 633.88 253.3 633.88 514M669.04 40C669.04 300.7 633.88 253.3 633.88 514M246.43 40C246.43 300.7 366.12 253.3 366.12 514M573.96 40C573.96 300.7 366.12 253.3 366.12 514M669.04 40C669.04 300.7 366.12 253.3 366.12 514M346.8 40C346.8 300.7 331.19 253.3 331.19 514M336.24 40C336.24 300.7 331.19 253.3 331.19 514M341.52 40C341.52 300.7 331.19 253.3 331.19 514M246.43 40C246.43 300.7 331.19 253.3 331.19 514M399.63 40C399.63 300.7 598.96 253.3 598.96 514M404.91 40C404.91 300.7 598.96 253.3 598.96 514M420.76 40C420.76 300.7 598.96 253.3 598.96 514M14 40C14 300.7 598.96 253.3 598.96 514M426.04 40C426.04 300.7 598.96 253.3 598.96 514M87.96 40C87.96 300.7 598.96 253.3 598.96 514M431.33 40C431.33 300.7 598.96 253.3 598.96 514M35.13 40C35.13 300.7 598.96 253.3 598.96 514M283.41 40C283.41 300.7 598.96 253.3 598.96 514M478.87 40C478.87 300.7 598.96 253.3 598.96 514M505.28 40C505.28 300.7 598.96 253.3 598.96 514M220.02 40C220.02 300.7 598.96 253.3 598.96 514M526.41 40C526.41 300.7 598.96 253.3 598.96 514M531.7 40C531.7 300.7 598.96 253.3 598.96 514M542.26 40C542.26 300.7 598.96 253.3 598.96 514M98.52 40C98.52 300.7 598.96 253.3 598.96 514M246.43 40C246.43 300.7 598.96 253.3 598.96 514M669.04 40C669.04 300.7 598.96 253.3 598.96 514M225.3 40C225.3 300.7 296.27 253.3 296.27 514M595.09 40C595.09 300.7 575.67 253.3 575.67 514M653.2 40C653.2 300.7 668.81 253.3 668.81 514M669.04 40C669.04 300.7 668.81 253.3 668.81 514M394.35 40C394.35 300.7 773.58 253.3 773.58 514M542.26 40C542.26 300.7 773.58 253.3 773.58 514M188.33 40C188.33 300.7 657.16 253.3 657.16 514M183.04 40C183.04 300.7 633.88 253.3 633.88 514" fill="none" stroke="#A8392B" stroke-opacity="0.42" stroke-width=".9"/><path d="M14 24V38M19.28 24V38M24.57 24V38M29.85 24V38M35.13 24V38M40.41 24V38M45.7 24V38M50.98 24V38M56.26 24V38M61.54 24V38M66.83 24V38M72.11 24V38M77.39 24V38M82.67 24V38M87.96 24V38M93.24 24V38M98.52 24V38M103.8 24V38M109.09 24V38M114.37 24V38M119.65 24V38M124.93 24V38M130.22 24V38M135.5 24V38M140.78 24V38M146.07 24V38M151.35 24V38M156.63 24V38M161.91 24V38M167.2 24V38M172.48 24V38M177.76 24V38M183.04 24V38M188.33 24V38M193.61 24V38M198.89 24V38M204.17 24V38M209.46 24V38M214.74 24V38M220.02 24V38M225.3 24V38M230.59 24V38M235.87 24V38M241.15 24V38M246.43 24V38M251.72 24V38M257 24V38M262.28 24V38M267.57 24V38M272.85 24V38M278.13 24V38M283.41 24V38M288.7 24V38M293.98 24V38M299.26 24V38M304.54 24V38M309.83 24V38M315.11 24V38M320.39 24V38M325.67 24V38M330.96 24V38M336.24 24V38M341.52 24V38M346.8 24V38M352.09 24V38M357.37 24V38M362.65 24V38M367.93 24V38M373.22 24V38M378.5 24V38M383.78 24V38M389.07 24V38M394.35 24V38M399.63 24V38M404.91 24V38M410.2 24V38M415.48 24V38M420.76 24V38M426.04 24V38M431.33 24V38M436.61 24V38M441.89 24V38M447.17 24V38M452.46 24V38M457.74 24V38M463.02 24V38M468.3 24V38M473.59 24V38M478.87 24V38M484.15 24V38M489.43 24V38M494.72 24V38M500 24V38M505.28 24V38M510.57 24V38M515.85 24V38M521.13 24V38M526.41 24V38M531.7 24V38M536.98 24V38M542.26 24V38M547.54 24V38M552.83 24V38M558.11 24V38M563.39 24V38M568.67 24V38M573.96 24V38M579.24 24V38M584.52 24V38M589.8 24V38M595.09 24V38M600.37 24V38M605.65 24V38M610.93 24V38M616.22 24V38M621.5 24V38M626.78 24V38M632.07 24V38M637.35 24V38M642.63 24V38M647.91 24V38M653.2 24V38M658.48 24V38M663.76 24V38M669.04 24V38M674.33 24V38" stroke="#A8392B" stroke-width="2"/><path d="M679.61 24V38M684.89 24V38M690.17 24V38M695.46 24V38M700.74 24V38M706.02 24V38M711.3 24V38M716.59 24V38M721.87 24V38M727.15 24V38M732.43 24V38M737.72 24V38M743 24V38M748.28 24V38M753.57 24V38M758.85 24V38M764.13 24V38M769.41 24V38M774.7 24V38M779.98 24V38M785.26 24V38M790.54 24V38M795.83 24V38M801.11 24V38M806.39 24V38M811.67 24V38M816.96 24V38M822.24 24V38M827.52 24V38M832.8 24V38M838.09 24V38M843.37 24V38M848.65 24V38M853.93 24V38M859.22 24V38M864.5 24V38M869.78 24V38M875.07 24V38M880.35 24V38M885.63 24V38M890.91 24V38" stroke="#D07C2B" stroke-width="2"/><path d="M896.2 24V38M901.48 24V38M906.76 24V38M912.04 24V38M917.33 24V38M922.61 24V38M927.89 24V38M933.17 24V38M938.46 24V38M943.74 24V38M949.02 24V38M954.3 24V38M959.59 24V38M964.87 24V38M970.15 24V38M975.43 24V38M980.72 24V38M986 24V38" stroke="#D4A060" stroke-width="2"/><path d="M107.3 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M118.94 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M130.58 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M142.23 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M153.87 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M165.22 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M176.64 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M188.79 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M200.43 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M211.56 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M223.21 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M235.07 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M247 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M258.64 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M269.77 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M281.41 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M293.57 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M304.35 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M316.56 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M327.63 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M339.44 520a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0M350.26 520a4.21 4.21 0 1 0 8.43 0a4.21 4.21 0 1 0 -8.43 0M362.14 520a3.98 3.98 0 1 0 7.96 0a3.98 3.98 0 1 0 -7.96 0M373.66 520a4.1 4.1 0 1 0 8.2 0a4.1 4.1 0 1 0 -8.2 0M385.3 520a4.1 4.1 0 1 0 8.2 0a4.1 4.1 0 1 0 -8.2 0M397.83 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M408.07 520a4.62 4.62 0 1 0 9.24 0a4.62 4.62 0 1 0 -9.24 0M421.12 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M432.4 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M444.05 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M454.73 520a4.52 4.52 0 1 0 9.05 0a4.52 4.52 0 1 0 -9.05 0M465.54 520a5.36 5.36 0 1 0 10.71 0a5.36 5.36 0 1 0 -10.71 0M477.49 520a5.05 5.05 0 1 0 10.1 0a5.05 5.05 0 1 0 -10.1 0M489.13 520a5.05 5.05 0 1 0 10.1 0a5.05 5.05 0 1 0 -10.1 0M501.97 520a3.85 3.85 0 1 0 7.7 0a3.85 3.85 0 1 0 -7.7 0M514.47 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M524.68 520a4.42 4.42 0 1 0 8.85 0a4.42 4.42 0 1 0 -8.85 0M535.95 520a4.8 4.8 0 1 0 9.6 0a4.8 4.8 0 1 0 -9.6 0M548.82 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M560.05 520a3.98 3.98 0 1 0 7.96 0a3.98 3.98 0 1 0 -7.96 0M572.11 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M584.32 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M593.06 520a5.9 5.9 0 1 0 11.79 0a5.9 5.9 0 1 0 -11.79 0M606.5 520a4.1 4.1 0 1 0 8.2 0a4.1 4.1 0 1 0 -8.2 0M618.26 520a3.98 3.98 0 1 0 7.96 0a3.98 3.98 0 1 0 -7.96 0M628.75 520a5.13 5.13 0 1 0 10.26 0a5.13 5.13 0 1 0 -10.26 0M641.96 520a3.57 3.57 0 1 0 7.13 0a3.57 3.57 0 1 0 -7.13 0M653.95 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M665.59 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M673.45 520a7 7 0 1 0 14 0a7 7 0 1 0 -14 0M688.37 520a3.71 3.71 0 1 0 7.43 0a3.71 3.71 0 1 0 -7.43 0M699.11 520a4.62 4.62 0 1 0 9.24 0a4.62 4.62 0 1 0 -9.24 0M711.97 520a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0M723.8 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M734.94 520a3.71 3.71 0 1 0 7.43 0a3.71 3.71 0 1 0 -7.43 0M745.98 520a4.32 4.32 0 1 0 8.64 0a4.32 4.32 0 1 0 -8.64 0M757.73 520a4.21 4.21 0 1 0 8.43 0a4.21 4.21 0 1 0 -8.43 0M770.37 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M781.82 520a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0M794.17 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M804.53 520a3.98 3.98 0 1 0 7.96 0a3.98 3.98 0 1 0 -7.96 0M816.43 520a3.71 3.71 0 1 0 7.43 0a3.71 3.71 0 1 0 -7.43 0M827.37 520a4.42 4.42 0 1 0 8.85 0a4.42 4.42 0 1 0 -8.85 0M840.22 520a3.21 3.21 0 1 0 6.42 0a3.21 3.21 0 1 0 -6.42 0M852.08 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0M864.02 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M875.66 520a2.7 2.7 0 1 0 5.4 0a2.7 2.7 0 1 0 -5.4 0M887.01 520a2.99 2.99 0 1 0 5.98 0a2.99 2.99 0 1 0 -5.98 0" fill="#111317"/><path d="M110 538H890" stroke="#111317" stroke-opacity=".25"/></svg>
+          <figcaption>The explorer’s 469 links: exposures along the top, ordered by IARC group and coloured on the same scale, each joined to the cancer types below. Dashed lines are suspected links.</figcaption>
+        </figure>
+      </article>
+      <article class="tool alt" aria-labelledby="t2">
+        <figure class="art sq" data-reveal="fade">
+          <img src="media/tool-chronic-network.svg" width="931" height="1006" alt="The Chronic Disease Evidence Explorer’s network: risk factors clustered around the diseases they affect." loading="lazy">
+        </figure>
+        <div>
+          <h3 id="t2">Chronic Disease Evidence Explorer</h3>
+          <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <dl class="spec">
+            <div><dt>risk factors</dt><dd>124</dd></div><div><dt>diseases</dt><dd>45</dd></div><div><dt>graded links</dt><dd>356</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="code" id="code" aria-labelledby="code-h" data-group="none">
+    <div class="wrap code-grid">
+      <div class="code-copy">
+        <h2 id="code-h" data-split>Code Against Cancer</h2>
+        <p data-reveal="fade" style="--d:300ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <a class="btn" href="#">Read the recommendations</a>
+      </div>
+      <div class="pair" data-reveal="fade" style="--d:200ms">
+        <div><span class="fig">14</span><p>actions for Europe</p></div>
+        <div><span class="fig">17</span><p>actions for Latin America and the Caribbean</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="games" id="games" aria-labelledby="games-h" data-group="none">
+    <div class="wrap games-grid">
+      <div class="games-head">
+        <h2 id="games-h">For schools and families</h2>
+        <p>Learning by playing — three games.</p>
+      </div>
+      <ul class="game-list">
+        <li class="game" data-reveal="fade"><a href="#"><div class="shot"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Sol & the UV Shield Quest: a cartoon hero on sunny platforms" loading="lazy" style="object-position:38% 60%"></div><div><h3>Sol &amp; the UV Shield Quest</h3><p>Skin cancer · ages 6–12</p></div></a></li>
+        <li class="game" data-reveal="fade" style="--d:120ms"><a href="#"><div class="shot"><img src="media/game-lung-detective.webp" width="720" height="405" alt="The Lung Detective: a cartoon living room with a basement door" loading="lazy" style="object-position:40% 50%"></div><div><h3>The Lung Detective</h3><p>Lung cancer · ages 10–16</p></div></a></li>
+        <li class="game" data-reveal="fade" style="--d:240ms"><a href="#"><div class="shot"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="A Town of 1,000: a small riverside town in soft colours" loading="lazy"></div><div><h3>A Town of 1,000</h3><p>Breast cancer · ages 14+</p></div></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about" data-group="none">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="mark" href="#">EpiDetective</a><p class="place">Lyon, France</p></div>
+      <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul><li><a class="ul" href="#">How we check</a></li><li><a class="ul" href="#">Report an error</a></li><li><a class="ul" href="#">How to cite</a></li><li><a class="ul" href="#">About</a></li></ul>
+    </div>
+    <p class="credits">Images: the spectrum and the drawing of the Cancer Evidence Explorer’s links are made for this page from the explorer’s data. Network drawing from the Chronic Disease Evidence Explorer, in greyscale; game screenshots from the three EpiDetective games. No photographs are used.</p>
+  </div>
+</footer>
+
+<script src="kit/kit.js" defer></script>
+<script>
+(function(){
+  var dock=document.querySelector('.dock'), band=document.querySelector('.band'), foot=document.querySelector('.foot');
+  if(!dock||!band||!('IntersectionObserver' in window)) return;
+  var idx={'1':0,'2A':1,'2B':2,'3':3}, ticking=false;
+  function place(){
+    ticking=false;
+    var b=band.getBoundingClientRect().bottom, f=foot.getBoundingClientRect().top;
+    dock.classList.toggle('on', b<40 && f>innerHeight*.55);
+  }
+  addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(place);} },{passive:true});
+  addEventListener('resize',place); place();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var g=e.target.getAttribute('data-group'), i=idx[g];
+      if(i==null){ dock.classList.add('none'); }
+      else { dock.classList.remove('none'); dock.style.setProperty('--i',i); dock.setAttribute('data-i',i); }
+    });
+  },{rootMargin:'-49% 0px -49% 0px'});
+  document.querySelectorAll('[data-group]').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

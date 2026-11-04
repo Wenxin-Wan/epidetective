@@ -68,19 +68,19 @@ form.find label{display:block;font-size:var(--f-s);font-weight:500;margin-bottom
   background:radial-gradient(90% 60% at 50% 112%,rgba(194,85,61,var(--g)),transparent 62%),linear-gradient(180deg,var(--top),var(--bot))}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .stage noscript svg{position:absolute;left:50%;top:50%;width:min(60vw,360px);transform:translate(-50%,-50%)}
-.readout{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:18px;pointer-events:none}
-.readout .now{text-align:right}
-.readout .n{display:block;font-family:var(--serif);font-size:clamp(28px,3vw,40px);line-height:1;font-variant-numeric:lining-nums tabular-nums}
-.readout .u{display:block;font-size:var(--f-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-top:8px}
-.scale{list-style:none;margin:0;padding:0;position:relative;height:240px;width:1px;background:var(--ink-2);opacity:.9}
-.scale li{position:absolute;left:-4px;width:9px;height:1px;background:var(--ink-2)}
-.scale li span{position:absolute;left:16px;top:-8px;font-size:11px;color:var(--ink-2);white-space:nowrap}
-.scale .mk{position:absolute;left:-5px;width:11px;height:11px;margin-top:-5px;border-radius:50%;background:var(--case);top:calc(var(--k,0) * 100%)}
+.readout{position:absolute;right:var(--gut);bottom:var(--gut);width:300px;padding:20px 24px 22px;background:rgba(250,248,245,.9);border:1px solid rgba(31,35,40,.08);border-radius:2px;pointer-events:none}
+.readout .now{display:flex;align-items:baseline;gap:10px}
+.readout .n{font-family:var(--serif);font-size:34px;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.readout .u{font-size:var(--f-s);color:var(--ink-2)}
+.scale{list-style:none;margin:22px 6px 18px;padding:0;position:relative;height:1px;background:var(--ink-2)}
+.scale li{position:absolute;top:-3px;width:1px;height:7px;background:var(--ink-2)}
+.scale li span{position:absolute;top:12px;left:0;transform:translateX(-50%);font-size:10px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:lining-nums}
+.scale .mk{position:absolute;top:-5px;width:11px;height:11px;margin-left:-5px;border-radius:50%;background:var(--case);left:calc(var(--k,0) * 100%)}
 html:not(.js) .readout{display:none}
 .cards{position:relative;z-index:1;margin-top:-100vh}
 .beat{min-height:110vh;display:flex;align-items:center;padding:0 var(--gut)}
 .beat:first-child{min-height:100vh}
-.beat:last-child{min-height:120vh}
+.beat:last-child{min-height:100vh}
 .card{width:min(400px,100%);background:rgba(250,248,245,.9);border:1px solid rgba(31,35,40,.08);padding:30px 32px 32px;border-radius:2px;margin-left:max(0px,calc((100vw - var(--max)) / 2))}
 .card h2{font-size:var(--f-l);letter-spacing:-.005em}
 .card p{margin-top:12px;font-size:16px;line-height:1.6}
@@ -94,7 +94,7 @@ html:not(.js) .readout{display:none}
 .card figcaption{font-size:var(--f-xs);color:var(--ink-2);margin-top:8px}
 
 /* ---------- idea ---------- */
-.idea{background:var(--day);padding-top:var(--s6)}
+.idea{background:var(--day);padding-top:var(--s5)}
 .idea-g{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--s5);align-items:start}
 .idea h2{font-size:var(--f-2xl);letter-spacing:-.012em;line-height:1.04}
 .idea .body{font-size:19px;max-width:38ch}
@@ -166,9 +166,8 @@ footer :focus-visible{outline-color:#fff}
 @media (max-width:640px){
   .top{gap:12px 20px}
   .nav{order:3;width:100%;gap:4px 18px}
-  .readout{top:18px;right:16px;transform:none;flex-direction:row-reverse;align-items:flex-start;gap:12px}
-  .readout .now{text-align:left}
-  .readout .n{font-size:26px}
+  .readout{top:14px;right:14px;bottom:auto;width:auto;padding:10px 14px}
+  .readout .n{font-size:24px}
   .scale{display:none}
   .beat{align-items:flex-end;padding-bottom:9vh;min-height:100vh}
   .card{padding:22px 22px 24px}
@@ -213,7 +212,7 @@ footer :focus-visible{outline-color:#fff}
       </noscript>
       <div class="readout" aria-hidden="true">
         <div class="now"><span class="n" id="ro-n">1</span><span class="u" id="ro-u">person</span></div>
-        <ol class="scale"><li style="top:0"><span>1</span></li><li style="top:16.667%"><span>10</span></li><li style="top:33.333%"><span>100</span></li><li style="top:50%"><span>1,000</span></li><li style="top:66.667%"><span>10,000</span></li><li style="top:83.333%"><span>100,000</span></li><li style="top:100%"><span>1,000,000</span></li><i class="mk" id="ro-mk"></i></ol>
+        <ol class="scale"><li style="left:0"><span>1</span></li><li style="left:16.667%"><span>10</span></li><li style="left:33.333%"><span>10²</span></li><li style="left:50%"><span>10³</span></li><li style="left:66.667%"><span>10⁴</span></li><li style="left:83.333%"><span>10⁵</span></li><li style="left:100%"><span>10⁶</span></li><i class="mk" id="ro-mk"></i></ol>
       </div>
     </div>
     <div class="cards">
@@ -339,21 +338,28 @@ footer :focus-visible{outline-color:#fff}
     for(var b=0;b<10;b++){var o=off(3,b);for(var i=0;i<100;i++){var row=Math.floor(i/10),col=i%10,colr=row===9?CASE:(row===8&&col>=8?RANGE:DOT);
       x.fillStyle="rgb("+colr+")";x.beginPath();x.arc((o[0]+col+.5)*T,(o[1]+row+.5)*T,.3*T,0,6.2832);x.fill();}}
     tiles.push({t:T,c:c});
-    while(T>.3){var n=document.createElement("canvas");n.width=Math.max(1,Math.round(c.width/2));n.height=Math.max(1,Math.round(c.height/2));
+    while(T>6){var n=document.createElement("canvas");n.width=Math.round(c.width/2);n.height=Math.round(c.height/2);
       var nx=n.getContext("2d");nx.imageSmoothingEnabled=true;nx.imageSmoothingQuality="high";nx.drawImage(c,0,0,n.width,n.height);T/=2;c=n;tiles.push({t:T,c:c});}
+    /* below six pixels a dot, draw each hundred as area-true bands: 10 rows in 100 are cases, 2 dots the range */
+    while(T>.2){T/=2;var m=document.createElement("canvas");m.width=Math.max(2,Math.ceil(LW[3]*T));m.height=Math.max(2,Math.ceil(LH[3]*T));var mx=m.getContext("2d");
+      for(var bb=0;bb<10;bb++){var oo=off(3,bb),X=oo[0]*T,Y=oo[1]*T,u=T;
+        mx.fillStyle="rgba(59,74,90,.34)";mx.fillRect(X,Y,10*u,8*u);mx.fillRect(X,Y+8*u,8*u,u);
+        mx.fillStyle="rgb(226,167,151)";mx.fillRect(X+8*u,Y+8*u,2*u,u);mx.fillStyle="rgb(194,85,61)";mx.fillRect(X,Y+9*u,10*u,u);}
+      tiles.push({t:T,c:m});}
   }
   function size(){
     var b=stage.getBoundingClientRect();W=Math.round(b.width);H=Math.round(b.height);narrow=W<640;
     dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
-    var fw=W*(narrow?.82:.56),fh=H*(narrow?.42:.6);
+    var fw=W*(narrow?.84:.46),fh=H*(narrow?.46:.62);
     for(var k=1;k<=6;k++)SC[k]=Math.min(fw/LW[k],fh/LH[k]);SC[0]=Math.max(W,H)*.9;
   }
-  function cam(zz){var k=Math.min(5,Math.floor(zz)),f=zz-k,e=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;
+  /* scale moves on a log curve; the one person's screen position glides between its place in each fitted view, so it never leaves the frame */
+  function cam(zz,ax,ay){var k=Math.min(5,Math.floor(zz)),f=zz-k,e=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;
     var s=Math.exp(Math.log(SC[k])+(Math.log(SC[k+1])-Math.log(SC[k]))*f);
-    var cx0=(LW[k]-1)/2,cy0=(LH[k]-1)/2,cx1=(LW[k+1]-1)/2,cy1=(LH[k+1]-1)/2;
-    return{s:s,cx:cx0+(cx1-cx0)*e,cy:cy0+(cy1-cy0)*e};}
+    var x0=ax-(LW[k]-1)/2*SC[k],y0=ay-(LH[k]-1)/2*SC[k],x1=ax-(LW[k+1]-1)/2*SC[k+1],y1=ay-(LH[k+1]-1)/2*SC[k+1];
+    return{s:s,ox:x0+(x1-x0)*e,oy:y0+(y1-y0)*e};}
   function draw(){
-    var t=Math.min(1,z/6),C=cam(z),s=C.s,ox=W*(narrow?.5:.44)-C.cx*s,oy=H*(narrow?.5:.5)-C.cy*s;
+    var t=Math.min(1,z/6),C=cam(z,W*(narrow?.5:.6),H*(narrow?.44:.47)),s=C.s,ox=C.ox,oy=C.oy;
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
     var reveal=Math.min(1,Math.max(0,(z-1.45)/.5)),r=Math.min(.3*s,13);
     function alphaFor(l){return Math.max(.16,Math.min(1,1-(l-z)*1.6));}

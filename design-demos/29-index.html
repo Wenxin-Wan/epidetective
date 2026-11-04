@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>29 · Index — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,400&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour */
+  --white:#FFFFFF;
+  --black:#0D0D0D;
+  --red:#E1251B;            /* one use: the Group 1 numeral */
+  --grey:#8C8C8C;           /* rules, large text only */
+  --grey-text:#5E5E5E;      /* small secondary text (AA) */
+  --hair:#D9D9D9;
+  /* type */
+  --sans:"Host Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --t-13:13px; --t-15:15px; --t-18:18px; --t-24:clamp(20px,1.8vw,26px); --t-36:clamp(28px,2.8vw,40px);
+  --t-56:clamp(36px,4.6vw,64px); --t-104:clamp(44px,7.6vw,116px);
+  --giant:clamp(60px,16vw,300px);
+  /* space and grid */
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+  --section:clamp(80px,10vw,160px);
+  --gutter:clamp(16px,3.4vw,48px);
+  --col-gap:clamp(12px,1.7vw,24px);
+  --max:1344px;
+  --thick:6px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--black);font:400 var(--t-18)/1.55 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
+.g12 > *{min-width:0}
+:focus-visible{outline:3px solid var(--black);outline-offset:2px}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size 400ms var(--ease)}
+.ul:hover,.ul:focus-visible{background-size:100% 2px}
+.num{font-variant-numeric:lining-nums tabular-nums}
+
+/* index rows: invert on hover */
+.irow{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);align-items:center;padding:20px 0;border-top:1px solid var(--black);text-decoration:none;color:var(--black);
+  transition:background-color 220ms linear,color 220ms linear,box-shadow 220ms linear;position:relative}
+.irow:hover,.irow:focus-visible{background:var(--black);color:var(--white);box-shadow:0 0 0 100vmax var(--black);clip-path:inset(0 -100vmax);outline:none}
+.irow .arr{justify-self:end;font-weight:400}
+
+/* ---------- header ---------- */
+.top{padding:22px 0 18px;border-bottom:1px solid var(--black)}
+.top .g12{align-items:baseline}
+.mark{grid-column:1 / 4;font:700 20px/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
+.nav{grid-column:4 / 10;display:flex;flex-wrap:wrap;gap:4px 22px;font-size:var(--t-15)}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+.lang{grid-column:10 / 13;justify-self:end;display:flex;gap:12px;list-style:none;margin:0;padding:0;font-size:var(--t-15)}
+.lang a{text-decoration:none;color:var(--grey-text)}
+.lang a[aria-current]{color:var(--black);font-weight:700}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(48px,6vw,96px) 0 var(--section)}
+.hero h1{font-size:var(--t-104);line-height:.94;letter-spacing:-.045em;font-weight:600;max-width:12.4em}
+.hero-row{margin-top:clamp(48px,6vw,96px);padding-top:var(--s-3);border-top:var(--thick) solid var(--black)}
+.who{grid-column:1 / 5;font-size:var(--t-18);font-weight:500}
+.caveat{grid-column:5 / 7;font-size:var(--t-15);color:var(--grey-text)}
+.search{grid-column:7 / 13}
+.search label{display:block;font-size:var(--t-15);font-weight:600;margin-bottom:6px}
+.field{display:flex;align-items:stretch;border-bottom:3px solid var(--black)}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--black);font:400 clamp(17px,1.5vw,21px)/1.3 var(--sans);padding:12px 0 14px;outline:none}
+.field input::placeholder{color:#6B6B6B;opacity:1}
+.field button{border:0;background:var(--black);color:var(--white);font:600 var(--t-15)/1 var(--sans);padding:0 22px;cursor:pointer;margin:6px 0 8px}
+.field button:hover{background:#333}
+.try{margin-top:12px;font-size:var(--t-15);color:var(--grey-text)}
+.try a{color:var(--black);font-weight:500}
+
+/* ---------- section frame ---------- */
+.sec{padding:0 0 var(--section)}
+.sec > .wrap > .bar{height:var(--thick);background:var(--black)}
+html.js:not(.still) .bar{transform-origin:left;transition:transform 1200ms var(--ease)}
+html.js:not(.still) .bar:not(.is-in){transform:scaleX(0)}
+.sec h2{font-size:var(--t-56);line-height:.98;letter-spacing:-.035em;margin-top:var(--s-3)}
+
+/* ---------- one idea ---------- */
+.idea .g12{row-gap:var(--s-4)}
+.idea h2{grid-column:1 / 10}
+.one{grid-column:1 / 5;margin-top:var(--s-4);position:relative}
+.red1{display:block;font:700 clamp(240px,36vw,560px)/.74 var(--sans);letter-spacing:-.06em;color:var(--red);margin-left:-.06em}
+.one p{margin-top:var(--s-3);font-size:var(--t-15);font-weight:600}
+.one p span{display:block;font-weight:400;color:var(--grey-text)}
+.idea-body{grid-column:5 / 13;margin-top:var(--s-4)}
+.lead{font-size:var(--t-24);line-height:1.35;font-weight:500;max-width:24em;letter-spacing:-.01em}
+.facts{list-style:none;margin:var(--s-5) 0 0;padding:0;border-bottom:1px solid var(--black)}
+.facts li{display:grid;grid-template-columns:minmax(0,4.4fr) minmax(0,3.6fr);column-gap:var(--col-gap);align-items:baseline;padding:18px 0 22px;border-top:1px solid var(--black)}
+.facts .f{font:600 clamp(44px,5.2vw,84px)/.9 var(--sans);letter-spacing:-.05em;white-space:nowrap}
+.facts p{font-size:var(--t-15);max-width:26em}
+.facts p b{display:block;font-size:var(--t-18);font-weight:600}
+.src{margin-top:var(--s-3);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px var(--s-4);font-size:var(--t-15);color:var(--grey-text)}
+.src a{color:var(--black);font-weight:600}
+
+/* ---------- the four groups ---------- */
+.groups-t{list-style:none;margin:var(--s-4) 0 0;padding:0;border-bottom:1px solid var(--black)}
+.groups-t li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);padding:18px 0 20px;border-top:1px solid var(--black);align-items:baseline}
+.groups-t .c{grid-column:1 / 3;font:700 var(--t-36)/1 var(--sans);letter-spacing:-.03em}
+.groups-t h3{grid-column:3 / 6;font-size:var(--t-24);letter-spacing:-.015em;line-height:1.15}
+.groups-t p{grid-column:6 / 13;font-size:var(--t-15);color:var(--black);max-width:40em}
+.groups .g12 > h2{grid-column:1 / 10}
+
+/* ---------- tools ---------- */
+.tool{padding-bottom:var(--s-5)}
+.tool + .tool{margin-top:var(--section)}
+.tool-head{margin-top:var(--s-3);align-items:start}
+.tool-head .tt{grid-column:1 / 8}
+.tool-head h2{margin-top:0}
+.tool-head .desc{margin-top:var(--s-3);font-size:var(--t-18);max-width:30em}
+.tool-head .langs{margin-top:10px;font-size:var(--t-15);color:var(--grey-text)}
+.tool-head figure{grid-column:9 / 13;margin:0}
+.tool-head figure img{width:100%;height:auto;filter:grayscale(1) contrast(1.6) brightness(.7)}
+.drift{overflow:hidden;overflow:clip;margin-top:var(--s-4);border-top:1px solid var(--black)}
+.drift-row{display:flex;gap:4vw;margin:0;padding:10px var(--gutter) 0;width:max-content;transform:translate3d(calc(var(--x0) - var(--p,.3) * var(--dx)),0,0);will-change:transform}
+.drift.l .drift-row{--x0:7vw;--dx:14vw}
+.drift.r .drift-row{--x0:-5vw;--dx:-14vw}
+.drift-row div{display:flex;flex-direction:column}
+.drift-row dd{order:-1;margin:0;font:700 var(--giant)/.8 var(--sans);letter-spacing:-.06em;font-variant-numeric:lining-nums}
+.drift-row dt{margin-top:14px;font-size:var(--t-15);font-weight:600;padding-left:.2em}
+html:not(.js) .drift-row,html.still .drift-row{transform:none;width:auto;flex-wrap:wrap;padding-left:var(--gutter)}
+.acts{margin-top:var(--s-4)}
+.acts .irow{font-size:var(--t-24);font-weight:600;letter-spacing:-.01em;border-top:var(--thick) solid var(--black);padding:22px 0 24px}
+.acts .irow span:first-child{grid-column:1 / 9}
+.acts .irow .arr{grid-column:9 / 13}
+.acts .sub{padding-top:14px;font-size:var(--t-15)}
+.acts .sub a{font-weight:600}
+
+/* ---------- code ---------- */
+.code .g12{row-gap:var(--s-4)}
+.code h2{grid-column:1 / 8}
+.code .text{grid-column:8 / 13;align-self:end;font-size:var(--t-18)}
+.pair{grid-column:1 / 13;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);margin-top:var(--s-3)}
+.pair div{grid-column:span 6;border-top:1px solid var(--black);padding-top:12px}
+.pair .n{display:block;font:700 clamp(96px,14vw,220px)/.82 var(--sans);letter-spacing:-.06em}
+.pair p{margin-top:var(--s-2);font-size:var(--t-15);font-weight:600;max-width:16em}
+.code .acts{grid-column:1 / 13;margin-top:var(--s-3)}
+
+/* ---------- games ---------- */
+.games .g12 > h2{grid-column:1 / 9}
+.games .g12 > p{grid-column:9 / 13;align-self:end;font-size:var(--t-18)}
+.game-list{list-style:none;margin:var(--s-5) 0 0;padding:0;border-bottom:1px solid var(--black)}
+.game-list .irow{padding:14px 0}
+.gt{grid-column:1 / 6;font-size:var(--t-24);font-weight:600;letter-spacing:-.015em;line-height:1.15}
+.gc{grid-column:6 / 9;font-size:var(--t-15)}
+.ga{grid-column:9 / 11;font-size:var(--t-15)}
+.gi{grid-column:11 / 13;aspect-ratio:16/9;overflow:hidden}
+.gi img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter 300ms linear}
+.irow:hover .gi img,.irow:focus-visible .gi img{filter:none}
+
+/* ---------- footer ---------- */
+.foot{padding:0 0 var(--s-5);font-size:var(--t-15)}
+.foot .bar{height:var(--thick);background:var(--black);margin-bottom:var(--s-4)}
+.foot .g12{row-gap:var(--s-4)}
+.f-mark{grid-column:1 / 4}
+.f-mark a{font:700 20px/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
+.f-mark p{margin-top:8px;color:var(--grey-text)}
+.f-text{grid-column:4 / 9;max-width:34em}
+.f-links{grid-column:9 / 13;list-style:none;margin:0;padding:0;border-bottom:1px solid var(--black)}
+.f-links a{display:block;padding:8px 0;border-top:1px solid var(--black);text-decoration:none;font-weight:500;transition:background-color 200ms linear,color 200ms linear,padding 200ms linear}
+.f-links a:hover,.f-links a:focus-visible{background:var(--black);color:var(--white);padding-left:10px;outline:none}
+.credits{grid-column:1 / 13;font-size:var(--t-13);color:var(--grey-text);padding-top:var(--s-2);border-top:1px solid var(--hair)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .nav{grid-column:1 / 13;order:3;margin-top:12px}
+  .lang{grid-column:4 / 13}
+  .who{grid-column:1 / 7}.caveat{grid-column:7 / 13}
+  .search{grid-column:1 / 13;margin-top:var(--s-4)}
+  .tool-head .tt{grid-column:1 / 9}
+  .tool-head figure{grid-column:9 / 13}
+}
+@media (max-width:720px){
+  .mark{grid-column:1 / 7}.lang{grid-column:7 / 13;gap:9px;font-size:14px}
+  .nav{gap:2px 16px;font-size:14px}
+  .who,.caveat{grid-column:1 / 13}
+  .caveat{margin-top:var(--s-2)}
+  .idea h2,.groups .g12 > h2,.code h2,.games .g12 > h2{grid-column:1 / 13}
+  .one{grid-column:1 / 13;display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s-3);align-items:end}
+  .red1{font-size:clamp(180px,48vw,260px)}
+  .idea-body{grid-column:1 / 13;margin-top:0}
+  .facts li{grid-template-columns:minmax(0,1fr)}
+  .facts p{margin-top:10px}
+  .groups-t .c{grid-column:1 / 4}
+  .groups-t h3{grid-column:4 / 13}
+  .groups-t p{grid-column:4 / 13;margin-top:6px}
+  .tool-head .tt{grid-column:1 / 13}
+  .tool-head figure{grid-column:1 / 13;max-width:280px;margin-top:var(--s-4)}
+  .drift-row{gap:3.5vw}
+  .drift-row dt{font-size:13px}
+  .code .text,.games .g12 > p{grid-column:1 / 13}
+  .gt{grid-column:1 / 9;font-size:19px}
+  .gc{grid-column:1 / 9;grid-row:2;margin-top:4px}
+  .ga{grid-column:1 / 9;grid-row:3}
+  .gi{grid-column:9 / 13;grid-row:1 / span 3}
+  .acts .irow{font-size:20px}
+  .acts .irow span:first-child{grid-column:1 / 11}
+  .acts .irow .arr{grid-column:11 / 13}
+  .f-mark,.f-text,.f-links{grid-column:1 / 13}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap g12">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tools">Tools</a><a href="#groups">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+      <div class="g12 hero-row" data-reveal="fade" style="--d:700ms">
+        <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+        <form class="search" role="search" onsubmit="return false">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec idea" id="idea" aria-labelledby="idea-h">
+    <div class="wrap">
+      <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+      <div class="g12">
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <div class="one" data-reveal="fade">
+          <span class="red1" aria-hidden="true">1</span>
+          <p>Group 1<span>Tobacco smoking<br>Processed meat</span></p>
+        </div>
+        <div class="idea-body">
+          <p class="lead" data-reveal="fade" style="--d:200ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+          <ul class="facts">
+            <li data-reveal="fade"><span class="f num">100–120</span><p><b>in 1,000 smokers</b>get lung cancer by age 75: about 10 to 12 in 100.</p></li>
+            <li data-reveal="fade" style="--d:120ms"><span class="f num">4–5</span><p><b>in 1,000 lifelong non-smokers</b>get lung cancer by age 75.</p></li>
+            <li data-reveal="fade" style="--d:240ms"><span class="f num">18%</span><p><b>higher risk of bowel cancer</b>for each 50 grams of processed meat eaten every day.</p></li>
+          </ul>
+          <div class="src"><span>European data. Quoted from the Cancer Evidence Explorer.</span><a class="ul" href="#">Seven ideas for reading a health headline →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec groups" id="groups" aria-labelledby="groups-h">
+    <div class="wrap">
+      <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+      <div class="g12"><h2 id="groups-h">Reading the evidence</h2></div>
+      <ol class="groups-t">
+        <li data-reveal="fade"><span class="c">1</span><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></li>
+        <li data-reveal="fade"><span class="c">2A</span><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></li>
+        <li data-reveal="fade"><span class="c">2B</span><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></li>
+        <li data-reveal="fade"><span class="c">3</span><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec tools" id="tools" aria-label="Tools">
+    <article class="tool" aria-labelledby="t1">
+      <div class="wrap">
+        <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+        <div class="g12 tool-head">
+          <div class="tt"><h2 id="t1">Cancer Evidence Explorer</h2>
+          <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <p class="langs">10 languages</p></div>
+          <figure><img src="media/tool-cancer-network.svg" width="1062" height="998" alt="The Cancer Evidence Explorer’s network: exposures linked to the cancers they can cause." loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="drift l" data-progress>
+        <dl class="drift-row">
+          <div><dt>exposures</dt><dd>185</dd></div>
+          <div><dt>cancer types</dt><dd>68</dd></div>
+          <div><dt>links</dt><dd>469</dd></div>
+        </dl>
+      </div>
+      <div class="wrap acts">
+        <a class="irow" href="#"><span>Open the explorer</span><span class="arr" aria-hidden="true">→</span></a>
+        <p class="sub"><a class="ul" href="#">About this tool</a></p>
+      </div>
+    </article>
+
+    <article class="tool" aria-labelledby="t2">
+      <div class="wrap">
+        <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+        <div class="g12 tool-head">
+          <div class="tt"><h2 id="t2">Chronic Disease Evidence Explorer</h2>
+          <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <p class="langs">10 languages</p></div>
+          <figure><img src="media/tool-chronic-network.svg" width="931" height="1006" alt="The Chronic Disease Evidence Explorer’s network: risk factors clustered around the diseases they affect." loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="drift r" data-progress>
+        <dl class="drift-row">
+          <div><dt>risk factors</dt><dd>124</dd></div>
+          <div><dt>diseases</dt><dd>45</dd></div>
+          <div><dt>graded links</dt><dd>356</dd></div>
+        </dl>
+      </div>
+      <div class="wrap acts">
+        <a class="irow" href="#"><span>Open the explorer</span><span class="arr" aria-hidden="true">→</span></a>
+        <p class="sub"><a class="ul" href="#">About this tool</a></p>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec code" id="code" aria-labelledby="code-h">
+    <div class="wrap">
+      <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+      <div class="g12">
+        <h2 id="code-h">Code Against Cancer</h2>
+        <p class="text">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <div class="pair">
+          <div data-reveal="fade"><span class="n num">14</span><p>actions for Europe</p></div>
+          <div data-reveal="fade" style="--d:150ms"><span class="n num">17</span><p>actions for Latin America and the Caribbean</p></div>
+        </div>
+        <div class="acts"><a class="irow" href="#"><span>Read the recommendations</span><span class="arr" aria-hidden="true">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec games" id="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <div class="bar" data-reveal="fade" aria-hidden="true"></div>
+      <div class="g12">
+        <h2 id="games-h">For schools and families</h2>
+        <p>Learning by playing — three games.</p>
+      </div>
+      <ul class="game-list">
+        <li><a class="irow" href="#"><span class="gt">Sol &amp; the UV Shield Quest</span><span class="gc">Skin cancer</span><span class="ga">Ages 6–12</span><span class="gi"><img src="media/game-sun-safety.webp" width="720" height="405" alt="" loading="lazy"></span></a></li>
+        <li><a class="irow" href="#"><span class="gt">The Lung Detective</span><span class="gc">Lung cancer</span><span class="ga">Ages 10–16</span><span class="gi"><img src="media/game-lung-detective.webp" width="720" height="405" alt="" loading="lazy"></span></a></li>
+        <li><a class="irow" href="#"><span class="gt">A Town of 1,000</span><span class="gc">Breast cancer</span><span class="ga">Ages 14+</span><span class="gi"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="" loading="lazy"></span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="bar" aria-hidden="true"></div>
+    <div class="g12">
+      <div class="f-mark"><a href="#">EpiDetective</a><p>Lyon, France</p></div>
+      <p class="f-text">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul class="f-links"><li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li></ul>
+      <p class="credits">Images: network drawings from the Cancer Evidence Explorer and the Chronic Disease Evidence Explorer, in black and white; game screenshots from the three EpiDetective games. No photographs are used.</p>
+    </div>
+  </div>
+</footer>
+<script src="kit/kit.js" defer></script>
+</body>
+</html>

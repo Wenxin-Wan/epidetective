@@ -1,0 +1,26 @@
+{
+ "n": 30,
+ "slug": "30-living-network",
+ "name": "Living Network",
+ "line": "The real cancer network from graph.json grown as a dandelion-like plant: a stem rises, fourteen organ-system branches unfold to 68 cancer buds, 469 links reach out to 185 exposure leaves coloured by IARC group, and the whole plant sways very slightly; hover any leaf or bud for its name.",
+ "palette": [
+  "#F5F4EE",
+  "#23261F",
+  "#4F7A4A",
+  "#C4573A",
+  "#D9A441",
+  "#B9B8AE"
+ ],
+ "fonts": [
+  "Hedvig Letters Serif",
+  "Hedvig Letters Sans"
+ ],
+ "images": [
+  "media/graph.json",
+  "media/tool-cancer-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Both Hedvig families have one weight and no italic (font-synthesis is off, so nothing is faked) and no Cyrillic. The tools' small plants are inline SVG drawn to count (68 stems and 185 leaves; 45 stems and 124 leaves) and grow in when revealed. Without JavaScript, or if graph.json fails, media/tool-cancer-network.svg is shown in the hero instead; reduced motion draws the full plant once."
+}
