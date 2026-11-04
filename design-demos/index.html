@@ -43,7 +43,7 @@ section.blk{padding-block:72px;border-bottom:1px solid var(--line)}
 .sub{margin-top:12px;color:var(--muted);max-width:62ch}
 
 /* research */
-.research{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:40px}
+.research{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 56px;margin-top:40px}
 .research h3{font-size:1.35rem;margin-bottom:14px}
 .research ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
 .research li{padding-left:18px;position:relative;font-size:15px}
@@ -146,16 +146,16 @@ dialog::backdrop{background:rgba(10,10,10,.55)}
 </style>
 
 <header class="mast wrap">
-  <p class="kick">EpiDetective redesign · round 3</p>
-  <h1>Thirty directions, <i>researched</i> and built with care</h1>
-  <p class="lede">Simple but informative, powerful, close to nature, and with the quiet confidence of a luxury house. Every demo uses the same shortened front page, real nature photography or public-domain scientific plates, and one signature moment.</p>
-  <nav class="toc" aria-label="On this page"><a href="#research">What the research says</a><a href="#decide">Help me decide</a><a href="#all">All thirty</a><a href="#recommend">My recommendation</a><a href="#plan">Front page and next steps</a><a href="round-2.html">Round 2</a><a href="round-1.html">Round 1</a></nav>
+  <p class="kick">EpiDetective redesign · the complete set</p>
+  <h1>Fifty directions, <i>researched</i> and built with care</h1>
+  <p class="lede">Simple but informative and powerful, with the quiet confidence of a luxury house. Eleven new directions put the web of causation itself on the cover, to explore from the first screen. Earlier concepts are rebuilt to the same standard, and overlapping ones are gone.</p>
+  <nav class="toc" aria-label="On this page"><a href="#research">What the research says</a><a href="#decide">Help me decide</a><a href="#all">All thirty</a><a href="#recommend">My recommendation</a><a href="#plan">Front page and next steps</a></nav>
 </header>
 
 <main>
 <section class="blk wrap" id="research" aria-labelledby="research-h">
   <h2 class="h2" id="research-h">What the research says</h2>
-  <p class="sub">I looked at luxury houses, award-winning websites, and sites with a purpose like yours. Three lessons kept returning.</p>
+  <p class="sub">I looked at luxury houses, award-winning websites, network visualisation, and sites with a purpose like yours.</p>
   <div class="research">
     <div>
       <h3>From luxury houses</h3>
@@ -178,12 +178,21 @@ dialog::backdrop{background:rgba(10,10,10,.55)}
       </ul>
     </div>
     <div>
+      <h3>For a network on the cover</h3>
+      <ul>
+        <li>Zoonotic Web, an interactive network of diseases, took gold for science, technology and health at the 2024 Information is Beautiful Awards.</li>
+        <li>“The Human Disease Network” (Goh and colleagues, PNAS, 2007) showed how a disease network can be read at a glance.</li>
+        <li>Danny Holten’s hierarchical edge bundling (IEEE InfoVis, 2006) and Jacques Bertin’s reorderable matrices (1967) tame dense webs.</li>
+        <li>The best covers let you touch the data at once, then guide you with a short story as you scroll.</li>
+      </ul>
+    </div>
+    <div>
       <h3>What this means for EpiDetective</h3>
       <ul>
         <li>Lead with one beautiful image or one beautiful idea, never both crowded together.</li>
         <li>Make “same certainty, very different size” the single lesson on the front page.</li>
         <li>Treat the two explorers as flagship products, with their three figures.</li>
-        <li>Nature fits your subject: causes, environments, living systems. Public-domain botanical plates add science and history at no licence cost.</li>
+        <li>Put the web of causation in the visitor’s hands on the first screen, and keep nature to a supporting role.</li>
       </ul>
     </div>
   </div>
@@ -228,7 +237,7 @@ dialog::backdrop{background:rgba(10,10,10,.55)}
 </section>
 
 <section class="blk wrap" id="all" aria-labelledby="all-h">
-  <h2 class="h2" id="all-h">All thirty directions</h2>
+  <h2 class="h2" id="all-h">All fifty directions</h2>
   <p class="sub">Hover a picture to see the page mid-scroll. Open a demo, scroll it slowly, and try it on your phone too.</p>
   <div class="tools">
     <div class="seg" role="radiogroup" aria-label="Family" id="famSeg"></div>
@@ -239,7 +248,7 @@ dialog::backdrop{background:rgba(10,10,10,.55)}
 
 <section class="blk wrap" id="recommend" aria-labelledby="rec-h">
   <h2 class="h2" id="rec-h">My recommendation</h2>
-  <p class="sub" id="recIntro">After building and reviewing all thirty, these are the ones I would put forward for your brief.</p>
+  <p class="sub" id="recIntro">After building and reviewing all fifty, these are the ones I would put forward for your brief.</p>
   <div class="rec" id="recPicks"></div>
 </section>
 
@@ -280,18 +289,20 @@ dialog::backdrop{background:rgba(10,10,10,.55)}
 (function(){
 "use strict";
 const D = window.DIRECTIONS || [];
-const FAM = {lux:"Lessons from luxury", nat:"Nature", sci:"Science and museum", data:"Data and information"};
+const FAM = {net:"Network on the cover", lux:"Lessons from luxury", nat:"Nature", sci:"Science and museum", data:"Data and information", story:"Stories and products"};
 const Q = [
+  {k:"cover", q:"What should the cover do?", o:[["network","Let me explore the web of causation"],["image","Show one beautiful image"],["type","Lead with typography"],["data","Tell a data story"]]},
   {k:"tone", q:"Light or dark?", o:[["light","Light"],["dark","Dark"],["mixed","Light with dark moments"]]},
-  {k:"media", q:"What should carry the page?", o:[["photo","Nature photography"],["plate","Botanical and scientific plates"],["type","Typography"],["data","Data and drawings"]]},
+  {k:"media", q:"What should carry the page?", o:[["photo","Nature photography"],["plate","Botanical and scientific plates"],["type","Typography"],["data","Data and drawings"],["illus","Drawn illustration"]]},
   {k:"motion", q:"How much movement?", o:[["1","Barely any"],["2","Some, slow"],["3","Rich, led by scrolling"]]},
   {k:"feel", q:"Which feeling first?", o:[["calm","Calm luxury"],["museum","Museum authority"],["info","Clear and informative"],["friendly","Warm and friendly"]]},
   {k:"dens", q:"How much on the front page?", o:[["1","Very little"],["2","Balanced"],["3","Quite a lot"]]},
   {k:"aud", q:"Who matters most?", o:[["public","The public"],["pro","Clinicians and journalists"],["kids","Students and schools"]]}
 ];
 const W = [
+  ["netw","Interactive network on the cover","Explore the web of causation on the first screen",3],
   ["lux","Feels expensive","Luxury lessons: space, restraint, craft",3],
-  ["nat","Close to nature","Nature imagery, materials or forms",3],
+  ["nat","Close to nature","Nature imagery, materials or forms",1],
   ["teach","Informative","The design itself teaches how to read evidence",3],
   ["mem","Powerful","Memorable at first sight",2],
   ["calm","Simple and calm","Nothing competes; easy on worried readers",2],
@@ -305,6 +316,7 @@ const LV = ["Ignore","A little","Matters","Essential"];
 const store = {get(k,d){try{const v=localStorage.getItem("epid-v3-"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("epid-v3-"+k,JSON.stringify(v))}catch(e){}}};
 let ans = store.get("ans",{}), wts = store.get("wts",null), stars = store.get("stars",{}), short = new Set(store.get("short",[])), fam = "all", sort = "match";
 if(!wts){ wts={}; W.forEach(w=>wts[w[0]]=w[3]); }
+if(wts.netw==null){ wts.netw=3; if(wts.nat===3) wts.nat=1; }
 
 /* questionnaire */
 const qBox=document.getElementById("questions");
@@ -328,9 +340,10 @@ document.getElementById("reset").addEventListener("click",()=>{ ans={}; stars={}
   buildGrid(); render(); });
 
 /* scoring */
-const val=(d,k)=> k==="lux"||k==="nat" ? d[k]/3*5 : k==="own" ? (stars[d.n]||null) : d.s[k];
+const val=(d,k)=> k==="lux"||k==="nat" ? d[k]/3*5 : k==="netw" ? (d.cover==="network"?5:d.cover==="data"?2:1) : k==="own" ? (stars[d.n]||null) : d.s[k];
 function qFit(d){
   let sum=0,c=0;
+  const cv=ans.cover; if(cv&&cv!=="any"){c++; sum+= d.cover===cv?1 : ((cv==="network"&&d.cover==="data")||(cv==="data"&&d.cover==="network"))?.5 : .15;}
   const t=ans.tone; if(t&&t!=="any"){c++; sum+= d.tone===t?1 : (d.tone==="mixed"||t==="mixed")?.6 : .15;}
   const m=ans.media; if(m&&m!=="any"){c++; sum+= d.media.includes(m)?1:.25;}
   const mo=ans.motion; if(mo&&mo!=="any"){c++; sum+= Math.max(0,1-Math.abs(d.motion-(+mo))*.45);}
@@ -343,6 +356,7 @@ function cFit(d){ let s=0,t=0; W.forEach(([k])=>{ const w=wts[k]; if(!w) return;
 function score(d){ const q=qFit(d), c=cFit(d); return q==null? c : .45*q+.55*c; }
 function why(d){
   const bits=[]; const lab=(k,v)=>{const q=Q.find(x=>x.k===k);const o=q&&q.o.find(o=>o[0]===v);return o?o[1].toLowerCase():v};
+  if(ans.cover&&ans.cover!=="any"&&d.cover===ans.cover) bits.push(lab("cover",d.cover));
   if(ans.tone&&ans.tone!=="any"&&d.tone===ans.tone) bits.push(lab("tone",d.tone));
   if(ans.media&&ans.media!=="any"&&d.media.includes(ans.media)) bits.push(lab("media",ans.media));
   if(ans.feel&&ans.feel!=="any"&&d.feel.includes(ans.feel)) bits.push(lab("feel",ans.feel));
@@ -394,7 +408,7 @@ function render(){
   const top=[...scored].sort((a,b)=>b.v-a.v||a.d.n-b.d.n).slice(0,5);
   document.getElementById("matches").innerHTML=top.map(({d,v})=>`<li><img src="thumbs/v3/${pad(d.n)}.jpg" alt=""><div><a href="#d${pad(d.n)}"><b>${pad(d.n)} · ${d.name}</b></a><span class="why">${why(d)}</span></div><span class="pct">${pct(v)}%<small>match</small></span></li>`).join("");
   const answered=Object.values(ans).filter(v=>v&&v!=="any").length, rated=Object.keys(stars).length;
-  document.getElementById("basis").textContent=`Based on ${answered? answered+" answer"+(answered>1?"s":"")+" and ":""}your priorities${rated? " and "+rated+" rating"+(rated>1?"s":""):""}. Match is relative to the other twenty-nine.`;
+  document.getElementById("basis").textContent=`Based on ${answered? answered+" answer"+(answered>1?"s":"")+" and ":""}your priorities${rated? " and "+rated+" rating"+(rated>1?"s":""):""}. Match is relative to the other forty-nine.`;
   renderShort();
 }
 function renderShort(){
