@@ -10,7 +10,7 @@ window.DIRECTIONS = [
   type:"Cormorant Garamond and Instrument Sans. Cormorant has Cyrillic."},
  {n:2,slug:"sanctuary",name:"Sanctuary",fam:"lux",tone:"mixed",media:["photo"],mediaLabel:"Landscape photography",motion:1,feel:["calm"],dens:1,nat:3,lux:3,
   s:{teach:2,calm:5,mem:4,long:4,lang:4,easy:4,kids:2},
-  line:"Arriving at a retreat: a misty mountain fills the screen, then narrow, silent columns of text.",
+  line:"Arriving at a retreat: a Himalayan dawn fills the screen, a misty lake shows through behind the one idea, and the explorers are two landscape panels.",
   refs:"Lessons from Aman, whose site is praised for its muted palette and understated type.",
   fit:"The most serene first impression; it lowers the temperature for anyone arriving anxious.",
   risk:"Little information above the fold; the landscape could feel unrelated to cancer evidence.",
@@ -44,7 +44,7 @@ window.DIRECTIONS = [
   risk:"May feel cold; says little about evidence on its own.",
   type:"Noto Serif Display and Geist (both have Cyrillic)."},
  {n:7,slug:"aluminium",name:"Aluminium",fam:"lux",tone:"light",media:["type","data"],mediaLabel:"Product-style presentation",motion:2,feel:["info"],dens:2,nat:0,lux:2,
-  s:{teach:3,calm:4,mem:3,long:3,lang:5,easy:4,kids:2},
+  s:{teach:3,calm:4,mem:2,long:3,lang:5,easy:4,kids:2},
   line:"Engineering precision: each explorer presented like a product, on a plinth, with a specification row.",
   refs:"Lessons from Leica and Bang & Olufsen product pages.",
   fit:"Makes the explorers feel like precise instruments worth owning.",
@@ -72,7 +72,7 @@ window.DIRECTIONS = [
   risk:"Black and white may feel austere for families.",
   type:"Jost (Cyrillic)."},
  {n:11,slug:"cyanotype",name:"Cyanotype",fam:"nat",tone:"mixed",media:["plate"],mediaLabel:"Anna Atkins cyanotypes",motion:2,feel:["museum"],dens:2,nat:3,lux:3,
-  s:{teach:3,calm:4,mem:5,long:3,lang:4,easy:4,kids:3},
+  s:{teach:3,calm:4,mem:5,long:4,lang:5,easy:4,kids:3},
   line:"Prussian-blue prints of algae, developing on screen like an exposure; science and nature in one colour.",
   refs:"Anna Atkins, Photographs of British Algae (1843), the first book illustrated with photographs.",
   fit:"A single, unforgettable colour with a scientific story behind it.",
@@ -129,7 +129,7 @@ window.DIRECTIONS = [
   type:"Shippori Mincho and Zen Kaku Gothic New. Zen Kaku Gothic New has Cyrillic."},
  {n:19,slug:"collection",name:"Collection",fam:"sci",tone:"light",media:["plate","photo"],mediaLabel:"Museum objects",motion:2,feel:["museum","info"],dens:2,nat:2,lux:2,
   s:{teach:3,calm:4,mem:4,long:4,lang:5,easy:4,kids:3},
-  line:"Image-first museum: plates shown as objects with labels, and the explorers as permanent galleries.",
+  line:"Image-first museum: Hooke’s cork cells hang on the wall with an object label, and a calm row of plates leads to the explorers.",
   refs:"The Rijksmuseum website (gold European Design Award 2021); the Wellcome Collection.",
   fit:"Authoritative and generous; museums are trusted public places.",
   risk:"Museum styling can feel institutional rather than personal.",
@@ -143,7 +143,7 @@ window.DIRECTIONS = [
   type:"Libre Caslon Display and Libre Franklin. Libre Franklin has Cyrillic."},
  {n:21,slug:"cabinet",name:"Cabinet",fam:"sci",tone:"light",media:["plate"],mediaLabel:"Specimen drawers",motion:2,feel:["museum","friendly"],dens:3,nat:3,lux:2,
   s:{teach:3,calm:3,mem:4,long:3,lang:4,easy:3,kids:5},
-  line:"A natural history cabinet: specimen drawers that slide out as you scroll.",
+  line:"A walnut cabinet: the drawer slides out as you scroll, and a Group 1 drawer holds two trays of 1,000 pins.",
   refs:"Natural history museums and their specimen drawers.",
   fit:"Discovery and curiosity, especially for students and families.",
   risk:"Busier than the others; wood tones can look heavy.",
@@ -212,4 +212,9 @@ window.DIRECTIONS = [
   risk:"The most code to maintain; must stay readable, not decorative.",
   type:"Hedvig Letters Serif and Sans (no Cyrillic)."}
 ];
-window.RECOMMEND = [];
+window.RECOMMEND = [
+ {n:11, role:"My first choice", why:"One colour carries the whole site, so it is simple and instantly recognisable. Anna Atkins’s algae bring nature and the history of science; the explorers are printed white on blue like her plates; even the game pictures are toned to match. It feels expensive without being cold, and both typefaces cover Russian."},
+ {n:13, role:"Calmest, and best for long reading", why:"A Victorian scientific book: wide margins, true small caps, sidenotes that show every source. It would carry the long pages (Reading the evidence, Work and cancer, How we check) better than any other direction, and EB Garamond covers Russian."},
+ {n:30, role:"Most informative", why:"Your real cancer network grows like a plant on the front page, coloured by the strength of evidence. Nature and data become one image that nobody else could have. It needs the most code to keep up."},
+ {n:16, role:"Most luxurious first impression", why:"A moonlit fjord, one horizon line through every section, and a page that moves from day to dusk. Closest to a luxury house; less informative, so it would need a strong second screen."}
+];
