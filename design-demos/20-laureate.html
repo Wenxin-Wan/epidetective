@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>20 · Laureate — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+@property --w{syntax:"<percentage>";inherits:false;initial-value:100%}
+@property --h{syntax:"<percentage>";inherits:false;initial-value:100%}
+:root{
+  /* colour */
+  --black:#0B0B0B;
+  --ivory:#F4EFE6;
+  --gold:#B8975A;
+  --grey:#77736B;          /* lines and large text only */
+  --grey-on-black:#A6A196; /* small text on black (AA) */
+  --grey-on-ivory:#5F5B54; /* small text on ivory (AA) */
+  --gold-hair:rgba(184,151,90,.42);
+  --ink-hair:rgba(11,11,11,.14);
+  /* type */
+  --display:"Libre Caslon Display","Big Caslon","Baskerville","Times New Roman",serif;
+  --text:"Libre Franklin","Franklin Gothic Book","Helvetica Neue",Arial,sans-serif;
+  --t-12:12px; --t-14:14px; --t-17:17px; --t-22:22px; --t-30:30px;
+  --t-44:clamp(32px,3.2vw,46px); --t-64:clamp(40px,4.8vw,68px); --t-84:clamp(42px,5.4vw,80px);
+  /* space */
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+  --section:clamp(96px,12vw,196px);
+  --gutter:clamp(20px,5vw,72px);
+  --max:1280px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--ivory);font:300 var(--t-17)/1.65 var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+.ivory{background:var(--ivory);color:var(--black)}
+.ivory :focus-visible{outline-color:var(--black)}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 700ms var(--ease)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.btn{display:inline-block;background:var(--gold);color:var(--black);text-decoration:none;font:500 var(--t-14)/1 var(--text);letter-spacing:.06em;padding:17px 30px;transition:background-color 500ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--ivory)}
+.ivory .btn:hover,.ivory .btn:focus-visible{background:var(--black);color:var(--ivory)}
+.more{font:400 var(--t-14)/1.4 var(--text);letter-spacing:.02em;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;transition:border-color 500ms}
+.more:hover,.more:focus-visible{border-color:currentColor}
+
+/* gold hairline rules that draw themselves */
+.rule{height:1px;background:var(--gold);transform-origin:left}
+html.js:not(.still) .rule{transition:transform 1600ms var(--ease) var(--d,0ms)}
+html.js:not(.still) .rule:not(.is-in){transform:scaleX(0)}
+/* gold frames that draw themselves (top from left, right from top, bottom from right, left from bottom) */
+.frame{position:absolute;pointer-events:none;
+  background:
+    linear-gradient(var(--gold),var(--gold)) left top/var(--w) 1px no-repeat,
+    linear-gradient(var(--gold),var(--gold)) right top/1px var(--h) no-repeat,
+    linear-gradient(var(--gold),var(--gold)) right bottom/var(--w) 1px no-repeat,
+    linear-gradient(var(--gold),var(--gold)) left bottom/1px var(--h) no-repeat}
+.frame.f1{inset:0}
+.frame.f2{inset:9px;opacity:.5}
+html.js:not(.still) .frame{transition:--w 1800ms var(--ease),--h 1800ms var(--ease)}
+html.js:not(.still) .framed:not(.is-in) .frame{--w:0%;--h:0%}
+html.js:not(.still) .framed .frame.f2{transition-delay:350ms}
+
+/* ---------- header ---------- */
+.top{border-bottom:1px solid rgba(184,151,90,.28)}
+.top-in{display:flex;align-items:center;gap:var(--s-4);min-height:78px}
+.mark{font:400 25px/1 var(--display);letter-spacing:.01em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 30px;font-size:13.5px;letter-spacing:.02em}
+.nav a{color:var(--grey-on-black);text-decoration:none;transition:color 400ms}
+.nav a:hover,.nav a:focus-visible{color:var(--ivory)}
+.lang{display:flex;gap:2px;list-style:none;margin:0;padding:0 0 0 var(--s-3);border-left:1px solid rgba(184,151,90,.28);font-size:12px;letter-spacing:.1em}
+.lang a{display:block;padding:4px 6px;color:var(--grey-on-black);text-decoration:none}
+.lang a[aria-current]{color:var(--gold)}
+.lang a:hover{color:var(--ivory)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(56px,7vw,112px) 0 var(--section)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(32px,6vw,104px);align-items:center}
+.hero h1{font-size:var(--t-84);line-height:1.04;letter-spacing:-.01em;max-width:11.5em}
+.who{margin-top:var(--s-4);max-width:31em;color:var(--ivory);font-size:18px}
+.search{margin-top:var(--s-5);max-width:33em}
+.search label{display:block;font-size:var(--t-12);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.field{display:flex;border:1px solid var(--gold-hair);transition:border-color 500ms}
+.field:focus-within{border-color:var(--gold)}
+.field input{flex:1;min-width:0;background:transparent;border:0;color:var(--ivory);font:300 16.5px/1.4 var(--text);padding:17px 18px;outline:none}
+.field input::placeholder{color:#8F8B82;opacity:1}
+.field button{background:transparent;border:0;border-left:1px solid var(--gold-hair);color:var(--gold);font:500 var(--t-14)/1 var(--text);letter-spacing:.06em;padding:0 22px;cursor:pointer;transition:color 400ms,background-color 400ms}
+.field button:hover{background:var(--gold);color:var(--black)}
+.try{margin-top:14px;font-size:var(--t-14);color:var(--grey-on-black)}
+.try a{color:var(--ivory)}
+.caveat{margin-top:var(--s-4);font-style:italic;font-size:15px;color:var(--grey-on-black);max-width:31em}
+.medal{margin:0;position:relative}
+.medal svg{width:100%;height:auto;overflow:visible}
+.medal .d{stroke-dasharray:1;stroke-dashoffset:0}
+html.js:not(.still) .medal .d{transition:stroke-dashoffset 2200ms var(--ease) var(--dd,0ms)}
+html.js:not(.still) .medal:not(.is-in) .d{stroke-dashoffset:1}
+.medal .t{transition:opacity 1600ms var(--ease) var(--dd,0ms)}
+html.js:not(.still) .medal:not(.is-in) .t{opacity:0}
+.medal figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- one idea (ivory) ---------- */
+.idea{padding:var(--section) 0}
+.idea-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,7vw,120px);align-items:start}
+.idea h2{font-size:var(--t-64);line-height:1.04;letter-spacing:-.01em}
+.idea-copy > p{margin-top:var(--s-3);font-size:18px;max-width:27em}
+.idea-copy .src{margin-top:var(--s-5);font-size:var(--t-14);color:var(--grey-on-ivory)}
+.idea-copy .more{display:inline-block;margin-top:var(--s-3)}
+.cites{list-style:none;margin:0;padding:0}
+.cite{padding:var(--s-4) 0 var(--s-4)}
+.cite + .cite{border-top:0}
+.cite .n{display:block;font:400 clamp(52px,6.4vw,96px)/.95 var(--display);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.cite .who2{display:block;margin-top:12px;font-size:16px;max-width:30em}
+.bar{position:relative;height:18px;margin-top:22px}
+.bar::before{content:"";position:absolute;left:0;right:0;top:8px;height:1px;background:var(--ink-hair)}
+.bar b,.bar s{position:absolute;top:7px;height:3px;left:0;transform-origin:left}
+.bar b{background:var(--black)}
+.bar s{background:repeating-linear-gradient(90deg,var(--black) 0 2px,transparent 2px 4px)}
+.bar i{position:absolute;top:2px;width:1px;height:13px;background:var(--grey)}
+html.js:not(.still) .bar b,html.js:not(.still) .bar s{transition:transform 1600ms var(--ease) 300ms}
+html.js:not(.still) .cite:not(.is-in) .bar b,html.js:not(.still) .cite:not(.is-in) .bar s{transform:scaleX(0)}
+.scale-lab{display:flex;justify-content:space-between;font-size:12px;color:var(--grey-on-ivory);margin-top:4px;font-variant-numeric:tabular-nums}
+
+/* ---------- tools (black) ---------- */
+.tools{padding:var(--section) 0}
+.tools-head{text-align:center;max-width:40em;margin:0 auto}
+.tools-head h2{font-size:var(--t-64);line-height:1.04}
+.tools-head p{margin-top:var(--s-2);color:var(--grey-on-black)}
+.plaques{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(56px,6vw,96px)}
+.plaque{position:relative;padding:clamp(36px,4vw,64px) clamp(24px,3.4vw,56px) clamp(40px,4vw,60px);text-align:center;display:flex;flex-direction:column;align-items:center;min-width:0}
+.plaque .pic{width:min(100%,400px);aspect-ratio:1;display:grid;place-items:center;margin-bottom:var(--s-4)}
+.plaque .pic img{width:88%;height:88%;object-fit:contain;filter:invert(1) grayscale(1) sepia(.85) saturate(1.25) brightness(.92)}
+.plaque h3{font-size:var(--t-44);line-height:1.08;max-width:11em}
+.plaque > p{margin-top:var(--s-2);color:var(--grey-on-black);max-width:26em;font-size:16px}
+.plaque > p.desc{margin-bottom:var(--s-4)}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:420px;margin:auto 0 0;padding:var(--s-3) 0 0;border-top:1px solid var(--gold-hair)}
+.figs div{display:flex;flex-direction:column;align-items:center}
+.figs dd{order:-1;margin:0;font:400 clamp(36px,3.4vw,50px)/1 var(--display);font-variant-numeric:lining-nums}
+.figs dt{margin-top:10px;font-size:var(--t-12);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.langs{margin-top:var(--s-3);font-size:var(--t-14);color:var(--grey-on-black)}
+.acts{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--s-2) var(--s-4);margin-top:var(--s-4)}
+.acts .ul{font-size:var(--t-14);letter-spacing:.02em}
+
+/* ---------- code (ivory) ---------- */
+.code{padding:var(--section) 0 clamp(72px,8vw,128px);text-align:center}
+.code h2{font-size:var(--t-64);line-height:1.04}
+.code .lead{margin:var(--s-3) auto 0;max-width:30em;font-size:18px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:680px;margin:var(--s-5) auto 0}
+.pair div{padding:0 var(--s-3)}
+.pair div + div{border-left:1px solid var(--gold)}
+.pair .n{display:block;font:400 clamp(64px,7vw,108px)/1 var(--display);font-variant-numeric:lining-nums}
+.pair p{margin-top:10px;font-size:15px;color:var(--grey-on-ivory)}
+.code .btn{margin-top:var(--s-5)}
+
+/* ---------- games (ivory) ---------- */
+.games{padding:0 0 var(--section)}
+.games .rule{max-width:var(--max);margin:0 auto var(--s-6)}
+.games-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,7vw,120px);align-items:baseline}
+.games h2{font-size:var(--t-44);line-height:1.08}
+.games-head p{font-size:18px}
+.game-list{list-style:none;margin:var(--s-5) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px)}
+.game a{text-decoration:none;display:block}
+.mat{position:relative;padding:14px;background:#FBF8F2;box-shadow:0 0 0 1px var(--gold-hair)}
+.mat img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;filter:saturate(.6) sepia(.12) contrast(.95);transition:filter 900ms var(--ease)}
+.game a:hover img,.game a:focus-visible img{filter:none}
+.game h3{margin-top:20px;font-size:var(--t-22);line-height:1.2}
+.game p{margin-top:6px;font-size:var(--t-14);color:var(--grey-on-ivory)}
+
+/* ---------- footer (black) ---------- */
+.foot{padding:var(--s-6) 0 var(--s-5);font-size:var(--t-14);color:var(--grey-on-black);border-top:1px solid rgba(184,151,90,.28)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:var(--s-4)}
+.foot .mark{color:var(--ivory);font-size:28px}
+.foot .place{margin-top:12px}
+.foot p{max-width:34em}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{color:var(--ivory);text-decoration:none}
+.credits{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid rgba(184,151,90,.2);font-size:12px}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .plaques{grid-template-columns:minmax(0,1fr);max-width:620px;margin-left:auto;margin-right:auto}
+}
+@media (max-width:900px){
+  .top-in{flex-wrap:wrap;gap:10px var(--s-3);padding-top:18px;padding-bottom:16px}
+  .nav{order:3;width:100%;gap:4px 20px;font-size:13px}
+  .hero-grid,.idea-grid,.games-head{grid-template-columns:minmax(0,1fr);row-gap:var(--s-5)}
+  .hero h1{font-size:clamp(40px,8vw,64px)}
+  .medal{max-width:520px;width:100%;margin:0 auto}
+  .games-head{row-gap:var(--s-2)}
+  .game-list{grid-template-columns:minmax(0,1fr);max-width:460px}
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:480px){
+  .lang{padding-left:12px}
+  .pair div{padding:0 12px}
+  .figs dt{font-size:11px;letter-spacing:.1em}
+  .plaque{padding-left:18px;padding-right:18px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tools">Tools</a><a href="#idea">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="who" data-reveal="fade" style="--d:700ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:900ms">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+        <p class="caveat" data-reveal="fade" style="--d:1100ms">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+      <figure class="medal" data-reveal="fade">
+<svg viewBox="0 0 600 600" role="img" aria-labelledby="mt"><title id="mt">Medal of the four IARC groups: 1 known cause, 2A probable cause, 2B possible cause, 3 not classifiable</title>
+<defs><path id="lt" d="M50.57 246.98A255 255 0 0 1 549.43 246.98"/><path id="lb" d="M48.92 381.58A264 264 0 0 0 551.08 381.58"/></defs><g fill="none" stroke="#B8975A">
+<circle class="d" pathLength="1" cx="300" cy="300" r="292" stroke-width="1.2" style="--dd:0ms"/>
+<circle class="d" pathLength="1" cx="300" cy="300" r="284" stroke-width=".6" stroke-opacity=".7" style="--dd:150ms"/>
+<circle class="d" pathLength="1" cx="300" cy="300" r="238" stroke-width=".8" style="--dd:300ms"/>
+<circle class="d" pathLength="1" cx="300" cy="300" r="176" stroke-width=".6" stroke-opacity=".55" style="--dd:900ms"/>
+</g><g class="t" style="--dd:900ms" font-family="'Libre Franklin', sans-serif" font-size="12.5" font-weight="400" letter-spacing="5.2" fill="#B8975A">
+<text><textPath href="#lt" startOffset="50%" text-anchor="middle">HOW SURE THE EVIDENCE IS</textPath></text>
+<text><textPath href="#lb" startOffset="50%" text-anchor="middle">EPIDETECTIVE</textPath></text></g><g class="t" style="--dd:1000ms" fill="#B8975A"><path d="M560 295.5L563 300L560 304.5L557 300Z"/><path d="M40 295.5L43 300L40 304.5L37 300Z"/></g><g stroke="#B8975A" stroke-width=".9" fill="rgba(184,151,90,.07)" stroke-linejoin="round"><path class="d" pathLength="1" d="M329.5 509.94A212 212 0 0 1 181.45 124.24" style="--dd:500ms" stroke="#B8975A" stroke-width="1.1" fill="none"/><path class="d" pathLength="1" d="M227.49 499.21Q208.4 494.82 195.54 509.6Q214.63 513.99 227.49 499.21Z" style="--dd:700ms"/><path class="d" pathLength="1" d="M213.77 493.67Q213.42 474.08 195.97 465.18Q196.32 484.77 213.77 493.67Z" style="--dd:740ms"/><path class="d" pathLength="1" d="M192.4 482.67Q174.99 475.11 160.13 486.91Q177.54 494.47 192.4 482.67Z" style="--dd:785ms"/><path class="d" pathLength="1" d="M179.92 474.71Q183.04 455.99 167.99 444.43Q164.87 463.15 179.92 474.71Z" style="--dd:825ms"/><path class="d" pathLength="1" d="M160.92 460Q145.68 449.74 129.46 458.35Q144.69 468.61 160.92 460Z" style="--dd:870ms"/><path class="d" pathLength="1" d="M150.09 449.91Q156.36 432.64 144.08 418.99Q137.81 436.25 150.09 449.91Z" style="--dd:910ms"/><path class="d" pathLength="1" d="M134.09 431.97Q121.42 419.54 104.48 424.86Q117.15 437.3 134.09 431.97Z" style="--dd:955ms"/><path class="d" pathLength="1" d="M125.29 420.08Q134.29 404.77 125.02 389.63Q116.02 404.93 125.29 420.08Z" style="--dd:995ms"/><path class="d" pathLength="1" d="M112.82 399.53Q102.97 385.49 85.96 387.57Q95.8 401.61 112.82 399.53Z" style="--dd:1040ms"/><path class="d" pathLength="1" d="M106.33 386.23Q117.57 373.28 111.43 357.27Q100.19 370.22 106.33 386.23Z" style="--dd:1080ms"/><path class="d" pathLength="1" d="M97.81 363.75Q90.95 348.71 74.45 347.69Q81.31 362.73 97.81 363.75Z" style="--dd:1125ms"/><path class="d" pathLength="1" d="M93.86 349.49Q106.79 339.19 103.79 322.94Q90.86 333.23 93.86 349.49Z" style="--dd:1165ms"/><path class="d" pathLength="1" d="M89.58 325.84Q85.72 310.39 70.28 306.53Q74.14 321.98 89.58 325.84Z" style="--dd:1210ms"/><path class="d" pathLength="1" d="M88.29 311.1Q102.34 303.61 102.35 287.69Q88.3 295.18 88.29 311.1Z" style="--dd:1250ms"/><path class="d" pathLength="1" d="M88.4 287.06Q87.45 271.78 73.53 265.42Q74.47 280.7 88.4 287.06Z" style="--dd:1295ms"/><path class="d" pathLength="1" d="M89.81 272.33Q104.41 267.72 107.21 252.67Q92.61 257.28 89.81 272.33Z" style="--dd:1335ms"/><path class="d" pathLength="1" d="M94.3 248.71Q96.08 234.13 84.05 225.69Q82.27 240.28 94.3 248.71Z" style="--dd:1380ms"/><path class="d" pathLength="1" d="M98.38 234.49Q112.96 232.69 118.23 218.97Q103.65 220.77 98.38 234.49Z" style="--dd:1420ms"/><path class="d" pathLength="1" d="M107.09 212.09Q111.31 198.65 101.45 188.6Q97.22 202.03 107.09 212.09Z" style="--dd:1465ms"/><path class="d" pathLength="1" d="M113.69 198.84Q127.75 199.69 135.11 187.69Q121.06 186.84 113.69 198.84Z" style="--dd:1505ms"/><path class="d" pathLength="1" d="M126.34 178.4Q132.66 166.5 125.13 155.33Q118.81 167.23 126.34 178.4Z" style="--dd:1550ms"/><path class="d" pathLength="1" d="M135.25 166.58Q148.32 169.83 157.34 159.83Q144.26 156.58 135.25 166.58Z" style="--dd:1590ms"/><path class="d" pathLength="1" d="M151.41 148.79Q159.4 138.72 154.29 126.93Q146.29 137 151.41 148.79Z" style="--dd:1635ms"/><path class="d" pathLength="1" d="M162.32 138.79Q174.02 144.12 184.23 136.3Q172.52 130.97 162.32 138.79Z" style="--dd:1675ms"/><path class="d" pathLength="1" d="M181.45 124.24Q193.93 123.07 199.69 111.94Q187.22 113.12 181.45 124.24Z" style="--dd:1720ms"/><path class="d" pathLength="1" d="M270.5 509.94A212 212 0 0 0 418.55 124.24" style="--dd:500ms" stroke="#B8975A" stroke-width="1.1" fill="none"/><path class="d" pathLength="1" d="M372.51 499.21Q385.37 513.99 404.46 509.6Q391.6 494.82 372.51 499.21Z" style="--dd:700ms"/><path class="d" pathLength="1" d="M386.23 493.67Q403.68 484.77 404.03 465.18Q386.58 474.08 386.23 493.67Z" style="--dd:740ms"/><path class="d" pathLength="1" d="M407.6 482.67Q422.46 494.47 439.87 486.91Q425.01 475.11 407.6 482.67Z" style="--dd:785ms"/><path class="d" pathLength="1" d="M420.08 474.71Q435.13 463.15 432.01 444.43Q416.96 455.99 420.08 474.71Z" style="--dd:825ms"/><path class="d" pathLength="1" d="M439.08 460Q455.31 468.61 470.54 458.35Q454.32 449.74 439.08 460Z" style="--dd:870ms"/><path class="d" pathLength="1" d="M449.91 449.91Q462.19 436.25 455.92 418.99Q443.64 432.64 449.91 449.91Z" style="--dd:910ms"/><path class="d" pathLength="1" d="M465.91 431.97Q482.85 437.3 495.52 424.86Q478.58 419.54 465.91 431.97Z" style="--dd:955ms"/><path class="d" pathLength="1" d="M474.71 420.08Q483.98 404.93 474.98 389.63Q465.71 404.77 474.71 420.08Z" style="--dd:995ms"/><path class="d" pathLength="1" d="M487.18 399.53Q504.2 401.61 514.04 387.57Q497.03 385.49 487.18 399.53Z" style="--dd:1040ms"/><path class="d" pathLength="1" d="M493.67 386.23Q499.81 370.22 488.57 357.27Q482.43 373.28 493.67 386.23Z" style="--dd:1080ms"/><path class="d" pathLength="1" d="M502.19 363.75Q518.69 362.73 525.55 347.69Q509.05 348.71 502.19 363.75Z" style="--dd:1125ms"/><path class="d" pathLength="1" d="M506.14 349.49Q509.14 333.23 496.21 322.94Q493.21 339.19 506.14 349.49Z" style="--dd:1165ms"/><path class="d" pathLength="1" d="M510.42 325.84Q525.86 321.98 529.72 306.53Q514.28 310.39 510.42 325.84Z" style="--dd:1210ms"/><path class="d" pathLength="1" d="M511.71 311.1Q511.7 295.18 497.65 287.69Q497.66 303.61 511.71 311.1Z" style="--dd:1250ms"/><path class="d" pathLength="1" d="M511.6 287.06Q525.53 280.7 526.47 265.42Q512.55 271.78 511.6 287.06Z" style="--dd:1295ms"/><path class="d" pathLength="1" d="M510.19 272.33Q507.39 257.28 492.79 252.67Q495.59 267.72 510.19 272.33Z" style="--dd:1335ms"/><path class="d" pathLength="1" d="M505.7 248.71Q517.73 240.28 515.95 225.69Q503.92 234.13 505.7 248.71Z" style="--dd:1380ms"/><path class="d" pathLength="1" d="M501.62 234.49Q496.35 220.77 481.77 218.97Q487.04 232.69 501.62 234.49Z" style="--dd:1420ms"/><path class="d" pathLength="1" d="M492.91 212.09Q502.78 202.03 498.55 188.6Q488.69 198.65 492.91 212.09Z" style="--dd:1465ms"/><path class="d" pathLength="1" d="M486.31 198.84Q478.94 186.84 464.89 187.69Q472.25 199.69 486.31 198.84Z" style="--dd:1505ms"/><path class="d" pathLength="1" d="M473.66 178.4Q481.19 167.23 474.87 155.33Q467.34 166.5 473.66 178.4Z" style="--dd:1550ms"/><path class="d" pathLength="1" d="M464.75 166.58Q455.74 156.58 442.66 159.83Q451.68 169.83 464.75 166.58Z" style="--dd:1590ms"/><path class="d" pathLength="1" d="M448.59 148.79Q453.71 137 445.71 126.93Q440.6 138.72 448.59 148.79Z" style="--dd:1635ms"/><path class="d" pathLength="1" d="M437.68 138.79Q427.48 130.97 415.77 136.3Q425.98 144.12 437.68 138.79Z" style="--dd:1675ms"/><path class="d" pathLength="1" d="M418.55 124.24Q412.78 113.12 400.31 111.94Q406.07 123.07 418.55 124.24Z" style="--dd:1720ms"/></g><g fill="none" stroke="#B8975A" stroke-width=".7" stroke-opacity=".6"><path class="d" pathLength="1" style="--dd:1300ms" d="M188 255H412"/><path class="d" pathLength="1" style="--dd:1450ms" d="M188 301H412"/><path class="d" pathLength="1" style="--dd:1600ms" d="M188 347H412"/></g><g class="t" style="--dd:1500ms"><text x="216" y="243" text-anchor="middle" font-family="'Libre Caslon Display', serif" font-size="34" fill="#B8975A">1</text><text x="250" y="236" font-family="'Libre Franklin', sans-serif" font-size="12" letter-spacing="2.6" fill="#F4EFE6">KNOWN CAUSE</text><text x="216" y="289" text-anchor="middle" font-family="'Libre Caslon Display', serif" font-size="34" fill="#B8975A">2A</text><text x="250" y="282" font-family="'Libre Franklin', sans-serif" font-size="12" letter-spacing="2.6" fill="#F4EFE6">PROBABLE CAUSE</text><text x="216" y="335" text-anchor="middle" font-family="'Libre Caslon Display', serif" font-size="34" fill="#B8975A">2B</text><text x="250" y="328" font-family="'Libre Franklin', sans-serif" font-size="12" letter-spacing="2.6" fill="#F4EFE6">POSSIBLE CAUSE</text><text x="216" y="381" text-anchor="middle" font-family="'Libre Caslon Display', serif" font-size="34" fill="#B8975A">3</text><text x="250" y="374" font-family="'Libre Franklin', sans-serif" font-size="12" letter-spacing="2.6" fill="#F4EFE6">NOT CLASSIFIABLE</text></g><g class="t" style="--dd:1700ms" fill="#B8975A"><circle cx="300" cy="197" r="2"/><circle cx="300" cy="403" r="2"/></g></svg>
+        <figcaption>A medal drawn in gold line: a laurel wreath around the four IARC groups. Group 1, known cause. Group 2A, probable cause. Group 2B, possible cause. Group 3, not classifiable.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="idea ivory" id="idea" aria-labelledby="idea-h">
+    <div class="wrap idea-grid">
+      <div class="idea-copy">
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <p data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <p class="src">European data. Quoted from the Cancer Evidence Explorer.</p>
+        <a class="more" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+      <ol class="cites">
+        <li class="cite" data-reveal="fade">
+          <div class="rule" data-reveal="fade" aria-hidden="true"></div>
+          <div style="padding-top:var(--s-4)">
+            <span class="n">100–120</span>
+            <span class="who2">in 1,000 smokers get lung cancer by age 75: about 10 to 12 in 100.</span>
+            <div class="bar" aria-hidden="true"><b style="width:66.67%"></b><s style="left:66.67%;width:13.33%"></s><i style="left:0"></i><i style="left:33.33%"></i><i style="left:66.67%"></i><i style="right:0"></i></div>
+            <div class="scale-lab" aria-hidden="true"><span>0</span><span>50</span><span>100</span><span>150 per 1,000</span></div>
+          </div>
+        </li>
+        <li class="cite" data-reveal="fade">
+          <div class="rule" data-reveal="fade" aria-hidden="true"></div>
+          <div style="padding-top:var(--s-4)">
+            <span class="n">4–5</span>
+            <span class="who2">in 1,000 lifelong non-smokers do.</span>
+            <div class="bar" aria-hidden="true"><b style="width:2.67%"></b><s style="left:2.67%;width:.67%"></s><i style="left:0"></i><i style="left:33.33%"></i><i style="left:66.67%"></i><i style="right:0"></i></div>
+            <div class="scale-lab" aria-hidden="true"><span>0</span><span>50</span><span>100</span><span>150 per 1,000</span></div>
+          </div>
+        </li>
+        <li class="cite" data-reveal="fade">
+          <div class="rule" data-reveal="fade" aria-hidden="true"></div>
+          <div style="padding-top:var(--s-4)">
+            <span class="n">18%</span>
+            <span class="who2">Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="tools" id="tools" aria-labelledby="tools-h">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2 id="tools-h" data-split>The two explorers</h2>
+        <p data-reveal="fade" style="--d:300ms">Free, and in 10 languages.</p>
+      </div>
+      <div class="plaques">
+        <article class="plaque framed" data-reveal="fade" aria-labelledby="t1">
+          <span class="frame f1" aria-hidden="true"></span><span class="frame f2" aria-hidden="true"></span>
+          <div class="pic"><img src="media/tool-cancer-network.svg" width="1062" height="998" alt="The Cancer Evidence Explorer’s network: exposures linked to the cancers they can cause." loading="lazy"></div>
+          <h3 id="t1">Cancer Evidence Explorer</h3>
+          <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <dl class="figs">
+            <div><dt>exposures</dt><dd>185</dd></div><div><dt>cancer types</dt><dd>68</dd></div><div><dt>links</dt><dd>469</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </article>
+        <article class="plaque framed" data-reveal="fade" style="--d:200ms" aria-labelledby="t2">
+          <span class="frame f1" aria-hidden="true"></span><span class="frame f2" aria-hidden="true"></span>
+          <div class="pic"><img src="media/tool-chronic-network.svg" width="931" height="1006" alt="The Chronic Disease Evidence Explorer’s network: risk factors clustered around the diseases they affect." loading="lazy"></div>
+          <h3 id="t2">Chronic Disease Evidence Explorer</h3>
+          <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <dl class="figs">
+            <div><dt>risk factors</dt><dd>124</dd></div><div><dt>diseases</dt><dd>45</dd></div><div><dt>graded links</dt><dd>356</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="code ivory" id="code" aria-labelledby="code-h">
+    <div class="wrap">
+      <h2 id="code-h" data-split>Code Against Cancer</h2>
+      <p class="lead" data-reveal="fade" style="--d:300ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+      <div class="pair" data-reveal="fade" style="--d:400ms">
+        <div><span class="n">14</span><p>actions for Europe</p></div>
+        <div><span class="n">17</span><p>actions for Latin America and the Caribbean</p></div>
+      </div>
+      <a class="btn" href="#">Read the recommendations</a>
+    </div>
+  </section>
+
+  <section class="games ivory" id="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <div class="rule" data-reveal="fade" aria-hidden="true"></div>
+      <div class="games-head">
+        <h2 id="games-h">For schools and families</h2>
+        <p>Learning by playing — three games.</p>
+      </div>
+      <ul class="game-list">
+        <li class="game" data-reveal="fade"><a href="#">
+          <div class="mat"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Sol & the UV Shield Quest: a cartoon hero on sunny platforms" loading="lazy" style="object-position:40% 60%"></div>
+          <h3>Sol &amp; the UV Shield Quest</h3><p>Skin cancer · ages 6–12</p></a></li>
+        <li class="game" data-reveal="fade" style="--d:150ms"><a href="#">
+          <div class="mat"><img src="media/game-lung-detective.webp" width="720" height="405" alt="The Lung Detective: a cartoon living room with a basement door" loading="lazy"></div>
+          <h3>The Lung Detective</h3><p>Lung cancer · ages 10–16</p></a></li>
+        <li class="game" data-reveal="fade" style="--d:300ms"><a href="#">
+          <div class="mat"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="A Town of 1,000: a small riverside town in soft colours" loading="lazy"></div>
+          <h3>A Town of 1,000</h3><p>Breast cancer · ages 14+</p></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="mark" href="#">EpiDetective</a><p class="place">Lyon, France</p></div>
+      <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul><li><a class="ul" href="#">How we check</a></li><li><a class="ul" href="#">Report an error</a></li><li><a class="ul" href="#">How to cite</a></li><li><a class="ul" href="#">About</a></li></ul>
+    </div>
+    <p class="credits">Images: the medal is drawn for this page. Network drawings from the Cancer Evidence Explorer and the Chronic Disease Evidence Explorer, tinted gold; game screenshots from the three EpiDetective games. No photographs are used.</p>
+  </div>
+</footer>
+<script src="kit/kit.js" defer></script>
+</body>
+</html>

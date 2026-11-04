@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>03 · Calibre — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour */
+  --midnight:#0E1A2B;      /* ground */
+  --midnight-deep:#0A1422; /* footer, dial shadow */
+  --slate:#2A3A52;         /* slate-blue: rings, plates */
+  --ivory:#F1EDE4;         /* text */
+  --ivory-2:#B9B6AE;       /* secondary text (AA on midnight) */
+  --champagne:#C9B37E;     /* accent, hairlines */
+  --hair:rgba(201,179,126,.24);
+  --hair-ivory:rgba(241,237,228,.12);
+  /* type */
+  --serif:"Bodoni Moda",Didot,"Bodoni 72","Times New Roman",serif;
+  --sans:"Manrope","Helvetica Neue",Arial,system-ui,sans-serif;
+  --t-12:12px; --t-14:14px; --t-17:17px; --t-22:22px; --t-30:30px;
+  --t-44:clamp(32px,3.1vw,44px); --t-60:clamp(38px,4.4vw,64px); --t-88:clamp(40px,4.5vw,70px);
+  /* space */
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+  --section:clamp(96px,12vw,200px);
+  --gutter:clamp(20px,5vw,72px);
+  --max:1320px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--midnight);color:var(--ivory);font:400 var(--t-17)/1.65 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;font-optical-sizing:auto}
+p{margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:1px solid var(--champagne);outline-offset:4px}
+.num{font-variant-numeric:lining-nums tabular-nums}
+
+/* quiet links: underline that grows */
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 700ms var(--ease),color 400ms}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.more{display:inline-block;color:var(--champagne);text-decoration:none;font-size:var(--t-14);font-weight:500;letter-spacing:.02em;padding-bottom:4px;background:linear-gradient(var(--champagne),var(--champagne)) 0 100%/28% 1px no-repeat;transition:background-size 800ms var(--ease)}
+.more:hover,.more:focus-visible{background-size:100% 1px}
+
+/* the one filled button */
+.btn{display:inline-block;background:var(--champagne);color:var(--midnight);text-decoration:none;font:600 var(--t-14)/1 var(--sans);letter-spacing:.04em;padding:17px 28px;transition:background-color 500ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--ivory)}
+
+/* ---------- header ---------- */
+.top{position:relative;z-index:5;border-bottom:1px solid var(--hair-ivory)}
+.top-in{display:flex;align-items:center;gap:var(--s-4);min-height:76px}
+.mark{font:500 var(--t-22)/1 var(--serif);letter-spacing:.005em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 30px;font-size:13.5px;letter-spacing:.02em}
+.nav a{color:var(--ivory-2);text-decoration:none;transition:color 400ms}
+.nav a:hover,.nav a:focus-visible{color:var(--ivory)}
+.lang{display:flex;gap:4px;list-style:none;margin:0;padding:0 0 0 var(--s-3);border-left:1px solid var(--hair-ivory);font-size:12px;letter-spacing:.08em}
+.lang a{display:block;padding:4px 5px;color:var(--ivory-2);text-decoration:none}
+.lang a[aria-current]{color:var(--champagne)}
+.lang a:hover{color:var(--ivory)}
+
+/* ---------- chapter: hero + the scale, with the sticky dial ---------- */
+.chapter{position:relative;overflow-x:clip;--k:clamp(0,calc((var(--p,1) - .36) / .25),1)}
+.chapter-grid{display:grid;grid-template-columns:minmax(0,5.2fr) minmax(0,6.8fr);column-gap:clamp(32px,5vw,96px)}
+.intro{grid-column:1;grid-row:1;min-height:calc(100vh - 77px);min-height:calc(100svh - 77px);display:flex;flex-direction:column;justify-content:center;padding:var(--s-4) 0 var(--s-5)}
+.intro h1{font-size:var(--t-88);line-height:1.03;letter-spacing:-.018em;max-width:12.5em}
+.lede{margin-top:34px;max-width:34em;color:var(--ivory-2);font-size:var(--t-17)}
+.search{margin-top:var(--s-4);max-width:34em}
+.search label{display:block;font-size:var(--t-12);letter-spacing:.16em;text-transform:uppercase;color:var(--champagne);margin-bottom:12px}
+.field{display:flex;align-items:stretch;border-bottom:1px solid var(--hair);transition:border-color 500ms}
+.field:focus-within{border-color:var(--champagne)}
+.field input{flex:1;min-width:0;background:transparent;border:0;color:var(--ivory);font:400 16.5px/1.4 var(--sans);padding:12px 0 14px;outline:none}
+.field input::placeholder{color:#8E918F;opacity:1}
+.field button{background:none;border:0;color:var(--champagne);font:600 var(--t-14)/1 var(--sans);letter-spacing:.04em;padding:0 0 0 var(--s-3);cursor:pointer}
+.field button:hover{color:var(--ivory)}
+.try{margin-top:14px;font-size:var(--t-14);color:var(--ivory-2)}
+.try a{color:var(--ivory)}
+.caveat{margin-top:var(--s-4);font-size:var(--t-14);color:var(--ivory-2);max-width:34em;padding-left:16px;border-left:1px solid var(--champagne)}
+
+.dial-col{grid-column:2;grid-row:1 / span 2;position:relative}
+.dial{position:sticky;top:calc(50vh - min(41vw,640px)/2 + 30px);width:min(41vw,640px);margin:var(--s-5) 0 var(--s-5) auto}
+.dial::before{content:"";position:absolute;inset:-18%;background:radial-gradient(closest-side,rgba(42,58,82,.7),rgba(42,58,82,0));pointer-events:none}
+.dial svg{position:relative;width:100%;height:auto;overflow:visible}
+.plate{position:absolute;inset:6.875%;border-radius:50%;
+  background:
+    repeating-conic-gradient(from 0deg,rgba(241,237,228,.028) 0deg .35deg,rgba(241,237,228,0) .35deg 1.1deg),
+    conic-gradient(from 215deg,rgba(255,255,255,.075),rgba(255,255,255,0) 20%,rgba(255,255,255,.05) 50%,rgba(255,255,255,0) 72%,rgba(255,255,255,.075)),
+    radial-gradient(circle,#17283F 0%,#112035 55%,#0B1626 100%);
+  box-shadow:inset 0 0 0 1px rgba(201,179,126,.35),inset 0 18px 40px rgba(0,0,0,.35)}
+.hand-g{transform-box:view-box;transform-origin:50% 50%;transform:rotate(calc(-90deg + 180deg * var(--k)))}
+html.armed .hand-g{transition:transform 900ms var(--ease)}
+.dial figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+.scale{grid-column:1;grid-row:2;padding:var(--s-5) 0 var(--s-6)}
+.scale h2{font-size:var(--t-44);line-height:1.08;letter-spacing:-.01em}
+.scale > p{margin-top:var(--s-2);color:var(--ivory-2);max-width:32em}
+.groups{list-style:none;margin:var(--s-5) 0 0;padding:0;counter-reset:none}
+.groups li{display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:var(--s-3);padding:var(--s-4) 0;border-top:1px solid var(--hair)}
+.groups li:last-child{border-bottom:1px solid var(--hair)}
+.g{font:400 var(--t-44)/1 var(--serif);color:var(--champagne);font-variant-numeric:lining-nums}
+.groups h3{font-size:var(--t-22);line-height:1.2;margin:4px 0 8px}
+.groups p{color:var(--ivory-2);font-size:16px;max-width:30em}
+
+/* ---------- one idea ---------- */
+.idea{padding:var(--section) 0;border-top:1px solid var(--hair-ivory);background:linear-gradient(180deg,var(--midnight-deep),var(--midnight) 40%)}
+.idea-grid{display:grid;grid-template-columns:minmax(0,5.2fr) minmax(0,6.8fr);column-gap:clamp(32px,6vw,112px);align-items:center}
+.idea h2{font-size:clamp(36px,3.9vw,56px);line-height:1.05;letter-spacing:-.015em}
+.idea-copy > p{margin-top:var(--s-3);max-width:28em;font-size:18px;color:var(--ivory)}
+.meat{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s-3);align-items:baseline;margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--hair)}
+.meat .big{font:400 var(--t-60)/1 var(--serif);color:var(--champagne)}
+.meat p{color:var(--ivory-2);font-size:16px;max-width:22em}
+.idea-copy > p.source{margin-top:var(--s-4);font-size:13px;color:var(--ivory-2);letter-spacing:.01em}
+.idea .more{margin-top:var(--s-3)}
+.subs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,48px)}
+.sub{margin:0;text-align:center}
+.sub svg{width:100%;height:auto}
+.sub figcaption{margin-top:var(--s-3);font-size:15px;color:var(--ivory-2);line-height:1.5;max-width:17em;margin-left:auto;margin-right:auto}
+.sub figcaption b{display:block;font:400 var(--t-22)/1.2 var(--serif);color:var(--ivory);margin-bottom:6px}
+.sub .fill,.sub .lit{stroke-dasharray:1;stroke-dashoffset:0}
+html.js:not(.still) .sub:not(.is-in) .fill,html.js:not(.still) .sub:not(.is-in) .lit{stroke-dashoffset:1}
+html.js:not(.still) .sub .fill{transition:stroke-dashoffset 1600ms var(--ease) 200ms}
+html.js:not(.still) .sub .lit{transition:stroke-dashoffset 900ms var(--ease) 1500ms}
+.scale-note{grid-column:2;margin-top:var(--s-4);text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ivory-2)}
+
+/* ---------- tools ---------- */
+.tools{padding:var(--section) 0 0}
+.tools-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-3);border-bottom:1px solid var(--hair);padding-bottom:var(--s-3);margin-bottom:clamp(24px,4vw,64px)}
+.tools-head h2{font-size:var(--t-44);letter-spacing:-.01em}
+.tools-head p{font-size:var(--t-14);color:var(--ivory-2)}
+.tool{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(32px,6vw,112px);align-items:center;padding:clamp(56px,7vw,112px) 0;border-bottom:1px solid var(--hair-ivory)}
+.tool:last-child{border-bottom:0;padding-bottom:var(--section)}
+.tool.alt .case{order:2}
+.case{position:relative;margin:0;aspect-ratio:1;width:100%;max-width:560px;justify-self:center}
+.case .back{position:absolute;inset:7%;border-radius:50%;background:radial-gradient(circle at 50% 42%,#1A2C45 0%,#122136 60%,#0B1626 100%);box-shadow:inset 0 0 0 1px rgba(201,179,126,.3),inset 0 20px 50px rgba(0,0,0,.35)}
+.case img{position:absolute;inset:15%;width:70%;height:70%;object-fit:contain;filter:invert(1) grayscale(1) sepia(.5) brightness(1.08)}
+.case svg{position:absolute;inset:0;width:100%;height:100%}
+.tool-body{min-width:0}
+.tool-body h3{font-size:var(--t-60);line-height:1.02;letter-spacing:-.015em;max-width:9em}
+.tool-body > p{margin-top:var(--s-3);max-width:27em;color:var(--ivory-2)}
+.ref{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;margin:var(--s-5) 0 0;padding:0}
+.ref div{display:flex;flex-direction:column;padding-right:clamp(18px,2.6vw,40px);margin-right:clamp(18px,2.6vw,40px);position:relative}
+.ref div:not(:last-child)::after{content:"";position:absolute;right:-2px;top:calc(var(--t-60) * .5);width:4px;height:4px;border-radius:50%;background:var(--champagne)}
+.ref div:last-child{padding-right:0;margin-right:0}
+.ref dd{order:-1;margin:0;font:400 var(--t-60)/1 var(--serif);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.ref dt{margin-top:10px;font-size:var(--t-12);letter-spacing:.14em;text-transform:uppercase;color:var(--ivory-2)}
+.langs{margin-top:var(--s-3);font-size:var(--t-14);color:var(--ivory-2)}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-4);margin-top:var(--s-4)}
+.actions .ul{font-size:var(--t-14);font-weight:500;letter-spacing:.02em;color:var(--ivory)}
+
+/* ---------- code against cancer ---------- */
+.code{padding:var(--section) 0;background:var(--midnight-deep);border-top:1px solid var(--hair-ivory);border-bottom:1px solid var(--hair-ivory)}
+.code-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);grid-template-areas:"copy wins" "act wins";column-gap:clamp(32px,6vw,112px);align-items:center}
+.code-copy{grid-area:copy;align-self:end}.wins{grid-area:wins}.code-act{grid-area:act;align-self:start;margin-top:var(--s-4)}
+.code h2{font-size:var(--t-60);line-height:1.04;letter-spacing:-.015em}
+.code-copy p{margin-top:var(--s-3);max-width:28em;color:var(--ivory-2)}
+.wins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.win{display:flex;flex-direction:column;gap:var(--s-2)}
+.win .n{align-self:flex-start;font:400 var(--t-60)/1 var(--serif);padding:14px 20px 12px;border:1px solid var(--champagne);background:#081120;box-shadow:inset 0 6px 14px rgba(0,0,0,.45);font-variant-numeric:lining-nums}
+.win span:last-child{font-size:15px;color:var(--ivory-2);max-width:13em;line-height:1.5}
+
+/* ---------- games ---------- */
+.games{padding:var(--section) 0}
+.games-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap}
+.games h2{font-size:var(--t-44);letter-spacing:-.01em}
+.games-head p{color:var(--ivory-2)}
+.game-list{list-style:none;margin:var(--s-5) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
+.game{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s-3);align-items:center;padding-top:var(--s-4);border-top:1px solid var(--hair)}
+.port{width:112px;height:112px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(201,179,126,.55),0 0 0 6px var(--midnight),0 0 0 7px rgba(201,179,126,.22);margin:7px}
+.port img{width:100%;height:100%;object-fit:cover;filter:saturate(.5) brightness(.82) contrast(1.05);transition:filter 900ms var(--ease),transform 1400ms var(--ease)}
+.game:hover .port img,.game:focus-within .port img{filter:none;transform:scale(1.06)}
+.game h3{font-size:var(--t-22);line-height:1.2}
+.game h3 a{text-decoration:none}
+.game p{margin-top:6px;font-size:var(--t-14);color:var(--ivory-2)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--midnight-deep);border-top:1px solid var(--hair-ivory);padding:var(--s-6) 0 var(--s-5);font-size:var(--t-14);color:var(--ivory-2)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:var(--s-4)}
+.foot .mark{font-size:26px;color:var(--ivory)}
+.foot p{max-width:36em}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{color:var(--ivory);text-decoration:none}
+.foot .place{margin-top:var(--s-2)}
+.credits{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid var(--hair-ivory);font-size:12px;line-height:1.6;color:#9A9993}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav{gap:6px 20px}
+}
+@media (max-width:900px){
+  .top-in{flex-wrap:wrap;gap:10px var(--s-3);padding-top:18px;padding-bottom:16px}
+  .nav{order:3;width:100%;gap:4px 18px;font-size:13px}
+  .chapter-grid{grid-template-columns:minmax(0,1fr)}
+  .intro{min-height:0;padding:var(--s-5) 0 var(--s-4)}
+  .dial-col{grid-column:1;grid-row:2}
+  .dial{position:relative;top:auto;width:min(100%,520px);margin:0 auto}
+  .scale{grid-row:3;padding-top:var(--s-6)}
+  .idea-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--s-5)}
+  .code-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "wins" "act";row-gap:var(--s-5)}
+  .code-act{margin-top:0}
+  .intro h1{font-size:clamp(38px,7.4vw,60px)}
+  .scale-note{grid-column:1;margin-top:var(--s-4)}
+  .tool{grid-template-columns:minmax(0,1fr);row-gap:var(--s-5)}
+  .tool.alt .case{order:0}
+  .case{max-width:460px}
+  .game-list{grid-template-columns:minmax(0,1fr);gap:0}
+  .game{padding:var(--s-3) 0}
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .lang{padding-left:12px}
+  .subs{gap:12px}
+  .sub figcaption{font-size:13.5px}
+  .sub figcaption b{font-size:18px}
+  .ref dd{font-size:40px}
+  .ref div{padding-right:16px;margin-right:16px}
+  .wins{gap:var(--s-3)}
+  .port{width:88px;height:88px}
+  .tools-head{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tools">Tools</a><a href="#scale">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <section class="chapter" data-progress aria-labelledby="h1">
+    <div class="wrap chapter-grid">
+      <div class="intro">
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="lede" data-reveal="fade" style="--d:650ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:850ms">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+        <p class="caveat" data-reveal="fade" style="--d:1050ms">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+
+      <div class="dial-col">
+        <figure class="dial" data-reveal="fade" style="--d:200ms">
+          <div class="plate" aria-hidden="true"></div>
+<svg viewBox="0 0 640 640" role="img" aria-labelledby="dialT"><title id="dialT">Dial of the four IARC groups: 3 not classifiable, 2B possible, 2A probable, 1 known</title>
+<defs>
+ <path id="bz" d="M319.48 619A299 299 0 1 1 320.52 619"/>
+ <linearGradient id="hl" x1="0" x2="1"><stop offset="0" stop-color="#EFE3BF"/><stop offset=".5" stop-color="#E2D2A2"/><stop offset=".5" stop-color="#A88E58"/><stop offset="1" stop-color="#8F7747"/></linearGradient>
+ <radialGradient id="cap" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#F3E7C4"/><stop offset="1" stop-color="#9C8452"/></radialGradient>
+ <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#02060C" flood-opacity=".55"/></filter>
+</defs>
+<g fill="none">
+ <circle cx="320" cy="320" r="318" stroke="#C9B37E" stroke-opacity=".55" stroke-width="1"/>
+ <circle cx="320" cy="320" r="281" stroke="#C9B37E" stroke-opacity=".4" stroke-width=".75"/>
+</g><g font-family="Manrope, sans-serif" font-size="11.5" font-weight="500" letter-spacing="3.4" fill="#C9B37E"><text><textPath href="#bz" startOffset="25%" text-anchor="middle" dominant-baseline="middle">NOT CLASSIFIABLE</textPath></text><text><textPath href="#bz" startOffset="41.67%" text-anchor="middle" dominant-baseline="middle">POSSIBLE</textPath></text><text><textPath href="#bz" startOffset="58.33%" text-anchor="middle" dominant-baseline="middle">PROBABLE</textPath></text><text><textPath href="#bz" startOffset="75%" text-anchor="middle" dominant-baseline="middle">KNOWN</textPath></text></g><g fill="#C9B37E"><circle cx="61.06" cy="469.5" r="2.2"/><circle cx="61.06" cy="170.5" r="2.2"/><circle cx="320" cy="21" r="2.2"/><circle cx="578.94" cy="170.5" r="2.2"/><circle cx="578.94" cy="469.5" r="2.2"/></g><path d="M91.32 441.59L83.37 445.82M87.21 433.54L79.12 437.48M83.39 425.34L75.17 429.01M79.86 417.02L71.51 420.39M73.68 400.04L65.12 402.82M71.03 391.39L62.38 393.87M68.69 382.66L59.96 384.84M66.66 373.85L57.86 375.72M63.52 356.05L54.61 357.3M62.42 347.07L53.47 348.01M61.63 338.07L52.65 338.69M61.16 329.04L52.16 329.35M61.16 310.96L52.16 310.65M61.63 301.93L52.65 301.31M62.42 292.93L53.47 291.99M63.52 283.95L54.61 282.7M66.66 266.15L57.86 264.28M68.69 257.34L59.96 255.16M71.03 248.61L62.38 246.13M73.68 239.96L65.12 237.18M79.86 222.98L71.51 219.61M83.39 214.66L75.17 210.99M87.21 206.46L79.12 202.52M91.32 198.41L83.37 194.18M100.36 182.75L92.72 177.98M105.28 175.17L97.82 170.14M110.46 167.76L103.18 162.47M115.91 160.54L108.81 155M127.53 146.7L120.84 140.67M133.69 140.08L127.22 133.83M140.08 133.69L133.83 127.22M146.7 127.53L140.67 120.84M160.54 115.91L155 108.81M167.76 110.46L162.47 103.18M175.17 105.28L170.14 97.82M182.75 100.36L177.98 92.72M198.41 91.32L194.18 83.37M206.46 87.21L202.52 79.12M214.66 83.39L210.99 75.17M222.98 79.86L219.61 71.51M239.96 73.68L237.18 65.12M248.61 71.03L246.13 62.38M257.34 68.69L255.16 59.96M266.15 66.66L264.28 57.86M283.95 63.52L282.7 54.61M292.93 62.42L291.99 53.47M301.93 61.63L301.31 52.65M310.96 61.16L310.65 52.16M329.04 61.16L329.35 52.16M338.07 61.63L338.69 52.65M347.07 62.42L348.01 53.47M356.05 63.52L357.3 54.61M373.85 66.66L375.72 57.86M382.66 68.69L384.84 59.96M391.39 71.03L393.87 62.38M400.04 73.68L402.82 65.12M417.02 79.86L420.39 71.51M425.34 83.39L429.01 75.17M433.54 87.21L437.48 79.12M441.59 91.32L445.82 83.37M457.25 100.36L462.02 92.72M464.83 105.28L469.86 97.82M472.24 110.46L477.53 103.18M479.46 115.91L485 108.81M493.3 127.53L499.33 120.84M499.92 133.69L506.17 127.22M506.31 140.08L512.78 133.83M512.47 146.7L519.16 140.67M524.09 160.54L531.19 155M529.54 167.76L536.82 162.47M534.72 175.17L542.18 170.14M539.64 182.75L547.28 177.98M548.68 198.41L556.63 194.18M552.79 206.46L560.88 202.52M556.61 214.66L564.83 210.99M560.14 222.98L568.49 219.61M566.32 239.96L574.88 237.18M568.97 248.61L577.62 246.13M571.31 257.34L580.04 255.16M573.34 266.15L582.14 264.28M576.48 283.95L585.39 282.7M577.58 292.93L586.53 291.99M578.37 301.93L587.35 301.31M578.84 310.96L587.84 310.65M578.84 329.04L587.84 329.35M578.37 338.07L587.35 338.69M577.58 347.07L586.53 348.01M576.48 356.05L585.39 357.3M573.34 373.85L582.14 375.72M571.31 382.66L580.04 384.84M568.97 391.39L577.62 393.87M566.32 400.04L574.88 402.82M560.14 417.02L568.49 420.39M556.61 425.34L564.83 429.01M552.79 433.54L560.88 437.48M548.68 441.59L556.63 445.82" stroke="#F1EDE4" stroke-opacity=".38" stroke-width=".7"/><path d="M85.08 405.51L68.16 411.66M73.8 363.41L56.07 366.54M70 320L52 320M73.8 276.59L56.07 273.46M85.08 234.49L68.16 228.34M128.49 159.3L114.7 147.73M159.3 128.49L147.73 114.7M195 103.49L186 87.91M234.49 85.08L228.34 68.16M276.59 73.8L273.46 56.07M363.41 73.8L366.54 56.07M405.51 85.08L411.66 68.16M445 103.49L454 87.91M480.7 128.49L492.27 114.7M511.51 159.3L525.3 147.73M554.92 234.49L571.84 228.34M566.2 276.59L583.93 273.46M570 320L588 320M566.2 363.41L583.93 366.54M554.92 405.51L571.84 411.66" stroke="#F1EDE4" stroke-opacity=".7" stroke-width="1"/><path d="M115.62 438L87.91 454M115.62 202L87.91 186M320 84L320 52M524.38 202L552.09 186M524.38 438L552.09 454" stroke="#C9B37E" stroke-width="1.4"/><path d="M86.17 455A270 270 0 1 1 553.83 455" stroke="#F1EDE4" stroke-opacity=".3" stroke-width=".7" fill="none"/><path d="M523.15 216.49A228 228 0 0 1 523.15 423.51" stroke="#C9B37E" stroke-opacity="1" stroke-width="2" fill="none"/><path d="M331.93 92.31A228 228 0 0 1 511.22 195.82" stroke="#C9B37E" stroke-opacity="0.72" stroke-width="2" fill="none"/><path d="M128.78 195.82A228 228 0 0 1 308.07 92.31" stroke="#C9B37E" stroke-opacity="0.48" stroke-width="2" fill="none"/><path d="M116.85 423.51A228 228 0 0 1 116.85 216.49" stroke="#C9B37E" stroke-opacity="0.26" stroke-width="2" fill="none"/><g font-family="'Bodoni Moda', serif" font-size="46" fill="#F1EDE4" text-anchor="middle" style="font-variant-numeric:lining-nums"><text x="506" y="336">1</text><text x="413" y="174.92">2A</text><text x="227" y="174.92">2B</text><text x="134" y="336">3</text></g><text x="320" y="236" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="21" fill="#F1EDE4" fill-opacity=".92" letter-spacing=".3">EpiDetective</text><text x="320" y="258" text-anchor="middle" font-family="Manrope, sans-serif" font-size="8.5" letter-spacing="3" fill="#C9B37E">HOW SURE</text><rect x="228" y="414" width="184" height="34" fill="#08101C" stroke="#C9B37E" stroke-opacity=".8" stroke-width="1"/><text id="winText" x="320" y="435.5" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="500" letter-spacing="1.6" fill="#F1EDE4">Group 1 · Known</text><g filter="url(#sh)"><g class="hand-g">
+  <path d="M320 326 C314 298 309.5 276 309.5 258 C310 220 315 188 320 162 Z" fill="#E8DAB0"/>
+  <path d="M320 326 C326 298 330.5 276 330.5 258 C330 220 325 188 320 162 Z" fill="#A08853"/>
+  <path d="M320 320 L320 366" stroke="#C9B37E" stroke-width="2.6"/>
+  <circle cx="320" cy="373" r="7" fill="none" stroke="#C9B37E" stroke-width="2.4"/>
+  <circle cx="320" cy="320" r="13" fill="url(#cap)"/>
+  <circle cx="320" cy="320" r="4.2" fill="#0E1A2B"/>
+ </g></g></svg>
+          <figcaption>A dial engraved with the four IARC groups, from Group 3, not classifiable, to Group 1, known cause. Its hand moves from Group 3 to Group 1 as you scroll.</figcaption>
+        </figure>
+      </div>
+
+      <div class="scale" id="scale">
+        <h2 data-reveal="rise">Reading the evidence</h2>
+        <p data-reveal="fade" style="--d:150ms">Four groups, from not classifiable to known cause.</p>
+        <ol class="groups">
+          <li data-reveal="fade"><span class="g">3</span><div><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></div></li>
+          <li data-reveal="fade"><span class="g">2B</span><div><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></div></li>
+          <li data-reveal="fade"><span class="g">2A</span><div><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></div></li>
+          <li data-reveal="fade"><span class="g">1</span><div><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="idea" id="idea" aria-labelledby="idea-h">
+    <div class="wrap idea-grid">
+      <div class="idea-copy">
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <p data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <div class="meat" data-reveal="fade" style="--d:450ms">
+          <span class="big num">18%</span>
+          <p>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</p>
+        </div>
+        <p class="source">European data. Quoted from the Cancer Evidence Explorer.</p>
+        <a class="more" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+      <div class="idea-dials">
+        <div class="subs">
+          <figure class="sub" data-reveal="fade">
+<svg viewBox="0 0 320 320" role="img" aria-labelledby="sd1"><title id="sd1">100–120 per 1,000, on a dial scaled 0 to 150</title>
+<circle cx="160" cy="160" r="156" fill="#0B1626" stroke="#C9B37E" stroke-opacity=".55"/>
+<circle cx="160" cy="160" r="148" fill="none" stroke="#C9B37E" stroke-opacity=".22"/><g fill="none" stroke="#F1EDE4" stroke-opacity=".045" stroke-width=".8"><circle cx="160" cy="160" r="8"/><circle cx="160" cy="160" r="11.2"/><circle cx="160" cy="160" r="14.4"/><circle cx="160" cy="160" r="17.6"/><circle cx="160" cy="160" r="20.8"/><circle cx="160" cy="160" r="24"/><circle cx="160" cy="160" r="27.2"/><circle cx="160" cy="160" r="30.4"/><circle cx="160" cy="160" r="33.6"/><circle cx="160" cy="160" r="36.8"/><circle cx="160" cy="160" r="40"/><circle cx="160" cy="160" r="43.2"/><circle cx="160" cy="160" r="46.4"/><circle cx="160" cy="160" r="49.6"/><circle cx="160" cy="160" r="52.8"/><circle cx="160" cy="160" r="56"/><circle cx="160" cy="160" r="59.2"/><circle cx="160" cy="160" r="62.4"/><circle cx="160" cy="160" r="65.6"/><circle cx="160" cy="160" r="68.8"/><circle cx="160" cy="160" r="72"/><circle cx="160" cy="160" r="75.2"/><circle cx="160" cy="160" r="78.4"/><circle cx="160" cy="160" r="81.6"/><circle cx="160" cy="160" r="84.8"/><circle cx="160" cy="160" r="88"/><circle cx="160" cy="160" r="91.2"/><circle cx="160" cy="160" r="94.4"/><circle cx="160" cy="160" r="97.6"/><circle cx="160" cy="160" r="100.8"/><circle cx="160" cy="160" r="104"/><circle cx="160" cy="160" r="107.2"/><circle cx="160" cy="160" r="110.4"/><circle cx="160" cy="160" r="113.6"/><circle cx="160" cy="160" r="116.8"/><circle cx="160" cy="160" r="120"/><circle cx="160" cy="160" r="123.2"/><circle cx="160" cy="160" r="126.4"/><circle cx="160" cy="160" r="129.6"/><circle cx="160" cy="160" r="132.8"/><circle cx="160" cy="160" r="136"/><circle cx="160" cy="160" r="139.2"/></g><path d="M54.83 236.41L48.36 241.11M44.17 219.02L37.04 222.65M36.36 200.17L28.75 202.64M31.6 180.34L23.7 181.59M31.6 139.66L23.7 138.41M36.36 119.83L28.75 117.36M44.17 100.98L37.04 97.35M54.83 83.59L48.36 78.89M83.59 54.83L78.89 48.36M100.98 44.17L97.35 37.04M119.83 36.36L117.36 28.75M139.66 31.6L138.41 23.7M180.34 31.6L181.59 23.7M200.17 36.36L202.64 28.75M219.02 44.17L222.65 37.04M236.41 54.83L241.11 48.36M265.17 83.59L271.64 78.89M275.83 100.98L282.96 97.35M283.64 119.83L291.25 117.36M288.4 139.66L296.3 138.41M288.4 180.34L296.3 181.59M283.64 200.17L291.25 202.64M275.83 219.02L282.96 222.65M265.17 236.41L271.64 241.11" stroke="#F1EDE4" stroke-opacity=".42" stroke-width=".7"/><path d="M75.15 244.85L62.42 257.58M40 160L22 160M75.15 75.15L62.42 62.42M160 40L160 22M244.85 75.15L257.58 62.42M280 160L298 160M244.85 244.85L257.58 257.58" stroke="#F1EDE4" stroke-opacity=".85" stroke-width="1.1"/><g font-family="Manrope, sans-serif" font-size="10.5" fill="#B9B6AE" text-anchor="middle"><text x="86.46" y="237.54">0</text><text x="86.46" y="90.46">50</text><text x="233.54" y="90.46">100</text><text x="233.54" y="237.54">150</text></g><path d="M56.76 263.24A146 146 0 1 1 263.24 263.24" fill="none" stroke="#F1EDE4" stroke-opacity=".14" stroke-width="3"/><path class="fill" pathLength="1" d="M56.76 263.24A146 146 0 0 1 263.24 56.76" fill="none" stroke="#C9B37E" stroke-opacity=".5" stroke-width="3"/><path class="lit" pathLength="1" d="M263.24 56.76A146 146 0 0 1 304.2 137.16" fill="none" stroke="#E6D6A6" stroke-width="7"/><text x="160" y="172" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="48" fill="#F1EDE4" style="font-variant-numeric:lining-nums">100–120</text><text x="160" y="200" text-anchor="middle" font-family="Manrope, sans-serif" font-size="9.5" letter-spacing="2.4" fill="#C9B37E">PER 1,000</text></svg>
+            <figcaption><b>Smokers</b>About 10 to 12 in 100 smokers get lung cancer by age 75.</figcaption>
+          </figure>
+          <figure class="sub" data-reveal="fade" style="--d:200ms">
+<svg viewBox="0 0 320 320" role="img" aria-labelledby="sd2"><title id="sd2">4–5 per 1,000, on a dial scaled 0 to 150</title>
+<circle cx="160" cy="160" r="156" fill="#0B1626" stroke="#C9B37E" stroke-opacity=".55"/>
+<circle cx="160" cy="160" r="148" fill="none" stroke="#C9B37E" stroke-opacity=".22"/><g fill="none" stroke="#F1EDE4" stroke-opacity=".045" stroke-width=".8"><circle cx="160" cy="160" r="8"/><circle cx="160" cy="160" r="11.2"/><circle cx="160" cy="160" r="14.4"/><circle cx="160" cy="160" r="17.6"/><circle cx="160" cy="160" r="20.8"/><circle cx="160" cy="160" r="24"/><circle cx="160" cy="160" r="27.2"/><circle cx="160" cy="160" r="30.4"/><circle cx="160" cy="160" r="33.6"/><circle cx="160" cy="160" r="36.8"/><circle cx="160" cy="160" r="40"/><circle cx="160" cy="160" r="43.2"/><circle cx="160" cy="160" r="46.4"/><circle cx="160" cy="160" r="49.6"/><circle cx="160" cy="160" r="52.8"/><circle cx="160" cy="160" r="56"/><circle cx="160" cy="160" r="59.2"/><circle cx="160" cy="160" r="62.4"/><circle cx="160" cy="160" r="65.6"/><circle cx="160" cy="160" r="68.8"/><circle cx="160" cy="160" r="72"/><circle cx="160" cy="160" r="75.2"/><circle cx="160" cy="160" r="78.4"/><circle cx="160" cy="160" r="81.6"/><circle cx="160" cy="160" r="84.8"/><circle cx="160" cy="160" r="88"/><circle cx="160" cy="160" r="91.2"/><circle cx="160" cy="160" r="94.4"/><circle cx="160" cy="160" r="97.6"/><circle cx="160" cy="160" r="100.8"/><circle cx="160" cy="160" r="104"/><circle cx="160" cy="160" r="107.2"/><circle cx="160" cy="160" r="110.4"/><circle cx="160" cy="160" r="113.6"/><circle cx="160" cy="160" r="116.8"/><circle cx="160" cy="160" r="120"/><circle cx="160" cy="160" r="123.2"/><circle cx="160" cy="160" r="126.4"/><circle cx="160" cy="160" r="129.6"/><circle cx="160" cy="160" r="132.8"/><circle cx="160" cy="160" r="136"/><circle cx="160" cy="160" r="139.2"/></g><path d="M54.83 236.41L48.36 241.11M44.17 219.02L37.04 222.65M36.36 200.17L28.75 202.64M31.6 180.34L23.7 181.59M31.6 139.66L23.7 138.41M36.36 119.83L28.75 117.36M44.17 100.98L37.04 97.35M54.83 83.59L48.36 78.89M83.59 54.83L78.89 48.36M100.98 44.17L97.35 37.04M119.83 36.36L117.36 28.75M139.66 31.6L138.41 23.7M180.34 31.6L181.59 23.7M200.17 36.36L202.64 28.75M219.02 44.17L222.65 37.04M236.41 54.83L241.11 48.36M265.17 83.59L271.64 78.89M275.83 100.98L282.96 97.35M283.64 119.83L291.25 117.36M288.4 139.66L296.3 138.41M288.4 180.34L296.3 181.59M283.64 200.17L291.25 202.64M275.83 219.02L282.96 222.65M265.17 236.41L271.64 241.11" stroke="#F1EDE4" stroke-opacity=".42" stroke-width=".7"/><path d="M75.15 244.85L62.42 257.58M40 160L22 160M75.15 75.15L62.42 62.42M160 40L160 22M244.85 75.15L257.58 62.42M280 160L298 160M244.85 244.85L257.58 257.58" stroke="#F1EDE4" stroke-opacity=".85" stroke-width="1.1"/><g font-family="Manrope, sans-serif" font-size="10.5" fill="#B9B6AE" text-anchor="middle"><text x="86.46" y="237.54">0</text><text x="86.46" y="90.46">50</text><text x="233.54" y="90.46">100</text><text x="233.54" y="237.54">150</text></g><path d="M56.76 263.24A146 146 0 1 1 263.24 263.24" fill="none" stroke="#F1EDE4" stroke-opacity=".14" stroke-width="3"/><path class="fill" pathLength="1" d="M56.76 263.24A146 146 0 0 1 44.64 249.48" fill="none" stroke="#C9B37E" stroke-opacity=".5" stroke-width="3"/><path class="lit" pathLength="1" d="M44.64 249.48A146 146 0 0 1 41.88 245.82" fill="none" stroke="#E6D6A6" stroke-width="7"/><text x="160" y="172" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="58" fill="#F1EDE4" style="font-variant-numeric:lining-nums">4–5</text><text x="160" y="200" text-anchor="middle" font-family="Manrope, sans-serif" font-size="9.5" letter-spacing="2.4" fill="#C9B37E">PER 1,000</text></svg>
+            <figcaption><b>Lifelong non-smokers</b>About 4 to 5 in 1,000 lifelong non-smokers do.</figcaption>
+          </figure>
+        </div>
+        <p class="scale-note">Lung cancer by age 75 · per 1,000 people · scale 0 to 150</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools" id="tools" aria-labelledby="tools-h">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2 id="tools-h">The explorers</h2>
+        <p>Two reference works, free to use, in 10 languages.</p>
+      </div>
+
+      <article class="tool" aria-labelledby="t1">
+        <figure class="case" data-reveal="scale">
+          <div class="back"></div>
+          <img src="media/tool-cancer-network.svg" width="1062" height="998" alt="The Cancer Evidence Explorer’s network: exposures linked to the cancers they can cause." loading="lazy">
+<svg viewBox="0 0 600 600" aria-hidden="true"><g fill="none"><circle cx="300" cy="300" r="298" stroke="#C9B37E" stroke-opacity=".5"/><circle cx="300" cy="300" r="279" stroke="#C9B37E" stroke-opacity=".25"/>
+<path d="M314.92 15.39L315.28 8.4M329.79 16.56L330.52 9.6M344.58 18.51L345.68 11.6M359.25 21.23L360.71 14.38M373.76 24.71L375.58 17.95M388.07 28.95L390.23 22.29M402.13 33.93L404.64 27.39M415.92 39.64L418.77 33.24M429.39 46.06L432.57 39.83M455.22 60.98L459.03 55.11M467.52 69.43L471.63 63.77M479.36 78.51L483.76 73.07M490.7 88.2L495.39 83M501.53 98.47L506.48 93.52M511.8 109.3L517 104.61M521.49 120.64L526.93 116.24M530.57 132.48L536.23 128.37M539.02 144.78L544.89 140.97M553.94 170.61L560.17 167.43M560.36 184.08L566.76 181.23M566.07 197.87L572.61 195.36M571.05 211.93L577.71 209.77M575.29 226.24L582.05 224.42M578.77 240.75L585.62 239.29M581.49 255.42L588.4 254.32M583.44 270.21L590.4 269.48M584.61 285.08L591.6 284.72M584.61 314.92L591.6 315.28M583.44 329.79L590.4 330.52M581.49 344.58L588.4 345.68M578.77 359.25L585.62 360.71M575.29 373.76L582.05 375.58M571.05 388.07L577.71 390.23M566.07 402.13L572.61 404.64M560.36 415.92L566.76 418.77M553.94 429.39L560.17 432.57M539.02 455.22L544.89 459.03M530.57 467.52L536.23 471.63M521.49 479.36L526.93 483.76M511.8 490.7L517 495.39M501.53 501.53L506.48 506.48M490.7 511.8L495.39 517M479.36 521.49L483.76 526.93M467.52 530.57L471.63 536.23M455.22 539.02L459.03 544.89M429.39 553.94L432.57 560.17M415.92 560.36L418.77 566.76M402.13 566.07L404.64 572.61M388.07 571.05L390.23 577.71M373.76 575.29L375.58 582.05M359.25 578.77L360.71 585.62M344.58 581.49L345.68 588.4M329.79 583.44L330.52 590.4M314.92 584.61L315.28 591.6M285.08 584.61L284.72 591.6M270.21 583.44L269.48 590.4M255.42 581.49L254.32 588.4M240.75 578.77L239.29 585.62M226.24 575.29L224.42 582.05M211.93 571.05L209.77 577.71M197.87 566.07L195.36 572.61M184.08 560.36L181.23 566.76M170.61 553.94L167.43 560.17M144.78 539.02L140.97 544.89M132.48 530.57L128.37 536.23M120.64 521.49L116.24 526.93M109.3 511.8L104.61 517M98.47 501.53L93.52 506.48M88.2 490.7L83 495.39M78.51 479.36L73.07 483.76M69.43 467.52L63.77 471.63M60.98 455.22L55.11 459.03M46.06 429.39L39.83 432.57M39.64 415.92L33.24 418.77M33.93 402.13L27.39 404.64M28.95 388.07L22.29 390.23M24.71 373.76L17.95 375.58M21.23 359.25L14.38 360.71M18.51 344.58L11.6 345.68M16.56 329.79L9.6 330.52M15.39 314.92L8.4 315.28M15.39 285.08L8.4 284.72M16.56 270.21L9.6 269.48M18.51 255.42L11.6 254.32M21.23 240.75L14.38 239.29M24.71 226.24L17.95 224.42M28.95 211.93L22.29 209.77M33.93 197.87L27.39 195.36M39.64 184.08L33.24 181.23M46.06 170.61L39.83 167.43M60.98 144.78L55.11 140.97M69.43 132.48L63.77 128.37M78.51 120.64L73.07 116.24M88.2 109.3L83 104.61M98.47 98.47L93.52 93.52M109.3 88.2L104.61 83M120.64 78.51L116.24 73.07M132.48 69.43L128.37 63.77M144.78 60.98L140.97 55.11M170.61 46.06L167.43 39.83M184.08 39.64L181.23 33.24M197.87 33.93L195.36 27.39M211.93 28.95L209.77 22.29M226.24 24.71L224.42 17.95M240.75 21.23L239.29 14.38M255.42 18.51L254.32 11.6M270.21 16.56L269.48 9.6M285.08 15.39L284.72 8.4" stroke="#F1EDE4" stroke-opacity=".25" stroke-width=".7"/><path d="M300 21L300 8M439.5 58.38L446 47.12M541.62 160.5L552.88 154M579 300L592 300M541.62 439.5L552.88 446M439.5 541.62L446 552.88M300 579L300 592M160.5 541.62L154 552.88M58.38 439.5L47.12 446M21 300L8 300M58.38 160.5L47.12 154M160.5 58.38L154 47.12" stroke="#C9B37E" stroke-width="1.2"/></g></svg>
+        </figure>
+        <div class="tool-body">
+          <h3 id="t1" data-reveal="rise">Cancer Evidence Explorer</h3>
+          <p data-reveal="fade" style="--d:150ms">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <dl class="ref" data-reveal="fade" style="--d:300ms">
+            <div><dt>exposures</dt><dd>185</dd></div>
+            <div><dt>cancer types</dt><dd>68</dd></div>
+            <div><dt>links</dt><dd>469</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="actions"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+      </article>
+
+      <article class="tool alt" aria-labelledby="t2">
+        <figure class="case" data-reveal="scale">
+          <div class="back"></div>
+          <img src="media/tool-chronic-network.svg" width="931" height="1006" alt="The Chronic Disease Evidence Explorer’s network: risk factors clustered around the diseases they affect." loading="lazy">
+<svg viewBox="0 0 600 600" aria-hidden="true"><g fill="none"><circle cx="300" cy="300" r="298" stroke="#C9B37E" stroke-opacity=".5"/><circle cx="300" cy="300" r="279" stroke="#C9B37E" stroke-opacity=".25"/>
+<path d="M314.92 15.39L315.28 8.4M329.79 16.56L330.52 9.6M344.58 18.51L345.68 11.6M359.25 21.23L360.71 14.38M373.76 24.71L375.58 17.95M388.07 28.95L390.23 22.29M402.13 33.93L404.64 27.39M415.92 39.64L418.77 33.24M429.39 46.06L432.57 39.83M455.22 60.98L459.03 55.11M467.52 69.43L471.63 63.77M479.36 78.51L483.76 73.07M490.7 88.2L495.39 83M501.53 98.47L506.48 93.52M511.8 109.3L517 104.61M521.49 120.64L526.93 116.24M530.57 132.48L536.23 128.37M539.02 144.78L544.89 140.97M553.94 170.61L560.17 167.43M560.36 184.08L566.76 181.23M566.07 197.87L572.61 195.36M571.05 211.93L577.71 209.77M575.29 226.24L582.05 224.42M578.77 240.75L585.62 239.29M581.49 255.42L588.4 254.32M583.44 270.21L590.4 269.48M584.61 285.08L591.6 284.72M584.61 314.92L591.6 315.28M583.44 329.79L590.4 330.52M581.49 344.58L588.4 345.68M578.77 359.25L585.62 360.71M575.29 373.76L582.05 375.58M571.05 388.07L577.71 390.23M566.07 402.13L572.61 404.64M560.36 415.92L566.76 418.77M553.94 429.39L560.17 432.57M539.02 455.22L544.89 459.03M530.57 467.52L536.23 471.63M521.49 479.36L526.93 483.76M511.8 490.7L517 495.39M501.53 501.53L506.48 506.48M490.7 511.8L495.39 517M479.36 521.49L483.76 526.93M467.52 530.57L471.63 536.23M455.22 539.02L459.03 544.89M429.39 553.94L432.57 560.17M415.92 560.36L418.77 566.76M402.13 566.07L404.64 572.61M388.07 571.05L390.23 577.71M373.76 575.29L375.58 582.05M359.25 578.77L360.71 585.62M344.58 581.49L345.68 588.4M329.79 583.44L330.52 590.4M314.92 584.61L315.28 591.6M285.08 584.61L284.72 591.6M270.21 583.44L269.48 590.4M255.42 581.49L254.32 588.4M240.75 578.77L239.29 585.62M226.24 575.29L224.42 582.05M211.93 571.05L209.77 577.71M197.87 566.07L195.36 572.61M184.08 560.36L181.23 566.76M170.61 553.94L167.43 560.17M144.78 539.02L140.97 544.89M132.48 530.57L128.37 536.23M120.64 521.49L116.24 526.93M109.3 511.8L104.61 517M98.47 501.53L93.52 506.48M88.2 490.7L83 495.39M78.51 479.36L73.07 483.76M69.43 467.52L63.77 471.63M60.98 455.22L55.11 459.03M46.06 429.39L39.83 432.57M39.64 415.92L33.24 418.77M33.93 402.13L27.39 404.64M28.95 388.07L22.29 390.23M24.71 373.76L17.95 375.58M21.23 359.25L14.38 360.71M18.51 344.58L11.6 345.68M16.56 329.79L9.6 330.52M15.39 314.92L8.4 315.28M15.39 285.08L8.4 284.72M16.56 270.21L9.6 269.48M18.51 255.42L11.6 254.32M21.23 240.75L14.38 239.29M24.71 226.24L17.95 224.42M28.95 211.93L22.29 209.77M33.93 197.87L27.39 195.36M39.64 184.08L33.24 181.23M46.06 170.61L39.83 167.43M60.98 144.78L55.11 140.97M69.43 132.48L63.77 128.37M78.51 120.64L73.07 116.24M88.2 109.3L83 104.61M98.47 98.47L93.52 93.52M109.3 88.2L104.61 83M120.64 78.51L116.24 73.07M132.48 69.43L128.37 63.77M144.78 60.98L140.97 55.11M170.61 46.06L167.43 39.83M184.08 39.64L181.23 33.24M197.87 33.93L195.36 27.39M211.93 28.95L209.77 22.29M226.24 24.71L224.42 17.95M240.75 21.23L239.29 14.38M255.42 18.51L254.32 11.6M270.21 16.56L269.48 9.6M285.08 15.39L284.72 8.4" stroke="#F1EDE4" stroke-opacity=".25" stroke-width=".7"/><path d="M300 21L300 8M439.5 58.38L446 47.12M541.62 160.5L552.88 154M579 300L592 300M541.62 439.5L552.88 446M439.5 541.62L446 552.88M300 579L300 592M160.5 541.62L154 552.88M58.38 439.5L47.12 446M21 300L8 300M58.38 160.5L47.12 154M160.5 58.38L154 47.12" stroke="#C9B37E" stroke-width="1.2"/></g></svg>
+        </figure>
+        <div class="tool-body">
+          <h3 id="t2" data-reveal="rise">Chronic Disease Evidence Explorer</h3>
+          <p data-reveal="fade" style="--d:150ms">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <dl class="ref" data-reveal="fade" style="--d:300ms">
+            <div><dt>risk factors</dt><dd>124</dd></div>
+            <div><dt>diseases</dt><dd>45</dd></div>
+            <div><dt>graded links</dt><dd>356</dd></div>
+          </dl>
+          <p class="langs">10 languages</p>
+          <div class="actions"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="code" id="code" aria-labelledby="code-h">
+    <div class="wrap code-grid">
+      <div class="code-copy">
+        <h2 id="code-h" data-reveal="rise">Code Against Cancer</h2>
+        <p data-reveal="fade" style="--d:150ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+      </div>
+      <div class="wins" data-reveal="fade" style="--d:250ms">
+        <div class="win"><span class="n">14</span><span>actions for Europe</span></div>
+        <div class="win"><span class="n">17</span><span>actions for Latin America and the Caribbean</span></div>
+      </div>
+      <div class="code-act"><a class="btn" href="#">Read the recommendations</a></div>
+    </div>
+  </section>
+
+  <section class="games" id="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <div class="games-head">
+        <h2 id="games-h">For schools and families</h2>
+        <p>Learning by playing — three games.</p>
+      </div>
+      <ul class="game-list">
+        <li class="game" data-reveal="fade">
+          <div class="port"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Sol & the UV Shield Quest: a cartoon hero on sunny platforms" loading="lazy" style="object-position:34% 60%"></div>
+          <div><h3><a class="ul" href="#">Sol &amp; the UV Shield Quest</a></h3><p>Skin cancer · ages 6–12</p></div>
+        </li>
+        <li class="game" data-reveal="fade" style="--d:150ms">
+          <div class="port"><img src="media/game-lung-detective.webp" width="720" height="405" alt="The Lung Detective: a cartoon living room with a basement door" loading="lazy" style="object-position:30% 50%"></div>
+          <div><h3><a class="ul" href="#">The Lung Detective</a></h3><p>Lung cancer · ages 10–16</p></div>
+        </li>
+        <li class="game" data-reveal="fade" style="--d:300ms">
+          <div class="port"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="A Town of 1,000: a small riverside town in soft colours" loading="lazy" style="object-position:52% 45%"></div>
+          <div><h3><a class="ul" href="#">A Town of 1,000</a></h3><p>Breast cancer · ages 14+</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="#">EpiDetective</a>
+        <p class="place">Lyon, France</p>
+      </div>
+      <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul>
+        <li><a class="ul" href="#">How we check</a></li><li><a class="ul" href="#">Report an error</a></li><li><a class="ul" href="#">How to cite</a></li><li><a class="ul" href="#">About</a></li>
+      </ul>
+    </div>
+    <p class="credits">Images: the dials are drawn for this page. Network drawings from the Cancer Evidence Explorer and the Chronic Disease Evidence Explorer. Game screenshots from the three EpiDetective games. No photographs are used.</p>
+  </div>
+</footer>
+
+<script src="kit/kit.js" defer></script>
+<script>
+(function(){
+  var root=document.documentElement, ch=document.querySelector('.chapter'), hand=document.querySelector('.hand-g'), win=document.getElementById('winText');
+  if(!ch||!hand||!win) return;
+  var labels=['Group 3 · Not classifiable','Group 2B · Possible','Group 2A · Probable','Group 1 · Known'];
+  var last=-1, running=false;
+  function read(){
+    var m=getComputedStyle(hand).transform, a=90;
+    if(m&&m!=='none'){var v=m.match(/-?[\d.e]+/g); if(v) a=Math.atan2(+v[1],+v[0])*180/Math.PI;}
+    var i=a< -60?0:a<0?1:a<60?2:3;
+    if(i!==last){last=i; win.textContent=labels[i];}
+  }
+  function loop(t0){ read(); if(performance.now()-t0<1100) requestAnimationFrame(function(){loop(t0)}); else running=false; }
+  function kick(){ if(running) return; running=true; var t0=performance.now(); requestAnimationFrame(function(){loop(t0)}); }
+  document.addEventListener('DOMContentLoaded',function(){
+    read();
+    requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('armed')})});
+    addEventListener('scroll',kick,{passive:true});
+  });
+})();
+</script>
+</body>
+</html>

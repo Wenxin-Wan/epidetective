@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>25 · Thousand — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300..600;1,300..500&family=Public+Sans:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --paper:#FBFAF7; --ink:#1B1D1F; --dot:#D8D6CF; --case:#B5432F; --range:#E7B3A6; --sage:#7C8C6E;
+  --ink-2:#5D6062; --rule:#E7E4DC; --panel:#F4F3EE;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  /* scale 12 / 14 / 16 / 20 / 26 / 36 / 54 / 76 */
+  --f-xs:12px; --f-s:14px; --f-ui:16px; --f-b:20px; --f-l:26px; --f-xl:clamp(30px,3vw,38px); --f-2xl:clamp(38px,4.2vw,56px); --f-3xl:clamp(42px,4.7vw,68px);
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,184px);
+  --gut:clamp(16px,4vw,56px); --max:1320px; --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:var(--f-b);line-height:1.6;
+  font-variant-numeric:oldstyle-nums proportional-nums;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.08;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--case);outline-offset:3px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.sans{font-family:var(--sans)}
+.fig-n{font-family:var(--sans);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.case{color:var(--case)}
+.link{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px;transition:background-size .6s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% 100%}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);text-decoration:none;font-family:var(--sans);font-size:15px;font-weight:500;
+  padding:14px 22px;border-radius:2px;transition:background .4s var(--ease)}
+.btn:hover{background:#3A3D40}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:baseline;gap:var(--s4);padding:28px var(--gut);max-width:var(--max);margin:0 auto;flex-wrap:wrap}
+.mark{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.005em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 28px;font-family:var(--sans);font-size:14px}
+.nav a,.lang a{text-decoration:none}
+.nav a:hover{color:var(--case)}
+.lang{display:flex;gap:12px;font-family:var(--sans);font-size:13px;color:var(--ink-2)}
+.lang a[aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- story (hero + pinned field) ---------- */
+.story{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:var(--s5)}
+.step{grid-column:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:var(--s5) 0;position:relative;z-index:1}
+.step.hero{min-height:calc(100vh - 100px);justify-content:flex-start;padding-top:clamp(32px,7vh,96px)}
+.fig{grid-column:2;grid-row:1 / span 5;align-self:start;position:sticky;top:0;height:100vh;margin:0;z-index:2}
+.fig canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fig .lbl{position:absolute;font-family:var(--sans);font-size:var(--f-s);line-height:1.35;color:var(--ink);white-space:nowrap;opacity:0;pointer-events:none;
+  font-variant-numeric:lining-nums tabular-nums}
+.fig .lbl b{display:block;font-weight:600;font-size:22px;letter-spacing:-.01em}
+.fig .lbl.c b{color:var(--case)}
+.fig .lbl small{display:block;font-size:var(--f-xs);color:var(--ink-2)}
+.fig .lbl.mid{transform:translateX(-50%);text-align:center}
+.fig .lbl.rt{transform:translateX(-100%);text-align:right}
+.fig .key{position:absolute;left:0;right:0;top:32px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-family:var(--sans);font-size:var(--f-xs);color:var(--ink-2)}
+.fig .key i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:0;background:var(--dot)}
+.fig .key i.c{background:var(--case)} .fig .key i.r{background:var(--range)}
+.fig noscript svg{position:absolute;inset:12% 6%;width:88%;height:76%}
+html:not(.js) .fig .lbl,html:not(.js) .fig .key{display:none}
+
+.hero h1{font-size:var(--f-3xl);font-weight:300;line-height:1.02;letter-spacing:-.018em}
+.hero .who{font-size:21px;line-height:1.55;margin-top:var(--s4);max-width:30ch}
+.hero .caveat{font-family:var(--sans);font-size:var(--f-s);line-height:1.6;color:var(--ink-2);margin-top:var(--s2);max-width:42ch}
+form.find{margin-top:var(--s4);max-width:470px}
+form.find label{display:block;font-family:var(--sans);font-size:var(--f-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.field{display:flex;align-items:center;border-bottom:1px solid var(--ink);transition:border-color .4s}
+.field:focus-within{border-color:var(--case)}
+.field input{flex:1;min-width:0;border:0;background:transparent;font-family:var(--sans);font-size:var(--f-ui);color:var(--ink);padding:12px 0}
+.field input::placeholder{color:#808386}
+.field input:focus{outline:none}
+.field button{border:0;background:none;font-family:var(--sans);font-size:var(--f-s);font-weight:600;color:var(--ink);padding:12px 0 12px 16px;cursor:pointer}
+.field button:hover{color:var(--case)}
+.try{margin-top:14px;font-family:var(--sans);font-size:var(--f-s);color:var(--ink-2)}
+.try a{color:var(--ink);margin-left:10px}
+.cue{margin-top:auto;padding-top:var(--s5);font-family:var(--sans);font-size:var(--f-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.cue::after{content:"";display:block;width:1px;height:48px;background:var(--ink-2);margin-top:14px;opacity:.5}
+
+.say{font-size:clamp(30px,3vw,40px);line-height:1.18;font-weight:300;letter-spacing:-.01em;max-width:17ch}
+.say .fig-n{font-weight:500;font-size:.86em;letter-spacing:-.01em}
+.small{font-family:var(--sans);font-size:15px;line-height:1.65;color:var(--ink-2);margin-top:var(--s3);max-width:40ch}
+.step h2{font-size:var(--f-2xl);font-weight:300;letter-spacing:-.015em;line-height:1.04}
+.step .body{font-size:var(--f-b);margin-top:var(--s3);max-width:34ch}
+.meat{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--rule);max-width:420px}
+.meat .n{font-family:var(--sans);font-size:44px;font-weight:500;letter-spacing:-.02em;line-height:1;color:var(--ink);font-variant-numeric:lining-nums}
+.meat p{font-size:18px;margin-top:10px}
+.src{font-family:var(--sans);font-size:var(--f-xs);color:var(--ink-2);margin-top:var(--s3)}
+.more{margin-top:var(--s2);font-size:19px}
+
+/* ---------- groups ---------- */
+.groups{margin-top:var(--s5)}
+.step:last-child{min-height:88vh}
+.groups h2{font-size:var(--f-xl);font-weight:300;letter-spacing:-.01em;max-width:24ch}
+.glist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4);margin:var(--s4) 0 0;padding:0;list-style:none}
+.glist li{border-top:1px solid var(--ink);padding-top:var(--s2)}
+.glist li:not(:first-child){border-top-color:var(--rule)}
+.glist h3{font-family:var(--sans);font-size:var(--f-s);font-weight:600;letter-spacing:.01em;font-variant-numeric:lining-nums}
+.glist h3 span{display:block;font-family:var(--serif);font-weight:400;font-size:var(--f-l);letter-spacing:-.005em;margin-top:2px}
+.glist p{font-size:17px;line-height:1.55;color:var(--ink-2);margin-top:10px}
+
+/* ---------- tools ---------- */
+.tools{margin-top:var(--s6)}
+.sect-h{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s4)}
+.sect-h h2{font-size:var(--f-2xl);font-weight:300;letter-spacing:-.015em}
+.sect-h p{font-family:var(--sans);font-size:var(--f-s);color:var(--ink-2)}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s5)}
+.tool{display:flex;flex-direction:column;min-width:0}
+@supports (grid-template-rows:subgrid){.pair{grid-template-rows:repeat(6,auto)}.tool{display:grid;grid-row:span 6;grid-template-rows:subgrid;align-content:start}}
+.tool .pic{position:relative;background:var(--panel);aspect-ratio:5/4;margin:0}
+.tool .pic img{position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain;filter:saturate(.8)}
+.tool h3{font-size:clamp(30px,2.9vw,40px);font-weight:400;letter-spacing:-.012em;margin-top:var(--s4)}
+.tool .desc{margin-top:var(--s2);max-width:36ch}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s4) 0 0;border-top:1px solid var(--rule)}
+.nums div{padding:var(--s2) var(--s2) 0 0}
+.nums dt{font-family:var(--sans);font-size:var(--f-s);color:var(--ink-2);order:2}
+.nums dd{margin:0 0 4px;font-family:var(--sans);font-size:clamp(30px,3vw,40px);font-weight:400;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
+.nums div{display:flex;flex-direction:column}
+.lang-n{font-family:var(--sans);font-size:var(--f-s);color:var(--ink-2);margin-top:var(--s2)}
+.acts{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:var(--s4)}
+.acts .link{font-family:var(--sans);font-size:15px}
+
+/* ---------- code ---------- */
+.code{margin-top:var(--s6);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5);align-items:start;border-top:1px solid var(--rule);padding-top:var(--s5)}
+.code h2{font-size:var(--f-2xl);font-weight:300;letter-spacing:-.015em}
+.code .t{max-width:40ch}
+.rows{margin:var(--s4) 0;display:grid;gap:14px}
+.rows div{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.rows span{font-family:var(--sans);font-size:13px;color:var(--ink-2);font-variant-numeric:lining-nums}
+.rows ol{list-style:none;margin:0;padding:0;display:flex;gap:6px;flex-wrap:wrap}
+.rows li{width:10px;height:10px;border-radius:50%;background:var(--sage)}
+
+/* ---------- games ---------- */
+.games{margin-top:var(--s6);border-top:1px solid var(--rule);padding-top:var(--s5)}
+.games h2{font-size:var(--f-xl);font-weight:300;letter-spacing:-.01em}
+.games .lede{font-family:var(--sans);font-size:15px;color:var(--ink-2);margin-top:8px}
+.gl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);margin:var(--s4) 0 0;padding:0;list-style:none}
+.gl a{text-decoration:none;display:block}
+.gl .im{overflow:hidden;background:var(--panel);aspect-ratio:3/2}
+.gl img{width:100%;height:100%;object-fit:cover;filter:saturate(.7) contrast(.95);transition:transform 1.2s var(--ease),filter .8s var(--ease)}
+.gl a:hover img{transform:scale(1.03);filter:saturate(.9)}
+.gl h3{font-size:22px;font-weight:400;margin-top:14px}
+.gl p{font-family:var(--sans);font-size:13px;color:var(--ink-2);margin-top:2px;font-variant-numeric:lining-nums}
+
+/* ---------- footer ---------- */
+footer{margin-top:var(--s6);background:var(--panel);padding:var(--s5) 0 calc(var(--s5) + 40px)}
+.foot{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr) minmax(0,3fr);gap:var(--s4)}
+.foot .mark{display:inline-block;margin-bottom:12px}
+.foot p{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:48ch}
+.foot ul{list-style:none;margin:0;padding:0;font-family:var(--sans);font-size:14px;line-height:2.1}
+.foot ul a{text-decoration:none}.foot ul a:hover{color:var(--case)}
+.foot .place{font-family:var(--sans);font-size:14px;color:var(--ink-2)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--rule);font-family:var(--sans);font-size:12px;color:var(--ink-2)}
+
+@media (max-width:900px){
+  .story{grid-template-columns:minmax(0,1fr)}
+  .step.hero{grid-row:1;min-height:0;padding:var(--s4) 0 var(--s5)}
+  .fig{grid-column:1;grid-row:2;height:54svh;background:var(--paper);box-shadow:0 1px 0 var(--rule)}
+  .step{grid-row:auto;min-height:72svh;justify-content:flex-start;padding:22svh 0 var(--s4)}
+  .step:last-child{min-height:80svh}
+  .cue{display:none}
+  .pair,.code{grid-template-columns:minmax(0,1fr)}
+  .tool + .tool{margin-top:var(--s5)}
+  .glist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  .top{gap:14px 20px}
+  .mark{flex:1 0 auto}
+  .nav{order:3;width:100%;gap:4px 18px}
+  .say{font-size:28px}
+  .fig .lbl{font-size:12px}
+  .fig .lbl b{font-size:17px}
+  .fig .key{top:10px;gap:14px}
+  .glist,.gl{grid-template-columns:minmax(0,1fr)}
+  .gl{gap:var(--s4)}
+  .foot{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav class="nav" aria-label="Main"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a></nav>
+  <nav class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a></nav>
+</header>
+
+<main>
+  <div class="story" id="story">
+    <section class="step hero" aria-labelledby="h1">
+      <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+      <p class="who" data-reveal="fade" style="--d:450ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+      <p class="caveat" data-reveal="fade" style="--d:600ms">They describe whole populations, not what caused any one person’s illness.</p>
+      <form class="find" role="search" onsubmit="return false" data-reveal="fade" style="--d:750ms">
+        <label for="q">Look something up</label>
+        <div class="field"><input id="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off"><button type="submit">Search</button></div>
+        <p class="try">Try <a class="link" href="#">aspartame</a> <a class="link" href="#">stroke</a> <a class="link" href="#">coffee</a></p>
+      </form>
+    </section>
+
+    <figure class="fig" id="fig" aria-label="A field of 1,000 dots, one per person, that re-forms as you read">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <noscript>
+        <svg viewBox="0 0 580 520" role="img" aria-label="Lung cancer by age 75 per 1,000 people: smokers 100 to 120, lifelong non-smokers 4 to 5">
+          <defs>
+            <pattern id="pg" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="3" fill="#D8D6CF"/></pattern>
+            <pattern id="pr" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="3" fill="#B5432F"/></pattern>
+            <pattern id="pp" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="3" fill="#E7B3A6"/></pattern>
+          </defs>
+          <g font-family="Public Sans, sans-serif" font-size="13" fill="#1B1D1F"><text x="0" y="16">Smokers: 100 to 120 in 1,000</text><text x="0" y="286">Lifelong non-smokers: 4 to 5 in 1,000</text></g>
+          <g transform="translate(0,30)"><rect width="580" height="220" fill="url(#pg)"/><rect x="0" y="0" width="100" height="100" fill="url(#pr)"/><rect x="120" y="0" width="100" height="20" fill="url(#pp)"/></g>
+          <g transform="translate(0,300)"><rect width="580" height="220" fill="url(#pg)"/><rect x="0" y="0" width="40" height="10" fill="url(#pr)"/><rect x="40" y="0" width="10" height="10" fill="url(#pp)"/></g>
+          <g fill="#FBFAF7"><rect x="100" y="30" width="20" height="220"/><rect x="220" y="30" width="20" height="220"/><rect x="340" y="30" width="20" height="220"/><rect x="460" y="30" width="20" height="220"/><rect x="0" y="130" width="580" height="20"/>
+            <rect x="100" y="300" width="20" height="220"/><rect x="220" y="300" width="20" height="220"/><rect x="340" y="300" width="20" height="220"/><rect x="460" y="300" width="20" height="220"/><rect x="0" y="400" width="580" height="20"/></g>
+        </svg>
+      </noscript>
+      <p class="lbl mid" data-s="0,1" id="l-pop"><b>1,000 people</b><small>One dot is one person</small></p>
+      <p class="lbl c" data-s="2" id="l-100"><b>100</b><small>with lung cancer</small></p>
+      <p class="lbl" data-s="2" id="l-120"><b>to 120</b><small>the range</small></p>
+      <p class="lbl c" data-s="3" id="l-45"><b>4 to 5</b><small>lifelong<br>non-smokers</small></p>
+      <p class="lbl mid c" data-s="4" id="l-a"><b>100 to 120</b><small>smokers</small></p>
+      <p class="lbl mid c" data-s="4" id="l-b"><b>4 to 5</b><small>lifelong non-smokers</small></p>
+      <p class="key" id="key" aria-hidden="true"><span><i></i>No lung cancer by 75</span><span><i class="c"></i>Lung cancer</span><span><i class="r"></i>Range</span></p>
+    </figure>
+
+    <section class="step" aria-labelledby="idea-h">
+      <h2 id="idea-h">Same certainty, very different size</h2>
+      <p class="body">Tobacco smoking and processed meat are both in Group&nbsp;1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+    </section>
+
+    <section class="step" aria-label="Smokers">
+      <p class="say">Of 1,000 smokers, about <span class="fig-n case">100 to 120</span> get lung cancer by age 75.</p>
+      <p class="small">About 10 to 12 in every 100: one full block of the ten, and part of the next.</p>
+    </section>
+
+    <section class="step" aria-label="Lifelong non-smokers">
+      <p class="say">Of 1,000 lifelong non&#8209;smokers, about <span class="fig-n case">4 to 5</span> do.</p>
+      <p class="small">The same thousand dots. Almost all of the colour has gone.</p>
+    </section>
+
+    <section class="step" aria-label="Same label, very different risk">
+      <p class="say">Same label. Very different risk.</p>
+      <div class="meat">
+        <p class="n">18%</p>
+        <p>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</p>
+      </div>
+      <p class="src">European data. Quoted from the Cancer Evidence Explorer.</p>
+      <p class="more"><a class="link" href="#">Seven ideas for reading a health headline&nbsp;→</a></p>
+    </section>
+  </div>
+
+  <section class="groups wrap" aria-labelledby="groups-h">
+    <h2 id="groups-h" data-reveal="rise">The label says how sure the evidence is, not how large the risk is</h2>
+    <ul class="glist">
+      <li data-reveal="rise"><h3>Group 1<span>Known cause</span></h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain.</p></li>
+      <li data-reveal="rise" style="--d:100ms"><h3>Group 2A<span>Probable cause</span></h3><p>The agent probably causes cancer in people.</p></li>
+      <li data-reveal="rise" style="--d:200ms"><h3>Group 2B<span>Possible cause</span></h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></li>
+      <li data-reveal="rise" style="--d:300ms"><h3>Group 3<span>Not classifiable</span></h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></li>
+    </ul>
+  </section>
+
+  <section class="tools wrap" aria-labelledby="tools-h">
+    <div class="sect-h"><h2 id="tools-h" data-reveal="rise">The two explorers</h2><p>Free, and in 10 languages</p></div>
+    <div class="pair">
+      <article class="tool" data-reveal="rise">
+        <figure class="pic"><img src="media/tool-cancer-network.svg" width="1062" height="998" loading="lazy" alt="Network drawing: 185 exposures linked to 68 cancer types"></figure>
+        <h3>Cancer Evidence Explorer</h3>
+        <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <dl class="nums"><div><dt>exposures</dt><dd>185</dd></div><div><dt>cancer types</dt><dd>68</dd></div><div><dt>links</dt><dd>469</dd></div></dl>
+        <p class="lang-n">10 languages</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </article>
+      <article class="tool" data-reveal="rise" style="--d:150ms">
+        <figure class="pic"><img src="media/tool-chronic-network.svg" width="931" height="1006" loading="lazy" alt="Network drawing: 124 risk factors linked to 45 chronic diseases"></figure>
+        <h3>Chronic Disease Evidence Explorer</h3>
+        <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="nums"><div><dt>risk factors</dt><dd>124</dd></div><div><dt>diseases</dt><dd>45</dd></div><div><dt>graded links</dt><dd>356</dd></div></dl>
+        <p class="lang-n">10 languages</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="code wrap" aria-labelledby="code-h">
+    <h2 id="code-h" data-reveal="rise">Code Against Cancer</h2>
+    <div data-reveal="rise" style="--d:120ms">
+      <p class="t">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+      <div class="rows" aria-hidden="true">
+        <div><span>Europe · 14</span><ol><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol></div>
+        <div><span>Latin America and the Caribbean · 17</span><ol><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol></div>
+      </div>
+      <a class="btn" href="#">Read the recommendations</a>
+    </div>
+  </section>
+
+  <section class="games wrap" aria-labelledby="games-h">
+    <h2 id="games-h">For schools and families</h2>
+    <p class="lede">Learning by playing: three games.</p>
+    <ul class="gl">
+      <li data-reveal="rise"><a href="#"><div class="im"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt="Sol &amp; the UV Shield Quest: a cartoon hero in a sunny meadow"></div><h3>Sol &amp; the UV Shield Quest</h3><p>Skin cancer · ages 6–12</p></a></li>
+      <li data-reveal="rise" style="--d:100ms"><a href="#"><div class="im"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt="The Lung Detective: a living room full of clues"></div><h3>The Lung Detective</h3><p>Lung cancer · ages 10–16</p></a></li>
+      <li data-reveal="rise" style="--d:200ms"><a href="#"><div class="im"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt="A Town of 1,000: an illustrated town by a river"></div><h3>A Town of 1,000</h3><p>Breast cancer · ages 14+</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><a class="mark" href="#">EpiDetective</a>
+      <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div>
+    <ul><li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li></ul>
+    <p class="place">Lyon, France</p>
+  </div>
+  <p class="wrap credits">Images: network drawings from the two explorers; screenshots from the three EpiDetective games. The dot field is drawn on this page, one dot per person.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var cv=document.getElementById("field"),fig=document.getElementById("fig");if(!cv||!cv.getContext)return;
+  var ctx=cv.getContext("2d"),still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var steps=[].slice.call(document.querySelectorAll("#story .step")),labels=[].slice.call(fig.querySelectorAll(".lbl")),key=document.getElementById("key");
+  var N=2000,W=0,H=0,dpr=1,S=[],delay=new Float32Array(N),shown=0,target=0,raf=0,intro=still?1:0;
+  var COL=[[216,214,207],[181,67,47],[231,179,166],[170,182,158]],GA=Math.PI*(3-Math.sqrt(5));
+  for(var i=0;i<N;i++){var h=Math.sin(i*12.9898+78.233)*43758.5453;delay[i]=(h-Math.floor(h))*.45+((i%1000)/1000)*.15;}
+  function seed(pos,off,cx,cy,rad){for(var i=0;i<1000;i++){var r=rad*Math.sqrt((i+.5)/1000),a=i*GA-Math.PI/2;pos[(off+i)*2]=cx+r*Math.cos(a);pos[(off+i)*2+1]=cy+r*Math.sin(a);}}
+  function layout(){
+    var b=fig.getBoundingClientRect();W=Math.round(b.width);H=Math.round(b.height);
+    dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var narrow=W<520,cx=W/2,cy=H*(narrow?.47:.47),rad=Math.min(W*.4,H*(narrow?.38:.31));
+    var pS=new Float32Array(N*2),pB=new Float32Array(N*2),pT=new Float32Array(N*2);
+    seed(pS,0,cx,cy,rad);seed(pS,1000,cx,cy,rad);
+    var nc=narrow?2:5,nr=narrow?5:2,g=narrow?Math.min(W*.5/22.2,H*.84/58.8):Math.min(W*.88/58.8,H*.5/22.2);
+    var bw=(nc*12.2-2.2)*g,bh=(nr*12.2-2.2)*g,x0=cx-bw/2+g/2,y0=cy-bh/2+g/2;
+    for(i=0;i<1000;i++){var blk=Math.floor(i/100),k=i%100,bx=blk%nc,by=Math.floor(blk/nc);
+      pB[i*2]=x0+bx*12.2*g+(k%10)*g;pB[i*2+1]=y0+by*12.2*g+Math.floor(k/10)*g;pB[(1000+i)*2]=pB[i*2];pB[(1000+i)*2+1]=pB[i*2+1];}
+    var r2=Math.min(W*.2,H*(narrow?.3:.25));seed(pT,0,W*.27,cy,r2);seed(pT,1000,W*.73,cy,r2);
+    var rs=rad*Math.sqrt(Math.PI/1000)*.36,rb=g*.33,rt=r2*Math.sqrt(Math.PI/1000)*.36;
+    function cols(a,b2,c,d){var o=new Uint8Array(N);for(var j=0;j<N;j++){var m=j%1000,first=j<1000;
+      if(first){if(m<a)o[j]=1;else if(m<b2)o[j]=2;}else{if(m<c)o[j]=1;else if(m<d)o[j]=2;}}return o;}
+    var sage=new Uint8Array(N).fill(3),none=cols(0,0,0,0),sm=cols(100,120,0,0),ns=cols(4,5,0,0),both=cols(100,120,4,5);
+    S=[{p:pS,c:sage,r:rs,b:0},{p:pS,c:sage,r:rs,b:0},{p:pB,c:sm,r:rb,b:0},{p:pB,c:ns,r:rb,b:0},{p:pT,c:both,r:rt,b:1}];
+    /* label positions */
+    place("l-pop",cx,cy+rad+22);
+    if(narrow){place("l-100",x0-g-12,y0-g/2-3,1);place("l-120",x0+22.2*g+12,y0-g/2-3);place("l-45",x0-g-12,y0-g/2-3,1);}
+    else{place("l-100",x0-g/2,y0-g/2-14,0,1);place("l-120",x0+12.2*g-g/2,y0-g/2-14,0,1);place("l-45",x0-g/2,y0-g/2-14,0,1);}
+    place("l-a",W*.27,cy+r2+20);place("l-b",W*.73,cy+r2+20);
+  }
+  function place(id,x,y,right,above){var e=document.getElementById(id);if(!e)return;e.style.left=x.toFixed(1)+"px";e.style.top=y.toFixed(1)+"px";
+    if(!e.classList.contains("mid"))e.style.transform="translate("+(right?"-100%":"0")+","+(above?"-100%":"0")+")";if(right)e.style.textAlign="right";else if(!e.classList.contains("mid"))e.style.textAlign="left";}
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  function stageFromScroll(){
+    var line=innerHeight*(W<520||innerWidth<=900?.74:.5),c=steps.map(function(s){var r=s.getBoundingClientRect();return r.top+r.height/2;});
+    if(line<=c[0])return 0;for(var k=0;k<c.length-1;k++){if(line<c[k+1]){var f=(line-c[k])/(c[k+1]-c[k]);f=Math.min(1,Math.max(0,(f-.22)/.56));return k+f;}}return c.length-1;
+  }
+  function draw(st){
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    var a=Math.floor(st),u=st-a,A=S[Math.min(a,4)],B=S[Math.min(a+1,4)],last="";
+    for(var i=0;i<N;i++){
+      var t=Math.min(1,Math.max(0,(u-delay[i]*.6)/.4));t=ease(t);
+      var grow=intro>=1?1:Math.min(1,Math.max(0,(intro*1.25-(i%1000)/1000)*5));if(grow<=0)continue;
+      var al=(i<1000?1:A.b+(B.b-A.b)*t);if(al<.01)continue;
+      var x=A.p[i*2]+(B.p[i*2]-A.p[i*2])*t,y=A.p[i*2+1]+(B.p[i*2+1]-A.p[i*2+1])*t,r=A.r+(B.r-A.r)*t;
+      var ca=COL[A.c[i]],cb=COL[B.c[i]],tc=Math.min(1,Math.max(0,(u-.25)/.5));
+      var col="rgba("+Math.round(ca[0]+(cb[0]-ca[0])*tc)+","+Math.round(ca[1]+(cb[1]-ca[1])*tc)+","+Math.round(ca[2]+(cb[2]-ca[2])*tc)+","+al.toFixed(2)+")";
+      if(col!==last){ctx.fillStyle=col;last=col;}
+      ctx.beginPath();ctx.arc(x,y,r*grow,0,6.2832);ctx.fill();
+    }
+    key.style.opacity=Math.min(1,Math.max(0,(st-1.3)/.6)).toFixed(3);
+    labels.forEach(function(l){var ss=l.getAttribute("data-s").split(","),o=0;ss.forEach(function(s){o=Math.max(o,1-Math.abs(st-(+s))*2.6);});l.style.opacity=Math.max(0,o).toFixed(3);});
+  }
+  function tick(){raf=0;var d=target-shown;if(Math.abs(d)<.002)shown=target;else{shown+=d*.12;raf=requestAnimationFrame(tick);}draw(shown);}
+  function onScroll(){var s=stageFromScroll();target=still?Math.round(s):s;if(still){shown=target;draw(shown);return;}if(!raf)raf=requestAnimationFrame(tick);}
+  layout();shown=target=still?Math.round(stageFromScroll()):stageFromScroll();draw(shown);
+  if(!still){var t0=performance.now();(function bloom(now){intro=Math.min(1,(now-t0)/1800);draw(shown);if(intro<1)requestAnimationFrame(bloom);})(t0);}
+  addEventListener("scroll",onScroll,{passive:true});
+  var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){layout();draw(shown);onScroll();},120);});
+})();
+</script>
+</body>
+</html>
