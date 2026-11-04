@@ -57,10 +57,22 @@
     if (!("IntersectionObserver" in window) || still) {
       targets.forEach(function (t) { t.classList.add("is-in"); });
     } else {
+      /* mask and wipe clip their element to nothing, which Chromium counts as never visible,
+         so those two are observed through their parent and revealed together with it */
+      var proxied = [];
       var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("is-in");
+          proxied.forEach(function (p) { if (p[1] === e.target) p[0].classList.add("is-in"); });
+          io.unobserve(e.target);
+        });
       }, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" });
-      targets.forEach(function (t) { io.observe(t); });
+      targets.forEach(function (t) {
+        var kind = t.getAttribute("data-reveal");
+        if ((kind === "mask" || kind === "wipe") && t.parentElement) { proxied.push([t, t.parentElement]); io.observe(t.parentElement); }
+        else io.observe(t);
+      });
     }
 
     /* count up */
