@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>19 · Collection — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..700&family=Wix+Madefor+Text:ital,wght@0,400..700;1,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --white:#FFFFFF; --ink:#111111; --wall:#F2F0EC; --ox:#7A1F1F;
+  --grey:#5C5853; --rule:#E2DFD9; --wall-2:#E8E5DF; --ox-lt:#F3E9E6;
+  --display:"Wix Madefor Display","Helvetica Neue",Arial,sans-serif;
+  --text:"Wix Madefor Text","Helvetica Neue",Arial,sans-serif;
+  /* type scale 13 / 15 / 18 / 22 / 32 / 48 / 72 / 112 */
+  --t-xs:13px; --t-s:15px; --t-b:18px; --t-m:22px; --t-l:clamp(26px,2.4vw,32px); --t-xl:clamp(34px,3.6vw,48px); --t-2xl:clamp(40px,5vw,72px); --t-3xl:clamp(64px,8.4vw,120px);
+  /* spacing */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,11vw,176px);
+  --gut:clamp(20px,4.4vw,64px); --max:1360px; --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--text);font-size:var(--t-b);line-height:1.6;-webkit-font-smoothing:antialiased;font-synthesis:none;overflow-x:clip}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+ul,ol,dl,dd{margin:0;padding:0}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--ox);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:background-size .6s var(--ease),color .3s}
+.ul:hover{background-size:0 1px;background-position:100% 100%;color:var(--ox)}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--text);font-size:var(--t-s);font-weight:600;color:var(--white);background:var(--ink);text-decoration:none;padding:15px 24px 16px;border-radius:2px;transition:background .5s var(--ease),color .5s var(--ease)}
+.btn::after{content:"→";transition:transform .6s var(--ease)}
+.btn:hover{background:var(--ox)}
+.btn:hover::after{transform:translateX(4px)}
+
+/* ---------- header ---------- */
+.bar{border-bottom:1px solid var(--rule);background:var(--white)}
+.bar .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:12px 36px;min-height:76px;padding-top:12px;padding-bottom:12px}
+.mark{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+.bar nav ul,.lang{list-style:none;display:flex;flex-wrap:wrap;gap:6px 28px;font-size:var(--t-s);font-weight:500}
+.bar nav a,.lang a{text-decoration:none;color:var(--ink);transition:color .3s}
+.bar nav a:hover,.lang a:hover{color:var(--ox)}
+.lang{gap:6px 14px;font-size:var(--t-xs);color:var(--grey)}
+.lang a{color:var(--grey)}
+.lang [aria-current]{color:var(--ink);font-weight:700}
+
+/* ---------- hero: the object on the wall ---------- */
+.hero{background:var(--wall)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--s4) clamp(32px,5vw,96px);align-items:center;min-height:calc(100svh - 77px);padding-top:clamp(32px,4vw,56px);padding-bottom:clamp(32px,4vw,56px)}
+.hero h1{font-size:var(--t-2xl);line-height:1.02;letter-spacing:-.034em;font-weight:500;max-width:15ch}
+.who{margin-top:var(--s3);font-size:var(--t-m);line-height:1.5;max-width:30ch}
+.caveat{margin-top:var(--s2);color:var(--grey);font-size:var(--t-s);max-width:44ch}
+.search{margin-top:var(--s4);max-width:540px}
+.search label{display:block;font-size:var(--t-xs);font-weight:600;margin-bottom:10px}
+.field{display:flex;background:var(--white);border:1px solid #CFCBC4;border-radius:2px;transition:border-color .3s}
+.field:focus-within{border-color:var(--ink);outline:2px solid var(--ox);outline-offset:2px}
+.field input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:16px;color:var(--ink);padding:15px 16px}
+.field input::placeholder{color:#77736D}
+.field input:focus{outline:none}
+.field button{border:0;background:var(--ink);color:var(--white);font-size:var(--t-s);font-weight:600;padding:0 22px;cursor:pointer;transition:background .4s var(--ease)}
+.field button:hover{background:var(--ox)}
+.try{margin-top:14px;font-size:var(--t-s);color:var(--grey)}
+.try a{color:var(--ink);margin-left:8px}
+
+.object{margin:0;justify-self:center;display:flex;flex-direction:column;align-items:flex-start}
+.object img{height:min(66svh,780px);width:auto;max-width:100%;object-fit:contain;box-shadow:0 2px 3px rgba(17,17,17,.08),0 30px 60px -36px rgba(17,17,17,.45)}
+.objlabel{margin-top:20px;font-size:var(--t-xs);line-height:1.5;color:var(--grey);display:grid;gap:1px;padding-left:12px;border-left:2px solid var(--ox)}
+.objlabel b{color:var(--ink);font-weight:600}
+.objlabel i{color:var(--ink)}
+
+/* ---------- one idea ---------- */
+.idea{padding-top:var(--s6)}
+.idea-head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--s3) clamp(32px,6vw,120px);align-items:end}
+.idea h2{font-size:var(--t-xl);line-height:1.04;letter-spacing:-.028em;max-width:15ch}
+.idea-head p{font-size:var(--t-m);line-height:1.5;max-width:36ch}
+.exhibits{margin-top:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,3vw,48px)}
+.ex{border-top:2px solid var(--ink);padding-top:var(--s3);min-width:0}
+.ex header{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2)}
+.ex h3{font-size:var(--t-m);font-weight:600;letter-spacing:-.01em}
+.grp{font-size:var(--t-xs);font-weight:700;color:var(--ox);letter-spacing:.02em}
+.big{margin-top:var(--s4);font-family:var(--display);font-weight:500;font-size:var(--t-3xl);line-height:.92;letter-spacing:-.045em;font-variant-numeric:lining-nums tabular-nums}
+.unit{margin-top:var(--s2);font-size:var(--t-b);max-width:34ch}
+.vs{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--rule);display:flex;align-items:baseline;gap:var(--s2);font-size:var(--t-s);color:var(--grey)}
+.vs b{font-family:var(--display);font-size:var(--t-l);font-weight:500;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.idea-foot{margin-top:var(--s4);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s2) var(--s4);font-size:var(--t-s);color:var(--grey)}
+.idea-foot a{color:var(--ink);font-size:var(--t-b);font-weight:500}
+
+/* ---------- groups ---------- */
+.groups{margin-top:var(--s6);background:var(--wall);padding:clamp(64px,8vw,120px) 0}
+.groups h2{font-size:var(--t-l);letter-spacing:-.02em;max-width:26ch;line-height:1.2}
+.glist{list-style:none;margin-top:var(--s5);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px)}
+.glist li{border-top:1px solid #CFCBC4;padding-top:var(--s3);min-width:0}
+.glist .g{font-family:var(--display);font-weight:500;font-size:clamp(48px,5vw,72px);line-height:1;letter-spacing:-.04em;font-variant-numeric:lining-nums}
+.glist li:first-child .g{color:var(--ox)}
+.glist h3{margin-top:var(--s3);font-size:var(--t-m);font-weight:600}
+.glist p{margin-top:var(--s1);font-size:var(--t-s);color:var(--grey)}
+
+/* ---------- galleries (the explorers) ---------- */
+.galleries{padding-top:var(--s6)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);flex-wrap:wrap}
+.sec-head h2{font-size:var(--t-xl);letter-spacing:-.028em;line-height:1.04}
+.sec-head p{color:var(--grey);font-size:var(--t-s)}
+.gallery{margin-top:var(--s5);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s4) clamp(32px,5vw,88px);align-items:center}
+.gallery + .gallery{margin-top:clamp(72px,8vw,128px)}
+.gallery.flip{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.gallery.flip .g-img{order:2}
+.g-img{margin:0;background:var(--wall);aspect-ratio:5/4;position:relative;overflow:hidden}
+.g-img img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:saturate(.85);transition:transform 1.6s var(--ease)}
+.gallery:hover .g-img img{transform:scale(1.03)}
+.g-img figcaption{position:absolute;left:20px;bottom:16px;font-size:12px;color:var(--grey)}
+.g-text{min-width:0}
+.g-text .kicker{font-size:var(--t-xs);font-weight:600;color:var(--ox);margin-bottom:var(--s2)}
+.g-text h3{font-size:var(--t-xl);line-height:1.04;letter-spacing:-.028em}
+.g-text .desc{margin-top:var(--s3);max-width:40ch}
+.figs{margin-top:var(--s4);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.figs div{padding:var(--s2) var(--s2) 0 0}
+.figs div + div{padding-left:var(--s2);border-left:1px solid var(--rule)}
+.figs dd{font-family:var(--display);font-weight:500;font-size:clamp(36px,3.4vw,52px);line-height:1;letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums}
+.figs dt{margin-top:8px;font-size:var(--t-xs);color:var(--grey)}
+.figs{grid-template-areas:none}
+.figs div{display:flex;flex-direction:column-reverse;justify-content:flex-end}
+.langs{margin-top:var(--s3);font-size:var(--t-s);color:var(--grey)}
+.acts{margin-top:var(--s4);display:flex;align-items:center;flex-wrap:wrap;gap:var(--s2) var(--s4)}
+.acts .ul{font-size:var(--t-s);font-weight:500}
+
+/* ---------- the row of objects ---------- */
+.objects{padding-top:var(--s6)}
+.row-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--s3)}
+.row-head h2{font-size:var(--t-xl);letter-spacing:-.028em;line-height:1.04}
+.row-head p{margin-top:var(--s2);color:var(--grey);max-width:52ch}
+.row-nav{display:flex;gap:8px}
+.row-nav button{width:48px;height:48px;border:1px solid #CFCBC4;background:var(--white);border-radius:50%;cursor:pointer;color:var(--ink);font-size:18px;transition:border-color .3s,background .3s}
+.row-nav button:hover{border-color:var(--ink)}
+.row-nav button:disabled{opacity:.35;cursor:default}
+.row{margin-top:var(--s4);display:flex;gap:clamp(16px,2vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:max(var(--gut),calc((100% - var(--max)) / 2 + var(--gut)));
+  padding:0 var(--gut) 20px max(var(--gut),calc((100% - var(--max)) / 2 + var(--gut)));scrollbar-width:thin;scrollbar-color:#CFCBC4 transparent;outline-offset:-2px}
+.row::after{content:"";flex:0 0 max(1px,calc((100% - var(--max)) / 2))}
+.obj{--w:clamp(250px,25vw,360px);margin:0;flex:0 0 var(--w);scroll-snap-align:start}
+.o-img{background:var(--wall);height:calc(var(--w) * 1.25);display:grid;place-items:center;padding:9%;min-height:0}
+.o-img img{max-height:100%;max-width:100%;width:auto;height:auto;box-shadow:0 1px 2px rgba(17,17,17,.1),0 14px 28px -20px rgba(17,17,17,.5)}
+.obj figcaption{margin-top:var(--s2);font-size:var(--t-xs);line-height:1.5;color:var(--grey);display:grid;gap:1px}
+.obj figcaption b{font-size:var(--t-s);font-weight:600;color:var(--ink)}
+.obj figcaption i{color:var(--ink)}
+
+/* ---------- what you can do ---------- */
+.act{margin-top:var(--s6);background:var(--ox);color:var(--white)}
+.act .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--s4) clamp(32px,6vw,120px);padding-top:clamp(72px,9vw,136px);padding-bottom:clamp(72px,9vw,136px);align-items:end}
+.act .kicker{font-size:var(--t-xs);font-weight:600;color:#EBD9D5;margin-bottom:var(--s2)}
+.act h2{font-size:var(--t-2xl);letter-spacing:-.032em;line-height:1}
+.act p{font-size:var(--t-b);max-width:44ch;color:#F7EEEC}
+.act .btn{margin-top:var(--s4);background:var(--white);color:var(--ink)}
+.act .btn:hover{background:var(--wall);color:var(--ox)}
+.act :focus-visible{outline-color:var(--white)}
+
+/* ---------- games ---------- */
+.games{padding-top:var(--s6)}
+.games .sec-head h2{font-size:var(--t-l)}
+.glist2{list-style:none;margin-top:var(--s4);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);max-width:980px}
+.glist2 a{text-decoration:none;display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--s2);align-items:center}
+.glist2 .shot{aspect-ratio:1;overflow:hidden;background:var(--wall)}
+.glist2 img{width:100%;height:100%;object-fit:cover;filter:saturate(.7);transition:filter .8s var(--ease),transform 1.2s var(--ease)}
+.glist2 a:hover img{filter:none;transform:scale(1.04)}
+.glist2 b{display:block;font-family:var(--display);font-weight:600;font-size:var(--t-b);line-height:1.25}
+.glist2 small{display:block;margin-top:4px;font-size:var(--t-xs);color:var(--grey)}
+
+/* ---------- footer ---------- */
+footer{margin-top:var(--s6);background:var(--ink);color:#E9E7E3;padding:var(--s5) 0 calc(var(--s5) + 48px)}
+.foot{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr) minmax(0,3fr);gap:var(--s4)}
+.foot .mark{color:var(--white)}
+.foot p{margin-top:var(--s2);font-size:var(--t-s);color:#C9C6C0;max-width:52ch}
+.foot ul{list-style:none;display:grid;gap:8px;font-size:var(--t-s);align-content:start}
+.foot ul a{text-decoration:none;color:#E9E7E3}
+.foot ul a:hover{color:var(--white);text-decoration:underline}
+.place{font-size:var(--t-s);color:#C9C6C0}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid #2E2D2B;font-size:12px;line-height:1.65;color:#A9A6A0;max-width:120ch}
+footer :focus-visible{outline-color:var(--white)}
+
+/* ---------- motion ---------- */
+html.js:not(.still) .object img{transition:opacity 1600ms var(--ease),transform 1800ms var(--ease)}
+html.js:not(.still) .object:not(.is-in) img{opacity:0;transform:scale(1.035)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .glist{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s5)}
+  .gallery{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .glist2{grid-template-columns:minmax(0,1fr)}
+  .glist2 a{grid-template-columns:96px minmax(0,1fr)}
+}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+  .object{order:-1;justify-self:start}
+  .object img{height:auto;max-height:52svh}
+  .idea-head,.act .wrap{grid-template-columns:minmax(0,1fr)}
+  .exhibits{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+  .gallery{grid-template-columns:minmax(0,1fr)}
+  .gallery.flip{grid-template-columns:minmax(0,1fr)}
+  .gallery.flip .g-img{order:0}
+  .foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:560px){
+  .bar .wrap{gap:10px 20px}
+  .bar nav ul{gap:6px 18px;font-size:14px}
+  .bar nav{order:3;width:100%}
+  .lang{order:2}
+  .hero .object img{max-height:32svh}
+  .objlabel{margin-top:12px}
+  .glist{grid-template-columns:minmax(0,1fr)}
+  .row-head{grid-template-columns:minmax(0,1fr)}
+  .row-nav{display:none}
+  .obj{--w:72vw}
+  .figs dd{font-size:34px}
+  .foot{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#tools">Tools</a></li><li><a href="#idea">Reading the evidence</a></li><li><a href="#act">Code Against Cancer</a></li><li><a href="#games">Games</a></li><li><a href="#">About</a></li>
+    </ul></nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true" lang="en">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero: one object on the wall, with its museum label -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="who" data-reveal="fade" style="--d:600ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat" data-reveal="fade" style="--d:750ms">They describe whole populations, not what caused any one person’s illness.</p>
+        <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:900ms">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+      </div>
+      <figure class="object" data-reveal="fade">
+        <img src="media/plate-hooke-cork-1000.webp" srcset="media/plate-hooke-cork-1000.webp 683w, media/plate-hooke-cork.webp 1367w" sizes="(max-width:860px) 70vw, 40vw" width="683" height="1000" alt="Engraved plate from Robert Hooke’s Micrographia: a large black circle seen through the microscope, holding two slices of cork whose tiny cells look like honeycomb; below, a sprig of a sensitive plant.">
+        <figcaption class="objlabel"><b>Robert Hooke</b><i>Micrographia, Schem. XI (cork)</i><span>1665 · Engraving; photograph: Wellcome Collection · CC BY 4.0</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- One idea -->
+  <section class="wrap idea" id="idea" aria-labelledby="h-idea">
+    <div class="idea-head">
+      <h2 id="h-idea" data-reveal="rise">Same certainty, very different size</h2>
+      <p data-reveal="fade" style="--d:150ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+    </div>
+    <div class="exhibits">
+      <article class="ex" data-reveal="rise">
+        <header><h3>Tobacco smoking</h3><span class="grp">Group 1 · Known cause</span></header>
+        <p class="big">100–120</p>
+        <p class="unit">in 1,000 smokers get lung cancer by age 75: about 10 to 12 in 100.</p>
+        <p class="vs"><b>4–5</b><span>in 1,000 lifelong non-smokers do.</span></p>
+      </article>
+      <article class="ex" data-reveal="rise" style="--d:160ms">
+        <header><h3>Processed meat</h3><span class="grp">Group 1 · Known cause</span></header>
+        <p class="big">18%</p>
+        <p class="unit">Each 50 grams eaten every day raises the risk of bowel cancer by 18%.</p>
+      </article>
+    </div>
+    <div class="idea-foot" data-reveal="fade"><span>European data. Quoted from the Cancer Evidence Explorer.</span><a class="ul" href="#">Seven ideas for reading a health headline →</a></div>
+  </section>
+
+  <!-- The four groups -->
+  <section class="groups" aria-labelledby="h-groups">
+    <div class="wrap">
+      <h2 id="h-groups" data-reveal="rise">The label says how sure the evidence is, not how large the risk is.</h2>
+      <ol class="glist">
+        <li data-reveal="rise"><span class="g">1</span><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></li>
+        <li data-reveal="rise" style="--d:120ms"><span class="g">2A</span><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></li>
+        <li data-reveal="rise" style="--d:240ms"><span class="g">2B</span><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></li>
+        <li data-reveal="rise" style="--d:360ms"><span class="g">3</span><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- The explorers, as permanent galleries -->
+  <section class="wrap galleries" id="tools" aria-labelledby="h-tools">
+    <div class="sec-head"><h2 id="h-tools" data-reveal="rise">The explorers</h2><p data-reveal="fade">Free, and in 10 languages</p></div>
+
+    <article class="gallery" aria-labelledby="h-cee">
+      <figure class="g-img" data-reveal="fade"><img src="media/tool-cancer-network.svg" width="1062" height="998" alt="Network drawing of the Cancer Evidence Explorer: exposures linked to the cancer types they can cause." loading="lazy"><figcaption>469 links between 185 exposures and 68 cancer types</figcaption></figure>
+      <div class="g-text" data-reveal="rise" style="--d:150ms">
+        <p class="kicker">From the IARC Monographs</p>
+        <h3 id="h-cee">Cancer Evidence Explorer</h3>
+        <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link.</p>
+        <dl class="figs"><div><dt>exposures</dt><dd>185</dd></div><div><dt>cancer types</dt><dd>68</dd></div><div><dt>links</dt><dd>469</dd></div></dl>
+        <p class="langs">10 languages</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+      </div>
+    </article>
+
+    <article class="gallery flip" aria-labelledby="h-cdee">
+      <figure class="g-img" data-reveal="fade"><img src="media/tool-chronic-network.svg" width="931" height="1006" alt="Network drawing of the Chronic Disease Evidence Explorer: risk factors linked to diseases, grouped by kind." loading="lazy"><figcaption>356 graded links between 124 risk factors and 45 diseases</figcaption></figure>
+      <div class="g-text" data-reveal="rise" style="--d:150ms">
+        <p class="kicker">Graded by how strong the evidence is</p>
+        <h3 id="h-cdee">Chronic Disease Evidence Explorer</h3>
+        <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="figs"><div><dt>risk factors</dt><dd>124</dd></div><div><dt>diseases</dt><dd>45</dd></div><div><dt>graded links</dt><dd>356</dd></div></dl>
+        <p class="langs">10 languages</p>
+        <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- A calm horizontal row of objects -->
+  <section class="objects" aria-labelledby="h-obj">
+    <div class="wrap row-head">
+      <div><h2 id="h-obj" data-reveal="rise">Nature, observed</h2><p data-reveal="fade">Plates of plants and sea life from the natural-history books of the past, with their labels.</p></div>
+      <div class="row-nav" aria-hidden="false"><button type="button" class="prev" aria-label="Previous object">←</button><button type="button" class="next" aria-label="Next object">→</button></div>
+    </div>
+    <div class="row" tabindex="0" role="region" aria-label="Plates, scroll sideways">
+      <figure class="obj"><div class="o-img"><img src="media/plate-redoute-lily-1000.webp" width="687" height="1000" alt="Redouté’s turban lily: nodding red flowers on a tall leafy stem, with its bulb drawn beside it." loading="lazy"></div>
+        <figcaption><b>Pierre-Joseph Redouté</b><i>Lillium pomponium (turban lily)</i><span>Les Liliacées, plate 7, 1802–16</span><span>Cleveland Museum of Art · Public domain</span></figcaption></figure>
+      <figure class="obj"><div class="o-img"><img src="media/plate-haeckel-jellyfish-1000.webp" width="744" height="1000" alt="Haeckel’s plate of six pale blue jellyfish with long curling tentacles." loading="lazy"></div>
+        <figcaption><b>Ernst Haeckel; lithography Adolf Giltsch</b><i>Leptomedusae</i><span>Kunstformen der Natur, 1899–1904</span><span>Public domain</span></figcaption></figure>
+      <figure class="obj"><div class="o-img"><img src="media/plate-redoute-rose-1000.webp" width="707" height="1000" alt="Redouté’s white moss rose: one open bloom, mossy buds and serrated leaves." loading="lazy"></div>
+        <figcaption><b>Pierre-Joseph Redouté</b><i>Rosa muscosa alba</i><span>Les Roses, 1817–24</span><span>Public domain</span></figcaption></figure>
+      <figure class="obj"><div class="o-img"><img src="media/plate-haeckel-desmids-1000.webp" width="728" height="1000" alt="Haeckel’s plate of desmids: green microscopic algae in star and crescent shapes." loading="lazy"></div>
+        <figcaption><b>Ernst Haeckel; lithography Adolf Giltsch</b><i>Desmidiea</i><span>Kunstformen der Natur, 1899–1904</span><span>Public domain</span></figcaption></figure>
+      <figure class="obj"><div class="o-img"><img src="media/plate-bradbury-3-1000.webp" width="645" height="1000" alt="A nature-printed maidenhair fern: three sprays of fan-shaped green leaflets on fine dark stems." loading="lazy"></div>
+        <figcaption><b>Henry Bradbury, nature-printing; Thomas Moore</b><i>Adiantum capillus-veneris</i><span>The Ferns of Great Britain and Ireland, 1855</span><span>Public domain</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- What you can do -->
+  <section class="act" id="act" aria-labelledby="h-act">
+    <div class="wrap">
+      <div><p class="kicker" data-reveal="fade">What you can do</p><h2 id="h-act" data-reveal="rise">Code Against Cancer</h2></div>
+      <div data-reveal="fade" style="--d:200ms">
+        <p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+        <a class="btn" href="#">Read the recommendations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section class="wrap games" id="games" aria-labelledby="h-games">
+    <div class="sec-head"><h2 id="h-games" data-reveal="rise">For schools and families</h2><p data-reveal="fade">Learning by playing: three games</p></div>
+    <ul class="glist2" data-reveal="fade" style="--d:150ms">
+      <li><a href="#"><span class="shot"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Screenshot of Sol &amp; the UV Shield Quest" loading="lazy"></span><span><b>Sol &amp; the UV Shield Quest</b><small>Skin cancer · ages 6–12</small></span></a></li>
+      <li><a href="#"><span class="shot"><img src="media/game-lung-detective.webp" width="720" height="405" alt="Screenshot of The Lung Detective" loading="lazy"></span><span><b>The Lung Detective</b><small>Lung cancer · ages 10–16</small></span></a></li>
+      <li><a href="#"><span class="shot"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="Screenshot of A Town of 1,000" loading="lazy"></span><span><b>A Town of 1,000</b><small>Breast cancer · ages 14+</small></span></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="mark" href="#">EpiDetective</a>
+        <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div>
+      <ul><li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li></ul>
+      <p class="place">Lyon, France</p>
+    </div>
+    <p class="credits">Image credits. Robert Hooke, Micrographia (1665), Schem. XI (cork); Robert Hooke (engraving), photograph: Wellcome Collection; CC BY 4.0. Pierre-Joseph Redouté, Les Liliacées, plate 7 (1802–16), Lillium pomponium (turban lily); Pierre-Joseph Redouté (artist), Cleveland Museum of Art (source); public domain. Pierre-Joseph Redouté, Les Roses (1817–24), Rosa muscosa alba; public domain. Ernst Haeckel (lithography Adolf Giltsch), Kunstformen der Natur (1899–1904), Leptomedusae and Desmidiea; public domain. Henry Bradbury (nature-printing), Thomas Moore, The Ferns of Great Britain and Ireland (1855), Adiantum capillus-veneris; public domain. Network drawings from the two EpiDetective explorers; screenshots from the three EpiDetective games.</p>
+  </div>
+</footer>
+
+<script>
+/* the object row: arrow buttons scroll by one object */
+(function(){
+  var row=document.querySelector('.row'), prev=document.querySelector('.row-nav .prev'), next=document.querySelector('.row-nav .next');
+  if(!row||!prev||!next)return;
+  var smooth=!document.documentElement.classList.contains('still');
+  function step(){var o=row.querySelector('.obj');return o?o.getBoundingClientRect().width+parseFloat(getComputedStyle(row).columnGap||24):320;}
+  function sync(){prev.disabled=row.scrollLeft<4;next.disabled=row.scrollLeft+row.clientWidth>=row.scrollWidth-4;}
+  prev.addEventListener('click',function(){row.scrollBy({left:-step(),behavior:smooth?'smooth':'auto'});});
+  next.addEventListener('click',function(){row.scrollBy({left:step(),behavior:smooth?'smooth':'auto'});});
+  row.addEventListener('scroll',function(){requestAnimationFrame(sync);},{passive:true});
+  addEventListener('resize',sync);sync();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12 · Kunstformen — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --paper:#F2EEE3; --ink:#20211F; --verdigris:#3E6E68; --ochre:#B08A3E;
+  --mat:#FAF8F2;                         /* passe-partout, a shade lighter than the wall */
+  --ink-2:rgba(32,33,31,.72);            /* ink at 72% on paper, 7.6:1 */
+  --rule:rgba(32,33,31,.14);
+  --display:"Gloock","Bodoni 72","Didot",Georgia,serif;
+  --sans:"Source Sans 3","Source Sans Pro",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  /* type scale 12 / 15 / 18 / 24 / 32 / 48 / 64 / 96 */
+  --t-12:12px; --t-15:15px; --t-18:18px; --t-24:24px; --t-32:clamp(26px,2.3vw,32px);
+  --t-48:clamp(34px,3.4vw,50px); --t-64:clamp(38px,4.5vw,66px); --t-96:clamp(56px,6.6vw,100px);
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px; --section:clamp(120px,14vw,210px);
+  --gut:clamp(20px,4.4vw,72px); --col-gap:clamp(16px,2vw,32px); --max:1360px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--t-18);line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;line-height:1.06;text-wrap:balance;font-synthesis:none}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--verdigris);outline-offset:4px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
+.grid > *{min-width:0}
+.num{font-family:var(--display);font-variant-numeric:lining-nums;letter-spacing:-.01em;line-height:1}
+.small{font-size:var(--t-15);line-height:1.55;color:var(--ink-2)}
+.cap{font-size:var(--t-12);letter-spacing:.04em;color:var(--ink-2)}
+.link{color:var(--verdigris);font-weight:500;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:background-size .9s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% 100%}
+.btn{display:inline-block;background:var(--verdigris);color:#FFFFFF;text-decoration:none;font-size:var(--t-15);font-weight:600;letter-spacing:.02em;padding:16px 28px;transition:background .6s var(--ease)}
+.btn:hover{background:#2F5752}
+
+/* ---------- the passe-partout ---------- */
+.framed{margin:0;position:relative}
+.mat{background:var(--mat);padding:var(--matpad,8%);box-shadow:0 0 0 1px rgba(32,33,31,.05),0 40px 70px -48px rgba(32,33,31,.38)}
+.win{position:relative;overflow:hidden;aspect-ratio:var(--ar);background:#E9E1D1;box-shadow:0 0 0 2px #FFFEFA,0 0 0 3px rgba(32,33,31,.12)}
+/* crop each scan to its printed plate: x, y, width and height as fractions of the scan */
+.win > img{position:absolute;max-width:none;width:calc(100% / var(--cw));height:auto;left:calc(-100% * var(--cx) / var(--cw));top:calc(-100% * var(--cy) / var(--ch))}
+.p-desmids{--ar:632/910;--cx:.0412;--cy:.04;--cw:.8681;--ch:.91}
+.p-jelly{--ar:640/930;--cx:.0376;--cy:.03;--cw:.8602;--ch:.93}
+.p-ferns{--ar:616/900;--cx:.0523;--cy:.045;--cw:.8485;--ch:.90}
+.framed figcaption{margin-top:var(--s-2);display:flex;justify-content:space-between;gap:var(--s-2);flex-wrap:wrap}
+.framed figcaption i{font-style:italic;color:var(--ink)}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--s-2) clamp(28px,3vw,48px);padding:28px var(--gut);max-width:var(--max);margin:0 auto}
+.mark{font-family:var(--display);font-size:26px;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 28px;font-size:var(--t-15)}
+.nav a,.lang a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .8s var(--ease)}
+.nav a:hover,.lang a:hover{background-size:100% 1px}
+.lang{display:flex;gap:14px;font-size:var(--t-12);letter-spacing:.08em;color:var(--ink-2)}
+.lang a[aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding-top:clamp(8px,2vh,24px)}
+.hero .framed{width:min(100%,calc((100svh - 345px) / 1.37),560px);margin:0 auto}
+.hero .framed figcaption{justify-content:center;gap:10px}
+.hero h1{margin:clamp(36px,5vh,64px) auto 0;max-width:20em;font-size:clamp(33px,3.6vw,54px);letter-spacing:-.012em;line-height:1.1}
+.hero .who{margin:var(--s-4) auto 0;max-width:34em;font-size:var(--t-18)}
+.search{margin:var(--s-5) auto 0;max-width:560px;text-align:left}
+.search label{display:block;font-size:var(--t-12);font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;text-align:center}
+.field{display:flex;align-items:center;gap:var(--s-2);border-bottom:1px solid var(--ink)}
+.field:focus-within{box-shadow:0 1px 0 var(--ink)}
+.field input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:17px;color:var(--ink);padding:14px 0;border-radius:0}
+.field input::placeholder{color:var(--ink-2);opacity:1}
+.field input:focus{outline:none}
+.field button{border:0;background:none;color:var(--verdigris);font:inherit;font-size:var(--t-15);font-weight:600;cursor:pointer;padding:14px 0 14px 8px}
+.try{margin-top:14px;text-align:center;font-size:var(--t-15);color:var(--ink-2)}
+.caveat{margin:var(--s-4) auto 0;max-width:30em}
+html.js:not(.still) .hero .framed[data-reveal]{--kit-dur:1800ms}
+
+/* ---------- one idea ---------- */
+.idea{padding-top:var(--section)}
+.idea .head{grid-column:1 / span 5}
+.idea h2{font-size:var(--t-64);letter-spacing:-.015em}
+.idea .head p{margin-top:var(--s-3);max-width:28em}
+.idea .head .link{display:inline-block;margin-top:var(--s-4);font-size:var(--t-15)}
+.idea .figs{grid-column:7 / span 6;align-self:end}
+.fig{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--col-gap);align-items:baseline;padding:var(--s-3) 0;border-top:1px solid var(--rule)}
+.fig .num{font-size:clamp(52px,5.4vw,80px);white-space:nowrap}
+.fig p{font-size:var(--t-15);line-height:1.55}
+.figs .src{padding-top:var(--s-2);border-top:1px solid var(--rule)}
+
+/* ---------- tools ---------- */
+.tools{padding-top:var(--section)}
+.tools-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s-2) var(--s-4);padding-bottom:var(--s-3);border-bottom:1px solid var(--rule)}
+.tools-head h2{font-size:var(--t-32)}
+.tool{margin-top:var(--s-6);align-items:center}
+.tool .framed{grid-column:1 / span 6;--matpad:9%}
+.tool .copy{grid-column:8 / span 5}
+.tool.alt .framed{grid-column:7 / span 6;grid-row:1}
+.tool.alt .copy{grid-column:1 / span 5;grid-row:1}
+.tool h3{font-size:var(--t-48);letter-spacing:-.01em}
+.tool .lead{margin-top:var(--s-3);max-width:28em}
+.tab{margin:var(--s-5) 0;border-top:1px solid var(--ink)}
+.tab div{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-2);padding:14px 0;border-bottom:1px solid var(--rule)}
+.tab dt{font-size:var(--t-15);color:var(--ink-2)}
+.tab dd{margin:0;font-family:var(--display);font-size:var(--t-32);line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.acts{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-3) var(--s-4)}
+
+/* signature: a loupe resting on the print; it magnifies more as you scroll (--p from kit.js) */
+.loupe{position:absolute;left:var(--lx);top:var(--ly);width:var(--ls);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;background:#EFE7D8;
+  box-shadow:0 0 0 1px var(--ochre),0 0 0 7px var(--mat),0 0 0 8px rgba(32,33,31,.14),0 26px 44px -18px rgba(32,33,31,.45)}
+.loupe .zoom{position:absolute;left:50%;top:50%;width:var(--zw);transform-origin:0 0;
+  transform:scale(calc(1.1 + var(--p,.5) * 2.2)) translate(calc(var(--fx) * -100%),calc(var(--fy) * -100%));will-change:transform}
+.loupe .zoom img{width:100%;max-width:none}
+.loupe::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),inset 0 10px 24px rgba(255,255,255,.25),inset 0 -14px 28px rgba(32,33,31,.10)}
+.jelly-frame{--lx:25%;--ly:78%;--ls:42%;--zw:250%;--fx:.245;--fy:.765}
+html.js:not(.still) .loupe{transition:opacity 1400ms var(--ease) 500ms,transform 1400ms var(--ease) 500ms}
+html.js:not(.still) .framed:not(.is-in) .loupe{opacity:0;transform:translate(-50%,-44%)}
+
+/* ---------- code ---------- */
+.code{padding-top:var(--section)}
+.code .inner{grid-column:3 / span 8;text-align:center}
+.code h2{font-size:var(--t-64);letter-spacing:-.015em}
+.code .big{margin:var(--s-4) auto 0;font-family:var(--display);font-size:var(--t-32);line-height:1.3;max-width:24em}
+.code .inner p.small{margin:var(--s-3) auto 0;max-width:34em;font-size:var(--t-18)}
+.code .btn{margin-top:var(--s-5)}
+
+/* ---------- games: three small framed prints ---------- */
+.games{padding-top:var(--section)}
+.games-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s-2) var(--s-4);padding-bottom:var(--s-3);border-bottom:1px solid var(--rule)}
+.games-head h2{font-size:var(--t-32)}
+.games ul{margin-top:var(--s-5);row-gap:var(--s-5)}
+.games li{grid-column:span 4}
+.games a{display:block;text-decoration:none}
+.games .mat{--matpad:9%;max-width:300px;box-shadow:0 0 0 1px rgba(32,33,31,.06)}
+.games .win{--ar:4/3}
+.games .win img{width:100%;height:100%;object-fit:cover;filter:saturate(.62) sepia(.12) contrast(.96);transition:filter 1.2s var(--ease),transform 1.6s var(--ease)}
+.games a:hover .win img,.games a:focus-visible .win img{filter:none;transform:scale(1.03)}
+.games h3{margin-top:var(--s-3);font-size:var(--t-24);line-height:1.2}
+.games a:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.games p{margin-top:6px}
+
+/* ---------- footer ---------- */
+footer{margin-top:var(--section);border-top:1px solid var(--rule)}
+.foot{padding-top:var(--s-5);row-gap:var(--s-4)}
+.foot .about{grid-column:1 / span 5}
+.foot .about p{margin-top:var(--s-2);font-size:var(--t-15);line-height:1.6;max-width:36em}
+.foot nav{grid-column:7 / span 3;font-size:var(--t-15)}
+.foot nav li+li{margin-top:6px}
+.foot nav a{text-decoration:none}
+.foot nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot .place{grid-column:10 / span 3;text-align:right}
+.credits{margin-top:var(--s-5);padding:var(--s-3) 0 calc(var(--s-6) + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule);font-size:var(--t-12);line-height:1.65;color:var(--ink-2)}
+.credits p{max-width:120ch}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .idea .head{grid-column:1 / span 8}
+  .idea .figs{grid-column:1 / span 12;margin-top:var(--s-5)}
+  .tool .copy{grid-column:7 / span 6}
+  .tool.alt .copy{grid-column:1 / span 6}
+  .code .inner{grid-column:1 / span 12}
+}
+@media (max-width:860px){
+  .hero .framed{width:min(100%,460px)}
+  .idea .head{grid-column:1 / span 12}
+  .tool .framed,.tool.alt .framed{grid-column:1 / span 12;grid-row:1;max-width:520px}
+  .tool .copy,.tool.alt .copy{grid-column:1 / span 12;grid-row:2;margin-top:var(--s-5)}
+  .games li{grid-column:span 12}
+  .games a{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:center}
+  .games h3{margin-top:0;font-size:21px}
+  .foot .about,.foot nav,.foot .place{grid-column:1 / span 12;text-align:left}
+}
+@media (max-width:560px){
+  .nav{order:3;flex-basis:100%;gap:6px 20px}
+  .hero h1{font-size:33px}
+  .fig{grid-template-columns:minmax(0,1fr);row-gap:6px}
+  .fig .num{font-size:64px}
+  .games ul{row-gap:var(--s-4)}
+  .games a{grid-template-columns:120px minmax(0,1fr)}
+  .code .big{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav class="nav" aria-label="Main">
+    <a href="#tools">Tools</a><a href="#idea">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#">About</a>
+  </nav>
+  <nav class="lang" aria-label="Language">
+    <a href="#" aria-current="true" lang="en">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero" aria-labelledby="h1">
+    <figure class="framed" data-reveal="scale">
+      <div class="mat"><div class="win p-desmids">
+        <img src="media/plate-haeckel-desmids-1000.webp" srcset="media/plate-haeckel-desmids-1000.webp 728w, media/plate-haeckel-desmids.webp 1457w" sizes="(max-width:860px) 100vw, 560px" width="1457" height="2000" alt="Ernst Haeckel’s plate of desmids, microscopic green algae drawn as symmetrical stars, crosses and discs, numbered like specimens.">
+      </div></div>
+      <figcaption class="cap"><span><i>Desmidiea</i>, Tafel 24</span><span>·</span><span>Ernst Haeckel, <i>Kunstformen der Natur</i></span></figcaption>
+    </figure>
+    <h1 id="h1" data-split data-split-delay="500">What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+    <p class="who" data-reveal="fade" style="--d:300ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+    <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:450ms">
+      <label for="q">Look something up</label>
+      <div class="field">
+        <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+        <button type="submit">Search&nbsp;&rarr;</button>
+      </div>
+      <p class="try">Try <a class="link" href="#">aspartame</a> · <a class="link" href="#">stroke</a> · <a class="link" href="#">coffee</a></p>
+    </form>
+    <p class="caveat small" data-reveal="fade" style="--d:600ms">They describe whole populations, not what caused any one person’s illness.</p>
+  </section>
+
+  <section class="wrap idea" id="idea" aria-labelledby="idea-h">
+    <div class="grid">
+      <div class="head">
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <p data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <a class="link" href="#" data-reveal="fade" style="--d:450ms">Seven ideas for reading a health headline&nbsp;&rarr;</a>
+      </div>
+      <div class="figs">
+        <div class="fig" data-reveal="fade"><span class="num">100–120</span><p>in 1,000 smokers get lung cancer by age 75 (about 10 to 12 in 100).</p></div>
+        <div class="fig" data-reveal="fade" style="--d:150ms"><span class="num">4–5</span><p>in 1,000 lifelong non-smokers do.</p></div>
+        <div class="fig" data-reveal="fade" style="--d:300ms"><span class="num">18%</span><p>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</p></div>
+        <p class="cap src">European data. Quoted from the Cancer Evidence Explorer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap tools" id="tools" aria-labelledby="tools-h">
+    <div class="tools-head">
+      <h2 id="tools-h">The explorers</h2>
+      <p class="small">Two tools, free to use, in 10 languages.</p>
+    </div>
+
+    <article class="grid tool" aria-labelledby="t1">
+      <figure class="framed jelly-frame" data-reveal="fade" data-progress style="--kit-dur:1500ms">
+        <div class="mat"><div class="win p-jelly">
+          <img src="media/plate-haeckel-jellyfish-1000.webp" srcset="media/plate-haeckel-jellyfish-1000.webp 744w, media/plate-haeckel-jellyfish.webp 1488w" sizes="(max-width:860px) 100vw, 46vw" width="1488" height="2000" loading="lazy" alt="Ernst Haeckel’s plate of leptomedusae: six jellyfish, some seen from the side trailing fine tentacles, two seen from below as ringed discs.">
+          <div class="loupe" aria-hidden="true"><div class="zoom"><img src="media/plate-haeckel-jellyfish.webp" width="1488" height="2000" loading="lazy" alt=""></div></div>
+        </div></div>
+        <figcaption class="cap"><span><i>Leptomedusae</i>, Tafel 36</span><span>Under the loupe: figure 3</span></figcaption>
+      </figure>
+      <div class="copy">
+        <h3 id="t1" data-split>Cancer Evidence Explorer</h3>
+        <p class="lead" data-reveal="fade" style="--d:250ms">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <dl class="tab" data-reveal="fade" style="--d:400ms">
+          <div><dt>Exposures</dt><dd>185</dd></div>
+          <div><dt>Cancer types</dt><dd>68</dd></div>
+          <div><dt>Links</dt><dd>469</dd></div>
+          <div><dt>Languages</dt><dd>10</dd></div>
+        </dl>
+        <div class="acts" data-reveal="fade" style="--d:550ms"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </div>
+    </article>
+
+    <article class="grid tool alt" aria-labelledby="t2">
+      <figure class="framed" data-reveal="fade" style="--kit-dur:1500ms">
+        <div class="mat"><div class="win p-ferns">
+          <img src="media/plate-haeckel-ferns-1000.webp" srcset="media/plate-haeckel-ferns-1000.webp 726w, media/plate-haeckel-ferns.webp 1451w" sizes="(max-width:860px) 100vw, 46vw" width="1451" height="2000" loading="lazy" alt="Ernst Haeckel’s plate of staghorn ferns in sage green: forked fronds spreading from a central shield, with smaller studies around it.">
+        </div></div>
+        <figcaption class="cap"><span><i>Filicinae</i>, Tafel 52</span><span>Ernst Haeckel</span></figcaption>
+      </figure>
+      <div class="copy">
+        <h3 id="t2" data-split>Chronic Disease Evidence Explorer</h3>
+        <p class="lead" data-reveal="fade" style="--d:250ms">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="tab" data-reveal="fade" style="--d:400ms">
+          <div><dt>Risk factors</dt><dd>124</dd></div>
+          <div><dt>Diseases</dt><dd>45</dd></div>
+          <div><dt>Graded links</dt><dd>356</dd></div>
+          <div><dt>Languages</dt><dd>10</dd></div>
+        </dl>
+        <div class="acts" data-reveal="fade" style="--d:550ms"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap code" id="code" aria-labelledby="code-h">
+    <div class="grid">
+      <div class="inner">
+        <h2 id="code-h" data-split>Code Against Cancer</h2>
+        <p class="big" data-reveal="fade" style="--d:250ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <p class="small" data-reveal="fade" style="--d:400ms">Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+        <a class="btn" href="#" data-reveal="fade" style="--d:550ms">Read the recommendations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap games" id="games" aria-labelledby="games-h">
+    <div class="games-head">
+      <h2 id="games-h">For schools and families</h2>
+      <p class="small">Learning by playing — three games.</p>
+    </div>
+    <ul class="grid">
+      <li data-reveal="fade"><a href="#"><div class="mat"><div class="win"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt=""></div></div>
+        <div><h3>Sol &amp; the UV Shield Quest</h3><p class="small">Skin cancer · ages 6–12</p></div></a></li>
+      <li data-reveal="fade" style="--d:120ms"><a href="#"><div class="mat"><div class="win"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt=""></div></div>
+        <div><h3>The Lung Detective</h3><p class="small">Lung cancer · ages 10–16</p></div></a></li>
+      <li data-reveal="fade" style="--d:240ms"><a href="#"><div class="mat"><div class="win"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt=""></div></div>
+        <div><h3>A Town of 1,000</h3><p class="small">Breast cancer · ages 14+</p></div></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid foot">
+      <div class="about">
+        <a class="mark" href="#">EpiDetective</a>
+        <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      </div>
+      <nav aria-label="Footer"><ul>
+        <li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li>
+      </ul></nav>
+      <p class="place small">Lyon, France</p>
+    </div>
+    <div class="credits">
+      <p>Plates from Ernst Haeckel, <i>Kunstformen der Natur</i> (1899–1904), lithography by Adolf Giltsch, all public domain, via Wikimedia Commons: <i>Desmidiea</i> (Tafel 24), <i>Leptomedusae</i> (Tafel 36), <i>Filicinae</i> (Tafel 52). Shown cropped to the printed plate. Small screenshots from the three EpiDetective games.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

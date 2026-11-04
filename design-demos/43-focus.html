@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>43 · Focus — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Petrona:wght@300;400;500&family=Onest:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour: a stained slide. Haematoxylin is the ink, eosin is used only inside the fields. */
+  --slide:#FBF9FC;          /* page */
+  --glass:#F4EEF5;          /* the field before the stain is drawn */
+  --ink:#2B2150;            /* haematoxylin: text, nuclei, the one button */
+  --ink-2:#5D5675;          /* secondary text, 6.6:1 on the page */
+  --hair:#E6E0EC;           /* hairlines */
+  --eosin:#E07BA5;          /* cytoplasm, focus ring; never text */
+  --eosin-soft:#F5DCE8;
+  /* type */
+  --serif:"Petrona",Georgia,"Times New Roman",serif;
+  --sans:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --t12:12px; --t15:15px; --t18:18px; --t24:24px;
+  --t36:clamp(28px,2.6vw,36px); --t56:clamp(38px,4.2vw,56px); --t88:clamp(52px,6.6vw,88px);
+  /* space */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:104px;
+  --section:clamp(96px,12vw,200px);
+  --gutter:clamp(20px,5vw,80px);
+  --max:1240px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--slide);color:var(--ink);font:400 var(--t18)/1.62 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:300;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul,ol{list-style:none;margin:0;padding:0}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:2px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 700ms var(--ease),color 400ms}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.link{font:500 var(--t15)/1.3 var(--sans);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px;transition:border-color 500ms var(--ease)}
+.link:hover{border-bottom-color:transparent}
+.btn{display:inline-block;background:var(--ink);color:var(--slide);text-decoration:none;font:500 var(--t15)/1 var(--sans);letter-spacing:.01em;padding:18px 28px;border-radius:999px;transition:background-color 500ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:#45386F}
+.label{font:500 var(--t12)/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+
+/* ---------- header ---------- */
+.top-in{display:flex;align-items:center;gap:var(--s4);min-height:84px;border-bottom:1px solid var(--hair)}
+.mark{font:500 23px/1 var(--serif);letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 30px;font-size:var(--t15)}
+.nav a{color:var(--ink-2)}
+.nav a:hover,.nav a:focus-visible{color:var(--ink)}
+.lang{display:flex;gap:2px;font-size:13px;white-space:nowrap}
+.lang a{display:block;padding:6px 7px;text-decoration:none;color:var(--ink-2)}
+.lang a[aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- the microscope field ---------- */
+.field{position:relative;aspect-ratio:1;border-radius:50%;background:var(--glass);
+  box-shadow:0 0 0 clamp(8px,1vw,14px) var(--slide),0 0 0 calc(clamp(8px,1vw,14px) + 1px) var(--hair),0 40px 80px -40px rgba(43,33,80,.28)}
+.field .lens{position:absolute;inset:0;border-radius:50%;overflow:hidden;isolation:isolate}
+.field canvas{position:absolute;inset:-3%;width:106%;height:106%;max-width:none}
+.field .lens::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 50% 46%,rgba(255,255,255,0) 58%,rgba(43,33,80,.10) 86%,rgba(43,33,80,.22) 100%);
+  box-shadow:inset 0 0 0 1px rgba(43,33,80,.08)}
+/* without JavaScript: a quiet stained texture instead of the drawing */
+.field .still-cells{position:absolute;inset:-3%;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(62,44,128,.55) 0 12%,transparent 13%) 0 0/22px 22px,
+    radial-gradient(circle at 50% 50%,rgba(224,123,165,.42) 0 44%,transparent 46%) 0 0/22px 22px,
+    radial-gradient(circle at 50% 50%,rgba(62,44,128,.45) 0 11%,transparent 12%) 11px 11px/22px 22px,
+    radial-gradient(circle at 50% 50%,rgba(224,123,165,.32) 0 44%,transparent 46%) 11px 11px/22px 22px,#F8EEF4}
+.lens.drawn .still-cells{display:none}
+.field img.still{position:absolute;inset:12%;width:76%;height:76%;object-fit:contain;filter:grayscale(1) contrast(1.1);opacity:.75;mix-blend-mode:multiply}
+.lens.drawn img.still{display:none}
+.reticle{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(56px,7vw,112px) 0 var(--section)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(40px,7vw,120px);align-items:center}
+.hero h1{font-size:clamp(40px,4.7vw,70px);line-height:1.04;letter-spacing:-.022em;max-width:13.5em}
+.who{margin-top:var(--s4);font-size:var(--t18);max-width:30em}
+.caveat{margin-top:var(--s2);font-size:var(--t15);color:var(--ink-2);max-width:32em;padding-left:18px;border-left:1px solid var(--eosin)}
+.search{margin-top:var(--s5);max-width:540px}
+.search label{display:block;margin-bottom:14px}
+.box{display:flex;align-items:center;gap:8px;border:1px solid #D6CEDF;border-radius:999px;padding:6px 6px 6px 24px;background:#fff;transition:border-color 400ms var(--ease),box-shadow 400ms var(--ease)}
+.box:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px rgba(224,123,165,.18)}
+.box input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:400 17px/1.3 var(--sans);padding:13px 0;outline:none}
+.box input::placeholder{color:#7A7391;opacity:1}
+.box button{flex:none;border:0;background:var(--ink);color:var(--slide);font:500 var(--t15)/1 var(--sans);padding:15px 24px;border-radius:999px;cursor:pointer;transition:background-color 500ms var(--ease)}
+.box button:hover{background:#45386F}
+.box button:focus-visible{outline-offset:2px}
+.try{margin-top:14px;padding-left:24px;font-size:var(--t15);color:var(--ink-2)}
+.try a{color:var(--ink);margin:0 2px}
+.hero-fig{margin:0;justify-self:end;width:100%;max-width:min(560px,70vh)}
+.hero-fig figcaption{margin-top:calc(var(--s4) + 6px);text-align:center;font-size:13px;color:var(--ink-2)}
+
+/* ---------- section heads ---------- */
+.head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:clamp(40px,7vw,120px);align-items:end}
+.head h2{font-size:var(--t56);line-height:1.04;letter-spacing:-.02em}
+.head p{font-size:var(--t18);color:var(--ink-2);max-width:30em}
+
+/* ---------- four levels of focus ---------- */
+.levels-sec{padding:var(--section) 0;border-top:1px solid var(--hair)}
+.levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(24px,3.4vw,56px);margin-top:clamp(64px,7vw,112px)}
+.lv{min-width:0}
+.lv .field{width:100%;box-shadow:0 0 0 8px var(--slide),0 0 0 9px var(--hair)}
+.lv .meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:calc(var(--s4) + 4px);padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.lv .gnum{font:300 var(--t36)/1 var(--serif);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.lv .sharp{font-size:13px;color:var(--ink-2);text-align:right}
+.lv h3{margin-top:var(--s3);font:400 var(--t24)/1.2 var(--serif);letter-spacing:-.005em}
+.lv p{margin-top:10px;font-size:var(--t15);line-height:1.6;color:var(--ink-2)}
+.lv p strong{color:var(--ink);font-weight:500}
+.levels-note{margin-top:var(--s5);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s2) var(--s4);font-size:var(--t15);color:var(--ink-2);padding-top:var(--s3);border-top:1px solid var(--hair)}
+
+/* ---------- one idea ---------- */
+.idea{padding:var(--section) 0;background:#fff;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.counts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(40px,7vw,120px);margin-top:clamp(64px,7vw,112px);align-items:start}
+.count{margin:0;min-width:0}
+.count .field{width:min(100%,440px);margin:0 auto;background:#fff;box-shadow:0 0 0 12px #fff,0 0 0 13px var(--hair)}
+.count figcaption{margin-top:calc(var(--s5) - 8px);text-align:center}
+.count .who-is{font:500 var(--t15)/1.3 var(--sans)}
+.count .num{display:block;margin-top:10px;font:300 var(--t88)/.95 var(--serif);letter-spacing:-.03em;font-variant-numeric:lining-nums;white-space:nowrap}
+.count .num small{font:400 var(--t18)/1 var(--sans);letter-spacing:0;color:var(--ink-2);margin-left:.3em}
+.count .say{margin:14px auto 0;font-size:var(--t15);color:var(--ink-2);max-width:22em}
+.meat{margin-top:clamp(72px,8vw,128px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,7vw,120px);align-items:center;padding:var(--s4) 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.meat b{font:300 var(--t88)/.95 var(--serif);letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.meat p{font-size:var(--t18);max-width:30em}
+.idea-foot{margin-top:var(--s4);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s2) var(--s4);font-size:var(--t15);color:var(--ink-2)}
+.key{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;margin-top:var(--s5);font-size:13px;color:var(--ink-2)}
+.key span{display:inline-flex;align-items:center;gap:9px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot.m{background:var(--ink)}.dot.r{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}.dot.u{background:var(--eosin-soft)}
+
+/* ---------- the explorers ---------- */
+.tools{padding:var(--section) 0 0}
+.tool{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(40px,8vw,140px);align-items:center;padding-bottom:var(--section)}
+.tool + .tool{padding-top:var(--section);border-top:1px solid var(--hair)}
+.tool.flip .tool-fig{order:2}
+.tool-fig{margin:0;width:100%;max-width:520px;justify-self:center}
+.tool-fig .field{background:#FBF4F8}
+.tool .from{margin-bottom:var(--s3)}
+.tool h3{font-size:var(--t56);line-height:1.04;letter-spacing:-.02em;max-width:9em}
+.tool .desc{margin-top:var(--s3);max-width:28em}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s5) 0 0;border-top:1px solid var(--ink);max-width:520px}
+.figs div{padding-top:var(--s3);min-width:0}
+.figs div + div{padding-left:var(--s3);border-left:1px solid var(--hair)}
+.figs dt{font-size:13px;color:var(--ink-2);margin-top:10px}
+.figs dd{margin:0;font:300 var(--t56)/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums;order:-1}
+.figs div{display:flex;flex-direction:column}
+.langs{margin-top:var(--s3);font-size:var(--t15);color:var(--ink-2)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-top:var(--s5)}
+
+/* ---------- code against cancer ---------- */
+.code{padding:var(--section) 0;background:var(--ink);color:var(--slide)}
+.code .label{color:#C9C1DC}
+.code-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:clamp(40px,7vw,120px);align-items:end}
+.code h2{margin-top:var(--s3);font-size:var(--t88);line-height:1;letter-spacing:-.03em}
+.code p{margin-top:var(--s4);font-size:var(--t18);max-width:28em;color:#E4DEEE}
+.code .btn{margin-top:var(--s5);background:var(--slide);color:var(--ink)}
+.code .btn:hover,.code .btn:focus-visible{background:var(--eosin-soft)}
+.code :focus-visible{outline-color:var(--slide)}
+.acts-n{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid rgba(251,249,252,.35)}
+.acts-n div{padding-top:var(--s3);min-width:0}
+.acts-n div + div{padding-left:var(--s3);border-left:1px solid rgba(251,249,252,.18)}
+.acts-n b{display:block;font:300 clamp(72px,9vw,136px)/.9 var(--serif);letter-spacing:-.04em;font-variant-numeric:lining-nums}
+.acts-n span{display:block;margin-top:var(--s2);font-size:var(--t15);color:#D5CEE3;max-width:14em}
+
+/* ---------- games ---------- */
+.games{padding:var(--section) 0}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(24px,4vw,72px);margin-top:clamp(56px,6vw,96px)}
+.game{display:block;text-decoration:none;text-align:center;min-width:0}
+.game .slide{width:min(100%,220px);margin:0 auto;aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px var(--slide),0 0 0 9px var(--hair);transition:box-shadow 600ms var(--ease)}
+.game img{width:100%;height:100%;object-fit:cover;filter:saturate(.62) contrast(.96);transform:scale(1.02);transition:filter 900ms var(--ease),transform 1200ms var(--ease)}
+.game:nth-child(1) img{object-position:38% 50%}
+.game:nth-child(2) img{object-position:52% 50%}
+.game:nth-child(3) img{object-position:62% 50%}
+.game:hover img,.game:focus-visible img{filter:saturate(1) contrast(1);transform:scale(1.06)}
+.game:hover .slide{box-shadow:0 0 0 8px var(--slide),0 0 0 9px var(--eosin)}
+.game b{display:block;margin-top:calc(var(--s4) - 4px);font:400 var(--t24)/1.2 var(--serif)}
+.game span{display:block;margin-top:8px;font-size:var(--t15);color:var(--ink-2)}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--hair);padding:var(--s6) 0 calc(var(--s6) + 24px);font-size:var(--t15);color:var(--ink-2)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,6fr) minmax(0,3fr);column-gap:clamp(32px,5vw,80px);align-items:start}
+.foot .mark{color:var(--ink)}
+.foot .place{margin-top:12px}
+.foot p.txt{max-width:36em;color:var(--ink)}
+.foot ul{display:grid;gap:10px}
+.foot ul a{color:var(--ink)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--hair);font-size:13px;line-height:1.6;max-width:72em}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .top-in{flex-wrap:wrap;gap:12px 24px;padding-top:18px;padding-bottom:18px}
+  .nav{order:3;width:100%}
+}
+@media (max-width:1080px){
+  .levels{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s6)}
+  .lv .field{max-width:300px}
+}
+@media (max-width:900px){
+  .hero-grid,.head,.tool,.code-grid,.meat{grid-template-columns:minmax(0,1fr)}
+  .hero-fig{justify-self:center;max-width:420px;margin-top:var(--s6)}
+  .head p{margin-top:var(--s3)}
+  .tool .tool-fig{order:0!important;max-width:420px;margin-bottom:var(--s5)}
+  .acts-n{margin-top:var(--s5)}
+  .meat p{margin-top:var(--s2)}
+  .foot-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot p.txt{grid-column:1/-1;grid-row:1;margin-bottom:var(--s4)}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .nav{gap:4px 20px}
+  .levels{grid-template-columns:minmax(0,1fr);row-gap:var(--s5)}
+  .lv{display:grid;grid-template-columns:112px minmax(0,1fr);column-gap:var(--s3);align-items:start}
+  .lv .field{grid-row:1/4;box-shadow:0 0 0 5px var(--slide),0 0 0 6px var(--hair)}
+  .lv .meta{margin-top:0}
+  .lv h3{margin-top:var(--s2)}
+  .counts{grid-template-columns:minmax(0,1fr);row-gap:var(--s6)}
+  .count .field{width:min(100%,320px)}
+  .trio{grid-template-columns:minmax(0,1fr);row-gap:var(--s5)}
+  .game{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:var(--s3);align-items:center;text-align:left}
+  .game .slide{width:104px;grid-row:1/3;box-shadow:0 0 0 5px var(--slide),0 0 0 6px var(--hair)}
+  .game b{margin-top:0;align-self:end}
+  .game span{align-self:start}
+  .figs dd{font-size:40px}
+  .figs div + div{padding-left:var(--s2)}
+  .idea-foot{flex-direction:column}
+  .foot-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--s4)}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a class="ul" href="#tools">Tools</a><a class="ul" href="#evidence">Reading the evidence</a><a class="ul" href="#code">Code Against Cancer</a><a class="ul" href="#games">Games</a><a class="ul" href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- 1 · hero -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="who" data-reveal="rise" style="--d:500ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat" data-reveal="rise" style="--d:620ms">They describe whole populations, not what caused any one person’s illness.</p>
+        <form class="search" role="search" onsubmit="return false" data-reveal="rise" style="--d:740ms">
+          <label class="label" for="q">Look something up</label>
+          <div class="box">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+        </form>
+      </div>
+      <figure class="hero-fig" data-reveal="fade" style="--d:200ms">
+        <div class="field" data-focus>
+          <div class="lens">
+            <div class="still-cells"></div>
+            <canvas class="tissue" data-seed="23" data-cells="19" aria-hidden="true"></canvas>
+          </div>
+          <svg class="reticle" viewBox="0 0 100 100" aria-hidden="true">
+            <g stroke="#2B2150" stroke-opacity=".42" stroke-width=".18" fill="none">
+              <line x1="34" y1="80" x2="66" y2="80"/>
+              <line x1="34" y1="78.2" x2="34" y2="80"/><line x1="37.2" y1="79.1" x2="37.2" y2="80"/><line x1="40.4" y1="79.1" x2="40.4" y2="80"/><line x1="43.6" y1="79.1" x2="43.6" y2="80"/><line x1="46.8" y1="79.1" x2="46.8" y2="80"/>
+              <line x1="50" y1="78.2" x2="50" y2="80"/><line x1="53.2" y1="79.1" x2="53.2" y2="80"/><line x1="56.4" y1="79.1" x2="56.4" y2="80"/><line x1="59.6" y1="79.1" x2="59.6" y2="80"/><line x1="62.8" y1="79.1" x2="62.8" y2="80"/>
+              <line x1="66" y1="78.2" x2="66" y2="80"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption>A section drawn for this page. It comes into focus at the middle of the screen.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 · four levels of focus -->
+  <section class="levels-sec" id="evidence" aria-labelledby="h-levels">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-levels" data-split>How sure is the evidence? Four groups, four levels of focus</h2>
+        <p data-reveal="rise" style="--d:300ms">The same slide, four times. The sharper the field, the surer the evidence that the agent can cause cancer in people. Focus says nothing about how large a risk is.</p>
+      </div>
+      <ol class="levels">
+        <li class="lv" data-reveal="rise">
+          <div class="field" data-fix="0"><div class="lens"><div class="still-cells" style="filter:blur(0)"></div><canvas class="tissue" data-seed="41" data-cells="9.5" aria-hidden="true"></canvas></div></div>
+          <div class="meta"><span class="gnum">Group 1</span><span class="sharp">In focus</span></div>
+          <h3>Known cause</h3>
+          <p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p>
+        </li>
+        <li class="lv" data-reveal="rise" style="--d:140ms">
+          <div class="field" data-fix="1.6"><div class="lens"><div class="still-cells" style="filter:blur(1.2px)"></div><canvas class="tissue" data-seed="41" data-cells="9.5" aria-hidden="true"></canvas></div></div>
+          <div class="meta"><span class="gnum">Group 2A</span><span class="sharp">Nearly sharp</span></div>
+          <h3>Probable cause</h3>
+          <p>The agent probably causes cancer in people.</p>
+        </li>
+        <li class="lv" data-reveal="rise" style="--d:280ms">
+          <div class="field" data-fix="4"><div class="lens"><div class="still-cells" style="filter:blur(3px)"></div><canvas class="tissue" data-seed="41" data-cells="9.5" aria-hidden="true"></canvas></div></div>
+          <div class="meta"><span class="gnum">Group 2B</span><span class="sharp">Soft</span></div>
+          <h3>Possible cause</h3>
+          <p>The agent may cause cancer in people. Aspartame is in this group.</p>
+        </li>
+        <li class="lv" data-reveal="rise" style="--d:420ms">
+          <div class="field" data-fix="9"><div class="lens"><div class="still-cells" style="filter:blur(7px)"></div><canvas class="tissue" data-seed="41" data-cells="9.5" aria-hidden="true"></canvas></div></div>
+          <div class="meta"><span class="gnum">Group 3</span><span class="sharp">Cannot be read</span></div>
+          <h3>Not classifiable</h3>
+          <p>The evidence does not meet the rules for any other group. <strong>It does not mean safe.</strong></p>
+        </li>
+      </ol>
+      <div class="levels-note" data-reveal="fade">
+        <p>A blurred field is not an empty one: Group 3 means the picture cannot be read yet.</p>
+        <a class="link" href="#">What each label says, and what it does not</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · one idea -->
+  <section class="idea" id="idea" aria-labelledby="h-idea">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-idea" data-split>Same certainty, very different size</h2>
+        <p data-reveal="rise" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+      </div>
+      <div class="counts">
+        <figure class="count" data-reveal="fade">
+          <div class="field" role="img" aria-label="A field of 1,000 cells, of which 100 to 120 are stained">
+            <div class="lens"><div class="still-cells"></div><canvas class="dots" data-marked="100" data-range="20" data-seed="5" aria-hidden="true"></canvas></div>
+          </div>
+          <figcaption>
+            <span class="who-is">Smokers</span>
+            <span class="num">100–120<small>in 1,000</small></span>
+            <p class="say">About 10 to 12 in 100 smokers get lung cancer by age 75.</p>
+          </figcaption>
+        </figure>
+        <figure class="count" data-reveal="fade" style="--d:200ms">
+          <div class="field" role="img" aria-label="A field of 1,000 cells, of which 4 to 5 are stained">
+            <div class="lens"><div class="still-cells"></div><canvas class="dots" data-marked="4" data-range="1" data-seed="9" aria-hidden="true"></canvas></div>
+          </div>
+          <figcaption>
+            <span class="who-is">Lifelong non-smokers</span>
+            <span class="num">4–5<small>in 1,000</small></span>
+            <p class="say">About 4 to 5 in 1,000 lifelong non-smokers do.</p>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="key" data-reveal="fade"><span><i class="dot u"></i>one person in 1,000</span><span><i class="dot m"></i>gets lung cancer by age 75</span><span><i class="dot r"></i>the upper end of the range</span></p>
+      <div class="meat" data-reveal="rise">
+        <b>18%</b>
+        <p>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</p>
+      </div>
+      <div class="idea-foot">
+        <p>European data. Quoted from the Cancer Evidence Explorer.</p>
+        <a class="link" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · the explorers -->
+  <section class="tools" id="tools" aria-label="The explorers">
+    <div class="wrap">
+      <article class="tool" aria-labelledby="h-cancer">
+        <figure class="tool-fig" data-reveal="fade">
+          <div class="field" data-focus>
+            <div class="lens">
+              <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="" loading="lazy">
+              <canvas class="net" data-net="cancer" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </figure>
+        <div class="tool-text">
+          <p class="label from" data-reveal="fade">From the IARC Monographs</p>
+          <h3 id="h-cancer" data-split>Cancer Evidence Explorer</h3>
+          <p class="desc" data-reveal="rise" style="--d:200ms">Which exposures can cause which cancers, and how sure the evidence is for each link.</p>
+          <dl class="figs" data-reveal="rise" style="--d:320ms">
+            <div><dt>exposures</dt><dd>185</dd></div>
+            <div><dt>cancer types</dt><dd>68</dd></div>
+            <div><dt>links</dt><dd>469</dd></div>
+          </dl>
+          <p class="langs">In 10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+        </div>
+      </article>
+
+      <article class="tool flip" aria-labelledby="h-chronic">
+        <figure class="tool-fig" data-reveal="fade">
+          <div class="field" data-focus>
+            <div class="lens">
+              <img class="still" src="media/tool-chronic-network.svg" width="931" height="1006" alt="" loading="lazy">
+              <canvas class="net" data-net="chronic" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </figure>
+        <div class="tool-text">
+          <p class="label from" data-reveal="fade">From published reviews</p>
+          <h3 id="h-chronic" data-split>Chronic Disease Evidence Explorer</h3>
+          <p class="desc" data-reveal="rise" style="--d:200ms">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <dl class="figs" data-reveal="rise" style="--d:320ms">
+            <div><dt>risk factors</dt><dd>124</dd></div>
+            <div><dt>diseases</dt><dd>45</dd></div>
+            <div><dt>graded links</dt><dd>356</dd></div>
+          </dl>
+          <p class="langs">In 10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5 · what you can do -->
+  <section class="code" id="code" aria-labelledby="h-code">
+    <div class="wrap code-grid">
+      <div>
+        <p class="label">What you can do</p>
+        <h2 id="h-code" data-split>Code Against Cancer</h2>
+        <p data-reveal="rise" style="--d:200ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <a class="btn" href="#">Read the recommendations</a>
+      </div>
+      <div class="acts-n" data-reveal="rise" style="--d:300ms">
+        <div><b>14</b><span>actions for Europe</span></div>
+        <div><b>17</b><span>for Latin America and the Caribbean</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · games -->
+  <section class="games" id="games" aria-labelledby="h-games">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-games" data-split>For schools and families</h2>
+        <p data-reveal="rise" style="--d:300ms">Learning by playing — three games.</p>
+      </div>
+      <ul class="trio">
+        <li data-reveal="rise"><a class="game" href="#"><span class="slide"><img src="media/game-sun-safety.webp" width="720" height="405" alt="" loading="lazy"></span><b>Sol &amp; the UV Shield Quest</b><span>Skin cancer · ages 6–12</span></a></li>
+        <li data-reveal="rise" style="--d:140ms"><a class="game" href="#"><span class="slide"><img src="media/game-lung-detective.webp" width="720" height="405" alt="" loading="lazy"></span><b>The Lung Detective</b><span>Lung cancer · ages 10–16</span></a></li>
+        <li data-reveal="rise" style="--d:280ms"><a class="game" href="#"><span class="slide"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="" loading="lazy"></span><b>A Town of 1,000</b><span>Breast cancer · ages 14+</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="mark" href="#">EpiDetective</a><p class="place">Lyon, France</p></div>
+      <p class="txt">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul><li><a class="ul" href="#">How we check</a></li><li><a class="ul" href="#">Report an error</a></li><li><a class="ul" href="#">How to cite</a></li><li><a class="ul" href="#">About</a></li></ul>
+    </div>
+    <p class="credits">Images: the stained sections are drawn for this page; the two networks are drawn from the explorers’ data (without JavaScript, the explorers’ own network pictures are shown). Game screenshots from the three EpiDetective games. No photographs are used.</p>
+  </div>
+</footer>
+
+<script src="kit/net.js"></script>
+<script src="kit/kit.js" defer></script>
+<script>
+(function(){
+  "use strict";
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DPR = Math.min(2, window.devicePixelRatio || 1);
+  function rng(seed){ var s = seed % 2147483647; if (s <= 0) s += 2147483646; return function(){ s = s * 16807 % 2147483647; return (s - 1) / 2147483646; }; }
+  function size(cv){ var w = cv.clientWidth; if (!w) return 0; cv.width = Math.round(w * DPR); cv.height = Math.round(w * DPR); var x = cv.getContext("2d"); x.setTransform(DPR,0,0,DPR,0,0); return w; }
+
+  /* ---------- a stained section: packed cells (clipped Voronoi), eosin cytoplasm, haematoxylin nuclei ---------- */
+  function poisson(S, d, R){
+    var cell = d / Math.SQRT2, gw = Math.ceil(S / cell), grid = new Array(gw * gw), pts = [], active = [];
+    function put(p){ pts.push(p); active.push(p); grid[Math.floor(p[1] / cell) * gw + Math.floor(p[0] / cell)] = p; }
+    put([S / 2 + (R() - .5) * d, S / 2 + (R() - .5) * d]);
+    while (active.length){
+      var i = Math.floor(R() * active.length), a = active[i], found = false;
+      for (var k = 0; k < 24; k++){
+        var ang = R() * Math.PI * 2, rr = d * (1 + R() * .9), p = [a[0] + Math.cos(ang) * rr, a[1] + Math.sin(ang) * rr];
+        if (p[0] < 0 || p[1] < 0 || p[0] >= S || p[1] >= S) continue;
+        var gx = Math.floor(p[0] / cell), gy = Math.floor(p[1] / cell), ok = true;
+        for (var yy = Math.max(0, gy - 2); yy <= Math.min(gw - 1, gy + 2) && ok; yy++)
+          for (var xx = Math.max(0, gx - 2); xx <= Math.min(gw - 1, gx + 2); xx++){
+            var q = grid[yy * gw + xx]; if (q && (q[0]-p[0])*(q[0]-p[0]) + (q[1]-p[1])*(q[1]-p[1]) < d * d){ ok = false; break; }
+          }
+        if (ok){ put(p); found = true; break; }
+      }
+      if (!found) active.splice(i, 1);
+    }
+    return pts;
+  }
+  function clip(poly, p, nx, ny, off){
+    var out = [];
+    for (var i = 0; i < poly.length; i++){
+      var a = poly[i], b = poly[(i + 1) % poly.length];
+      var da = (a[0]-p[0])*nx + (a[1]-p[1])*ny - off, db = (b[0]-p[0])*nx + (b[1]-p[1])*ny - off;
+      if (da <= 0) out.push(a);
+      if ((da <= 0) !== (db <= 0)){ var t = da / (da - db); out.push([a[0] + (b[0]-a[0]) * t, a[1] + (b[1]-a[1]) * t]); }
+    }
+    return out;
+  }
+  function smooth(x, poly){
+    var n = poly.length; if (n < 3) return false;
+    function mid(i){ var a = poly[i % n], b = poly[(i + 1) % n]; return [(a[0]+b[0])/2, (a[1]+b[1])/2]; }
+    var s = mid(n - 1); x.beginPath(); x.moveTo(s[0], s[1]);
+    for (var i = 0; i < n; i++){ var c = poly[i], e = mid(i); x.quadraticCurveTo(c[0], c[1], e[0], e[1]); }
+    x.closePath(); return true;
+  }
+  function tissue(cv){
+    var S = size(cv); if (!S) return;
+    var x = cv.getContext("2d"), R = rng(+cv.getAttribute("data-seed") || 7), d = S / (+cv.getAttribute("data-cells") || 14);
+    var bg = x.createRadialGradient(S*.5, S*.46, S*.05, S*.5, S*.5, S*.6);
+    bg.addColorStop(0, "#FDF8FB"); bg.addColorStop(1, "#F3E4EE");
+    x.fillStyle = bg; x.fillRect(0, 0, S, S);
+    var pts = poisson(S, d, R);
+    /* two quiet lumens: open spaces in the tissue */
+    var holes = [[S*(.28 + R()*.1), S*(.62 + R()*.12), d*(1.5 + R()*.5)], [S*(.66 + R()*.1), S*(.3 + R()*.1), d*(1.1 + R()*.4)]];
+    pts = pts.filter(function(p){ return !holes.some(function(h){ return Math.hypot(p[0]-h[0], p[1]-h[1]) < h[2]; }); });
+    /* collagen fibres under the cells */
+    x.lineCap = "round";
+    for (var f = 0; f < 16; f++){
+      var fx = R()*S, fy = R()*S, fa = R()*Math.PI, fl = S*(.15 + R()*.35);
+      x.strokeStyle = "rgba(214,104,150," + (.10 + R()*.16).toFixed(3) + ")"; x.lineWidth = .6 + R()*1.4;
+      x.beginPath(); x.moveTo(fx, fy);
+      x.bezierCurveTo(fx + Math.cos(fa)*fl*.33 + (R()-.5)*d, fy + Math.sin(fa)*fl*.33 + (R()-.5)*d, fx + Math.cos(fa)*fl*.66 + (R()-.5)*d, fy + Math.sin(fa)*fl*.66 + (R()-.5)*d, fx + Math.cos(fa)*fl, fy + Math.sin(fa)*fl);
+      x.stroke();
+    }
+    var gap = Math.max(1.2, d * .07);
+    pts.forEach(function(p){
+      var poly = [], rad = d * .78;
+      for (var k = 0; k < 16; k++){ var a = k / 16 * Math.PI * 2; poly.push([p[0] + Math.cos(a)*rad*(.92 + R()*.16), p[1] + Math.sin(a)*rad*(.92 + R()*.16)]); }
+      pts.forEach(function(q){
+        if (q === p) return; var dx = q[0]-p[0], dy = q[1]-p[1], L = Math.sqrt(dx*dx + dy*dy);
+        if (L > d * 2.2) return; poly = clip(poly, p, dx/L, dy/L, L/2 - gap/2);
+      });
+      if (!smooth(x, poly)) return;
+      var tone = R(), a1 = .20 + tone * .30;
+      x.fillStyle = tone > .88 ? "rgba(168,112,176," + (a1*.85).toFixed(3) + ")" : "rgba(222,120,162," + a1.toFixed(3) + ")";
+      x.fill();
+      x.strokeStyle = "rgba(186,80,132,.24)"; x.lineWidth = .6; x.stroke();
+      /* nucleus */
+      if (R() < .06) return;
+      var nx = p[0] + (R()-.5) * d * .24, ny = p[1] + (R()-.5) * d * .24, rx = d * (.15 + R()*.08), ry = rx * (.66 + R()*.3), rot = R()*Math.PI;
+      x.save(); x.translate(nx, ny); x.rotate(rot);
+      x.beginPath(); x.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+      x.fillStyle = "rgba(74,54,146," + (.55 + R()*.25).toFixed(3) + ")"; x.fill();
+      x.strokeStyle = "rgba(43,33,80,.78)"; x.lineWidth = Math.max(.6, d*.025); x.stroke();
+      var specks = 4 + Math.floor(R()*6);
+      for (var s = 0; s < specks; s++){
+        var sa = R()*Math.PI*2, sr = R()*.75;
+        x.beginPath(); x.arc(Math.cos(sa)*rx*sr, Math.sin(sa)*ry*sr, Math.max(.35, d*(.012 + R()*.02)), 0, Math.PI*2);
+        x.fillStyle = "rgba(36,26,72,.55)"; x.fill();
+      }
+      if (R() < .35){ x.beginPath(); x.arc((R()-.5)*rx*.5, (R()-.5)*ry*.5, Math.max(.6, d*.035), 0, Math.PI*2); x.fillStyle = "rgba(30,22,62,.9)"; x.fill(); }
+      x.restore();
+    });
+    /* a fine grain, as in a photographed slide */
+    for (var g2 = 0; g2 < S * 7; g2++){ x.fillStyle = R() < .5 ? "rgba(43,33,80,.06)" : "rgba(255,255,255,.22)"; x.fillRect(R()*S, R()*S, 1, 1); }
+    cv.parentNode.classList.add("drawn");
+  }
+
+  /* ---------- 1,000 cells, some stained: the one idea ---------- */
+  var dotFields = [];
+  function dots(cv, k){
+    var S = cv._S || (cv._S = size(cv)); if (!S) return;
+    var x = cv.getContext("2d"), N = 1000, Rd = S * .5 * .86, c = S / 2, r = Rd * Math.sqrt(1 / N) * .82;
+    if (!cv._order){
+      var R = rng(+cv.getAttribute("data-seed") || 3), idx = []; for (var i = 0; i < N; i++) idx.push(i);
+      for (var j = N - 1; j > 0; j--){ var t = Math.floor(R() * (j + 1)), tmp = idx[j]; idx[j] = idx[t]; idx[t] = tmp; }
+      cv._order = idx; cv._rank = new Array(N); idx.forEach(function(v, r){ cv._rank[v] = r; });
+    }
+    var m = +cv.getAttribute("data-marked"), rg = +cv.getAttribute("data-range"), role = new Array(N);
+    for (var q = 0; q < m + rg; q++) role[cv._order[q]] = q < m ? 2 : 1;
+    x.clearRect(0, 0, S, S); x.fillStyle = "#FFFFFF"; x.fillRect(0, 0, S, S);
+    for (var i2 = 0; i2 < N; i2++){
+      var rad = Rd * Math.sqrt((i2 + .5) / N), ang = i2 * 2.399963229728653, px = c + Math.cos(ang) * rad, py = c + Math.sin(ang) * rad;
+      var rk = role[i2] ? cv._rank[i2] : -1, show = rk < 0 ? 0 : Math.min(1, Math.max(0, k * (m + rg + 6) - rk) / 6);
+      x.beginPath(); x.arc(px, py, r, 0, Math.PI * 2);
+      if (role[i2] === 2 && show > 0){ x.fillStyle = "rgba(43,33,80," + (.18 + .82 * show).toFixed(3) + ")"; x.fill(); if (show < 1){ x.fillStyle = "rgba(224,123,165," + (.42 * (1 - show)).toFixed(3) + ")"; x.fill(); } }
+      else if (role[i2] === 1 && show > 0){ x.fillStyle = "#FFFFFF"; x.fill(); x.lineWidth = Math.max(1, r * .28); x.strokeStyle = "rgba(43,33,80," + (.9 * show).toFixed(3) + ")"; x.stroke(); }
+      else { x.fillStyle = "rgba(224,123,165,.40)"; x.fill(); }
+    }
+    cv.parentNode.classList.add("drawn");
+  }
+  function stain(cv){
+    if (still){ dots(cv, 1); return; }
+    var t0 = null, dur = 2200;
+    (function step(ts){ if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur); dots(cv, 1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); })(performance.now());
+  }
+
+  /* ---------- the explorers, drawn as a specimen ---------- */
+  /* a small, stable force layout (springs weighted by degree, steps capped) */
+function lay(g, o){
+  o = o || {}; var it = o.iterations || 300, L = o.linkDistance || 30, C = o.charge || 700, G = o.gravity || .02, N = g.nodes, n = N.length;
+  var s = (o.seed || 7) % 2147483647; function R(){ s = s * 16807 % 2147483647; return (s - 1) / 2147483646; }
+  N.forEach(function(d, i){ var a = i * 2.399963, r = 10 * Math.sqrt(i + 1); d.x = Math.cos(a) * r + R() - .5; d.y = Math.sin(a) * r + R() - .5; d.vx = d.vy = 0; });
+  for (var k = 0; k < it; k++){
+    var al = 1 - k / it;
+    for (var i = 0; i < n; i++){ var p = N[i];
+      for (var j = i + 1; j < n; j++){ var q = N[j], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy + .01; if (d2 > 90000) continue;
+        var f = C / d2 * al; p.vx += dx * f; p.vy += dy * f; q.vx -= dx * f; q.vy -= dy * f; } }
+    g.links.forEach(function(l){ var a = l.source, b = l.target, dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      var st = .5 / Math.min(a.degree, b.degree), f = (d - L) / d * al * st; dx *= f; dy *= f;
+      var wa = b.degree / (a.degree + b.degree), wb = 1 - wa; a.vx += dx * wa; a.vy += dy * wa; b.vx -= dx * wb; b.vy -= dy * wb; });
+    N.forEach(function(d){ d.vx -= d.x * G * al; d.vy -= d.y * G * al; var v = Math.hypot(d.vx, d.vy), m = 30; if (v > m){ d.vx *= m / v; d.vy *= m / v; }
+      d.x += d.vx; d.y += d.vy; d.vx *= .6; d.vy *= .6; });
+  }
+  return g;
+}
+
+  var graphs = {};
+  function net(cv){
+    if (!window.EpiNet) return;
+    var which = cv.getAttribute("data-net");
+    (graphs[which] || (graphs[which] = EpiNet.load(which).then(function(g){
+      lay(g, which === "cancer" ? { seed: 11, charge: 560, linkDistance: 26, gravity: .024 } : { seed: 5, charge: 520, linkDistance: 26, gravity: .024 });
+      return g;
+    }))).then(function(g){
+      var S = size(cv); if (!S) return;
+      var x = cv.getContext("2d"), cx = 0, cy = 0, n = g.nodes.length;
+      g.nodes.forEach(function(d){ cx += d.x; cy += d.y; }); cx /= n; cy /= n;
+      var far = g.nodes.map(function(d){ return Math.hypot(d.x - cx, d.y - cy); }).sort(function(a, b){ return a - b; });
+      var k = S * .5 * .78 / far[Math.floor(n * .985)];
+      function X(d){ var dx = d.x - cx, dy = d.y - cy, L = Math.hypot(dx, dy) * k, lim = S * .44, s = L > lim ? lim / L : 1; return [S/2 + dx * k * s, S/2 + dy * k * s]; }
+      var bg = x.createRadialGradient(S*.5, S*.46, S*.05, S*.5, S*.5, S*.6);
+      bg.addColorStop(0, "#FFFBFD"); bg.addColorStop(1, "#F5E7F0");
+      x.fillStyle = bg; x.fillRect(0, 0, S, S);
+      var lw = Math.max(.6, S / 900);
+      g.links.forEach(function(l){
+        var a = X(l.source), b = X(l.target);
+        x.beginPath(); x.moveTo(a[0], a[1]); x.lineTo(b[0], b[1]);
+        if (which === "cancer"){ x.setLineDash(l.est ? [] : [2.5, 3]); x.strokeStyle = l.est ? "rgba(196,78,132,.62)" : "rgba(196,78,132,.36)"; }
+        else { x.setLineDash([]); x.strokeStyle = l.est ? "rgba(196,78,132,.6)" : "rgba(196,78,132,.26)"; }
+        x.lineWidth = lw; x.stroke();
+      });
+      x.setLineDash([]);
+      g.nodes.forEach(function(d){
+        var p = X(d), big = d.kind === "cancer" || d.kind === "disease";
+        var r = big ? 2.2 + Math.sqrt(d.degree) * 1.05 : 1.4 + Math.sqrt(d.degree) * .45;
+        r *= S / 560;
+        x.beginPath(); x.arc(p[0], p[1], r, 0, Math.PI * 2);
+        if (big){ x.fillStyle = "rgba(74,54,146,.78)"; x.fill(); x.lineWidth = Math.max(.7, r * .22); x.strokeStyle = "rgba(43,33,80,.9)"; x.stroke(); }
+        else {
+          var a = d.group === "1" ? .95 : d.group === "2A" ? .7 : d.group === "2B" ? .45 : .62;
+          x.fillStyle = "rgba(43,33,80," + a + ")"; x.fill();
+        }
+      });
+      cv.parentNode.classList.add("drawn");
+    }).catch(function(){});
+  }
+
+  /* ---------- draw lazily, as each field comes near ---------- */
+  function draw(cv){
+    if (cv._done) return; cv._done = true;
+    if (cv.classList.contains("tissue")) tissue(cv);
+    else if (cv.classList.contains("dots")) { dots(cv, 0); dotFields.push(cv); }
+    else if (cv.classList.contains("net")) net(cv);
+  }
+  var cvs = Array.prototype.slice.call(document.querySelectorAll("canvas.tissue, canvas.dots, canvas.net"));
+  if ("IntersectionObserver" in window){
+    var near = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ near.unobserve(e.target); draw(e.target); } }); }, { rootMargin: "800px 0px" });
+    cvs.forEach(function(c){ near.observe(c); });
+    var seen = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ seen.unobserve(e.target); var cv = e.target.querySelector("canvas.dots"); draw(cv); stain(cv); } }); }, { threshold: .45 });
+    document.querySelectorAll("canvas.dots").forEach(function(c){ seen.observe(c.closest(".field")); });
+  } else { cvs.forEach(function(c){ draw(c); if (c.classList.contains("dots")) dots(c, 1); }); }
+
+  var lastW = innerWidth;
+  addEventListener("resize", function(){
+    if (Math.abs(innerWidth - lastW) < 40) return; lastW = innerWidth;
+    cvs.forEach(function(c){ if (!c._done) return; c._S = 0;
+      if (c.classList.contains("tissue")) tissue(c); else if (c.classList.contains("dots")) dots(c, 1); else net(c); });
+  });
+
+  /* ---------- focus: sharp at the middle of the screen ---------- */
+  var focusing = Array.prototype.slice.call(document.querySelectorAll("[data-focus]"));
+  var fixed = Array.prototype.slice.call(document.querySelectorAll("[data-fix]"));
+  var all = focusing.concat(fixed);
+  all.forEach(function(f){ f._cur = still ? 0 : 14; f._t = 0; f._layers = f.querySelectorAll("canvas"); });
+  fixed.forEach(function(f){ f._cur = still ? +f.getAttribute("data-fix") : 14; });
+  function apply(f){ var b = f._cur < .05 ? 0 : f._cur; for (var i = 0; i < f._layers.length; i++) f._layers[i].style.filter = b ? "blur(" + b.toFixed(2) + "px)" : "none"; }
+  function targets(){
+    var vh = innerHeight, mid = vh / 2;
+    focusing.forEach(function(f){
+      if (still){ f._t = 0; return; }
+      var r = f.getBoundingClientRect(), c = r.top + r.height / 2, d = Math.abs(c - mid);
+      f._t = Math.min(10, Math.max(0, (d - vh * .14) / (vh * .028)));
+    });
+    fixed.forEach(function(f){
+      var r = f.getBoundingClientRect(), on = r.top < vh * .82 && r.bottom > vh * .1;
+      if (on) f._seen = true;
+      f._t = (f._seen || still) ? +f.getAttribute("data-fix") : 14;
+    });
+  }
+  var running = false;
+  function tick(){
+    var moving = false;
+    all.forEach(function(f){
+      var d = f._t - f._cur;
+      if (Math.abs(d) > .03){ f._cur += d * (still ? 1 : .075); moving = true; } else f._cur = f._t;
+      apply(f);
+    });
+    if (moving) requestAnimationFrame(tick); else running = false;
+  }
+  function kick(){ targets(); if (!running){ running = true; requestAnimationFrame(tick); } }
+  addEventListener("scroll", kick, { passive: true });
+  addEventListener("resize", kick);
+  if (document.readyState === "complete") kick(); else addEventListener("load", kick);
+  kick();
+})();
+</script>
+</body>
+</html>

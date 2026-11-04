@@ -1,0 +1,25 @@
+{
+ "n": 4,
+ "slug": "04-verde",
+ "name": "Verde",
+ "line": "Bottle green and paper in confident blocks: an enormous Familjen Grotesk question beside one tightly cropped leaf macro that bleeds off the right edge, and as you scroll a green frame closes in around the leaf (clip-path driven by --p); the one idea is shown as two bars on the same 1,000-person scale, and the explorers carry huge one-line names with their figures in a single row.",
+ "palette": [
+  "#12382B",
+  "#2E6B4F",
+  "#F4F1EA",
+  "#0B1A14",
+  "#C8D96F"
+ ],
+ "fonts": [
+  "Familjen Grotesk"
+ ],
+ "images": [
+  "media/photo-leaf-veins.webp",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Uses the short headline allowed for very large type (\"What causes cancer, and how sure is the evidence?\") with \"And other chronic diseases.\" directly beneath it. Chartreuse appears only as hover underlines, the current language and the focus ring on green. The network drawings are recoloured white with a CSS filter on leaf-green plates. With reduced motion the leaf stays full-bleed and the bars are drawn at full length. Familjen Grotesk has no Cyrillic; a Russian page would need a fallback face."
+}

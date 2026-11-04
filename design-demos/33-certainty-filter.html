@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>33 · Certainty Filter — EpiDetective demo</title>
+<meta name="description" content="What causes cancer and other chronic diseases, and how sure the evidence is. Sharpen the web of causation by certainty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --white:#FFFFFF; --cool:#E9ECEF; --cool-2:#F4F6F7; --graph:#1D2125; --graph-2:#4A5159; --mute:#8A9199; --rule:#DCE0E4;
+  --teal:#1F6F6A; --teal-2:#E3EFEE; --g1:#C2362B; --g2a:#E08A2E; --g2b:#B9A27A;
+  --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  /* type scale: 12 / 14 / 16 / 18 / 22 / 30 / 46 / 68 */
+  --t12:12px; --t14:14px; --t16:16px; --t18:18px; --t22:22px; --t30:clamp(24px,2.3vw,30px); --t46:clamp(32px,3.3vw,46px); --t68:clamp(42px,5vw,68px);
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,200px);
+  --gut:clamp(20px,4.4vw,64px); --colw:clamp(300px,29vw,430px); --hdr:84px; --panel:76px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--graph);font:400 var(--t18)/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-weight:300;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img,canvas{display:block;max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{width:100%;max-width:1312px;margin:0 auto;padding:0 var(--gut)}
+.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 600ms var(--ease);padding-bottom:2px}
+.lnk:hover{background-size:100% 1px}
+.skip{position:absolute;left:var(--gut);top:-60px;z-index:20;background:var(--graph);color:var(--white);padding:10px 14px;font:500 var(--t14)/1 var(--sans);text-decoration:none}
+.skip:focus{top:12px}
+
+/* ---------- header ---------- */
+.top{position:absolute;inset:0 0 auto 0;z-index:6;display:flex;align-items:baseline;gap:var(--s2) var(--s4);padding:28px var(--gut) 0;font:400 var(--t14)/1.3 var(--sans)}
+.mark{font:500 19px/1 var(--sans);letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+.mark b{font-weight:300}
+.nav,.lang{display:flex;flex-wrap:wrap;gap:6px 26px}
+.nav a,.lang a{color:var(--graph-2);text-decoration:none;background:linear-gradient(var(--teal),var(--teal)) 0 100%/0 1px no-repeat;transition:background-size 600ms var(--ease),color 300ms;padding-bottom:3px}
+.nav a:hover,.lang a:hover{color:var(--graph);background-size:100% 1px}
+.lang{gap:6px 14px;font:400 var(--t12)/1.3 var(--mono)}
+.lang a[aria-current]{color:var(--graph);background-size:100% 1px}
+
+/* ---------- cover ---------- */
+.cover{position:relative}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;column-gap:var(--s5);padding:calc(var(--hdr) + var(--s3)) var(--gut) var(--s5);min-height:100vh}
+.js .cover{height:calc(100vh + 4 * 85vh);height:calc(100svh + 4 * 85svh)}
+.js .stage{position:sticky;top:0;height:100vh;height:100svh;min-height:540px;overflow:hidden}
+#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:1;display:none}
+.js .live #cv{display:block}
+.field{grid-column:2;grid-row:1 / 3;position:relative;min-height:0;margin-bottom:var(--s3)}
+.js .live .field{border:1px solid var(--rule);background:
+  linear-gradient(var(--cool-2) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,var(--cool-2) 1px,transparent 1px) 0 0/48px 48px,var(--white)}
+.field .crn{display:none}
+.js .live .field .crn{display:block;position:absolute;width:14px;height:14px;border-color:var(--graph);border-style:solid;border-width:0}
+.crn.a{left:-1px;top:-1px;border-left-width:1px!important;border-top-width:1px!important}
+.crn.b{right:-1px;top:-1px;border-right-width:1px!important;border-top-width:1px!important}
+.crn.c{left:-1px;bottom:-1px;border-left-width:1px!important;border-bottom-width:1px!important}
+.crn.d{right:-1px;bottom:-1px;border-right-width:1px!important;border-bottom-width:1px!important}
+.fallback{width:100%;height:auto;max-width:720px;margin:0 auto}
+.js .fallback{display:none}
+.js .failed .fallback{display:block}
+.legend{display:none}
+.js .live .legend{display:flex;position:absolute;top:14px;left:16px;right:16px;gap:6px 20px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font:400 var(--t12)/1.2 var(--sans);color:var(--graph-2);z-index:2;pointer-events:none}
+.legend li{display:flex;align-items:center;gap:7px}
+.slot{grid-column:1;grid-row:1;position:relative;z-index:2;min-height:0}
+.find{grid-column:1;grid-row:2;position:relative;z-index:4;margin:var(--s3) 0 var(--s3)}
+.panel{grid-column:1 / -1;grid-row:3;position:relative;z-index:3}
+
+/* captions */
+.cap + .cap{margin-top:var(--s5)}
+.js .live .cap{position:absolute;left:0;right:0;bottom:0;margin:0;opacity:0;transform:translate3d(0,16px,0);pointer-events:none;transition:opacity 650ms var(--ease),transform 950ms var(--ease)}
+.js .live .cap.up{transform:translate3d(0,-12px,0)}
+.js .live .cap.on{opacity:1;transform:none;pointer-events:auto;transition-delay:160ms}
+.cap h1{font:300 var(--t46)/1.06 var(--sans);letter-spacing:-.022em}
+.cap .who{margin-top:var(--s3);font:400 var(--t18)/1.55 var(--sans);color:var(--graph-2);max-width:26em}
+.cap .caveat{margin-top:var(--s2);padding-left:14px;border-left:1px solid var(--teal);font:italic 300 var(--t16)/1.5 var(--sans);color:var(--graph-2);max-width:28em}
+.cap .n{display:flex;align-items:center;gap:10px;font:500 var(--t12)/1 var(--mono);color:var(--teal);margin-bottom:var(--s2)}
+.cap .n::after{content:"";flex:0 0 32px;height:1px;background:var(--teal)}
+.cap h2{font:300 var(--t30)/1.15 var(--sans);letter-spacing:-.015em}
+.cap p.b{margin-top:14px;font:400 var(--t16)/1.6 var(--sans);color:var(--graph-2)}
+.cap p.b strong{font-weight:500;color:var(--graph)}
+.def{margin-top:var(--s2);padding-top:14px;border-top:1px solid var(--rule);font:400 var(--t14)/1.55 var(--sans);color:var(--graph-2)}
+.def b{font-weight:500;color:var(--graph)}
+.sw{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.sw.g1{background:var(--g1)}.sw.g2a{background:var(--g2a)}.sw.g2b{background:var(--g2b)}
+.sw.ca{border-radius:0;width:10px;height:10px;border:1.3px solid var(--graph);background:var(--white)}
+.ln{display:inline-block;width:18px;height:0;border-top:1.3px solid var(--graph);flex:none}
+.ln.d{border-top-style:dashed}
+.bars{margin-top:var(--s3);display:grid;gap:14px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:end}
+.bar .k{font:400 13px/1.35 var(--sans);color:var(--graph-2)}
+.bar .v{font:300 clamp(24px,2.2vw,30px)/1 var(--sans);letter-spacing:-.01em;font-variant-numeric:lining-nums;text-align:right}
+.bar .v.r{color:var(--g1)}
+.bar .tr{grid-column:1 / -1;position:relative;height:8px;background:var(--cool)}
+.bar .tr i{position:absolute;left:0;top:0;bottom:0;background:var(--graph)}
+.bar .tr i.r{background:var(--g1)}
+.bar .tr i.x{opacity:.35}
+.scale{display:flex;justify-content:space-between;font:400 11px/1 var(--mono);color:var(--graph-2);margin-top:-6px}
+.meat{margin-top:var(--s2);display:flex;align-items:baseline;gap:14px;padding-top:14px;border-top:1px solid var(--rule)}
+.meat .v{font:300 clamp(24px,2.2vw,30px)/1 var(--sans);font-variant-numeric:lining-nums}
+.meat .k{font:400 13px/1.4 var(--sans);color:var(--graph-2)}
+.src{margin-top:14px;font:400 var(--t12)/1.5 var(--sans);color:var(--graph-2)}
+.more{display:inline-block;margin-top:10px;font:500 var(--t14)/1.3 var(--sans);color:var(--teal)}
+
+/* search */
+.find label{display:block;font:500 var(--t12)/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--graph-2);margin-bottom:10px}
+.fld{position:relative;display:flex;align-items:stretch;border:1px solid var(--rule);background:var(--white);transition:border-color 300ms}
+.fld:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-2)}
+.find input{flex:1;min-width:0;border:0;background:transparent;padding:13px 14px;font:400 15px/1.3 var(--sans);color:var(--graph);border-radius:0;-webkit-appearance:none;appearance:none}
+.find input::placeholder{color:#6E757D;opacity:1}
+.find input::-webkit-search-cancel-button{-webkit-appearance:none}
+.find input:focus{outline:none}
+.find button[type=submit]{border:0;border-left:1px solid var(--rule);background:var(--cool-2);padding:0 18px;font:500 var(--t14)/1 var(--sans);color:var(--graph);cursor:pointer}
+.find button[type=submit]:hover{background:var(--cool)}
+.try{margin-top:10px;font:400 var(--t14)/1.4 var(--sans);color:var(--graph-2)}
+.try a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;margin:0 2px}
+.none{margin-top:10px;font:400 var(--t14)/1.45 var(--sans);color:var(--graph);padding-left:12px;border-left:2px solid var(--g1)}
+.results{position:absolute;left:-1px;right:-1px;top:100%;margin:0;padding:4px 0;list-style:none;background:var(--white);border:1px solid var(--rule);box-shadow:0 18px 40px -24px rgba(29,33,37,.4);z-index:8;max-height:290px;overflow:auto}
+.results.up{top:auto;bottom:100%}
+.results li{display:flex;align-items:baseline;gap:12px;padding:9px 14px;cursor:pointer;font:400 15px/1.35 var(--sans)}
+.results li .o-n{flex:1;min-width:0}
+.results li .o-k{flex:none;font-size:var(--t12);color:var(--graph-2);display:flex;align-items:center;gap:7px}
+.results li[aria-selected=true],.results li:hover{background:var(--teal-2)}
+
+/* instrument panel */
+.panel{display:flex;align-items:center;flex-wrap:wrap;gap:12px var(--s4);padding:14px 0 0;border-top:1px solid var(--graph)}
+.seg{border:0;margin:0;padding:0;display:flex;align-items:center;gap:12px;min-width:0}
+.seg legend{float:left;margin-right:12px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--graph-2);padding:0}
+.seg .opts{display:flex;border:1px solid var(--graph);background:var(--white)}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg label span{display:block;padding:9px 15px;font:500 13px/1 var(--sans);color:var(--graph);white-space:nowrap;transition:background 500ms var(--ease),color 500ms var(--ease)}
+.seg label + label span{border-left:1px solid var(--graph)}
+.seg label.in span{background:var(--teal-2);color:var(--teal)}
+.seg input:checked + span{background:var(--teal);color:var(--white)}
+.seg input:focus-visible + span{outline:2px solid var(--teal);outline-offset:2px}
+.seg label:hover span{background:var(--cool)}
+.seg input:checked:hover + span{background:var(--teal)}
+.readout{flex:1 1 260px;min-width:0;font:400 var(--t14)/1.4 var(--sans);color:var(--graph)}
+.readout .rk{display:block;font:500 11px/1 var(--mono);color:var(--teal);margin-bottom:5px;letter-spacing:.04em}
+.idx{font:400 var(--t12)/1 var(--mono);color:var(--graph-2);display:flex;align-items:center;gap:10px}
+.idx button{width:22px;height:22px;border:0;padding:0;background:none;cursor:pointer;position:relative}
+.idx button::before{content:"";position:absolute;inset:8px;border:1px solid var(--mute);border-radius:50%}
+.idx button[aria-current]::before{background:var(--teal);border-color:var(--teal);inset:7px}
+.idx ol{display:flex;list-style:none;margin:0;padding:0}
+html:not(.js) .idx{display:none}
+
+/* card */
+.card{position:absolute;z-index:7;top:calc(var(--hdr) + var(--s3) + 44px);right:calc(var(--gut) + 16px);width:330px;max-height:calc(100% - var(--hdr) - var(--panel) - 120px);display:flex;flex-direction:column;
+  background:var(--white);border:1px solid var(--graph);box-shadow:0 24px 50px -30px rgba(29,33,37,.35);padding:var(--s3) var(--s3) var(--s2);
+  opacity:0;transform:translate3d(0,8px,0);transition:opacity 450ms var(--ease),transform 650ms var(--ease)}
+.card.on{opacity:1;transform:none}
+.c-x{position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;background:none;cursor:pointer;color:var(--graph-2)}
+.c-x:hover{color:var(--graph);background:var(--cool)}
+.c-x svg{display:block;margin:auto}
+.c-kind{font:500 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--graph-2);padding-right:36px}
+.c-name{margin-top:10px;font:300 25px/1.15 var(--sans);letter-spacing:-.015em;padding-right:8px}
+.c-desc{margin-top:4px;font:italic 300 15px/1.4 var(--sans);color:var(--graph-2)}
+.c-group{margin-top:12px;display:flex;align-items:center;gap:9px;font:500 13px/1.3 var(--sans)}
+.c-count{margin-top:6px;font:400 13px/1.3 var(--sans);color:var(--graph-2)}
+.c-list{list-style:none;margin:var(--s2) 0 0;padding:0;border-top:1px solid var(--rule);overflow:auto;flex:1 1 auto;min-height:60px;overscroll-behavior:contain}
+.c-list li{border-bottom:1px solid var(--rule)}
+.c-list button{display:flex;width:100%;align-items:center;gap:10px;border:0;background:none;padding:9px 2px;text-align:left;cursor:pointer;font:400 14px/1.3 var(--sans);color:var(--graph)}
+.c-list button:hover{background:var(--cool-2)}
+.c-list .nm{flex:1;min-width:0}
+.c-list .gr{flex:none;display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--graph-2)}
+.c-list .gr .ln{width:14px}
+.c-open{margin-top:var(--s2);font:500 var(--t14)/1.3 var(--sans);color:var(--teal);align-self:flex-start}
+
+/* ---------- after the story ---------- */
+.sec{padding-top:var(--s6)}
+.h-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5);align-items:end;padding-bottom:var(--s4);border-bottom:1px solid var(--graph)}
+.h-row h2{font:300 var(--t68)/1.02 var(--sans);letter-spacing:-.03em}
+.h-row p{font:400 var(--t18)/1.55 var(--sans);color:var(--graph-2);max-width:32em}
+.scale4{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.scale4 li{padding:var(--s4) var(--s3) var(--s4) 0;min-width:0}
+.scale4 li + li{padding-left:var(--s3);border-left:1px solid var(--rule)}
+.scale4 .gk{display:flex;align-items:center;gap:10px;font:500 var(--t12)/1 var(--mono);color:var(--graph-2)}
+.scale4 .gk .sw{width:10px;height:10px}
+.scale4 .sw.g3{background:var(--white);border:1px solid var(--mute)}
+.scale4 h3{margin-top:var(--s3);font:300 var(--t30)/1.1 var(--sans);letter-spacing:-.015em}
+.scale4 p{margin-top:12px;font:400 var(--t14)/1.6 var(--sans);color:var(--graph-2)}
+.tool{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:center;padding:var(--s5) 0;border-bottom:1px solid var(--rule)}
+.tool.rev{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.tool.rev .plate{order:2}
+.plate{margin:0;position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--rule);background:
+  linear-gradient(var(--cool-2) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--cool-2) 1px,transparent 1px) 0 0/40px 40px,var(--white)}
+.plate canvas,.plate img{position:absolute;inset:0;width:100%;height:100%}
+.plate img{object-fit:contain;padding:7%}
+.js .plate.drawn img{display:none}
+.plate figcaption{position:absolute;left:16px;bottom:12px;right:16px;font:400 11px/1.4 var(--mono);color:var(--graph-2)}
+.tool-t{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tool h2{font:300 var(--t46)/1.05 var(--sans);letter-spacing:-.025em}
+.tool .d{margin-top:var(--s3);font:400 var(--t18)/1.55 var(--sans);color:var(--graph-2);max-width:28em}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s4) 0 0;border-top:1px solid var(--graph);border-bottom:1px solid var(--rule)}
+.three div{display:flex;flex-direction:column-reverse;padding:var(--s2) var(--s2) var(--s2) 0;min-width:0}
+.three div + div{padding-left:var(--s2);border-left:1px solid var(--rule)}
+.three dd{margin:0;font:300 clamp(34px,3.4vw,48px)/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.three dt{margin-top:8px;font:400 var(--t12)/1.3 var(--sans);color:var(--graph-2)}
+.langs{margin-top:12px;font:400 var(--t12)/1.3 var(--mono);color:var(--graph-2)}
+.acts{margin-top:var(--s4);display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s4)}
+.btn{display:inline-block;background:var(--teal);color:var(--white);text-decoration:none;font:500 var(--t14)/1 var(--sans);padding:16px 24px;transition:background 400ms var(--ease)}
+.btn:hover{background:#185853}
+.acts .lnk{font:500 var(--t14)/1.3 var(--sans)}
+.code{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5);align-items:start;border-top:1px solid var(--graph);padding-top:var(--s4)}
+.code h2{font:300 var(--t68)/1.02 var(--sans);letter-spacing:-.03em}
+.code .d{font:400 var(--t18)/1.6 var(--sans);color:var(--graph-2);max-width:32em}
+.cnt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:var(--s4) 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.cnt div{display:flex;flex-direction:column-reverse;padding:var(--s3) var(--s3) var(--s3) 0;min-width:0}
+.cnt div + div{padding-left:var(--s3);border-left:1px solid var(--rule)}
+.cnt dd{margin:0;font:300 clamp(56px,6vw,84px)/.9 var(--sans);letter-spacing:-.04em;font-variant-numeric:lining-nums}
+.cnt dt{margin-top:12px;font:400 var(--t14)/1.4 var(--sans);color:var(--graph-2)}
+.games-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--s2) var(--s4);padding-bottom:var(--s3);border-bottom:1px solid var(--graph)}
+.games-h h2{font:300 var(--t46)/1.05 var(--sans);letter-spacing:-.025em}
+.games-h p{font:400 var(--t16)/1.4 var(--sans);color:var(--graph-2)}
+.gl{list-style:none;margin:0;padding:var(--s4) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.gl a{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--s2);align-items:center;text-decoration:none}
+.gl .ph{display:block;aspect-ratio:1/1;overflow:hidden;border:1px solid var(--rule);padding:6px;background:var(--white)}
+.gl img{width:100%;height:100%;object-fit:cover;filter:saturate(.7);transition:filter 700ms var(--ease)}
+.gl a:hover img{filter:none}
+.gl .gt{display:block;font:400 var(--t18)/1.25 var(--sans)}
+.gl .gm{display:block;margin-top:6px;font:400 var(--t12)/1.3 var(--mono);color:var(--graph-2)}
+.foot{margin-top:var(--s6);background:var(--cool-2);border-top:1px solid var(--rule);padding:var(--s5) 0 calc(var(--s5) + 40px);font:400 var(--t14)/1.6 var(--sans);color:var(--graph-2)}
+.foot-g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:var(--s4)}
+.foot .mark{display:inline-block;font-size:21px;color:var(--graph);margin-bottom:var(--s2)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{color:var(--graph)}
+.foot p + p{margin-top:var(--s2)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--rule);font-size:var(--t12);line-height:1.6}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .seg legend{display:none}
+  .card{width:300px}
+}
+@media (max-width:980px){
+  .h-row,.tool,.tool.rev,.code{grid-template-columns:minmax(0,1fr);gap:var(--s4)}
+  .tool.rev .plate{order:0}
+  .scale4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scale4 li:nth-child(3){padding-left:0;border-left:0}
+  .scale4 li:nth-child(n+3){border-top:1px solid var(--rule)}
+  .gl{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  .foot-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot-g > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:860px){
+  :root{--hdr:92px}
+  .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
+  .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
+  .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;padding:calc(var(--hdr) + 12px) 16px calc(60px + env(safe-area-inset-bottom,0px))}
+  .slot{grid-column:1;grid-row:1}
+  .find{grid-column:1;grid-row:2;margin:14px 0 12px}
+  .field{grid-column:1;grid-row:3;margin-bottom:10px;min-height:180px}
+  .panel{grid-column:1;grid-row:4;gap:8px 10px;padding-top:10px}
+  .js .live .slot{transition:height 600ms var(--ease)}
+  .js .live .cap{top:0;bottom:auto}
+  .cap h1{font-size:clamp(27px,4.6vw,38px);line-height:1.08}
+  .cap .who{margin-top:12px;font-size:15px}
+  .cap .caveat{margin-top:8px;font-size:14px}
+  .cap h2{font-size:23px}
+  .cap .n{margin-bottom:8px}
+  .cap p.b{font-size:14.5px;margin-top:8px}
+  .def{display:none}
+  .bars{margin-top:12px;gap:10px}
+  .bar .v,.meat .v{font-size:22px}
+  .bar .k,.meat .k{font-size:12px}
+  .meat{margin-top:10px;padding-top:10px}
+  .src{margin-top:8px;font-size:11px}
+  .more{margin-top:6px;font-size:13px}
+  .find label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .find input{font-size:16px;padding:10px 12px}
+  .find button[type=submit]{padding:0 14px}
+  .try{margin-top:6px;font-size:13px}
+  .js .live .legend{display:none}
+  .seg{flex:1 1 auto}
+  .seg .opts{flex:1}
+  .seg label{flex:1}
+  .seg label span{padding:9px 6px;text-align:center;font-size:12.5px}
+  .readout{order:-1;flex:1 1 100%;font-size:12.5px;line-height:1.35}
+  .readout .rk{display:none}
+  .idx{display:none}
+  .card{left:0;right:0;bottom:0;top:auto;width:auto;max-height:62%;padding:20px 20px calc(16px + env(safe-area-inset-bottom,0px));border-left:0;border-right:0;border-bottom:0}
+  .c-name{font-size:23px}
+  .c-list button{padding:11px 2px}
+  .scale4{grid-template-columns:minmax(0,1fr)}
+  .scale4 li,.scale4 li + li{padding:var(--s3) 0;border-left:0}
+  .scale4 li + li{border-top:1px solid var(--rule)}
+  .three div,.three div + div{padding-right:8px}
+  .three dd{font-size:32px}
+  .cnt div,.cnt div + div{padding-right:10px}
+  .gl a{grid-template-columns:96px minmax(0,1fr)}
+  .foot-g{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .live .cap,.card,.lnk,.seg label span,.gl img{transition:none!important}
+}
+</style>
+<script src="kit/kit.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#tools">Skip to the explorers</a>
+<header class="top">
+  <a class="mark" href="#">Epi<b>Detective</b></a>
+  <nav class="nav" aria-label="Main"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a></nav>
+  <nav class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a></nav>
+</header>
+
+<main>
+<section class="cover" id="cover" aria-labelledby="h1">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="The web of causation: 185 exposures linked to 68 cancer types by 469 links, filtered by how sure the evidence is. Point at or tap a dot or square to read its links; the search reaches every entry by keyboard."></canvas>
+
+    <div class="field" id="netbox">
+      <span class="crn a" aria-hidden="true"></span><span class="crn b" aria-hidden="true"></span><span class="crn c" aria-hidden="true"></span><span class="crn d" aria-hidden="true"></span>
+      <img class="fallback" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
+      <ul class="legend" aria-hidden="true">
+        <li><span class="sw g1"></span>Known cause</li>
+        <li><span class="sw g2a"></span>Probable cause</li>
+        <li><span class="sw g2b"></span>Possible cause</li>
+        <li><span class="sw ca"></span>Cancer type</li>
+        <li><span class="ln"></span>Established link</li>
+        <li><span class="ln d"></span>Suspected link</li>
+      </ul>
+    </div>
+
+    <div class="slot" id="slot">
+      <div class="cap on">
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+      <div class="cap">
+        <span class="n">01</span>
+        <h2>Remove the possible causes</h2>
+        <p class="b">The filter drops Group 2B. Watch the web thin.</p>
+        <p class="def"><b>Group 2B, Possible cause:</b> the agent may cause cancer in people. Aspartame is in this group.</p>
+      </div>
+      <div class="cap">
+        <span class="n">02</span>
+        <h2>Keep only the known causes</h2>
+        <p class="b">Group 2A goes too. What is left is <strong>Group 1</strong>.</p>
+        <p class="def"><b>Group 1, Known cause:</b> the agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p>
+      </div>
+      <div class="cap">
+        <span class="n">03</span>
+        <h2>Established links only</h2>
+        <p class="b">Now the dashed lines go. Each solid line is an established link: studies in people show that it causes this cancer.</p>
+        <p class="def"><b>Suspected link:</b> studies in people show a link, and a causal link is credible.</p>
+      </div>
+      <div class="cap">
+        <span class="n">04</span>
+        <h2>Same certainty, very different size</h2>
+        <p class="b">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <div class="bars" role="img" aria-label="Lung cancer by age 75: 100 to 120 in 1,000 smokers, 4 to 5 in 1,000 lifelong non-smokers.">
+          <div class="bar"><span class="k">Smokers who get lung cancer by age 75, per 1,000 (about 10 to 12 in 100)</span><span class="v r">100–120</span><span class="tr"><i class="r x" style="width:12%"></i><i class="r" style="width:10%"></i></span></div>
+          <div class="bar"><span class="k">Lifelong non-smokers, per 1,000</span><span class="v">4–5</span><span class="tr"><i class="x" style="width:.5%"></i><i style="width:.4%"></i></span></div>
+          <p class="scale" aria-hidden="true"><span>0</span><span>1,000</span></p>
+        </div>
+        <p class="meat"><span class="v">18%</span><span class="k">Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</span></p>
+        <p class="src">European data. Quoted from the Cancer Evidence Explorer.</p>
+        <a class="more lnk" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+    </div>
+
+    <form class="find" id="find" role="search" onsubmit="return false" autocomplete="off">
+      <label for="q">Look something up</label>
+      <div class="fld">
+        <input id="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="results" spellcheck="false">
+        <button type="submit">Search</button>
+        <ul class="results" id="results" role="listbox" aria-label="Matches on the map" hidden></ul>
+      </div>
+      <p class="none" id="none" role="status" hidden>Not on this map. The explorers list every agent and risk factor they cover.</p>
+      <p class="try">Try <a href="#">aspartame</a> · <a href="#">stroke</a> · <a href="#">coffee</a></p>
+    </form>
+
+    <div class="panel" id="panel">
+      <fieldset class="seg" id="seg-g">
+        <legend>Exposures</legend>
+        <div class="opts">
+          <label><input type="radio" name="grp" value="1"><span>Group 1</span></label>
+          <label><input type="radio" name="grp" value="2A"><span>+ 2A</span></label>
+          <label><input type="radio" name="grp" value="2B" checked><span>+ 2B</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="seg" id="seg-l">
+        <legend>Links</legend>
+        <div class="opts">
+          <label><input type="radio" name="lnk" value="est"><span>Established only</span></label>
+          <label><input type="radio" name="lnk" value="all" checked><span>+ Suspected</span></label>
+        </div>
+      </fieldset>
+      <p class="readout" id="readout" aria-live="polite"><span class="rk" id="rk">G1 + 2A + 2B · EST + SUS</span><span id="rt">Showing known, probable and possible causes, with established and suspected links.</span></p>
+      <nav class="idx" aria-label="Story">
+        <ol>
+          <li><button type="button" aria-label="Start: everything" aria-current="step"></button></li>
+          <li><button type="button" aria-label="1: Remove the possible causes"></button></li>
+          <li><button type="button" aria-label="2: Keep only the known causes"></button></li>
+          <li><button type="button" aria-label="3: Established links only"></button></li>
+          <li><button type="button" aria-label="4: Same certainty, very different size"></button></li>
+        </ol>
+        <span id="idx-n">00 / 04</span>
+      </nav>
+    </div>
+
+    <aside class="card" id="card" aria-labelledby="c-name" hidden>
+      <button class="c-x" id="c-x" type="button" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></button>
+      <p class="c-kind" id="c-kind"></p>
+      <h2 class="c-name" id="c-name"></h2>
+      <p class="c-desc" id="c-desc" hidden></p>
+      <p class="c-group" id="c-group" hidden></p>
+      <p class="c-count" id="c-count"></p>
+      <ul class="c-list" id="c-list" aria-label="Links"></ul>
+      <a class="c-open lnk" href="#">Open in the explorer →</a>
+    </aside>
+    <p class="vh" id="live" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="scale-t">
+  <div class="wrap">
+    <div class="h-row">
+      <h2 id="scale-t" data-split>Four levels of certainty</h2>
+      <p data-reveal="rise">The four groups IARC uses to say how sure it is that an agent can cause cancer in people.</p>
+    </div>
+    <ol class="scale4">
+      <li data-reveal="rise"><span class="gk"><span class="sw g1"></span>Group 1</span><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></li>
+      <li data-reveal="rise" style="--d:100ms"><span class="gk"><span class="sw g2a"></span>Group 2A</span><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></li>
+      <li data-reveal="rise" style="--d:200ms"><span class="gk"><span class="sw g2b"></span>Group 2B</span><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></li>
+      <li data-reveal="rise" style="--d:300ms"><span class="gk"><span class="sw g3"></span>Group 3</span><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="tools" aria-labelledby="tools-t">
+  <div class="wrap">
+    <div class="h-row">
+      <h2 id="tools-t" data-split>The explorers</h2>
+      <p data-reveal="rise">Two reference works, free to use, each in 10 languages. Every entry names its sources.</p>
+    </div>
+    <article class="tool" aria-labelledby="t1">
+      <figure class="plate" data-reveal="fade">
+        <canvas data-plate="cancer" aria-hidden="true"></canvas>
+        <img src="media/tool-cancer-network.svg" width="1062" height="998" loading="lazy" alt="Network drawing of the Cancer Evidence Explorer: exposures linked to cancer types.">
+        <figcaption>Drawn from the explorer’s own data</figcaption>
+      </figure>
+      <div class="tool-t" data-reveal="rise" style="--d:150ms">
+        <h2 id="t1">Cancer Evidence Explorer</h2>
+        <p class="d">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <dl class="three">
+          <div><dt>exposures</dt><dd>185</dd></div>
+          <div><dt>cancer types</dt><dd>68</dd></div>
+          <div><dt>links</dt><dd>469</dd></div>
+        </dl>
+        <p class="langs">10 languages</p>
+        <p class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></p>
+      </div>
+    </article>
+    <article class="tool rev" aria-labelledby="t2">
+      <figure class="plate" data-reveal="fade">
+        <canvas data-plate="chronic" aria-hidden="true"></canvas>
+        <img src="media/tool-chronic-network.svg" width="931" height="1006" loading="lazy" alt="Network drawing of the Chronic Disease Evidence Explorer: risk factors linked to chronic diseases.">
+        <figcaption>Drawn from the explorer’s own data</figcaption>
+      </figure>
+      <div class="tool-t" data-reveal="rise" style="--d:150ms">
+        <h2 id="t2">Chronic Disease Evidence Explorer</h2>
+        <p class="d">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="three">
+          <div><dt>risk factors</dt><dd>124</dd></div>
+          <div><dt>diseases</dt><dd>45</dd></div>
+          <div><dt>graded links</dt><dd>356</dd></div>
+        </dl>
+        <p class="langs">10 languages</p>
+        <p class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="code-t">
+  <div class="wrap code">
+    <h2 id="code-t" data-split>Code Against Cancer</h2>
+    <div data-reveal="rise" style="--d:150ms">
+      <p class="d">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+      <dl class="cnt">
+        <div><dt>actions for Europe</dt><dd>14</dd></div>
+        <div><dt>for Latin America and the Caribbean</dt><dd>17</dd></div>
+      </dl>
+      <a class="btn" href="#">Read the recommendations</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="games-t">
+  <div class="wrap">
+    <div class="games-h">
+      <h2 id="games-t" data-split>For schools and families</h2>
+      <p data-reveal="fade">Learning by playing: three games.</p>
+    </div>
+    <ul class="gl">
+      <li data-reveal="rise"><a href="#"><span class="ph"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt="Sol &amp; the UV Shield Quest: a cartoon game scene in the sun"></span><span><span class="gt">Sol &amp; the UV Shield Quest</span><span class="gm">Skin cancer · ages 6–12</span></span></a></li>
+      <li data-reveal="rise" style="--d:120ms"><a href="#"><span class="ph"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt="The Lung Detective: a cartoon game scene in a living room"></span><span><span class="gt">The Lung Detective</span><span class="gm">Lung cancer · ages 10–16</span></span></a></li>
+      <li data-reveal="rise" style="--d:240ms"><a href="#"><span class="ph"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt="A Town of 1,000: a cartoon town seen from above"></span><span><span class="gt">A Town of 1,000</span><span class="gm">Breast cancer · ages 14+</span></span></a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-g">
+      <div>
+        <a class="mark" href="#">Epi<b>Detective</b></a>
+        <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor.</p>
+        <p>A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      </div>
+      <ul>
+        <li><a class="lnk" href="#">How we check</a></li>
+        <li><a class="lnk" href="#">Report an error</a></li>
+        <li><a class="lnk" href="#">How to cite</a></li>
+        <li><a class="lnk" href="#">About</a></li>
+      </ul>
+      <div><p>Lyon, France</p></div>
+    </div>
+    <p class="credits">Images: the networks on this page are drawn from the explorers’ own data (without JavaScript, the explorers’ network drawings stand in); game screenshots from the three EpiDetective games. No photographs are used.</p>
+  </div>
+</footer>
+
+<script src="kit/net.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (!window.EpiNet || !document.querySelector("#cv").getContext) return;
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
+  var cover = $("#cover"), stage = $("#stage"), cv = $("#cv"), ctx = cv.getContext("2d"), netbox = $("#netbox"),
+      slot = $("#slot"), caps = $$(".cap"), dots = $$(".idx button"), idxN = $("#idx-n"),
+      card = $("#card"), live = $("#live"), q = $("#q"), list = $("#results"), none = $("#none"), form = $("#find"),
+      rGrp = $$("input[name=grp]"), rLnk = $$("input[name=lnk]"), rk = $("#rk"), rt = $("#rt");
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+  var COL = { white: tok("--white"), graph: tok("--graph"), graph2: tok("--graph-2"), mute: tok("--mute"), teal: tok("--teal"),
+              g: { "1": tok("--g1"), "2A": tok("--g2a"), "2B": tok("--g2b") } };
+  var SANS = '"IBM Plex Sans", Arial, sans-serif';
+  var LAB = EpiNet.LABELS, RANK = { "1": 1, "2A": 2, "2B": 3 };
+
+  var G = null, N = [], L = [], byName = {}, DEF = [];
+  var W = 0, H = 0, DPR = 1, phone = false, stacked = false, visible = true;
+  var BOX = { x: 0, y: 0, w: 1, h: 1 }, base = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 };
+  var cam = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 }, camT = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 };
+  var hover = null, sel = null, matches = [], mset = new Set(), opts = [], act = -1, cardOn = false;
+  var step = -1, story = { hi: null, labels: null };
+  var filt = { g: "2B", est: false }, stateKey = "2Bs";
+  var t0 = 0, introDone = still, raf = 0, last = 0;
+
+  var STEPS = [
+    { g: "2B", est: false },
+    { g: "2A", est: false },
+    { g: "1", est: false },
+    { g: "1", est: true },
+    { g: "1", est: true, hi: ["Tobacco smoking", "Processed meat"], labels: ["Tobacco smoking", "Processed meat", "Lung cancer", "Colon cancer", "Rectal cancer", "Bladder cancer"] }
+  ];
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(t) { t = clamp(t, 0, 1); return 1 - Math.pow(1 - t, 3); }
+  function rad(d) { var s = phone ? 0.86 : 1; return (d.kind === "cancer" ? 2.2 + Math.sqrt(d.degree) * 1.3 : 1.8 + Math.sqrt(d.degree) * 0.55) * s; }
+  function nb(d) { return d.links.map(function (l) { return l.source === d ? l.target : l.source; }); }
+  function labelOf(d) { return d.short.replace(/\s*\((all types|unspecified)\)$/i, ""); }
+  function countText(d) { var n = d.links.length; return d.kind === "exposure" ? "Linked to " + n + (n === 1 ? " cancer type" : " cancer types") : "Linked to " + n + (n === 1 ? " exposure" : " exposures"); }
+  function keyOf(g, est) { return g + (est ? "e" : "s"); }
+  function linkIn(l, g, est) { return RANK[l.source.group] <= RANK[g] && (l.est || !est); }
+
+  /* ---------- load and precompute the six filter states ---------- */
+  EpiNet.load("cancer").then(function (g) {
+    G = g; N = g.nodes; L = g.links;
+    EpiNet.layout(g, { seed: 11, iterations: 360, linkDistance: 30, charge: 1000 });
+    var mx = 0, my = 0; N.forEach(function (d) { mx += d.x; my += d.y; }); mx /= N.length; my /= N.length;
+    var sxx = 0, syy = 0, sxy = 0; N.forEach(function (d) { var x = d.x - mx, y = d.y - my; sxx += x * x; syy += y * y; sxy += x * y; });
+    var th = 0.5 * Math.atan2(2 * sxy, sxx - syy), c = Math.cos(-th), s = Math.sin(-th);
+    N.forEach(function (d) { var x = d.x - mx, y = d.y - my; d.fx = x * c - y * s; d.fy = x * s + y * c; d.P = {}; d.V = {}; });
+    N.forEach(function (d) {
+      byName[d.name] = d; d.lab = labelOf(d); d.a = 0; d.ta = 1; d.e = 0; d.te = 0;
+      d.r0 = Math.sqrt(d.fx * d.fx + d.fy * d.fy);
+    });
+    L.forEach(function (l) { l.a = 0; l.ta = 0; l.e = 0; l.te = 0; l.V = {}; });
+    ["1", "2A", "2B"].forEach(function (gg) { [true, false].forEach(function (est) { visState(keyOf(gg, est), gg, est); }); });
+    N.forEach(function (d) { d.P["2Bs"] = [d.fx, d.fy]; d.x = d.fx; d.y = d.fy; });
+    var rmax = Math.max.apply(null, N.map(function (d) { return d.r0; }));
+    N.forEach(function (d) { d.delay = 80 + (d.r0 / rmax) * 1100; });
+    L.forEach(function (l) { l.from = l.source.delay <= l.target.delay ? l.source : l.target; l.to = l.from === l.source ? l.target : l.source; l.delay = l.from.delay + 90; });
+    DEF = N.slice().sort(function (a, b) { return b.degree - a.degree; });
+    stage.classList.add("live");
+    measure(true); bind(); syncControls(); onScroll(); retarget();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { kick(); });
+    /* relax the thinner states one by one, after the first paint */
+    var todo = ["2As", "1s", "1e", "2Ae", "2Be"];
+    (function next() { if (!todo.length) return; var k = todo.shift(); setTimeout(function () { relax(k); if (k === stateKey) retarget(); next(); }, 30); })();
+    plates();
+  }).catch(function () { stage.classList.add("failed"); });
+
+  function visState(key, gg, est) {
+    N.forEach(function (d) { d.V[key] = false; });
+    L.forEach(function (l) { var v = linkIn(l, gg, est); l.V[key] = v; if (v) { l.source.V[key] = true; l.target.V[key] = true; } });
+  }
+  /* the remaining web relaxes from the full layout, gently held to where it was */
+  function relax(key) {
+    if (N[0].P[key]) return;
+    var V = N.filter(function (d) { return d.V[key]; }), E = L.filter(function (l) { return l.V[key]; }), n = V.length, it = 150;
+    V.forEach(function (d) { d.tx = d.fx; d.ty = d.fy; d.vx = 0; d.vy = 0; });
+    for (var k = 0; k < it; k++) {
+      var al = 0.7 * (1 - k / it);
+      for (var i = 0; i < n; i++) { var p = V[i];
+        for (var j = i + 1; j < n; j++) { var o = V[j], dx = p.tx - o.tx, dy = p.ty - o.ty, d2 = dx * dx + dy * dy + .01;
+          if (d2 > 90000) continue; var f = 1000 / d2 * al; p.vx += dx * f; p.vy += dy * f; o.vx -= dx * f; o.vy -= dy * f; } }
+      E.forEach(function (l) { var a = l.source, b = l.target, dx = b.tx - a.tx, dy = b.ty - a.ty, dd = Math.sqrt(dx * dx + dy * dy) || 1, f = (dd - 30) * .06 * al / dd;
+        a.vx += dx * f; a.vy += dy * f; b.vx -= dx * f; b.vy -= dy * f; });
+      V.forEach(function (d) { d.vx += (-d.tx * 0.012 + (d.fx - d.tx) * 0.02) * al; d.vy += (-d.ty * 0.012 + (d.fy - d.ty) * 0.02) * al;
+        d.tx += d.vx; d.ty += d.vy; d.vx *= .55; d.vy *= .55; });
+    }
+    N.forEach(function (d) { d.P[key] = d.V[key] ? [d.tx, d.ty] : [d.fx, d.fy]; });
+  }
+  function posOf(d) { var p = d.P[stateKey] || d.P["2Bs"]; return p; }
+
+  /* ---------- geometry ---------- */
+  function measure(snap) {
+    var r = stage.getBoundingClientRect(), b = netbox.getBoundingClientRect();
+    var nw = r.width, nh = r.height, nd = Math.min(2.5, window.devicePixelRatio || 1);
+    if (nw !== W || nh !== H || nd !== DPR) { W = nw; H = nh; DPR = nd; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
+    phone = W < 600; stacked = W < 860;
+    BOX = { x: b.left - r.left, y: b.top - r.top, w: Math.max(40, b.width), h: Math.max(40, b.height) };
+    if (snap || base.k === 1) {
+      var o = BOX.h > BOX.w * 1.15;
+      N.forEach(function (d) { d.ox = o ? d.fy : d.fx; d.oy = o ? d.fx : d.fy; });
+      var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      N.forEach(function (d) { x0 = Math.min(x0, d.ox); x1 = Math.max(x1, d.ox); y0 = Math.min(y0, d.oy); y1 = Math.max(y1, d.oy); });
+      var ra = (BOX.w / BOX.h) / ((x1 - x0) / (y1 - y0)), sx = ra > 1 ? Math.min(1.3, ra) : 1, sy = ra < 1 ? Math.min(1.3, 1 / ra) : 1;
+      base.o = o; base.sx = sx; base.sy = sy; base.bw = (x1 - x0) * sx; base.bh = (y1 - y0) * sy; base.mx = (x0 + x1) / 2 * sx; base.my = (y0 + y1) / 2 * sy;
+    }
+    var pad = phone ? 18 : 34, top = stacked ? 0 : 30;
+    base.ax = BOX.x + BOX.w / 2; base.ay = BOX.y + top / 2 + BOX.h / 2; base.cx = base.mx; base.cy = base.my;
+    base.k = Math.min((BOX.w - 2 * pad) / base.bw, (BOX.h - top - 2 * pad) / base.bh);
+    camT.ax = base.ax; camT.ay = base.ay; camT.cx = base.cx; camT.cy = base.cy; camT.k = base.k;
+    if (snap) { cam.ax = camT.ax; cam.ay = camT.ay; cam.cx = camT.cx; cam.cy = camT.cy; cam.k = camT.k; N.forEach(function (d) { var p = posOf(d); d.x = p[0]; d.y = p[1]; }); }
+    kick();
+  }
+  function screen(d) {
+    var X = base.o ? d.y : d.x, Y = base.o ? d.x : d.y;
+    d.sx = cam.ax + (X * base.sx - cam.cx) * cam.k; d.sy = cam.ay + (Y * base.sy - cam.cy) * cam.k;
+  }
+
+  /* ---------- state -> targets ---------- */
+  function retarget() {
+    if (!G) return;
+    var key = stateKey, focus = hover || sel;
+    N.forEach(function (d) { d.on = d.V[key]; d.tp = posOf(d); });
+    L.forEach(function (l) { l.on = l.V[key]; });
+    if (focus) { focus.on = true; focus.links.forEach(function (l) { l.on = true; l.source.on = true; l.target.on = true; }); }
+    var hiN = focus ? [focus] : mset.size ? matches : story.hi, hset = hiN ? new Set(hiN) : null, lit = null;
+    if (hset) { lit = new Set(hiN); if (focus || !mset.size) hiN.forEach(function (d) { d.links.forEach(function (l) { if (l.on) { lit.add(l.source); lit.add(l.target); } }); }); }
+    N.forEach(function (d) {
+      var b = d.on ? 1 : 0;
+      d.ta = lit ? (lit.has(d) ? 1 : b * 0.3) : b;
+      d.te = hset && hset.has(d) ? 1 : lit && lit.has(d) ? 0.5 : 0;
+    });
+    L.forEach(function (l) {
+      var inc = hset && (hset.has(l.source) || hset.has(l.target)) && l.on;
+      l.te = inc ? 1 : 0;
+      l.ta = !l.on ? 0 : lit ? (inc ? (focus || story.hi && !mset.size ? 0.95 : 0.55) : 0.06) : (l.est ? 0.32 : 0.24);
+    });
+    kick();
+  }
+
+  /* ---------- loop ---------- */
+  function kick() { if (!raf && G && visible) raf = requestAnimationFrame(frame); }
+  function frame(t) {
+    raf = 0; if (!t0) t0 = t;
+    var dt = last ? Math.min(64, t - last) : 16; last = t;
+    var moving = tick(dt);
+    if (!introDone && t - t0 > 2300) introDone = true;
+    draw(t);
+    if (moving || !introDone) kick(); else last = 0;
+  }
+  function tick(dt) {
+    var a = still ? 1 : 1 - Math.exp(-dt / 230), ap = still ? 1 : 1 - Math.exp(-dt / 300), m = false;
+    ["ax", "ay", "cx", "cy", "k"].forEach(function (p) { var dv = camT[p] - cam[p]; if (Math.abs(dv) > (p === "k" ? 1e-4 : .05)) { cam[p] += dv * a; m = true; } else cam[p] = camT[p]; });
+    for (var i = 0; i < N.length; i++) { var d = N[i], tp = d.tp || posOf(d);
+      if (Math.abs(tp[0] - d.x) + Math.abs(tp[1] - d.y) > 0.02) { d.x += (tp[0] - d.x) * ap; d.y += (tp[1] - d.y) * ap; m = true; } else { d.x = tp[0]; d.y = tp[1]; }
+      if (Math.abs(d.ta - d.a) > 0.004) { d.a += (d.ta - d.a) * a; m = true; } else d.a = d.ta;
+      if (Math.abs(d.te - d.e) > 0.004) { d.e += (d.te - d.e) * a; m = true; } else d.e = d.te; }
+    for (var j = 0; j < L.length; j++) { var l = L[j];
+      if (Math.abs(l.ta - l.a) > 0.004) { l.a += (l.ta - l.a) * a; m = true; } else l.a = l.ta;
+      if (Math.abs(l.te - l.e) > 0.004) { l.e += (l.te - l.e) * a; m = true; } else l.e = l.te; }
+    return m;
+  }
+
+  /* ---------- drawing ---------- */
+  function draw(t) {
+    var T = introDone ? 1e9 : t - t0;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+    ctx.save(); ctx.beginPath(); ctx.rect(BOX.x + 1, BOX.y + 1, BOX.w - 2, BOX.h - 2); ctx.clip();
+    for (var i = 0; i < N.length; i++) { var d = N[i]; screen(d); d.ip = ease((T - d.delay) / 650); }
+    ctx.lineCap = "round";
+    for (var pass = 0; pass < 2; pass++) {
+      for (var j = 0; j < L.length; j++) {
+        var l = L[j]; if ((l.e >= 0.5) !== (pass === 1)) continue;
+        var p = ease((T - l.delay) / 800), al = l.a * p; if (al < 0.01) continue;
+        var f = l.from, to = l.to;
+        ctx.globalAlpha = al;
+        ctx.strokeStyle = l.e > 0.5 ? COL.g[l.source.group] : COL.graph;
+        ctx.lineWidth = 0.65 + l.e * 0.8;
+        ctx.setLineDash(l.est ? [] : [2.4, 3]);
+        ctx.beginPath(); ctx.moveTo(f.sx, f.sy); ctx.lineTo(f.sx + (to.sx - f.sx) * p, f.sy + (to.sy - f.sy) * p); ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+    for (var k = 0; k < 2; k++) {
+      for (i = 0; i < N.length; i++) {
+        d = N[i]; if ((d.kind === "cancer") !== (k === 1)) continue;
+        var al2 = d.a * d.ip; if (al2 < 0.01) continue;
+        var r = rad(d) * (1 + d.e * 0.15);
+        ctx.globalAlpha = al2;
+        if (d.kind === "exposure") { ctx.fillStyle = COL.g[d.group]; ctx.beginPath(); ctx.arc(d.sx, d.sy, r, 0, 6.2832); ctx.fill(); }
+        else { ctx.fillStyle = COL.white; ctx.strokeStyle = COL.graph; ctx.lineWidth = 1.2 + d.e * 0.3; var s2 = r * 0.9; ctx.fillRect(d.sx - s2, d.sy - s2, 2 * s2, 2 * s2); ctx.strokeRect(d.sx - s2, d.sy - s2, 2 * s2, 2 * s2); }
+      }
+    }
+    [sel, hover].forEach(function (n, z) {
+      if (!n || n.a < 0.05) return;
+      var R = rad(n) * 1.15 + 6;
+      ctx.globalAlpha = z ? 0.55 : 0.95; ctx.strokeStyle = COL.teal; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(n.sx, n.sy, R, 0, 6.2832); ctx.stroke();
+      /* crosshair ticks */
+      ctx.beginPath(); ctx.moveTo(n.sx - R - 6, n.sy); ctx.lineTo(n.sx - R + 2, n.sy); ctx.moveTo(n.sx + R - 2, n.sy); ctx.lineTo(n.sx + R + 6, n.sy);
+      ctx.moveTo(n.sx, n.sy - R - 6); ctx.lineTo(n.sx, n.sy - R + 2); ctx.moveTo(n.sx, n.sy + R - 2); ctx.lineTo(n.sx, n.sy + R + 6); ctx.stroke();
+    });
+    drawLabels(introDone ? 1 : clamp((T - 1500) / 700, 0, 1));
+    ctx.restore(); ctx.globalAlpha = 1;
+  }
+  var wcache = {};
+  function tw(font, s) { var key = font + "|" + s; if (!(key in wcache)) { ctx.font = font; wcache[key] = ctx.measureText(s).width; } return wcache[key]; }
+  function over(a, b) { return a[0] < b[0] + b[2] && a[0] + a[2] > b[0] && a[1] < b[1] + b[3] && a[1] + a[3] > b[1]; }
+  function drawLabels(mul) {
+    if (mul <= 0) return;
+    var items = [], seen = new Set(), focus = hover || sel;
+    function add(d, pri) { if (d && !seen.has(d)) { seen.add(d); items.push([d, pri]); } }
+    add(hover, 3); add(sel, 3);
+    if (focus) nb(focus).sort(function (a, b) { return b.degree - a.degree; }).slice(0, phone ? 7 : 18).forEach(function (d) { add(d, 1); });
+    else if (mset.size) matches.slice(0, phone ? 5 : 10).forEach(function (d) { add(d, 2); });
+    else if (story.labels) story.labels.forEach(function (n) { add(byName[n], 2); });
+    else DEF.filter(function (d) { return d.on; }).slice(0, phone ? 4 : 9).forEach(function (d) { add(d, 0); });
+    var placed = [], x0 = BOX.x + 6, x1 = BOX.x + BOX.w - 6, y0 = BOX.y + (stacked ? 6 : 40), y1 = BOX.y + BOX.h - 6, cr = null;
+    if (cardOn) { var a = card.getBoundingClientRect(), s = stage.getBoundingClientRect(); cr = [a.left - s.left - 8, a.top - s.top - 8, a.width + 16, a.height + 16]; }
+    ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+    if (focus && focus.a > 0.08) { var fr = rad(focus) + 9; placed.push([focus.sx - fr, focus.sy - fr, 2 * fr, 2 * fr]); }
+    items.forEach(function (it) {
+      var d = it[0], pri = it[1]; if (d.a < 0.08) return;
+      var cancer = d.kind === "cancer", fs = phone ? 11 : 12;
+      var font = (cancer ? "500 " : "400 ") + fs + "px " + SANS;
+      var w = tw(font, d.lab), h = fs + 5, r = rad(d) + 5;
+      var c = [[d.sx + r, d.sy - h / 2], [d.sx - r - w, d.sy - h / 2], [d.sx - w / 2, d.sy - r - h - 1], [d.sx - w / 2, d.sy + r + 1]], pick = null;
+      if (focus && d !== focus && d.sx < focus.sx) c = [c[1], c[0], c[2], c[3]];
+      if (focus && d !== focus && Math.abs(d.sx - focus.sx) < 24) c = d.sy < focus.sy ? [c[2], c[0], c[1], c[3]] : [c[3], c[0], c[1], c[2]];
+      for (var i = 0; i < 4 && !pick; i++) {
+        var rc = [c[i][0] - 3, c[i][1], w + 6, h];
+        if (rc[0] < x0 || rc[0] + rc[2] > x1 || rc[1] < y0 || rc[1] + rc[3] > y1) continue;
+        if (cr && over(rc, cr)) continue;
+        if (placed.some(function (p) { return over(p, rc); })) continue;
+        pick = c[i]; placed.push(rc);
+      }
+      if (!pick && pri === 3) { pick = [clamp(c[0][0], x0, x1 - w), clamp(c[0][1], y0, y1 - h)]; placed.push([pick[0], pick[1], w, h]); }
+      if (!pick) return;
+      ctx.font = font; ctx.globalAlpha = Math.min(1, d.a) * mul * (pri === 0 ? 0.85 : 1);
+      ctx.lineWidth = 4; ctx.strokeStyle = COL.white; ctx.strokeText(d.lab, pick[0], pick[1] + h / 2);
+      ctx.fillStyle = cancer ? COL.graph : COL.graph2; ctx.fillText(d.lab, pick[0], pick[1] + h / 2);
+    });
+  }
+
+  /* ---------- filter controls ---------- */
+  var WORDS = { "1": "known causes only (Group 1)", "2A": "known and probable causes (Groups 1 and 2A)", "2B": "known, probable and possible causes (Groups 1, 2A and 2B)" };
+  var CODES = { "1": "G1", "2A": "G1 + 2A", "2B": "G1 + 2A + 2B" };
+  function syncControls() {
+    rGrp.forEach(function (r) { r.checked = r.value === filt.g; r.parentNode.classList.toggle("in", RANK[r.value] < RANK[filt.g]); });
+    rLnk.forEach(function (r) { r.checked = (r.value === "est") === filt.est; });
+    rk.textContent = CODES[filt.g] + " · " + (filt.est ? "EST" : "EST + SUS");
+    rt.textContent = "Showing " + WORDS[filt.g] + ", with " + (filt.est ? "established links only." : "established and suspected links.");
+  }
+  function setFilter(g, est, quiet) {
+    filt.g = g; filt.est = est; stateKey = keyOf(g, est);
+    relax(stateKey);
+    syncControls(); retarget();
+  }
+
+  /* ---------- interaction ---------- */
+  function local(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  function hit(x, y, tol) {
+    var best = null, bd = Infinity;
+    for (var i = 0; i < N.length; i++) { var d = N[i]; if (d.a < 0.3) continue;
+      var dx = d.sx - x, dy = d.sy - y, dd = Math.sqrt(dx * dx + dy * dy) - rad(d);
+      if (dd < tol && dd < bd) { bd = dd; best = d; } }
+    return best;
+  }
+  function announce(d) { live.textContent = d.short + ". " + (d.group ? LAB.groupLong[d.group] : "Cancer type, " + d.cat) + ". " + countText(d) + "."; }
+  function select(d, withCard) { sel = d; hover = null; if (withCard) openCard(d); else closeCard(); announce(d); retarget(); }
+  function clearSel() { if (!sel) return; sel = null; closeCard(); live.textContent = "Selection cleared."; retarget(); }
+  function openCard(d) {
+    $("#c-kind").textContent = d.kind === "exposure" ? "Exposure · " + d.cat : "Cancer type · " + d.cat;
+    $("#c-name").textContent = d.short;
+    var m = d.name.match(/\((a |an )([^)]*)\)\s*$/i), desc = $("#c-desc");
+    desc.hidden = !m; if (m) desc.textContent = (m[1] + m[2]).replace(/^./, function (c) { return c.toUpperCase(); }) + ".";
+    var gp = $("#c-group"); gp.hidden = !d.group;
+    if (d.group) { gp.innerHTML = ""; var sw = document.createElement("span"); sw.className = "sw"; sw.style.background = COL.g[d.group]; gp.appendChild(sw); gp.appendChild(document.createTextNode(LAB.groupLong[d.group])); }
+    $("#c-count").textContent = countText(d);
+    var ul = $("#c-list"); ul.innerHTML = "";
+    d.links.slice().sort(function (a, b) {
+      var na = a.source === d ? a.target : a.source, nb2 = b.source === d ? b.target : b.source;
+      return (b.est - a.est) || na.short.localeCompare(nb2.short);
+    }).forEach(function (l) {
+      var o = l.source === d ? l.target : l.source, li = document.createElement("li"), bt = document.createElement("button");
+      bt.type = "button";
+      var nm = document.createElement("span"); nm.className = "nm";
+      if (o.group) { var sw2 = document.createElement("span"); sw2.className = "sw"; sw2.style.cssText = "background:" + COL.g[o.group] + ";display:inline-block;margin-right:9px;vertical-align:1px;width:7px;height:7px"; nm.appendChild(sw2); }
+      nm.appendChild(document.createTextNode(o.short));
+      var gr = document.createElement("span"); gr.className = "gr"; gr.innerHTML = '<span class="ln' + (l.est ? "" : " d") + '"></span>' + l.grade;
+      bt.appendChild(nm); bt.appendChild(gr); bt.setAttribute("aria-label", o.short + ": " + l.grade + " link");
+      bt.addEventListener("click", function () { select(o, true); });
+      li.appendChild(bt); ul.appendChild(li);
+    });
+    ul.scrollTop = 0; card.hidden = false; cardOn = true;
+    requestAnimationFrame(function () { card.classList.add("on"); kick(); });
+  }
+  function closeCard() { if (!cardOn) return; cardOn = false; card.classList.remove("on"); card.hidden = true; }
+
+  function bind() {
+    var downType = "mouse";
+    cv.addEventListener("pointerdown", function (e) { downType = e.pointerType || "mouse"; });
+    cv.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var p = local(e), d = hit(p.x, p.y, 7);
+      if (d !== hover) { hover = d; cv.style.cursor = d ? "pointer" : ""; retarget(); }
+    });
+    cv.addEventListener("pointerleave", function () { if (hover) { hover = null; cv.style.cursor = ""; retarget(); } });
+    cv.addEventListener("click", function (e) { var p = local(e), d = hit(p.x, p.y, downType === "mouse" ? 7 : 18); if (d) select(d, true); else clearSel(); });
+    $("#c-x").addEventListener("click", function () { clearSel(); q.focus({ preventScroll: true }); });
+    card.addEventListener("keydown", function (e) { if (e.key === "Escape") { clearSel(); q.focus({ preventScroll: true }); } });
+    rGrp.forEach(function (r) { r.addEventListener("change", function () { if (r.checked) setFilter(r.value, filt.est); }); });
+    rLnk.forEach(function (r) { r.addEventListener("change", function () { if (r.checked) setFilter(filt.g, r.value === "est"); }); });
+    q.addEventListener("input", function () { runSearch(q.value); });
+    q.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (list.hidden && opts.length) openList(); setAct(Math.min(opts.length - 1, act + 1)); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); setAct(Math.max(0, act - 1)); }
+      else if (e.key === "Enter") { e.preventDefault(); submit(); }
+      else if (e.key === "Escape") { if (!list.hidden) closeList(); else if (q.value) { q.value = ""; runSearch(""); } else clearSel(); }
+    });
+    q.addEventListener("focus", function () { if (opts.length && q.value.trim()) openList(); });
+    q.addEventListener("blur", function () { setTimeout(closeList, 150); });
+    form.addEventListener("submit", function (e) { e.preventDefault(); submit(); });
+    $$(".try a").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); q.value = a.textContent; runSearch(q.value); if (matches.length) choose(matches[0]); else { closeList(); none.hidden = false; } });
+    });
+    dots.forEach(function (b, i) { b.addEventListener("click", function () { goStep(i); }); });
+    caps.forEach(function (c, i) { c.addEventListener("focusin", function () { if (i !== step) goStep(i); }); });
+    addEventListener("scroll", onScroll, { passive: true });
+    var rt2 = 0;
+    addEventListener("resize", function () { clearTimeout(rt2); rt2 = setTimeout(function () { fitSlot(); measure(true); }, 80); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { measure(false); }).observe(netbox);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(stage);
+  }
+
+  /* ---------- search ---------- */
+  function runSearch(text) {
+    if (!G) return;
+    var tx = text.trim();
+    matches = tx ? EpiNet.search(G, tx) : []; mset = new Set(matches);
+    renderList(matches.slice(0, 6));
+    none.hidden = !(tx.length >= 2 && !matches.length);
+    if (tx && sel && !mset.has(sel)) { sel = null; closeCard(); }
+    retarget();
+  }
+  function renderList(items) {
+    list.innerHTML = ""; act = -1; opts = items;
+    items.forEach(function (d, i) {
+      var li = document.createElement("li");
+      li.id = "opt-" + i; li.setAttribute("role", "option"); li.setAttribute("aria-selected", "false");
+      var a = document.createElement("span"); a.className = "o-n"; a.textContent = d.short;
+      var b = document.createElement("span"); b.className = "o-k";
+      var sw = document.createElement("span"); sw.className = d.group ? "sw" : "sw ca";
+      if (d.group) sw.style.background = COL.g[d.group]; else sw.style.cssText = "width:9px;height:9px";
+      b.appendChild(sw); b.appendChild(document.createTextNode(d.group ? LAB.group[d.group] : "Cancer type"));
+      li.appendChild(a); li.appendChild(b);
+      li.addEventListener("mousedown", function (e) { e.preventDefault(); choose(d); });
+      list.appendChild(li);
+    });
+    if (items.length) openList(); else closeList();
+  }
+  function openList() {
+    if (!opts.length) return; list.hidden = false; q.setAttribute("aria-expanded", "true");
+    var f = q.parentNode.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    list.classList.toggle("up", s.bottom - f.bottom < 250 && f.top - s.top > 300);
+  }
+  function closeList() { list.hidden = true; q.setAttribute("aria-expanded", "false"); q.removeAttribute("aria-activedescendant"); act = -1; }
+  function setAct(i) {
+    if (!opts.length) return; act = i;
+    $$("li", list).forEach(function (li, k) { li.setAttribute("aria-selected", k === i ? "true" : "false"); });
+    var el = $("#opt-" + i); if (el) { q.setAttribute("aria-activedescendant", el.id); el.scrollIntoView({ block: "nearest" }); }
+  }
+  function submit() {
+    if (!G) return; var tx = q.value.trim(); if (!tx) return;
+    var all = EpiNet.search(G, tx);
+    if (!all.length) { closeList(); none.hidden = false; return; }
+    choose(act >= 0 && opts[act] ? opts[act] : all[0]);
+  }
+  function choose(d) { closeList(); none.hidden = true; select(d, true); }
+
+  /* ---------- story ---------- */
+  function stepH() { return (cover.offsetHeight - stage.offsetHeight) / (STEPS.length - 1); }
+  function onScroll() {
+    if (!G) return;
+    var r = cover.getBoundingClientRect(), i = clamp(Math.floor(-r.top / stepH() + 0.42), 0, STEPS.length - 1);
+    if (i !== step) setStep(i);
+  }
+  function goStep(i) { scrollTo({ top: cover.getBoundingClientRect().top + scrollY + i * stepH() + 2, behavior: still ? "auto" : "smooth" }); }
+  function fitSlot() {
+    if (W >= 860) { slot.style.height = ""; return; }
+    var c = caps[Math.max(0, step)]; if (c) slot.style.height = c.offsetHeight + "px";
+  }
+  function setStep(i) {
+    step = i; var s = STEPS[i];
+    caps.forEach(function (c, k) { c.classList.toggle("on", k === i); c.classList.toggle("up", k < i); });
+    dots.forEach(function (b, k) { if (k === i) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    idxN.textContent = "0" + i + " / 0" + (STEPS.length - 1);
+    story.hi = s.hi ? s.hi.map(function (n) { return byName[n]; }) : null;
+    story.labels = s.labels || null;
+    hover = null; if (sel) { sel = null; closeCard(); }
+    fitSlot();
+    setFilter(s.g, s.est);
+  }
+  addEventListener("load", fitSlot);
+
+  /* ---------- explorer plates ---------- */
+  function calmLayout(g, it) {
+    var V = g.nodes, n = V.length, sd = 3;
+    function rnd() { sd = (sd * 16807) % 2147483647; return (sd - 1) / 2147483646; }
+    V.forEach(function (d, i) { var a = i * 2.399963, rr = 12 * Math.sqrt(i + 1); d.x = Math.cos(a) * rr + rnd() - .5; d.y = Math.sin(a) * rr + rnd() - .5; d.vx = 0; d.vy = 0; });
+    for (var k = 0; k < it; k++) {
+      var al = 1 - k / it;
+      for (var i = 0; i < n; i++) { var p = V[i];
+        for (var j = i + 1; j < n; j++) { var o = V[j], dx = p.x - o.x, dy = p.y - o.y, d2 = dx * dx + dy * dy + .01;
+          if (d2 > 90000) continue; var f = 1500 / d2 * al; p.vx += dx * f; p.vy += dy * f; o.vx -= dx * f; o.vy -= dy * f; } }
+      g.links.forEach(function (l) { var a = l.source, b = l.target, dx = b.x - a.x, dy = b.y - a.y, dd = Math.sqrt(dx * dx + dy * dy) || 1;
+        var f = (dd - 46) * 0.05 * al / dd / Math.sqrt(Math.min(a.degree, b.degree) + 1); a.vx += dx * f; a.vy += dy * f; b.vx -= dx * f; b.vy -= dy * f; });
+      V.forEach(function (d) { d.vx -= d.x * 0.012 * al; d.vy -= d.y * 0.012 * al;
+        var v = Math.sqrt(d.vx * d.vx + d.vy * d.vy), mm = 2 + 18 * al; if (v > mm) { d.vx *= mm / v; d.vy *= mm / v; }
+        d.x += d.vx; d.y += d.vy; d.vx *= .55; d.vy *= .55; });
+    }
+  }
+  function plates() {
+    var cans = $$("canvas[data-plate]"); if (!cans.length) return;
+    function render(c) {
+      var which = c.getAttribute("data-plate");
+      EpiNet.load(which).then(function (gr) {
+        if (!gr._laid) { if (which === "chronic") calmLayout(gr, 300); gr._laid = true; }
+        var fig = c.parentNode, w = fig.clientWidth, h = fig.clientHeight, dpr = Math.min(2.5, devicePixelRatio || 1);
+        if (!w || !h) return;
+        c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+        var x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
+        var P = function (d) { return which === "cancer" ? [d.fx, d.fy] : [d.x, d.y]; };
+        var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+        gr.nodes.forEach(function (d) { var p = P(d); x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]); });
+        var pad = Math.max(28, w * 0.07), k = Math.min((w - 2 * pad) / (x1 - x0), (h - 2 * pad - 20) / (y1 - y0));
+        var ox = w / 2 - (x0 + x1) / 2 * k, oy = (h - 20) / 2 - (y0 + y1) / 2 * k;
+        var S = function (d) { var p = P(d); return [p[0] * k + ox, p[1] * k + oy]; }, sc = clamp(w / 900, 0.6, 1.1);
+        gr.links.forEach(function (l) {
+          var a = S(l.source), b = S(l.target);
+          if (which === "cancer") { x.globalAlpha = l.est ? 0.34 : 0.24; x.setLineDash(l.est ? [] : [2.4, 3]); }
+          else { var gi = ["Strong", "Moderate", "Suggestive", "Weak", "Conflicting"].indexOf(l.grade); x.globalAlpha = [0.55, 0.36, 0.24, 0.15, 0.2][gi] || 0.2; x.setLineDash(l.grade === "Conflicting" ? [2, 3] : []); }
+          x.strokeStyle = which === "cancer" ? COL.graph : COL.teal; x.lineWidth = 0.7; x.beginPath(); x.moveTo(a[0], a[1]); x.lineTo(b[0], b[1]); x.stroke();
+        });
+        x.setLineDash([]); x.globalAlpha = 1;
+        gr.nodes.forEach(function (d) {
+          var p = S(d), hub = d.kind === "cancer" || d.kind === "disease";
+          var r = (hub ? 2.1 + Math.sqrt(d.degree) * 1.2 : 1.6 + Math.sqrt(d.degree) * 0.5) * sc;
+          if (hub) { var s2 = r * 0.9; x.fillStyle = COL.white; x.strokeStyle = COL.graph; x.lineWidth = 1.1; x.fillRect(p[0] - s2, p[1] - s2, 2 * s2, 2 * s2); x.strokeRect(p[0] - s2, p[1] - s2, 2 * s2, 2 * s2); }
+          else { x.beginPath(); x.arc(p[0], p[1], r, 0, 6.2832); x.fillStyle = d.group ? COL.g[d.group] : COL.teal; x.fill(); }
+        });
+        fig.classList.add("drawn");
+      });
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { render(e.target); io.unobserve(e.target); } }); }, { rootMargin: "300px" });
+      cans.forEach(function (c) { io.observe(c); });
+    } else cans.forEach(render);
+    var pt = 0;
+    addEventListener("resize", function () { clearTimeout(pt); pt = setTimeout(function () { cans.forEach(function (c) { if (c.parentNode.classList.contains("drawn")) render(c); }); }, 200); });
+  }
+})();
+</script>
+</body>
+</html>

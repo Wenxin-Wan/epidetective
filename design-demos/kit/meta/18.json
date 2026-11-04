@@ -1,0 +1,25 @@
+{
+ "n": 18,
+ "slug": "18-ma",
+ "name": "Ma",
+ "line": "Space as luxury: a quiet Shippori Mincho question and a single brush-like ensō that slowly draws itself around the search field, then one close-cropped photograph of a stone on its moss island, two circles whose areas show 100 to 120 and 4 to 5 in 1,000, and the explorers as pale ink drawings, each section about one screen.",
+ "palette": [
+  "#F5F3EE",
+  "#1E1E1C",
+  "#5C6B4A",
+  "#A8A69F"
+ ],
+ "fonts": [
+  "Shippori Mincho",
+  "Zen Kaku Gothic New"
+ ],
+ "images": [
+  "media/photo-zen-garden.webp",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "The ensō is a filled brush shape (generated once, inlined as an SVG path) revealed through an animated mask stroke; with reduced motion it is shown complete. The photograph is cropped in CSS to the single large stone so the dark temple wall and the other rock groups stay out of frame, and it is revealed by a washi-coloured curtain drawing back. Stone grey is used only for hairlines (it is too light for text). Both typefaces carry Han glyphs; Zen Kaku Gothic New also has Cyrillic, Shippori Mincho does not. No Japanese words are used."
+}

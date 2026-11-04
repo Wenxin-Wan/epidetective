@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>21 · Cabinet — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --walnut:#3B2A1E; --paper:#F3EFE6; --label:#FFFDF8; --ink:#222222; --brass:#A88B5A;
+  --walnut-dk:#2C1F16; --front:#4A3627; --brass-lt:#CDB384; --cream:#EFE8DA; --cream-2:#CBBFA9; --paper-2:#E6DFD1; --ink-2:#55504A;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2400' height='1200'%3E%3Cfilter id='g' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0025 0.085' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 1.3 -0.52'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --serif:"Alegreya","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Alegreya Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  /* type scale 12 / 14 / 17 / 21 / 28 / 40 / 60 */
+  --t-xs:12px; --t-s:14px; --t-b:17px; --t-m:21px; --t-l:28px; --t-xl:clamp(30px,3.2vw,40px); --t-2xl:clamp(34px,4vw,58px);
+  /* spacing */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,11vw,176px);
+  --gut:clamp(16px,4vw,56px); --max:1320px; --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--walnut) var(--grain) 0 0/2400px 1200px;color:var(--cream);font-family:var(--serif);font-size:var(--t-b);line-height:1.6;font-variant-numeric:oldstyle-nums;-webkit-font-smoothing:antialiased;font-synthesis:none;overflow-x:clip}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+ul,ol,dl,dd{margin:0;padding:0}
+:focus-visible{outline:2px solid var(--brass-lt);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.lin{font-variant-numeric:lining-nums tabular-nums}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px;transition:background-size .7s var(--ease),color .3s}
+.ul:hover{background-size:0 1px;background-position:100% 100%;color:var(--brass-lt)}
+.btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.03em;color:var(--walnut-dk);background:linear-gradient(180deg,#D9C291,#C3A772);text-decoration:none;padding:12px 22px 13px;border-radius:2px;box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 -1px 0 rgba(0,0,0,.18) inset,0 2px 4px rgba(0,0,0,.25);transition:filter .4s var(--ease)}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible{outline-offset:4px}
+
+/* ---------- joinery ---------- */
+.front{position:relative;background:var(--front) var(--grain) -700px -300px/2400px 1200px;border-radius:3px;
+  box-shadow:0 1px 0 rgba(255,236,210,.10) inset,0 -2px 0 rgba(0,0,0,.25) inset,0 0 0 1px rgba(0,0,0,.28),0 18px 30px -18px rgba(0,0,0,.6)}
+.front::before{content:"";position:absolute;inset:10px;border-radius:2px;pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.22),0 1px 0 1px rgba(255,236,210,.05)}
+.holder{position:relative;display:block;padding:7px;background:linear-gradient(180deg,#C7AB78,#A88B5A 45%,#8F7449);border-radius:2px;box-shadow:0 1px 0 rgba(255,255,255,.3) inset,0 2px 5px rgba(0,0,0,.45)}
+.holder::before,.holder::after{content:"";position:absolute;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:#7D6440;box-shadow:0 1px 0 rgba(255,255,255,.35)}
+.holder::before{left:-1px}.holder::after{right:-1px}
+.card{display:block;background:var(--label);color:var(--ink);padding:clamp(16px,2vw,26px) clamp(18px,2.2vw,30px);box-shadow:0 1px 3px rgba(0,0,0,.35) inset}
+.pull{display:block;margin:0 auto;width:120px;height:26px}
+.pull path{fill:none;stroke:url(#brassg);stroke-width:5;stroke-linecap:round}
+.knob{display:block;width:20px;height:20px;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E6D3A6,#A88B5A 55%,#6E5733);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.tray{position:relative;background:var(--paper);border:12px solid var(--front);border-bottom:0;border-radius:3px 3px 0 0;
+  box-shadow:0 0 0 1px rgba(0,0,0,.3),0 12px 22px -14px rgba(0,0,0,.6) inset}
+.cells{display:grid;gap:1px;background:var(--paper-2)}
+.cell{position:relative;background:var(--paper);box-shadow:0 10px 14px -12px rgba(60,40,20,.45) inset,0 -1px 0 rgba(255,255,255,.7) inset;min-width:0}
+.slip{display:block;background:var(--label);border:1px solid rgba(34,34,34,.25);padding:7px 10px 8px;color:var(--ink);box-shadow:0 1px 2px rgba(60,40,20,.2)}
+.slip i{display:block;font-size:15px;line-height:1.2}
+.slip small{display:block;margin-top:2px;font-family:var(--sans);font-size:11px;line-height:1.3;color:var(--ink-2)}
+
+/* ---------- top ---------- */
+.top{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px 36px;padding-top:24px;padding-bottom:20px}
+.mark{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:.005em;text-decoration:none;color:var(--cream);margin-right:auto}
+.top nav ul,.lang{list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px;font-family:var(--sans);font-size:15px}
+.top nav a,.lang a{text-decoration:none;color:var(--cream-2);transition:color .3s}
+.top nav a:hover,.lang a:hover{color:var(--cream)}
+.lang{gap:6px 14px;font-size:var(--t-xs);letter-spacing:.08em}
+.lang [aria-current]{color:var(--cream);font-weight:700}
+
+/* ---------- hero: the drawer ---------- */
+.hero{--tray-h:420px;--open:1}
+.edge{height:16px;border-radius:3px 3px 0 0;background:var(--front) var(--grain) -200px 0/2400px 1200px;box-shadow:0 1px 0 rgba(255,236,210,.1) inset,0 0 0 1px rgba(0,0,0,.3),0 8px 14px -6px rgba(0,0,0,.55)}
+.edge::after{content:"";display:block;height:2px;margin:0 0 0;background:linear-gradient(90deg,transparent,rgba(205,179,132,.55) 12%,rgba(205,179,132,.55) 88%,transparent);transform:translateY(16px)}
+.well{position:relative}
+.tray-hero{height:var(--tray-h);padding:14px}
+.tray-hero .cells{height:100%;grid-template-columns:repeat(6,minmax(0,1fr))}
+.specimen{display:flex;flex-direction:column-reverse;padding:12px;gap:10px}
+.specimen .pic{flex:1;min-height:0;overflow:hidden;position:relative;background:var(--paper)}
+.specimen .pic img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--x,50%) var(--y,50%);transform:scale(var(--s,1));transform-origin:var(--x,50%) var(--y,50%);mix-blend-mode:multiply}
+.front-hero{padding:clamp(28px,3.4vw,52px) clamp(28px,3.4vw,52px) 22px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s3) clamp(28px,4vw,64px);align-items:center}
+.front-hero h1{font-size:var(--t-2xl);line-height:1.04;letter-spacing:-.01em;font-weight:400}
+.front-hero .intro{font-size:var(--t-m);line-height:1.45;color:var(--cream)}
+.front-hero .caveat{margin-top:12px;font-size:15px;color:var(--cream-2);font-style:italic}
+.front-hero .pull{grid-column:1 / -1;margin-top:6px}
+.search{margin-top:var(--s3)}
+.search label{display:block;font-family:var(--sans);font-size:var(--t-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-lt);margin-bottom:8px}
+.field{display:flex;border-bottom:1px solid var(--brass-lt)}
+.field input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:17px;color:var(--cream);padding:9px 0 10px}
+.field input::placeholder{color:#A99C86;font-style:italic}
+.field input:focus{outline:none}
+.field:focus-within{box-shadow:0 1px 0 var(--brass-lt)}
+.field button{border:0;background:transparent;color:var(--brass-lt);font-family:var(--sans);font-size:var(--t-s);font-weight:700;letter-spacing:.08em;padding:0 0 0 12px;cursor:pointer}
+.field button:hover{color:var(--cream)}
+.try{margin-top:10px;font-family:var(--sans);font-size:var(--t-s);color:var(--cream-2)}
+.try a{color:var(--cream);margin:0 3px}
+.hint{display:none}
+
+/* the pull-out: only with JS, motion allowed and a wide screen; --z (0..1) is set by the script below */
+@media (min-width:861px){
+  html.js:not(.still) .hero{height:calc(100vh + var(--tray-h) * 1.15);height:calc(100svh + var(--tray-h) * 1.15)}
+  html.js:not(.still) .hero-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+  html.js:not(.still) .hero .cab{--o:calc(.26 + .74 * var(--z, 0));transform:translateY(calc(20px + (1 - var(--o)) * var(--tray-h) / 2))}
+  html.js:not(.still) .hero .well{overflow:hidden;padding-bottom:var(--tray-h)}
+  html.js:not(.still) .hero .drawer{margin-top:calc(-1 * var(--tray-h));transform:translateY(calc(var(--o) * var(--tray-h)));will-change:transform}
+  html.js:not(.still) .hint{display:block;position:absolute;left:50%;bottom:20px;transform:translateX(-50%);margin:0;font-family:var(--sans);font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-2);opacity:calc(1 - var(--z, 0) * 4);transition:opacity .3s}
+}
+
+/* ---------- section heads on walnut ---------- */
+.sec{padding-top:var(--s6)}
+.head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--s3) clamp(32px,6vw,96px);align-items:end;margin-bottom:var(--s5)}
+.head h2{font-size:var(--t-xl);line-height:1.08;letter-spacing:-.005em}
+.head p{color:var(--cream);font-size:var(--t-m);line-height:1.5;max-width:40ch}
+
+/* idea drawer */
+.tray-idea{padding:14px}
+.tray-idea .cells{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr)}
+.tray-idea .cell{padding:clamp(20px,2.4vw,32px);color:var(--ink);display:flex;flex-direction:column}
+.cell h3{font-family:var(--sans);font-size:var(--t-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.cell .fig{margin-top:var(--s2);font-size:clamp(40px,4.4vw,60px);line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums}
+.cell .fig small{font-size:var(--t-b);letter-spacing:0;color:var(--ink-2);margin-left:6px}
+.cell p{margin-top:var(--s1);font-size:15px;line-height:1.5;color:var(--ink-2)}
+.pins{display:block;width:100%;height:auto;margin-top:auto;padding-top:var(--s3)}
+.pins .p0{fill:#C8BCA5}
+.pins .p1{fill:#2A221C}
+.pins .p2{fill:var(--brass)}
+html.js:not(.still) .pins .p1,html.js:not(.still) .pins .p2{transition:opacity .9s var(--ease) .3s}
+html.js:not(.still) .drawer:not(.is-in) .pins .p1,html.js:not(.still) .drawer:not(.is-in) .pins .p2{opacity:0}
+.key{margin-top:12px;font-family:var(--sans);font-size:12px;color:var(--ink-2);display:flex;gap:16px;flex-wrap:wrap}
+.key span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0;background:#2A221C}
+.key span.r::before{background:var(--brass)}
+.key span.e::before{background:#C8BCA5}
+.cell.meat{justify-content:flex-start}
+.cell.meat .fig{font-size:clamp(56px,6vw,88px)}
+.front-idea{padding:22px clamp(24px,3vw,44px);display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+.front-idea .holder{width:min(420px,100%)}
+.front-idea .card{padding:12px 18px;display:flex;align-items:baseline;gap:14px}
+.front-idea .card b{font-weight:500;font-size:var(--t-m);font-variant-numeric:lining-nums}
+.front-idea .card span{font-family:var(--sans);font-size:var(--t-s);color:var(--ink-2)}
+.front-idea .note{font-family:var(--sans);font-size:var(--t-s);color:var(--cream-2)}
+.front-idea .note a{color:var(--cream);font-family:var(--serif);font-size:var(--t-b)}
+
+/* groups chest */
+.chest{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:14px;background:var(--walnut-dk);border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.3),0 30px 50px -30px rgba(0,0,0,.7)}
+.chest .front{padding:26px 22px 20px;display:flex;flex-direction:column;gap:16px}
+.chest .card{text-align:center;padding:12px 10px}
+.chest .card b{display:block;font-weight:500;font-size:var(--t-l);line-height:1.1;font-variant-numeric:lining-nums}
+.chest .card span{display:block;margin-top:2px;font-family:var(--sans);font-size:var(--t-s);color:var(--ink-2)}
+.chest p{font-size:15px;line-height:1.55;color:var(--cream);flex:1}
+.chest .knob{margin-top:4px}
+
+/* tools: two large drawers */
+.big + .big{margin-top:var(--s5)}
+.tray-tool{padding:14px}
+.tray-tool .cells{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.net{margin:0;position:relative;min-height:clamp(320px,34vw,500px)}
+.net img{position:absolute;inset:7%;width:86%;height:86%;object-fit:contain;filter:sepia(.35) saturate(.85) contrast(1.05);mix-blend-mode:multiply}
+.net .slip{position:absolute;left:16px;bottom:16px;max-width:calc(100% - 32px)}
+.quad{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--paper-2)}
+.quad .cell{padding:clamp(18px,2vw,28px);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-end}
+.quad dd{font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums}
+.quad dt{margin-top:8px;font-family:var(--sans);font-size:var(--t-s);color:var(--ink-2)}
+.quad .cell{flex-direction:column-reverse;justify-content:flex-start}
+.front-tool{padding:clamp(24px,3vw,40px) clamp(24px,3vw,44px) 18px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--s3) clamp(24px,4vw,64px);align-items:center}
+.front-tool h3{font-size:var(--t-xl);line-height:1.05;font-style:italic;font-weight:400}
+.front-tool .desc{font-size:var(--t-b);color:var(--cream)}
+.acts{margin-top:var(--s3);display:flex;align-items:center;flex-wrap:wrap;gap:var(--s2) 28px}
+.acts .ul{font-family:var(--sans);font-size:15px;color:var(--cream)}
+.front-tool .pull{grid-column:1 / -1}
+
+/* last row: what you can do + games */
+.last{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,3vw,40px);align-items:start}
+.front-act{padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:var(--s3)}
+.front-act .card h2{font-size:var(--t-xl);line-height:1.05}
+.front-act .card p{margin-top:4px;font-family:var(--sans);font-size:var(--t-s);color:var(--ink-2)}
+.front-act p.body{color:var(--cream)}
+.front-act .knob{margin-top:auto}
+.games{display:flex;flex-direction:column}
+.games .tray{padding:14px}
+.games .cells{grid-template-columns:repeat(3,minmax(0,1fr))}
+.games .cell{padding:14px;display:flex;flex-direction:column;gap:12px}
+.games .cell a{display:flex;flex-direction:column;gap:12px;text-decoration:none;height:100%}
+.games .shot{aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
+.games .shot img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) sepia(.15);transition:filter .8s var(--ease)}
+.games a:hover img{filter:none}
+.games .slip{margin-top:0}
+.games .slip i{font-size:15px}
+.games-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-bottom:14px}
+.games-head h2{font-size:var(--t-l);line-height:1.15}
+.games-head p{font-family:var(--sans);font-size:var(--t-s);color:var(--cream-2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:var(--s6);background:var(--walnut-dk);border-top:1px solid rgba(205,179,132,.25);padding:var(--s5) 0 calc(var(--s5) + 48px)}
+.foot{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr) minmax(0,3fr);gap:var(--s4)}
+.foot p{margin-top:var(--s2);font-size:15px;color:var(--cream-2);max-width:54ch}
+.foot ul{list-style:none;font-family:var(--sans);font-size:15px;display:grid;gap:8px;align-content:start}
+.foot ul a{text-decoration:none;color:var(--cream-2)}
+.foot ul a:hover{color:var(--cream)}
+.place{font-family:var(--sans);font-size:15px;color:var(--cream-2)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid rgba(205,179,132,.18);font-family:var(--sans);font-size:12.5px;line-height:1.65;color:#B5A890;max-width:120ch}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .chest{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tray-idea .cells{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .tray-idea .cell.meat{grid-column:1 / -1}
+  .last{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:860px){
+  .hero .well{display:flex;flex-direction:column}
+  .hero .drawer{display:flex;flex-direction:column-reverse}
+  .hero .tray{border-top:0;border-bottom:12px solid var(--front);border-radius:0 0 3px 3px}
+  .tray-hero{height:auto}
+  .tray-hero .cells{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .specimen{height:clamp(220px,48vw,320px)}
+  .front-hero{grid-template-columns:minmax(0,1fr)}
+  .head{grid-template-columns:minmax(0,1fr)}
+  .tray-tool .cells{grid-template-columns:minmax(0,1fr)}
+  .front-tool{grid-template-columns:minmax(0,1fr)}
+  .foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:560px){
+  .top nav{order:3;width:100%}
+  .top nav ul{gap:6px 18px;font-size:14px}
+  .lang{order:2}
+  .tray-hero .cells{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tray-hero .cell:nth-child(n+5){display:none}
+  .specimen{height:230px}
+  .tray-idea .cells{grid-template-columns:minmax(0,1fr)}
+  .chest{grid-template-columns:minmax(0,1fr)}
+  .games .cells{grid-template-columns:minmax(0,1fr)}
+  .games .cell a{flex-direction:row;align-items:center}
+  .games .shot{width:96px;flex:0 0 96px}
+  .games .slip{margin-top:0;flex:1}
+  .foot{grid-template-columns:minmax(0,1fr)}
+  .tray{border-width:8px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="brassg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2CC9C"/><stop offset=".5" stop-color="#A88B5A"/><stop offset="1" stop-color="#7A6038"/></linearGradient></defs></svg>
+
+<header class="wrap top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#tools">Tools</a></li><li><a href="#idea">Reading the evidence</a></li><li><a href="#act">Code Against Cancer</a></li><li><a href="#games">Games</a></li><li><a href="#">About</a></li>
+  </ul></nav>
+  <ul class="lang" aria-label="Language">
+    <li><a href="#" aria-current="true" lang="en">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+  </ul>
+</header>
+
+<main>
+  <!-- Hero: a drawer that slides out as you scroll -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-stick">
+      <div class="wrap cab">
+        <div class="edge" aria-hidden="true"></div>
+        <div class="well">
+          <div class="drawer">
+            <div class="tray tray-hero" aria-label="A drawer of specimens: details from natural-history plates">
+              <div class="cells">
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-redoute-rose-1000.webp" width="707" height="1000" alt="Detail: a white moss rose in bloom" style="--x:31%;--y:30%;--s:1.9"></div><span class="slip"><i>Rosa muscosa alba</i><small>Redouté, Les Roses</small></span></figure>
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-haeckel-jellyfish-1000.webp" width="744" height="1000" alt="Detail: a pale blue jellyfish with trailing tentacles" style="--x:26%;--y:42%;--s:2"></div><span class="slip"><i>Leptomedusae</i><small>Haeckel, Kunstformen der Natur</small></span></figure>
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-blossfeldt-5-1000.webp" width="779" height="1000" alt="Detail: young fern fronds curled into spirals" style="--x:46%;--y:22%;--s:1.35"></div><span class="slip"><i>Adiantum, young fronds</i><small>Blossfeldt</small></span></figure>
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-haeckel-desmids-1000.webp" width="728" height="1000" alt="Detail: a green desmid, a microscopic alga, shaped like a star" style="--x:47%;--y:22%;--s:2.6"></div><span class="slip"><i>Desmidiea</i><small>Haeckel, Kunstformen der Natur</small></span></figure>
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-herbarium-1-1000.webp" width="730" height="1000" alt="Detail: a pressed oak leaf, its veins like lace" style="--x:20%;--y:20%;--s:2.3"></div><span class="slip"><i>Pressed leaves</i><small>Album page, Rijksmuseum</small></span></figure>
+                <figure class="cell specimen" style="margin:0"><div class="pic"><img src="media/plate-redoute-lily-1000.webp" width="687" height="1000" alt="Detail: red turban lilies, nodding" style="--x:48%;--y:23%;--s:1.9"></div><span class="slip"><i>Lillium pomponium</i><small>Redouté, Les Liliacées</small></span></figure>
+              </div>
+            </div>
+            <div class="front front-hero">
+              <span class="holder"><span class="card"><h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1></span></span>
+              <div>
+                <p class="intro">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+                <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+                <form class="search" role="search" onsubmit="return false">
+                  <label for="q">Look something up</label>
+                  <div class="field">
+                    <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+                    <button type="submit">Search</button>
+                  </div>
+                  <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+                </form>
+              </div>
+              <svg class="pull" viewBox="0 0 120 26" aria-hidden="true"><path d="M6 4 C 22 26, 98 26, 114 4"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="hint" aria-hidden="true">Scroll to open the drawer</p>
+    </div>
+  </section>
+
+  <!-- One idea: one drawer, one label, very different specimens -->
+  <section class="wrap sec" id="idea" aria-labelledby="h-idea">
+    <div class="head">
+      <h2 id="h-idea" data-reveal="rise">Same certainty, very different size</h2>
+      <p data-reveal="fade" style="--d:150ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+    </div>
+    <div class="drawer" data-reveal="rise">
+      <div class="tray tray-idea">
+        <div class="cells">
+          <div class="cell">
+            <h3>Smokers</h3>
+            <p class="fig">100–120 <small>in 1,000</small></p>
+            <p>About 10 to 12 in 100 smokers get lung cancer by age 75.</p>
+            <svg viewBox="0 0 500 200" class="pins" role="img" aria-label="1,000 pins: 100 dark, and 20 more in brass for the range up to 120"><defs><pattern id="pa" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2.3" class="p0"/></pattern></defs><rect width="500" height="200" fill="url(#pa)"/><circle cx="5" cy="5" r="3.2" class="p1"/><circle cx="15" cy="5" r="3.2" class="p1"/><circle cx="25" cy="5" r="3.2" class="p1"/><circle cx="35" cy="5" r="3.2" class="p1"/><circle cx="45" cy="5" r="3.2" class="p1"/><circle cx="55" cy="5" r="3.2" class="p1"/><circle cx="65" cy="5" r="3.2" class="p1"/><circle cx="75" cy="5" r="3.2" class="p1"/><circle cx="85" cy="5" r="3.2" class="p1"/><circle cx="95" cy="5" r="3.2" class="p1"/><circle cx="105" cy="5" r="3.2" class="p1"/><circle cx="115" cy="5" r="3.2" class="p1"/><circle cx="125" cy="5" r="3.2" class="p1"/><circle cx="135" cy="5" r="3.2" class="p1"/><circle cx="145" cy="5" r="3.2" class="p1"/><circle cx="155" cy="5" r="3.2" class="p1"/><circle cx="165" cy="5" r="3.2" class="p1"/><circle cx="175" cy="5" r="3.2" class="p1"/><circle cx="185" cy="5" r="3.2" class="p1"/><circle cx="195" cy="5" r="3.2" class="p1"/><circle cx="205" cy="5" r="3.2" class="p1"/><circle cx="215" cy="5" r="3.2" class="p1"/><circle cx="225" cy="5" r="3.2" class="p1"/><circle cx="235" cy="5" r="3.2" class="p1"/><circle cx="245" cy="5" r="3.2" class="p1"/><circle cx="255" cy="5" r="3.2" class="p1"/><circle cx="265" cy="5" r="3.2" class="p1"/><circle cx="275" cy="5" r="3.2" class="p1"/><circle cx="285" cy="5" r="3.2" class="p1"/><circle cx="295" cy="5" r="3.2" class="p1"/><circle cx="305" cy="5" r="3.2" class="p1"/><circle cx="315" cy="5" r="3.2" class="p1"/><circle cx="325" cy="5" r="3.2" class="p1"/><circle cx="335" cy="5" r="3.2" class="p1"/><circle cx="345" cy="5" r="3.2" class="p1"/><circle cx="355" cy="5" r="3.2" class="p1"/><circle cx="365" cy="5" r="3.2" class="p1"/><circle cx="375" cy="5" r="3.2" class="p1"/><circle cx="385" cy="5" r="3.2" class="p1"/><circle cx="395" cy="5" r="3.2" class="p1"/><circle cx="405" cy="5" r="3.2" class="p1"/><circle cx="415" cy="5" r="3.2" class="p1"/><circle cx="425" cy="5" r="3.2" class="p1"/><circle cx="435" cy="5" r="3.2" class="p1"/><circle cx="445" cy="5" r="3.2" class="p1"/><circle cx="455" cy="5" r="3.2" class="p1"/><circle cx="465" cy="5" r="3.2" class="p1"/><circle cx="475" cy="5" r="3.2" class="p1"/><circle cx="485" cy="5" r="3.2" class="p1"/><circle cx="495" cy="5" r="3.2" class="p1"/><circle cx="5" cy="15" r="3.2" class="p1"/><circle cx="15" cy="15" r="3.2" class="p1"/><circle cx="25" cy="15" r="3.2" class="p1"/><circle cx="35" cy="15" r="3.2" class="p1"/><circle cx="45" cy="15" r="3.2" class="p1"/><circle cx="55" cy="15" r="3.2" class="p1"/><circle cx="65" cy="15" r="3.2" class="p1"/><circle cx="75" cy="15" r="3.2" class="p1"/><circle cx="85" cy="15" r="3.2" class="p1"/><circle cx="95" cy="15" r="3.2" class="p1"/><circle cx="105" cy="15" r="3.2" class="p1"/><circle cx="115" cy="15" r="3.2" class="p1"/><circle cx="125" cy="15" r="3.2" class="p1"/><circle cx="135" cy="15" r="3.2" class="p1"/><circle cx="145" cy="15" r="3.2" class="p1"/><circle cx="155" cy="15" r="3.2" class="p1"/><circle cx="165" cy="15" r="3.2" class="p1"/><circle cx="175" cy="15" r="3.2" class="p1"/><circle cx="185" cy="15" r="3.2" class="p1"/><circle cx="195" cy="15" r="3.2" class="p1"/><circle cx="205" cy="15" r="3.2" class="p1"/><circle cx="215" cy="15" r="3.2" class="p1"/><circle cx="225" cy="15" r="3.2" class="p1"/><circle cx="235" cy="15" r="3.2" class="p1"/><circle cx="245" cy="15" r="3.2" class="p1"/><circle cx="255" cy="15" r="3.2" class="p1"/><circle cx="265" cy="15" r="3.2" class="p1"/><circle cx="275" cy="15" r="3.2" class="p1"/><circle cx="285" cy="15" r="3.2" class="p1"/><circle cx="295" cy="15" r="3.2" class="p1"/><circle cx="305" cy="15" r="3.2" class="p1"/><circle cx="315" cy="15" r="3.2" class="p1"/><circle cx="325" cy="15" r="3.2" class="p1"/><circle cx="335" cy="15" r="3.2" class="p1"/><circle cx="345" cy="15" r="3.2" class="p1"/><circle cx="355" cy="15" r="3.2" class="p1"/><circle cx="365" cy="15" r="3.2" class="p1"/><circle cx="375" cy="15" r="3.2" class="p1"/><circle cx="385" cy="15" r="3.2" class="p1"/><circle cx="395" cy="15" r="3.2" class="p1"/><circle cx="405" cy="15" r="3.2" class="p1"/><circle cx="415" cy="15" r="3.2" class="p1"/><circle cx="425" cy="15" r="3.2" class="p1"/><circle cx="435" cy="15" r="3.2" class="p1"/><circle cx="445" cy="15" r="3.2" class="p1"/><circle cx="455" cy="15" r="3.2" class="p1"/><circle cx="465" cy="15" r="3.2" class="p1"/><circle cx="475" cy="15" r="3.2" class="p1"/><circle cx="485" cy="15" r="3.2" class="p1"/><circle cx="495" cy="15" r="3.2" class="p1"/><circle cx="5" cy="25" r="3.2" class="p2"/><circle cx="15" cy="25" r="3.2" class="p2"/><circle cx="25" cy="25" r="3.2" class="p2"/><circle cx="35" cy="25" r="3.2" class="p2"/><circle cx="45" cy="25" r="3.2" class="p2"/><circle cx="55" cy="25" r="3.2" class="p2"/><circle cx="65" cy="25" r="3.2" class="p2"/><circle cx="75" cy="25" r="3.2" class="p2"/><circle cx="85" cy="25" r="3.2" class="p2"/><circle cx="95" cy="25" r="3.2" class="p2"/><circle cx="105" cy="25" r="3.2" class="p2"/><circle cx="115" cy="25" r="3.2" class="p2"/><circle cx="125" cy="25" r="3.2" class="p2"/><circle cx="135" cy="25" r="3.2" class="p2"/><circle cx="145" cy="25" r="3.2" class="p2"/><circle cx="155" cy="25" r="3.2" class="p2"/><circle cx="165" cy="25" r="3.2" class="p2"/><circle cx="175" cy="25" r="3.2" class="p2"/><circle cx="185" cy="25" r="3.2" class="p2"/><circle cx="195" cy="25" r="3.2" class="p2"/></svg>
+          </div>
+          <div class="cell">
+            <h3>Lifelong non-smokers</h3>
+            <p class="fig">4–5 <small>in 1,000</small></p>
+            <p>About 4 to 5 in 1,000 lifelong non-smokers do.</p>
+            <svg viewBox="0 0 500 200" class="pins" role="img" aria-label="1,000 pins: 4 dark, and 1 more in brass for the range up to 5"><defs><pattern id="pb" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2.3" class="p0"/></pattern></defs><rect width="500" height="200" fill="url(#pb)"/><circle cx="5" cy="5" r="3.2" class="p1"/><circle cx="15" cy="5" r="3.2" class="p1"/><circle cx="25" cy="5" r="3.2" class="p1"/><circle cx="35" cy="5" r="3.2" class="p1"/><circle cx="45" cy="5" r="3.2" class="p2"/></svg>
+          </div>
+          <div class="cell meat">
+            <h3>Processed meat</h3>
+            <p class="fig">18%</p>
+            <p>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</p>
+            <p class="key" style="margin-top:auto;padding-top:24px"><span>Lung cancer by age 75</span><span class="r">Range</span><span class="e">No lung cancer</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="front front-idea">
+        <span class="holder"><span class="card"><b>Group 1</b><span>Known cause · the same label for both</span></span></span>
+        <p class="note">European data. Quoted from the Cancer Evidence Explorer. <a class="ul" href="#">Seven ideas for reading a health headline →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The four groups: a chest of four drawers -->
+  <section class="wrap sec" aria-labelledby="h-groups">
+    <div class="head">
+      <h2 id="h-groups" data-reveal="rise">The label says how sure the evidence is, not how large the risk is</h2>
+      <p data-reveal="fade" style="--d:150ms">Four groups, from the IARC Monographs.</p>
+    </div>
+    <ul class="chest" data-reveal="fade">
+      <li class="front"><span class="holder"><span class="card"><b>Group 1</b><span>Known cause</span></span></span><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p><span class="knob" aria-hidden="true"></span></li>
+      <li class="front"><span class="holder"><span class="card"><b>Group 2A</b><span>Probable cause</span></span></span><p>The agent probably causes cancer in people.</p><span class="knob" aria-hidden="true"></span></li>
+      <li class="front"><span class="holder"><span class="card"><b>Group 2B</b><span>Possible cause</span></span></span><p>The agent may cause cancer in people. Aspartame is in this group.</p><span class="knob" aria-hidden="true"></span></li>
+      <li class="front"><span class="holder"><span class="card"><b>Group 3</b><span>Not classifiable</span></span></span><p>The evidence does not meet the rules for any other group. It does not mean safe.</p><span class="knob" aria-hidden="true"></span></li>
+    </ul>
+  </section>
+
+  <!-- The explorers: two large drawers -->
+  <section class="wrap sec" id="tools" aria-labelledby="h-tools">
+    <div class="head">
+      <h2 id="h-tools" data-reveal="rise">The two explorers</h2>
+      <p data-reveal="fade" style="--d:150ms">Free, and in 10 languages.</p>
+    </div>
+
+    <article class="drawer big" aria-labelledby="h-cee" data-reveal="rise">
+      <div class="tray tray-tool">
+        <div class="cells">
+          <figure class="cell net"><img src="media/tool-cancer-network.svg" width="1062" height="998" alt="Network drawing of the Cancer Evidence Explorer: exposures linked to the cancer types they can cause." loading="lazy"><figcaption class="slip"><i>The network of links</i><small>From the IARC Monographs</small></figcaption></figure>
+          <dl class="quad">
+            <div class="cell"><dt>exposures</dt><dd>185</dd></div>
+            <div class="cell"><dt>cancer types</dt><dd>68</dd></div>
+            <div class="cell"><dt>links</dt><dd>469</dd></div>
+            <div class="cell"><dt>languages</dt><dd>10</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="front front-tool">
+        <span class="holder"><span class="card"><h3 id="h-cee">Cancer Evidence Explorer</h3></span></span>
+        <div>
+          <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+        <svg class="pull" viewBox="0 0 120 26" aria-hidden="true"><path d="M6 4 C 22 26, 98 26, 114 4"/></svg>
+      </div>
+    </article>
+
+    <article class="drawer big" aria-labelledby="h-cdee" data-reveal="rise">
+      <div class="tray tray-tool">
+        <div class="cells">
+          <figure class="cell net"><img src="media/tool-chronic-network.svg" width="931" height="1006" alt="Network drawing of the Chronic Disease Evidence Explorer: risk factors linked to diseases, grouped by kind." loading="lazy"><figcaption class="slip"><i>The network of graded links</i><small>Graded by strength of evidence</small></figcaption></figure>
+          <dl class="quad">
+            <div class="cell"><dt>risk factors</dt><dd>124</dd></div>
+            <div class="cell"><dt>diseases</dt><dd>45</dd></div>
+            <div class="cell"><dt>graded links</dt><dd>356</dd></div>
+            <div class="cell"><dt>languages</dt><dd>10</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="front front-tool">
+        <span class="holder"><span class="card"><h3 id="h-cdee">Chronic Disease Evidence Explorer</h3></span></span>
+        <div>
+          <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+        </div>
+        <svg class="pull" viewBox="0 0 120 26" aria-hidden="true"><path d="M6 4 C 22 26, 98 26, 114 4"/></svg>
+      </div>
+    </article>
+  </section>
+
+  <!-- What you can do + games -->
+  <section class="wrap sec last" aria-label="What you can do, and games">
+    <div class="front front-act" id="act" data-reveal="rise">
+      <span class="holder"><span class="card"><h2>Code Against Cancer</h2><p>What you can do</p></span></span>
+      <p class="body">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. Fourteen actions for Europe, seventeen for Latin America and the Caribbean.</p>
+      <div><a class="btn" href="#">Read the recommendations</a></div>
+      <span class="knob" aria-hidden="true"></span>
+    </div>
+    <div class="games" id="games" data-reveal="rise" style="--d:150ms">
+      <div class="games-head"><h2>For schools and families</h2><p>Learning by playing: three games</p></div>
+      <div class="tray">
+        <ul class="cells" style="list-style:none">
+          <li class="cell"><a href="#"><span class="shot"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Screenshot of Sol &amp; the UV Shield Quest" loading="lazy"></span><span class="slip"><i>Sol &amp; the UV Shield Quest</i><small>Skin cancer · ages 6–12</small></span></a></li>
+          <li class="cell"><a href="#"><span class="shot"><img src="media/game-lung-detective.webp" width="720" height="405" alt="Screenshot of The Lung Detective" loading="lazy"></span><span class="slip"><i>The Lung Detective</i><small>Lung cancer · ages 10–16</small></span></a></li>
+          <li class="cell"><a href="#"><span class="shot"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="Screenshot of A Town of 1,000" loading="lazy"></span><span class="slip"><i>A Town of 1,000</i><small>Breast cancer · ages 14+</small></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="mark" href="#">EpiDetective</a>
+        <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div>
+      <ul><li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li></ul>
+      <p class="place">Lyon, France</p>
+    </div>
+    <p class="credits">Image credits (details shown in the drawer). Pierre-Joseph Redouté, Les Roses (1817–24), Rosa muscosa alba; public domain. Pierre-Joseph Redouté, Les Liliacées, plate 7 (1802–16), Lillium pomponium; Pierre-Joseph Redouté (artist), Cleveland Museum of Art (source); public domain. Ernst Haeckel (lithography Adolf Giltsch), Kunstformen der Natur (1899–1904), Leptomedusae and Desmidiea; public domain. Karl Blossfeldt, young fronds of maidenhair fern (Adiantum), c.1920s, as reproduced in Das deutsche Lichtbild 1935; Karl Blossfeldt (1865–1932); public domain. Eight pressed leaves, album page, Rijksmuseum RP-D-1996-1-18; Rijksmuseum; CC0. Network drawings from the two EpiDetective explorers; screenshots from the three EpiDetective games.</p>
+  </div>
+</footer>
+
+<script>
+/* size the hero drawer so tray and front fit the screen when fully open, and drive --z from scroll */
+(function(){
+  var root=document.documentElement, hero=document.querySelector('.hero');
+  if(!hero||root.classList.contains('still'))return;
+  var front=hero.querySelector('.front-hero'), wide=false;
+  function size(){
+    wide=innerWidth>=861;
+    if(!wide){hero.style.removeProperty('--tray-h');hero.style.removeProperty('--z');return;}
+    var t=Math.max(240,Math.min(560,innerHeight-front.offsetHeight-24-16-28));
+    hero.style.setProperty('--tray-h',t+'px');
+    tick();
+  }
+  function tick(){
+    if(!wide)return;
+    var r=hero.getBoundingClientRect(), travel=(r.height-innerHeight)*.82;
+    var z=travel>0?Math.min(1,Math.max(0,-r.top/travel)):1;
+    hero.style.setProperty('--z',z.toFixed(4));
+  }
+  var ticking=false;
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;tick();});}},{passive:true});
+  addEventListener('resize',size);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
+  size();
+})();
+</script>
+</body>
+</html>

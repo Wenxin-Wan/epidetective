@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>08 · Journal — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,500;1,400&family=Albert+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour */
+  --paper:#F6F4EF;      /* ground */
+  --paper-2:#ECE9E2;    /* plate ground for drawings */
+  --ink:#262624;        /* text */
+  --grey:#7A776F;       /* rules, quiet marks */
+  --grey-text:#67645C;  /* captions: 5.4:1 on paper */
+  --sage:#8A9A7E;       /* accent marks */
+  --sage-text:#55654A;  /* links: 5.8:1 on paper */
+  --hair:rgba(38,38,36,.13);
+  --hair-2:rgba(38,38,36,.3);
+  /* type */
+  --serif:"Brygada 1918",Georgia,"Times New Roman",serif;
+  --sans:"Albert Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --t-12:12px; --t-13:13px; --t-15:15px; --t-17:17px; --t-19:19px; --t-22:22px;
+  --t-32:clamp(26px,2.5vw,34px);
+  --t-48:clamp(34px,3.6vw,52px);
+  --t-64:clamp(38px,4.4vw,66px);
+  /* space */
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+  --section:clamp(96px,12vw,200px);
+  --gutter:clamp(20px,4.5vw,72px);
+  --max:1296px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --kit-dur:1500ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 var(--t-17)/1.65 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul{list-style:none;margin:0;padding:0}
+figure{margin:0}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.dept{font:600 var(--t-12)/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--sage-text)}
+.cap{font:400 var(--t-13)/1.5 var(--sans);color:var(--grey-text);letter-spacing:.01em}
+.cap i{font:italic 400 14px/1 var(--serif);color:var(--ink)}
+
+/* quiet links */
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 900ms var(--ease)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.more{display:inline-block;color:var(--sage-text);text-decoration:none;font:500 var(--t-15)/1.4 var(--sans);letter-spacing:.01em;padding-bottom:3px;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;transition:background-size 900ms var(--ease),color 500ms}
+.more:hover,.more:focus-visible{background-size:22% 1px;color:var(--ink)}
+/* the one filled button */
+.btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font:500 var(--t-15)/1 var(--sans);letter-spacing:.02em;padding:18px 26px;transition:background-color 600ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--sage-text)}
+
+/* ---------- masthead ---------- */
+.mast{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:var(--s-3);padding-top:22px;padding-bottom:20px}
+.nav ul{display:flex;flex-wrap:wrap;gap:4px 22px;font:500 var(--t-13)/1.4 var(--sans);letter-spacing:.01em}
+.nav a{text-decoration:none}
+.mark{font:500 30px/1 var(--serif);letter-spacing:-.005em;text-decoration:none}
+.lang{justify-self:end;display:flex;gap:2px;font:500 var(--t-12)/1 var(--sans);letter-spacing:.08em}
+.lang a{display:block;padding:5px;text-decoration:none;color:var(--grey-text)}
+.lang a[aria-current]{color:var(--ink)}
+.lang a:hover{color:var(--ink)}
+
+/* ---------- cover ---------- */
+.cover{position:relative;height:calc(100vh - 210px);height:calc(100svh - 210px);min-height:520px;max-height:860px;overflow:hidden;background:#d9c9a8}
+.cover > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 55%}
+.cover-line{position:absolute;top:clamp(40px,7%,80px);right:clamp(28px,4.5%,72px);width:min(41%,600px)}
+.cover-line h1{font-size:var(--t-64);line-height:1.04;letter-spacing:-.016em;color:var(--ink)}
+.cover-line .dept{margin-bottom:var(--s-3);color:#3F3A2E}
+.cover-cap{display:flex;justify-content:space-between;gap:var(--s-3);padding-top:12px}
+.standfirst{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding-top:var(--s-5);padding-bottom:var(--section)}
+.sf-text{grid-column:1 / span 6}
+.sf-text p:first-child{font:400 var(--t-22)/1.5 var(--serif);max-width:26em}
+.sf-text p + p{margin-top:var(--s-2);font:italic 400 var(--t-19)/1.5 var(--serif);color:var(--grey-text);max-width:28em}
+.search{grid-column:8 / span 5;align-self:start}
+.search label{display:block;margin-bottom:10px}
+.field{display:flex;align-items:stretch;border-bottom:1px solid var(--ink)}
+.field input{flex:1;min-width:0;background:transparent;border:0;border-radius:0;color:var(--ink);font:400 var(--t-17)/1.4 var(--sans);padding:12px 0 13px;outline:none;-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:var(--grey-text);opacity:1}
+.field input::-webkit-search-cancel-button{display:none}
+.field:focus-within{box-shadow:0 1px 0 var(--ink)}
+.field button{background:none;border:0;color:var(--ink);font:500 var(--t-15)/1 var(--sans);padding:0 0 0 var(--s-3);cursor:pointer}
+.field button:hover{color:var(--sage-text)}
+.try{margin-top:14px;font-size:var(--t-15);color:var(--grey-text)}
+.try a{color:var(--sage-text);text-decoration:underline;text-decoration-color:rgba(85,101,74,.35);text-decoration-thickness:1px;text-underline-offset:4px;transition:text-decoration-color 500ms}
+.try a:hover,.try a:focus-visible{text-decoration-color:currentColor}
+.try .sep{margin:0 .45em;color:var(--grey)}
+
+/* ---------- spreads ---------- */
+.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;margin-bottom:var(--section)}
+.page-img{position:relative;margin:0;min-width:0}
+.page-img .pic{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--paper-2)}
+.page-img .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 2200ms var(--ease)}
+/* page-turn wipe: the figure is observed (kit adds .is-in), the inner page is clipped, opening from the spine */
+html.js:not(.still) .page-img[data-reveal="page"] .pic{transition:clip-path 1600ms var(--ease) var(--d,0ms)}
+html.js:not(.still) .page-img[data-reveal="page"]:not(.is-in) .pic{clip-path:inset(0 100% 0 0)}
+html.js:not(.still) .page-img[data-reveal="page"].from-r:not(.is-in) .pic{clip-path:inset(0 0 0 100%)}
+html.js:not(.still) .page-img[data-reveal="page"]:not(.is-in) .pic img{transform:scale(1.07)}
+html.js:not(.still) .page-img[data-reveal="page"] figcaption{transition:opacity 1200ms var(--ease) 900ms}
+html.js:not(.still) .page-img[data-reveal="page"]:not(.is-in) figcaption{opacity:0}
+.page-img figcaption{padding:12px var(--gutter) 0 0}
+.spread.img-l .page-img figcaption{padding-left:var(--gutter)}
+.spread.img-r .page-img{grid-column:2;grid-row:1}
+.spread.img-r .page-text{grid-column:1;grid-row:1}
+.page-text{min-width:0;padding:0 clamp(32px,6vw,112px)}
+.spread.img-l .page-text{padding-right:max(var(--gutter),calc((100vw - var(--max)) / 2))}
+.spread.img-r .page-text{padding-left:max(var(--gutter),calc((100vw - var(--max)) / 2))}
+.page-text h2{margin-top:var(--s-3);font-size:var(--t-48);line-height:1.06;letter-spacing:-.014em;max-width:11em}
+.body{margin-top:var(--s-3);font:400 var(--t-19)/1.62 var(--serif);max-width:30em}
+
+/* fact box */
+.facts{margin-top:var(--s-5);border-top:1px solid var(--ink)}
+.facts > div{display:grid;grid-template-columns:minmax(8.6rem,auto) minmax(0,1fr);column-gap:var(--s-3);align-items:baseline;padding:18px 0 17px;border-bottom:1px solid var(--hair)}
+.facts dt{font:400 var(--t-32)/1.05 var(--serif);letter-spacing:-.01em;font-variant-numeric:lining-nums;white-space:nowrap}
+.facts dt small{display:block;margin-top:6px;font:500 var(--t-12)/1.2 var(--sans);letter-spacing:.06em;color:var(--grey-text)}
+.facts dd{margin:0;font-size:var(--t-15);line-height:1.55;color:var(--ink)}
+.facts-cap{margin-top:var(--s-2)}
+.page-text .more{margin-top:var(--s-4)}
+
+/* tools */
+.tools-open{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s-2) var(--s-4);padding-bottom:var(--s-3);margin-bottom:clamp(56px,6vw,96px);border-bottom:1px solid var(--hair-2)}
+.tools-open h2{font-size:var(--t-48);line-height:1.06;letter-spacing:-.014em}
+.tools-open p{font-size:var(--t-15);color:var(--grey-text)}
+.page-img .pic.plate{aspect-ratio:1/1}
+.plate img.net{position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain;filter:url(#ink-sage)}
+.page-img .pic.plate img.net{inset:auto;left:7%;top:7%;width:86%;height:86%}
+.tool-name{font-size:var(--t-48);line-height:1.04;letter-spacing:-.016em;max-width:9.5em}
+.tool-figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s-3);margin:var(--s-5) 0 0;border-top:1px solid var(--ink)}
+.tool-figs > div{display:flex;flex-direction:column-reverse;justify-content:flex-end;padding-top:var(--s-2)}
+.tool-figs dd{margin:0;font:400 var(--t-48)/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums}
+.tool-figs dt{margin-top:8px;font:500 var(--t-12)/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text)}
+.langs{margin-top:var(--s-3);font-size:var(--t-15);color:var(--grey-text)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-4);margin-top:var(--s-4)}
+
+/* interlude */
+.interlude{margin-bottom:var(--section)}
+.interlude .pic{position:relative;height:clamp(380px,78vh,820px);overflow:hidden;background:#173a5a}
+.interlude .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% 45%;transition:transform 2400ms var(--ease)}
+html.js:not(.still) .interlude .pic:not(.is-in) img{transform:scale(1.06)}
+.interlude figcaption{padding-top:12px}
+
+/* code */
+.code-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s-4);margin:var(--s-5) 0 0;border-top:1px solid var(--ink)}
+.code-counts > div{display:flex;flex-direction:column-reverse;justify-content:flex-end;padding-top:var(--s-2)}
+.code-counts dd{margin:0;font:400 clamp(56px,6vw,88px)/.95 var(--serif);letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.code-counts dt{margin-top:10px;font-size:var(--t-15);line-height:1.5;color:var(--grey-text);max-width:15em}
+.page-text .btn{margin-top:var(--s-5)}
+
+/* games */
+.games{padding-bottom:var(--section)}
+.games-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s-2) var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--ink)}
+.games-head h2{font-size:var(--t-32);line-height:1.1;letter-spacing:-.01em}
+.games-head p{font-size:var(--t-15);color:var(--grey-text)}
+.game-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;row-gap:var(--s-4);margin-top:var(--s-5)}
+.game-list a{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;text-decoration:none;max-width:232px}
+.g-img{display:block;overflow:hidden;background:var(--paper-2)}
+.g-img img{width:100%;aspect-ratio:3/2;object-fit:cover;filter:saturate(.5) contrast(.94) brightness(1.03);transition:filter 900ms var(--ease),transform 1400ms var(--ease)}
+.game-list a:hover .g-img img,.game-list a:focus-visible .g-img img{filter:none;transform:scale(1.03)}
+.g-name{display:block;font:400 var(--t-19)/1.3 var(--serif)}
+.g-meta{display:block;margin-top:4px;font-size:var(--t-13);color:var(--grey-text)}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--hair-2);padding-top:clamp(56px,6vw,96px);padding-bottom:clamp(88px,8vw,112px)}
+.foot-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:var(--s-5)}
+.foot-brand{grid-column:1 / span 5}
+.foot .mark{display:inline-block;font-size:30px}
+.foot-text{margin-top:var(--s-3);max-width:30em;font-size:var(--t-15);color:var(--grey-text)}
+.foot nav{grid-column:7 / span 3}
+.foot-links{display:grid;gap:9px;font-size:var(--t-15)}
+.foot-links a{text-decoration:none}
+.place{grid-column:10 / span 3;font:italic 400 var(--t-19)/1.4 var(--serif)}
+.credits{grid-column:1 / -1;padding-top:var(--s-3);border-top:1px solid var(--hair);font-size:var(--t-12);line-height:1.75;color:var(--grey-text)}
+.credits h2{font:600 var(--t-12)/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--grey-text);margin-bottom:10px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .mast{grid-template-columns:auto minmax(0,1fr);row-gap:10px}
+  .mark{grid-column:1;grid-row:1}
+  .lang{grid-column:2;grid-row:1}
+  .nav{grid-column:1 / -1;grid-row:2}
+  .cover{height:auto;min-height:0;max-height:none;aspect-ratio:16/10}
+  .cover-line{width:min(46%,600px)}
+}
+@media (max-width:900px){
+  .cover-wrap{display:flex;flex-direction:column}
+  .cover{display:contents}
+  .cover > img{position:static;order:1;width:100%;height:auto;aspect-ratio:1/1;object-position:30% 50%;background:#d9c9a8}
+  .cover-cap{order:2}
+  .cover-line{order:3;position:static;width:auto;padding:var(--s-4) 0 0}
+  .cover-line .dept{color:var(--sage-text)}
+  .standfirst{grid-template-columns:minmax(0,1fr);row-gap:var(--s-5);padding-top:var(--s-4)}
+  .sf-text,.search{grid-column:1}
+  .spread,.spread.img-r{grid-template-columns:minmax(0,1fr);row-gap:var(--s-4)}
+  .spread.img-r .page-img,.spread.img-r .page-text{grid-column:1;grid-row:auto}
+  .spread .page-img{grid-row:1}
+  .spread .page-text,.spread.img-l .page-text,.spread.img-r .page-text{padding:0 var(--gutter)}
+  .page-img .pic{aspect-ratio:5/4}
+  .page-img figcaption,.spread.img-l .page-img figcaption{padding:12px var(--gutter) 0}
+  .game-list{grid-template-columns:minmax(0,1fr)}
+  .game-list a{grid-template-columns:120px minmax(0,1fr);align-items:center;max-width:none;gap:var(--s-3)}
+  .foot-brand,.foot nav,.place{grid-column:1 / -1}
+}
+@media (max-width:520px){
+  .nav ul{gap:4px 16px}
+  .mark{font-size:26px}
+  .cover > img{aspect-ratio:4/5}
+  .facts > div{grid-template-columns:minmax(0,1fr);row-gap:6px}
+  .tool-figs dd{font-size:36px}
+  .cover-cap{flex-direction:column;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="ink-sage" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".25 .49 .09 0 .13  .29 .57 .1 0 .13  .22 .44 .08 0 .12  0 0 0 1.1 0"/>
+  </filter>
+</svg>
+
+<header class="wrap">
+  <div class="mast">
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a class="ul" href="#tools">Tools</a></li>
+        <li><a class="ul" href="#evidence">Reading the evidence</a></li>
+        <li><a class="ul" href="#code">Code Against Cancer</a></li>
+        <li><a class="ul" href="#games">Games</a></li>
+        <li><a class="ul" href="#about">About</a></li>
+      </ul>
+    </nav>
+    <a class="mark" href="#">EpiDetective</a>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" lang="en" aria-current="true">EN</a></li>
+      <li><a href="#" lang="zh">中文</a></li>
+      <li><a href="#" lang="fr">FR</a></li>
+      <li><a href="#" lang="es">ES</a></li>
+      <li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <!-- cover -->
+  <section aria-labelledby="h1">
+    <div class="wrap cover-wrap">
+      <div class="cover">
+        <img src="media/photo-lake-mist.webp" width="2000" height="1335" alt="Morning mist over a still bog lake; pines and bare trees on the left shore are mirrored in the water, and the far bank fades into golden fog" fetchpriority="high">
+        <div class="cover-line">
+          <p class="dept" data-reveal="fade" style="--d:200ms">Free evidence tools</p>
+          <h1 id="h1" data-split data-split-delay="300">What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        </div>
+      </div>
+      <p class="cover-cap cap"><span><i>Hommikune udu Kakerdaja rabas</i>, morning mist in Kakerdaja bog</span><span>Photograph: Abrget47j, CC BY-SA 3.0</span></p>
+    </div>
+    <div class="wrap standfirst">
+      <div class="sf-text" data-reveal="fade">
+        <p>Free tools built from the IARC Monographs and published reviews by Wenxin&nbsp;Wan, a cancer epidemiologist.</p>
+        <p>They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+      <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:200ms">
+        <label class="dept" for="q">Look something up</label>
+        <div class="field">
+          <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+          <button type="submit">Search</button>
+        </div>
+        <p class="try">Try&ensp;<a href="#">aspartame</a><span class="sep" aria-hidden="true">·</span><a href="#">stroke</a><span class="sep" aria-hidden="true">·</span><a href="#">coffee</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- spread: one idea -->
+  <section class="spread img-l" id="evidence" aria-labelledby="idea-h">
+    <figure class="page-img from-r" data-reveal="page">
+      <div class="pic"><img src="media/photo-grasses-1.webp" width="2000" height="1333" loading="lazy" alt="Feathery seed heads of wild barley, Hordeum jubatum, arching in pale green and cream" style="object-position:44% 50%"></div>
+      <figcaption class="cap"><i>Hordeum jubatum</i>. Photograph: Cephas, CC BY-SA 4.0</figcaption>
+    </figure>
+    <div class="page-text">
+      <p class="dept" data-reveal="fade">Reading the evidence</p>
+      <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+      <p class="body" data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group&nbsp;1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+      <dl class="facts" data-reveal="fade" style="--d:450ms">
+        <div><dt>100–120<small>in 1,000</small></dt><dd>smokers get lung cancer by age 75: about 10 to 12 in 100.</dd></div>
+        <div><dt>4–5<small>in 1,000</small></dt><dd>lifelong non-smokers do.</dd></div>
+        <div><dt>18%</dt><dd>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</dd></div>
+      </dl>
+      <p class="facts-cap cap">European data. Quoted from the Cancer Evidence Explorer.</p>
+      <a class="more" href="#">Seven ideas for reading a health headline&nbsp;→</a>
+    </div>
+  </section>
+
+  <!-- tools -->
+  <div class="wrap" id="tools">
+    <div class="tools-open" data-reveal="fade">
+      <h2>The two explorers</h2>
+      <p>Free, and each in 10 languages.</p>
+    </div>
+  </div>
+
+  <section class="spread img-r" aria-labelledby="t1">
+    <figure class="page-img" data-reveal="page">
+      <div class="pic plate"><img class="net" src="media/tool-cancer-network.svg" width="1062" height="998" loading="lazy" alt="Network drawing of the Cancer Evidence Explorer: 469 links between 185 exposures and 68 cancer types"></div>
+      <figcaption class="cap">The Cancer Evidence Explorer, drawn link by link</figcaption>
+    </figure>
+    <div class="page-text">
+      <p class="dept" data-reveal="fade">From the IARC Monographs</p>
+      <h3 class="tool-name" id="t1" data-split>Cancer Evidence Explorer</h3>
+      <p class="body" data-reveal="fade" style="--d:300ms">Which exposures can cause which cancers, and how sure the evidence is for each link.</p>
+      <dl class="tool-figs" data-reveal="fade" style="--d:450ms">
+        <div><dt>Exposures</dt><dd>185</dd></div>
+        <div><dt>Cancer types</dt><dd>68</dd></div>
+        <div><dt>Links</dt><dd>469</dd></div>
+      </dl>
+      <p class="langs">In 10 languages</p>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="more" href="#">About this tool</a></div>
+    </div>
+  </section>
+
+  <section class="spread img-l" aria-labelledby="t2">
+    <figure class="page-img from-r" data-reveal="page">
+      <div class="pic plate"><img class="net" src="media/tool-chronic-network.svg" width="931" height="1006" loading="lazy" alt="Network drawing of the Chronic Disease Evidence Explorer: graded links between 124 risk factors and 45 diseases, in clusters"></div>
+      <figcaption class="cap">The Chronic Disease Evidence Explorer, grouped by disease</figcaption>
+    </figure>
+    <div class="page-text">
+      <p class="dept" data-reveal="fade">Graded by strength of evidence</p>
+      <h3 class="tool-name" id="t2" data-split>Chronic Disease Evidence Explorer</h3>
+      <p class="body" data-reveal="fade" style="--d:300ms">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+      <dl class="tool-figs" data-reveal="fade" style="--d:450ms">
+        <div><dt>Risk factors</dt><dd>124</dd></div>
+        <div><dt>Diseases</dt><dd>45</dd></div>
+        <div><dt>Graded links</dt><dd>356</dd></div>
+      </dl>
+      <p class="langs">In 10 languages</p>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="more" href="#">About this tool</a></div>
+    </div>
+  </section>
+
+  <!-- interlude -->
+  <figure class="interlude">
+    <div class="pic" data-reveal="fade"><img src="media/photo-sea-horizon-2.webp" width="2000" height="1269" loading="lazy" alt="A waxing half moon over a calm fjord at blue hour, its light laid in a narrow path across the still water between dark wooded shores"></div>
+    <figcaption class="cap wrap">Waxing half moon over Brofjorden. Photograph: W.carter, CC0</figcaption>
+  </figure>
+
+  <!-- code against cancer -->
+  <section class="spread img-r" id="code" aria-labelledby="code-h">
+    <figure class="page-img" data-reveal="page">
+      <div class="pic"><img src="media/photo-leaf-shadow.webp" width="2000" height="1080" loading="lazy" alt="The shadow of long, narrow leaves falling across a pale plastered wall in sunlight" style="object-position:46% 50%"></div>
+      <figcaption class="cap">Shadow of leaves on a wall, Lisbon. Photograph: Jules Verne Times Two, CC BY-SA 4.0</figcaption>
+    </figure>
+    <div class="page-text">
+      <p class="dept" data-reveal="fade">What you can do</p>
+      <h2 id="code-h" data-split>Code Against Cancer</h2>
+      <p class="body" data-reveal="fade" style="--d:300ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+      <dl class="code-counts" data-reveal="fade" style="--d:450ms">
+        <div><dt>actions for Europe</dt><dd>14</dd></div>
+        <div><dt>for Latin America and the Caribbean</dt><dd>17</dd></div>
+      </dl>
+      <a class="btn" href="#">Read the recommendations</a>
+    </div>
+  </section>
+
+  <!-- games -->
+  <section class="games wrap" id="games" aria-labelledby="games-h">
+    <div class="games-head" data-reveal="fade">
+      <h2 id="games-h">For schools and families</h2>
+      <p>Learning by playing — three games.</p>
+    </div>
+    <ul class="game-list">
+      <li data-reveal="fade"><a href="#"><span class="g-img"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt=""></span><span><span class="g-name">Sol &amp; the UV Shield Quest</span><span class="g-meta">Skin cancer · ages 6–12</span></span></a></li>
+      <li data-reveal="fade" style="--d:150ms"><a href="#"><span class="g-img"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt=""></span><span><span class="g-name">The Lung Detective</span><span class="g-meta">Lung cancer · ages 10–16</span></span></a></li>
+      <li data-reveal="fade" style="--d:300ms"><a href="#"><span class="g-img"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt=""></span><span><span class="g-name">A Town of 1,000</span><span class="g-meta">Breast cancer · ages 14+</span></span></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="mark" href="#">EpiDetective</a>
+      <p class="foot-text">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="foot-links">
+        <li><a class="ul" href="#">How we check</a></li>
+        <li><a class="ul" href="#">Report an error</a></li>
+        <li><a class="ul" href="#">How to cite</a></li>
+        <li><a class="ul" href="#">About</a></li>
+      </ul>
+    </nav>
+    <p class="place">Lyon, France</p>
+    <div class="credits">
+      <h2>Photographs</h2>
+      <ul>
+        <li>Cover: Hommikune udu Kakerdaja rabas (morning mist, Kakerdaja bog) — Abrget47j, CC BY-SA 3.0</li>
+        <li>Hordeum jubatum — Cephas, CC BY-SA 4.0</li>
+        <li>Waxing half moon over Brofjorden — W.carter, CC0</li>
+        <li>Shadow of leaves on a wall, Lisbon — Jules Verne Times Two, CC BY-SA 4.0</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="kit/kit.js" defer></script>
+</body>
+</html>

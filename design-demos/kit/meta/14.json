@@ -1,0 +1,25 @@
+{
+ "n": 14,
+ "slug": "14-terrain",
+ "name": "Terrain",
+ "line": "A Swiss-map sheet: generative contour lines drift slowly (and shift as you scroll) behind a map title block holding the headline and search; the four IARC groups become altitude bands on a mountain profile, risk sits on a map scale bar, and the explorers are framed map sheets with legends.",
+ "palette": [
+  "#F1F0EA",
+  "#A7835A",
+  "#6E8B5B",
+  "#5B88A6",
+  "#22241F"
+ ],
+ "fonts": [
+  "Sofia Sans",
+  "Sofia Sans Semi Condensed"
+ ],
+ "images": [
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "The contours are generated from noise and show no data; the page says so ('Contours illustrative'). Canvas is drawn at device pixel ratio, pauses off-screen, and is drawn once with reduced motion; without JavaScript a CSS ring pattern stands in. Both families have Cyrillic and Greek; Chinese falls back to the system font."
+}

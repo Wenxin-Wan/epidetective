@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>45 · Exhibition — EpiDetective demo</title>
+<meta name="description" content="EpiDetective: what causes cancer and other chronic diseases, and how sure the evidence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Sofia+Sans+Extra+Condensed:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour: a gallery. Warm wall, ink lettering, one oxblood for the room numbers. */
+  --wall:#F2F0EB;
+  --wall-2:#E9E6E0;         /* floor and quiet panels */
+  --ink:#161514;
+  --ink-2:#5C5852;          /* label text, 6.2:1 on the wall */
+  --hair:#D6D1C7;
+  --accent:#8E2F22;         /* room numerals, current room; 7.1:1 */
+  --frame:#1D1C1A;
+  --mat:#FBFAF7;
+  /* type */
+  --cond:"Sofia Sans Extra Condensed","Arial Narrow","Helvetica Neue",sans-serif;
+  --sans:"Sofia Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --t12:12px; --t15:15px; --t18:18px; --t24:24px;
+  --t36:clamp(30px,2.8vw,40px); --t56:clamp(40px,4.4vw,64px); --t88:clamp(56px,7vw,104px);
+  /* space */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:104px;
+  --section:clamp(96px,12vw,200px);
+  --gutter:clamp(20px,5.5vw,88px);
+  --max:1320px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--wall);color:var(--ink);font:400 var(--t18)/1.6 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul,ol{list-style:none;margin:0;padding:0}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 700ms var(--ease)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.link{font:500 var(--t15)/1.3 var(--sans);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px;transition:border-color 500ms var(--ease)}
+.link:hover{border-bottom-color:transparent}
+.btn{display:inline-block;background:var(--ink);color:var(--wall);text-decoration:none;font:600 var(--t15)/1 var(--sans);letter-spacing:.02em;padding:17px 26px;transition:background-color 500ms var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--accent)}
+.label{font:600 var(--t12)/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.vinyl{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.86}
+
+/* ---------- header ---------- */
+.top-in{display:flex;align-items:center;gap:var(--s4);min-height:84px;border-bottom:1px solid var(--hair)}
+.mark{font:700 27px/1 var(--cond);letter-spacing:.01em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:6px 30px;font-size:var(--t15)}
+.lang{display:flex;gap:2px;font-size:13px;white-space:nowrap}
+.lang a{display:block;padding:6px 7px;text-decoration:none;color:var(--ink-2)}
+.lang a[aria-current]{color:var(--ink);font-weight:600}
+
+/* ---------- title wall ---------- */
+.title-wall{padding-top:clamp(56px,7vw,112px);padding-bottom:clamp(72px,8vw,128px)}
+.title-wall h1{font-size:clamp(58px,10.4vw,164px);max-width:12.5em}
+.tw-row{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);column-gap:clamp(32px,4vw,64px);margin-top:clamp(56px,6vw,96px);padding-top:var(--s3);border-top:1px solid var(--ink);align-items:start}
+.who{font-size:var(--t18);max-width:24em}
+.caveat{margin-top:var(--s2);font-size:var(--t15);color:var(--ink-2);max-width:24em}
+.search label{display:block;margin-bottom:12px}
+.box{display:flex;align-items:stretch;border:1px solid var(--ink);background:var(--mat);transition:box-shadow 400ms var(--ease)}
+.box:focus-within{box-shadow:0 0 0 3px rgba(22,21,20,.12)}
+.box input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:400 17px/1.3 var(--sans);padding:15px 16px;outline:none}
+.box input::placeholder{color:#77726A;opacity:1}
+.box button{flex:none;border:0;background:var(--ink);color:var(--wall);font:600 var(--t15)/1 var(--sans);padding:0 22px;cursor:pointer;transition:background-color 500ms var(--ease)}
+.box button:hover{background:var(--accent)}
+.box button:focus-visible{outline-offset:-5px;outline-color:var(--wall)}
+.try{margin-top:12px;font-size:var(--t15);color:var(--ink-2)}
+.try a{color:var(--ink)}
+.plan li{display:grid;grid-template-columns:2.2em minmax(0,1fr);padding:7px 0;border-bottom:1px solid var(--hair);font-size:var(--t15);line-height:1.35}
+.plan li:first-child{padding-top:0}
+.plan b{font:800 18px/1.1 var(--cond);color:var(--accent);letter-spacing:.02em}
+.plan a{text-decoration:none}
+.plan a:hover{text-decoration:underline;text-underline-offset:4px}
+.enter{display:flex;align-items:center;gap:14px;margin-top:clamp(56px,6vw,88px);font:600 var(--t15)/1 var(--sans)}
+.enter i{display:block;width:64px;height:1px;background:var(--ink);transform-origin:0 50%}
+html.js:not(.still) .enter i{animation:walk 2400ms var(--ease) 1200ms infinite}
+@keyframes walk{0%{transform:scaleX(.2);opacity:0}30%{opacity:1}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+
+/* ---------- the gallery (stacked by default; walked sideways when html.walk) ---------- */
+.gallery{position:relative;border-top:1px solid var(--hair)}
+.pin{position:relative}
+.track{position:relative}
+.room{position:relative;padding:var(--section) var(--gutter);border-bottom:1px solid var(--hair);overflow:hidden}
+.room::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 34% 58% at var(--lx,32%) -6%,rgba(255,255,255,.95),rgba(255,255,255,0) 72%);opacity:1;transition:opacity 1400ms var(--ease)}
+.room-in{position:relative;width:100%;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:clamp(40px,6vw,104px);align-items:center}
+.room-title{grid-column:1/-1;display:flex;align-items:flex-end;gap:18px;margin-bottom:clamp(40px,5vw,72px)}
+.room-title .no{font:800 clamp(64px,7vw,112px)/.8 var(--cond);color:var(--accent)}
+.room-title h2{font-size:clamp(30px,3vw,46px);padding-bottom:4px;max-width:14em}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* frames */
+.work{margin:0;justify-self:center;min-width:0}
+.frame{display:block;background:var(--mat);border:clamp(7px,.75vw,11px) solid var(--frame);padding:var(--matw,9%);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 38px 60px -28px rgba(22,21,20,.42),0 6px 14px -6px rgba(22,21,20,.3);transition:box-shadow 1400ms var(--ease)}
+.frame img{width:100%;height:auto;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 0 0 1px rgba(22,21,20,.10)}
+.w-hooke{width:min(100%,400px)}
+.w-snow{width:min(100%,560px)}
+.w-net{width:min(100%,540px)}
+.w-net .frame{--matw:7%}
+.w-net .frame img{background:#fff;padding:5%;aspect-ratio:1;object-fit:contain}
+
+/* wall labels */
+.wl{min-width:0;max-width:30em}
+.wl .obj{padding-bottom:var(--s3);border-bottom:1px solid var(--hair)}
+.wl .obj b{display:block;font:600 var(--t18)/1.3 var(--sans)}
+.wl .obj span{display:block;font-size:var(--t15);line-height:1.5;color:var(--ink-2)}
+.wl .obj i{font-style:italic}
+.wl h3{font:800 var(--t56)/.9 var(--cond);text-transform:uppercase;letter-spacing:.005em}
+.wl .txt{margin-top:var(--s3);font-size:var(--t18);max-width:28em}
+.groups{margin-top:var(--s3)}
+.groups li{display:grid;grid-template-columns:3em minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--hair);font-size:var(--t15);line-height:1.5}
+.groups li:last-child{border-bottom:1px solid var(--hair)}
+.groups b{font:800 22px/1.05 var(--cond)}
+.groups strong{font-weight:600}
+.groups span{color:var(--ink-2)}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:var(--s4)}
+.figs div{display:flex;flex-direction:column;min-width:0;padding-top:12px;border-top:1px solid var(--ink)}
+.figs div + div{margin-left:16px}
+.figs dd{margin:0;order:-1;font:700 var(--t56)/.9 var(--cond);padding-bottom:8px;font-variant-numeric:lining-nums}
+.figs dt{font-size:13px;color:var(--ink-2)}
+.langs{margin-top:var(--s2);font-size:var(--t15);color:var(--ink-2)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-top:var(--s4)}
+.lesson{margin-top:var(--s4)}
+.lesson li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:20px;align-items:baseline;padding:14px 0;border-top:1px solid var(--hair)}
+.lesson li:last-child{border-bottom:1px solid var(--hair)}
+.lesson b{font:700 clamp(40px,3.6vw,56px)/.9 var(--cond);font-variant-numeric:lining-nums;white-space:nowrap}
+.lesson b small{font:500 var(--t15)/1 var(--sans);margin-left:6px;color:var(--ink-2)}
+.lesson span{font-size:var(--t15);line-height:1.45;color:var(--ink-2)}
+.src{margin-top:var(--s3);display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;font-size:13px;color:var(--ink-2)}
+
+/* room v: the games, small and quiet */
+.r5 .room-in{grid-template-columns:minmax(0,3fr) minmax(0,9fr);align-items:center}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(20px,2.4vw,40px)}
+.game{display:block;text-decoration:none;min-width:0}
+.game .frame{--matw:7%;border-width:6px}
+.game img{aspect-ratio:3/2;object-fit:cover;filter:saturate(.62);transition:filter 900ms var(--ease)}
+.game:hover img,.game:focus-visible img{filter:saturate(1)}
+.game .cap{display:block;margin-top:var(--s3);padding-left:12px;border-left:1px solid var(--ink)}
+.game b{display:block;font:600 var(--t15)/1.35 var(--sans)}
+.game small{display:block;margin-top:2px;font-size:13px;color:var(--ink-2)}
+.r5 .wl .txt{margin-top:0;padding-left:20px;border-left:1px solid var(--ink);font-size:var(--t24);line-height:1.35;max-width:10em}
+
+/* the floor and the plan of the walk (walk mode only) */
+.floor,.walkbar{display:none}
+
+html.walk .gallery{border-top:0}
+html.walk .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--wall)}
+html.walk .track{display:flex;height:100%;will-change:transform}
+html.walk .room{flex:0 0 100%;height:100%;padding:23vh 6vw 20vh;border:0;
+  background:linear-gradient(90deg,rgba(22,21,20,.05),rgba(22,21,20,0) 7vw)}
+html.walk .room::before{opacity:.38}
+html.walk .room.lit::before{opacity:1}
+html.walk .room:not(.lit) .frame{box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 30px 50px -30px rgba(22,21,20,.3),0 4px 10px -6px rgba(22,21,20,.24)}
+html.walk .room-in{position:static;height:100%;max-width:1240px}
+html.walk .room-title{position:absolute;left:6vw;top:7vh;margin:0}
+html.walk .work{height:100%;width:100%;display:flex;align-items:center;justify-content:center}
+html.walk .w-hooke{width:auto}
+html.walk .w-hooke .frame{width:fit-content;padding:4.6vh}
+html.walk .w-hooke .frame img{height:46vh;width:auto;max-width:none}
+html.walk .w-snow .frame,html.walk .w-net .frame{width:min(100%,57vh)}
+html.walk .r5 .room-in{align-items:center}
+html.walk .floor{display:block;position:absolute;left:0;right:0;bottom:0;height:15vh;background:var(--wall-2);border-top:1px solid #D3CEC4;pointer-events:none}
+html.walk .floor::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:#EEEBE5;border-bottom:1px solid #DAD5CB}
+html.walk .walkbar{display:flex;position:absolute;left:6vw;right:6vw;bottom:5.2vh;align-items:center;gap:22px;font:600 13px/1 var(--sans);color:var(--ink-2)}
+.walkbar ol{display:flex;gap:4px;flex:1;margin:0;padding:0;list-style:none}
+.walkbar li{flex:1;position:relative;height:28px;display:flex;align-items:flex-end;padding-bottom:10px;font:800 15px/1 var(--cond);letter-spacing:.04em}
+.walkbar li::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#CFC9BE}
+.walkbar li i{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transform:scaleX(var(--f,0));transform-origin:0 50%;z-index:1}
+.walkbar li.now{color:var(--accent)}
+.walkbar .now-name{min-width:16em;text-align:right;color:var(--ink)}
+
+/* shorter screens: the same walk, set a little tighter */
+@media (max-height:860px){
+  html.walk .room{padding:19vh 6vw 16.5vh}
+  html.walk .room-title{top:5vh}
+  html.walk .room-title .no{font-size:clamp(56px,10vh,92px)}
+  html.walk .floor{height:12.5vh}
+  html.walk .walkbar{bottom:3.4vh}
+  html.walk .wl .obj{padding-bottom:14px}
+  html.walk .wl .txt{margin-top:14px;font-size:16px;line-height:1.5}
+  html.walk .wl h3{font-size:clamp(36px,6vh,52px)}
+  html.walk .lesson{margin-top:18px}
+  html.walk .lesson li{padding:8px 0}
+  html.walk .lesson b{font-size:clamp(30px,5vh,44px)}
+  html.walk .groups{margin-top:14px}
+  html.walk .groups li{padding:8px 0;font-size:14px}
+  html.walk .figs{margin-top:22px}
+  html.walk .figs dd{font-size:clamp(36px,6vh,52px)}
+  html.walk .acts{margin-top:24px}
+  html.walk .src{margin-top:14px}
+}
+
+/* ---------- exit: what you can do ---------- */
+.exit{background:var(--ink);color:var(--wall);padding:var(--section) 0}
+.exit .label{color:#B9B3A9}
+.exit-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(40px,6vw,104px);align-items:end}
+.exit h2{margin-top:var(--s3);font-size:clamp(64px,9.6vw,150px)}
+.exit p{margin-top:var(--s4);max-width:28em;color:#DCD7CE}
+.exit .btn{margin-top:var(--s5);background:var(--wall);color:var(--ink)}
+.exit .btn:hover,.exit .btn:focus-visible{background:#fff}
+.exit :focus-visible{outline-color:var(--wall)}
+.n2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--s4)}
+.n2 div{min-width:0;padding-top:16px;border-top:1px solid rgba(242,240,235,.4)}
+.n2 b{display:block;font:700 clamp(96px,11vw,170px)/.82 var(--cond)}
+.n2 span{display:block;margin-top:var(--s2);font-size:var(--t15);color:#CFC9BF;max-width:14em}
+
+/* ---------- footer ---------- */
+.foot{padding:var(--s6) 0 calc(var(--s6) + 24px);font-size:var(--t15);color:var(--ink-2)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,6fr) minmax(0,3fr);column-gap:clamp(32px,5vw,80px)}
+.foot .mark{color:var(--ink)}
+.foot .place{margin-top:12px}
+.foot .txt{color:var(--ink);max-width:34em}
+.foot ul{display:grid;gap:10px}
+.foot ul a{color:var(--ink)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--hair);font-size:13px;line-height:1.6;max-width:74em}
+.credits b{font-weight:600;color:var(--ink)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .top-in{flex-wrap:wrap;gap:12px 24px;padding-top:20px;padding-bottom:20px;min-height:0}
+  .nav{order:3;width:100%}
+  .tw-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:var(--s4)}
+  .tw-row .plan{grid-column:1/-1}
+  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));column-gap:24px}
+  .plan li:first-child{padding-top:7px}
+}
+@media (max-width:860px){
+  .room-in,.r5 .room-in,.exit-grid{grid-template-columns:minmax(0,1fr)}
+  .work{margin-bottom:var(--s5)}
+  .r5 .wl{margin-bottom:var(--s4)}
+  .n2{margin-top:var(--s5)}
+  .foot-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:var(--s4)}
+  .foot .txt{grid-column:1/-1;grid-row:1}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .nav{gap:4px 20px}
+  .tw-row{grid-template-columns:minmax(0,1fr)}
+  .room{padding:var(--s6) var(--gutter)}
+  .trio{grid-template-columns:minmax(0,1fr);row-gap:var(--s4)}
+  .game{display:grid;grid-template-columns:140px minmax(0,1fr);column-gap:var(--s3);align-items:center}
+  .game .cap{margin-top:0}
+  .figs dd{font-size:46px}
+  .lesson li{grid-template-columns:minmax(0,1fr)}
+  .lesson span{margin-top:6px}
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a class="ul" href="#room-3">Tools</a><a class="ul" href="#room-1">Reading the evidence</a><a class="ul" href="#code">Code Against Cancer</a><a class="ul" href="#room-5">Games</a><a class="ul" href="#about">About</a>
+    </nav>
+    <ul class="lang" aria-label="Language">
+      <li><a href="#" aria-current="true">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- the title wall -->
+  <section class="wrap title-wall" aria-labelledby="h1">
+    <h1 id="h1" class="vinyl" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+    <div class="tw-row">
+      <div data-reveal="rise" style="--d:500ms">
+        <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+      <form class="search" role="search" onsubmit="return false" data-reveal="rise" style="--d:620ms">
+        <label class="label" for="q">Look something up</label>
+        <div class="box">
+          <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+          <button type="submit">Search</button>
+        </div>
+        <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+      </form>
+      <nav aria-label="The five rooms" data-reveal="rise" style="--d:740ms">
+        <ol class="plan">
+          <li><b>I</b><a href="#room-1">How sure</a></li>
+          <li><b>II</b><a href="#room-2">Same certainty, very different size</a></li>
+          <li><b>III</b><a href="#room-3">Cancer Evidence Explorer</a></li>
+          <li><b>IV</b><a href="#room-4">Chronic Disease Evidence Explorer</a></li>
+          <li><b>V</b><a href="#room-5">For schools and families</a></li>
+        </ol>
+      </nav>
+    </div>
+    <p class="enter" aria-hidden="true">Five rooms. Scroll to walk through <i></i></p>
+  </section>
+
+  <!-- the five rooms -->
+  <section class="gallery" aria-label="The rooms">
+    <div class="pin">
+      <div class="track">
+
+        <section class="room r1" id="room-1" style="--lx:30%" aria-labelledby="h-r1">
+          <div class="room-in">
+            <div class="room-title"><span class="no" aria-hidden="true">I</span><h2 id="h-r1" class="vinyl"><span class="vh">Room I: </span>How sure</h2></div>
+            <figure class="work w-hooke">
+              <span class="frame"><img src="media/plate-hooke-cork-1000.webp" width="683" height="1000" alt="Robert Hooke’s engraving of cork seen through a microscope: a round field of tiny cells" loading="lazy"></span>
+            </figure>
+            <div class="wl">
+              <p class="obj"><b>Robert Hooke</b><span><i>Micrographia</i> (1665), Schem. XI (cork)</span><span>Engraving. Photograph: Wellcome Collection, CC BY 4.0</span></p>
+              <p class="txt">Four groups, from known cause to not classifiable.</p>
+              <ul class="groups">
+                <li><b>1</b><p><strong>Known cause.</strong> <span>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</span></p></li>
+                <li><b>2A</b><p><strong>Probable cause.</strong> <span>The agent probably causes cancer in people.</span></p></li>
+                <li><b>2B</b><p><strong>Possible cause.</strong> <span>The agent may cause cancer in people. Aspartame is in this group.</span></p></li>
+                <li><b>3</b><p><strong>Not classifiable.</strong> <span>The evidence does not meet the rules for any other group. It does not mean safe.</span></p></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="room r2" id="room-2" style="--lx:30%" aria-labelledby="h-r2">
+          <div class="room-in">
+            <div class="room-title"><span class="no" aria-hidden="true">II</span><h2 id="h-r2" class="vinyl"><span class="vh">Room II: </span>Same certainty, very different size</h2></div>
+            <figure class="work w-snow">
+              <span class="frame"><img src="media/plate-snow-map-1000.webp" width="1000" height="938" alt="John Snow’s 1854 map of Soho, with each cholera death marked as a small bar along the streets" loading="lazy"></span>
+            </figure>
+            <div class="wl">
+              <p class="obj"><b>John Snow</b><span>Map of cholera deaths around the Broad Street pump, Soho (1854)</span><span>Public domain</span></p>
+              <p class="txt">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+              <ul class="lesson">
+                <li><b>100–120<small>in 1,000</small></b><span>smokers get lung cancer by age 75 (about 10 to 12 in 100).</span></li>
+                <li><b>4–5<small>in 1,000</small></b><span>lifelong non-smokers do.</span></li>
+                <li><b>18%</b><span>higher risk of bowel cancer for each 50 grams of processed meat eaten every day.</span></li>
+              </ul>
+              <p class="src"><span>European data. Quoted from the Cancer Evidence Explorer.</span><a class="link" href="#">Seven ideas for reading a health headline →</a></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="room r3" id="room-3" style="--lx:30%" aria-labelledby="h-r3">
+          <div class="room-in">
+            <div class="room-title"><span class="no" aria-hidden="true">III</span><h2 class="vinyl"><span class="vh">Room III: </span>Which exposures cause which cancers</h2></div>
+            <figure class="work w-net">
+              <span class="frame"><img src="media/tool-cancer-network.svg" width="1062" height="998" alt="The Cancer Evidence Explorer’s network: exposures linked to the cancers they can cause" loading="lazy"></span>
+            </figure>
+            <div class="wl">
+              <h3 id="h-r3">Cancer Evidence Explorer</h3>
+              <p class="txt">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+              <dl class="figs">
+                <div><dt>exposures</dt><dd>185</dd></div>
+                <div><dt>cancer types</dt><dd>68</dd></div>
+                <div><dt>links</dt><dd>469</dd></div>
+              </dl>
+              <p class="langs">In 10 languages</p>
+              <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="room r4" id="room-4" style="--lx:30%" aria-labelledby="h-r4">
+          <div class="room-in">
+            <div class="room-title"><span class="no" aria-hidden="true">IV</span><h2 class="vinyl"><span class="vh">Room IV: </span>Risk factors for chronic disease</h2></div>
+            <figure class="work w-net">
+              <span class="frame"><img src="media/tool-chronic-network.svg" width="931" height="1006" alt="The Chronic Disease Evidence Explorer’s network: risk factors linked to the diseases they affect" loading="lazy"></span>
+            </figure>
+            <div class="wl">
+              <h3 id="h-r4">Chronic Disease Evidence Explorer</h3>
+              <p class="txt">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+              <dl class="figs">
+                <div><dt>risk factors</dt><dd>124</dd></div>
+                <div><dt>diseases</dt><dd>45</dd></div>
+                <div><dt>graded links</dt><dd>356</dd></div>
+              </dl>
+              <p class="langs">In 10 languages</p>
+              <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="room r5" id="room-5" style="--lx:62%" aria-labelledby="h-r5">
+          <div class="room-in">
+            <div class="room-title"><span class="no" aria-hidden="true">V</span><h2 id="h-r5" class="vinyl"><span class="vh">Room V: </span>For schools and families</h2></div>
+            <div class="wl"><p class="txt">Learning by playing — three games.</p></div>
+            <ul class="trio">
+              <li><a class="game" href="#"><span class="frame"><img src="media/game-sun-safety.webp" width="720" height="405" alt="" loading="lazy"></span><span class="cap"><b>Sol &amp; the UV Shield Quest</b><small>Skin cancer · ages 6–12</small></span></a></li>
+              <li><a class="game" href="#"><span class="frame"><img src="media/game-lung-detective.webp" width="720" height="405" alt="" loading="lazy"></span><span class="cap"><b>The Lung Detective</b><small>Lung cancer · ages 10–16</small></span></a></li>
+              <li><a class="game" href="#"><span class="frame"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="" loading="lazy"></span><span class="cap"><b>A Town of 1,000</b><small>Breast cancer · ages 14+</small></span></a></li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+      <div class="floor" aria-hidden="true"></div>
+      <div class="walkbar" aria-hidden="true">
+        <ol><li><i></i>I</li><li><i></i>II</li><li><i></i>III</li><li><i></i>IV</li><li><i></i>V</li></ol>
+        <span class="now-name">How sure</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- the exit: what you can do -->
+  <section class="exit" id="code" aria-labelledby="h-code">
+    <div class="wrap exit-grid">
+      <div>
+        <p class="label">On the way out · What you can do</p>
+        <h2 id="h-code" class="vinyl" data-split>Code Against Cancer</h2>
+        <p data-reveal="rise" style="--d:200ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <a class="btn" href="#">Read the recommendations</a>
+      </div>
+      <div class="n2" data-reveal="rise" style="--d:300ms">
+        <div><b>14</b><span>actions for Europe</span></div>
+        <div><b>17</b><span>for Latin America and the Caribbean</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="mark" href="#">EpiDetective</a><p class="place">Lyon, France</p></div>
+      <p class="txt">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      <ul><li><a class="ul" href="#">How we check</a></li><li><a class="ul" href="#">Report an error</a></li><li><a class="ul" href="#">How to cite</a></li><li><a class="ul" href="#">About</a></li></ul>
+    </div>
+    <p class="credits">Image credits: <b>Robert Hooke, Micrographia (1665), Schem. XI (cork)</b>, engraving by Robert Hooke, photograph by Wellcome Collection, CC BY 4.0. <b>Map of cholera deaths around the Broad Street pump, Soho (1854)</b>, John Snow, public domain. Network drawings from the Cancer and Chronic Disease Evidence Explorers; game screenshots from the three EpiDetective games.</p>
+  </div>
+</footer>
+
+<script src="kit/kit.js" defer></script>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var gallery = document.querySelector(".gallery"), pin = gallery.querySelector(".pin"), track = gallery.querySelector(".track");
+  var rooms = Array.prototype.slice.call(track.querySelectorAll(".room"));
+  var bars = Array.prototype.slice.call(gallery.querySelectorAll(".walkbar li")), nameEl = gallery.querySelector(".now-name");
+  var names = rooms.map(function(r){ var h = r.querySelector(".room-title h2"); return h.lastChild.textContent.trim(); });
+  var mq = window.matchMedia ? matchMedia("(min-width: 861px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)") : null;
+  var walking = false, max = 0, cur = -1;
+
+  function layout(){
+    walking = !!(mq && mq.matches);
+    root.classList.toggle("walk", walking);
+    if (!walking){ gallery.style.height = ""; track.style.transform = ""; rooms.forEach(function(r){ r.classList.add("lit"); }); return; }
+    max = track.scrollWidth - pin.clientWidth;
+    gallery.style.height = (max + pin.clientHeight) + "px";
+    move();
+  }
+  function move(){
+    if (!walking) return;
+    var r = gallery.getBoundingClientRect(), span = gallery.offsetHeight - pin.clientHeight;
+    var p = Math.min(1, Math.max(0, -r.top / (span || 1)));
+    track.style.transform = "translate3d(" + (-p * max).toFixed(1) + "px,0,0)";
+    var f = p * (rooms.length - 1), i = Math.round(f);
+    bars.forEach(function(b, k){ b.style.setProperty("--f", Math.min(1, Math.max(0, f - k + 1)).toFixed(3)); b.classList.toggle("now", k === i); });
+    if (i !== cur){ cur = i; rooms.forEach(function(rm, k){ rm.classList.toggle("lit", k === i); }); nameEl.textContent = names[i]; }
+  }
+  /* keyboard: bring a room into view when something inside it takes focus */
+  track.addEventListener("focusin", function(e){
+    if (!walking) return;
+    var k = rooms.indexOf(e.target.closest(".room")); if (k < 0) return;
+    pin.scrollLeft = 0;
+    var top = gallery.getBoundingClientRect().top + scrollY, span = gallery.offsetHeight - pin.clientHeight;
+    window.scrollTo(0, top + span * k / (rooms.length - 1));
+  });
+  /* the plan links jump to the right point of the walk */
+  document.querySelectorAll('a[href^="#room-"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      if (!walking) return;
+      var k = rooms.indexOf(document.querySelector(a.getAttribute("href"))); if (k < 0) return;
+      e.preventDefault();
+      var top = gallery.getBoundingClientRect().top + scrollY, span = gallery.offsetHeight - pin.clientHeight;
+      window.scrollTo({ top: top + span * k / (rooms.length - 1), behavior: "smooth" });
+    });
+  });
+  var q = false;
+  addEventListener("scroll", function(){ if (!q){ q = true; requestAnimationFrame(function(){ q = false; move(); }); } }, { passive: true });
+  addEventListener("resize", layout);
+  if (mq && mq.addEventListener) mq.addEventListener("change", layout);
+  addEventListener("load", layout);
+  layout();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+ "n": 42,
+ "slug": "42-quiet-clinic",
+ "name": "Quiet Clinic",
+ "line": "A calm health product rebuilt from demo 3: the first screen is a search that answers in place (suggestions from the Cancer Evidence Explorer's map, then a white answer card beside the field, starting from a worked example, Processed meat), followed by one lesson per screen, the lung-cancer range bars that grow into place, and the four IARC groups folded as an accordion beneath the lesson.",
+ "palette": [
+  "#EFF2F0",
+  "#FFFFFF",
+  "#2D5B4F",
+  "#1B2621",
+  "#4F5D57",
+  "#D5DDD9"
+ ],
+ "fonts": [
+  "Newsreader",
+  "Public Sans"
+ ],
+ "images": [
+  "media/graph.json",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Only CONTENT.md text is used (the old demo's question cards and news are gone). The search looks things up on the cancer network only; anything else (coffee, stroke) gets: 'Not on the Cancer Evidence Explorer's map. The explorers list every agent and risk factor they cover.' The network drawings are tinted pine with a CSS filter. Group 3 reads 'It does not mean safe'. Newsreader and Public Sans have no Cyrillic. Without JavaScript the example card and the open accordion still read."
+}

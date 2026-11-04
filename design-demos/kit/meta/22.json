@@ -1,0 +1,28 @@
+{
+ "n": 22,
+ "slug": "22-transactions",
+ "name": "Transactions",
+ "line": "A classic journal article: title block, an abstract box holding the search, a two-column body with a to-scale Figure 2 and the four groups, Table 1 for the explorers and a short reference list; Figure 1, John Snow's 1854 map, zooms towards the Broad Street pump as you scroll and hands over to the sharp detail scan at full magnification.",
+ "palette": [
+  "#FBFAF7",
+  "#1A1A1A",
+  "#D8D6D0",
+  "#9B1C1C",
+  "#F3F1EC"
+ ],
+ "fonts": [
+  "Source Serif 4",
+  "Source Sans 3"
+ ],
+ "images": [
+  "media/plate-snow-map.webp",
+  "media/plate-snow-map-detail.webp",
+  "media/plate-snow-map-detail-1000.webp",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Source Serif 4 and Source Sans 3 cover Cyrillic. The zoom pins Figure 1 for about 1.7 screens; the detail scan is aligned to its exact place on the full map. With reduced motion or without JavaScript, the full map and the detail sit side by side. Network drawings are shown in greyscale as journal figures. The reference list names only sources given in the content; nothing (volumes, years) was added except 1854 from the map credit."
+}
