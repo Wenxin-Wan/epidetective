@@ -52,16 +52,16 @@ button{font:inherit;color:inherit}
 .lang a[aria-current]{color:var(--ink);font-weight:600}
 
 /* ---------- 1 · search first ---------- */
-.hero{padding-top:clamp(48px,9vh,112px);padding-bottom:var(--s6)}
-.hgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,96px);align-items:end}
-.hero h1{font-size:clamp(40px,5.2vw,72px);line-height:1.04;letter-spacing:-.02em;font-weight:300;max-width:17ch;font-variation-settings:"opsz" 72}
+.hero{padding-top:clamp(40px,8vh,104px);padding-bottom:var(--s6)}
+.hgrid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,5fr);gap:clamp(40px,6vw,96px);align-items:end}
+.hero h1{font-size:clamp(40px,min(4.6vw,7.4vh),66px);line-height:1.04;letter-spacing:-.02em;font-weight:300;max-width:17ch;font-variation-settings:"opsz" 72}
 .hero .who{margin-top:var(--s3);font-size:var(--f-b);color:var(--ink-2);max-width:46ch}
 .find{margin-top:var(--s5);max-width:720px;position:relative}
 .find label{display:block;font-size:var(--f-s);font-weight:600;margin-bottom:12px}
 .box{display:flex;align-items:center;gap:8px;background:var(--white);border-radius:var(--r-s);padding:8px 8px 8px 22px;box-shadow:0 1px 2px rgba(27,38,33,.05),0 18px 48px -20px rgba(27,38,33,.18);transition:box-shadow .4s var(--ease)}
 .box:focus-within{box-shadow:0 0 0 3px var(--pine-soft),0 1px 2px rgba(27,38,33,.05),0 18px 48px -20px rgba(27,38,33,.18)}
 .box svg{flex:none;color:var(--ink-2)}
-.box input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:18px;color:var(--ink);padding:16px 8px;-webkit-appearance:none;appearance:none}
+.box input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:17px;color:var(--ink);padding:16px 8px;-webkit-appearance:none;appearance:none}
 .box input::placeholder{color:#6B7872}
 .box input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 .box input:focus{outline:none}
@@ -79,7 +79,7 @@ button{font:inherit;color:inherit}
 .caveat{margin-top:var(--s4);max-width:52ch;padding-left:18px;border-left:2px solid var(--pine);font-size:var(--f-s);color:var(--ink-2)}
 
 /* the answer to a search */
-.answer{background:var(--white);border-radius:var(--r);padding:32px 34px 28px;position:relative;margin-bottom:calc(var(--s4) + 26px);box-shadow:0 1px 2px rgba(27,38,33,.04),0 30px 60px -36px rgba(27,38,33,.25);transition:opacity .5s var(--ease)}
+.answer{background:var(--white);border-radius:var(--r);padding:32px 34px 28px;position:relative;margin-bottom:0;box-shadow:0 1px 2px rgba(27,38,33,.04),0 30px 60px -36px rgba(27,38,33,.25);transition:opacity .5s var(--ease)}
 .answer.swap{opacity:.25}
 .answer .k{font-size:13px;color:var(--ink-2);padding-right:40px}
 .answer h2{font-size:var(--f-l);line-height:1.12;margin-top:6px;letter-spacing:-.01em}
@@ -215,7 +215,6 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
   .game{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--s2);align-items:center}
   .game h3{margin-top:0;font-size:19px}
 }
-@media (max-width:420px){.box .btn .w{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -239,13 +238,12 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
           <div class="box">
             <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="9.5" cy="9.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <input id="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sug">
-            <button class="btn" type="submit">Look<span class="w"> it</span> up</button>
+            <button class="btn" type="submit">Search</button>
           </div>
           <ul class="sug" id="sug" role="listbox" aria-label="Suggestions" hidden></ul>
         </div>
         <p class="try">Try <a href="#" data-try="aspartame">aspartame</a> <a href="#" data-try="stroke">stroke</a> <a href="#" data-try="coffee">coffee</a></p>
       </form>
-      <p class="caveat" data-reveal="fade" style="--d:900ms">They describe whole populations, not what caused any one person’s illness.</p>
     </div>
 
     <section class="answer" id="answer" aria-labelledby="a-name" data-reveal="rise" style="--d:1000ms">
@@ -261,6 +259,7 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
       <div class="more"><p id="a-n">3 links in the Cancer Evidence Explorer.</p><a class="tl" href="#">Open in the explorer →</a></div>
     </section>
   </div>
+  <p class="caveat" data-reveal="fade" style="--d:900ms">They describe whole populations, not what caused any one person’s illness.</p>
   <p class="sr" id="live" aria-live="polite"></p>
 </section>
 

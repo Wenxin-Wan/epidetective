@@ -1,0 +1,29 @@
+{
+ "n": 33,
+ "slug": "33-certainty-filter",
+ "name": "Certainty Filter",
+ "line": "A clinical instrument: the cancer network sits in a gridded specimen field with crop marks above an instrument panel (Group 1 · + 2A · + 2B and Established only · + Suspected); each of the six filter states has its own precomputed layout and the web visibly thins and re-settles as certainty rises, with a live readout in words; scrolling turns the controls from everything to Group 1, established links only, then shows the lesson with the lung-cancer figures drawn to scale on a 1,000 track.",
+ "palette": [
+  "#FFFFFF",
+  "#E9ECEF",
+  "#1D2125",
+  "#1F6F6A",
+  "#C2362B",
+  "#E08A2E",
+  "#B9A27A"
+ ],
+ "fonts": [
+  "IBM Plex Sans",
+  "IBM Plex Mono"
+ ],
+ "images": [
+  "media/graph.json",
+  "media/chronic-graph.json",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "The segmented controls are real radio groups (keyboard operable without JavaScript styling); the visitor can change them at any step. Thinner states relax from the full layout and are gently held near their old positions so the mental map survives the transition; they are computed after the first paint. Plex Mono is used only for the small state code and step counter. A short 'Four levels of certainty' section (Groups 1, 2A, 2B and 3, wording from the content brief) follows the story because the filter is about those groups. IBM Plex Sans has Cyrillic."
+}

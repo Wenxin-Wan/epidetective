@@ -408,7 +408,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
 
   /* a 3D force layout, flattened into a thick disc */
   function layout3d(g) {
-    var N = g.nodes, n = N.length, it = 340, L = 34, C = 1300, Gr = .02, s = 9;
+    var N = g.nodes, n = N.length, it = 300, L = 34, C = 1100, Gr = .022, s = 9;
     function rnd() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }
     N.forEach(function (d, i) { var y = 1 - (i + .5) / n * 2, r = Math.sqrt(1 - y * y), a = i * 2.399963, R = 220;
       d.x = Math.cos(a) * r * R + rnd(); d.y = y * R + rnd(); d.z = Math.sin(a) * r * R + rnd(); d.vx = d.vy = d.vz = 0; });
@@ -416,7 +416,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
       var al = 1 - k / it;
       for (var i = 0; i < n; i++) { var p = N[i];
         for (var j = i + 1; j < n; j++) { var o = N[j], dx = p.x - o.x, dy = p.y - o.y, dz = p.z - o.z, d2 = dx * dx + dy * dy + dz * dz + .01;
-          if (d2 > 250000) continue; var f = C / d2 * al / Math.sqrt(d2) * 30; p.vx += dx * f; p.vy += dy * f; p.vz += dz * f; o.vx -= dx * f; o.vy -= dy * f; o.vz -= dz * f; } }
+          if (d2 > 250000) continue; var f = C / d2 * al; p.vx += dx * f; p.vy += dy * f; p.vz += dz * f; o.vx -= dx * f; o.vy -= dy * f; o.vz -= dz * f; } }
       g.links.forEach(function (l) { var a = l.source, b = l.target, dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z, d = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1, f = (d - L) * .08 * al / d;
         var wa = 1 / Math.sqrt(a.degree), wb = 1 / Math.sqrt(b.degree);
         a.vx += dx * f * wa; a.vy += dy * f * wa; a.vz += dz * f * wa; b.vx -= dx * f * wb; b.vy -= dy * f * wb; b.vz -= dz * f * wb; });

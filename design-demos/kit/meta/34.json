@@ -1,0 +1,27 @@
+{
+ "n": 34,
+ "slug": "34-wheel",
+ "name": "Wheel",
+ "line": "An astrolabe of evidence: the 68 cancers on the rim grouped by organ system with arc-set names, the 185 exposures as beads on an inner ring grouped by kind, and every link bundled through the centre as a fine B-spline (hierarchical edge bundling); the tracery sweeps in on load, and scrolling turns the whole wheel so Respiratory, then Digestive, then Lymphoid and haematopoietic arrive under the oxblood index, each bundle lit, before the lesson.",
+ "palette": [
+  "#F7F3EA",
+  "#1F1B16",
+  "#7E1F23",
+  "#B08D57",
+  "#A59E92"
+ ],
+ "fonts": [
+  "Libre Baskerville",
+  "Hanken Grotesk"
+ ],
+ "images": [
+  "media/graph.json",
+  "media/chronic-graph.json",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Bundles are precomputed as Path2D objects and the wheel rotates as a whole, so turning stays smooth. Point at or tap a rim tick or an inner bead to light its bundle (coloured by the exposure's group) and name the far ends; click opens the card in the left column (a bottom sheet on phones). Rim names that would collide are left out, smaller organ systems first, so the phone wheel stays clean. The explorers are shown as two still wheels drawn from graph.json and chronic-graph.json. Neither Libre Baskerville nor Hanken Grotesk covers basic Cyrillic (Hanken has only the extended block), so a Russian version would need a substitute."
+}
