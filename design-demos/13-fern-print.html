@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>13 · Fern Print — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --page:#FAFAF6; --fern:#3F6B3A; --ink:#1E2B1C; --rule:#D9DCD2;
+  --ink-2:rgba(30,43,28,.74);            /* dark ink at 74% on the page, 7.8:1 */
+  --serif:"EB Garamond","Garamond","Adobe Garamond Pro","Iowan Old Style",Georgia,serif;
+  /* type scale 13 / 15 / 19 / 24 / 32 / 44 / 64 / 88 */
+  --t-13:13px; --t-15:15px; --t-19:19px; --t-24:24px; --t-32:clamp(26px,2.4vw,32px);
+  --t-44:clamp(34px,3.3vw,46px); --t-64:clamp(40px,4.6vw,66px); --t-88:clamp(56px,6.2vw,90px);
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px; --section:clamp(120px,14vw,220px);
+  --margin:clamp(22px,6.5vw,120px); --col-gap:clamp(16px,2vw,32px); --max:1400px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--serif);font-size:var(--t-19);line-height:1.6;
+  font-feature-settings:"onum","kern","liga";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.08;text-wrap:balance}
+p{margin:0;text-wrap:pretty;hyphens:manual}
+a{color:inherit}
+ul,ol{margin:0;padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:1px solid var(--fern);outline-offset:4px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.page{max-width:var(--max);margin:0 auto;padding:0 var(--margin)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
+.grid > *{min-width:0}
+.sc{font-feature-settings:"smcp","c2sc","onum";letter-spacing:.08em}
+.lsc{font-feature-settings:"smcp","onum";letter-spacing:.06em}
+.lining{font-feature-settings:"lnum","tnum"}
+.small{font-size:var(--t-15);line-height:1.5;color:var(--ink-2)}
+.link{color:var(--fern);text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px;transition:background-size .9s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% 100%}
+.btn{display:inline-block;background:var(--fern);color:var(--page);text-decoration:none;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.1em;padding:15px 28px 16px;transition:background .6s var(--ease)}
+.btn:hover{background:#2F5329}
+.note-ref{font-size:.7em;vertical-align:.5em;line-height:0;color:var(--fern);text-decoration:none;font-feature-settings:"lnum";margin-left:1px}
+.rule-s{display:block;width:44px;height:1px;background:var(--fern);border:0;margin:0}
+
+/* ---------- plates: nature prints on the page ---------- */
+.plate{margin:0}
+.plate .print{mix-blend-mode:multiply}
+.plate .print img{filter:contrast(1.12) brightness(1.06)}  /* lift the yellowed paper to white, so only the fern prints on the page */
+.plate figcaption{margin-top:var(--s-3);font-size:var(--t-15);line-height:1.45;color:var(--ink-2);text-align:center}
+.plate figcaption .no{display:block;color:var(--ink);font-feature-settings:"smcp","c2sc";letter-spacing:.14em;font-size:var(--t-13);margin-bottom:4px}
+.plate figcaption i{color:var(--ink)}
+/* signature: each plate grows in from the stem to the tip (the figure is observed; the print is unmasked) */
+html.js:not(.still) .plate[data-reveal] .print{transition:clip-path 2400ms cubic-bezier(.45,.05,.2,1) var(--d,0ms)}
+html.js:not(.still) .plate[data-reveal]:not(.is-in) .print{clip-path:inset(100% 0 0 0)}
+html.js:not(.still) .plate[data-reveal] .print{clip-path:inset(0 0 0 0)}
+html.js:not(.still) .plate[data-reveal] figcaption{transition:opacity 1200ms var(--ease) 1600ms}
+html.js:not(.still) .plate[data-reveal]:not(.is-in) figcaption{opacity:0}
+/* hold the growth until the print has arrived (lazy images) */
+html.js:not(.still) .plate[data-reveal].wait .print{clip-path:inset(100% 0 0 0)}
+html.js:not(.still) .plate[data-reveal].wait figcaption{opacity:0}
+
+/* ---------- running head ---------- */
+.head{max-width:var(--max);margin:0 auto;padding:26px var(--margin) 0}
+.head-in{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 32px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.mark{font-size:var(--t-19);font-feature-settings:"smcp","onum";letter-spacing:.12em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:4px 26px;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.09em}
+.nav a,.lang a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:1px;transition:background-size .8s var(--ease)}
+.nav a:hover,.lang a:hover{background-size:100% 1px}
+.lang{display:flex;gap:12px;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.09em;color:var(--ink-2)}
+.lang a[aria-current]{color:var(--fern)}
+
+/* ---------- title spread ---------- */
+.spread{align-items:center;min-height:calc(100svh - 70px);padding:var(--s-5) 0 var(--s-4)}
+.front{grid-column:1 / span 5}
+.front .print{width:min(100%,calc((100svh - 260px) * .642));margin:0 auto;aspect-ratio:1284/2000}
+.titlepage{grid-column:7 / span 6}
+.titlepage h1{font-size:var(--t-64);letter-spacing:-.01em;line-height:1.06}
+.titlepage h1 em{font-style:italic;color:var(--fern)}
+.titlepage .by{margin-top:var(--s-4);font-size:var(--t-24);line-height:1.45;font-style:italic;max-width:24em}
+.titlepage .rule-s{margin-top:var(--s-4)}
+.search{margin-top:var(--s-4);max-width:520px}
+.search label{display:block;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.12em;color:var(--ink-2);margin-bottom:4px}
+.field{display:flex;align-items:center;gap:var(--s-2);border-bottom:1px solid var(--ink)}
+.field:focus-within{box-shadow:0 1px 0 var(--ink)}
+.field input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:var(--t-19);color:var(--ink);padding:10px 0 11px;border-radius:0}
+.field input::placeholder{color:var(--ink-2);opacity:1;font-style:italic}
+.field input:focus{outline:none}
+.field button{border:0;background:none;color:var(--fern);font:inherit;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.1em;cursor:pointer;padding:10px 0 10px 8px}
+.try{margin-top:10px;font-size:var(--t-15);color:var(--ink-2)}
+.titlepage .caveat{margin-top:var(--s-4);font-size:var(--t-15);color:var(--ink-2);font-style:italic;max-width:30em}
+
+/* ---------- chapters ---------- */
+.chap{padding-top:var(--section)}
+.chap-no{display:block;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.16em;color:var(--fern);margin-bottom:var(--s-3)}
+.text{font-size:var(--t-19);line-height:1.65}
+.text p + p{margin-top:var(--s-2)}
+.drop::first-letter{float:left;font-size:4.1em;line-height:.82;padding:.06em .08em 0 0;color:var(--fern)}
+.side{font-size:var(--t-15);line-height:1.5;color:var(--ink-2)}
+.side p + p{margin-top:var(--s-2)}
+.side sup{color:var(--fern);font-feature-settings:"lnum";margin-right:4px}
+
+/* II. one idea */
+.idea .text{grid-column:1 / span 6}
+.idea h2{font-size:var(--t-64);letter-spacing:-.01em}
+.idea .text .lead{margin-top:var(--s-4)}
+.idea .side{grid-column:7 / span 2;align-self:start;padding-top:calc(var(--t-64) * 2.6 + 120px)}
+.idea .plate{grid-column:9 / span 4;align-self:start}
+.idea .plate .print{aspect-ratio:1289/2000}
+.idea .plate img{clip-path:inset(1.6% 1.2% 0 0)}  /* trims a scanner line at the top edge */
+.tally{margin-top:var(--s-5);border-top:1px solid var(--ink)}
+.tally div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:var(--s-3);padding:18px 0 16px;border-bottom:1px solid var(--rule)}
+.tally dt{font-size:var(--t-19);line-height:1.4}
+.tally dd{margin:0;font-size:var(--t-44);line-height:1;color:var(--fern);font-feature-settings:"onum";white-space:nowrap;text-align:right}
+.tally dd small{font-size:var(--t-15);color:var(--ink-2);margin-left:6px}
+.idea .more{margin-top:var(--s-4)}
+
+/* III. explorers */
+.tools .intro{grid-column:1 / span 7}
+.tools h2{font-size:var(--t-64);letter-spacing:-.01em}
+.tools .intro p{margin-top:var(--s-3);max-width:32em}
+.entry{margin-top:var(--s-6);align-items:center}
+.entry + .entry{margin-top:var(--section)}
+.entry .fig{grid-column:1 / span 6;margin:0}
+.entry .copy{grid-column:8 / span 5}
+.entry.alt .fig{grid-column:7 / span 6;grid-row:1}
+.entry.alt .copy{grid-column:1 / span 5;grid-row:1}
+/* the network drawings, nature-printed in fern green */
+.nprint{aspect-ratio:1;position:relative}
+.nprint span{position:absolute;inset:4%;background:var(--fern);-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+.fig figcaption{margin-top:var(--s-2);font-size:var(--t-15);color:var(--ink-2);text-align:center}
+.fig figcaption .no{font-feature-settings:"smcp","c2sc";letter-spacing:.14em;color:var(--ink);margin-right:8px;font-size:var(--t-13)}
+html.js:not(.still) .fig[data-reveal] .nprint{transition:clip-path 2600ms cubic-bezier(.45,.05,.2,1)}
+html.js:not(.still) .fig[data-reveal]:not(.is-in) .nprint{clip-path:inset(100% 0 0 0)}
+html.js:not(.still) .fig[data-reveal] .nprint{clip-path:inset(0)}
+.entry h3{font-size:var(--t-44);letter-spacing:-.005em}
+.entry .lead{margin-top:var(--s-3);max-width:28em}
+.counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3) var(--col-gap);margin:var(--s-5) 0 var(--s-5)}
+.counts div{border-top:1px solid var(--rule);padding-top:12px}
+.counts dd{margin:0;font-size:var(--t-64);line-height:1;color:var(--fern);font-feature-settings:"onum"}
+.counts dt{margin-top:6px;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.1em;color:var(--ink-2)}
+.counts div{display:flex;flex-direction:column-reverse;justify-content:flex-end}
+.acts{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-3) var(--s-4)}
+
+/* IV. code */
+.code{align-items:center}
+.code .plate{grid-column:1 / span 4}
+.code .plate .print{aspect-ratio:1170/2000;width:min(100%,calc((100svh - 160px) * .585));margin:0 auto}
+.code .text{grid-column:6 / span 6}
+.code h2{font-size:var(--t-64);letter-spacing:-.01em}
+.code .text .lead{margin-top:var(--s-4)}
+.code .counted{margin-top:var(--s-4);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--col-gap);border-top:1px solid var(--rule);padding-top:var(--s-3)}
+.code .counted p{margin:0;font-size:var(--t-19);line-height:1.4}
+.code .counted em{display:block;font-size:var(--t-44);line-height:1.05;color:var(--fern)}
+.code .btn{margin-top:var(--s-5)}
+
+/* V. games */
+.games .lead-in{grid-column:1 / span 7}
+.games h2{font-size:var(--t-44)}
+.games .lead-in p{margin-top:var(--s-2);font-style:italic}
+.games ol{margin-top:var(--s-5);border-top:1px solid var(--ink)}
+.games li{border-bottom:1px solid var(--rule)}
+.games a{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:var(--s-4);align-items:center;padding:var(--s-3) 0;text-decoration:none}
+.games .shot{aspect-ratio:3/2;overflow:hidden;box-shadow:0 0 0 1px var(--rule);background:var(--rule)}
+.games img{width:100%;height:100%;object-fit:cover;filter:saturate(.5) sepia(.18) contrast(.95) brightness(1.03);transition:filter 1.1s var(--ease)}
+.games a:hover img,.games a:focus-visible img{filter:none}
+.games h3{font-size:var(--t-32);line-height:1.15}
+.games a:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.games .meta{font-size:var(--t-15);color:var(--ink-2);text-align:right}
+
+/* ---------- colophon ---------- */
+footer{margin-top:var(--section)}
+.colophon{max-width:var(--max);margin:0 auto;padding:0 var(--margin)}
+.colophon-in{border-top:1px solid var(--rule);padding:var(--s-5) 0 calc(var(--s-6) + env(safe-area-inset-bottom,0px));text-align:center}
+.colophon .mark{margin:0}
+.colophon .body{margin:var(--s-3) auto 0;max-width:38em;font-size:var(--t-19);line-height:1.6}
+.colophon nav{margin-top:var(--s-4);display:flex;justify-content:center;flex-wrap:wrap;gap:6px 28px;font-size:var(--t-15);font-feature-settings:"smcp","c2sc";letter-spacing:.1em}
+.colophon nav a{text-decoration:none}
+.colophon nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.colophon .place{margin-top:var(--s-3);font-style:italic;color:var(--ink-2)}
+.colophon .rule-s{margin:var(--s-4) auto 0}
+.credits{margin:var(--s-4) auto 0;max-width:72em;font-size:var(--t-13);line-height:1.6;color:var(--ink-2)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .idea .text{grid-column:1 / span 7}
+  .idea .side{grid-column:1 / span 7;grid-row:2;padding-top:var(--s-4)}
+  .idea .plate{grid-column:9 / span 4;grid-row:1 / span 2}
+  .entry .copy{grid-column:7 / span 6}
+  .entry.alt .copy{grid-column:1 / span 6}
+  .code .text{grid-column:6 / span 7}
+}
+@media (max-width:860px){
+  .spread{min-height:0;padding-top:var(--s-4)}
+  .front{grid-column:1 / span 12;grid-row:2;margin-top:var(--s-5)}
+  .front .print{width:min(100%,380px)}
+  .titlepage{grid-column:1 / span 12;grid-row:1}
+  .idea .text,.idea .side{grid-column:1 / span 12}
+  .idea .plate{grid-column:1 / span 12;grid-row:3;margin-top:var(--s-5)}
+  .idea .plate .print{width:min(100%,360px);margin:0 auto}
+  .tools .intro{grid-column:1 / span 12}
+  .entry .fig,.entry.alt .fig{grid-column:1 / span 12;grid-row:1;max-width:480px}
+  .entry .copy,.entry.alt .copy{grid-column:1 / span 12;grid-row:2;margin-top:var(--s-4)}
+  .code .plate{grid-column:1 / span 12;grid-row:2;margin-top:var(--s-5)}
+  .code .plate .print{width:min(100%,300px)}
+  .code .text{grid-column:1 / span 12;grid-row:1}
+  .games .lead-in{grid-column:1 / span 12}
+  .games a{grid-template-columns:120px minmax(0,1fr);gap:20px}
+  .games .meta{grid-column:2;text-align:left;margin-top:-14px}
+  .games h3{font-size:24px}
+}
+@media (max-width:560px){
+  .head-in{gap:8px 20px}
+  .nav{order:3;flex-basis:100%;gap:2px 18px}
+  .titlepage h1{font-size:38px}
+  .titlepage .by{font-size:20px}
+  .idea h2,.tools h2,.code h2{font-size:40px}
+  .tally div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .tally dd{font-size:36px;text-align:left}
+  .counts dd{font-size:46px}
+  .code .counted em{font-size:34px}
+  .games a{grid-template-columns:96px minmax(0,1fr);gap:16px;padding:18px 0}
+  .games h3{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div class="head-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tools">Tools</a><a href="#idea">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#">About</a>
+    </nav>
+    <nav class="lang" aria-label="Language">
+      <a href="#" aria-current="true" lang="en">en</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">fr</a><a href="#" lang="es">es</a><a href="#" lang="ru">ru</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page" aria-labelledby="h1">
+    <div class="grid spread">
+      <figure class="plate front" data-reveal="grow" style="--d:200ms">
+        <div class="print"><img src="media/plate-bradbury-2-1000.webp" srcset="media/plate-bradbury-2-1000.webp 642w, media/plate-bradbury-2.webp 1284w" sizes="(max-width:860px) 380px, 34vw" width="1284" height="2000" alt="Henry Bradbury’s nature print of the fern Athyrium filix-femina: a tall triangular frond in soft green, beside a single fertile stem."></div>
+        <figcaption><span class="no">Plate I</span><i>Athyrium filix-femina</i>, nature-printed by Henry Bradbury, 1855</figcaption>
+      </figure>
+      <div class="titlepage">
+        <h1 id="h1" data-split data-split-delay="300">What causes cancer and other chronic diseases, and how sure the evidence&nbsp;is</h1>
+        <p class="by" data-reveal="fade" style="--d:900ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <hr class="rule-s" data-reveal="fade" style="--d:1050ms">
+        <form class="search" role="search" onsubmit="return false" data-reveal="fade" style="--d:1150ms">
+          <label for="q">Look something up</label>
+          <div class="field">
+            <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+            <button type="submit">Search</button>
+          </div>
+          <p class="try">Try <a class="link" href="#">aspartame</a> · <a class="link" href="#">stroke</a> · <a class="link" href="#">coffee</a></p>
+        </form>
+        <p class="caveat" data-reveal="fade" style="--d:1300ms">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page chap idea" id="idea" aria-labelledby="idea-h">
+    <div class="grid">
+      <div class="text">
+        <span class="chap-no">II</span>
+        <h2 id="idea-h" data-split>Same certainty, very different size</h2>
+        <p class="lead drop" data-reveal="fade" style="--d:300ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <dl class="tally" data-reveal="fade" style="--d:450ms">
+          <div><dt>Smokers who get lung cancer by age 75<a class="note-ref" href="#n1" aria-label="Note 1">1</a></dt><dd>100–120 <small>in 1,000</small></dd></div>
+          <div><dt>Lifelong non-smokers who do</dt><dd>4–5 <small>in 1,000</small></dd></div>
+          <div><dt>Rise in the risk of bowel cancer for each 50 grams of processed meat eaten every day</dt><dd>18%</dd></div>
+        </dl>
+        <p class="more" data-reveal="fade"><a class="link" href="#">Seven ideas for reading a health headline&nbsp;&rarr;</a></p>
+      </div>
+      <aside class="side" aria-label="Notes">
+        <p id="n1"><sup>1</sup>About 10 to 12 in 100 smokers. European data. Quoted from the Cancer Evidence Explorer.</p>
+      </aside>
+      <figure class="plate" data-reveal="grow">
+        <div class="print"><img src="media/plate-bradbury-3-1000.webp" width="645" height="1000" loading="lazy" alt="Henry Bradbury’s nature print of maidenhair fern, Adiantum capillus-veneris: fine black stems carrying fan-shaped green leaflets, roots and all."></div>
+        <figcaption><span class="no">Plate II</span><i>Adiantum capillus-veneris</i></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="page chap tools" id="tools" aria-labelledby="tools-h">
+    <div class="grid">
+      <div class="intro">
+        <span class="chap-no">III</span>
+        <h2 id="tools-h" data-split>The explorers</h2>
+        <p data-reveal="fade" style="--d:300ms">Two tools, free to use, in 10 languages.</p>
+      </div>
+    </div>
+
+    <article class="grid entry" aria-labelledby="t1">
+      <figure class="fig" data-reveal="grow">
+        <div class="nprint" role="img" aria-label="Network drawing of the Cancer Evidence Explorer, printed in fern green: exposures linked to the cancer types they can cause."><span style="--src:url(media/tool-cancer-network.svg)"></span></div>
+        <figcaption><span class="no">Fig. 1</span>Exposures and the cancers they can cause</figcaption>
+      </figure>
+      <div class="copy">
+        <h3 id="t1" data-split>Cancer Evidence Explorer</h3>
+        <p class="lead" data-reveal="fade" style="--d:250ms">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <dl class="counts" data-reveal="fade" style="--d:400ms">
+          <div><dt>exposures</dt><dd>185</dd></div>
+          <div><dt>cancer types</dt><dd>68</dd></div>
+          <div><dt>links</dt><dd>469</dd></div>
+          <div><dt>languages</dt><dd>10</dd></div>
+        </dl>
+        <div class="acts" data-reveal="fade" style="--d:550ms"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </div>
+    </article>
+
+    <article class="grid entry alt" aria-labelledby="t2">
+      <figure class="fig" data-reveal="grow">
+        <div class="nprint" role="img" aria-label="Network drawing of the Chronic Disease Evidence Explorer, printed in fern green: risk factors clustered around the diseases they affect."><span style="--src:url(media/tool-chronic-network.svg)"></span></div>
+        <figcaption><span class="no">Fig. 2</span>Risk factors and the diseases they affect</figcaption>
+      </figure>
+      <div class="copy">
+        <h3 id="t2" data-split>Chronic Disease Evidence Explorer</h3>
+        <p class="lead" data-reveal="fade" style="--d:250ms">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="counts" data-reveal="fade" style="--d:400ms">
+          <div><dt>risk factors</dt><dd>124</dd></div>
+          <div><dt>diseases</dt><dd>45</dd></div>
+          <div><dt>graded links</dt><dd>356</dd></div>
+          <div><dt>languages</dt><dd>10</dd></div>
+        </dl>
+        <div class="acts" data-reveal="fade" style="--d:550ms"><a class="btn" href="#">Open the explorer</a><a class="link" href="#">About this tool</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="page chap" id="code" aria-labelledby="code-h">
+    <div class="grid code">
+      <figure class="plate" data-reveal="grow">
+        <div class="print"><img src="media/plate-bradbury-1-1000.webp" srcset="media/plate-bradbury-1-1000.webp 585w, media/plate-bradbury-1.webp 1170w" sizes="(max-width:860px) 300px, 28vw" width="1170" height="2000" loading="lazy" alt="Henry Bradbury’s nature print of Polystichum angulare: one long frond arching over, with three small young fronds at its foot."></div>
+        <figcaption><span class="no">Plate III</span><i>Polystichum angulare</i></figcaption>
+      </figure>
+      <div class="text">
+        <span class="chap-no">IV</span>
+        <h2 id="code-h" data-split>Code Against Cancer</h2>
+        <p class="lead drop" data-reveal="fade" style="--d:300ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <div class="counted" data-reveal="fade" style="--d:450ms">
+          <p><em>Fourteen</em> actions for Europe</p>
+          <p><em>Seventeen</em> for Latin America and the Caribbean</p>
+        </div>
+        <a class="btn" href="#" data-reveal="fade" style="--d:600ms">Read the recommendations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page chap games" id="games" aria-labelledby="games-h">
+    <div class="grid">
+      <div class="lead-in">
+        <span class="chap-no">V</span>
+        <h2 id="games-h">For schools and families</h2>
+        <p>Learning by playing — three games.</p>
+      </div>
+    </div>
+    <ol>
+      <li data-reveal="fade"><a href="#"><div class="shot"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt=""></div>
+        <h3>Sol &amp; the UV Shield Quest</h3><p class="meta">Skin cancer · ages 6–12</p></a></li>
+      <li data-reveal="fade" style="--d:120ms"><a href="#"><div class="shot"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt=""></div>
+        <h3>The Lung Detective</h3><p class="meta">Lung cancer · ages 10–16</p></a></li>
+      <li data-reveal="fade" style="--d:240ms"><a href="#"><div class="shot"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt=""></div>
+        <h3>A Town of 1,000</h3><p class="meta">Breast cancer · ages 14+</p></a></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="colophon-in">
+    <a class="mark" href="#">EpiDetective</a>
+    <p class="body">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+    <nav aria-label="Footer"><a href="#">How we check</a><a href="#">Report an error</a><a href="#">How to cite</a><a href="#">About</a></nav>
+    <p class="place">Lyon, France</p>
+    <hr class="rule-s">
+    <p class="credits">Plates from Thomas Moore, <i>The Ferns of Great Britain and Ireland</i>, edited by John Lindley, nature-printed by Henry Bradbury (1855), all public domain, via Wikimedia Commons: I, <i>Athyrium filix-femina</i>; II, <i>Adiantum capillus-veneris</i>; III, <i>Polystichum angulare</i>. Figures 1 and 2 are the explorers’ network drawings, printed here in fern green. Small screenshots from the three EpiDetective games.</p>
+  </div>
+</footer>
+
+<script>
+/* The plates grow from stem to tip (CSS). Lazy images can arrive after the plate is revealed,
+   so each plate waits, unmasked by nothing, until its image has loaded. */
+(function(){
+  "use strict";
+  document.querySelectorAll(".plate[data-reveal] img").forEach(function(img){
+    if(img.complete && img.naturalWidth) return;
+    var fig=img.closest(".plate"); fig.classList.add("wait");
+    var done=function(){ requestAnimationFrame(function(){ fig.classList.remove("wait"); }); };
+    img.addEventListener("load",done,{once:true}); img.addEventListener("error",done,{once:true});
+  });
+})();
+</script>
+</body>
+</html>

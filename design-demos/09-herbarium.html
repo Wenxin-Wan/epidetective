@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>09 · Herbarium — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Karla:ital,wght@0,400..700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --sheet:#F1EEE5; --mount:#E3DDCF; --ink:#2B2B26; --label:#FBFAF5; --green:#5F6F52; --red:#8E3B2F;
+  --ink-2:#55524A; --ink-3:#6B675D; --rule:rgba(43,43,38,.16); --rule-2:rgba(43,43,38,.5); --green-dk:#3D4734;
+  --serif:"Castoro","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Karla",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  /* type scale 12 / 14 / 17 / 20 / 26 / 36 / 52 */
+  --t-xs:12px; --t-s:14px; --t-b:17px; --t-m:20px; --t-l:26px; --t-xl:clamp(28px,2.8vw,38px); --t-2xl:clamp(34px,3.6vw,52px);
+  /* spacing */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,180px);
+  --gut:clamp(12px,2.2vw,32px); --pad:clamp(24px,4.4vw,72px); --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--mount);color:var(--ink);font-family:var(--serif);font-size:var(--t-b);line-height:1.6;font-variant-numeric:oldstyle-nums;-webkit-font-smoothing:antialiased;font-synthesis:none;overflow-x:clip}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+ul,dl,dd{margin:0;padding:0}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.lin{font-variant-numeric:lining-nums tabular-nums}
+.cap{font-family:var(--sans);font-size:var(--t-xs);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px;transition:color .4s var(--ease),background-size .7s var(--ease)}
+.ul:hover{color:var(--green);background-size:0 1px;background-position:100% 100%}
+.btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--label);background:var(--green);text-decoration:none;padding:12px 22px 13px;border-radius:1px;transition:background .5s var(--ease)}
+.btn:hover{background:var(--green-dk)}
+
+/* ---------- top ---------- */
+.top{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px 36px;padding:24px calc(var(--gut) + var(--pad)) 22px}
+.mark{font-family:var(--serif);font-size:23px;text-decoration:none;letter-spacing:-.005em;margin-right:auto}
+.top nav ul,.lang{list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px;font-family:var(--sans);font-size:var(--t-s)}
+.top nav a,.lang a{text-decoration:none;color:var(--ink-2);transition:color .3s}
+.top nav a:hover,.lang a:hover{color:var(--ink)}
+.lang{gap:6px 14px;font-size:var(--t-xs);letter-spacing:.06em}
+.lang [aria-current]{color:var(--ink);font-weight:700}
+
+/* ---------- sheets ---------- */
+.sheets{padding:0 var(--gut)}
+.sheet{position:relative;max-width:1400px;margin:0 auto 28px;background:var(--sheet);padding:var(--pad);min-height:calc(100vh - 56px);min-height:calc(100svh - 56px);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-items:end;
+  box-shadow:0 1px 0 rgba(43,43,38,.05),0 -1px 0 rgba(255,255,255,.6) inset,0 -16px 36px -26px rgba(43,43,38,.35),0 30px 60px -40px rgba(43,43,38,.4)}
+html.js .sheet{position:sticky;transform-origin:50% 0;transition:filter .2s linear}
+html.js:not(.still) .sheet{transform:scale(calc(1 - var(--c,0) * .025));filter:brightness(calc(1 - var(--c,0) * .045))}
+.sheet > *{min-width:0}
+.sheet-no{position:absolute;top:calc(var(--pad) * .55);right:var(--pad);font-family:var(--sans);font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* specimen */
+.spec{grid-column:1 / 7;align-self:center;margin:0;justify-self:center}
+.spec img{height:min(calc(100vh - 220px),860px);height:min(calc(100svh - 220px),860px);width:auto;max-width:100%;object-fit:contain;
+  box-shadow:0 1px 1px rgba(43,43,38,.12),0 14px 30px -18px rgba(43,43,38,.45)}
+.mounted{position:relative;display:inline-block}
+.mounted .corner{position:absolute;width:22px;height:22px;background:#3A3730;opacity:.9}
+.corner.tl{left:-6px;top:-6px;clip-path:polygon(0 0,100% 0,0 100%)}
+.corner.tr{right:-6px;top:-6px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.corner.bl{left:-6px;bottom:-6px;clip-path:polygon(0 0,100% 100%,0 100%)}
+.corner.br{right:-6px;bottom:-6px;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.spec figcaption,.drawing figcaption{margin-top:14px;font-family:var(--sans);font-size:var(--t-xs);color:var(--ink-3);max-width:46ch}
+.spec figcaption i{font-family:var(--serif);font-size:var(--t-s);color:var(--ink-2)}
+
+/* label */
+.label{grid-column:7 / 13;position:relative;background:var(--label);border:1px solid var(--rule-2);padding:clamp(22px,2.6vw,38px);
+  box-shadow:0 1px 1px rgba(43,43,38,.08),0 10px 24px -18px rgba(43,43,38,.4)}
+.label::before{content:"";position:absolute;inset:4px;border:1px solid var(--rule);pointer-events:none}
+.label > *{position:relative}
+.lhead{display:flex;justify-content:space-between;gap:16px;padding-bottom:12px;margin-bottom:var(--s3);border-bottom:1px solid var(--rule-2)}
+.lhead span{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+.label h1{font-size:var(--t-2xl);line-height:1.06;letter-spacing:-.012em}
+.label h2{font-size:var(--t-xl);line-height:1.1;letter-spacing:-.008em}
+.label h2 i{font-style:italic}
+.fields{margin-top:var(--s3);display:grid;grid-template-columns:minmax(0,8.6em) minmax(0,1fr);border-top:1px solid var(--rule)}
+.fields dt,.fields dd{padding:11px 0;border-bottom:1px solid var(--rule)}
+.fields dt{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-top:15px;padding-right:14px}
+.fields dd{font-size:var(--t-b);line-height:1.5}
+.fields dd.num{font-size:var(--t-l);line-height:1.2;font-variant-numeric:lining-nums tabular-nums}
+.lead{margin-top:var(--s2);color:var(--ink-2);max-width:52ch}
+
+/* search on the label: a ruled writing line */
+.search{margin-top:var(--s3)}
+.search label{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.field{display:flex;align-items:flex-end;gap:12px;border-bottom:1px solid var(--ink)}
+.field input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-family:var(--serif);font-size:18px;color:var(--ink);padding:8px 0 9px}
+.field input::placeholder{color:#7A766B;font-style:italic}
+.field input:focus{outline:none}
+.field:focus-within{border-bottom-color:var(--green);box-shadow:0 1px 0 var(--green)}
+.field button{border:0;background:transparent;font-family:var(--sans);font-size:var(--t-s);font-weight:700;letter-spacing:.06em;color:var(--green);padding:8px 0 10px;cursor:pointer}
+.field button:hover{color:var(--ink)}
+.try{margin-top:12px;font-family:var(--sans);font-size:var(--t-s);color:var(--ink-3)}
+.try a{color:var(--ink);margin:0 2px}
+
+.stamp{position:absolute!important;right:clamp(18px,2.4vw,34px);top:-26px;width:104px;height:104px;transform:rotate(-11deg);color:var(--red);opacity:.86;mix-blend-mode:multiply;pointer-events:none}
+
+/* idea sheet */
+.drawing{grid-column:1 / 7;align-self:center;margin:0;justify-self:start;width:100%;max-width:520px}
+.drawing svg{display:block;width:100%;height:auto;max-height:calc(100svh - 230px)}
+.drawing .pn{fill:var(--green);fill-opacity:.84}
+.drawing .pn.rg{fill:none;stroke:var(--green);stroke-width:.9}
+.drawing .rb{fill:none;stroke:var(--sheet);stroke-opacity:.5;stroke-width:.6}
+.drawing .st{fill:none;stroke:var(--green-dk);stroke-width:1.3;stroke-linecap:round}
+.drawing .st.rg{stroke-dasharray:2 4;stroke-width:1.1}
+.drawing .rl,.drawing .tk{stroke:var(--ink);stroke-width:1;fill:none}
+.drawing text{font-family:var(--sans);font-size:12px;fill:var(--ink-3);font-variant-numeric:lining-nums tabular-nums}
+.drawing .hand{font-family:var(--serif);font-style:italic;font-size:17px;fill:var(--ink)}
+.drawing .val{font-family:var(--sans);font-size:13px;font-weight:700;fill:var(--ink)}
+.drawing .tape{fill:var(--label);fill-opacity:.82;stroke:rgba(43,43,38,.14);stroke-width:.8}
+html.js:not(.still) .drawing .grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1600ms var(--ease) 200ms,opacity 1200ms var(--ease) 200ms}
+html.js:not(.still) .drawing:not(.is-in) .grow{transform:scaleY(.04);opacity:0}
+
+/* tool sheets */
+.tool .label h2{font-style:italic;font-size:clamp(30px,3.2vw,44px)}
+.acts{margin-top:var(--s3);display:flex;align-items:center;flex-wrap:wrap;gap:var(--s2) 28px}
+.acts .ul{font-family:var(--sans);font-size:15px}
+
+/* last sheet */
+.prints{grid-column:1 / 7;align-self:start}
+.prints h2{font-size:var(--t-xl);line-height:1.1}
+.prints > p{margin-top:8px;color:var(--ink-2)}
+.prints ul{list-style:none;margin-top:var(--s4);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2vw,30px)}
+.prints a{text-decoration:none;display:block}
+.prints .mounted{display:block}
+.prints img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:saturate(.62) sepia(.12) contrast(.96);transition:filter 1s var(--ease);box-shadow:0 1px 1px rgba(43,43,38,.14),0 8px 18px -12px rgba(43,43,38,.5)}
+.prints a:hover img{filter:none}
+.prints .corner{width:16px;height:16px}
+.prints .corner.tl,.prints .corner.tr{top:-4px}.prints .corner.bl,.prints .corner.br{bottom:-4px}
+.prints .corner.tl,.prints .corner.bl{left:-4px}.prints .corner.tr,.prints .corner.br{right:-4px}
+.prints b{display:block;margin-top:14px;font-weight:400;font-style:italic;font-size:var(--t-b);line-height:1.3}
+.prints small{display:block;margin-top:2px;font-family:var(--sans);font-size:var(--t-xs);color:var(--ink-3)}
+.sheet.last{min-height:0;align-items:start}
+.last .label{align-self:start}
+
+/* ---------- footer ---------- */
+footer{max-width:1400px;margin:0 auto;padding:var(--s5) calc(var(--gut) + var(--pad)) calc(var(--s5) + 56px)}
+.foot{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr) minmax(0,3fr);gap:var(--s4)}
+.foot p{margin-top:var(--s2);font-size:15px;color:var(--ink-2);max-width:54ch}
+.foot ul{list-style:none;font-family:var(--sans);font-size:var(--t-s);display:grid;gap:8px;align-content:start}
+.foot ul a{text-decoration:none;color:var(--ink-2)}
+.foot ul a:hover{color:var(--ink)}
+.place{font-family:var(--sans);font-size:var(--t-s);color:var(--ink-2)}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--rule);font-family:var(--sans);font-size:12px;line-height:1.65;color:var(--ink-3);max-width:120ch}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .spec,.drawing,.prints{grid-column:1 / 7}
+  .label{grid-column:7 / 13}
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .fields dt{border-bottom:0;padding-bottom:0}
+  .fields dd{padding-top:2px}
+}
+@media (max-width:860px){
+  .sheet{grid-template-columns:minmax(0,1fr);row-gap:var(--s4);align-items:start}
+  .spec,.drawing,.prints,.label{grid-column:1 / -1}
+  .spec{justify-self:center}
+  .spec img{height:auto;max-height:68svh}
+  .drawing{justify-self:center;max-width:440px}
+  .drawing svg{max-height:60svh}
+  .fields{grid-template-columns:minmax(0,8em) minmax(0,1fr)}
+  .fields dt{border-bottom:1px solid var(--rule);padding-bottom:11px}
+  .fields dd{padding-top:11px}
+  .foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:520px){
+  .top{padding-left:calc(var(--gut) + 12px);padding-right:calc(var(--gut) + 12px)}
+  .top nav ul{gap:6px 18px}
+  .lang{width:100%}
+  .sheet{padding:28px 20px 24px}
+  .label{padding:22px 18px}
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .fields dt{border-bottom:0;padding-bottom:0}
+  .fields dd{padding-top:2px}
+  .prints ul{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .stamp{width:78px;height:78px;top:-20px}
+  .hero .spec{width:100%}
+  .hero .spec img{width:100%;height:30svh;max-height:none;object-fit:cover;object-position:50% 34%}
+  .sheet-no{display:none}
+  footer{padding-left:calc(var(--gut) + 12px);padding-right:calc(var(--gut) + 12px)}
+  .foot{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#tools">Tools</a></li><li><a href="#idea">Reading the evidence</a></li><li><a href="#act">Code Against Cancer</a></li><li><a href="#games">Games</a></li><li><a href="#">About</a></li>
+  </ul></nav>
+  <ul class="lang" aria-label="Language">
+    <li><a href="#" aria-current="true" lang="en">EN</a></li><li><a href="#" lang="zh">中文</a></li><li><a href="#" lang="fr">FR</a></li><li><a href="#" lang="es">ES</a></li><li><a href="#" lang="ru">RU</a></li>
+  </ul>
+</header>
+
+<main class="sheets">
+
+  <!-- Sheet 1: the hero specimen, headline set as its label -->
+  <section class="sheet hero" aria-labelledby="h1">
+    <figure class="spec" data-reveal="fade">
+      <img src="media/plate-herbarium-3-1000.webp" srcset="media/plate-herbarium-3-1000.webp 655w, media/plate-herbarium-3.webp 1311w" sizes="(max-width:860px) 80vw, 40vw" width="655" height="1000" alt="A pressed columbine, Aquilegia paui, taped to a herbarium sheet, with its printed collection label in the lower left corner.">
+    </figure>
+    <div class="label" data-reveal="rise" style="--d:250ms">
+      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="2.2"/><circle cx="60" cy="60" r="49" stroke-width="1"/></g><defs><path id="arc" d="M60 60m-41 0a41 41 0 1 1 82 0a41 41 0 1 1-82 0"/></defs><text font-family="Karla,sans-serif" font-size="11.5" font-weight="700" letter-spacing="3.2" fill="currentColor"><textPath href="#arc" startOffset="2%">EPIDETECTIVE · LYON · FRANCE ·</textPath></text><path d="M44 62h32" stroke="currentColor" stroke-width="1.2"/><text x="60" y="56" text-anchor="middle" font-family="Castoro,serif" font-style="italic" font-size="15" fill="currentColor">Herb.</text></svg>
+      <div class="lhead"><span>EpiDetective</span></div>
+      <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+      <dl class="fields">
+        <dt>Free tools built from</dt><dd>the IARC Monographs and published reviews</dd>
+        <dt>By</dt><dd>Wenxin Wan, a cancer epidemiologist</dd>
+        <dt>Note</dt><dd>They describe whole populations, not what caused any one person’s illness.</dd>
+      </dl>
+      <form class="search" role="search" onsubmit="return false">
+        <label for="q">Look something up</label>
+        <div class="field">
+          <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+          <button type="submit">Search</button>
+        </div>
+        <p class="try">Try <a class="ul" href="#">aspartame</a> · <a class="ul" href="#">stroke</a> · <a class="ul" href="#">coffee</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Sheet 2: same certainty, very different size -->
+  <section class="sheet" id="idea" aria-labelledby="h-idea">
+    <figure class="drawing" data-reveal="fade" aria-labelledby="idea-cap">
+      <svg viewBox="0 0 460 600" role="img" aria-label="Two pressed fronds drawn to the same scale of lung cancer by age 75 per 1,000 people: the smokers’ frond reaches 100, with its tip outlined up to 120; the non-smokers’ frond is a sprig of 4 to 5.">
+        <g class="ruler"><path class="rl" d="M60 530V30"/><path class="tk" d="M60 530h-10"/><path class="tk" d="M60 510h-3"/><path class="tk" d="M60 490h-6"/><path class="tk" d="M60 470h-3"/><path class="tk" d="M60 450h-6"/><path class="tk" d="M60 430h-3"/><path class="tk" d="M60 410h-6"/><path class="tk" d="M60 390h-3"/><path class="tk" d="M60 370h-6"/><path class="tk" d="M60 350h-3"/><path class="tk" d="M60 330h-10"/><path class="tk" d="M60 310h-3"/><path class="tk" d="M60 290h-6"/><path class="tk" d="M60 270h-3"/><path class="tk" d="M60 250h-6"/><path class="tk" d="M60 230h-3"/><path class="tk" d="M60 210h-6"/><path class="tk" d="M60 190h-3"/><path class="tk" d="M60 170h-6"/><path class="tk" d="M60 150h-3"/><path class="tk" d="M60 130h-10"/><path class="tk" d="M60 110h-3"/><path class="tk" d="M60 90h-6"/><path class="tk" d="M60 70h-3"/><path class="tk" d="M60 50h-6"/><path class="tk" d="M60 30h-3"/><text x="44" y="534" text-anchor="end">0</text><text x="44" y="334" text-anchor="end">50</text><text x="44" y="134" text-anchor="end">100</text></g>
+        <g class="grow"><path class="pn" d="M202.5 491.6C193.0 477.0 175.7 467.8 164.1 467.3C169.4 479.4 185.1 491.6 202.5 491.6ZM203.1 482.5C222.9 482.4 240.7 468.5 246.6 454.7C233.4 455.3 213.8 465.9 203.1 482.5ZM203.7 473.4C193.0 454.0 171.7 440.7 156.8 439.0C162.6 454.9 181.6 471.8 203.7 473.4ZM204.3 464.3C226.3 464.3 246.1 448.9 252.8 433.5C238.1 434.1 216.2 445.9 204.3 464.3ZM204.8 455.2C193.4 434.2 170.4 419.7 154.3 417.8C160.5 435.0 181.0 453.4 204.8 455.2ZM205.4 446.2C232.7 444.4 256.2 423.8 263.5 404.2C245.2 406.1 218.8 422.4 205.4 446.2ZM205.9 437.1C192.5 412.7 165.9 395.9 147.2 393.7C154.4 413.8 178.2 435.0 205.9 437.1ZM206.5 428.0C234.2 424.7 257.3 402.2 263.7 381.8C245.0 384.8 218.8 402.9 206.5 428.0ZM207.0 418.9C192.7 394.1 165.0 377.3 145.9 375.5C153.6 395.9 178.4 417.3 207.0 418.9ZM207.4 409.8C236.1 407.5 260.5 385.4 267.9 364.7C248.6 367.0 221.1 384.6 207.4 409.8ZM207.9 400.7C196.0 373.6 169.0 353.3 149.2 349.2C155.2 371.1 178.7 395.9 207.9 400.7ZM208.4 391.6C238.3 388.1 263.3 363.9 270.2 341.8C250.0 345.1 221.7 364.6 208.4 391.6ZM208.8 382.5C197.9 355.9 172.2 335.6 152.9 331.1C158.3 352.5 180.6 377.2 208.8 382.5ZM209.2 373.4C239.6 368.8 264.2 343.2 270.7 320.5C250.0 324.5 221.8 345.4 209.2 373.4ZM209.6 364.3C196.3 337.2 168.1 317.6 147.8 314.3C154.7 336.4 179.6 360.7 209.6 364.3ZM209.9 355.3C239.7 351.4 264.3 327.1 271.1 305.0C250.9 308.5 222.9 328.2 209.9 355.3ZM210.2 346.2C198.4 320.0 172.1 300.5 152.8 296.8C158.8 318.0 181.9 341.8 210.2 346.2ZM210.5 337.1C238.8 332.8 261.8 309.2 267.9 288.1C248.7 291.7 222.4 311.0 210.5 337.1ZM210.8 328.0C201.3 299.8 175.7 277.2 156.0 271.4C160.4 293.8 182.0 320.7 210.8 328.0ZM211.1 318.9C237.0 312.4 256.6 288.2 260.5 268.0C242.7 273.2 219.7 293.6 211.1 318.9ZM211.3 309.8C201.6 282.4 176.4 260.6 157.1 255.2C161.6 277.1 183.0 303.0 211.3 309.8ZM211.5 300.7C237.9 293.7 257.6 268.7 261.4 248.0C243.2 253.5 220.0 274.7 211.5 300.7ZM211.6 291.6C203.5 266.5 181.2 246.1 163.7 240.7C167.3 260.7 186.2 284.8 211.6 291.6ZM211.8 282.5C236.2 276.2 254.5 253.3 258.1 234.3C241.3 239.3 219.8 258.6 211.8 282.5ZM211.9 273.5C203.3 249.7 181.4 230.8 164.6 226.2C168.6 245.2 187.3 267.7 211.9 273.5ZM211.9 264.4C236.0 258.5 254.2 236.3 258.0 217.6C241.5 222.3 220.1 241.0 211.9 264.4ZM212.0 255.3C204.0 232.2 183.0 213.6 166.8 208.9C170.4 227.4 188.3 249.4 212.0 255.3ZM212.0 246.2C233.7 238.4 248.7 216.1 250.6 198.4C235.6 204.4 217.3 223.8 212.0 246.2ZM212.0 237.1C205.1 215.5 186.0 197.8 171.0 193.0C174.0 210.2 190.1 231.1 212.0 237.1ZM211.9 228.0C232.6 221.1 247.2 200.2 249.3 183.5C235.0 188.9 217.4 206.9 211.9 228.0ZM211.8 218.9C207.7 198.9 192.0 181.3 178.8 175.7C180.1 191.4 192.8 211.5 211.8 218.9ZM211.7 209.8C230.3 203.2 243.0 184.1 244.7 169.0C231.8 174.1 216.3 190.7 211.7 209.8ZM211.6 200.7C208.7 183.5 195.7 167.9 184.5 162.7C185.2 176.1 195.6 193.8 211.6 200.7ZM211.4 191.7C228.2 186.0 239.9 169.2 241.6 155.7C230.1 160.0 215.8 174.6 211.4 191.7ZM211.2 182.6C207.9 167.8 196.1 154.9 186.2 150.9C187.4 162.5 197.0 177.3 211.2 182.6ZM211.0 173.5C224.3 167.3 232.7 152.2 233.0 140.9C223.7 145.5 213.1 158.9 211.0 173.5ZM210.7 164.4C208.1 151.2 197.8 139.4 189.1 135.7C189.9 146.0 198.2 159.4 210.7 164.4ZM210.5 155.3C222.3 149.3 229.5 135.4 229.5 125.1C221.1 129.6 211.9 142.1 210.5 155.3ZM210.1 146.2C209.0 134.4 200.9 123.3 193.5 119.2C193.4 128.4 199.6 140.8 210.1 146.2ZM209.8 137.1C219.5 132.3 225.4 121.0 225.5 112.7C218.6 116.3 211.1 126.3 209.8 137.1Z"/><path class="pn rg" d="M209.4 128.0C207.7 118.3 200.3 109.5 194.0 106.5C194.4 114.2 200.3 124.1 209.4 128.0ZM209.1 118.9C216.7 115.6 221.6 107.1 222.0 100.7C216.6 103.2 210.4 110.7 209.1 118.9ZM208.6 109.8C208.2 102.8 203.6 95.9 199.3 93.3C199.0 98.7 202.5 106.3 208.6 109.8ZM208.2 100.8C213.6 97.5 216.6 90.7 216.3 85.9C212.5 88.3 208.5 94.4 208.2 100.8ZM207.8 91.7C207.4 85.8 203.5 80.2 199.9 78.1C199.7 82.6 202.6 88.8 207.8 91.7ZM207.3 82.6C212.4 79.5 215.2 73.0 214.9 68.4C211.2 70.7 207.5 76.6 207.3 82.6ZM206.8 73.5C206.3 68.1 202.6 63.0 199.2 61.1C199.2 65.3 202.0 71.0 206.8 73.5ZM206.3 64.4C211.1 61.9 213.9 56.1 213.9 51.9C210.5 53.8 206.8 59.0 206.3 64.4Z"/><path class="rb" d="M202.5 491.6Q172.6 473.6 164.1 467.3M203.1 482.5Q237.0 461.9 246.6 454.7M203.7 473.4Q167.1 447.8 156.8 439.0M204.3 464.3Q242.1 441.5 252.8 433.5M204.8 455.2Q165.4 427.4 154.3 417.8M205.4 446.2Q250.7 415.0 263.5 404.2M205.9 437.1Q160.1 404.8 147.2 393.7M206.5 428.0Q251.1 393.5 263.7 381.8M207.0 418.9Q159.3 386.6 145.9 375.5M207.4 409.8Q254.6 376.2 267.9 364.7M207.9 400.7Q162.1 362.2 149.2 349.2M208.4 391.6Q256.6 354.5 270.2 341.8M208.8 382.5Q165.2 344.0 152.9 331.1M209.2 373.4Q257.1 333.9 270.7 320.5M209.6 364.3Q161.4 327.0 147.8 314.3M209.9 355.3Q257.6 317.8 271.1 305.0M210.2 346.2Q165.4 309.3 152.8 296.8M210.5 337.1Q255.3 300.5 267.9 288.1M210.8 328.0Q168.1 285.5 156.0 271.4M211.1 318.9Q249.6 280.7 260.5 268.0M211.3 309.8Q169.0 268.8 157.1 255.2M211.5 300.7Q250.4 261.1 261.4 248.0M211.6 291.6Q174.2 253.4 163.7 240.7M211.8 282.5Q247.9 246.3 258.1 234.3M211.9 273.5Q175.0 238.0 164.6 226.2M211.9 264.4Q247.8 229.3 258.0 217.6M212.0 255.3Q176.7 220.5 166.8 208.9M212.0 246.2Q242.1 210.2 250.6 198.4M212.0 237.1Q180.0 204.0 171.0 193.0M211.9 228.0Q241.1 194.6 249.3 183.5M211.8 218.9Q186.0 186.4 178.8 175.7M211.7 209.8Q237.4 179.1 244.7 169.0M211.6 200.7Q190.5 172.0 184.5 162.7M211.4 191.7Q235.0 164.6 241.6 155.7M211.2 182.6Q191.7 158.7 186.2 150.9M211.0 173.5Q228.2 148.9 233.0 140.9M210.7 164.4Q193.9 142.7 189.1 135.7M210.5 155.3Q225.3 132.5 229.5 125.1M210.1 146.2Q197.2 125.8 193.5 119.2M209.8 137.1Q222.0 118.7 225.5 112.7"/><path class="st" d="M199.0 544.0 L200.0 530.0 L200.5 522.0 L201.1 514.0 L201.6 506.0 L202.1 498.0 L202.6 490.0 L203.2 482.0 L203.7 474.0 L204.2 466.0 L204.7 458.0 L205.2 450.0 L205.6 442.0 L206.1 434.0 L206.6 426.0 L207.0 418.0 L207.4 410.0 L207.8 402.0 L208.2 394.0 L208.6 386.0 L209.0 378.0 L209.3 370.0 L209.7 362.0 L210.0 354.0 L210.2 346.0 L210.5 338.0 L210.8 330.0 L211.0 322.0 L211.2 314.0 L211.4 306.0 L211.5 298.0 L211.7 290.0 L211.8 282.0 L211.9 274.0 L211.9 266.0 L212.0 258.0 L212.0 250.0 L212.0 242.0 L212.0 234.0 L211.9 226.0 L211.8 218.0 L211.7 210.0 L211.6 202.0 L211.5 194.0 L211.3 186.0 L211.1 178.0 L210.9 170.0 L210.7 162.0 L210.4 154.0 L210.1 146.0 L209.8 138.0 L209.5 130.0"/><path class="st rg" d="M209.5 130.0 L209.2 122.0 L208.8 114.0 L208.5 106.0 L208.1 98.0 L207.7 90.0 L207.3 82.0 L206.8 74.0 L206.4 66.0 L205.9 58.0 L205.4 50.0"/></g>
+        <g class="grow"><path class="pn" d="M392.0 528.4C391.0 526.7 389.0 525.7 387.7 525.6C388.3 527.0 390.1 528.4 392.0 528.4ZM392.1 524.8C394.8 524.6 397.0 522.5 397.7 520.5C395.9 520.8 393.4 522.5 392.1 524.8ZM392.2 521.3C391.3 518.7 389.1 516.6 387.3 516.1C387.6 518.1 389.6 520.6 392.2 521.3ZM392.2 517.7C394.0 517.2 395.4 515.4 395.6 513.9C394.3 514.4 392.7 515.9 392.2 517.7ZM392.2 514.2C392.0 513.1 391.3 512.0 390.6 511.7C390.6 512.5 391.2 513.7 392.2 514.2Z"/><path class="pn rg" d="M392.1 510.6C392.6 510.3 392.9 509.7 392.9 509.2C392.5 509.4 392.1 510.0 392.1 510.6Z"/><path class="rb" d="M392.0 528.4Q388.6 526.4 387.7 525.6M392.1 524.8Q396.5 521.6 397.7 520.5M392.2 521.3Q388.3 517.4 387.3 516.1M392.2 517.7Q394.9 514.9 395.6 513.9M392.2 514.2Q390.9 512.3 390.6 511.7"/><path class="st" d="M391.0 544.0 L392.0 530.0 L392.0 529.7 L392.0 529.3 L392.0 529.0 L392.0 528.7 L392.0 528.3 L392.1 528.0 L392.1 527.7 L392.1 527.3 L392.1 527.0 L392.1 526.7 L392.1 526.3 L392.1 526.0 L392.1 525.7 L392.1 525.3 L392.1 525.0 L392.1 524.7 L392.1 524.3 L392.1 524.0 L392.1 523.7 L392.2 523.3 L392.2 523.0 L392.2 522.7 L392.2 522.3 L392.2 522.0 L392.2 521.7 L392.2 521.3 L392.2 521.0 L392.2 520.7 L392.2 520.3 L392.2 520.0 L392.2 519.7 L392.2 519.3 L392.2 519.0 L392.2 518.7 L392.2 518.3 L392.2 518.0 L392.2 517.7 L392.2 517.3 L392.2 517.0 L392.2 516.7 L392.2 516.3 L392.2 516.0 L392.2 515.7 L392.2 515.3 L392.2 515.0 L392.2 514.7 L392.2 514.3 L392.2 514.0"/><path class="st rg" d="M392.2 514.0 L392.2 513.7 L392.2 513.3 L392.2 513.0 L392.1 512.7 L392.1 512.3 L392.1 512.0 L392.1 511.7 L392.1 511.3 L392.1 511.0 L392.1 510.7 L392.1 510.3 L392.1 510.0"/></g>
+        <rect class="tape" x="176" y="506" width="52" height="13" transform="rotate(-8 202 512)"/>
+        <rect class="tape" x="181" y="300" width="44" height="12" transform="rotate(6 203 306)"/>
+        <text class="val" x="232" y="54">100–120</text>
+        <text class="val" x="402" y="500">4–5</text>
+        <text class="hand" x="200" y="566" text-anchor="middle">Smokers</text>
+        <text class="hand" x="392" y="566" text-anchor="middle"><tspan x="392">Lifelong</tspan><tspan x="392" dy="19">non-smokers</tspan></text>
+        <text x="60" y="18" text-anchor="middle">per 1,000</text>
+      </svg>
+      <figcaption id="idea-cap">Drawn to the same scale: lung cancer by age 75, per 1,000 people. The outlined tip is the range.</figcaption>
+    </figure>
+    <div class="label" data-reveal="rise" style="--d:150ms">
+      <div class="lhead"><span>Reading the evidence</span><span>Group 1</span></div>
+      <h2 id="h-idea">Same certainty, very different size</h2>
+      <p class="lead">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+      <dl class="fields">
+        <dt>Tobacco smoking</dt><dd>About 10 to 12 in 100 smokers get lung cancer by age 75. About 4 to 5 in 1,000 lifelong non-smokers do.</dd>
+        <dt>Processed meat</dt><dd>Each 50 grams eaten every day raises the risk of bowel cancer by 18%.</dd>
+        <dt>Source</dt><dd>European data. Quoted from the Cancer Evidence Explorer.</dd>
+      </dl>
+      <div class="acts"><a class="ul" href="#">Seven ideas for reading a health headline →</a></div>
+    </div>
+  </section>
+
+  <!-- Sheet 3: Cancer Evidence Explorer -->
+  <section class="sheet tool" id="tools" aria-labelledby="h-cee">
+    <figure class="spec" data-reveal="fade">
+      <span class="mounted"><img src="media/plate-herbarium-1-1000.webp" srcset="media/plate-herbarium-1-1000.webp 730w, media/plate-herbarium-1.webp 1460w" sizes="(max-width:860px) 80vw, 40vw" width="730" height="1000" alt="An album page of eight pressed leaves: oak leaves, a fern frond and finely cut sprigs, pale green on cream paper." loading="lazy"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></span>
+    </figure>
+    <div class="label" data-reveal="rise" style="--d:150ms">
+      <div class="lhead"><span>Explorer</span><span>From the IARC Monographs</span></div>
+      <h2 id="h-cee">Cancer Evidence Explorer</h2>
+      <p class="lead">Which exposures can cause which cancers, and how sure the evidence is for each link.</p>
+      <dl class="fields">
+        <dt>Exposures</dt><dd class="num">185</dd>
+        <dt>Cancer types</dt><dd class="num">68</dd>
+        <dt>Links</dt><dd class="num">469</dd>
+        <dt>Languages</dt><dd class="num">10</dd>
+      </dl>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+    </div>
+  </section>
+
+  <!-- Sheet 4: Chronic Disease Evidence Explorer -->
+  <section class="sheet tool" aria-labelledby="h-cdee">
+    <figure class="spec" data-reveal="fade">
+      <span class="mounted"><img src="media/plate-herbarium-2-1000.webp" srcset="media/plate-herbarium-2-1000.webp 715w, media/plate-herbarium-2.webp 1430w" sizes="(max-width:860px) 80vw, 40vw" width="715" height="1000" alt="An album page of pressed leaves of various trees and plants, each named in a fine hand." loading="lazy"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></span>
+    </figure>
+    <div class="label" data-reveal="rise" style="--d:150ms">
+      <div class="lhead"><span>Explorer</span><span>Graded by strength of evidence</span></div>
+      <h2 id="h-cdee">Chronic Disease Evidence Explorer</h2>
+      <p class="lead">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+      <dl class="fields">
+        <dt>Risk factors</dt><dd class="num">124</dd>
+        <dt>Diseases</dt><dd class="num">45</dd>
+        <dt>Graded links</dt><dd class="num">356</dd>
+        <dt>Languages</dt><dd class="num">10</dd>
+      </dl>
+      <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="ul" href="#">About this tool</a></div>
+    </div>
+  </section>
+
+  <!-- Sheet 5: games and what you can do -->
+  <section class="sheet last" aria-label="What you can do, and games">
+    <div class="prints" id="games" data-reveal="fade">
+      <h2>For schools and families</h2>
+      <p>Learning by playing: three games.</p>
+      <ul>
+        <li><a href="#"><span class="mounted"><img src="media/game-sun-safety.webp" width="720" height="405" alt="Screenshot of Sol &amp; the UV Shield Quest" loading="lazy"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></span><b>Sol &amp; the UV Shield Quest</b><small>Skin cancer · ages 6–12</small></a></li>
+        <li><a href="#"><span class="mounted"><img src="media/game-lung-detective.webp" width="720" height="405" alt="Screenshot of The Lung Detective" loading="lazy"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></span><b>The Lung Detective</b><small>Lung cancer · ages 10–16</small></a></li>
+        <li><a href="#"><span class="mounted"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="Screenshot of A Town of 1,000" loading="lazy"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></span><b>A Town of 1,000</b><small>Breast cancer · ages 14+</small></a></li>
+      </ul>
+    </div>
+    <div class="label" id="act" data-reveal="rise" style="--d:150ms">
+      <div class="lhead"><span>What you can do</span><span>IARC (WHO) and partners</span></div>
+      <h2 id="h-act">Code Against Cancer</h2>
+      <p class="lead">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+      <dl class="fields">
+        <dt>Europe</dt><dd>Fourteen actions</dd>
+        <dt>Latin America and the Caribbean</dt><dd>Seventeen actions</dd>
+      </dl>
+      <div class="acts"><a class="btn" href="#">Read the recommendations</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div><a class="mark" href="#">EpiDetective</a>
+      <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p></div>
+    <ul><li><a href="#">How we check</a></li><li><a href="#">Report an error</a></li><li><a href="#">How to cite</a></li><li><a href="#">About</a></li></ul>
+    <p class="place">Lyon, France</p>
+  </div>
+  <p class="credits">Image credits. Herbarium specimen of <i>Aquilegia paui</i>, Université de Montpellier herbarium; Université de Montpellier; CC BY-SA 4.0. Eight pressed leaves, album page, Rijksmuseum RP-D-1996-1-18; Rijksmuseum; CC0. Pressed leaves of various trees and plants, album page, Rijksmuseum RP-D-1996-1-158; Rijksmuseum; CC0. The fronds are drawn for this page. Screenshots from the three EpiDetective games.</p>
+</footer>
+
+<script>
+/* sticky stacking: each sheet settles a little lower than the one beneath it; tall sheets scroll fully before they stick */
+(function(){
+  var root=document.documentElement, sheets=[].slice.call(document.querySelectorAll('.sheet'));
+  if(!sheets.length)return;
+  var still=root.classList.contains('still'), tops=[];
+  function layout(){
+    var vh=innerHeight;
+    sheets.forEach(function(s,i){
+      var want=14+i*10, h=s.offsetHeight, t=Math.min(want, vh-h-14);
+      tops[i]=t; s.style.top=t+'px';
+    });
+    cover();
+  }
+  function cover(){
+    if(still)return;
+    var vh=innerHeight;
+    for(var i=0;i<sheets.length;i++){
+      var c=0, nx=sheets[i+1];
+      if(nx){
+        var nt=nx.getBoundingClientRect().top, my=Math.max(tops[i],0);
+        c=Math.min(1,Math.max(0,(vh-nt)/(vh-my)));
+      }
+      sheets[i].style.setProperty('--c',c.toFixed(3));
+    }
+  }
+  var ticking=false;
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;cover();});}},{passive:true});
+  addEventListener('resize',layout);
+  addEventListener('load',layout);
+  layout();
+})();
+</script>
+</body>
+</html>

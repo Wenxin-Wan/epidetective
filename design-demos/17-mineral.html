@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>17 · Mineral — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour: limestone ground, granite text, basalt depth, travertine tablets, oxide used once or twice */
+  --limestone:#E7E4DE; --granite:#4A4C4E; --basalt:#1C1D1F; --travertine:#CFC4B2; --oxide:#8B5A3C;
+  --carve:#2A2B2D;                 /* inscription colour on pale stone */
+  --granite-2:#5A5C5E;             /* secondary text on limestone (5.5:1) */
+  --stone-light:#B9B6AF;           /* secondary text on basalt (8.6:1) */
+  --rule:rgba(28,29,31,.16); --rule-d:rgba(231,228,222,.16);
+  --display:"Marcellus","Trajan Pro","Optima","Palatino Linotype",Georgia,serif;
+  --sans:"Manrope","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* type scale 12 / 15 / 17 / 22 / 32 / 48 / 72 */
+  --t-xs:12px; --t-s:15px; --t-b:17px; --t-m:clamp(19px,1.7vw,22px); --t-l:clamp(26px,2.6vw,32px);
+  --t-xl:clamp(32px,3.6vw,48px); --t-2xl:clamp(34px,5vw,72px);
+  /* space */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,192px);
+  --gut:clamp(20px,5vw,72px); --max:1320px;
+  --ease:cubic-bezier(.2,.7,.1,1); --kit-dur:1500ms;
+  /* engraving: a lit lower lip and a shadowed upper edge */
+  --engrave:0 1px 0 rgba(255,255,255,.62),0 -1px 0 rgba(0,0,0,.16);
+  --engrave-d:0 -1px 0 rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.07);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--limestone);color:var(--granite);font-family:var(--sans);font-size:var(--t-b);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-synthesis:none}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:1px solid var(--oxide);outline-offset:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.insc{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;color:var(--carve);text-shadow:var(--engrave)}
+.label{font-size:var(--t-xs);letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--granite-2)}
+.lnk{text-decoration:none;font-weight:500;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:3px;transition:background-size .9s var(--ease)}
+.lnk:hover{background-size:0 1px;background-position:100% 100%}
+/* the one filled button: a polished slab */
+.btn{display:inline-block;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:19px 30px;background:var(--basalt);color:var(--limestone);transition:background .8s var(--ease)}
+.btn:hover{background:var(--granite)}
+.dark .btn{background:var(--limestone);color:var(--basalt)}
+.dark .btn:hover{background:#fff}
+.dark :focus-visible{outline-color:var(--limestone)}
+/* carved double rule */
+.carved{height:4px;border:0;border-top:1px solid rgba(28,29,31,.28);border-bottom:1px solid rgba(255,255,255,.7);margin:0}
+
+/* inscription reveal: letters sharpen from a slight blur */
+.ins .iw{display:inline-block;white-space:nowrap}
+.ins .ic{display:inline-block}
+html.js:not(.still) .ins .ic{transition:filter 1.6s var(--ease),opacity 1.6s var(--ease)}
+html.js:not(.still) .ins:not(.is-on) .ic{filter:blur(9px);opacity:0}
+
+/* ---------- hero: an inscription on marble ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#CFCCC7}
+.hero-stone{position:absolute;inset:0;margin:0}
+.hero-stone img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+/* a soft polish where the words are cut, so the inscription reads (AA) without hiding the stone */
+.hero-stone::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 62% 58% at 50% 54%,rgba(231,228,222,.62),rgba(231,228,222,.34) 60%,rgba(231,228,222,.1) 100%),
+  linear-gradient(180deg,rgba(231,228,222,.5),rgba(231,228,222,0) 16%)}
+.top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;flex-wrap:wrap;gap:12px 40px;padding:28px var(--gut);color:var(--basalt)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;margin-right:auto;text-shadow:var(--engrave)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 28px;font-size:14px;font-weight:500}
+.nav a,.lang a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .8s var(--ease)}
+.nav a:hover,.lang a:hover{background-size:100% 1px}
+.lang{display:flex;gap:14px;font-size:13px;font-weight:500;color:#3A3C3E}
+.lang a[aria-current]{color:var(--basalt);background-image:linear-gradient(var(--oxide),var(--oxide));background-size:100% 1px}
+.hero-in{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(120px,16vh,150px) var(--gut) clamp(56px,9vh,104px)}
+.hero h1{font-size:var(--t-2xl);line-height:1.14;letter-spacing:.07em;max-width:16.5em;padding-left:.07em}
+.hero .rule-wrap{position:relative;width:min(220px,40vw);margin:clamp(28px,4.4vh,48px) auto}
+.hero .rule-wrap::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;background:var(--oxide);transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 5px rgba(231,228,222,.9)}
+.hero .who{max-width:31em;font-size:var(--t-m);line-height:1.55;color:var(--basalt);font-weight:500}
+.find{margin-top:clamp(28px,4.4vh,44px);width:min(560px,100%);text-align:left}
+.find label{display:block;text-align:center;margin-bottom:10px;color:#3A3C3E}
+.field{display:flex;align-items:center;border-bottom:1px solid var(--basalt);background:rgba(231,228,222,.42)}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--basalt);font:500 16px/1.3 var(--sans);padding:15px 14px}
+.field input::placeholder{color:#4A4C4E}
+.field input:focus{outline:none}
+.field:focus-within{background:rgba(231,228,222,.7)}
+.field button{border:0;background:none;cursor:pointer;color:var(--basalt);font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:15px 14px}
+.try{margin-top:14px;text-align:center;font-size:var(--t-s);color:#3A3C3E}
+.try a{margin:0 6px;color:var(--basalt);font-weight:500}
+.hero .caveat{margin-top:clamp(28px,5vh,52px);font-size:var(--t-s);color:var(--basalt);max-width:34em}
+
+/* ---------- tablets ---------- */
+.sec{padding:var(--s6) 0}
+.tablet{position:relative;background:var(--travertine);padding:clamp(40px,6vw,96px) clamp(24px,6vw,96px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(0,0,0,.08)}
+.tablet::before{content:"";position:absolute;inset:14px;border:1px solid rgba(28,29,31,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.35);pointer-events:none}
+.tablet > *{position:relative}
+.tablet .insc{color:#26272A}
+.tablet p{color:var(--basalt)}
+.idea-head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:var(--s5);row-gap:var(--s3);align-items:end}
+.idea h2{font-size:var(--t-xl);line-height:1.12;letter-spacing:.07em}
+.idea-head p{font-size:var(--t-m);line-height:1.55;max-width:26em}
+.figs{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.15fr);margin:clamp(48px,6vw,88px) 0 0;padding:0;list-style:none}
+.figs li{padding:0 clamp(16px,2.6vw,40px);border-left:1px solid rgba(28,29,31,.2);box-shadow:inset 1px 0 0 rgba(255,255,255,.4);min-width:0}
+.figs li:first-child{padding-left:0;border-left:0;box-shadow:none}
+.figs .n{display:block;font-family:var(--display);font-size:clamp(44px,4.8vw,70px);line-height:1;letter-spacing:.02em;color:#26272A;text-shadow:var(--engrave);white-space:nowrap;font-variant-numeric:lining-nums}
+.figs p{margin-top:18px;font-size:var(--t-s);line-height:1.55;max-width:20em}
+.idea-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s2) var(--s4);margin-top:clamp(40px,5vw,72px);padding-top:var(--s3);border-top:1px solid rgba(28,29,31,.2);font-size:var(--t-s)}
+
+/* the four labels, as a frieze */
+.labels{margin-top:var(--s6)}
+.labels-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s2) var(--s4);margin-bottom:var(--s5)}
+.labels-head h2{font-size:var(--t-l);letter-spacing:.08em;line-height:1.2}
+.labels-head p{max-width:30em;color:var(--granite-2)}
+.frieze{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none;border-top:1px solid rgba(28,29,31,.28);box-shadow:0 1px 0 rgba(255,255,255,.7)}
+.frieze li{padding:var(--s4) clamp(16px,2vw,32px) 0 0;min-width:0}
+.frieze li + li{padding-left:clamp(16px,2vw,32px);border-left:1px solid var(--rule)}
+.frieze .g{font-family:var(--display);font-size:clamp(30px,3vw,44px);line-height:1;letter-spacing:.04em;color:var(--carve);text-shadow:var(--engrave)}
+.frieze h3{margin-top:16px;font-family:var(--sans);font-weight:600;font-size:var(--t-b);letter-spacing:0;color:var(--basalt)}
+.frieze p{margin-top:8px;font-size:var(--t-s);color:var(--granite-2)}
+
+/* ---------- monoliths ---------- */
+.tools-head{text-align:center;margin-bottom:var(--s5)}
+.tools-head h2{font-size:var(--t-xl);letter-spacing:.08em;line-height:1.1}
+.tools-head p{margin-top:14px;color:var(--granite-2)}
+.monoliths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,48px)}
+.mono{position:relative;min-height:clamp(640px,64vw,900px);background:var(--basalt);color:var(--limestone);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;min-width:0}
+.mono .stone{position:absolute;inset:0;margin:0}
+.mono .stone img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.02);transform:scale(1.04);transition:transform 2.6s var(--ease)}
+.mono:hover .stone img{transform:scale(1)}
+.mono.a .stone img{object-position:84% 40%}
+.mono.b .stone img{object-position:24% 60%}
+.mono .stone::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(28,29,31,.96) 0%,rgba(28,29,31,.93) 46%,rgba(28,29,31,.62) 66%,rgba(28,29,31,.22) 100%)}
+.mono-in{position:relative;padding:clamp(28px,3.6vw,56px)}
+.mono h3{font-size:clamp(28px,2.9vw,42px);line-height:1.12;letter-spacing:.08em;text-transform:uppercase;text-shadow:var(--engrave-d);max-width:12em}
+.mono .desc{margin-top:var(--s3);color:#D6D3CC;max-width:30em}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s4) 0 0;border-top:1px solid var(--rule-d)}
+.spec div{display:flex;flex-direction:column-reverse;justify-content:flex-end;padding:20px 12px 0 0;min-width:0}
+.spec div + div{padding-left:16px;border-left:1px solid var(--rule-d)}
+.spec dd{margin:0;font-family:var(--display);font-size:clamp(36px,3.6vw,56px);line-height:1;letter-spacing:.02em;text-shadow:var(--engrave-d)}
+.spec dt{margin-top:10px;font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--stone-light)}
+.mono .note{margin-top:var(--s3);font-size:var(--t-s);color:var(--stone-light)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-top:var(--s4)}
+.acts .lnk{font-size:var(--t-s)}
+
+/* ---------- code against cancer ---------- */
+.code .tablet{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:var(--s5);row-gap:var(--s4);align-items:start}
+.code h2{font-size:var(--t-xl);letter-spacing:.08em;line-height:1.12}
+.code-txt > p{font-size:var(--t-m);line-height:1.55;max-width:26em}
+.counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:var(--s4) 0;border-top:1px solid rgba(28,29,31,.2)}
+.counts div{padding:20px 16px 0 0;min-width:0}
+.counts div + div{padding-left:20px;border-left:1px solid rgba(28,29,31,.2)}
+.counts b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(48px,5vw,72px);line-height:1;color:#26272A;text-shadow:var(--engrave)}
+.counts span{display:block;margin-top:10px;font-size:var(--t-s)}
+
+/* ---------- games ---------- */
+.games-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s2) var(--s4)}
+.games h2{font-size:var(--t-l);letter-spacing:.08em}
+.games-head p{color:var(--granite-2)}
+.games ul{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.game a{display:grid;grid-template-columns:clamp(120px,11vw,160px) minmax(0,1fr);column-gap:20px;align-items:center;text-decoration:none}
+.game .frame{grid-row:1/3;display:block;padding:6px;background:var(--travertine);box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+.game img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(.55) sepia(.12) contrast(.95);transition:filter 1.2s var(--ease)}
+.game a:hover img{filter:none}
+.game h3{align-self:end;font-family:var(--sans);font-weight:600;font-size:var(--t-b);line-height:1.3;letter-spacing:0;color:var(--basalt)}
+.game span.m{align-self:start;display:block;margin-top:4px;font-size:var(--t-s);color:var(--granite-2)}
+
+/* ---------- footer ---------- */
+footer{background:var(--basalt);color:var(--limestone);padding:var(--s6) 0 56px}
+.f-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--s5);row-gap:var(--s4)}
+.f-mark{font-family:var(--display);font-size:clamp(28px,3vw,40px);letter-spacing:.2em;text-transform:uppercase;text-shadow:var(--engrave-d);line-height:1.1}
+.f-place{margin-top:var(--s2);font-size:var(--t-s);color:var(--stone-light)}
+.f-links{list-style:none;margin:0 0 var(--s3);padding:0;display:flex;flex-wrap:wrap;gap:10px 30px;font-size:var(--t-s);font-weight:500}
+.f-text{color:#D6D3CC;max-width:36em}
+.credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--rule-d);font-size:12.5px;color:var(--stone-light);line-height:1.6}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .idea-head,.code .tablet,.f-grid{grid-template-columns:minmax(0,1fr)}
+  .frieze{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s4)}
+  .frieze li:nth-child(3){padding-left:0;border-left:0}
+  .monoliths{grid-template-columns:minmax(0,1fr)}
+  .games ul{grid-template-columns:minmax(0,1fr);max-width:540px;gap:var(--s3)}
+  .mono{min-height:clamp(560px,110vw,760px)}
+}
+@media (max-width:700px){
+  .figs{grid-template-columns:minmax(0,1fr)}
+  .figs li,.figs li:first-child{padding:24px 0 0;border-left:0;box-shadow:none;border-top:1px solid rgba(28,29,31,.2);margin-top:24px}
+  .figs li:first-child{margin-top:0}
+  .frieze{grid-template-columns:minmax(0,1fr)}
+  .frieze li + li{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .games ul{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  .hero h1{letter-spacing:.05em}
+  .hero-in{padding-top:196px}
+  .tablet::before{inset:8px}
+}
+@media (max-width:420px){
+  .spec div + div{padding-left:10px}
+  .spec dt{letter-spacing:.08em}
+  .nav{gap:6px 18px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav class="nav" aria-label="Main">
+    <a href="#tools">Tools</a><a href="#idea">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+  </nav>
+  <nav class="lang" aria-label="Language">
+    <a href="#" aria-current="true" lang="en">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <figure class="hero-stone" aria-hidden="true">
+      <img src="media/photo-stone-marble.webp" srcset="media/photo-stone-marble-1000.webp 1000w, media/photo-stone-marble.webp 2000w" sizes="100vw" width="2000" height="1333" alt="" fetchpriority="high">
+    </figure>
+    <div class="hero-in">
+      <h1 class="insc" data-inscribe>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+      <div class="rule-wrap" data-reveal="fade" style="--d:1600ms"><hr class="carved"></div>
+      <p class="who" data-reveal="fade" style="--d:1900ms">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+      <form class="find" role="search" onsubmit="return false" data-reveal="fade" style="--d:2200ms">
+        <label class="label" for="q">Look something up</label>
+        <div class="field">
+          <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off">
+          <button type="submit">Search</button>
+        </div>
+        <p class="try">Try <a href="#">aspartame</a>·<a href="#">stroke</a>·<a href="#">coffee</a></p>
+      </form>
+      <p class="caveat" data-reveal="fade" style="--d:2500ms">They describe whole populations, not what caused any one person’s illness.</p>
+    </div>
+  </section>
+
+  <section class="sec idea" id="idea" aria-labelledby="idea-h">
+    <div class="wrap">
+      <div class="tablet">
+        <div class="idea-head">
+          <h2 class="insc" id="idea-h" data-inscribe>Same certainty, very different size</h2>
+          <p data-reveal="fade" style="--d:400ms">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        </div>
+        <ul class="figs">
+          <li data-reveal="fade"><span class="n">100–120</span><p>in 1,000 smokers get lung cancer by age 75: about 10 to 12 in every 100.</p></li>
+          <li data-reveal="fade" style="--d:250ms"><span class="n">4–5</span><p>in 1,000 lifelong non-smokers do.</p></li>
+          <li data-reveal="fade" style="--d:500ms"><span class="n">18%</span><p>more bowel cancer risk for each 50 grams of processed meat eaten every day.</p></li>
+        </ul>
+        <div class="idea-foot">
+          <p>European data. Quoted from the Cancer Evidence Explorer.</p>
+          <a class="lnk" href="#">Seven ideas for reading a health headline →</a>
+        </div>
+      </div>
+
+      <div class="labels" aria-labelledby="labels-h">
+        <div class="labels-head">
+          <h2 class="insc" id="labels-h" data-inscribe>The four labels</h2>
+          <p>How sure IARC is that something can cause cancer in people. None of them says how large the risk is.</p>
+        </div>
+        <ul class="frieze">
+          <li data-reveal="fade"><span class="g">Group 1</span><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></li>
+          <li data-reveal="fade" style="--d:150ms"><span class="g">Group 2A</span><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></li>
+          <li data-reveal="fade" style="--d:300ms"><span class="g">Group 2B</span><h3>Possible cause</h3><p>The agent may cause cancer in people. Aspartame is in this group.</p></li>
+          <li data-reveal="fade" style="--d:450ms"><span class="g">Group 3</span><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tools" id="tools" aria-labelledby="tools-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2 class="insc" id="tools-h" data-inscribe>The explorers</h2>
+        <p>Two reference tools, free to use, each in 10 languages.</p>
+      </div>
+      <div class="monoliths">
+        <article class="mono a dark" aria-labelledby="t1" data-reveal="rise">
+          <figure class="stone" aria-hidden="true"><img src="media/photo-stone-ruskeala-1000.webp" srcset="media/photo-stone-ruskeala-1000.webp 1000w, media/photo-stone-ruskeala.webp 2000w" sizes="(max-width:1000px) 92vw, 46vw" width="1000" height="667" alt="" loading="lazy"></figure>
+          <div class="mono-in">
+            <h3 id="t1">Cancer Evidence Explorer</h3>
+            <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+            <dl class="spec">
+              <div><dt>Exposures</dt><dd>185</dd></div>
+              <div><dt>Cancer types</dt><dd>68</dd></div>
+              <div><dt>Links</dt><dd>469</dd></div>
+            </dl>
+            <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></div>
+          </div>
+        </article>
+        <article class="mono b dark" aria-labelledby="t2" data-reveal="rise" style="--d:250ms">
+          <figure class="stone" aria-hidden="true"><img src="media/photo-stone-ruskeala-1000.webp" srcset="media/photo-stone-ruskeala-1000.webp 1000w, media/photo-stone-ruskeala.webp 2000w" sizes="(max-width:1000px) 92vw, 46vw" width="1000" height="667" alt="" loading="lazy"></figure>
+          <div class="mono-in">
+            <h3 id="t2">Chronic Disease Evidence Explorer</h3>
+            <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+            <dl class="spec">
+              <div><dt>Risk factors</dt><dd>124</dd></div>
+              <div><dt>Diseases</dt><dd>45</dd></div>
+              <div><dt>Graded links</dt><dd>356</dd></div>
+            </dl>
+            <div class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec code" id="code" aria-labelledby="code-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="tablet">
+        <h2 class="insc" id="code-h" data-inscribe>Code Against Cancer</h2>
+        <div class="code-txt" data-reveal="fade" style="--d:300ms">
+          <p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+          <div class="counts">
+            <div><b>14</b><span>actions for Europe</span></div>
+            <div><b>17</b><span>for Latin America and the Caribbean</span></div>
+          </div>
+          <a class="btn" href="#">Read the recommendations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec games" id="games" aria-labelledby="games-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="games-head">
+        <h2 class="insc" id="games-h">For schools and families</h2>
+        <p>Learning by playing: three games.</p>
+      </div>
+      <ul>
+        <li class="game" data-reveal="fade"><a href="#"><span class="frame"><img src="media/game-sun-safety.webp" width="720" height="405" alt="" loading="lazy"></span><h3>Sol &amp; the UV Shield Quest</h3><span class="m">Skin cancer · ages 6–12</span></a></li>
+        <li class="game" data-reveal="fade" style="--d:150ms"><a href="#"><span class="frame"><img src="media/game-lung-detective.webp" width="720" height="405" alt="" loading="lazy"></span><h3>The Lung Detective</h3><span class="m">Lung cancer · ages 10–16</span></a></li>
+        <li class="game" data-reveal="fade" style="--d:300ms"><a href="#"><span class="frame"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="" loading="lazy"></span><h3>A Town of 1,000</h3><span class="m">Breast cancer · ages 14+</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="about" class="dark">
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <p class="f-mark">EpiDetective</p>
+        <p class="f-place">Lyon, France</p>
+      </div>
+      <div>
+        <ul class="f-links">
+          <li><a class="lnk" href="#">How we check</a></li><li><a class="lnk" href="#">Report an error</a></li><li><a class="lnk" href="#">How to cite</a></li><li><a class="lnk" href="#">About</a></li>
+        </ul>
+        <p class="f-text">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      </div>
+    </div>
+    <p class="credits">Photographs: Marble, Kymi, Euboea, Greece, by Jebulon, CC0 · Marble wall of Ruskeala, by Aleksander Kaasik, CC BY-SA 4.0. Both via Wikimedia Commons. Game images: EpiDetective.</p>
+  </div>
+</footer>
+
+<script>
+/* Inscription reveal: each heading marked data-inscribe is cut letter by letter; the letters sharpen from a slight blur. */
+(function () {
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var els = Array.prototype.slice.call(document.querySelectorAll("[data-inscribe]"));
+  if (still || !("IntersectionObserver" in window)) return;
+  document.documentElement.classList.add("js");
+  els.forEach(function (el, k) {
+    var text = el.textContent.replace(/\s+/g, " ").trim(), i = 0, base = k === 0 ? 250 : 0;
+    var step = Math.max(14, Math.min(34, 1500 / text.length));
+    el.setAttribute("aria-label", text);
+    var frag = document.createDocumentFragment();
+    text.split(" ").forEach(function (word, wi) {
+      if (wi) frag.appendChild(document.createTextNode(" "));
+      var w = document.createElement("span"); w.className = "iw"; w.setAttribute("aria-hidden", "true");
+      Array.from(word).forEach(function (ch) {
+        var c = document.createElement("span"); c.className = "ic"; c.textContent = ch;
+        c.style.transitionDelay = Math.round(base + i * step) + "ms"; i++; w.appendChild(c);
+      });
+      frag.appendChild(w);
+    });
+    el.textContent = ""; el.appendChild(frag); el.classList.add("ins");
+  });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { e.target.classList.add("is-on"); }); });
+    });
+  }, { threshold: 0.3 });
+  /* start once the inscription face has loaded, so letters do not change shape mid-reveal */
+  var started = false, start = function () { if (started) return; started = true; els.forEach(function (el) { io.observe(el); }); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1500);
+})();
+</script>
+</body>
+</html>
