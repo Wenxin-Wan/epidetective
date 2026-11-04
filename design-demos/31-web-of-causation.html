@@ -51,7 +51,7 @@ img,canvas{display:block;max-width:100%}
 
 /* ---------- cover: pinned stage ---------- */
 .cover{position:relative}
-.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;column-gap:var(--s5);padding:calc(var(--hdr) + var(--s4)) var(--gut) var(--s4);min-height:100vh}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;column-gap:var(--s5);padding:calc(var(--hdr) + var(--s4)) var(--gut) var(--s5);min-height:100vh}
 .js .cover{height:calc(100vh + 5 * 82vh);height:calc(100svh + 5 * 82svh)}
 .js .stage{position:sticky;top:0;height:100vh;height:100svh;min-height:520px;overflow:hidden}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:0;display:none}
@@ -225,7 +225,9 @@ img,canvas{display:block;max-width:100%}
   .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
   .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
   .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;padding:calc(var(--hdr) + 14px) 20px 18px}
-  .js .live .stage,.js .stage.live{padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+  .js .live .stage,.js .stage.live{padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+  .prog{justify-content:flex-end}
+  .prog .now{display:none}
   .slot{grid-column:1;grid-row:1}
   .find{grid-column:1;grid-row:2;margin-top:var(--s3)}
   .netbox,.fallback{grid-column:1;grid-row:3;min-height:200px}

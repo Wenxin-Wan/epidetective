@@ -51,7 +51,7 @@ img,canvas{display:block;max-width:100%}
 
 /* ---------- cover ---------- */
 .cover{position:relative}
-.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:var(--s4);padding:calc(var(--hdr) + var(--s3)) var(--gut) var(--s4);min-height:100vh}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:var(--s4);padding:calc(var(--hdr) + var(--s3)) var(--gut) var(--s5);min-height:100vh}
 .js .cover{height:calc(100vh + 4 * 90vh);height:calc(100svh + 4 * 90svh)}
 .js .stage{position:sticky;top:0;height:100vh;height:100svh;min-height:540px;overflow:hidden}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:1;display:none}
@@ -113,6 +113,10 @@ html:not(.js) .netbox{align-items:flex-start}
 .ln.d{border-top-style:dashed;border-top-color:var(--ink-2)}
 
 /* progress */
+.key{display:none}
+.js .live .key{display:flex;position:absolute;z-index:3;left:calc(var(--gut) + var(--colw) + var(--s4));bottom:22px;gap:6px 18px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font:400 var(--t12)/1 var(--sans);color:var(--ink-2);pointer-events:none}
+.key li{display:flex;align-items:center;gap:7px}
+.key .tick{display:inline-block;width:1.2px;height:10px;background:var(--ink)}
 .prog{display:none}
 .js .live .prog{display:flex;position:absolute;z-index:3;right:var(--gut);bottom:18px;align-items:center;gap:14px;font:400 var(--t12)/1 var(--sans);color:var(--ink-2);letter-spacing:.04em}
 .prog ol{display:flex;list-style:none;margin:0;padding:0;gap:2px}
@@ -218,7 +222,9 @@ html:not(.js) .netbox{align-items:flex-start}
   .find label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .find input{font-size:16px;padding:10px 0}
   .try{margin-top:6px;font-size:13px}
-  .js .live .prog{left:16px;right:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .js .live .prog{right:10px;left:auto;bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+  .prog #prog-now{display:none}
+  .js .live .key{display:none}
   .card{left:0!important;right:0;bottom:0;top:auto!important;width:auto!important;height:auto!important;max-height:62%;padding:18px 20px calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -24px 50px -30px rgba(31,27,22,.4)}
   .c-x{right:10px}
   .c-name{font-size:22px}
@@ -295,6 +301,7 @@ html:not(.js) .netbox{align-items:flex-start}
       <p class="try">Try <a href="#">aspartame</a> · <a href="#">stroke</a> · <a href="#">coffee</a></p>
     </form>
 
+    <ul class="key" aria-hidden="true"><li><span class="sw" style="background:var(--ox)"></span>Known cause</li><li><span class="sw" style="background:var(--gold)"></span>Probable cause</li><li><span class="sw" style="background:var(--grey)"></span>Possible cause</li><li><span class="tick"></span>Cancer type</li><li><span class="ln"></span>Established</li><li><span class="ln d"></span>Suspected</li></ul>
     <nav class="prog" aria-label="Story">
       <ol>
         <li><button type="button" aria-label="Start: the whole wheel" aria-current="step"></button></li>
