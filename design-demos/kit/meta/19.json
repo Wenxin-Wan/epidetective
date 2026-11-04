@@ -1,0 +1,31 @@
+{
+ "n": 19,
+ "slug": "19-collection",
+ "name": "Collection",
+ "line": "An image-first museum page: Hooke's engraving of cork cells hangs on a warm-grey wall beside the headline with its object label; the explorers are presented as permanent galleries, and a calm horizontal row of Redouté, Haeckel and Bradbury plates carries their museum labels.",
+ "palette": [
+  "#FFFFFF",
+  "#111111",
+  "#F2F0EC",
+  "#7A1F1F"
+ ],
+ "fonts": [
+  "Wix Madefor Display",
+  "Wix Madefor Text"
+ ],
+ "images": [
+  "media/plate-hooke-cork.webp",
+  "media/plate-hooke-cork-1000.webp",
+  "media/plate-redoute-lily-1000.webp",
+  "media/plate-haeckel-jellyfish-1000.webp",
+  "media/plate-redoute-rose-1000.webp",
+  "media/plate-haeckel-desmids-1000.webp",
+  "media/plate-bradbury-3-1000.webp",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Wix Madefor covers Cyrillic but not Han. Oxblood is used once as a full band (Code Against Cancer) and otherwise only for Group 1 tags and hovers. The object row scrolls sideways with scroll snap; on desktop two round arrow buttons step through it. Object labels quote only credits.json (maker, title, book and dates, licence)."
+}

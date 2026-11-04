@@ -1,0 +1,30 @@
+{
+ "n": 24,
+ "slug": "24-field-guide",
+ "name": "Field Guide",
+ "line": "A naturalist's field guide in book spreads: Bradbury's fern faces the title page; on Plate II, callout lines draw from three field marks to Redouté's rose (the full bloom for tobacco, a small bud for processed meat, the printed name for their shared Group 1 label); the four groups are look-alikes, the explorers two cloth-bound field guides and the games junior guides.",
+ "palette": [
+  "#F7F5EE",
+  "#222320",
+  "#4E6B3F",
+  "#6E8FA6",
+  "#E3B23C",
+  "#B5442F"
+ ],
+ "fonts": [
+  "Besley",
+  "Atkinson Hyperlegible"
+ ],
+ "images": [
+  "media/plate-bradbury-2.webp",
+  "media/plate-bradbury-2-1000.webp",
+  "media/plate-redoute-rose.webp",
+  "media/plate-redoute-rose-1000.webp",
+  "media/tool-cancer-network.svg",
+  "media/tool-chronic-network.svg",
+  "media/game-sun-safety.webp",
+  "media/game-lung-detective.webp",
+  "media/game-town-of-1000.webp"
+ ],
+ "notes": "Besley and Atkinson Hyperlegible are Latin-only on Google Fonts, so the RU and ZH pages would need other faces. Atkinson Hyperlegible draws a slashed zero by design, so key figures are set in Besley. The callout lines need JavaScript and a screen at least 861px wide; otherwise the numbered markers on the plate match the numbered notes. The chronic cover uses a darker sky (#46667C) so its cream title passes AA. The bloom and bud are a visual metaphor; the exact figures are in the text."
+}
