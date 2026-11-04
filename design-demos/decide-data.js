@@ -275,8 +275,8 @@ window.DIRECTIONS = [
   risk:"Long Russian and French names will need a condensed face.",
   type:"Archivo with its width axis (no Cyrillic)."},
  {n:40,cover:"network",slug:"territories",name:"Territories",fam:"net",tone:"light",media:["data"],mediaLabel:"A map of causes",motion:2,feel:["info","friendly"],dens:2,nat:0,lux:2,
-  s:{teach:4,calm:4,mem:4,long:3,lang:5,easy:2,kids:4},
-  line:"An abstract atlas: each kind of exposure is a territory, cancers sit on the borders, and scrolling pans from region to region.",
+  s:{teach:4,calm:4,mem:5,long:3,lang:5,easy:2,kids:4},
+  line:"An abstract atlas: each kind of exposure is a tinted territory, cancers sit on the borders, and scrolling flies from region to region.",
   refs:"Katy Börner’s Places & Spaces: Mapping Science; atlas and transit-map design.",
   fit:"Groups the web into regions people can name and remember.",
   risk:"Territories are a reading aid, not data; needs a clear note.",
@@ -353,8 +353,8 @@ window.DIRECTIONS = [
   type:"Bricolage Grotesque and Atkinson Hyperlegible (no Cyrillic)."}
 ];
 window.RECOMMEND = [
- {n:11, role:"My first choice", why:"One colour carries the whole site, so it is simple and instantly recognisable. Anna Atkins’s algae bring nature and the history of science; the explorers are printed white on blue like her plates; even the game pictures are toned to match. It feels expensive without being cold, and both typefaces cover Russian."},
- {n:13, role:"Calmest, and best for long reading", why:"A Victorian scientific book: wide margins, true small caps, sidenotes that show every source. It would carry the long pages (Reading the evidence, Work and cancer, How we check) better than any other direction, and EB Garamond covers Russian."},
- {n:30, role:"Most informative", why:"Your real cancer network grows like a plant on the front page, coloured by the strength of evidence. Nature and data become one image that nobody else could have. It needs the most code to keep up."},
- {n:16, role:"Most luxurious first impression", why:"A moonlit fjord, one horizon line through every section, and a page that moves from day to dusk. Closest to a luxury house; less informative, so it would need a strong second screen."}
+ {n:31, role:"My first choice", why:"The most direct answer to your brief: the real web of causation is the cover, ready to hover, tap and search, and a short pinned story walks from tobacco smoking to lung cancer to Group 1 and the lesson. Calm editorial type around it; Lora covers Russian. It is also the easiest of the network covers to carry through to the inner pages."},
+ {n:34, role:"Most beautiful network cover", why:"An ivory astrolabe: cancers round the rim, exposures inside, all 469 links bundled through the centre, and the wheel turns as you scroll to bring each organ system to the reading mark. The most luxurious way to show the whole web without a tangle."},
+ {n:40, role:"Most memorable and friendly", why:"An abstract atlas of causes: each kind of exposure is a territory, cancers sit on the borders between them, and the camera flies from region to region. Easy for the public and schools to remember, while staying exact."},
+ {n:41, role:"Most useful in everyday use", why:"Scroll down an index of exposures and cancers and the network beside it answers, entry by entry. It turns reading into exploring, and it would carry the long reference pages best."}
 ];
