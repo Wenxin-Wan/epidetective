@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>32 · Two Shores — EpiDetective demo</title>
+<meta name="description" content="What causes cancer and other chronic diseases, and how sure the evidence is. Exposures on one shore, cancers on the other, every link between them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --white:#FFFFFF; --black:#111111; --grey:#9A9A9A; --red:#D7261E; --ink-2:#555555; --rule:#E4E4E4; --wash:#F4F4F4;
+  --sans:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* type scale: 12 / 14 / 16 / 19 / 24 / 32 / 48 / 96 */
+  --t12:12px; --t14:14px; --t16:16px; --t19:19px; --t24:24px; --t32:clamp(25px,2.3vw,32px); --t48:clamp(34px,3.4vw,48px); --t96:clamp(52px,7.4vw,108px);
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,200px);
+  --gut:clamp(20px,4.4vw,64px); --colw:clamp(290px,26vw,380px); --hdr:84px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--black);font:400 var(--t16)/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"ss01"}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img,canvas{display:block;max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.wrap{width:100%;max-width:1312px;margin:0 auto;padding:0 var(--gut)}
+.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size 600ms var(--ease);padding-bottom:2px}
+.lnk:hover{background-size:100% 1.5px}
+.skip{position:absolute;left:var(--gut);top:-60px;z-index:20;background:var(--black);color:var(--white);padding:10px 14px;font:600 var(--t14)/1 var(--sans);text-decoration:none}
+.skip:focus{top:12px}
+
+/* ---------- header ---------- */
+.top{position:absolute;inset:0 0 auto 0;z-index:6;display:flex;align-items:baseline;gap:var(--s2) var(--s4);padding:28px var(--gut) 0;font:500 var(--t14)/1.3 var(--sans)}
+.mark{font:750 20px/1 var(--sans);letter-spacing:-.03em;text-decoration:none;margin-right:auto}
+.nav,.lang{display:flex;flex-wrap:wrap;gap:6px 26px}
+.nav a,.lang a{text-decoration:none;color:var(--black);background:linear-gradient(var(--black),var(--black)) 0 100%/0 1.5px no-repeat;transition:background-size 500ms var(--ease);padding-bottom:3px}
+.nav a:hover,.lang a:hover{background-size:100% 1.5px}
+.lang{gap:6px 14px;font-size:var(--t12);color:var(--ink-2)}
+.lang a{color:var(--ink-2)}
+.lang a[aria-current]{color:var(--black);background-size:100% 1.5px}
+
+/* ---------- cover ---------- */
+.cover{position:relative}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,var(--colw)) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:var(--s4);padding:calc(var(--hdr) + var(--s3)) var(--gut) var(--s4);min-height:100vh}
+.js .cover{height:calc(100vh + 4 * 85vh);height:calc(100svh + 4 * 85svh)}
+.js .stage{position:sticky;top:0;height:100vh;height:100svh;min-height:540px;overflow:hidden}
+#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:1;display:none}
+.js .live #cv{display:block}
+.netbox{grid-column:2;grid-row:1 / 3;min-height:0;position:relative;pointer-events:none}
+.still{width:100%;height:auto;max-width:720px;margin:0 auto}
+.js .still{display:none}
+.js .failed .still{display:block}
+.slot{grid-column:1;grid-row:1;position:relative;z-index:2;min-height:0}
+.find{grid-column:1;grid-row:2;position:relative;z-index:4;margin-top:var(--s4)}
+
+/* captions */
+.cap + .cap{margin-top:var(--s5)}
+.js .live .cap{position:absolute;left:0;right:0;bottom:0;margin:0;opacity:0;transform:translate3d(-14px,0,0);pointer-events:none;transition:opacity 600ms var(--ease),transform 900ms var(--ease)}
+.js .live .cap.up{transform:translate3d(0,-12px,0)}
+.js .live .cap.on{opacity:1;transform:none;pointer-events:auto;transition-delay:140ms}
+.js .live .slot.carded .cap.on{opacity:0;pointer-events:none;transition-delay:0ms}
+.cap h1{font:700 var(--t48)/1.0 var(--sans);letter-spacing:-.035em}
+.cap .who{margin-top:var(--s3);font:400 var(--t16)/1.55 var(--sans);max-width:26em}
+.cap .caveat{margin-top:var(--s2);font:400 var(--t14)/1.5 var(--sans);color:var(--ink-2);max-width:28em}
+.cap .n{display:block;font:700 var(--t96)/.8 var(--sans);letter-spacing:-.05em;margin-bottom:var(--s3);font-variant-numeric:lining-nums}
+.cap h2{font:700 var(--t32)/1.05 var(--sans);letter-spacing:-.03em}
+.cap p.b{margin-top:var(--s2);font:400 var(--t16)/1.55 var(--sans);color:var(--black)}
+.cap p.b .g{color:var(--ink-2)}
+.figs{margin:var(--s3) 0 0;padding:0;display:grid;gap:0;border-top:2px solid var(--black)}
+.figs div{display:grid;grid-template-columns:minmax(0,9.2ch) minmax(0,1fr);gap:var(--s2);align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule)}
+.figs dt{font:700 clamp(22px,2vw,28px)/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:lining-nums;white-space:nowrap}
+.figs dt.r{color:var(--red)}
+.figs dd{margin:0;font:400 13px/1.4 var(--sans)}
+.src{margin-top:12px;font:400 var(--t12)/1.5 var(--sans);color:var(--ink-2)}
+.more{display:inline-block;margin-top:10px;font:600 var(--t14)/1.3 var(--sans)}
+
+/* search */
+.find label{display:block;font:700 var(--t12)/1 var(--sans);letter-spacing:.02em;margin-bottom:10px}
+.fld{position:relative;display:flex;align-items:stretch;border-top:2px solid var(--black);border-bottom:1px solid var(--black)}
+.find input{flex:1;min-width:0;border:0;background:transparent;padding:13px 0;font:400 15px/1.3 var(--sans);color:var(--black);border-radius:0;-webkit-appearance:none;appearance:none}
+.find input::placeholder{color:#707070;opacity:1}
+.find input::-webkit-search-cancel-button{-webkit-appearance:none}
+.find input:focus{outline:none}
+.fld:focus-within{border-bottom-color:var(--red);box-shadow:0 1px 0 var(--red)}
+.find button[type=submit]{border:0;background:var(--black);color:var(--white);margin:6px 0 6px var(--s2);padding:0 16px;font:600 var(--t14)/1 var(--sans);cursor:pointer}
+.find button[type=submit]:hover{background:var(--red)}
+.try{margin-top:12px;font:400 var(--t14)/1.4 var(--sans);color:var(--ink-2)}
+.try a{color:var(--black);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;margin:0 2px}
+.try a:hover{text-decoration-color:var(--red)}
+.none{margin-top:10px;font:500 var(--t14)/1.45 var(--sans);color:var(--black)}
+.none::before{content:"";display:inline-block;width:8px;height:8px;background:var(--red);margin-right:9px;vertical-align:1px}
+.results{position:absolute;left:0;right:0;top:100%;margin:0;padding:0;list-style:none;background:var(--white);border:1px solid var(--black);z-index:8;max-height:290px;overflow:auto}
+.results.up{top:auto;bottom:calc(100% + 2px)}
+.results li{display:flex;align-items:baseline;gap:12px;padding:10px 14px;cursor:pointer;font:500 15px/1.3 var(--sans);border-bottom:1px solid var(--rule)}
+.results li:last-child{border-bottom:0}
+.results li .o-n{flex:1;min-width:0}
+.results li .o-k{flex:none;font:400 var(--t12)/1.3 var(--sans);color:var(--ink-2)}
+.results li[aria-selected=true],.results li:hover{background:var(--black);color:var(--white)}
+.results li[aria-selected=true] .o-k,.results li:hover .o-k{color:#CFCFCF}
+
+/* shore headings and progress */
+.heads{display:none}
+.js .live .heads{display:block;position:absolute;inset:0;z-index:2;pointer-events:none;font:700 var(--t12)/1.2 var(--sans)}
+.heads span{position:absolute;top:0;white-space:nowrap}
+.heads .r{text-align:left}
+.prog{display:none}
+.js .live .prog{display:flex;position:absolute;z-index:3;right:var(--gut);bottom:14px;gap:4px;align-items:center;font:600 var(--t12)/1 var(--sans)}
+.prog ol{display:flex;list-style:none;margin:0 10px 0 0;padding:0;gap:2px}
+.prog button{width:24px;height:24px;border:0;padding:0;background:none;cursor:pointer;position:relative}
+.prog button::before{content:"";position:absolute;left:4px;right:4px;top:11px;height:2px;background:var(--rule);transition:background 400ms}
+.prog button[aria-current]::before{background:var(--black)}
+
+/* card */
+.card{position:absolute;z-index:7;display:flex;flex-direction:column;background:var(--white);border-top:2px solid var(--black);padding:var(--s2) 0 0;
+  opacity:0;transform:translate3d(-12px,0,0);transition:opacity 450ms var(--ease),transform 650ms var(--ease)}
+.card.on{opacity:1;transform:none}
+.c-x{position:absolute;top:6px;right:-8px;width:36px;height:36px;border:0;background:none;cursor:pointer;color:var(--black)}
+.c-x:hover{color:var(--red)}
+.c-x svg{display:block;margin:auto}
+.c-kind{font:700 var(--t12)/1.3 var(--sans);padding-right:36px}
+.c-name{margin-top:8px;font:700 28px/1.05 var(--sans);letter-spacing:-.03em;padding-right:8px}
+.c-desc{margin-top:4px;font:400 15px/1.4 var(--sans);color:var(--ink-2)}
+.c-group{margin-top:10px;display:flex;align-items:center;gap:9px;font:600 13px/1.3 var(--sans)}
+.c-count{margin-top:4px;font:400 13px/1.3 var(--sans);color:var(--ink-2)}
+.c-list{list-style:none;margin:var(--s2) 0 0;padding:0;border-top:1px solid var(--black);overflow:auto;flex:1 1 auto;min-height:60px;overscroll-behavior:contain}
+.c-list li{border-bottom:1px solid var(--rule)}
+.c-list button{display:flex;width:100%;align-items:center;gap:10px;border:0;background:none;padding:8px 0;text-align:left;cursor:pointer;font:500 14px/1.3 var(--sans);color:var(--black)}
+.c-list button:hover{color:var(--red)}
+.c-list .nm{flex:1;min-width:0}
+.c-list .gr{flex:none;display:flex;align-items:center;gap:7px;font:400 11.5px/1 var(--sans);color:var(--ink-2)}
+.ln{display:inline-block;width:16px;height:0;border-top:1.5px solid var(--black);flex:none}
+.ln.d{border-top-style:dashed;border-top-color:var(--ink-2)}
+.tk{display:inline-block;width:12px;height:2px;flex:none;background:var(--black)}
+.tk.g1{background:var(--red)}.tk.g2b{background:var(--grey)}
+.c-open{margin-top:var(--s2);font:700 var(--t14)/1.3 var(--sans);align-self:flex-start}
+
+/* ---------- after the story ---------- */
+.sec{padding-top:var(--s6)}
+.rule2{border-top:2px solid var(--black)}
+.h-big{font:700 var(--t96)/.92 var(--sans);letter-spacing:-.05em;padding-top:var(--s3)}
+.h-sub{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4);margin-top:var(--s4);padding-bottom:var(--s5)}
+.h-sub p{font:400 var(--t19)/1.5 var(--sans);max-width:26em}
+.tool{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);padding:var(--s4) 0 var(--s5);border-top:1px solid var(--black)}
+.plate{margin:0;position:relative;aspect-ratio:16/10;background:var(--white)}
+.plate canvas,.plate img{position:absolute;inset:0;width:100%;height:100%}
+.plate img{object-fit:contain;padding:4%}
+.js .plate.drawn img{display:none}
+.plate figcaption{position:absolute;left:0;bottom:-28px;font:400 var(--t12)/1.3 var(--sans);color:var(--ink-2)}
+.tool-t{min-width:0}
+.tool .k{font:700 var(--t12)/1 var(--sans);display:flex;gap:10px;align-items:center}
+.tool h2{margin-top:0;font:700 var(--t48)/1 var(--sans);letter-spacing:-.04em}
+.tool .d{margin-top:var(--s3);font:400 var(--t19)/1.5 var(--sans);max-width:26em}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s4) 0 0;border-top:2px solid var(--black)}
+.three div{display:flex;flex-direction:column-reverse;padding:12px 12px 0 0;min-width:0}
+.three dd{margin:0;font:700 clamp(36px,3.6vw,54px)/1 var(--sans);letter-spacing:-.05em;font-variant-numeric:lining-nums}
+.three dt{margin-top:8px;font:400 var(--t12)/1.3 var(--sans);color:var(--ink-2)}
+.langs{margin-top:var(--s2);font:400 var(--t12)/1.3 var(--sans);color:var(--ink-2)}
+.acts{margin-top:var(--s4);display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s4)}
+.btn{display:inline-block;background:var(--black);color:var(--white);text-decoration:none;font:600 var(--t14)/1 var(--sans);padding:17px 24px;transition:background 400ms var(--ease)}
+.btn:hover{background:var(--red)}
+.acts .lnk{font:600 var(--t14)/1.3 var(--sans)}
+.code{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:end}
+.code .d{font:400 var(--t19)/1.5 var(--sans);max-width:26em}
+.cnt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4);margin:var(--s4) 0;border-top:2px solid var(--black)}
+.cnt div{display:flex;flex-direction:column-reverse;padding-top:12px;min-width:0}
+.cnt dd{margin:0;font:700 clamp(64px,8vw,128px)/.85 var(--sans);letter-spacing:-.06em;font-variant-numeric:lining-nums}
+.cnt dt{margin-top:12px;font:400 var(--t14)/1.4 var(--sans)}
+.gl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);border-top:1px solid var(--black);padding-top:var(--s3)}
+.gl a{display:block;text-decoration:none}
+.gl .ph{display:block;aspect-ratio:16/9;overflow:hidden;background:var(--wash)}
+.gl img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter 700ms var(--ease)}
+.gl a:hover img,.gl a:focus-visible img{filter:none}
+.gl .gt{display:block;margin-top:12px;font:700 var(--t19)/1.2 var(--sans);letter-spacing:-.02em}
+.gl .gm{display:block;margin-top:4px;font:400 var(--t12)/1.3 var(--sans);color:var(--ink-2)}
+.foot{margin-top:var(--s6);border-top:2px solid var(--black);padding:var(--s4) 0 calc(var(--s5) + 40px);font:400 var(--t14)/1.6 var(--sans)}
+.foot-g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:var(--s4)}
+.foot .mark{display:inline-block;font-size:24px;margin-bottom:var(--s2)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-weight:600}
+.foot p + p{margin-top:var(--s2)}
+.credits{margin-top:var(--s5);padding-top:var(--s2);border-top:1px solid var(--rule);font-size:var(--t12);line-height:1.6;color:var(--ink-2)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .h-sub,.tool,.code{grid-template-columns:minmax(0,1fr);gap:var(--s4)}
+  .plate figcaption{position:static;margin-top:8px}
+  .plate{margin-bottom:28px}
+  .gl{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:var(--s2)}
+  .foot-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .foot-g > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  :root{--hdr:92px}
+  .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
+  .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
+  .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);padding:calc(var(--hdr) + 12px) 16px calc(40px + env(safe-area-inset-bottom,0px))}
+  .slot{grid-column:1;grid-row:1}
+  .find{grid-column:1;grid-row:2;margin-top:14px}
+  .netbox{grid-column:1;grid-row:3;margin-top:28px;min-height:200px}
+  .js .live .slot{transition:height 600ms var(--ease)}
+  .js .live .cap{top:0;bottom:auto}
+  .cap h1{font-size:31px;line-height:1.02}
+  .cap .who{margin-top:12px;font-size:14.5px}
+  .cap .caveat{margin-top:6px;font-size:13px}
+  .cap .n{font-size:44px;margin-bottom:10px}
+  .cap h2{font-size:24px}
+  .cap p.b{margin-top:8px;font-size:14.5px}
+  .figs{margin-top:12px}
+  .figs div{padding:7px 0;grid-template-columns:minmax(0,7.4ch) minmax(0,1fr)}
+  .figs dt{font-size:20px}
+  .figs dd{font-size:12px}
+  .src{margin-top:8px;font-size:11px}
+  .more{margin-top:6px;font-size:13px}
+  .find label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .find input{font-size:16px;padding:10px 0}
+  .try{margin-top:6px;font-size:13px}
+  .js .live .prog{left:16px;right:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .card{left:0!important;right:0;bottom:0;top:auto!important;width:auto!important;height:auto!important;max-height:62%;padding:18px 20px calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -20px 40px -24px rgba(0,0,0,.3)}
+  .c-x{right:10px;top:8px}
+  .c-name{font-size:24px}
+  .c-list button{padding:11px 0}
+  .h-sub{grid-template-columns:minmax(0,1fr)}
+  .three dd{font-size:34px}
+  .gl{grid-template-columns:minmax(0,1fr)}
+  .foot-g{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .live .cap,.card,.lnk,.gl img{transition:none!important}
+}
+</style>
+<script src="kit/kit.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#tools">Skip to the explorers</a>
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav class="nav" aria-label="Main"><a href="#">Tools</a><a href="#">Reading the evidence</a><a href="#">Code Against Cancer</a><a href="#">Games</a><a href="#">About</a></nav>
+  <nav class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a></nav>
+</header>
+
+<main>
+<section class="cover" id="cover" aria-labelledby="h1">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="Two shores: 185 exposures on the left, 68 cancer types on the right, and the 469 links between them. Point at or tap a shore to read a name and its links; the search reaches every entry by keyboard."></canvas>
+    <div class="netbox" id="netbox">
+      <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
+      <div class="heads" aria-hidden="true"><span class="l" id="head-l">185 exposures</span><span class="r" id="head-r">68 cancer types</span></div>
+    </div>
+
+    <div class="slot" id="slot">
+      <div class="cap on">
+        <h1 id="h1" data-split>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+        <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+        <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+      </div>
+      <div class="cap">
+        <span class="n" aria-hidden="true">1</span>
+        <h2>Sorted by certainty</h2>
+        <p class="b">The left shore regroups by how sure IARC is: known causes at the top in red, then probable, then possible causes in grey.</p>
+      </div>
+      <div class="cap">
+        <span class="n" aria-hidden="true">2</span>
+        <h2>Sorted by number of links</h2>
+        <p class="b">Now the exposures linked to the most cancer types rise to the top. <span class="g">Each line is one link; a dashed line is a suspected link.</span></p>
+      </div>
+      <div class="cap">
+        <span class="n" aria-hidden="true">3</span>
+        <h2>Group 1 only</h2>
+        <p class="b">Known cause: the agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p>
+      </div>
+      <div class="cap">
+        <span class="n" aria-hidden="true">4</span>
+        <h2>Same certainty, very different size</h2>
+        <p class="b">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+        <dl class="figs">
+          <div><dt class="r">100–120</dt><dd>in 1,000 smokers get lung cancer by age 75 (about 10 to 12 in 100)</dd></div>
+          <div><dt>4–5</dt><dd>in 1,000 lifelong non-smokers do</dd></div>
+          <div><dt>18%</dt><dd>higher risk of bowel cancer for each 50 grams of processed meat eaten every day</dd></div>
+        </dl>
+        <p class="src">European data. Quoted from the Cancer Evidence Explorer.</p>
+        <a class="more lnk" href="#">Seven ideas for reading a health headline →</a>
+      </div>
+    </div>
+
+    <form class="find" id="find" role="search" onsubmit="return false" autocomplete="off">
+      <label for="q">Look something up</label>
+      <div class="fld">
+        <input id="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="results" spellcheck="false">
+        <button type="submit">Search</button>
+        <ul class="results" id="results" role="listbox" aria-label="Matches on the map" hidden></ul>
+      </div>
+      <p class="none" id="none" role="status" hidden>Not on this map. The explorers list every agent and risk factor they cover.</p>
+      <p class="try">Try <a href="#">aspartame</a> · <a href="#">stroke</a> · <a href="#">coffee</a></p>
+    </form>
+
+    <nav class="prog" aria-label="Story">
+      <ol>
+        <li><button type="button" aria-label="Start: sorted by category" aria-current="step"></button></li>
+        <li><button type="button" aria-label="1: Sorted by certainty"></button></li>
+        <li><button type="button" aria-label="2: Sorted by number of links"></button></li>
+        <li><button type="button" aria-label="3: Group 1 only"></button></li>
+        <li><button type="button" aria-label="4: Same certainty, very different size"></button></li>
+      </ol>
+      <span id="prog-now">Sorted by category</span>
+    </nav>
+
+    <aside class="card" id="card" aria-labelledby="c-name" hidden>
+      <button class="c-x" id="c-x" type="button" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+      <p class="c-kind" id="c-kind"></p>
+      <h2 class="c-name" id="c-name"></h2>
+      <p class="c-desc" id="c-desc" hidden></p>
+      <p class="c-group" id="c-group" hidden></p>
+      <p class="c-count" id="c-count"></p>
+      <ul class="c-list" id="c-list" aria-label="Links"></ul>
+      <a class="c-open lnk" href="#">Open in the explorer →</a>
+    </aside>
+    <p class="vh" id="live" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="sec" id="tools" aria-labelledby="tools-t">
+  <div class="wrap">
+    <div class="rule2">
+      <h2 class="h-big" id="tools-t" data-split>The explorers</h2>
+      <div class="h-sub"><p data-reveal="rise">Two reference works, free to use, each in 10 languages.</p><p data-reveal="rise" style="--d:120ms">Every entry names its sources.</p></div>
+    </div>
+    <article class="tool" aria-labelledby="t1">
+      <figure class="plate" data-reveal="fade">
+        <canvas data-plate="cancer" aria-hidden="true"></canvas>
+        <img src="media/tool-cancer-network.svg" width="1062" height="998" loading="lazy" alt="Network drawing of the Cancer Evidence Explorer: exposures linked to cancer types.">
+        <figcaption>Exposures, left; cancer types, right. Drawn from the explorer’s own data.</figcaption>
+      </figure>
+      <div class="tool-t" data-reveal="rise" style="--d:150ms">
+        <h2 id="t1">Cancer Evidence Explorer</h2>
+        <p class="d">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+        <dl class="three">
+          <div><dt>exposures</dt><dd>185</dd></div>
+          <div><dt>cancer types</dt><dd>68</dd></div>
+          <div><dt>links</dt><dd>469</dd></div>
+        </dl>
+        <p class="langs">10 languages</p>
+        <p class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></p>
+      </div>
+    </article>
+    <article class="tool" aria-labelledby="t2">
+      <figure class="plate" data-reveal="fade">
+        <canvas data-plate="chronic" aria-hidden="true"></canvas>
+        <img src="media/tool-chronic-network.svg" width="931" height="1006" loading="lazy" alt="Network drawing of the Chronic Disease Evidence Explorer: risk factors linked to chronic diseases.">
+        <figcaption>Risk factors, left; diseases, right. Drawn from the explorer’s own data.</figcaption>
+      </figure>
+      <div class="tool-t" data-reveal="rise" style="--d:150ms">
+        <h2 id="t2">Chronic Disease Evidence Explorer</h2>
+        <p class="d">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+        <dl class="three">
+          <div><dt>risk factors</dt><dd>124</dd></div>
+          <div><dt>diseases</dt><dd>45</dd></div>
+          <div><dt>graded links</dt><dd>356</dd></div>
+        </dl>
+        <p class="langs">10 languages</p>
+        <p class="acts"><a class="btn" href="#">Open the explorer</a><a class="lnk" href="#">About this tool</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="code-t">
+  <div class="wrap">
+    <div class="rule2">
+      <h2 class="h-big" id="code-t" data-split>Code Against Cancer</h2>
+    </div>
+    <div class="code">
+      <dl class="cnt" data-reveal="rise">
+        <div><dt>actions for Europe</dt><dd>14</dd></div>
+        <div><dt>for Latin America and the Caribbean</dt><dd>17</dd></div>
+      </dl>
+      <div data-reveal="rise" style="--d:150ms">
+        <p class="d">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+        <p class="acts"><a class="btn" href="#">Read the recommendations</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="games-t">
+  <div class="wrap">
+    <div class="rule2">
+      <h2 class="h-big" id="games-t" data-split>For schools and families</h2>
+      <div class="h-sub"><p data-reveal="rise">Learning by playing: three games.</p></div>
+    </div>
+    <ul class="gl">
+      <li data-reveal="rise"><a href="#"><span class="ph"><img src="media/game-sun-safety.webp" width="720" height="405" loading="lazy" alt="Sol &amp; the UV Shield Quest: a cartoon game scene in the sun"></span><span class="gt">Sol &amp; the UV Shield Quest</span><span class="gm">Skin cancer · ages 6–12</span></a></li>
+      <li data-reveal="rise" style="--d:120ms"><a href="#"><span class="ph"><img src="media/game-lung-detective.webp" width="720" height="405" loading="lazy" alt="The Lung Detective: a cartoon game scene in a living room"></span><span class="gt">The Lung Detective</span><span class="gm">Lung cancer · ages 10–16</span></a></li>
+      <li data-reveal="rise" style="--d:240ms"><a href="#"><span class="ph"><img src="media/game-town-of-1000.webp" width="720" height="405" loading="lazy" alt="A Town of 1,000: a cartoon town seen from above"></span><span class="gt">A Town of 1,000</span><span class="gm">Breast cancer · ages 14+</span></a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-g">
+      <div>
+        <a class="mark" href="#">EpiDetective</a>
+        <p>Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor.</p>
+        <p>A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      </div>
+      <ul>
+        <li><a class="lnk" href="#">How we check</a></li>
+        <li><a class="lnk" href="#">Report an error</a></li>
+        <li><a class="lnk" href="#">How to cite</a></li>
+        <li><a class="lnk" href="#">About</a></li>
+      </ul>
+      <div><p>Lyon, France</p></div>
+    </div>
+    <p class="credits">Images: the drawings on this page are made from the explorers’ own data (without JavaScript, the explorers’ network drawings stand in); game screenshots from the three EpiDetective games, shown in grey until pointed at. No photographs are used.</p>
+  </div>
+</footer>
+
+<script src="kit/net.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (!window.EpiNet || !document.querySelector("#cv").getContext) return;
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
+  var cover = $("#cover"), stage = $("#stage"), cv = $("#cv"), ctx = cv.getContext("2d"), netbox = $("#netbox"),
+      slot = $("#slot"), caps = $$(".cap"), dots = $$(".prog button"), progNow = $("#prog-now"), headL = $("#head-l"), headR = $("#head-r"),
+      card = $("#card"), live = $("#live"), q = $("#q"), list = $("#results"), none = $("#none"), form = $("#find");
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+  var COL = { white: tok("--white"), black: tok("--black"), grey: tok("--grey"), red: tok("--red"), ink2: tok("--ink-2"), rule: tok("--rule") };
+  var GC = { "1": COL.red, "2A": COL.black, "2B": COL.grey };
+  var SANS = '"Schibsted Grotesk", Helvetica, Arial, sans-serif';
+  var LAB = EpiNet.LABELS, RANK = { "1": 1, "2A": 2, "2B": 3 };
+  var CATS = ["Occupational", "Environmental", "Medical & pharmaceutical", "Infections", "Lifestyle & diet", "Radiation"];
+  var ORGANS = ["Lip, oral cavity & pharynx", "Eye, brain & CNS", "Respiratory & intrathoracic", "Breast", "Digestive organs", "Urinary tract",
+    "Female genital organs", "Male genital organs", "Skin", "Bone", "Mesothelium, endothelium & soft tissue", "Endocrine glands", "Lymphoid & haematopoietic", "Multiple / unspecified sites"];
+  var SHORT = { "Lip, oral cavity & pharynx": "Mouth & pharynx", "Eye, brain & CNS": "Eye, brain & CNS", "Respiratory & intrathoracic": "Respiratory",
+    "Mesothelium, endothelium & soft tissue": "Mesothelium & soft tissue", "Lymphoid & haematopoietic": "Lymphoid & blood", "Multiple / unspecified sites": "Multiple sites",
+    "Medical & pharmaceutical": "Medical", "Female genital organs": "Female genital", "Male genital organs": "Male genital", "Digestive organs": "Digestive" };
+
+  var G = null, N = [], L = [], E = [], C = [], byName = {};
+  var W = 0, H = 0, DPR = 1, phone = false, visible = true;
+  var BOX = { x: 0, y: 0, w: 1, h: 1 }, xL = 0, xR = 0, top = 0, bot = 0;
+  var hover = null, sel = null, matches = [], mset = new Set(), opts = [], act = -1, cardOn = false;
+  var step = -1, mode = "cat", g1only = false, story = { hi: null };
+  var groupsL = [], groupsR = [];
+  var t0 = 0, introDone = still, raf = 0, last = 0;
+
+  var STEPS = [
+    { mode: "cat", label: "Sorted by category" },
+    { mode: "group", label: "Sorted by certainty" },
+    { mode: "deg", label: "Sorted by number of links" },
+    { mode: "deg", g1: true, label: "Group 1 only" },
+    { mode: "deg", g1: true, hi: ["Tobacco smoking", "Processed meat"], label: "Same certainty, very different size" }
+  ];
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(t) { t = clamp(t, 0, 1); return 1 - Math.pow(1 - t, 3); }
+  function labelOf(d) { return d.short.replace(/\s*\((all types|unspecified)\)$/i, ""); }
+  function countText(d) { var n = d.links.length; return d.kind === "exposure" ? "Linked to " + n + (n === 1 ? " cancer type" : " cancer types") : "Linked to " + n + (n === 1 ? " exposure" : " exposures"); }
+  function nb(d) { return d.links.map(function (l) { return l.source === d ? l.target : l.source; }); }
+  function tickLen(d) { return d.kind === "exposure" ? 4 + Math.sqrt(d.degree) * 1.6 : 5 + Math.sqrt(d.degree) * 1.7; }
+
+  EpiNet.load("cancer").then(function (g) {
+    G = g; N = g.nodes; L = g.links;
+    E = N.filter(function (d) { return d.kind === "exposure"; }); C = N.filter(function (d) { return d.kind === "cancer"; });
+    N.forEach(function (d) { byName[d.name] = d; d.lab = labelOf(d); d.a = 0; d.ta = 1; d.e = 0; d.te = 0; d.y = 0; d.ty = 0; });
+    L.forEach(function (l) { l.a = 0; l.ta = 0; l.e = 0; l.te = 0; });
+    C.sort(function (a, b) { return ORGANS.indexOf(a.cat) - ORGANS.indexOf(b.cat) || b.degree - a.degree || a.short.localeCompare(b.short); });
+    stage.classList.add("live");
+    measure(true); bind(); onScroll(); retarget();
+    N.forEach(function (d) { d.y = d.ty; });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { kick(); });
+    plates();
+  }).catch(function () { stage.classList.add("failed"); });
+
+  /* ---------- the two shores ---------- */
+  function order() {
+    var list = E.slice();
+    if (mode === "cat") list.sort(function (a, b) { return CATS.indexOf(a.cat) - CATS.indexOf(b.cat) || b.degree - a.degree || a.short.localeCompare(b.short); });
+    else if (mode === "group") list.sort(function (a, b) { return RANK[a.group] - RANK[b.group] || CATS.indexOf(a.cat) - CATS.indexOf(b.cat) || b.degree - a.degree; });
+    else list.sort(function (a, b) { return b.degree - a.degree || RANK[a.group] - RANK[b.group] || a.short.localeCompare(b.short); });
+    return list;
+  }
+  function keyL(d) { return mode === "cat" ? d.cat : mode === "group" ? d.group : g1only ? "1" : "all"; }
+  function placeShore(list, keyf, gapU, x, side) {
+    var groups = [], cur = null;
+    list.forEach(function (d) { var k = keyf(d); if (!cur || cur.k !== k) { cur = { k: k, items: [] }; groups.push(cur); } cur.items.push(d); });
+    var units = list.length + (groups.length - 1) * gapU, stp = (bot - top) / Math.max(1, units), u = 0;
+    groups.forEach(function (gr, gi) {
+      if (gi) u += gapU;
+      gr.y0 = top + u * stp;
+      gr.items.forEach(function (d) { d.ty = top + (u + 0.5) * stp; d.x = x; u++; });
+      gr.y1 = top + u * stp; gr.side = side;
+    });
+    return groups;
+  }
+  function layoutShores() {
+    var list = order().filter(function (d) { return !g1only || d.group === "1"; });
+    E.forEach(function (d) { d.x = xL; });
+    groupsL = placeShore(list, keyL, phone ? 4 : 5, xL, "l");
+    groupsR = placeShore(C, function (d) { return d.cat; }, phone ? 1.6 : 2.2, xR, "r");
+  }
+  function measure(snap) {
+    var r = stage.getBoundingClientRect(), b = netbox.getBoundingClientRect();
+    var nw = r.width, nh = r.height, nd = Math.min(2.5, window.devicePixelRatio || 1);
+    if (nw !== W || nh !== H || nd !== DPR) { W = nw; H = nh; DPR = nd; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
+    phone = W < 760;
+    BOX = { x: b.left - r.left, y: b.top - r.top, w: Math.max(40, b.width), h: Math.max(40, b.height) };
+    var lw = phone ? 10 : clamp(BOX.w * 0.2, 118, 172), rw = phone ? 10 : clamp(BOX.w * 0.25, 130, 236);
+    xL = BOX.x + lw; xR = BOX.x + BOX.w - rw; top = BOX.y + (phone ? 4 : 30); bot = BOX.y + BOX.h - (phone ? 4 : 30);
+    headL.style.left = (xL - BOX.x - 120) + "px"; headL.style.width = "120px"; headL.style.textAlign = "right"; headL.style.paddingRight = "12px";
+    headR.style.left = (xR - BOX.x + 12) + "px";
+    if (!phone) { headL.style.top = headR.style.top = "0px"; } else { headL.style.top = headR.style.top = "-24px"; headL.style.left = "0px"; headL.style.textAlign = "left"; headL.style.paddingRight = "0"; headR.style.left = "auto"; headR.style.right = "0px"; }
+    layoutShores();
+    if (snap) N.forEach(function (d) { d.y = d.ty; });
+    if (!phone) { var sr = slot.getBoundingClientRect(); card.style.left = (sr.left - r.left) + "px"; card.style.top = (sr.top - r.top) + "px"; card.style.width = sr.width + "px"; card.style.height = sr.height + "px"; }
+    kick();
+  }
+
+  /* ---------- state ---------- */
+  function retarget() {
+    if (!G) return;
+    var focus = hover || sel;
+    N.forEach(function (d) { d.on = d.kind === "cancer" || !g1only || d.group === "1"; });
+    L.forEach(function (l) { l.on = l.source.on; });
+    if (focus) { focus.on = true; focus.links.forEach(function (l) { l.on = true; l.source.on = true; }); }
+    var hiN = focus ? [focus] : mset.size ? matches : story.hi, hset = hiN ? new Set(hiN) : null, lit = null;
+    if (hset) { lit = new Set(hiN); if (focus || !mset.size) hiN.forEach(function (d) { d.links.forEach(function (l) { if (l.on) { lit.add(l.source); lit.add(l.target); } }); }); }
+    N.forEach(function (d) {
+      var b = d.on ? 1 : 0;
+      d.ta = lit ? (lit.has(d) ? 1 : b * 0.35) : b;
+      d.te = hset && hset.has(d) ? 1 : lit && lit.has(d) ? 0.5 : 0;
+    });
+    L.forEach(function (l) {
+      var inc = hset && (hset.has(l.source) || hset.has(l.target)) && l.on;
+      l.te = inc ? 1 : 0;
+      l.ta = !l.on ? 0 : lit ? (inc ? (focus || story.hi && !mset.size ? 0.9 : 0.5) : 0.035) : (l.est ? 0.16 : 0.11);
+    });
+    kick();
+  }
+
+  function kick() { if (!raf && G && visible) raf = requestAnimationFrame(frame); }
+  function frame(t) {
+    raf = 0; if (!t0) t0 = t;
+    var dt = last ? Math.min(64, t - last) : 16; last = t;
+    var m = tick(dt);
+    if (!introDone && t - t0 > 2300) introDone = true;
+    draw(t);
+    if (m || !introDone) kick(); else last = 0;
+  }
+  function tick(dt) {
+    var a = still ? 1 : 1 - Math.exp(-dt / 220), ap = still ? 1 : 1 - Math.exp(-dt / 260), m = false;
+    for (var i = 0; i < N.length; i++) { var d = N[i];
+      if (Math.abs(d.ty - d.y) > 0.05) { d.y += (d.ty - d.y) * ap; m = true; } else d.y = d.ty;
+      if (Math.abs(d.ta - d.a) > 0.004) { d.a += (d.ta - d.a) * a; m = true; } else d.a = d.ta;
+      if (Math.abs(d.te - d.e) > 0.004) { d.e += (d.te - d.e) * a; m = true; } else d.e = d.te; }
+    for (var j = 0; j < L.length; j++) { var l = L[j];
+      if (Math.abs(l.ta - l.a) > 0.004) { l.a += (l.ta - l.a) * a; m = true; } else l.a = l.ta;
+      if (Math.abs(l.te - l.e) > 0.004) { l.e += (l.te - l.e) * a; m = true; } else l.e = l.te; }
+    return m;
+  }
+
+  /* ---------- drawing ---------- */
+  function curve(x1, y1, x2, y2, p) {
+    var mx = (x1 + x2) / 2;
+    ctx.beginPath(); ctx.moveTo(x1, y1);
+    if (p >= 1) { ctx.bezierCurveTo(mx, y1, mx, y2, x2, y2); return; }
+    /* partial curve: de Casteljau split at p */
+    var ax = x1 + (mx - x1) * p, ay = y1, bx = mx, by = y1 + (y2 - y1) * p, cx2 = mx + (x2 - mx) * p, cy2 = y2;
+    var dx = ax + (bx - ax) * p, dy = ay + (by - ay) * p, ex = bx + (cx2 - bx) * p, ey = by + (cy2 - by) * p;
+    ctx.bezierCurveTo(ax, ay, dx, dy, dx + (ex - dx) * p, dy + (ey - dy) * p);
+  }
+  function draw(t) {
+    var T = introDone ? 1e9 : t - t0;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+    var focus = hover || sel, pr = ease((T - 200) / 1600);
+    /* shores */
+    ctx.globalAlpha = 1; ctx.strokeStyle = COL.black; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(xL + .5, top - 8); ctx.lineTo(xL + .5, top - 8 + (bot - top + 16) * ease(T / 900)); ctx.moveTo(xR + .5, top - 8); ctx.lineTo(xR + .5, top - 8 + (bot - top + 16) * ease(T / 900)); ctx.stroke();
+    /* links */
+    for (var pass = 0; pass < 2; pass++) {
+      for (var j = 0; j < L.length; j++) {
+        var l = L[j]; if ((l.e >= 0.5) !== (pass === 1)) continue;
+        var p = ease((T - 500 - (l.source.y - top) / (bot - top) * 900) / 900), al = l.a * p; if (al < 0.008) continue;
+        ctx.globalAlpha = al;
+        ctx.strokeStyle = l.e > 0.5 && (story.hi && !focus && !mset.size) ? COL.red : COL.black;
+        ctx.lineWidth = 0.6 + l.e * 0.7;
+        ctx.setLineDash(l.est ? [] : [2.5, 2.5]);
+        curve(xL + 1, l.source.y, xR - 1, l.target.y, p); ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+    /* ticks */
+    for (var i = 0; i < N.length; i++) {
+      var d = N[i], al2 = d.a * pr; if (al2 < 0.01) continue;
+      var tl = tickLen(d) * (1 + d.e * 0.4), lw = d.e > 0.9 ? 2.2 : 1.3;
+      ctx.globalAlpha = al2; ctx.lineWidth = Math.min(lw, Math.max(1, (bot - top) / (d.kind === "exposure" ? 200 : 90)));
+      ctx.strokeStyle = d.kind === "exposure" ? GC[d.group] : COL.black;
+      ctx.beginPath();
+      if (d.kind === "exposure") { ctx.moveTo(xL - tl, d.y); ctx.lineTo(xL, d.y); } else { ctx.moveTo(xR, d.y); ctx.lineTo(xR + tl, d.y); }
+      ctx.stroke();
+    }
+    [sel, hover].forEach(function (n, z) {
+      if (!n) return; var x = n.kind === "exposure" ? xL : xR;
+      ctx.globalAlpha = z ? 0.7 : 1; ctx.fillStyle = COL.red; ctx.beginPath(); ctx.arc(x, n.y, 3.5, 0, 6.2832); ctx.fill();
+    });
+    labels(pr);
+    ctx.globalAlpha = 1;
+  }
+
+  var wcache = {};
+  function tw(font, s) { var key = font + "|" + s; if (!(key in wcache)) { ctx.font = font; wcache[key] = ctx.measureText(s).width; } return wcache[key]; }
+  function fitText(font, s, maxW) {
+    if (tw(font, s) <= maxW) return s;
+    var t = s.replace(/\s*\([^)]*\)/g, "");
+    if (tw(font, t) <= maxW) return t;
+    while (t.length > 4 && tw(font, t + "…") > maxW) t = t.slice(0, -1);
+    return t.replace(/[\s,;]+$/, "") + "…";
+  }
+  /* labels stacked in one column without overlaps, with leader lines back to their ticks */
+  function stack(items, lh, y0, y1) {
+    items.sort(function (a, b) { return a.y - b.y; });
+    var prev = -Infinity;
+    items.forEach(function (it) { it.ly = Math.max(it.y, prev + lh); prev = it.ly; });
+    var over2 = items.length ? items[items.length - 1].ly - y1 : 0;
+    if (over2 > 0) { var nxt = Infinity; for (var i = items.length - 1; i >= 0; i--) { items[i].ly = Math.min(items[i].ly - 0, nxt - lh, i === items.length - 1 ? y1 : Infinity); nxt = items[i].ly; } }
+    items.forEach(function (it) { it.ly = Math.max(y0, it.ly); });
+    return items;
+  }
+  function labels(pr) {
+    var focus = hover || sel, fs = phone ? 11 : 11.5, lh = fs + 3.5;
+    var fN = "500 " + fs + "px " + SANS, fB = "700 " + fs + "px " + SANS, fG = "700 " + (phone ? 10.5 : 11.5) + "px " + SANS;
+    ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+    var showL = [], showR = [];
+    if (focus) {
+      var o = nb(focus).filter(function (d) { return d.on !== false; });
+      (focus.kind === "exposure" ? showR : showL).push.apply(focus.kind === "exposure" ? showR : showL, o);
+      (focus.kind === "exposure" ? showL : showR).push(focus);
+    } else if (mset.size) {
+      matches.slice(0, phone ? 6 : 14).forEach(function (d) { (d.kind === "exposure" ? showL : showR).push(d); });
+    } else if (story.hi) {
+      story.hi.forEach(function (d) { showL.push(d); nb(d).forEach(function (c) { if (showR.indexOf(c) < 0) showR.push(c); }); });
+    } else if (mode === "deg" && !phone) {
+      E.filter(function (d) { return d.on; }).sort(function (a, b) { return b.degree - a.degree; }).slice(0, 6).forEach(function (d) { showL.push(d); });
+    }
+    var maxN = phone ? 9 : 30;
+    if (showL.length > maxN) showL = showL.sort(function (a, b) { return b.degree - a.degree; }).slice(0, maxN);
+    if (showR.length > maxN) showR = showR.sort(function (a, b) { return b.degree - a.degree; }).slice(0, maxN);
+    var gA = focus || mset.size || story.hi ? 0.12 : 1;
+    /* group labels and brackets */
+    function groupsDraw(groups, side, alpha) {
+      if (alpha <= 0.01) return;
+      var it = groups.map(function (gr) { return { y: (gr.y0 + gr.y1) / 2, gr: gr }; });
+      if (!phone) stack(it, lh + 1, top, bot);
+      it.forEach(function (o2) {
+        var gr = o2.gr, name = side === "l" ? (mode === "group" ? LAB.groupLong[gr.k] : mode === "cat" ? (SHORT[gr.k] || gr.k) : gr.k === "1" ? LAB.groupLong["1"] : "") : (SHORT[gr.k] || gr.k);
+        if (!name) return;
+        ctx.globalAlpha = alpha * pr; ctx.strokeStyle = COL.black; ctx.lineWidth = 1;
+        var bx = side === "l" ? xL - 16 - (phone ? -26 : 0) : xR + 16 + (phone ? -26 : 0);
+        if (!phone) { ctx.beginPath(); ctx.moveTo(bx, gr.y0 + 1); ctx.lineTo(bx, gr.y1 - 1); ctx.stroke(); }
+        ctx.font = fG; ctx.fillStyle = side === "l" && mode === "group" ? GC[gr.k] : COL.black;
+        if (phone) {
+          ctx.textAlign = side === "l" ? "left" : "right";
+          var px = side === "l" ? xL + 14 : xR - 14;
+          ctx.lineWidth = 3; ctx.strokeStyle = COL.white; ctx.strokeText(name, px, o2.y); ctx.fillText(name, px, o2.y);
+        } else {
+          ctx.textAlign = side === "l" ? "right" : "left";
+          var tx = side === "l" ? bx - 8 : bx + 8;
+          if (Math.abs(o2.ly - o2.y) > 1) { ctx.globalAlpha = alpha * pr * 0.5; ctx.beginPath(); ctx.moveTo(bx, o2.y); ctx.lineTo(side === "l" ? bx - 5 : bx + 5, o2.ly); ctx.stroke(); ctx.globalAlpha = alpha * pr; }
+          ctx.fillText(name, tx, o2.ly);
+        }
+      });
+      ctx.textAlign = "left";
+    }
+    var gl = phone ? (focus || mset.size || story.hi ? 0 : (mode === "cat" || mode === "group" ? 1 : 0)) : (showL.length && gA < 1 ? 0 : gA);
+    groupsDraw(groupsL, "l", gl);
+    groupsDraw(groupsR, "r", phone ? 0 : (showR.length && gA < 1 ? 0 : gA));
+    /* names */
+    function names(arr, side) {
+      if (!arr.length) return;
+      var it = arr.map(function (d) { return { y: d.y, d: d }; });
+      var y0 = phone ? BOX.y + 2 : top - 6, y1 = phone ? BOX.y + BOX.h - 2 : bot + 6;
+      stack(it, lh, y0, y1);
+      it.forEach(function (o2) {
+        var d = o2.d, strong = d === focus || (story.hi && story.hi.indexOf(d) >= 0) || mset.has(d);
+        ctx.font = strong ? fB : fN;
+        var x0 = side === "l" ? (phone ? xL + 22 : xL - tickLen(d) - 8) : (phone ? xR - 22 : xR + tickLen(d) + 8);
+        var maxW = phone ? (xR - xL) * 0.62 : side === "l" ? x0 - (BOX.x - 34) : W - 10 - x0;
+        var txt = fitText(ctx.font, d.lab, maxW), w = tw(ctx.font, txt);
+        var lx = side === "l" ? (phone ? x0 : x0 - w) : (phone ? x0 - w : x0);
+        if (!phone && side === "l") lx = Math.max(BOX.x - 40, lx);
+        ctx.globalAlpha = Math.min(1, d.a) * pr;
+        if (Math.abs(o2.ly - d.y) > 1.5) {
+          ctx.strokeStyle = COL.grey; ctx.lineWidth = 0.75; ctx.beginPath();
+          var sx = side === "l" ? (phone ? xL + 4 : xL - tickLen(d) - 2) : (phone ? xR - 4 : xR + tickLen(d) + 2);
+          ctx.moveTo(sx, d.y); ctx.lineTo(side === "l" ? (phone ? x0 - 3 : x0 + 3) : (phone ? x0 + 3 : x0 - 3), o2.ly); ctx.stroke();
+        }
+        ctx.lineWidth = 4; ctx.strokeStyle = COL.white; ctx.strokeText(txt, lx, o2.ly);
+        ctx.fillStyle = d === sel ? COL.red : (d.kind === "exposure" && d.group === "1" && strong ? COL.red : COL.black);
+        ctx.fillText(txt, lx, o2.ly);
+      });
+    }
+    names(showL, "l"); names(showR, "r");
+  }
+
+  /* ---------- interaction ---------- */
+  function local(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  function hit(x, y, touch) {
+    var side = null, band = touch ? 44 : 30;
+    if (phone) { side = x < BOX.x + BOX.w / 2 ? (x < xL + band + 20 ? "l" : null) : (x > xR - band - 20 ? "r" : null); }
+    else { if (x > xL - 150 && x < xL + band) side = "l"; else if (x > xR - band && x < xR + 200) side = "r"; }
+    if (!side || y < top - 10 || y > bot + 10) return null;
+    var pool = side === "l" ? E : C, best = null, bd = Infinity;
+    pool.forEach(function (d) { if (d.a < 0.3) return; var dd = Math.abs(d.y - y); if (dd < bd) { bd = dd; best = d; } });
+    return bd < (touch ? 16 : 10) ? best : null;
+  }
+  function announce(d) { live.textContent = d.short + ". " + (d.group ? LAB.groupLong[d.group] : "Cancer type, " + d.cat) + ". " + countText(d) + "."; }
+  function select(d, withCard) { sel = d; hover = null; if (withCard) openCard(d); else closeCard(); announce(d); retarget(); }
+  function clearSel() { if (!sel) return; sel = null; closeCard(); live.textContent = "Selection cleared."; retarget(); }
+  function openCard(d) {
+    $("#c-kind").textContent = d.kind === "exposure" ? "Exposure · " + d.cat : "Cancer type · " + d.cat;
+    $("#c-name").textContent = d.short;
+    var m = d.name.match(/\((a |an )([^)]*)\)\s*$/i), desc = $("#c-desc");
+    desc.hidden = !m; if (m) desc.textContent = (m[1] + m[2]).replace(/^./, function (c) { return c.toUpperCase(); }) + ".";
+    var gp = $("#c-group"); gp.hidden = !d.group;
+    if (d.group) { gp.innerHTML = '<span class="tk ' + (d.group === "1" ? "g1" : d.group === "2B" ? "g2b" : "") + '"></span>'; gp.appendChild(document.createTextNode(LAB.groupLong[d.group])); }
+    $("#c-count").textContent = countText(d);
+    var ul = $("#c-list"); ul.innerHTML = "";
+    d.links.slice().sort(function (a, b) {
+      var na = a.source === d ? a.target : a.source, nb2 = b.source === d ? b.target : b.source;
+      return (b.est - a.est) || na.short.localeCompare(nb2.short);
+    }).forEach(function (l) {
+      var o = l.source === d ? l.target : l.source, li = document.createElement("li"), bt = document.createElement("button");
+      bt.type = "button";
+      var nm = document.createElement("span"); nm.className = "nm"; nm.textContent = o.short;
+      var gr = document.createElement("span"); gr.className = "gr"; gr.innerHTML = '<span class="ln' + (l.est ? "" : " d") + '"></span>' + l.grade;
+      bt.appendChild(nm); bt.appendChild(gr); bt.setAttribute("aria-label", o.short + ": " + l.grade + " link");
+      bt.addEventListener("click", function () { select(o, true); });
+      li.appendChild(bt); ul.appendChild(li);
+    });
+    ul.scrollTop = 0; card.hidden = false; cardOn = true; slot.classList.add("carded");
+    requestAnimationFrame(function () { card.classList.add("on"); });
+  }
+  function closeCard() { if (!cardOn) return; cardOn = false; card.classList.remove("on"); card.hidden = true; slot.classList.remove("carded"); }
+
+  function bind() {
+    var downType = "mouse";
+    cv.addEventListener("pointerdown", function (e) { downType = e.pointerType || "mouse"; });
+    cv.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var p = local(e), d = hit(p.x, p.y, false);
+      if (d !== hover) { hover = d; cv.style.cursor = d ? "pointer" : ""; retarget(); }
+    });
+    cv.addEventListener("pointerleave", function () { if (hover) { hover = null; cv.style.cursor = ""; retarget(); } });
+    cv.addEventListener("click", function (e) { var p = local(e), d = hit(p.x, p.y, downType !== "mouse"); if (d) select(d, true); else clearSel(); });
+    $("#c-x").addEventListener("click", function () { clearSel(); q.focus({ preventScroll: true }); });
+    card.addEventListener("keydown", function (e) { if (e.key === "Escape") { clearSel(); q.focus({ preventScroll: true }); } });
+    q.addEventListener("input", function () { runSearch(q.value); });
+    q.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (list.hidden && opts.length) openList(); setAct(Math.min(opts.length - 1, act + 1)); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); setAct(Math.max(0, act - 1)); }
+      else if (e.key === "Enter") { e.preventDefault(); submit(); }
+      else if (e.key === "Escape") { if (!list.hidden) closeList(); else if (q.value) { q.value = ""; runSearch(""); } else clearSel(); }
+    });
+    q.addEventListener("focus", function () { if (opts.length && q.value.trim()) openList(); });
+    q.addEventListener("blur", function () { setTimeout(closeList, 150); });
+    form.addEventListener("submit", function (e) { e.preventDefault(); submit(); });
+    $$(".try a").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); q.value = a.textContent; runSearch(q.value); if (matches.length) choose(matches[0]); else { closeList(); none.hidden = false; } });
+    });
+    dots.forEach(function (b, i) { b.addEventListener("click", function () { goStep(i); }); });
+    caps.forEach(function (c, i) { c.addEventListener("focusin", function () { if (i !== step) goStep(i); }); });
+    addEventListener("scroll", onScroll, { passive: true });
+    var rt = 0;
+    addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { fitSlot(); measure(true); }, 80); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { measure(false); }).observe(netbox);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(stage);
+  }
+
+  /* ---------- search ---------- */
+  function runSearch(text) {
+    if (!G) return;
+    var tx = text.trim();
+    matches = tx ? EpiNet.search(G, tx) : []; mset = new Set(matches);
+    renderList(matches.slice(0, 6));
+    none.hidden = !(tx.length >= 2 && !matches.length);
+    if (tx && sel && !mset.has(sel)) { sel = null; closeCard(); }
+    retarget();
+  }
+  function renderList(items) {
+    list.innerHTML = ""; act = -1; opts = items;
+    items.forEach(function (d, i) {
+      var li = document.createElement("li");
+      li.id = "opt-" + i; li.setAttribute("role", "option"); li.setAttribute("aria-selected", "false");
+      var a = document.createElement("span"); a.className = "o-n"; a.textContent = d.short;
+      var b = document.createElement("span"); b.className = "o-k"; b.textContent = d.group ? LAB.groupLong[d.group] : "Cancer type";
+      li.appendChild(a); li.appendChild(b);
+      li.addEventListener("mousedown", function (e) { e.preventDefault(); choose(d); });
+      list.appendChild(li);
+    });
+    if (items.length) openList(); else closeList();
+  }
+  function openList() {
+    if (!opts.length) return; list.hidden = false; q.setAttribute("aria-expanded", "true");
+    var f = q.parentNode.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    list.classList.toggle("up", s.bottom - f.bottom < 250 && f.top - s.top > 300);
+  }
+  function closeList() { list.hidden = true; q.setAttribute("aria-expanded", "false"); q.removeAttribute("aria-activedescendant"); act = -1; }
+  function setAct(i) {
+    if (!opts.length) return; act = i;
+    $$("li", list).forEach(function (li, k) { li.setAttribute("aria-selected", k === i ? "true" : "false"); });
+    var el = $("#opt-" + i); if (el) { q.setAttribute("aria-activedescendant", el.id); el.scrollIntoView({ block: "nearest" }); }
+  }
+  function submit() {
+    if (!G) return; var tx = q.value.trim(); if (!tx) return;
+    var all = EpiNet.search(G, tx);
+    if (!all.length) { closeList(); none.hidden = false; return; }
+    choose(act >= 0 && opts[act] ? opts[act] : all[0]);
+  }
+  function choose(d) { closeList(); none.hidden = true; select(d, true); }
+
+  /* ---------- story ---------- */
+  function stepH() { return (cover.offsetHeight - stage.offsetHeight) / (STEPS.length - 1); }
+  function onScroll() {
+    if (!G) return;
+    var r = cover.getBoundingClientRect(), i = clamp(Math.floor(-r.top / stepH() + 0.42), 0, STEPS.length - 1);
+    if (i !== step) setStep(i);
+  }
+  function goStep(i) { scrollTo({ top: cover.getBoundingClientRect().top + scrollY + i * stepH() + 2, behavior: still ? "auto" : "smooth" }); }
+  function fitSlot() {
+    if (W >= 760) { slot.style.height = ""; return; }
+    var c = caps[Math.max(0, step)]; if (c) slot.style.height = c.offsetHeight + "px";
+  }
+  function setStep(i) {
+    step = i; var s = STEPS[i];
+    caps.forEach(function (c, k) { c.classList.toggle("on", k === i); c.classList.toggle("up", k < i); });
+    dots.forEach(function (b, k) { if (k === i) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    progNow.textContent = s.label;
+    mode = s.mode; g1only = !!s.g1;
+    story.hi = s.hi ? s.hi.map(function (n) { return byName[n]; }) : null;
+    hover = null; if (sel) { sel = null; closeCard(); }
+    fitSlot(); layoutShores(); retarget();
+  }
+  addEventListener("load", function () { fitSlot(); measure(false); });
+
+  /* ---------- explorer plates: the same two shores, drawn still ---------- */
+  function plates() {
+    var cans = $$("canvas[data-plate]"); if (!cans.length) return;
+    var CHRON = { risk: ["Tobacco", "Alcohol", "Diet", "Physical activity", "Metabolic", "Clinical", "Sleep & circadian", "Psychosocial", "Environment", "Occupational", "Infection", "Medicines", "Reproductive & hormonal", "Early life", "Drugs & other substances"] };
+    function render(c) {
+      var which = c.getAttribute("data-plate");
+      EpiNet.load(which).then(function (gr) {
+        var fig = c.parentNode, w = fig.clientWidth, h = fig.clientHeight, dpr = Math.min(2.5, devicePixelRatio || 1);
+        if (!w || !h) return;
+        c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+        var x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
+        var left = gr.nodes.filter(function (d) { return d.kind === "exposure" || d.kind === "risk"; }), right = gr.nodes.filter(function (d) { return d.kind === "cancer" || d.kind === "disease"; });
+        var lo = which === "cancer" ? CATS : CHRON.risk;
+        left.sort(function (a, b) { var ia = lo.indexOf(a.cat), ib = lo.indexOf(b.cat); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || b.degree - a.degree; });
+        right.sort(function (a, b) { return (which === "cancer" ? ORGANS.indexOf(a.cat) - ORGANS.indexOf(b.cat) : a.cat.localeCompare(b.cat)) || b.degree - a.degree; });
+        var t2 = 14, b2 = h - 14, xl = w * 0.16, xr = w * 0.84;
+        function place(arr, gap) {
+          var groups = 0, prev = null; arr.forEach(function (d) { if (d.cat !== prev) { groups++; prev = d.cat; } });
+          var units = arr.length + (groups - 1) * gap, s = (b2 - t2) / units, u = 0; prev = null;
+          arr.forEach(function (d, i) { if (i && d.cat !== prev) u += gap; prev = d.cat; d.py = t2 + (u + .5) * s; u++; });
+        }
+        place(left, 4); place(right, 2);
+        gr.links.forEach(function (l) {
+          var a = l.source.kind === "exposure" || l.source.kind === "risk" ? l.source : l.target, b = a === l.source ? l.target : l.source;
+          if (which === "cancer") { x.globalAlpha = l.est ? 0.2 : 0.12; x.setLineDash(l.est ? [] : [2, 2]); }
+          else { var gi = ["Strong", "Moderate", "Suggestive", "Weak", "Conflicting"].indexOf(l.grade); x.globalAlpha = [0.36, 0.2, 0.12, 0.08, 0.12][gi] || 0.1; x.setLineDash(l.grade === "Conflicting" ? [2, 2] : []); }
+          x.strokeStyle = COL.black; x.lineWidth = 0.6; var mx = (xl + xr) / 2;
+          x.beginPath(); x.moveTo(xl, a.py); x.bezierCurveTo(mx, a.py, mx, b.py, xr, b.py); x.stroke();
+        });
+        x.setLineDash([]); x.globalAlpha = 1; x.lineWidth = 1;
+        x.strokeStyle = COL.black; x.beginPath(); x.moveTo(xl + .5, t2 - 6); x.lineTo(xl + .5, b2 + 6); x.moveTo(xr + .5, t2 - 6); x.lineTo(xr + .5, b2 + 6); x.stroke();
+        left.forEach(function (d) { x.strokeStyle = d.group ? GC[d.group] : COL.black; x.beginPath(); x.moveTo(xl - 3 - Math.sqrt(d.degree) * 1.5, d.py); x.lineTo(xl, d.py); x.stroke(); });
+        right.forEach(function (d) { x.strokeStyle = COL.black; x.beginPath(); x.moveTo(xr, d.py); x.lineTo(xr + 4 + Math.sqrt(d.degree) * 1.5, d.py); x.stroke(); });
+        fig.classList.add("drawn");
+      });
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { render(e.target); io.unobserve(e.target); } }); }, { rootMargin: "300px" });
+      cans.forEach(function (c) { io.observe(c); });
+    } else cans.forEach(render);
+    var pt = 0;
+    addEventListener("resize", function () { clearTimeout(pt); pt = setTimeout(function () { cans.forEach(function (c) { if (c.parentNode.classList.contains("drawn")) render(c); }); }, 200); });
+  }
+})();
+</script>
+</body>
+</html>

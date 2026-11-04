@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>35 · Matrix — EpiDetective demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<script>document.documentElement.classList.add("nj");</script>
+<script src="kit/kit.js" defer></script>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* colour: a ledger. white paper, black ink, a pale grid, one red */
+  --paper:#FFFFFF; --ink:#121212; --grid:#EDEDED; --red:#B3261E; --grey:#8C8C8C;
+  --ink-2:#4A4A4A;   /* secondary text, 8.9:1 */
+  --ink-3:#6E6E6E;   /* small labels, 5.1:1 */
+  --wash:#F6F6F6;
+  --sans:"Geist","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  /* type scale 12 / 14 / 17 / 22 / 32 / 48 / 80 */
+  --t-xs:12px; --t-s:14px; --t-b:17px; --t-m:clamp(19px,1.6vw,22px); --t-l:clamp(26px,2.4vw,32px);
+  --t-xl:clamp(34px,3.6vw,48px); --t-2xl:clamp(48px,6.4vw,88px);
+  /* space */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:clamp(96px,12vw,200px);
+  --gut:clamp(16px,3.4vw,48px); --max:1440px;
+  --col:clamp(300px,27vw,400px); --gap:clamp(32px,4.4vw,72px);
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--t-b);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-synthesis:none;font-feature-settings:"ss01"}
+h1,h2,h3{margin:0;font-weight:500;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.mono{font-family:var(--mono);font-weight:400}
+.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:background-size .9s var(--ease),color .5s}
+.lnk:hover{background-size:0 1px;background-position:100% 100%;color:var(--red)}
+/* the one filled button: ink, square, quiet */
+.btn{display:inline-flex;align-items:center;gap:14px;font:500 15px/1 var(--sans);letter-spacing:-.005em;text-decoration:none;padding:16px 22px;background:var(--ink);color:var(--paper);transition:background .6s var(--ease)}
+.btn:hover{background:var(--red)}
+.btn span{transition:transform .6s var(--ease)}
+.btn:hover span{transform:translateX(4px)}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:center;flex-wrap:wrap;gap:10px 40px;padding:20px var(--gut);border-bottom:1px solid var(--grid);position:relative;z-index:3;background:var(--paper)}
+.mark{font-size:18px;font-weight:600;letter-spacing:-.025em;text-decoration:none;margin-right:auto}
+.nav{display:flex;flex-wrap:wrap;gap:4px 28px;font-size:var(--t-s);color:var(--ink-2)}
+.nav a,.lang a{text-decoration:none;transition:color .4s}
+.nav a:hover,.lang a:hover{color:var(--red)}
+.lang{display:flex;gap:14px;font-size:13px;color:var(--ink-3)}
+.lang a[aria-current]{color:var(--ink);font-weight:500}
+
+/* ---------- cover: without JavaScript a plain sequence ---------- */
+.cover{position:relative}
+.pin{padding:var(--s4) var(--gut) var(--s5)}
+.mxw{position:relative;margin:var(--s4) 0}
+.mxw .still{width:min(100%,720px);filter:grayscale(1) contrast(1.15);opacity:.85}
+.mxw canvas,.mxw .tip,.legend,.steps,.rd{display:none}
+.caps{display:grid;gap:var(--s5)}
+.cap h1{font-size:var(--t-xl);line-height:1.04;letter-spacing:-.035em;font-weight:500;max-width:11em}
+.cap h2{font-size:var(--t-l);line-height:1.1;letter-spacing:-.025em;max-width:13em}
+.cap .who{margin-top:var(--s3);font-size:var(--t-b);color:var(--ink-2);max-width:26em}
+.cap .caveat{margin-top:12px;font-size:var(--t-s);color:var(--ink-3);max-width:30em}
+.cap .ix{display:block;margin-bottom:14px;font:400 12px/1 var(--mono);color:var(--ink-3);letter-spacing:.02em}
+.cap .ix b{font-weight:500;color:var(--red)}
+.cap p.t{margin-top:var(--s2);font-size:var(--t-b);color:var(--ink-2);max-width:28em}
+.cap .key{display:inline-block;width:9px;height:9px;margin:0 2px 0 1px;vertical-align:0;background:var(--red)}
+.cap .key.o{background:none;box-shadow:inset 0 0 0 1.25px var(--red)}
+.figs{margin-top:var(--s3);border-top:1px solid var(--ink)}
+.figs div{display:grid;grid-template-columns:5.6em minmax(0,1fr);column-gap:var(--s2);align-items:baseline;padding:10px 0 11px;border-bottom:1px solid var(--grid)}
+.figs b{white-space:nowrap;font-weight:500;font-size:var(--t-m);letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums;color:var(--red)}
+.figs span{font-size:var(--t-s);line-height:1.45;color:var(--ink-2)}
+.src{margin-top:12px;font-size:var(--t-xs);color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between}
+.src a{color:var(--ink)}
+
+/* search */
+.find{margin-top:var(--s4);max-width:560px;position:relative}
+.find label{display:block;font-size:var(--t-xs);color:var(--ink-3);margin-bottom:6px}
+.field{display:flex;align-items:center;border-bottom:1px solid var(--ink);transition:border-color .5s}
+.field:focus-within{border-color:var(--red)}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:400 16px/1.3 var(--sans);padding:12px 0;border-radius:0;-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:#7A7A7A}
+.field input:focus{outline:none}
+.field input::-webkit-search-cancel-button{-webkit-appearance:none}
+.field button{border:0;background:none;cursor:pointer;font-size:var(--t-s);font-weight:500;padding:12px 0 12px 16px;transition:color .4s}
+.field button:hover{color:var(--red)}
+.try{margin-top:10px;font-size:var(--t-s);color:var(--ink-3)}
+.try a{color:var(--ink);margin-left:10px;text-underline-offset:3px;text-decoration-thickness:1px}
+.try a:hover{color:var(--red)}
+.qlist,.qmsg{position:absolute;left:0;right:0;top:calc(100% - 26px);z-index:8;background:var(--paper);border:1px solid var(--ink);border-top:0}
+.qlist[hidden],.qmsg:empty{display:none}
+.qlist li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:9px 12px;cursor:pointer;font-size:15px;line-height:1.3}
+.qlist li+li{border-top:1px solid var(--grid)}
+.qlist li span{flex:none;font-size:var(--t-xs);color:var(--ink-3)}
+.qlist li[aria-selected="true"]{background:var(--wash)}
+.qlist li[aria-selected="true"] b{color:var(--red)}
+.qlist b{font-weight:400;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qmsg{padding:12px;font-size:var(--t-s);color:var(--ink-2)}
+
+/* the entry card */
+.card{background:var(--paper);display:flex;flex-direction:column;min-height:0}
+.card[hidden]{display:none}
+.c-top{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--ink);padding-top:10px}
+.c-kind{font-size:var(--t-xs);color:var(--ink-3)}
+.c-x{width:40px;height:40px;margin:-8px -10px -8px 0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.c-x svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.4;transition:transform .5s var(--ease)}
+.c-x:hover svg{transform:rotate(90deg);color:var(--red)}
+.c-name{margin-top:12px;font-size:var(--t-l);line-height:1.08;letter-spacing:-.03em;font-weight:500}
+.c-meta{margin-top:10px;font-size:var(--t-s);color:var(--ink-2)}
+.c-meta .g1{color:var(--red)}
+.c-list{margin-top:var(--s2);border-top:1px solid var(--grid);overflow:auto;min-height:0;flex:0 1 auto;overscroll-behavior:contain;-webkit-mask-image:linear-gradient(#000 calc(100% - 18px),transparent);mask-image:linear-gradient(#000 calc(100% - 18px),transparent)}
+.c-list button{display:grid;grid-template-columns:12px minmax(0,1fr) auto;align-items:baseline;column-gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--grid);background:none;padding:8px 2px;cursor:pointer;font-size:var(--t-s);line-height:1.35}
+.c-list button:hover{background:var(--wash)}
+.c-list i{width:9px;height:9px;background:var(--red);align-self:center}
+.c-list i.o{background:none;box-shadow:inset 0 0 0 1.25px var(--red)}
+.c-list em{font-style:normal;font-size:var(--t-xs);color:var(--ink-3)}
+.c-open{margin-top:var(--s2);font-size:var(--t-s);font-weight:500;align-self:flex-start}
+
+/* ---------- cover with JavaScript: the pinned ledger ---------- */
+.nj .cover{display:grid}
+.nj .pin,.nj .steps{grid-area:1/1}
+.nj .steps{display:block;pointer-events:none}
+.nj .sp{height:100vh;height:100svh}
+.nj .sp:last-child{height:140vh;height:140svh}
+.nj .pin{position:sticky;top:0;z-index:1;height:100vh;height:100svh;padding:0;display:grid;
+  grid-template-columns:var(--gut) var(--col) var(--gap) minmax(0,1fr) var(--gut);
+  grid-template-rows:clamp(28px,5vh,56px) auto auto minmax(0,1fr) auto calc(28px + var(--hb,0px))}
+.nj .caps{grid-area:2/2/3/3;display:grid;gap:0}
+.nj .cap{grid-area:1/1;align-self:start;transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.nj .cap:not(.on){opacity:0;transform:translate3d(0,14px,0);pointer-events:none}
+.nj .cap.on{transition-delay:.18s}
+.nj .find{grid-area:3/2/4/3;margin-top:var(--s4);max-width:none}
+.nj .card{grid-area:2/2/3/3;z-index:4;contain:size;align-self:stretch;overflow:hidden}
+.nj .legend{grid-area:5/2/6/3;display:block;align-self:end;font-size:var(--t-xs);color:var(--ink-3);line-height:1.5}
+.legend .k{display:flex;flex-wrap:wrap;gap:4px 20px;color:var(--ink-2);margin-bottom:6px}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:8px;vertical-align:-.5px;background:var(--red)}
+.legend i.o{background:none;box-shadow:inset 0 0 0 1.25px var(--red)}
+.nj .mxw{grid-area:2/4/6/6;margin:0;min-width:0;min-height:0}
+.nj .mxw .still{display:none}
+.mxf{position:absolute;inset:0}
+.nj .mxw canvas{display:block;width:100%;height:100%;touch-action:pan-x pan-y;cursor:crosshair}
+.nj .rd{display:none}
+.nj .tip{display:block;position:absolute;left:0;top:0;z-index:5;pointer-events:none;background:var(--paper);border:1px solid var(--ink);padding:8px 11px 9px;max-width:300px;opacity:0;transition:opacity .25s}
+.tip.on{opacity:1}
+.tip b{display:block;font-weight:500;font-size:var(--t-s);line-height:1.3;letter-spacing:-.01em}
+.tip span{display:block;margin-top:3px;font-size:var(--t-xs);color:var(--ink-3)}
+.tip span.e{color:var(--red)}
+.tip i{display:inline-block;width:8px;height:8px;margin-right:7px;background:var(--red);vertical-align:0}
+.tip i.o{background:none;box-shadow:inset 0 0 0 1.25px var(--red)}
+.tip i.n{background:none;box-shadow:inset 0 0 0 1px var(--grey)}
+html.still .nj .cap,html.still .cap{transition:none}
+
+/* ---------- after the cover ---------- */
+section.s{padding:var(--s6) 0 0}
+.head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--s5);row-gap:var(--s3);align-items:end;padding-bottom:var(--s4);border-bottom:1px solid var(--ink)}
+.head h2{font-size:var(--t-xl);line-height:1.04;letter-spacing:-.035em}
+.head p{color:var(--ink-2);max-width:32em}
+
+/* the four groups, as a ledger */
+.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.scale div{padding:var(--s3) var(--s3) var(--s4) 0;border-right:1px solid var(--grid);min-width:0}
+.scale div+div{padding-left:var(--s3)}
+.scale div:last-child{border-right:0}
+.scale b{display:block;font-weight:400;font-size:var(--t-2xl);line-height:.9;letter-spacing:-.05em;font-variant-numeric:lining-nums}
+.scale .g1 b{color:var(--red)}
+.scale h3{margin-top:var(--s3);font-size:var(--t-m);letter-spacing:-.015em}
+.scale p{margin-top:10px;font-size:var(--t-s);color:var(--ink-2);max-width:22em}
+
+/* the explorers */
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s5)}
+.tool{min-width:0;padding-top:var(--s4)}
+.plate{margin:0;position:relative;aspect-ratio:4/3;background:var(--wash);overflow:hidden}
+.plate img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:grayscale(1) contrast(1.1);opacity:.8}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
+.nj .plate.live canvas{display:block}
+.nj .plate.live img{display:none}
+.plate figcaption{position:absolute;left:16px;bottom:12px;font-size:var(--t-xs);color:var(--ink-3)}
+.tool h3{margin-top:var(--s4);font-size:var(--t-xl);line-height:1.02;letter-spacing:-.035em}
+.tool .desc{margin-top:var(--s2);color:var(--ink-2);max-width:30em}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:var(--s4) 0 0;border-top:1px solid var(--ink)}
+.spec div{padding:14px 0 0;min-width:0;display:flex;flex-direction:column-reverse;justify-content:flex-end}
+.spec dd{margin:0;font-size:var(--t-2xl);line-height:.95;letter-spacing:-.05em;font-variant-numeric:lining-nums tabular-nums;font-weight:400}
+.spec dt{margin-top:10px;font-size:var(--t-xs);color:var(--ink-3)}
+.tool .langs{margin-top:var(--s3);font-size:var(--t-s);color:var(--ink-3)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-top:var(--s4)}
+.acts .lnk{font-size:var(--t-s)}
+
+/* code against cancer */
+.code-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--s5);row-gap:var(--s4);border-top:1px solid var(--ink);padding-top:var(--s4)}
+.code-in h2{font-size:var(--t-xl);line-height:1.04;letter-spacing:-.035em}
+.code-in .t p{color:var(--ink-2);max-width:28em}
+.code-in .lede{margin-top:var(--s3)}
+.code-in .acts{margin-top:var(--s4)}
+.counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s4);align-self:start;margin-top:var(--s5)}
+.counts div{border-top:1px solid var(--grid);padding-top:var(--s2)}
+.counts b{display:block;font-weight:400;font-size:var(--t-2xl);line-height:.9;letter-spacing:-.05em;font-variant-numeric:lining-nums}
+.counts span{display:block;margin-top:14px;font-size:var(--t-s);color:var(--ink-2)}
+
+/* games */
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s4);row-gap:var(--s4);padding-top:var(--s4)}
+.game a{display:block;text-decoration:none}
+.game .th{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--wash)}
+.game img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(.92) brightness(1.04);transition:filter 1.2s var(--ease),transform 1.6s var(--ease)}
+.game a:hover img{filter:none;transform:scale(1.02)}
+.game h3{margin-top:var(--s2);font-size:var(--t-m);letter-spacing:-.015em;line-height:1.25}
+.game p{margin-top:4px;font-size:var(--t-s);color:var(--ink-3)}
+.game a:hover h3{color:var(--red)}
+
+/* footer */
+footer{margin-top:var(--s6);border-top:1px solid var(--ink);padding:var(--s4) 0 var(--s5)}
+.f-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--s5);row-gap:var(--s4)}
+.f-mark{font-size:var(--t-l);font-weight:600;letter-spacing:-.035em;line-height:1}
+.f-place{margin-top:10px;font-size:var(--t-s);color:var(--ink-3)}
+.f-links{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:var(--t-s);margin-bottom:var(--s3)}
+.f-text{font-size:var(--t-s);color:var(--ink-2);max-width:40em}
+.credits{margin-top:var(--s5);padding-top:var(--s2);border-top:1px solid var(--grid);font-size:var(--t-xs);color:var(--ink-3);max-width:60em}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  :root{--col:clamp(280px,30vw,340px)}
+  .scale{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scale div:nth-child(2){border-right:0}
+  .scale div:nth-child(3){padding-left:0}
+  .scale div:nth-child(n+3){border-top:1px solid var(--grid)}
+}
+@media (max-width:899px){
+  .nj .pin{grid-template-columns:var(--gut) minmax(0,1fr) var(--gut);grid-template-rows:20px auto auto minmax(0,1fr) auto calc(12px + var(--hb,0px))}
+  .nj .caps{grid-area:2/2/3/3}
+  .nj .cap{display:none}
+  .nj .cap.on{display:block}
+  .nj .cap:not(.on){transform:none}
+  .nj .find{grid-area:3/2/4/3;margin-top:var(--s3)}
+  .nj .mxw{grid-area:4/1/5/4;margin-top:var(--s2)}
+  .mxf{inset:0 var(--gut)}
+  .nj .legend{grid-area:5/2/6/3;margin-top:8px}
+  .legend .h{display:none}
+  .nj .card{grid-area:auto;contain:none;position:absolute;left:0;right:0;bottom:0;max-height:64%;padding:4px var(--gut) 20px;z-index:9;border-top:0;box-shadow:0 -1px 0 var(--ink),0 -24px 48px rgba(18,18,18,.08)}
+  .head,.code-in,.f-grid{grid-template-columns:minmax(0,1fr)}
+  .tools{grid-template-columns:minmax(0,1fr);row-gap:var(--s5)}
+}
+@media (max-width:599px){
+  .top{gap:8px 20px;padding:16px var(--gut)}
+  .nav{order:3;width:100%;gap:4px 18px}
+  .cap h1{font-size:30px;line-height:1.06}
+  .cap h2{font-size:24px}
+  .cap .who{margin-top:12px;font-size:15px}
+  .cap .caveat{font-size:13px;margin-top:8px}
+  .cap p.t{margin-top:10px;font-size:15px}
+  .figs div{padding:7px 0 8px}
+  .src{font-size:11.5px}
+  .nj .find{margin-top:var(--s2)}
+  .try{margin-top:6px}
+  .mxf{inset:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;padding:0 var(--gut)}
+  .mxf canvas{height:100%}
+  .nj .rd{display:block;position:absolute;left:var(--gut);right:var(--gut);top:-22px;font-size:var(--t-xs);color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nj .mxw{margin-top:30px}
+  .nj .tip{display:none}
+  .scale{grid-template-columns:minmax(0,1fr)}
+  .scale div,.scale div+div{padding:var(--s3) 0;border-right:0;border-top:1px solid var(--grid)}
+  .scale div:first-child{border-top:0}
+  .scale b{font-size:56px}
+  .spec dd,.counts b{font-size:48px}
+  .games{grid-template-columns:minmax(0,1fr)}
+  .game a{display:grid;grid-template-columns:120px minmax(0,1fr);column-gap:var(--s2);align-items:center}
+  .game h3{margin-top:0;font-size:var(--t-b)}
+}
+@media (prefers-reduced-motion:reduce){
+  .nj .cap,.btn,.btn span,.lnk,.game img{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">EpiDetective</a>
+  <nav class="nav" aria-label="Main">
+    <a href="#tools">Tools</a><a href="#groups">Reading the evidence</a><a href="#code">Code Against Cancer</a><a href="#games">Games</a><a href="#about">About</a>
+  </nav>
+  <nav class="lang" aria-label="Language">
+    <a href="#" aria-current="true" lang="en">EN</a><a href="#" lang="zh">中文</a><a href="#" lang="fr">FR</a><a href="#" lang="es">ES</a><a href="#" lang="ru">RU</a>
+  </nav>
+</header>
+
+<main>
+  <section class="cover" id="cover" aria-label="The evidence matrix">
+    <div class="pin">
+      <div class="caps">
+        <div class="cap on" data-step="0">
+          <h1>What causes cancer and other chronic diseases, and how sure the evidence is</h1>
+          <p class="who">Free tools built from the IARC Monographs and published reviews by Wenxin Wan, a cancer epidemiologist.</p>
+          <p class="caveat">They describe whole populations, not what caused any one person’s illness.</p>
+        </div>
+        <div class="cap" data-step="1">
+          <span class="ix"><b>1</b> / 4</span>
+          <h2>Every pair at a glance</h2>
+          <p class="t">One square for every pair of an exposure and a cancer type. A filled square <i class="key" aria-hidden="true"></i> is an established link; an outlined square <i class="key o" aria-hidden="true"></i> is a suspected one. Here the exposures are grouped by kind and the cancer types by organ system.</p>
+        </div>
+        <div class="cap" data-step="2">
+          <span class="ix"><b>2</b> / 4</span>
+          <h2>Sorted by certainty</h2>
+          <p class="t">Known causes (Group 1) come first, then probable causes (Group 2A) and possible causes (Group 2B). The group says how sure IARC is that something can cause cancer in people. It does not say how large the risk is.</p>
+        </div>
+        <div class="cap" data-step="3">
+          <span class="ix"><b>3</b> / 4</span>
+          <h2>Sorted by reach</h2>
+          <p class="t">Now the exposures linked to the most cancer types come first, and so do the cancer types with the most links. One exposure, many cancers: tobacco smoking. One cancer, many causes: lung cancer.</p>
+        </div>
+        <div class="cap" data-step="4">
+          <span class="ix"><b>4</b> / 4</span>
+          <h2>Same certainty, very different size</h2>
+          <p class="t">Tobacco smoking and processed meat are both in Group 1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
+          <div class="figs">
+            <div><b>100–120</b><span>in 1,000 smokers get lung cancer by age 75: about 10 to 12 in 100.</span></div>
+            <div><b>4–5</b><span>in 1,000 lifelong non-smokers do.</span></div>
+            <div><b>18%</b><span>Each 50 grams of processed meat eaten every day raises the risk of bowel cancer by 18%.</span></div>
+          </div>
+          <p class="src"><span>European data. Quoted from the Cancer Evidence Explorer.</span><a class="lnk" href="#">Seven ideas for reading a health headline →</a></p>
+        </div>
+      </div>
+
+      <form class="find" id="find" role="search" onsubmit="return false">
+        <label for="q">Look something up</label>
+        <div class="field">
+          <input id="q" name="q" type="search" placeholder="Search a cancer, an exposure, a disease or a risk factor" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="qlist">
+          <button type="submit">Search</button>
+        </div>
+        <p class="try">Try <a href="#" data-q="aspartame">aspartame</a> <a href="#" data-q="stroke">stroke</a> <a href="#" data-q="coffee">coffee</a></p>
+        <ul class="qlist" id="qlist" role="listbox" aria-label="Matches on the map" hidden></ul>
+        <p class="qmsg" id="qmsg" role="status"></p>
+      </form>
+
+      <aside class="card" id="card" aria-label="Entry" hidden>
+        <div class="c-top"><span class="c-kind" id="c-kind"></span><button class="c-x" type="button" id="c-x" aria-label="Close the entry"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" fill="none"/></svg></button></div>
+        <h2 class="c-name" id="c-name"></h2>
+        <p class="c-meta" id="c-meta"></p>
+        <ul class="c-list" id="c-list"></ul>
+        <a class="c-open lnk" href="#">Open in the explorer →</a>
+      </aside>
+
+      <div class="legend" aria-hidden="true">
+        <p class="k"><span><i></i>Established link</span><span><i class="o"></i>Suspected link</span></p>
+        <p>185 exposures × 68 cancer types. 469 links.</p>
+        <p class="h">Point at a square to read the pair; click a name for its entry.</p>
+      </div>
+
+      <div class="mxw" id="mxw">
+        <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="Network drawing of the Cancer Evidence Explorer: 185 exposures linked to 68 cancer types by 469 links">
+        <p class="rd" id="rd" aria-hidden="true">Tap a square to read the pair. The ledger scrolls sideways.</p>
+        <div class="mxf" id="mxf"><canvas id="mx" role="img" aria-label="Matrix of the Cancer Evidence Explorer: rows are 185 exposures, columns are 68 cancer types, and each of the 469 links is a square, filled when established and outlined when suspected. Use the search to look up an exposure or a cancer."></canvas></div>
+        <div class="tip" id="tip" aria-hidden="true"></div>
+      </div>
+      <p class="vh" id="live" aria-live="polite"></p>
+    </div>
+    <div class="steps" aria-hidden="true"><div class="sp"></div><div class="sp"></div><div class="sp"></div><div class="sp"></div><div class="sp"></div></div>
+  </section>
+
+  <section class="s" id="groups" aria-labelledby="groups-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="groups-h" data-reveal="fade">How sure, not how big</h2>
+        <p data-reveal="fade" style="--d:150ms">IARC sorts each agent into one of four groups by how sure it is that the agent can cause cancer in people. Aspartame is in Group 2B.</p>
+      </div>
+      <div class="scale">
+        <div class="g1" data-reveal="fade"><b>1</b><h3>Known cause</h3><p>The agent can cause cancer in people. This is the group in which IARC is most certain. It does not say how large the risk is.</p></div>
+        <div data-reveal="fade" style="--d:120ms"><b>2A</b><h3>Probable cause</h3><p>The agent probably causes cancer in people.</p></div>
+        <div data-reveal="fade" style="--d:240ms"><b>2B</b><h3>Possible cause</h3><p>The agent may cause cancer in people.</p></div>
+        <div data-reveal="fade" style="--d:360ms"><b>3</b><h3>Not classifiable</h3><p>The evidence does not meet the rules for any other group. It does not mean safe.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="tools" aria-labelledby="tools-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="tools-h" data-reveal="fade">The explorers</h2>
+        <p data-reveal="fade" style="--d:150ms">Two reference tools, free to use. Every link names its sources.</p>
+      </div>
+      <div class="tools">
+        <article class="tool" aria-labelledby="t1">
+          <figure class="plate" id="plate-c" data-reveal="fade">
+            <img src="media/tool-cancer-network.svg" width="1062" height="998" alt="Network drawing: exposures linked to the cancers they can cause" loading="lazy">
+            <canvas aria-hidden="true"></canvas>
+            <figcaption>Every exposure against every cancer type</figcaption>
+          </figure>
+          <h3 id="t1">Cancer Evidence Explorer</h3>
+          <p class="desc">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
+          <dl class="spec">
+            <div><dt>Exposures</dt><dd>185</dd></div>
+            <div><dt>Cancer types</dt><dd>68</dd></div>
+            <div><dt>Links</dt><dd>469</dd></div>
+          </dl>
+          <p class="langs">In 10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer <span aria-hidden="true">→</span></a><a class="lnk" href="#">About this tool</a></div>
+        </article>
+        <article class="tool" aria-labelledby="t2">
+          <figure class="plate" id="plate-d" data-reveal="fade" style="--d:150ms">
+            <img src="media/tool-chronic-network.svg" width="931" height="1006" alt="Network drawing: risk factors linked to the chronic diseases they affect" loading="lazy">
+            <canvas aria-hidden="true"></canvas>
+            <figcaption>Every risk factor against every disease</figcaption>
+          </figure>
+          <h3 id="t2">Chronic Disease Evidence Explorer</h3>
+          <p class="desc">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by how strong the evidence is.</p>
+          <dl class="spec">
+            <div><dt>Risk factors</dt><dd>124</dd></div>
+            <div><dt>Diseases</dt><dd>45</dd></div>
+            <div><dt>Graded links</dt><dd>356</dd></div>
+          </dl>
+          <p class="langs">In 10 languages</p>
+          <div class="acts"><a class="btn" href="#">Open the explorer <span aria-hidden="true">→</span></a><a class="lnk" href="#">About this tool</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="code" aria-labelledby="code-h">
+    <div class="wrap">
+      <div class="code-in">
+        <div class="t">
+          <h2 id="code-h" data-reveal="fade">Code Against Cancer</h2>
+          <p class="lede" data-reveal="fade" style="--d:150ms">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
+          <div class="acts" data-reveal="fade" style="--d:250ms"><a class="btn" href="#">Read the recommendations <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="counts" data-reveal="fade" style="--d:200ms">
+          <div><b>14</b><span>actions for Europe</span></div>
+          <div><b>17</b><span>for Latin America and the Caribbean</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="games-h" data-reveal="fade">For schools and families</h2>
+        <p data-reveal="fade" style="--d:150ms">Learning by playing: three games.</p>
+      </div>
+      <ul class="games">
+        <li class="game" data-reveal="fade"><a href="#"><span class="th"><img src="media/game-sun-safety.webp" width="720" height="405" alt="" loading="lazy"></span><div><h3>Sol &amp; the UV Shield Quest</h3><p>Skin cancer · ages 6–12</p></div></a></li>
+        <li class="game" data-reveal="fade" style="--d:120ms"><a href="#"><span class="th"><img src="media/game-lung-detective.webp" width="720" height="405" alt="" loading="lazy"></span><div><h3>The Lung Detective</h3><p>Lung cancer · ages 10–16</p></div></a></li>
+        <li class="game" data-reveal="fade" style="--d:240ms"><a href="#"><span class="th"><img src="media/game-town-of-1000.webp" width="720" height="405" alt="" loading="lazy"></span><div><h3>A Town of 1,000</h3><p>Breast cancer · ages 14+</p></div></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="about">
+  <div class="wrap">
+    <div class="f-grid">
+      <div><p class="f-mark">EpiDetective</p><p class="f-place">Lyon, France</p></div>
+      <div>
+        <ul class="f-links"><li><a class="lnk" href="#">How we check</a></li><li><a class="lnk" href="#">Report an error</a></li><li><a class="lnk" href="#">How to cite</a></li><li><a class="lnk" href="#">About</a></li></ul>
+        <p class="f-text">Every entry names its sources. The tools describe whole populations; for your own health, speak to a doctor. A personal project by Wenxin Wan, not endorsed by IARC or WHO.</p>
+      </div>
+    </div>
+    <p class="credits">Images: the matrices are drawn on this page from the explorers’ own network data (without JavaScript, the explorers’ network drawings stand in); game screenshots from the three EpiDetective games.</p>
+  </div>
+</footer>
+
+<script src="kit/net.js"></script>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  if (!window.EpiNet || !root.classList.contains("nj")) { root.classList.remove("nj"); return; }
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var LB = EpiNet.LABELS;
+  function $(s) { return document.querySelector(s); }
+  var cover = $("#cover"), mxw = $("#mxw"), mxf = $("#mxf"), cv = $("#mx"), ctx = cv.getContext("2d");
+  var tip = $("#tip"), rd = $("#rd"), live = $("#live");
+  var q = $("#q"), qlist = $("#qlist"), qmsg = $("#qmsg");
+  var card = $("#card"), cKind = $("#c-kind"), cName = $("#c-name"), cMeta = $("#c-meta"), cList = $("#c-list");
+  var caps = [].slice.call(document.querySelectorAll(".cap")), spacers = [].slice.call(document.querySelectorAll(".sp"));
+  var RED = "#B3261E", INK = "#121212", GRID = "#EDEDED", INK2 = "#4A4A4A", INK3 = "#6E6E6E";
+  var SANS = '"Geist","Helvetica Neue",Helvetica,Arial,sans-serif', MONO = '"Geist Mono",ui-monospace,Menlo,monospace';
+
+  /* orders */
+  var CATS = ["Lifestyle & diet", "Infections", "Radiation", "Occupational", "Environmental", "Medical & pharmaceutical"];
+  var GROUPS = ["1", "2A", "2B"];
+  var ORGANS = ["Lip, oral cavity & pharynx", "Digestive organs", "Respiratory & intrathoracic", "Bone", "Skin", "Mesothelium, endothelium & soft tissue",
+    "Breast", "Female genital organs", "Male genital organs", "Urinary tract", "Eye, brain & CNS", "Endocrine glands", "Multiple / unspecified sites", "Lymphoid & haematopoietic"];
+  var STEPS = [
+    { e: "az", c: "az", focus: [] },
+    { e: "cat", c: "organ", focus: [] },
+    { e: "group", c: "organ", focus: [] },
+    { e: "reach", c: "reach", focus: ["Tobacco smoking", "Lung cancer"], pair: true },
+    { e: "reach", c: "reach", focus: ["Tobacco smoking", "Processed meat"] }
+  ];
+
+  var G, EX = [], CA = [], LINKS, CELL = {}, byName = {};
+  var axE = { S: 0, S0: 0, S1: 0, groups: [] }, axC = { S: 0, S0: 0, S1: 0, groups: [] };
+  var anim = { t0: 0, dur: still ? 0 : 1250 };
+  var reveal = still ? 1 : 0, revealT0 = 0;
+  var step = -1, sel = null, matches = null, hoverE = null, hoverC = null, hoverZone = "";
+  var lensH = { s: 0, a: 0, ta: 0, ts: 0 }, pins = {};
+  var geo = null, dpr = 1, raf = 0, lastT = 0, fontsOk = false;
+
+  function cmpName(a, b) { return a.name.localeCompare(b.name, "en", { sensitivity: "base" }); }
+  function cmpDeg(a, b) { return b.degree - a.degree || cmpName(a, b); }
+  function ease(t) { return t <= 0 ? 0 : t >= 1 ? 1 : 1 - Math.pow(1 - t, 3.2); }
+
+  /* place the nodes of one axis in slots, with gaps between groups */
+  function arrange(nodes, mode, lead, gap) {
+    var groups;
+    if (mode === "az") groups = [{ label: "A to Z", items: nodes.slice().sort(cmpName) }];
+    else if (mode === "reach") groups = [{ label: "Most links first", items: nodes.slice().sort(cmpDeg) }];
+    else if (mode === "cat") groups = CATS.map(function (c) { return { label: c, items: nodes.filter(function (d) { return d.cat === c; }).sort(cmpDeg) }; });
+    else if (mode === "group") groups = GROUPS.map(function (gk) { return { label: "Group " + gk + " · " + LB.group[gk], items: nodes.filter(function (d) { return d.group === gk; }).sort(cmpDeg) }; });
+    else groups = ORGANS.map(function (o) { return { label: o, items: nodes.filter(function (d) { return d.cat === o; }).sort(cmpDeg) }; });
+    groups = groups.filter(function (gr) { return gr.items.length; });
+    var s = lead, n = 0;
+    groups.forEach(function (gr, gi) {
+      if (gi) s += gap;
+      gr.start = s;
+      gr.items.forEach(function (d) { d.s1 = s; d.rank = n++; s += 1; });
+      gr.end = s;
+    });
+    return { S: s, groups: groups };
+  }
+
+  function setOrder(stp, instant) {
+    var t = performance.now();
+    EX.concat(CA).forEach(function (d) { d.s0 = d.s; });
+    axE.S0 = axE.S; axC.S0 = axC.S;
+    var ra = arrange(EX, stp.e, geo && geo.orient === "rows" ? 4.6 : 0, geo && geo.orient === "rows" ? 4.6 : 1.4);
+    var ca = arrange(CA, stp.c, 0, geo && geo.orient === "rows" ? .8 : 1.6);
+    axE.S1 = ra.S; axE.groups = ra.groups; axC.S1 = ca.S; axC.groups = ca.groups;
+    EX.forEach(function (d) { d.dl = still || instant ? 0 : d.rank / EX.length * 320; });
+    CA.forEach(function (d) { d.dl = still || instant ? 0 : d.rank / CA.length * 220; });
+    if (instant || still) { EX.concat(CA).forEach(function (d) { d.s = d.s0 = d.s1; }); axE.S = axE.S0 = axE.S1; axC.S = axC.S0 = axC.S1; anim.t0 = -1e9; }
+    else anim.t0 = t;
+    kick();
+  }
+  function stepAnim(t) {
+    var busy = false, k;
+    [EX, CA].forEach(function (arr) {
+      arr.forEach(function (d) {
+        k = anim.dur ? (t - anim.t0 - d.dl) / anim.dur : 1;
+        if (k < 1) busy = true;
+        d.s = d.s0 + (d.s1 - d.s0) * ease(k);
+      });
+    });
+    k = anim.dur ? (t - anim.t0) / anim.dur : 1;
+    axE.S = axE.S0 + (axE.S1 - axE.S0) * ease(k); axC.S = axC.S0 + (axC.S1 - axC.S0) * ease(k);
+    return busy || k < 1;
+  }
+
+  /* lens on the exposure axis (desktop): the rows near the pointer and the chosen rows open up */
+  var SIG = 3.6, AMP = 3.3, SQ = Math.sqrt(Math.PI) / 2;
+  function erf(x) { var s = x < 0 ? -1 : 1; x = Math.abs(x); var t = 1 / (1 + .3275911 * x);
+    return s * (1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); }
+  var foci = [], lensT = 1;
+  function lensI(s) { var v = s; for (var i = 0; i < foci.length; i++) { var f = foci[i]; v += f.a * AMP * SIG * SQ * (erf((s - f.s) / SIG) - erf(-f.s / SIG)); } return v; }
+  function posE(s) { return geo.orient === "rows" ? geo.y0 + geo.H * lensI(s) / lensT : geo.x0 + s * geo.cw; }
+  function posC(s) { return geo.orient === "rows" ? geo.x0 + geo.W * s / axC.S : geo.y0 + geo.H * s / axC.S; }
+  function invE(p) {
+    if (geo.orient !== "rows") return (p - geo.x0) / geo.cw;
+    var lo = 0, hi = axE.S, target = (p - geo.y0) / geo.H * lensT;
+    for (var i = 0; i < 26; i++) { var m = (lo + hi) / 2; if (lensI(m) < target) lo = m; else hi = m; }
+    return (lo + hi) / 2;
+  }
+  function invC(p) { return geo.orient === "rows" ? (p - geo.x0) / geo.W * axC.S : (p - geo.y0) / geo.H * axC.S; }
+  function nodeAt(arr, s) { for (var i = 0; i < arr.length; i++) { var d = arr[i]; if (s >= d.s && s < d.s + 1) return d; } return null; }
+
+  /* ---------- geometry ---------- */
+  function measure() {
+    var r = mxf.getBoundingClientRect(), w = mxw.clientWidth, h = mxw.clientHeight;
+    var orient = w < 560 ? "cols" : "rows";
+    var g = { orient: orient };
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (orient === "rows") {
+      g.cssW = Math.max(200, r.width); g.cssH = Math.max(200, r.height);
+      g.gutter = Math.round(Math.min(230, Math.max(150, g.cssW * .24)));
+      g.x0 = 0; g.W = g.cssW - g.gutter; g.cwC = g.W / 70;
+      g.heads = g.cwC >= 9.2;
+      g.HB = g.heads ? Math.min(150, Math.round(g.cssH * .19)) : 30;
+      g.y0 = g.HB + 6; g.H = g.cssH - g.y0 - 2;
+      cv.style.width = ""; cv.style.height = "";
+    } else {
+      g.cw = 10; g.cssH = Math.max(220, h);
+      g.HB = Math.min(118, Math.round(g.cssH * .3));
+      g.x0 = 0; g.cssW = Math.ceil(EX.length * g.cw + 6 * 1.4 * g.cw + 4);
+      g.W = g.cssW - 4; g.y0 = g.HB + 6; g.H = g.cssH - g.y0 - 2; g.heads = true;
+      cv.style.width = g.cssW + "px"; cv.style.height = g.cssH + "px";
+    }
+    var changed = !geo || geo.orient !== orient;
+    geo = g;
+    cv.width = Math.round(g.cssW * dpr); cv.height = Math.round(g.cssH * dpr);
+    if (changed && step >= 0) setOrder(STEPS[step], true);
+    if (LINKS && step >= 0) { if (raf) { cancelAnimationFrame(raf); raf = 0; } frame(performance.now()); }
+  }
+
+  /* ---------- focus sets ---------- */
+  function focusSet() {
+    if (matches && matches.length) return matches;
+    if (sel) return [sel];
+    var st = STEPS[Math.max(0, step)];
+    return st.focus.map(function (n) { return byName[n]; }).filter(Boolean);
+  }
+
+  /* ---------- drawing ---------- */
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+  function frame(t) {
+    raf = 0;
+    if (!geo) return;
+    var dt = lastT ? Math.min(64, t - lastT) : 16; lastT = t;
+    var busy = stepAnim(t);
+    if (reveal < 1) { reveal = Math.min(1, (t - revealT0) / 1400); busy = true; }
+    /* lens foci */
+    var lerp = still ? 1 : 1 - Math.exp(-dt / 110);
+    var F = focusSet(), want = {};
+    if (geo.orient === "rows") F.forEach(function (d) { if (d.kind === "exposure" && F.length <= 4) want[d.i] = d; });
+    Object.keys(want).forEach(function (k) { if (!pins[k]) pins[k] = { d: want[k], a: 0 }; });
+    foci = [];
+    Object.keys(pins).forEach(function (k) {
+      var p = pins[k], ta = want[k] ? 1 : 0;
+      p.a += (ta - p.a) * lerp; if (Math.abs(ta - p.a) > .004) busy = true;
+      if (!ta && p.a < .01) { delete pins[k]; return; }
+      foci.push({ s: p.d.s + .5, a: p.a });
+    });
+    if (geo.orient === "rows") {
+      lensH.a += (lensH.ta - lensH.a) * lerp; lensH.s += (lensH.ts - lensH.s) * (still ? 1 : 1 - Math.exp(-dt / 70));
+      if (Math.abs(lensH.ta - lensH.a) > .004 || Math.abs(lensH.ts - lensH.s) > .01) busy = true;
+      if (lensH.a > .01) foci.push({ s: lensH.s, a: lensH.a * .9 });
+    }
+    lensT = geo.orient === "rows" ? lensI(axE.S) : 1;
+    draw(F);
+    if (busy) kick(); else lastT = 0;
+  }
+
+  var labelCache = {};
+  function fitText(txt, max, font) {
+    var key = font + "|" + max + "|" + txt;
+    if (labelCache[key] != null) return labelCache[key];
+    ctx.font = font;
+    var out = txt;
+    if (ctx.measureText(out).width > max) { while (out.length > 2 && ctx.measureText(out + "…").width > max) out = out.slice(0, -1); out = out.replace(/[\s,;/(]+$/, "") + "…"; }
+    return (labelCache[key] = out);
+  }
+
+  function draw(F) {
+    var g = geo, rows = g.orient === "rows";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, g.cssW, g.cssH);
+    var downs = rows ? EX : CA, acrs = rows ? CA : EX;
+    var posD = rows ? posE : posC, posA = rows ? posC : posE;
+    var fs = {}; F.forEach(function (d) { fs[d.i] = 1; });
+    var anyF = F.length > 0;
+    /* pixel extents */
+    downs.forEach(function (d) { d.p0 = posD(d.s); d.p1 = posD(d.s + 1); });
+    acrs.forEach(function (d) { d.p0 = posA(d.s); d.p1 = posA(d.s + 1); });
+    var xR = rows ? g.x0 + g.W : posE(axE.S), yB = g.y0 + g.H;
+    var hair = 1 / dpr;
+
+    /* grid of empty cells, revealed column by column on load */
+    ctx.fillStyle = GRID;
+    ctx.beginPath();
+    acrs.forEach(function (a) {
+      if (reveal < 1 && a.s / (rows ? axC.S : axE.S) > reveal * 1.15) return;
+      var x = a.p0 + Math.min(1, (a.p1 - a.p0) * .14), w = a.p1 - a.p0 - Math.min(2, (a.p1 - a.p0) * .28);
+      downs.forEach(function (d) {
+        var hh = d.p1 - d.p0, gy = hh > 5 ? 1 : hh * .18;
+        ctx.rect(x, d.p0 + gy * .5, w, hh - gy);
+      });
+    });
+    ctx.fill();
+
+    /* tints for the focus rows and columns, and the hovered row and column */
+    function band(d, isDown, col) {
+      ctx.fillStyle = col;
+      if (isDown) ctx.fillRect(g.x0, d.p0, (rows ? xR : xR) - g.x0, d.p1 - d.p0);
+      else ctx.fillRect(d.p0, g.y0, d.p1 - d.p0, yB - g.y0);
+    }
+    F.forEach(function (d) { var isDown = rows ? d.kind === "exposure" : d.kind === "cancer"; band(d, isDown, "rgba(179,38,30,.07)"); });
+    var hD = rows ? hoverE : hoverC, hA = rows ? hoverC : hoverE;
+    if (hD) band(hD, true, "rgba(18,18,18,.055)");
+    if (hA) band(hA, false, "rgba(18,18,18,.055)");
+
+    /* links */
+    var lit = [], dim = [];
+    LINKS.forEach(function (l) {
+      var on = !anyF || fs[l.e.i] || fs[l.c.i];
+      (on ? lit : dim).push(l);
+    });
+    function cells(list, alpha) {
+      ctx.globalAlpha = alpha;
+      list.forEach(function (l) {
+        var a = rows ? l.c : l.e, d = rows ? l.e : l.c;
+        if (reveal < 1 && a.s / (rows ? axC.S : axE.S) > reveal * 1.15) return;
+        var aw = a.p1 - a.p0, dh = d.p1 - d.p0;
+        var gx = Math.min(1, aw * .14), gy = dh > 5 ? .5 : dh * .09;
+        var x = a.p0 + gx, y = d.p0 + gy, w = aw - 2 * gx, h = dh - 2 * gy;
+        if (l.est) { ctx.fillStyle = RED; ctx.fillRect(x, y, w, h); }
+        else {
+          var lw = Math.max(hair, Math.min(1.25, Math.min(w, h) * .2));
+          ctx.strokeStyle = RED; ctx.lineWidth = lw;
+          ctx.strokeRect(x + lw / 2, y + lw / 2, Math.max(0, w - lw), Math.max(0, h - lw));
+        }
+      });
+      ctx.globalAlpha = 1;
+    }
+    cells(dim, .16); cells(lit, 1);
+
+    /* the hovered pair: an ink frame on the cell, leaders into the margins */
+    var pairD = hD, pairA = hA;
+    if (!pairD && !pairA && STEPS[Math.max(0, step)].pair && !sel && !(matches && matches.length)) {
+      pairD = rows ? byName["Tobacco smoking"] : byName["Lung cancer"]; pairA = rows ? byName["Lung cancer"] : byName["Tobacco smoking"];
+    }
+    if (pairD && pairA && !hD && !hA && rows) pinTip(pairD, pairA);
+    else if (!hD && !hA) tip.classList.remove("on");
+    ctx.strokeStyle = INK; ctx.lineWidth = 1;
+    if (pairD && pairA) ctx.strokeRect(pairA.p0 - .5, pairD.p0 - .5, pairA.p1 - pairA.p0 + 1, pairD.p1 - pairD.p0 + 1);
+    ctx.lineWidth = hair; ctx.strokeStyle = "rgba(18,18,18,.55)";
+    ctx.beginPath();
+    if (pairA && g.heads) { var ax = (pairA.p0 + pairA.p1) / 2; ctx.moveTo(ax, g.y0 - 2); ctx.lineTo(ax, g.y0 - 8); }
+    if (pairD && rows) { var dy = (pairD.p0 + pairD.p1) / 2; ctx.moveTo(xR + 2, dy); ctx.lineTo(xR + 8, dy); }
+    ctx.stroke();
+
+    /* group labels in the gaps (rows) */
+    ctx.textBaseline = "alphabetic";
+    if (rows) {
+      ctx.font = "500 11px " + SANS;
+      axE.groups.forEach(function (gr) {
+        var yTop = posE(gr.start - 4.6), yBot = posE(gr.start);
+        if (yBot - yTop < 10) return;
+        ctx.fillStyle = INK2; ctx.globalAlpha = Math.min(1, (yBot - yTop - 10) / 4);
+        ctx.fillText(gr.label, g.x0, yBot - 4);
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    /* column heads: rotated names */
+    var hl = {};
+    F.forEach(function (d) { hl[d.i] = 2; EpiNet.neighbours(d).forEach(function (n) { if (!hl[n.node.i]) hl[n.node.i] = 1; }); });
+    var fsz = rows ? 10.5 : 10;
+    acrs.forEach(function (a) {
+      var w = a.p1 - a.p0, cx = (a.p0 + a.p1) / 2;
+      var on = a === hA || a === pairA, strong = hl[a.i] === 2, linked = hl[a.i] === 1;
+      if (!g.heads && !on && !strong) return;
+      if (reveal < 1 && a.s / (rows ? axC.S : axE.S) > reveal * 1.15) return;
+      var font = (on || strong ? "500 " : "400 ") + fsz + "px " + SANS;
+      var txt = fitText(a.head || a.short, g.HB - 12, font);
+      ctx.font = font;
+      ctx.fillStyle = strong ? RED : on ? INK : linked ? INK : (anyF ? "rgba(110,110,110,.55)" : INK3);
+      ctx.save(); ctx.translate(cx + fsz * .36, g.y0 - 10); ctx.rotate(-Math.PI / 2); ctx.fillText(txt, 0, 0); ctx.restore();
+    });
+
+    /* row labels in the right margin: they appear as rows open up under the lens */
+    if (rows) {
+      var lx = xR + 12;
+      downs.forEach(function (d) {
+        var h = d.p1 - d.p0, on = d === hD || d === pairD, strong = hl[d.i] === 2;
+        if (h < 7.6 && !strong) return;
+        var size = Math.max(9.5, Math.min(13, h - 1.6)), alpha = strong ? 1 : Math.min(1, (h - 7.6) / 4);
+        var cy = (d.p0 + d.p1) / 2 + size * .34;
+        ctx.globalAlpha = alpha;
+        ctx.font = "500 " + Math.max(9, size - 2.5) + "px " + SANS; ctx.fillStyle = INK3;
+        ctx.fillText(d.group, lx, cy);
+        var font = (on || strong ? "500 " : "400 ") + size + "px " + SANS, txt = fitText(d.short, g.gutter - 50, font);
+        ctx.font = font;
+        ctx.fillStyle = strong ? RED : on ? INK : hl[d.i] === 1 ? INK : INK2;
+        ctx.fillText(txt, lx + 26, cy);
+      });
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  /* ---------- pointer ---------- */
+  function locate(ev) {
+    var r = cv.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top, g = geo, rows = g.orient === "rows";
+    var xR = rows ? g.x0 + g.W : posE(axE.S), out = { x: x, y: y, e: null, c: null, zone: "" };
+    if (x < g.x0 || y > g.y0 + g.H + 2) return out;
+    var inX = x <= xR, inY = y >= g.y0;
+    if (rows) {
+      if (inY && y <= g.y0 + g.H) out.e = nodeAt(EX, invE(y));
+      if (inX) out.c = nodeAt(CA, invC(x));
+      out.zone = inX && inY ? "cell" : inX ? "head" : inY ? "label" : "";
+      if (out.zone === "head") out.e = null;
+      if (out.zone === "label") out.c = null;
+    } else {
+      if (inX) out.e = nodeAt(EX, invE(x));
+      if (inY) out.c = nodeAt(CA, invC(y));
+      out.zone = inX && inY ? "cell" : inX ? "head" : "";
+      if (out.zone === "head") out.c = null;
+    }
+    if (!out.zone) out.e = out.c = null;
+    return out;
+  }
+  function hoverTo(o) {
+    var rows = geo.orient === "rows";
+    hoverE = o.e; hoverC = o.c; hoverZone = o.zone;
+    if (rows) {
+      if (o.e || o.zone === "label") { lensH.ta = 1; if (o.e) lensH.ts = o.e.s + .5; else lensH.ts = invE(o.y); }
+      else if (o.zone === "cell" || o.zone === "head") { lensH.ta = o.zone === "cell" ? 1 : 0; lensH.ts = invE(Math.max(geo.y0, o.y)); }
+      else lensH.ta = 0;
+    }
+    showTip(o);
+    kick();
+  }
+  function pairText(e, c) {
+    var l = CELL[e.i + "-" + c.i];
+    return '<b>' + esc(e.short) + ' × ' + esc(c.short) + '</b>' +
+      (l ? '<span class="e"><i class="' + (l.est ? "" : "o") + '"></i>' + (l.est ? "Established link" : "Suspected link") + '</span>'
+         : '<span><i class="n"></i>No link listed</span>');
+  }
+  function showTip(o) {
+    if (geo.orient !== "rows") return;
+    var html = "";
+    if (o.zone === "cell" && o.e && o.c) html = pairText(o.e, o.c);
+    else if (o.zone === "head" && o.c) html = '<b>' + esc(o.c.name) + '</b><span>Cancer type · ' + esc(o.c.cat) + '. Click for its entry.</span>';
+    else if (o.zone === "label" && o.e) html = '<b>' + esc(o.e.name) + '</b><span>' + esc(LB.groupLong[o.e.group]) + '. Click for its entry.</span>';
+    if (!html) { tip.classList.remove("on"); return; }
+    tip.innerHTML = html;
+    var wr = mxw.getBoundingClientRect(), cr = cv.getBoundingClientRect();
+    var x = cr.left - wr.left + o.x + 18, y = cr.top - wr.top + o.y + 20, tw = tip.offsetWidth, th = tip.offsetHeight;
+    if (x + tw > wr.width) x = cr.left - wr.left + o.x - tw - 14;
+    if (y + th > wr.height) y = cr.top - wr.top + o.y - th - 14;
+    tip.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
+    tip.classList.add("on");
+  }
+  function pinTip(e, c) {
+    tip.innerHTML = pairText(e, c);
+    var wr = mxw.getBoundingClientRect(), cr = cv.getBoundingClientRect();
+    var x = cr.left - wr.left + c.p1 + 14, y = cr.top - wr.top + (e.p0 + e.p1) / 2 + 12;
+    if (x + tip.offsetWidth > wr.width) x = cr.left - wr.left + c.p0 - tip.offsetWidth - 14;
+    tip.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
+    tip.classList.add("on");
+  }
+  var down = null;
+  cv.addEventListener("pointermove", function (ev) {
+    if (ev.pointerType !== "mouse") return;
+    hoverTo(locate(ev));
+  });
+  cv.addEventListener("pointerleave", function () { hoverE = hoverC = null; lensH.ta = 0; tip.classList.remove("on"); kick(); });
+  cv.addEventListener("pointerdown", function (ev) { down = { x: ev.clientX, y: ev.clientY, t: performance.now(), sl: mxf.scrollLeft }; });
+  cv.addEventListener("pointerup", function (ev) {
+    if (!down) return;
+    var moved = Math.abs(ev.clientX - down.x) + Math.abs(ev.clientY - down.y) > 10 || Math.abs(mxf.scrollLeft - down.sl) > 4;
+    down = null; if (moved) return;
+    var o = locate(ev), pick = null;
+    if (o.zone === "cell") pick = o.e || o.c;
+    else if (o.zone === "head") pick = geo.orient === "rows" ? o.c : o.e;
+    else if (o.zone === "label") pick = o.e;
+    if (ev.pointerType !== "mouse") {
+      hoverE = o.e; hoverC = o.c;
+      if (o.e && o.c) rd.innerHTML = readout(o.e, o.c);
+      else if (pick) rd.textContent = pick.name;
+    }
+    if (pick) select(pick, true); else if (o.zone === "") select(null);
+  });
+  function readout(e, c) { var l = CELL[e.i + "-" + c.i]; return esc(e.short) + " × " + esc(c.short) + ": " + (l ? (l.est ? "Established link" : "Suspected link") : "no link listed"); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- selection and the card ---------- */
+  function select(d, fromMap) {
+    sel = d;
+    if (!d) { card.hidden = true; kick(); return; }
+    var nb = EpiNet.neighbours(d).sort(function (a, b) { return (b.link.est - a.link.est) || cmpName(a.node, b.node); });
+    var est = nb.filter(function (n) { return n.link.est; }).length;
+    cKind.textContent = d.kind === "exposure" ? "Exposure · " + d.cat : "Cancer type · " + d.cat;
+    cName.textContent = d.name;
+    var meta = (d.kind === "exposure" ? '<span class="' + (d.group === "1" ? "g1" : "") + '">' + esc(LB.groupLong[d.group]) + '</span><br>' : "") +
+      nb.length + (nb.length === 1 ? " link" : " links") + ": " + est + " established, " + (nb.length - est) + " suspected";
+    cMeta.innerHTML = meta;
+    cList.innerHTML = "";
+    nb.forEach(function (n) {
+      var li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = '<i class="' + (n.link.est ? "" : "o") + '" aria-hidden="true"></i><span>' + esc(n.node.name) + '</span><em>' + (n.link.est ? "Established" : "Suspected") + '</em>';
+      b.addEventListener("click", function () { select(n.node); });
+      li.appendChild(b); cList.appendChild(li);
+    });
+    cList.scrollTop = 0;
+    card.hidden = false;
+    live.textContent = d.name + " selected. " + (d.kind === "exposure" ? LB.groupLong[d.group] + ". " : "Cancer type. ") + nb.length + (nb.length === 1 ? " link." : " links.");
+    if (geo.orient === "cols" && d.kind === "exposure") {
+      var x = posE(d.s1 + .5) - mxf.clientWidth / 2;
+      mxf.scrollTo({ left: Math.max(0, x), behavior: still ? "auto" : "smooth" });
+    }
+    kick();
+  }
+  $("#c-x").addEventListener("click", function () { select(null); q.focus({ preventScroll: true }); });
+  card.addEventListener("keydown", function (ev) { if (ev.key === "Escape") { select(null); q.focus({ preventScroll: true }); } });
+
+  /* ---------- search ---------- */
+  var res = [], act = -1;
+  function runSearch(text, pickFirst) {
+    var t = (text || "").trim();
+    res = t ? EpiNet.search(G, t).slice(0, 7) : [];
+    act = res.length ? 0 : -1;
+    qlist.innerHTML = "";
+    res.forEach(function (d, i) {
+      var li = document.createElement("li");
+      li.id = "opt-" + i; li.setAttribute("role", "option"); li.setAttribute("aria-selected", i === act ? "true" : "false");
+      li.innerHTML = '<b>' + esc(d.name) + '</b><span>' + (d.kind === "exposure" ? "Group " + d.group : "Cancer type") + '</span>';
+      li.addEventListener("mousedown", function (ev) { ev.preventDefault(); choose(i); });
+      qlist.appendChild(li);
+    });
+    var open = res.length > 0 && !pickFirst;
+    qlist.hidden = !open;
+    q.setAttribute("aria-expanded", open ? "true" : "false");
+    if (act >= 0 && open) q.setAttribute("aria-activedescendant", "opt-" + act); else q.removeAttribute("aria-activedescendant");
+    qmsg.textContent = t.length >= 2 && !res.length ? "Not on this map. The explorers list every agent and risk factor they cover." : "";
+    matches = t && res.length && !pickFirst ? EpiNet.search(G, t) : null;
+    if (pickFirst && res.length) choose(0);
+    kick();
+  }
+  function setAct(i) {
+    if (!res.length) return;
+    act = (i + res.length) % res.length;
+    [].forEach.call(qlist.children, function (li, k) { li.setAttribute("aria-selected", k === act ? "true" : "false"); });
+    q.setAttribute("aria-activedescendant", "opt-" + act);
+  }
+  function closeList() { qlist.hidden = true; q.setAttribute("aria-expanded", "false"); q.removeAttribute("aria-activedescendant"); }
+  function choose(i) {
+    var d = res[i]; if (!d) return;
+    closeList(); matches = null; qmsg.textContent = "";
+    q.value = d.name;
+    select(d);
+  }
+  q.addEventListener("input", function () { runSearch(q.value); });
+  q.addEventListener("keydown", function (ev) {
+    if (ev.key === "ArrowDown") { ev.preventDefault(); if (qlist.hidden && q.value.trim()) runSearch(q.value); else setAct(act + 1); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); setAct(act - 1); }
+    else if (ev.key === "Enter") { ev.preventDefault(); if (res.length) choose(Math.max(0, act)); else runSearch(q.value); }
+    else if (ev.key === "Escape") { if (!qlist.hidden) { closeList(); } else { q.value = ""; matches = null; qmsg.textContent = ""; } kick(); }
+  });
+  q.addEventListener("blur", function () { setTimeout(function () { if (document.activeElement !== q) { closeList(); matches = null; kick(); } }, 120); });
+  $("#find button").addEventListener("click", function (ev) { ev.preventDefault(); if (res.length) choose(Math.max(0, act)); else runSearch(q.value, true); });
+  document.querySelectorAll(".try a").forEach(function (a) {
+    a.addEventListener("click", function (ev) { ev.preventDefault(); q.value = a.getAttribute("data-q"); runSearch(q.value, true); });
+  });
+
+  /* ---------- the story: which step is at the reading line ---------- */
+  function setStep(k) {
+    if (k === step) return;
+    var first = step < 0;
+    step = k;
+    caps.forEach(function (c, i) {
+      var on = i === k;
+      c.classList.toggle("on", on);
+      c.querySelectorAll("a").forEach(function (a) { if (on) a.removeAttribute("tabindex"); else a.setAttribute("tabindex", "-1"); });
+    });
+    if (!first && sel) select(null);
+    if (!first) { q.value = q.value && matches ? q.value : q.value; }
+    setOrder(STEPS[k], first);
+    if (geo && geo.orient === "cols" && STEPS[k].focus.length) {
+      var d = byName[STEPS[k].focus[0]];
+      if (d && d.kind === "exposure") mxf.scrollTo({ left: Math.max(0, d.s1 * geo.cw - mxf.clientWidth / 3), behavior: still ? "auto" : "smooth" });
+    }
+    if (geo && geo.orient === "cols") {
+      var st = STEPS[k];
+      rd.textContent = st.pair ? "Tobacco smoking × Lung cancer: Established link" : k === 4 ? "Tobacco smoking and Processed meat: both Group 1" : "Tap a square to read the pair. The ledger scrolls sideways.";
+    }
+  }
+  var pinEl = cover.querySelector(".pin"), topEl = document.querySelector(".top"), hbLast = -1;
+  function headerGap() {
+    var hb = Math.max(0, Math.round(topEl.getBoundingClientRect().bottom));
+    if (hb !== hbLast) { hbLast = hb; pinEl.style.setProperty("--hb", hb + "px"); }
+  }
+  function checkStep() {
+    headerGap();
+    var mid = innerHeight * .5, k = 0;
+    for (var i = 0; i < spacers.length; i++) if (spacers[i].getBoundingClientRect().top <= mid) k = i;
+    setStep(k);
+  }
+
+  /* ---------- the two plates in the explorers section ---------- */
+  function plate(fig, graph) {
+    var c = fig.querySelector("canvas"); if (!c) return;
+    var ex = graph.nodes.filter(function (d) { return d.kind === "exposure" || d.kind === "risk"; });
+    var ds = graph.nodes.filter(function (d) { return d.kind === "cancer" || d.kind === "disease"; });
+    var key = function (d) { return d.cat; };
+    var cats = []; ex.forEach(function (d) { if (cats.indexOf(key(d)) < 0) cats.push(key(d)); });
+    var dc = []; ds.forEach(function (d) { if (dc.indexOf(key(d)) < 0) dc.push(key(d)); });
+    ex.sort(function (a, b) { return cats.indexOf(a.cat) - cats.indexOf(b.cat) || cmpDeg(a, b); });
+    ds.sort(function (a, b) { return dc.indexOf(a.cat) - dc.indexOf(b.cat) || cmpDeg(a, b); });
+    var ri = {}, ci = {}; ex.forEach(function (d, i) { ri[d.i] = i; }); ds.forEach(function (d, i) { ci[d.i] = i; });
+    function paint() {
+      var r = c.getBoundingClientRect(); if (!r.width) return;
+      var d = Math.min(2, window.devicePixelRatio || 1);
+      c.width = Math.round(r.width * d); c.height = Math.round(r.height * d);
+      var x = c.getContext("2d"); x.setTransform(d, 0, 0, d, 0, 0);
+      /* exposures run across, diseases down: a wide ledger page */
+      var padX = r.width * .08, padY = r.height * .12;
+      var cw = (r.width - 2 * padX) / ex.length, chh = (r.height - 2 * padY - 18) / ds.length, s = Math.min(cw, chh * 2.2);
+      var W = s * ex.length, H = Math.min(chh, s * 1.6) * ds.length, rh = H / ds.length;
+      var x0 = (r.width - W) / 2, y0 = (r.height - H) / 2 - 8;
+      x.fillStyle = "#E4E4E4";
+      for (var i = 0; i < ex.length; i++) for (var j = 0; j < ds.length; j++) x.fillRect(x0 + i * s + s * .12, y0 + j * rh + rh * .12, s * .76, rh * .76);
+      graph.links.forEach(function (l) {
+        var e = l.source.kind === "exposure" || l.source.kind === "risk" ? l.source : l.target, k = e === l.source ? l.target : l.source;
+        var X = x0 + ri[e.i] * s + s * .12, Y = y0 + ci[k.i] * rh + rh * .12, w = s * .76, h = rh * .76;
+        if (l.est) { x.fillStyle = RED; x.fillRect(X, Y, w, h); }
+        else { x.strokeStyle = l.grade === "Conflicting" ? "#9A9A9A" : RED; x.lineWidth = Math.max(.5, Math.min(w, h) * .18); x.strokeRect(X + x.lineWidth / 2, Y + x.lineWidth / 2, w - x.lineWidth, h - x.lineWidth); }
+      });
+    }
+    fig.classList.add("live");
+    paint();
+    var t; addEventListener("resize", function () { clearTimeout(t); t = setTimeout(paint, 150); });
+  }
+
+  /* ---------- start ---------- */
+  EpiNet.load("cancer").then(function (graph) {
+    G = graph;
+    graph.nodes.forEach(function (d) { if (d.kind === "exposure") EX.push(d); else CA.push(d); byName[d.name] = d; d.s = 0; });
+    /* column heads: drop a parenthesis when the name stays unique without it (the readout keeps the full name) */
+    var bare = function (d) { return d.short.replace(/\s*\([^()]*(\([^()]*\)[^()]*)*\)/g, "").replace(/\s+/g, " ").trim(); }, seen = {};
+    graph.nodes.forEach(function (d) { var b = bare(d); seen[b] = (seen[b] || 0) + 1; });
+    graph.nodes.forEach(function (d) { var b = bare(d); d.head = seen[b] === 1 && b ? b : d.short; });
+    LINKS = graph.links.map(function (l) {
+      var e = l.source.kind === "exposure" ? l.source : l.target, c = e === l.source ? l.target : l.source;
+      var o = { e: e, c: c, est: l.est }; CELL[e.i + "-" + c.i] = o; return o;
+    });
+    measure();
+    revealT0 = performance.now();
+    checkStep();
+    addEventListener("scroll", checkStep, { passive: true });
+    var rt; addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { measure(); checkStep(); }, 120); });
+    if (window.ResizeObserver) new ResizeObserver(function () { measure(); }).observe(mxw);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { labelCache = {}; kick(); });
+    plate($("#plate-c"), graph);
+    EpiNet.load("chronic").then(function (cg) { plate($("#plate-d"), cg); }).catch(function () {});
+  }).catch(function () { root.classList.remove("nj"); });
+})();
+</script>
+</body>
+</html>

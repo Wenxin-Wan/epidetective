@@ -60,7 +60,7 @@
   /* simple deterministic force layout: repulsion (all pairs), springs on links, gravity to centre */
   function layout(g, o) {
     o = o || {};
-    var it = o.iterations || 320, r = rng(o.seed || 7), L = o.linkDistance || 34, C = o.charge || 900, G = o.gravity || 0.012;
+    var it = o.iterations || 320, cap = o.cap || (g.which === "chronic" ? 60 : Infinity), r = rng(o.seed || 7), L = o.linkDistance || 34, C = o.charge || 900, G = o.gravity || 0.012;
     var N = g.nodes, n = N.length;
     N.forEach(function (d, i) { var a = i * 2.399963, rad = 12 * Math.sqrt(i + 1); d.x = Math.cos(a) * rad + r() - .5; d.y = Math.sin(a) * rad + r() - .5; d.vx = 0; d.vy = 0; });
     for (var k = 0; k < it; k++) {
@@ -70,7 +70,10 @@
           if (d2 > 90000) continue; var f = C / d2 * alpha; dx *= f; dy *= f; p.vx += dx; p.vy += dy; q.vx -= dx; q.vy -= dy; } }
       g.links.forEach(function (l) { var s = l.source, t = l.target, dx = t.x - s.x, dy = t.y - s.y, d = Math.sqrt(dx * dx + dy * dy) || 1, f = (d - L) * .06 * alpha / d;
         dx *= f; dy *= f; s.vx += dx; s.vy += dy; t.vx -= dx; t.vy -= dy; });
-      N.forEach(function (d) { d.vx -= d.x * G * alpha; d.vy -= d.y * G * alpha; d.x += d.vx; d.y += d.vy; d.vx *= .55; d.vy *= .55; });
+      N.forEach(function (d) { d.vx -= d.x * G * alpha; d.vy -= d.y * G * alpha;
+        var v = Math.sqrt(d.vx * d.vx + d.vy * d.vy);   /* the step cap keeps the chronic hubs (up to 81 links) from exploding */
+        if (v > cap) { d.vx *= cap / v; d.vy *= cap / v; }
+        d.x += d.vx; d.y += d.vy; d.vx *= .55; d.vy *= .55; });
     }
     return g;
   }
