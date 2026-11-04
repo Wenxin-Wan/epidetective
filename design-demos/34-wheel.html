@@ -57,9 +57,10 @@ img,canvas{display:block;max-width:100%}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:1;display:none}
 .js .live #cv{display:block}
 .netbox{grid-column:2;grid-row:1 / 3;min-height:0;pointer-events:none;display:flex;align-items:center;justify-content:center}
-.still{width:100%;height:auto;max-width:640px;border-radius:50%;opacity:.85}
-.js .still{display:none}
-.js .failed .still{display:block}
+html:not(.js) .netbox{align-items:flex-start}
+.fallback{width:100%;height:auto;max-width:640px;border-radius:50%;opacity:.85}
+.js .fallback{display:none}
+.js .failed .fallback{display:block}
 .slot{grid-column:1;grid-row:1;position:relative;z-index:2;min-height:0}
 .find{grid-column:1;grid-row:2;position:relative;z-index:4;margin-top:var(--s4)}
 
@@ -193,7 +194,7 @@ img,canvas{display:block;max-width:100%}
   .foot-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .foot-g > div:first-child{grid-column:1 / -1}
 }
-@media (max-width:760px){
+@media (max-width:860px){
   :root{--hdr:92px}
   .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
   .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
@@ -203,7 +204,7 @@ img,canvas{display:block;max-width:100%}
   .netbox{grid-column:1;grid-row:3;min-height:220px}
   .js .live .slot{transition:height 650ms var(--ease)}
   .js .live .cap{top:0;bottom:auto}
-  .cap h1{font-size:26px;line-height:1.18}
+  .cap h1{font-size:clamp(25px,4.2vw,36px);line-height:1.18}
   .cap .who{margin-top:12px;font-size:15px}
   .cap .caveat{margin-top:6px;font-size:13px}
   .cap h2{font-size:22px}
@@ -245,7 +246,7 @@ img,canvas{display:block;max-width:100%}
   <div class="stage" id="stage">
     <canvas id="cv" role="img" aria-label="The wheel of causation: 68 cancer types around the rim, grouped by organ system; 185 exposures on the inner ring, grouped by kind; 469 links bundled through the centre. Point at or tap a mark on either ring to read its links; the search reaches every entry by keyboard."></canvas>
     <div class="netbox" id="netbox">
-      <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
+      <img class="fallback" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
     </div>
 
     <div class="slot" id="slot">
@@ -416,6 +417,7 @@ img,canvas{display:block;max-width:100%}
   "use strict";
   if (!window.EpiNet || !document.querySelector("#cv").getContext) return;
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var HOVER = window.matchMedia && matchMedia("(hover: hover)").matches;
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
   var cover = $("#cover"), stage = $("#stage"), cv = $("#cv"), ctx = cv.getContext("2d"), netbox = $("#netbox"),
@@ -445,7 +447,7 @@ img,canvas{display:block;max-width:100%}
   var t0 = 0, introDone = still, raf = 0, last = 0;
 
   var STEPS = [
-    { label: "Scroll to turn the wheel" },
+    { label: HOVER ? "Point at a mark, or scroll to turn the wheel" : "Tap a mark, or scroll" },
     { label: "Respiratory & intrathoracic", org: "Respiratory & intrathoracic" },
     { label: "Digestive organs", org: "Digestive organs" },
     { label: "Lymphoid & haematopoietic", org: "Lymphoid & haematopoietic" },
@@ -491,13 +493,13 @@ img,canvas{display:block;max-width:100%}
     var r = stage.getBoundingClientRect(), b = netbox.getBoundingClientRect();
     var nw = r.width, nh = r.height, nd = Math.min(2.5, window.devicePixelRatio || 1);
     if (nw !== W || nh !== H || nd !== DPR) { W = nw; H = nh; DPR = nd; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
-    phone = W < 760;
+    phone = W < 600;
     BOX = { x: b.left - r.left, y: b.top - r.top, w: Math.max(40, b.width), h: Math.max(40, b.height) };
     var m = phone ? 30 : 64;
     R1 = Math.max(60, Math.min(BOX.w, BOX.h) / 2 - m); R2 = R1 * 0.66;
     cx = BOX.x + BOX.w / 2; cy = BOX.y + BOX.h / 2 + (phone ? 0 : 6);
     buildPaths();
-    if (!phone) { var sr = slot.getBoundingClientRect(); card.style.left = (sr.left - r.left) + "px"; card.style.top = (sr.top - r.top) + "px"; card.style.width = sr.width + "px"; card.style.height = sr.height + "px"; }
+    if (W >= 860) { var sr = slot.getBoundingClientRect(); card.style.left = (sr.left - r.left) + "px"; card.style.top = (sr.top - r.top) + "px"; card.style.width = sr.width + "px"; card.style.height = sr.height + "px"; }
     kick();
   }
   /* hierarchical edge bundling (Holten 2006): exposure -> its kind -> centre -> organ system -> cancer, as a straightened B-spline */
@@ -831,7 +833,7 @@ img,canvas{display:block;max-width:100%}
   }
   function goStep(i) { scrollTo({ top: cover.getBoundingClientRect().top + scrollY + i * stepH() + 2, behavior: still ? "auto" : "smooth" }); }
   function fitSlot() {
-    if (W >= 760) { slot.style.height = ""; return; }
+    if (W >= 860) { slot.style.height = ""; return; }
     var c = caps[Math.max(0, step)]; if (c) slot.style.height = c.offsetHeight + "px";
   }
   function setStep(i) {

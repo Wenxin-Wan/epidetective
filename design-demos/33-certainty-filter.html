@@ -67,9 +67,9 @@ img,canvas{display:block;max-width:100%}
 .crn.b{right:-1px;top:-1px;border-right-width:1px!important;border-top-width:1px!important}
 .crn.c{left:-1px;bottom:-1px;border-left-width:1px!important;border-bottom-width:1px!important}
 .crn.d{right:-1px;bottom:-1px;border-right-width:1px!important;border-bottom-width:1px!important}
-.still{width:100%;height:auto;max-width:720px;margin:0 auto}
-.js .still{display:none}
-.js .failed .still{display:block}
+.fallback{width:100%;height:auto;max-width:720px;margin:0 auto}
+.js .fallback{display:none}
+.js .failed .fallback{display:block}
 .legend{display:none}
 .js .live .legend{display:flex;position:absolute;top:14px;left:16px;right:16px;gap:6px 20px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font:400 var(--t12)/1.2 var(--sans);color:var(--graph-2);z-index:2;pointer-events:none}
 .legend li{display:flex;align-items:center;gap:7px}
@@ -191,10 +191,10 @@ html:not(.js) .idx{display:none}
 .scale4 .sw.g3{background:var(--white);border:1px solid var(--mute)}
 .scale4 h3{margin-top:var(--s3);font:300 var(--t30)/1.1 var(--sans);letter-spacing:-.015em}
 .scale4 p{margin-top:12px;font:400 var(--t14)/1.6 var(--sans);color:var(--graph-2)}
-.tool{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:stretch;padding:var(--s5) 0;border-bottom:1px solid var(--rule)}
+.tool{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:center;padding:var(--s5) 0;border-bottom:1px solid var(--rule)}
 .tool.rev{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
 .tool.rev .plate{order:2}
-.plate{margin:0;position:relative;aspect-ratio:4/3;border:1px solid var(--rule);background:
+.plate{margin:0;position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--rule);background:
   linear-gradient(var(--cool-2) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--cool-2) 1px,transparent 1px) 0 0/40px 40px,var(--white)}
 .plate canvas,.plate img{position:absolute;inset:0;width:100%;height:100%}
 .plate img{object-fit:contain;padding:7%}
@@ -254,7 +254,7 @@ html:not(.js) .idx{display:none}
   .foot-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .foot-g > div:first-child{grid-column:1 / -1}
 }
-@media (max-width:760px){
+@media (max-width:860px){
   :root{--hdr:92px}
   .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
   .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
@@ -265,7 +265,7 @@ html:not(.js) .idx{display:none}
   .panel{grid-column:1;grid-row:4;gap:8px 10px;padding-top:10px}
   .js .live .slot{transition:height 600ms var(--ease)}
   .js .live .cap{top:0;bottom:auto}
-  .cap h1{font-size:29px;line-height:1.08}
+  .cap h1{font-size:clamp(27px,4.6vw,38px);line-height:1.08}
   .cap .who{margin-top:12px;font-size:15px}
   .cap .caveat{margin-top:8px;font-size:14px}
   .cap h2{font-size:23px}
@@ -323,7 +323,7 @@ html:not(.js) .idx{display:none}
 
     <div class="field" id="netbox">
       <span class="crn a" aria-hidden="true"></span><span class="crn b" aria-hidden="true"></span><span class="crn c" aria-hidden="true"></span><span class="crn d" aria-hidden="true"></span>
-      <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
+      <img class="fallback" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
       <ul class="legend" aria-hidden="true">
         <li><span class="sw g1"></span>Known cause</li>
         <li><span class="sw g2a"></span>Probable cause</li>
@@ -556,7 +556,7 @@ html:not(.js) .idx{display:none}
   var LAB = EpiNet.LABELS, RANK = { "1": 1, "2A": 2, "2B": 3 };
 
   var G = null, N = [], L = [], byName = {}, DEF = [];
-  var W = 0, H = 0, DPR = 1, phone = false, visible = true;
+  var W = 0, H = 0, DPR = 1, phone = false, stacked = false, visible = true;
   var BOX = { x: 0, y: 0, w: 1, h: 1 }, base = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 };
   var cam = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 }, camT = { ax: 0, ay: 0, cx: 0, cy: 0, k: 1 };
   var hover = null, sel = null, matches = [], mset = new Set(), opts = [], act = -1, cardOn = false;
@@ -637,7 +637,7 @@ html:not(.js) .idx{display:none}
     var r = stage.getBoundingClientRect(), b = netbox.getBoundingClientRect();
     var nw = r.width, nh = r.height, nd = Math.min(2.5, window.devicePixelRatio || 1);
     if (nw !== W || nh !== H || nd !== DPR) { W = nw; H = nh; DPR = nd; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
-    phone = W < 760;
+    phone = W < 600; stacked = W < 860;
     BOX = { x: b.left - r.left, y: b.top - r.top, w: Math.max(40, b.width), h: Math.max(40, b.height) };
     if (snap || base.k === 1) {
       var o = BOX.h > BOX.w * 1.15;
@@ -647,7 +647,7 @@ html:not(.js) .idx{display:none}
       var ra = (BOX.w / BOX.h) / ((x1 - x0) / (y1 - y0)), sx = ra > 1 ? Math.min(1.3, ra) : 1, sy = ra < 1 ? Math.min(1.3, 1 / ra) : 1;
       base.o = o; base.sx = sx; base.sy = sy; base.bw = (x1 - x0) * sx; base.bh = (y1 - y0) * sy; base.mx = (x0 + x1) / 2 * sx; base.my = (y0 + y1) / 2 * sy;
     }
-    var pad = phone ? 18 : 34, top = phone ? 0 : 30;
+    var pad = phone ? 18 : 34, top = stacked ? 0 : 30;
     base.ax = BOX.x + BOX.w / 2; base.ay = BOX.y + top / 2 + BOX.h / 2; base.cx = base.mx; base.cy = base.my;
     base.k = Math.min((BOX.w - 2 * pad) / base.bw, (BOX.h - top - 2 * pad) / base.bh);
     camT.ax = base.ax; camT.ay = base.ay; camT.cx = base.cx; camT.cy = base.cy; camT.k = base.k;
@@ -758,7 +758,7 @@ html:not(.js) .idx{display:none}
     else if (mset.size) matches.slice(0, phone ? 5 : 10).forEach(function (d) { add(d, 2); });
     else if (story.labels) story.labels.forEach(function (n) { add(byName[n], 2); });
     else DEF.filter(function (d) { return d.on; }).slice(0, phone ? 4 : 9).forEach(function (d) { add(d, 0); });
-    var placed = [], x0 = BOX.x + 6, x1 = BOX.x + BOX.w - 6, y0 = BOX.y + (phone ? 6 : 40), y1 = BOX.y + BOX.h - 6, cr = null;
+    var placed = [], x0 = BOX.x + 6, x1 = BOX.x + BOX.w - 6, y0 = BOX.y + (stacked ? 6 : 40), y1 = BOX.y + BOX.h - 6, cr = null;
     if (cardOn) { var a = card.getBoundingClientRect(), s = stage.getBoundingClientRect(); cr = [a.left - s.left - 8, a.top - s.top - 8, a.width + 16, a.height + 16]; }
     ctx.textBaseline = "middle"; ctx.lineJoin = "round";
     if (focus && focus.a > 0.08) { var fr = rad(focus) + 9; placed.push([focus.sx - fr, focus.sy - fr, 2 * fr, 2 * fr]); }
@@ -930,7 +930,7 @@ html:not(.js) .idx{display:none}
   }
   function goStep(i) { scrollTo({ top: cover.getBoundingClientRect().top + scrollY + i * stepH() + 2, behavior: still ? "auto" : "smooth" }); }
   function fitSlot() {
-    if (W >= 760) { slot.style.height = ""; return; }
+    if (W >= 860) { slot.style.height = ""; return; }
     var c = caps[Math.max(0, step)]; if (c) slot.style.height = c.offsetHeight + "px";
   }
   function setStep(i) {

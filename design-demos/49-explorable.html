@@ -81,9 +81,9 @@ ul{list-style:none;margin:0;padding:0}
 .note svg{width:96px;height:40px;margin:0 0 4px -10px}
 .anchor{position:relative}
 /* drawing in: only when the script runs and motion is allowed */
-html.marks .passage:not(.on) .draw{stroke-dashoffset:1}
-html.marks .passage:not(.on) .hl{background-size:0% 100%}
-html.marks .passage:not(.on) .note{opacity:0;transform:rotate(-2deg) translateY(6px)}
+html.marks .unit:not(.on) .draw{stroke-dashoffset:1}
+html.marks .unit:not(.on) .hl{background-size:0% 100%}
+html.marks .unit:not(.on) .note{opacity:0;transform:rotate(-2deg) translateY(6px)}
 html.marks .draw{transition:stroke-dashoffset 1100ms var(--ease) var(--d,300ms)}
 html.marks .hl{transition:background-size 1200ms var(--ease) var(--d,150ms)}
 html.marks .note{transition:opacity 1000ms var(--ease) var(--nd,700ms),transform 1000ms var(--ease) var(--nd,700ms)}
@@ -134,7 +134,7 @@ html.marks .note{transition:opacity 1000ms var(--ease) var(--nd,700ms),transform
 .fig figcaption i{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:baseline;margin:0 2px}
 .key-s{background:var(--pen)}
 .key-r{border:1.2px solid var(--pen)}
-html.marks .passage:not(.on) .dots .fill{opacity:0}
+html.marks .unit:not(.on) .dots .fill{opacity:0}
 html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
 .meat{margin-top:var(--s-5)}
 .idea .link{display:inline-block;margin-top:var(--s-4)}
@@ -185,7 +185,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
   .page{max-width:calc(var(--col) + 2*var(--gutter))}
   .sec-n{position:static;display:block;margin-bottom:var(--s-2)}
   .note{position:relative;left:auto;top:auto;width:auto;max-width:22em;margin:var(--s-3) 0 0 18px;font-size:27px;transform:rotate(-1.2deg)}
-  html.marks .passage:not(.on) .note{transform:rotate(-1.2deg) translateY(6px)}
+  html.marks .unit:not(.on) .note{transform:rotate(-1.2deg) translateY(6px)}
   .note svg{transform:rotate(58deg);width:56px;height:24px;margin:0 0 8px 0}
   .fig,.netfig,.games{width:100%}
   .foot-grid{grid-template-columns:minmax(0,1fr) auto}
@@ -225,8 +225,8 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
   <main id="main">
 
     <!-- 1 · hero -->
-    <section class="passage hero" aria-labelledby="h1">
-      <div class="anchor">
+    <section class="unit passage hero" aria-labelledby="h1">
+      <div class="unit anchor">
         <h1 id="h1">What causes cancer and other chronic diseases, and <span class="hl">how sure the evidence is</span></h1>
         <aside class="note" style="--top:52%" aria-label="Margin note">
           <svg viewBox="0 0 96 40" aria-hidden="true"><path class="draw" pathLength="1" d="M92 32 C66 36 34 30 7 12" style="--d:900ms"/><path class="draw" pathLength="1" d="M7 12 L19 12 M7 12 L11 23" style="--d:1500ms"/></svg>
@@ -246,11 +246,11 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
     </section>
 
     <!-- 2 · one idea -->
-    <section class="passage idea" id="idea" aria-labelledby="h-idea">
+    <section class="unit passage idea" id="idea" aria-labelledby="h-idea">
       <span class="sec-n" aria-hidden="true">i</span>
       <h2 id="h-idea">Same certainty, very different size</h2>
       <p style="margin-bottom:1.1em">Tobacco smoking and processed meat are both in <span class="circ">Group&nbsp;1<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path class="draw" pathLength="1" vector-effect="non-scaling-stroke" d="M54 4 C22 2 4 11 4 21 C4 32 28 38 55 37 C82 36 97 28 96 18 C95 8 76 2 44 6"/></svg></span>: the evidence that each can cause cancer is equally sure. The risks are not.</p>
-      <div class="anchor">
+      <div class="unit anchor">
         <p>About <a class="ref nums" href="#g-smk" data-ref="smk">10 to 12 in 100</a> smokers get lung cancer by age 75. About <a class="ref nums" href="#g-non" data-ref="non">4 to 5 in 1,000</a> lifelong non-smokers do.</p>
         <aside class="note" style="--top:-6px;--nd:1100ms" aria-label="Margin note">
           <svg viewBox="0 0 96 40" aria-hidden="true"><path class="draw" pathLength="1" d="M92 32 C66 36 34 30 7 12" style="--d:1300ms"/><path class="draw" pathLength="1" d="M7 12 L19 12 M7 12 L11 23" style="--d:1900ms"/></svg>
@@ -258,7 +258,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
         </aside>
       </div>
 
-      <figure class="fig" id="fig-dots" aria-labelledby="fig-dots-cap">
+      <figure class="fig unit" id="fig-dots" aria-labelledby="fig-dots-cap">
         <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
           <defs>
             <pattern id="pe" width="10" height="10" patternUnits="userSpaceOnUse"><circle class="e" cx="5" cy="5" r="1.45"/></pattern>
@@ -293,15 +293,15 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
     </section>
 
     <!-- 3 · the tools -->
-    <section class="passage" id="tools" aria-labelledby="h-tools">
+    <section class="unit passage" id="tools" aria-labelledby="h-tools">
       <span class="sec-n" aria-hidden="true">ii</span>
       <h2 id="h-tools">Look it up yourself</h2>
       <p>Two explorers, free to use, in 10 languages.</p>
 
-      <article class="tool" aria-labelledby="h-cancer">
+      <article class="unit tool" aria-labelledby="h-cancer">
         <h3 id="h-cancer">Cancer Evidence Explorer</h3>
         <p class="lede-t">Which exposures can cause which cancers, and how sure the evidence is for each link. From the IARC Monographs.</p>
-        <div class="anchor">
+        <div class="unit anchor">
         <div class="figs">
           <div><b>185</b><span class="lab">exposures</span></div>
           <div><b>68</b><span class="lab">cancer types</span></div>
@@ -320,7 +320,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
         </figure>
       </article>
 
-      <article class="tool" aria-labelledby="h-chronic">
+      <article class="unit tool" aria-labelledby="h-chronic">
         <h3 id="h-chronic">Chronic Disease Evidence Explorer</h3>
         <p class="lede-t">Risk factors for heart disease, stroke, type 2 diabetes, dementia and more, graded by <span class="hl" style="--d:300ms">how strong the evidence is</span>.</p>
         <div class="figs">
@@ -338,7 +338,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
     </section>
 
     <!-- 4 · code against cancer -->
-    <section class="passage code" id="code" aria-labelledby="h-code">
+    <section class="unit passage code" id="code" aria-labelledby="h-code">
       <span class="sec-n" aria-hidden="true">iii</span>
       <h2 id="h-code">What you can do: Code Against Cancer</h2>
       <p>The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners. <span class="uline">Fourteen<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path class="draw" pathLength="1" vector-effect="non-scaling-stroke" d="M1 5 C30 8 60 2 99 6"/></svg></span> actions for Europe, <span class="uline">seventeen<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path class="draw" pathLength="1" vector-effect="non-scaling-stroke" d="M1 6 C34 3 66 8 99 4" style="--d:800ms"/></svg></span> for Latin America and the Caribbean.</p>
@@ -346,7 +346,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
     </section>
 
     <!-- 5 · games -->
-    <section class="passage" id="games" aria-labelledby="h-games">
+    <section class="unit passage" id="games" aria-labelledby="h-games">
       <span class="sec-n" aria-hidden="true">iv</span>
       <h2 id="h-games">For schools and families</h2>
       <p>Learning by playing — three games.</p>
@@ -377,7 +377,7 @@ html.marks .dots .fill{transition:opacity 700ms var(--ease) var(--fd,0ms)}
 (function(){
   var root=document.documentElement;
   /* each passage draws its marks once, when it reaches the reading line */
-  var ps=document.querySelectorAll('.passage');
+  var ps=document.querySelectorAll('.unit');
   if(root.classList.contains('marks')){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });

@@ -194,7 +194,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
 /* ---------- responsive ---------- */
 @media (max-width:899px){
   .nj .pin{grid-template-columns:var(--gut) minmax(0,1fr) var(--gut);grid-template-rows:16px auto auto minmax(0,1fr) auto calc(14px + var(--hb,0px))}
-  .nj .pin::before{background:linear-gradient(180deg,rgba(7,10,18,.94) 0%,rgba(7,10,18,.8) 34%,rgba(7,10,18,0) 52%)}
+  .nj .pin::before{display:none}
   .nj .caps{grid-area:2/2/3/3}
   .nj .cap{display:none}
   .nj .cap.on{display:block}
@@ -217,7 +217,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
   .cap .caveat{font-size:13px;margin-top:6px}
   .cap .ix{margin-bottom:6px}
   .cap p.t{margin-top:8px;font-size:15px}
-  .figs{margin-top:12px;gap:6px}
+  .figs{margin-top:12px;gap:10px}
   .figs b{font-size:22px}
   .figs span{font-size:13px}
   .src{margin-top:10px}
@@ -227,6 +227,21 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
   .ctl button{width:40px;height:40px}
   .spec dd{font-size:38px}
   .counts b{font-size:56px}
+}
+@media (min-width:900px) and (max-height:860px){
+  .cap h1{font-size:clamp(28px,3vw,40px)}
+  .cap h2{font-size:24px}
+  .cap .who{margin-top:14px;font-size:15.5px}
+  .cap p.t{font-size:15px;margin-top:10px}
+  .cap .ix{margin-bottom:8px}
+  .figs{margin-top:12px;gap:6px}
+  .figs b{font-size:22px}
+  .figs span{font-size:13px}
+  .src{margin-top:12px}
+  .nj .find{margin-top:24px}
+  .nj .pin{grid-template-rows:14px auto auto minmax(0,1fr) auto calc(14px + var(--hb,0px))}
+  .nj .legend{grid-area:5/3/6/4;max-width:calc(100% - 170px);padding-left:var(--s3)}
+  .ctl p{display:none}
 }
 @media (prefers-reduced-motion:reduce){ .nj .cap,.btn,.lnk,.game img{transition:none!important} }
 </style>
@@ -315,7 +330,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
     <div class="wrap">
       <div class="head">
         <h2 id="tools-h" data-reveal="fade">Two skies of evidence</h2>
-        <p data-reveal="fade" style="--d:150ms">The explorers: free to use, every link with its sources.</p>
+        <p data-reveal="fade" style="--d:150ms">The explorers: free to use. Every entry names its sources.</p>
       </div>
       <div class="tools">
         <article class="tool" aria-labelledby="t1">
@@ -397,7 +412,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
   var SANS = '"Sora","Segoe UI",Helvetica,Arial,sans-serif';
 
   var G, byName = {}, W = 0, H = 0, dpr = 1, raf = 0, lastT = 0, visible = true;
-  var cam = { yaw: .6, pitch: .38, dist: 3.4, tx: 0, ty: 0, tz: 0 }, aim = { yaw: .6, pitch: .38, dist: 3.4, tx: 0, ty: 0, tz: 0 };
+  var cam = { yaw: .6, pitch: .38, dist: 2.9, tx: 0, ty: 0, tz: 0 }, aim = { yaw: .6, pitch: .38, dist: 2.9, tx: 0, ty: 0, tz: 0 };
   var spin = !still, userTurned = false, drag = null;
   var view = { cx: 0, cy: 0, f: 1 };
   var hover = null, sel = null, matches = null, step = -1, storyNodes = [];
@@ -462,7 +477,9 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     var ax = a.left - r.left, ay = a.top - r.top, aw = Math.max(60, a.width), ah = Math.max(60, a.height);
     view.cx = ax + aw / 2; view.cy = ay + ah / 2;
-    view.f = Math.min(aw * .5, ah * .78) * .82 * 3.4;
+    view.f = Math.min(aw * .5, ah * .78) * .8 * 2.9;
+    view.k = Math.max(.6, Math.min(1.15, view.f / 1070));
+    view.mask = W < 900 ? ay : 0;
     if (G) { if (raf) { cancelAnimationFrame(raf); raf = 0; } frame(performance.now()); }
   }
 
@@ -497,7 +514,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
     G.links.forEach(function (l) {
       var a = l.source, b = l.target; if (!a.vis || !b.vis) return;
       var on = any && (F[a.i] === 2 || F[b.i] === 2), fade = Math.min(a.fade, b.fade);
-      var alpha = any ? (on ? .75 : .025) : (l.est ? .1 : .06);
+      var alpha = any ? (on ? .75 : .025) : (l.est ? .13 : .08);
       var e = a.kind === "exposure" ? a : b;
       ctx.strokeStyle = on ? rgba(colourOf(e), alpha * fade) : rgba(COL.c, alpha * fade);
       ctx.setLineDash(l.est ? [] : [3, 4]);
@@ -510,7 +527,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
       var base = d.kind === "cancer" ? 2.2 + Math.sqrt(d.degree) * .75 : 1.5 + Math.sqrt(d.degree) * .35;
       var r = base * d.s / (view.f / cam.dist) * (F[d.i] === 2 ? 1.5 : 1);
       var a = d.fade * (any ? (F[d.i] ? 1 : .22) : 1);
-      var size = Math.max(3, r * 7);
+      var size = Math.max(3, r * 8 * view.k);
       ctx.globalAlpha = a;
       ctx.drawImage(sprite(colourOf(d)), d.px - size / 2, d.py - size / 2, size, size);
     });
@@ -524,13 +541,14 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
     /* labels */
     var lab = [];
     if (any) G.nodes.forEach(function (d) { if (d.vis && F[d.i]) lab.push(d); });
-    else lab = G.nodes.filter(function (d) { return d.vis && d.kind === "cancer" && d.degree >= 19; });
+    else lab = G.nodes.filter(function (d) { return d.vis && d.kind === "cancer" && d.degree >= (W < 600 ? 23 : 19); });
     var placed = [];
     lab.sort(function (a, b) { return (F[b.i] || 0) - (F[a.i] || 0) || a.depth - b.depth; }).forEach(function (d) {
       var strong = F[d.i] === 2, fsz = strong ? 15 : 12;
       ctx.font = (strong ? "400 " : "300 ") + fsz + "px " + SANS;
       var txt = d.short, w = ctx.measureText(txt).width, x = d.px + (strong ? 16 : 9), y = d.py + fsz * .35;
       if (x + w > W - 12) x = d.px - (strong ? 16 : 9) - w;
+      if (x < 10 || x + w > W - 10 || y < view.mask + 14) return;
       var box = [x - 2, y - fsz, x + w + 2, y + 5];
       for (var i = 0; i < placed.length; i++) { var p = placed[i]; if (box[0] < p[2] && box[2] > p[0] && box[1] < p[3] && box[3] > p[1]) return; }
       if (placed.length > (W < 600 ? 10 : 26)) return;
@@ -540,13 +558,19 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
       ctx.fillText(txt, x, y);
     });
     ctx.globalAlpha = 1;
+    if (view.mask) {
+      ctx.fillStyle = "#070A12"; ctx.fillRect(0, 0, W, Math.max(0, view.mask - 24));
+      var mg = ctx.createLinearGradient(0, view.mask - 24, 0, view.mask + 28);
+      mg.addColorStop(0, "rgba(7,10,18,1)"); mg.addColorStop(1, "rgba(7,10,18,0)");
+      ctx.fillStyle = mg; ctx.fillRect(0, view.mask - 24, W, 52);
+    }
   }
 
   /* ---------- pointer: hover, select, drag to turn ---------- */
   function local(ev) { var r = cv.getBoundingClientRect(); return { x: ev.clientX - r.left, y: ev.clientY - r.top }; }
   function pick(x, y, touch) {
     var best = null, bd = touch ? 26 : 14;
-    G.nodes.forEach(function (d) { if (!d.vis || d.fade < .2) return; var dd = Math.hypot(d.px - x, d.py - y) - (d.depth < cam.dist ? 2 : 0); if (dd < bd) { bd = dd; best = d; } });
+    G.nodes.forEach(function (d) { if (!d.vis || d.fade < .2 || d.py < view.mask) return; var dd = Math.hypot(d.px - x, d.py - y) - (d.depth < cam.dist ? 2 : 0); if (dd < bd) { bd = dd; best = d; } });
     return best;
   }
   function showTip(d, x, y) {
@@ -599,7 +623,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
 
   /* ---------- fly the camera ---------- */
   function flyTo(d, dist) {
-    if (!d) { aim.tx = aim.ty = aim.tz = 0; aim.dist = 3.4; aim.pitch = .38; }
+    if (!d) { aim.tx = aim.ty = aim.tz = 0; aim.dist = dist || 2.9; aim.pitch = .38; }
     else { aim.tx = d.X; aim.ty = d.Y; aim.tz = d.Z; aim.dist = dist || 1.9; aim.pitch = .32; }
     if (still) { ["tx", "ty", "tz", "dist", "pitch"].forEach(function (p) { cam[p] = aim[p]; }); }
     kick();
@@ -668,10 +692,10 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
 
   /* ---------- story: fly to tobacco, to lung cancer, back out ---------- */
   var SHOTS = [
-    { node: null, dist: 3.4, story: [] },
+    { node: null, dist: 2.9, story: [] },
     { node: "Tobacco smoking", dist: 1.85, story: ["Tobacco smoking"] },
     { node: "Lung cancer", dist: 1.75, story: ["Lung cancer"] },
-    { node: null, dist: 3.4, story: ["Tobacco smoking", "Processed meat"] }
+    { node: null, dist: 2.9, story: ["Tobacco smoking", "Processed meat"] }
   ];
   function setStep(k) {
     if (k === step) return;
@@ -700,7 +724,7 @@ footer{margin-top:var(--s6);border-top:1px solid var(--hair);padding:var(--s5) 0
     if (still) $("#rp").setAttribute("aria-pressed", "false");
     measure(); checkStep();
     addEventListener("scroll", checkStep, { passive: true });
-    if (window.ResizeObserver) new ResizeObserver(measure).observe(pinEl); else addEventListener("resize", measure);
+    if (window.ResizeObserver) { var ro = new ResizeObserver(measure); ro.observe(pinEl); ro.observe(area); } else addEventListener("resize", measure);
     if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(cover);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(kick);
   }).catch(function () { root.classList.remove("nj"); });

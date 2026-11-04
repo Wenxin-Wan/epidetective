@@ -126,9 +126,10 @@ ul,ol{list-style:none;margin:0;padding:0}
 .try a{color:var(--ink);margin:0 2px}
 
 /* ---------- 02 idea ---------- */
-.idea{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s-5) clamp(32px,5vw,88px);align-items:start}
-.idea h2{font-size:var(--t-56);line-height:1.02;letter-spacing:-.035em;max-width:9em}
-.idea-text p{margin-top:var(--s-3);max-width:26em}
+.idea{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,4vw,56px) clamp(32px,5vw,88px);align-items:start}
+.idea h2{grid-column:1 / -1;font-size:var(--t-56);line-height:1.02;letter-spacing:-.035em;max-width:14em}
+.idea-text p{max-width:26em}
+.idea-text p + p{margin-top:var(--s-3)}
 .idea-text .src{font-size:var(--t-15);color:var(--ink-2);margin-top:var(--s-4)}
 .idea-text .link{display:inline-block;margin-top:var(--s-3)}
 .meter-screen{padding:clamp(22px,2.6vw,36px)}
@@ -175,12 +176,12 @@ html.js:not(.still) .net-wrap:not(.is-in) .net{opacity:0;transform:scale(.96)}
 .tool.flip .tool-text{order:2}
 
 /* ---------- 05 act ---------- */
-.act{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--s-5) clamp(32px,5vw,88px);align-items:end}
+.act{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(32px,4vw,56px) clamp(32px,5vw,88px);align-items:end}
 .act .kicker{color:var(--ink-2);margin-bottom:var(--s-2)}
-.act h2{font-size:var(--t-88);line-height:.98;letter-spacing:-.04em;max-width:8em}
-.act-lede{margin-top:var(--s-3);max-width:27em}
+.act h2{grid-column:1 / -1;font-size:var(--t-88);line-height:.98;letter-spacing:-.04em}
+.act-lede{max-width:27em}
 .act-reads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.act-reads .screen{padding:20px 18px 16px}
+.act-reads .screen{padding:20px 18px 16px;text-align:right}
 .act-reads .dots{display:block;font-size:clamp(56px,6vw,88px);line-height:.9;color:var(--lcd)}
 .act-reads span{display:block;margin-top:14px;font-size:var(--t-15);color:var(--ink-2)}
 
@@ -324,8 +325,8 @@ html.js:not(.still) .net-wrap:not(.is-in) .net{opacity:0;transform:scale(.96)}
     <section class="mod" id="m2" data-m="1" aria-labelledby="h-idea">
       <div class="mod-bar" aria-hidden="true"><span class="dots">02</span><span class="cap">One idea</span><i class="led"></i></div>
       <div class="idea">
+        <h2 id="h-idea" data-split>Same certainty, very different size</h2>
         <div class="idea-text">
-          <h2 id="h-idea" data-split>Same certainty, very different size</h2>
           <p>Tobacco smoking and processed meat are both in Group&nbsp;1: the evidence that each can cause cancer is equally sure. The risks are not.</p>
           <p class="src">European data. Quoted from the Cancer Evidence Explorer.</p>
           <a class="link" href="#">Seven ideas for reading a health headline →</a>
@@ -399,8 +400,8 @@ html.js:not(.still) .net-wrap:not(.is-in) .net{opacity:0;transform:scale(.96)}
     <section class="mod" id="m5" data-m="4" aria-labelledby="h-act">
       <div class="mod-bar" aria-hidden="true"><span class="dots">05</span><span class="cap">What you can do</span><i class="led"></i></div>
       <div class="act">
+        <h2 id="h-act" data-split>Code Against Cancer</h2>
         <div>
-          <h2 id="h-act" data-split>Code Against Cancer</h2>
           <p class="act-lede">The official recommendations for lowering your own cancer risk, coordinated by IARC (WHO) and its partners.</p>
           <div class="acts"><a class="key" href="#"><i aria-hidden="true"></i>Read the recommendations</a></div>
         </div>

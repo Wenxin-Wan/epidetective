@@ -56,9 +56,9 @@ img,canvas{display:block;max-width:100%}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:1;display:none}
 .js .live #cv{display:block}
 .netbox{grid-column:2;grid-row:1 / 3;min-height:0;position:relative;pointer-events:none}
-.still{width:100%;height:auto;max-width:720px;margin:0 auto}
-.js .still{display:none}
-.js .failed .still{display:block}
+.fallback{width:100%;height:auto;max-width:720px;margin:0 auto}
+.js .fallback{display:none}
+.js .failed .fallback{display:block}
 .slot{grid-column:1;grid-row:1;position:relative;z-index:2;min-height:0}
 .find{grid-column:1;grid-row:2;position:relative;z-index:4;margin-top:var(--s4)}
 
@@ -191,13 +191,12 @@ img,canvas{display:block;max-width:100%}
 /* ---------- responsive ---------- */
 @media (max-width:980px){
   .h-sub,.tool,.code{grid-template-columns:minmax(0,1fr);gap:var(--s4)}
-  .plate figcaption{position:static;margin-top:8px}
-  .plate{margin-bottom:28px}
+  .plate{margin-bottom:34px}
   .gl{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:var(--s2)}
   .foot-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .foot-g > div:first-child{grid-column:1 / -1}
 }
-@media (max-width:760px){
+@media (max-width:860px){
   :root{--hdr:92px}
   .top{flex-wrap:wrap;padding-top:18px;gap:10px var(--s3)}
   .nav{order:3;width:100%;gap:4px 18px;font-size:13.5px}
@@ -207,7 +206,7 @@ img,canvas{display:block;max-width:100%}
   .netbox{grid-column:1;grid-row:3;margin-top:28px;min-height:200px}
   .js .live .slot{transition:height 600ms var(--ease)}
   .js .live .cap{top:0;bottom:auto}
-  .cap h1{font-size:31px;line-height:1.02}
+  .cap h1{font-size:clamp(29px,5vw,44px);line-height:1.02}
   .cap .who{margin-top:12px;font-size:14.5px}
   .cap .caveat{margin-top:6px;font-size:13px}
   .cap .n{font-size:44px;margin-bottom:10px}
@@ -251,7 +250,7 @@ img,canvas{display:block;max-width:100%}
   <div class="stage" id="stage">
     <canvas id="cv" role="img" aria-label="Two shores: 185 exposures on the left, 68 cancer types on the right, and the 469 links between them. Point at or tap a shore to read a name and its links; the search reaches every entry by keyboard."></canvas>
     <div class="netbox" id="netbox">
-      <img class="still" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
+      <img class="fallback" src="media/tool-cancer-network.svg" width="1062" height="998" alt="The cancer network: 185 exposures linked to the 68 cancer types they can cause, by 469 links.">
       <div class="heads" aria-hidden="true"><span class="l" id="head-l">185 exposures</span><span class="r" id="head-r">68 cancer types</span></div>
     </div>
 
@@ -430,6 +429,7 @@ img,canvas{display:block;max-width:100%}
   "use strict";
   if (!window.EpiNet || !document.querySelector("#cv").getContext) return;
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var HOVER = window.matchMedia && matchMedia("(hover: hover)").matches;
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
   var cover = $("#cover"), stage = $("#stage"), cv = $("#cv"), ctx = cv.getContext("2d"), netbox = $("#netbox"),
@@ -457,7 +457,7 @@ img,canvas{display:block;max-width:100%}
   var t0 = 0, introDone = still, raf = 0, last = 0;
 
   var STEPS = [
-    { mode: "cat", label: "Sorted by category" },
+    { mode: "cat", label: HOVER ? "Sorted by category. Point at either shore" : "Tap a shore, or scroll" },
     { mode: "group", label: "Sorted by certainty" },
     { mode: "deg", label: "Sorted by number of links" },
     { mode: "deg", g1: true, label: "Group 1 only" },
@@ -515,7 +515,7 @@ img,canvas{display:block;max-width:100%}
     var r = stage.getBoundingClientRect(), b = netbox.getBoundingClientRect();
     var nw = r.width, nh = r.height, nd = Math.min(2.5, window.devicePixelRatio || 1);
     if (nw !== W || nh !== H || nd !== DPR) { W = nw; H = nh; DPR = nd; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
-    phone = W < 760;
+    phone = W < 600;
     BOX = { x: b.left - r.left, y: b.top - r.top, w: Math.max(40, b.width), h: Math.max(40, b.height) };
     var lw = phone ? 10 : clamp(BOX.w * 0.2, 118, 172), rw = phone ? 10 : clamp(BOX.w * 0.25, 130, 236);
     xL = BOX.x + lw; xR = BOX.x + BOX.w - rw; top = BOX.y + (phone ? 4 : 30); bot = BOX.y + BOX.h - (phone ? 4 : 30);
@@ -524,7 +524,7 @@ img,canvas{display:block;max-width:100%}
     if (!phone) { headL.style.top = headR.style.top = "0px"; } else { headL.style.top = headR.style.top = "-24px"; headL.style.left = "0px"; headL.style.textAlign = "left"; headL.style.paddingRight = "0"; headR.style.left = "auto"; headR.style.right = "0px"; }
     layoutShores();
     if (snap) N.forEach(function (d) { d.y = d.ty; });
-    if (!phone) { var sr = slot.getBoundingClientRect(); card.style.left = (sr.left - r.left) + "px"; card.style.top = (sr.top - r.top) + "px"; card.style.width = sr.width + "px"; card.style.height = sr.height + "px"; }
+    if (W >= 860) { var sr = slot.getBoundingClientRect(); card.style.left = (sr.left - r.left) + "px"; card.style.top = (sr.top - r.top) + "px"; card.style.width = sr.width + "px"; card.style.height = sr.height + "px"; }
     kick();
   }
 
@@ -839,7 +839,7 @@ img,canvas{display:block;max-width:100%}
   }
   function goStep(i) { scrollTo({ top: cover.getBoundingClientRect().top + scrollY + i * stepH() + 2, behavior: still ? "auto" : "smooth" }); }
   function fitSlot() {
-    if (W >= 760) { slot.style.height = ""; return; }
+    if (W >= 860) { slot.style.height = ""; return; }
     var c = caps[Math.max(0, step)]; if (c) slot.style.height = c.offsetHeight + "px";
   }
   function setStep(i) {

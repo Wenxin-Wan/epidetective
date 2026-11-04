@@ -90,6 +90,8 @@ button{font:inherit;color:inherit}
 .answer li span{color:var(--ink-2);font-size:13px;flex:none}
 .answer .more{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between}
 .answer .more p{font-size:14px;color:var(--ink-2)}
+.answer .more[hidden]{display:none}
+.answer .msg{margin-top:12px;font-size:var(--f-b);max-width:36ch}
 .answer .x[hidden]{display:none}
 .answer .x{position:absolute;top:18px;right:18px;width:40px;height:40px;border:0;border-radius:50%;background:var(--linen);cursor:pointer}
 .answer .x::before,.answer .x::after{content:"";position:absolute;left:13px;right:13px;top:50%;height:1.5px;background:var(--ink);transform:rotate(45deg)}
@@ -188,8 +190,10 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
 .credits{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--line);font-size:var(--f-xs);color:var(--ink-2)}
 
 @media (max-width:900px){
+  .top{gap:10px 20px}
+  .nav{order:3;width:100%;gap:2px 22px}
   .hgrid{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
-  .answer{margin-bottom:0;max-width:620px}
+  .answer{margin-bottom:0;max-width:620px;--d:0ms!important}
   .lesson .grid,.code .grid{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
   .tool{grid-template-columns:minmax(0,1fr)}
   .tool .pic img{max-width:420px}
@@ -418,8 +422,23 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
     ai = k; [].forEach.call(sug.children, function (li, j) { li.setAttribute("aria-selected", j === k ? "true" : "false"); });
     if (items[k]) q.setAttribute("aria-activedescendant", "s-" + k);
   }
+  function settle() {
+    ans.classList.add("is-in"); ans.querySelector(".x").hidden = false;
+    if (!still) { ans.classList.add("swap"); requestAnimationFrame(function () { requestAnimationFrame(function () { ans.classList.remove("swap"); }); }); }
+    if (innerWidth <= 900) ans.scrollIntoView({ block: "nearest", behavior: still ? "auto" : "smooth" });
+  }
+  function none(t) {
+    reset(); open(false); items = []; sug.innerHTML = "";
+    document.getElementById("a-k").textContent = "Search";
+    document.getElementById("a-name").textContent = "“" + t + "”";
+    document.getElementById("a-g").hidden = true;
+    document.getElementById("a-l").outerHTML = '<p class="msg" id="a-l"></p>';
+    document.getElementById("a-l").textContent = NOTHERE;
+    ans.querySelector(".more").hidden = true;
+    settle(); live.textContent = NOTHERE;
+  }
   function choose(n) {
-    q.value = n.name; open(false); items = [];
+    reset(); q.value = n.name; open(false); items = []; sug.innerHTML = "";
     document.getElementById("a-k").textContent = (n.kind === "cancer" ? "Cancer type · " : "Exposure · ") + n.cat;
     document.getElementById("a-name").textContent = n.name;
     var g = document.getElementById("a-g"); g.hidden = !n.group; g.textContent = n.group ? "Group " + n.group + " · " + n.groupLabel : "";
@@ -427,9 +446,7 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
     var ul = document.getElementById("a-l"); ul.innerHTML = "";
     list.slice(0, 6).forEach(function (m) { var li = document.createElement("li"); li.innerHTML = "<b></b><span></span>"; li.firstChild.textContent = m.node.name; li.firstChild.style.fontWeight = "400"; li.lastChild.textContent = m.link.grade; ul.appendChild(li); });
     document.getElementById("a-n").textContent = n.degree === 1 ? "1 link in the Cancer Evidence Explorer." : (list.length > 6 ? n.degree + " links in all; the first six are shown." : n.degree + " links in the Cancer Evidence Explorer.");
-    ans.querySelector(".x").hidden = false;
-    if (!still) { ans.classList.add("swap"); requestAnimationFrame(function () { requestAnimationFrame(function () { ans.classList.remove("swap"); }); }); }
-    if (innerWidth <= 900) ans.scrollIntoView({ block: "nearest", behavior: still ? "auto" : "smooth" });
+    settle();
     live.textContent = n.name + ". " + (n.group ? "Group " + n.group + ", " + n.groupLabel + ". " : "Cancer type. ") + n.degree + (n.degree === 1 ? " link." : " links.");
   }
   q.addEventListener("input", run);
@@ -438,17 +455,17 @@ footer{padding:var(--s5) 0 var(--s6);border-top:1px solid var(--line)}
   q.addEventListener("keydown", function (e) {
     if (e.key === "ArrowDown" && items.length) { e.preventDefault(); if (sug.hidden) open(true); mark((ai + 1) % items.length); }
     else if (e.key === "ArrowUp" && items.length) { e.preventDefault(); mark(ai <= 0 ? items.length - 1 : ai - 1); }
-    else if (e.key === "Enter") { e.preventDefault(); if (!items.length) run(); if (items.length) choose(items[ai >= 0 ? ai : 0]); }
+    else if (e.key === "Enter") { e.preventDefault(); if (!G || !q.value.trim()) return; if (items.length) choose(items[ai >= 0 ? ai : 0]); else { var r = EpiNet.search(G, q.value); if (r.length) choose(r[0]); else none(q.value.trim()); } }
     else if (e.key === "Escape") { if (!sug.hidden) open(false); else { q.value = ""; reset(); } }
   });
-  document.querySelector(".find").addEventListener("submit", function (e) { e.preventDefault(); if (!items.length) run(); if (items.length) choose(items[0]); });
+  document.querySelector(".find").addEventListener("submit", function (e) { e.preventDefault(); if (!G || !q.value.trim()) return; var r = EpiNet.search(G, q.value); if (r.length) choose(items[ai >= 0 ? ai : 0] || r[0]); else none(q.value.trim()); });
   function reset() { ans.innerHTML = example; ans.querySelector(".x").addEventListener("click", clear); }
   function clear() { reset(); q.value = ""; live.textContent = "Answer cleared."; q.focus(); }
   ans.querySelector(".x").addEventListener("click", clear);
   document.querySelectorAll("[data-try]").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault(); q.value = a.getAttribute("data-try");
-      var go = function () { run(); if (items.length) choose(items[0]); };
+      var go = function () { var r = EpiNet.search(G, q.value); if (r.length) choose(r[0]); else none(q.value); };
       if (G) go(); else pending = go;
     });
   });

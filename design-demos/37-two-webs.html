@@ -148,9 +148,9 @@ section.s{padding:var(--s6) 0 0}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .ex{padding:clamp(32px,5vw,80px);min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule)}
 .ex.on-blue{background:var(--blue);color:var(--ivory);border-color:var(--blue)}
-.ex figure{margin:0 0 var(--s4);aspect-ratio:5/4;display:grid;place-items:center;background:#EFE9DD}
+.ex figure{margin:0 0 var(--s4);aspect-ratio:5/4;display:grid;place-items:center;background:#EFE9DD;overflow:hidden}
 .ex.on-blue figure{background:#EDE8DE}
-.ex figure img{width:auto;max-width:82%;max-height:88%}
+.ex figure img{width:auto;max-width:82%;max-height:88%;height:auto}
 .ex .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .ex.on-blue .k{color:var(--on-blue)}
 .ex h2{margin-top:12px;font-size:var(--t-xl);line-height:1.02;letter-spacing:-.02em}
