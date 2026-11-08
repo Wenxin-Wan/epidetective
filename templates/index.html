@@ -27,8 +27,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="{{PREFIX}}assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{PREFIX}}assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{PREFIX}}assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 <!-- without JavaScript the cover shows a faint still of the contour map (the
      canvas draws the moving one, labels and all); with it, the still is never
@@ -41,7 +40,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <a class="mark" href="{{URL_HOME}}">{{LOGO}}<span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
@@ -59,21 +58,24 @@
 
 <main id="content" tabindex="-1">
 
-<!-- Cover (Terrain, Nov 2026): a map sheet. The contour field and its summit
-     labels are drawn by assets/terrain.js on the canvas; the names come from
-     both explorers (tn_* keys, separated by |; no straight double quote or
-     ampersand in them). The title block holds the site's scope, its readers
-     and the search; terrain.js keeps every label off it (data-terrain-avoid).
-     The search result list drops below the title block, so nothing here may
-     clip it (site.css .map). -->
+<!-- Cover (Terrain, Nov 2026; revised 8 Nov 2026): the contour map runs the
+     full width of the window under the header, with no frame. The contour
+     field and its summit labels are drawn by assets/terrain.js on the canvas;
+     the names, their links and the deep links into the tools come from
+     build_site.py (TERRAIN_DATA, an inline JSON script). Causes are set in the
+     map's brown, outcomes in its water blue and in italic. Selecting a label
+     draws dashed lines to the labels on the map that the data link to it, and
+     opens a small card; terrain.js also adds a list of buttons for keyboards
+     and an announcement for screen readers. The title block holds the site's
+     scope, its readers and the search; terrain.js keeps every label off it
+     (data-terrain-avoid). The search result list drops below the title block,
+     so nothing here may clip it (site.css .map). -->
 <section class="cover" aria-labelledby="cover-h">
-  <div class="sheet">
-    <div class="map">
-      <div class="map-ground" aria-hidden="true">
-        <canvas class="terrain" data-terrain
-          data-causes="{{tn_tobacco}}|{{tn_alcohol}}|{{tn_processed}}|{{tn_asbestos}}|{{tn_nightshift}}|{{tn_radon}}|{{tn_hpv}}|{{tn_airpoll}}|{{tn_inactivity}}|{{tn_salt}}|{{tn_shortsleep}}|{{tn_noise}}|{{tn_lonely}}|{{tn_bp}}"
-          data-outcomes="{{tn_lung}}|{{tn_breast}}|{{tn_colon}}|{{tn_liver}}|{{tn_chd}}|{{tn_stroke}}|{{tn_t2d}}|{{tn_dementia}}|{{tn_copd}}|{{tn_depression}}"></canvas>
-      </div>
+  <div class="map">
+    <div class="map-ground" aria-hidden="true">
+      <canvas class="terrain" data-terrain></canvas>
+    </div>
+    <div class="wrap map-in">
       <div class="title-block" data-terrain-avoid>
         <h1 id="cover-h">{{home_h1}}</h1>
         <p class="cover-lede">{{home_lede}}</p>
@@ -105,11 +107,12 @@
       </div>
     </div>
   </div>
-  <!-- the key to the labels on the map -->
-  <div class="map-key">
-    <p class="mk-key"><span><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_cause}}</span>
-      <span><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_outcome}}</span></p>
-    <p class="mk-note">{{terrain_note}}</p>
+  {{TERRAIN_DATA}}
+  <!-- the key to the labels on the map, in their two colours -->
+  <div class="wrap map-key">
+    <p class="mk-key"><span class="mk-c"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_cause}}</span>
+      <span class="mk-o"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_outcome}}</span></p>
+    <p class="mk-note"><span class="mk-hint">{{terrain_hint}}</span><span>{{terrain_note}}</span></p>
   </div>
 </section>
 
@@ -164,105 +167,13 @@
         <a href="{{TL_T2D}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_t2d}}</a>
         <a href="{{TL_DEMENTIA}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_dementia}}</a>
         <a href="{{TL_CHD}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_chd}}</a></p>
-      <!-- the secondary action opens this tool's sources card on How we check -->
+      <!-- the secondary action opens this tool's About page (chronic.html) -->
       <div class="ts-acts">
         <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst_t2_btn_open}}</a>
-        <a class="tlink" href="{{URL_HWC}}#chronic">{{inst_t2_btn_about}}</a>
+        <a class="tlink" href="{{URL_CHRONIC}}">{{inst_t2_btn_about}}</a>
       </div>
     </article>
   </div>
-</section>
-
-<!-- How sure is the evidence: the labels both tools print, as a map key. The
-     contour rings stand for height (most certain = most rings) in the colour
-     each tool gives the label; the words carry the meaning. Full table:
-     reading.html#labels. -->
-<section class="sec wrap evidence" id="evidence" aria-labelledby="ev-h">
-  <div class="sec-bar">
-    <h2 id="ev-h">{{lbl_h2}}</h2>
-  </div>
-  <div class="keys">
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">{{inst_t1_name}}</span> {{lbl_cap_cause}}</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 g1" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g1}}</b> <span>{{GRP_1}}</span></p><p class="key-says">{{lbl_g1_says}}</p></div></li>
-        <li><span class="elev e3 g2a" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g2a}}</b> <span>{{GRP_2A}}</span></p><p class="key-says">{{lbl_g2a_says}}</p></div></li>
-        <li><span class="elev e2 g2b" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g2b}}</b> <span>{{GRP_2B}}</span></p><p class="key-says">{{lbl_g2b_says}}</p></div></li>
-        <li><span class="elev e1 g3" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g3}}</b> <span>{{GRP_3}}</span></p><p class="key-says">{{lbl_g3_says}}</p></div></li>
-      </ol>
-    </div>
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">{{inst_t2_name}}</span> {{lbl_cap_chronic}}</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 strong" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_strong}}</b></p><p class="key-says">{{lbl_strong_says}}</p></div></li>
-        <li><span class="elev e3 moderate" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_moderate}}</b></p><p class="key-says">{{lbl_moderate_says}}</p></div></li>
-        <li><span class="elev e2 suggestive" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_suggestive}}</b></p><p class="key-says">{{lbl_suggestive_says}}</p></div></li>
-        <li><span class="elev e1 weak" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_weak}}</b></p><p class="key-says">{{lbl_weak_says}}</p></div></li>
-        <li><span class="elev ec conflicting" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_conflicting}}</b></p><p class="key-says">{{lbl_conflicting_says}}</p></div></li>
-      </ol>
-    </div>
-  </div>
-  <p class="sec-links"><a class="tlink" href="{{URL_READING}}#labels">{{lbl_label}} &rarr;</a> <a class="tlink" href="{{URL_READING}}">{{read_home_btn}}</a></p>
-</section>
-
-<!-- Four questions a visitor brings, each answered by sentences quoted word for
-     word from the published tool entries (en and zh; fr, es and ru translate
-     them and say so). The kicker above a quote is EpiDetective's own summary.
-     The second question leads, with its lesson drawn to scale: lung cancer by
-     age 75 per 1,000 people, smokers 100 to 120, lifelong non-smokers 4 to 5
-     (the numbers in qa_a2); the axis runs 0 to 150. -->
-<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
-  <div class="sec-bar">
-    <h2 id="qa-h">{{qa_label}}</h2>
-  </div>
-  <article class="lesson">
-    <div class="lesson-text">
-      <h3>{{qa_q2}}</h3>
-      <p class="lesson-k">{{qa_k2}}</p>
-      <blockquote class="qa-a" cite="{{TL_PROCESSED}}"><p>{{qa_a2}}</p></blockquote>
-      <p class="qa-src">{{qa_from_cancer}}</p>
-      <p class="qa-go"><a href="{{TL_PROCESSED}}">{{qa_go2}}</a> <a href="{{URL_READING}}#relative-absolute">{{qa_go2b}}</a></p>
-    </div>
-    <figure class="scale-fig">
-      <figcaption>{{fig_axis}}</figcaption>
-      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
-        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
-      <div class="sf-row"><span class="sf-who">{{fig_smokers}}</span>
-        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
-        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
-      <div class="sf-row"><span class="sf-who">{{fig_never}}</span>
-        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
-        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
-    </figure>
-  </article>
-  <ol class="qa-rows">
-    <li class="qa-row">
-      <h3>{{qa_q1}}</h3>
-      <div class="qa-body">
-        <blockquote class="qa-a" cite="{{TL_ASPARTAME}}"><p>{{qa_a1}}</p></blockquote>
-        <p class="qa-src">{{qa_from_cancer}}</p>
-        <p class="qa-go"><a href="{{TL_ASPARTAME}}">{{qa_go1}}</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>{{qa_q3}}</h3>
-      <div class="qa-body">
-        <p class="qa-k">{{qa_k3}}</p>
-        <blockquote class="qa-a"><p>{{qa_a3}}</p></blockquote>
-        <p class="qa-src">{{qa_from_cancer}}</p>
-        <p class="qa-go"><a href="{{URL_WORK}}">{{qa_go3}}</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>{{qa_q4}}</h3>
-      <div class="qa-body">
-        <p class="qa-k">{{qa_k4}}</p>
-        <blockquote class="qa-a" cite="{{TL_STROKE}}"><p>{{qa_a4}}</p></blockquote>
-        <p class="qa-src">{{qa_from_chronic}}</p>
-        <p class="qa-go"><a href="{{TL_STROKE}}">{{qa_go4}}</a></p>
-      </div>
-    </li>
-  </ol>
 </section>
 
 <!-- What you can do: the summary of the official Codes Against Cancer. The two
@@ -283,6 +194,17 @@
       <a class="btn btn-solid" href="{{URL_PREVENTION}}">{{code_home_btn}}</a>
     </div>
   </div>
+</section>
+
+<!-- From the blog: the newest posts in posts/ (at most three, newest first),
+     written by build_site.py (BLOG_LATEST), centred like a contents page. -->
+<section class="sec wrap blog-row" id="blog" aria-labelledby="blog-h">
+  <div class="sec-bar sec-bar-c">
+    <p class="label">{{blog_h1}}</p>
+    <h2 id="blog-h">{{home_blog_h2}}</h2>
+  </div>
+  {{BLOG_LATEST}}
+  <p class="sec-links"><a class="tlink" href="{{URL_BLOG}}">{{post_back}} &rarr;</a></p>
 </section>
 
 <!-- Games, for schools and families: small frames of the games, all cropped
@@ -336,7 +258,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark">{{LOGO}}<span class="mark-w">EpiDetective</span></div>
         <p class="tag">{{foot_tagline}}</p>
       </div>
       <nav class="menu">

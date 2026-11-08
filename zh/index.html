@@ -22,18 +22,17 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="EpiDetective。转化流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。">
+<meta property="og:image:alt" content="EpiDetective。转化最佳流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective｜读懂健康证据的公开工具">
 <meta name="twitter:description" content="癌症流行病学研究者万汶鑫的个人项目：免费工具，帮你查阅已发表的研究认为哪些因素会导致癌症和其他慢性病，以及证据有多可靠。癌症数据来自《IARC 致癌物专论》。">
 <meta name="twitter:image" content="https://epidetective.com/assets/og/home-zh.png">
-<meta name="twitter:image:alt" content="EpiDetective。转化流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。">
+<meta name="twitter:image:alt" content="EpiDetective。转化最佳流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="../assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 <noscript><style>.map-ground{background:url(../assets/contours.svg) center/cover no-repeat;opacity:.55}.map-key{visibility:hidden}</style></noscript>
 <script type="application/ld+json">
@@ -77,7 +76,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
@@ -96,15 +95,13 @@
 <main id="content" tabindex="-1">
 
 <section class="cover" aria-labelledby="cover-h">
-  <div class="sheet">
-    <div class="map">
-      <div class="map-ground" aria-hidden="true">
-        <canvas class="terrain" data-terrain
-          data-causes="吸烟|酒精饮料|加工肉类|石棉|夜班工作|氡气|高危型人乳头瘤病毒（HPV）|室外空气污染|身体活动不足|高盐摄入|睡眠不足|道路交通噪声|社会隔离与孤独|高血压"
-          data-outcomes="肺癌|乳腺癌|结肠癌|肝癌|冠心病|缺血性卒中|2 型糖尿病|痴呆|慢阻肺|抑郁症"></canvas>
-      </div>
+  <div class="map">
+    <div class="map-ground" aria-hidden="true">
+      <canvas class="terrain" data-terrain></canvas>
+    </div>
+    <div class="wrap map-in">
       <div class="title-block" data-terrain-avoid>
-        <h1 id="cover-h">转化流行病学证据，<b>让世界更健康</b></h1>
+        <h1 id="cover-h">转化最佳流行病学证据，<b>让世界更健康</b></h1>
         <p class="cover-lede">EpiDetective 开发免费工具，让你自己查阅已发表的健康研究</p>
         <p class="cover-aud">写给关心健康的普通读者、临床医生、学生和记者</p>
         <div class="search" data-search data-lang="zh" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
@@ -131,10 +128,11 @@
       </div>
     </div>
   </div>
-  <div class="map-key">
-    <p class="mk-key"><span><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>暴露或风险因素</span>
-      <span><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>癌症或疾病</span></p>
-    <p class="mk-note">名称取自两个工具；地形仅作示意。</p>
+  <script type="application/json" id="terrain-data">{"items":[{"n":"吸烟","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Tobacco%20smoking"],["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=smoking"]]},{"n":"酒精饮料","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Alcoholic%20beverages"],["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=alcohol_heavy"]]},{"n":"加工肉类","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat"],["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=processed_meat"]]},{"n":"石棉","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Asbestos%20%28all%20forms%29"]]},{"n":"夜班工作","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Night%20shift%20work"],["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=night_shift"]]},{"n":"氡气","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Radon-222%20%26%20decay%20products"]]},{"n":"高危型人乳头瘤病毒（HPV）","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Human%20papillomavirus%20%28types%2016%2C18%2C31%2C33%2C35%2C39%2C45%2C51%2C52%2C56%2C58%2C59%29"]]},{"n":"室外空气污染","o":0,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#exposure=Outdoor%20air%20pollution"],["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=pm25"]]},{"n":"身体活动不足","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=low_pa"]]},{"n":"高盐摄入","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=high_sodium"]]},{"n":"睡眠不足","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=short_sleep"]]},{"n":"道路交通噪声","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=traffic_noise"]]},{"n":"社会隔离与孤独","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=isolation"]]},{"n":"高血压","o":0,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#risk=high_sbp"]]},{"n":"肺癌","o":1,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#cancer=Lung"]]},{"n":"乳腺癌","o":1,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#cancer=Breast"]]},{"n":"结肠癌","o":1,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#cancer=Colon"]]},{"n":"肝癌","o":1,"u":[["癌症证据探索器","https://tools.epidetective.com/cancer/?lang=zh#cancer=Liver"]]},{"n":"冠心病","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=chd"]]},{"n":"缺血性卒中","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=stroke_isch"]]},{"n":"2 型糖尿病","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=t2d"]]},{"n":"痴呆","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=dementia"]]},{"n":"慢阻肺","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=copd"]]},{"n":"抑郁症","o":1,"u":[["慢性病证据图谱","https://tools.epidetective.com/chronic/?lang=zh#disease=depression"]]}],"links":[[0,14,"已确认关联"],[0,15,"疑似关联"],[0,16,"已确认关联"],[0,17,"已确认关联"],[0,18,"强"],[0,19,"强"],[0,20,"强"],[0,21,"中等"],[0,22,"中等"],[0,23,"中等"],[1,15,"已确认关联"],[1,16,"已确认关联"],[1,17,"已确认关联"],[1,18,"相互矛盾"],[1,19,"中等"],[1,21,"提示性"],[2,16,"已确认关联"],[2,18,"提示性"],[2,20,"中等"],[3,14,"已确认关联"],[3,16,"疑似关联"],[4,15,"疑似关联"],[4,16,"疑似关联"],[4,18,"提示性"],[4,20,"中等"],[5,14,"已确认关联"],[7,14,"已确认关联"],[7,18,"强"],[7,19,"中等"],[7,20,"中等"],[7,21,"提示性"],[7,22,"强"],[8,20,"强"],[8,21,"提示性"],[8,23,"中等"],[10,18,"中等"],[10,20,"提示性"],[10,21,"弱"],[11,18,"中等"],[12,18,"提示性"],[12,21,"提示性"],[12,23,"提示性"],[13,18,"强"],[13,19,"强"],[13,21,"中等"]],"t":{"open":"在工具中查看 →","say":"{name}：在地图上与{list}相关。","say_none":"{name}：地图上暂时没有与它相关的标签。","say_off":"{name}暂时不在地图上。","list":"地图上的标签：选择一个，查看它的关联","close":"关闭","key_cause":"暴露或风险因素","key_outcome":"癌症或疾病","open_in":"在工具中查看","sep":"、"}}</script>
+  <div class="wrap map-key">
+    <p class="mk-key"><span class="mk-c"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>暴露或风险因素</span>
+      <span class="mk-o"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>癌症或疾病</span></p>
+    <p class="mk-note"><span class="mk-hint">点选一个名称，查看与它相关的标签。</span><span>名称取自两个工具；地形仅作示意。</span></p>
   </div>
 </section>
 
@@ -187,92 +185,10 @@
         <a href="https://tools.epidetective.com/chronic/?lang=zh#disease=chd"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>冠心病</a></p>
       <div class="ts-acts">
         <a class="btn btn-solid" href="https://tools.epidetective.com/chronic/?lang=zh">打开 &rarr;</a>
-        <a class="tlink" href="how-we-check.html#chronic">了解这个工具</a>
+        <a class="tlink" href="chronic.html">了解这个工具</a>
       </div>
     </article>
   </div>
-</section>
-
-<section class="sec wrap evidence" id="evidence" aria-labelledby="ev-h">
-  <div class="sec-bar">
-    <h2 id="ev-h">两个工具中的标签，<b>放在一起看</b>。</h2>
-  </div>
-  <div class="keys">
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">癌症证据探索器</span> IARC 对某种因素能否致癌有多大把握</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 g1" aria-hidden="true"></span><div><p class="key-n"><b>已知致癌</b> <span>1 类</span></p><p class="key-says">该因素能使人患癌。这是 IARC 把握最大的一类。</p></div></li>
-        <li><span class="elev e3 g2a" aria-hidden="true"></span><div><p class="key-n"><b>很可能致癌</b> <span>2A 类</span></p><p class="key-says">该因素很可能使人患癌。证据达不到 1 类的标准，最常见的原因是人群研究的证据有限。</p></div></li>
-        <li><span class="elev e2 g2b" aria-hidden="true"></span><div><p class="key-n"><b>可能致癌</b> <span>2B 类</span></p><p class="key-says">该因素可能使人患癌。有一种证据指向这个方向，例如人群证据有限，或动物证据充分。</p></div></li>
-        <li><span class="elev e1 g3" aria-hidden="true"></span><div><p class="key-n"><b>无法分类</b> <span>3 类</span></p><p class="key-says">证据达不到其他任何一类的标准，通常是因为证据太少。</p></div></li>
-      </ol>
-    </div>
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">慢性病证据图谱</span> 证据在多大程度上表明某个危险因素会导致某种疾病</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 strong" aria-hidden="true"></span><div><p class="key-n"><b>强</b></p><p class="key-says">多种不同类型的证据一致表明这是病因，结论被推翻的可能性很小。</p></div></li>
-        <li><span class="elev e3 moderate" aria-hidden="true"></span><div><p class="key-n"><b>中等</b></p><p class="key-says">多半是病因：各项研究一致，并显示剂量反应关系或已知机制，但还缺一环证据。</p></div></li>
-        <li><span class="elev e2 suggestive" aria-hidden="true"></span><div><p class="key-n"><b>提示性</b></p><p class="key-says">关联一致，但混杂或反向因果尚未排除。</p></div></li>
-        <li><span class="elev e1 weak" aria-hidden="true"></span><div><p class="key-n"><b>弱</b></p><p class="key-says">信号来自少量、结果不一致或易受偏倚影响的研究，可能经不起检验。</p></div></li>
-        <li><span class="elev ec conflicting" aria-hidden="true"></span><div><p class="key-n"><b>相互矛盾</b></p><p class="key-says">高质量证据指向相反方向，常见于观察性研究与试验或遗传学研究互相矛盾。</p></div></li>
-      </ol>
-    </div>
-  </div>
-  <p class="sec-links"><a class="tlink" href="reading.html#labels">标签的含义 &rarr;</a> <a class="tlink" href="reading.html">阅读指南 &rarr;</a></p>
-</section>
-
-<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
-  <div class="sec-bar">
-    <h2 id="qa-h">四个问题，用工具里的内容来回答</h2>
-  </div>
-  <article class="lesson">
-    <div class="lesson-text">
-      <h3>加工肉类和吸烟一样有害吗？</h3>
-      <p class="lesson-k">确定程度相同（1 类），风险大小却相差悬殊。</p>
-      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat"><p>每天每多吃 50 克，患肠癌的风险就增加 18%。欧洲的数据显示，到 75 岁时，每 100 名吸烟者中约有 10 至 12 人患肺癌；终生不吸烟者中，每 1,000 人约有 4 至 5 人患肺癌。</p></blockquote>
-      <p class="qa-src">引自癌症证据探索器</p>
-      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat">查看加工肉类条目 &rarr;</a> <a href="reading.html#relative-absolute">相对风险与绝对风险 &rarr;</a></p>
-    </div>
-    <figure class="scale-fig">
-      <figcaption>75 岁前患肺癌人数（每 1000 人）</figcaption>
-      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
-        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
-      <div class="sf-row"><span class="sf-who">吸烟者</span>
-        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
-        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
-      <div class="sf-row"><span class="sf-who">终生不吸烟者</span>
-        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
-        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
-    </figure>
-  </article>
-  <ol class="qa-rows">
-    <li class="qa-row">
-      <h3>阿斯巴甜危险吗？</h3>
-      <div class="qa-body">
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=zh#exposure=Aspartame"><p>2023 年 6 月，IARC 将阿斯巴甜列为可能致癌物（2B 类），这是对危害的评定。WHO 称，一名 70 千克的成年人每天要喝超过 9 至 14 罐无糖饮料，才会超过［每日可接受摄入量］。</p></blockquote>
-        <p class="qa-src">引自癌症证据探索器</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Aspartame">查看阿斯巴甜条目 &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>我的工作会增加我患癌的风险吗？</h3>
-      <div class="qa-body">
-        <p class="qa-k">癌症图谱上有 68 种工作场所因素和职业，从石棉和二氧化硅粉尘，到夜班工作和消防工作。</p>
-        <blockquote class="qa-a"><p>从业超过 10 年的油漆工，患膀胱癌的风险约为非油漆工的 1.8 倍。肺癌风险随多年累计吸入的二氧化硅总量而升高。</p></blockquote>
-        <p class="qa-src">引自癌症证据探索器</p>
-        <p class="qa-go"><a href="work.html">工作与癌症：按行业查看 &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>什么会增加中风风险？</h3>
-      <div class="qa-body">
-        <p class="qa-k">缺血性卒中有 12 个已分级的风险因素，从血压、吸烟和糖尿病（强）到抑郁（提示性）。</p>
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/chronic/?lang=zh#disease=stroke_isch"><p>高血压是导致卒中的首要原因。</p></blockquote>
-        <p class="qa-src">引自慢性病证据图谱</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/chronic/?lang=zh#disease=stroke_isch">查看缺血性卒中条目 &rarr;</a></p>
-      </div>
-    </li>
-  </ol>
 </section>
 
 <section class="band code-band" id="what-you-can-do" aria-labelledby="code-h">
@@ -290,6 +206,22 @@
       <a class="btn btn-solid" href="../code-against-cancer/?lang=zh">查看各项建议 &rarr;</a>
     </div>
   </div>
+</section>
+
+<section class="sec wrap blog-row" id="blog" aria-labelledby="blog-h">
+  <div class="sec-bar sec-bar-c">
+    <p class="label">随笔与札记</p>
+    <h2 id="blog-h">博客近作</h2>
+  </div>
+  <ol class="bl-list" data-n="1">
+<li class="bl-post">
+  <p class="bl-date"><time datetime="2026-11-08">2026年11月8日</time></p>
+  <h3><a href="blog/shoe-leather-in-the-age-of-ai.html">AI 时代，还得磨破鞋底</a></h3>
+  <p class="bl-sf">一条指令就能把公开数据集变成一篇过得去的流行病学论文。这时候该问一问：我们的论文本来值多少，流行病学家还有什么用。</p>
+  <p class="bl-more"><a class="tlink" href="blog/shoe-leather-in-the-age-of-ai.html">阅读全文</a></p>
+</li>
+</ol>
+  <p class="sec-links"><a class="tlink" href="blog.html">全部随笔 &rarr;</a></p>
 </section>
 
 <section class="sec wrap games-row" id="games" aria-labelledby="games-h">
@@ -334,7 +266,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">读懂健康证据的公开工具。</p>
       </div>
       <nav class="menu">

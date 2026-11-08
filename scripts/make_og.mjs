@@ -107,11 +107,11 @@ const SRC = {
 /* The home title is the home page's h1 (plan, Batch 6: home_h1). <i> marks the
    emphasised words, which the page sets in italic (bold in Chinese). */
 const HOME_TITLE = {
-  en: 'Translating epidemiological evidence <i>for a healthier world</i>',
-  zh: '转化流行病学证据，<br><i>让世界更健康</i>',
-  fr: 'Traduire les preuves épidémiologiques <i>pour un monde en meilleure santé</i>',
-  es: 'Traducir la evidencia epidemiológica <i>para un mundo más sano</i>',
-  ru: 'Объясняем эпидемиологические данные <i>ради более здорового мира</i>',
+  en: 'Translating the best epidemiological evidence <i>for a healthier world</i>',
+  zh: '转化最佳流行病学证据，<br><i>让世界更健康</i>',
+  fr: 'Traduire les meilleures preuves épidémiologiques <i>pour un monde en meilleure santé</i>',
+  es: 'Traducir la mejor evidencia epidemiológica <i>para un mundo más sano</i>',
+  ru: 'Объясняем наилучшие эпидемиологические данные <i>ради более здорового мира</i>',
 };
 
 /* The other pages: kicker (small label above the title) and title, by language.

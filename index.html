@@ -22,18 +22,17 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="EpiDetective. Translating epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
+<meta property="og:image:alt" content="EpiDetective. Translating the best epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective — Open tools for reading health evidence">
 <meta name="twitter:description" content="A personal project by Wenxin Wan, a cancer epidemiologist: free tools to look up what published research says causes cancer and other chronic diseases, and how sure the evidence is. Cancer data: IARC Monographs.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og/home-en.png">
-<meta name="twitter:image:alt" content="EpiDetective. Translating epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
+<meta name="twitter:image:alt" content="EpiDetective. Translating the best epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 <noscript><style>.map-ground{background:url(assets/contours.svg) center/cover no-repeat;opacity:.55}.map-key{visibility:hidden}</style></noscript>
 <script type="application/ld+json">
@@ -77,7 +76,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
@@ -96,15 +95,13 @@
 <main id="content" tabindex="-1">
 
 <section class="cover" aria-labelledby="cover-h">
-  <div class="sheet">
-    <div class="map">
-      <div class="map-ground" aria-hidden="true">
-        <canvas class="terrain" data-terrain
-          data-causes="Tobacco smoking|Alcoholic drinks|Processed meat|Asbestos|Night-shift work|Radon gas|High-risk HPV|Outdoor air pollution|Low physical activity|High salt intake|Short sleep|Road traffic noise|Social isolation and loneliness|High blood pressure"
-          data-outcomes="Lung cancer|Breast cancer|Colon cancer|Liver cancer|Coronary heart disease|Ischaemic stroke|Type 2 diabetes|Dementia|COPD|Depression"></canvas>
-      </div>
+  <div class="map">
+    <div class="map-ground" aria-hidden="true">
+      <canvas class="terrain" data-terrain></canvas>
+    </div>
+    <div class="wrap map-in">
       <div class="title-block" data-terrain-avoid>
-        <h1 id="cover-h">Translating epidemiological evidence <b>for a healthier world</b></h1>
+        <h1 id="cover-h">Translating the best epidemiological evidence <b>for a healthier world</b></h1>
         <p class="cover-lede">EpiDetective builds free tools that let you explore published health research for yourself.</p>
         <p class="cover-aud">For the curious public, clinicians, students and journalists.</p>
         <div class="search" data-search data-lang="en" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
@@ -131,10 +128,11 @@
       </div>
     </div>
   </div>
-  <div class="map-key">
-    <p class="mk-key"><span><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Exposure or risk factor</span>
-      <span><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Cancer or disease</span></p>
-    <p class="mk-note">Names from both explorers. The terrain is illustrative.</p>
+  <script type="application/json" id="terrain-data">{"items":[{"n":"Tobacco smoking","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Tobacco%20smoking"],["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=smoking"]]},{"n":"Alcoholic drinks","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Alcoholic%20beverages"],["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=alcohol_heavy"]]},{"n":"Processed meat","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat"],["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=processed_meat"]]},{"n":"Asbestos","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Asbestos%20%28all%20forms%29"]]},{"n":"Night-shift work","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Night%20shift%20work"],["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=night_shift"]]},{"n":"Radon gas","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Radon-222%20%26%20decay%20products"]]},{"n":"High-risk HPV","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Human%20papillomavirus%20%28types%2016%2C18%2C31%2C33%2C35%2C39%2C45%2C51%2C52%2C56%2C58%2C59%29"]]},{"n":"Outdoor air pollution","o":0,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#exposure=Outdoor%20air%20pollution"],["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=pm25"]]},{"n":"Low physical activity","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=low_pa"]]},{"n":"High salt intake","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=high_sodium"]]},{"n":"Short sleep","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=short_sleep"]]},{"n":"Road traffic noise","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=traffic_noise"]]},{"n":"Social isolation and loneliness","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=isolation"]]},{"n":"High blood pressure","o":0,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#risk=high_sbp"]]},{"n":"Lung cancer","o":1,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#cancer=Lung"]]},{"n":"Breast cancer","o":1,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#cancer=Breast"]]},{"n":"Colon cancer","o":1,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#cancer=Colon"]]},{"n":"Liver cancer","o":1,"u":[["Cancer Evidence Explorer","https://tools.epidetective.com/cancer/?lang=en#cancer=Liver"]]},{"n":"Coronary heart disease","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=chd"]]},{"n":"Ischaemic stroke","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=stroke_isch"]]},{"n":"Type 2 diabetes","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=t2d"]]},{"n":"Dementia","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=dementia"]]},{"n":"COPD","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=copd"]]},{"n":"Depression","o":1,"u":[["Chronic Disease Evidence Explorer","https://tools.epidetective.com/chronic/?lang=en#disease=depression"]]}],"links":[[0,14,"Established link"],[0,15,"Suspected link"],[0,16,"Established link"],[0,17,"Established link"],[0,18,"Strong"],[0,19,"Strong"],[0,20,"Strong"],[0,21,"Moderate"],[0,22,"Moderate"],[0,23,"Moderate"],[1,15,"Established link"],[1,16,"Established link"],[1,17,"Established link"],[1,18,"Conflicting"],[1,19,"Moderate"],[1,21,"Suggestive"],[2,16,"Established link"],[2,18,"Suggestive"],[2,20,"Moderate"],[3,14,"Established link"],[3,16,"Suspected link"],[4,15,"Suspected link"],[4,16,"Suspected link"],[4,18,"Suggestive"],[4,20,"Moderate"],[5,14,"Established link"],[7,14,"Established link"],[7,18,"Strong"],[7,19,"Moderate"],[7,20,"Moderate"],[7,21,"Suggestive"],[7,22,"Strong"],[8,20,"Strong"],[8,21,"Suggestive"],[8,23,"Moderate"],[10,18,"Moderate"],[10,20,"Suggestive"],[10,21,"Weak"],[11,18,"Moderate"],[12,18,"Suggestive"],[12,21,"Suggestive"],[12,23,"Suggestive"],[13,18,"Strong"],[13,19,"Strong"],[13,21,"Moderate"]],"t":{"open":"Open in the explorer →","say":"{name}: linked on the map to {list}.","say_none":"{name}: nothing linked to it is on the map at the moment.","say_off":"{name} is not on the map at the moment.","list":"Labels on the map: choose one to see its links","close":"Close","key_cause":"Exposure or risk factor","key_outcome":"Cancer or disease","open_in":"Open in the explorer","sep":", "}}</script>
+  <div class="wrap map-key">
+    <p class="mk-key"><span class="mk-c"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Exposure or risk factor</span>
+      <span class="mk-o"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Cancer or disease</span></p>
+    <p class="mk-note"><span class="mk-hint">Select a name to see what it is linked to.</span><span>Names from both explorers. The terrain is illustrative.</span></p>
   </div>
 </section>
 
@@ -187,92 +185,10 @@
         <a href="https://tools.epidetective.com/chronic/?lang=en#disease=chd"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Coronary heart disease</a></p>
       <div class="ts-acts">
         <a class="btn btn-solid" href="https://tools.epidetective.com/chronic/?lang=en">Open it &rarr;</a>
-        <a class="tlink" href="how-we-check.html#chronic">About this tool</a>
+        <a class="tlink" href="chronic.html">About this tool</a>
       </div>
     </article>
   </div>
-</section>
-
-<section class="sec wrap evidence" id="evidence" aria-labelledby="ev-h">
-  <div class="sec-bar">
-    <h2 id="ev-h">The labels in both tools, <b>side by side</b>.</h2>
-  </div>
-  <div class="keys">
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">Cancer Evidence Explorer</span> How sure IARC is that an agent can cause cancer</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 g1" aria-hidden="true"></span><div><p class="key-n"><b>Known cause</b> <span>Group 1</span></p><p class="key-says">The agent can cause cancer in people. This is the group in which IARC is most certain.</p></div></li>
-        <li><span class="elev e3 g2a" aria-hidden="true"></span><div><p class="key-n"><b>Probable cause</b> <span>Group 2A</span></p><p class="key-says">The agent probably causes cancer in people. The evidence falls short of Group 1, most often because the studies in people are limited.</p></div></li>
-        <li><span class="elev e2 g2b" aria-hidden="true"></span><div><p class="key-n"><b>Possible cause</b> <span>Group 2B</span></p><p class="key-says">The agent may cause cancer in people. One kind of evidence points that way, such as limited evidence in people or sufficient evidence in animals.</p></div></li>
-        <li><span class="elev e1 g3" aria-hidden="true"></span><div><p class="key-n"><b>Not classifiable</b> <span>Group 3</span></p><p class="key-says">The evidence does not meet the rules for any other group, usually because there is too little of it.</p></div></li>
-      </ol>
-    </div>
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">Chronic Disease Evidence Explorer</span> How sure the evidence is that a risk factor causes a disease</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 strong" aria-hidden="true"></span><div><p class="key-n"><b>Strong</b></p><p class="key-says">Different kinds of evidence agree that this is a cause, and a reversal is unlikely.</p></div></li>
-        <li><span class="elev e3 moderate" aria-hidden="true"></span><div><p class="key-n"><b>Moderate</b></p><p class="key-says">Probably a cause: studies agree and show a gradient or a known mechanism, but one strand of proof is still missing.</p></div></li>
-        <li><span class="elev e2 suggestive" aria-hidden="true"></span><div><p class="key-n"><b>Suggestive</b></p><p class="key-says">A consistent association, but confounding or reverse causation has not been ruled out.</p></div></li>
-        <li><span class="elev e1 weak" aria-hidden="true"></span><div><p class="key-n"><b>Weak</b></p><p class="key-says">A signal from few, inconsistent or bias-prone studies. It may not hold up.</p></div></li>
-        <li><span class="elev ec conflicting" aria-hidden="true"></span><div><p class="key-n"><b>Conflicting</b></p><p class="key-says">Good evidence points in opposite directions, often observational studies against trials or genetic studies.</p></div></li>
-      </ol>
-    </div>
-  </div>
-  <p class="sec-links"><a class="tlink" href="reading.html#labels">What the labels mean &rarr;</a> <a class="tlink" href="reading.html">Read the guide &rarr;</a></p>
-</section>
-
-<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
-  <div class="sec-bar">
-    <h2 id="qa-h">Four questions, answered from the tools</h2>
-  </div>
-  <article class="lesson">
-    <div class="lesson-text">
-      <h3>Is processed meat as bad as smoking?</h3>
-      <p class="lesson-k">Same certainty (Group 1), very different size.</p>
-      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat"><p>Each 50 grams eaten every day raises the risk of bowel cancer by 18%. In European data, about 10 to 12 in 100 smokers get lung cancer by age 75, compared with 4 to 5 in 1,000 lifelong non-smokers.</p></blockquote>
-      <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
-      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat">Open the Processed meat entry &rarr;</a> <a href="reading.html#relative-absolute">Relative and absolute risk &rarr;</a></p>
-    </div>
-    <figure class="scale-fig">
-      <figcaption>Lung cancer by age 75, per 1,000 people</figcaption>
-      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
-        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
-      <div class="sf-row"><span class="sf-who">Smokers</span>
-        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
-        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
-      <div class="sf-row"><span class="sf-who">Lifelong non-smokers</span>
-        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
-        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
-    </figure>
-  </article>
-  <ol class="qa-rows">
-    <li class="qa-row">
-      <h3>Is aspartame dangerous?</h3>
-      <div class="qa-body">
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=en#exposure=Aspartame"><p>In June 2023 IARC classified aspartame as possibly carcinogenic to humans (Group 2B), a rating of hazard. WHO says a 70-kilogram adult would need more than 9 to 14 cans of diet drink a day to pass [the acceptable daily intake].</p></blockquote>
-        <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Aspartame">Open the Aspartame entry &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>Does my job raise my cancer risk?</h3>
-      <div class="qa-body">
-        <p class="qa-k">68 workplace agents and jobs are on the cancer map, from asbestos and silica dust to night-shift work and firefighting.</p>
-        <blockquote class="qa-a"><p>Painters with over 10 years in the trade had about 1.8 times the bladder-cancer risk of non-painters. Lung-cancer risk rises with the total silica breathed over the years.</p></blockquote>
-        <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
-        <p class="qa-go"><a href="work.html">Work and cancer, sector by sector &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>What raises stroke risk?</h3>
-      <div class="qa-body">
-        <p class="qa-k">Twelve risk factors are graded for ischaemic stroke, from blood pressure, smoking and diabetes (Strong) to depression (Suggestive).</p>
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/chronic/?lang=en#disease=stroke_isch"><p>High blood pressure is the leading cause of stroke.</p></blockquote>
-        <p class="qa-src">Quoted from the Chronic Disease Evidence Explorer</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/chronic/?lang=en#disease=stroke_isch">Open the Ischaemic stroke entry &rarr;</a></p>
-      </div>
-    </li>
-  </ol>
 </section>
 
 <section class="band code-band" id="what-you-can-do" aria-labelledby="code-h">
@@ -290,6 +206,22 @@
       <a class="btn btn-solid" href="code-against-cancer/">Read the recommendations &rarr;</a>
     </div>
   </div>
+</section>
+
+<section class="sec wrap blog-row" id="blog" aria-labelledby="blog-h">
+  <div class="sec-bar sec-bar-c">
+    <p class="label">Essays and notes</p>
+    <h2 id="blog-h">From the blog</h2>
+  </div>
+  <ol class="bl-list" data-n="1">
+<li class="bl-post">
+  <p class="bl-date"><time datetime="2026-11-08">8 November 2026</time></p>
+  <h3><a href="blog/shoe-leather-in-the-age-of-ai.html">Shoe leather in the age of AI</a></h3>
+  <p class="bl-sf">When one prompt can turn a public dataset into a passable epidemiology paper, it is time to ask what our papers were ever worth, and what epidemiologists are still for.</p>
+  <p class="bl-more"><a class="tlink" href="blog/shoe-leather-in-the-age-of-ai.html">Read the essay</a></p>
+</li>
+</ol>
+  <p class="sec-links"><a class="tlink" href="blog.html">All essays &rarr;</a></p>
 </section>
 
 <section class="sec wrap games-row" id="games" aria-labelledby="games-h">
@@ -334,7 +266,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">Open tools for reading health evidence.</p>
       </div>
       <nav class="menu">

@@ -1,47 +1,55 @@
-/* EpiDetective site styles: "Terrain" (Nov 2026). Topographic paper, contour
-   brown and green, water blue, ink; Sofia Sans for text and display, Sofia Sans
-   Semi Condensed for headings, labels and figures. Colour that carries meaning
-   (the evidence scale: Group 1 red, probable amber ...) keeps that meaning and
-   is never decoration.
+/* EpiDetective site styles: "Terrain" (Nov 2026, revised 8 Nov 2026).
+   Topographic paper, contour brown and green, water blue, ink; one face,
+   Source Serif 4, for everything: text, display, labels, figures and menus.
+   Colour that carries meaning (the evidence scale: Group 1 red, probable
+   amber ...) keeps that meaning and is never decoration. On the cover map,
+   causes are set in the map's brown and outcomes in its water blue.
 
-   Budget: the home page stays within 9 requests and 300 KB (Batch 6): the page,
-   this file, the two Latin font files, search.js and terrain.js on the first
-   screen (two Cyrillic files more in Russian), then the three lazy game frames.
-   The map insets are inline (build_site.py), the contour still loads only
-   without JavaScript. */
+   Budget: the home page's first screen stays within 9 requests and about
+   300 KB (Batch 6): the page, this file, the Latin roman and italic font files,
+   search.js and terrain.js (two Cyrillic files more in Russian); the three game
+   frames load lazily further down. The map insets are inline (build_site.py),
+   the contour still loads only without JavaScript. */
 
-/* Sofia Sans and Sofia Sans Semi Condensed (Google Fonts, OFL), self-hosted as
-   variable woff2 files cut by Google into Latin, Latin-ext and Cyrillic;
-   unicode-range keeps each file off pages that do not use its characters. The
-   pages preload the two Latin files. No italic file: emphasis is carried by
-   weight, and font-synthesis below forbids a fake slant. */
-@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-latin.woff2) format("woff2");
-  font-weight:300 800;font-style:normal;font-display:swap;
+/* Source Serif 4 (Adobe, OFL), self-hosted. Cut from Google Fonts' woff2
+   subsets (Latin, Latin-ext, Cyrillic, Greek; unicode-range keeps each file off
+   pages that do not use its characters) and trimmed with fontTools'
+   instancer to fit the budget: the roman keeps its optical-size axis (opsz 8
+   to 60) and weights 400 to 600; the italic keeps the optical-size axis at
+   weight 400. Every page preloads the Latin roman. font-synthesis below
+   forbids a faked bold or slant. */
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-latin.woff2) format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-latinext.woff2) format("woff2");
-  font-weight:300 800;font-style:normal;font-display:swap;
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-latinext.woff2) format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
   unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-cyr.woff2) format("woff2");
-  font-weight:300 800;font-style:normal;font-display:swap;
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-cyr.woff2) format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
   unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-latin.woff2) format("woff2");
-  font-weight:400 700;font-style:normal;font-display:swap;
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-greek.woff2) format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
+  unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-italic-latin.woff2) format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-latinext.woff2) format("woff2");
-  font-weight:400 700;font-style:normal;font-display:swap;
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-italic-latinext.woff2) format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
   unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-cyr.woff2) format("woff2");
-  font-weight:400 700;font-style:normal;font-display:swap;
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-italic-cyr.woff2) format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
   unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-/* While the faces load (font-display:swap), Arial stands in, scaled to their
-   measure so the swap barely reflows: size-adjust is the ratio of the average
-   width of running English text (Sofia Sans 97.1 %, Semi Condensed 92.5 % of
-   Arial's), the overrides are the fonts' ascent (900) and descent (300) over
-   that ratio (from the font files, 8 Nov 2026). */
-@font-face{font-family:"Sofia Sans Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");
-  size-adjust:97.1%;ascent-override:92.7%;descent-override:30.9%;line-gap-override:0%}
-@font-face{font-family:"Sofia Sans SC Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");
-  size-adjust:92.5%;ascent-override:97.3%;descent-override:32.4%;line-gap-override:0%}
+@font-face{font-family:"Source Serif 4";src:url(assets/sourceserif4-italic-greek.woff2) format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
+  unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+/* While the face loads (font-display:swap), Times New Roman stands in, scaled
+   to its measure so the swap barely reflows: size-adjust is the ratio of the
+   average width of running English text (Source Serif 4 at the body's optical
+   size, opsz 17, is 114.0 % of Times New Roman's), the overrides are Source
+   Serif 4's ascent (1036) and descent (335) over that ratio (from the font
+   files, 8 Nov 2026). */
+@font-face{font-family:"Source Serif 4 Fallback";src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Liberation Serif"),local("Times");
+  size-adjust:114%;ascent-override:90.9%;descent-override:29.4%;line-gap-override:0%}
 
 :root{
   /* topo paper, contour brown and green, water, ink (design-demos/14-terrain) */
@@ -52,54 +60,54 @@
   --ink-soft:#4A4C44;         /* 7.6:1 */
   --ink-faint:#5F6158;        /* 5.5:1 on the paper, 5.0:1 on the recessed band */
   --brown:#A7835A;            /* contour brown: lines and rules, never text */
-  --brown-ink:#6E5A3D;        /* the map labels' brown, 5.3:1 */
+  --brown-ink:#6E5A3D;        /* the map's causes (exposures, risk factors), 5.8:1 */
   --green:#6E8B5B;            /* contour green */
   --water:#5B88A6;            /* water */
-  --water-ink:#3F6A86;        /* water as text or focus, 5.1:1 */
+  --water-ink:#3F6A86;        /* water as a focus ring, 5.1:1 */
+  --water-deep:#2D5470;       /* the map's outcomes (cancers, diseases), 7.0:1 */
   --rule:rgba(34,36,31,.16);  /* hairline */
   --madder:#9E2F23;           /* semantic only: established / known cause red */
   --sage:#B4681F;             /* semantic only: suspected / probable amber */
-  --teal:#22241F;             /* entity marks (cancers, diseases) set in ink */
   --chalk:var(--paper);       /* older names, still used by the inner pages */
   --chalk-deep:var(--paper-deep);
   --veil:rgba(241,240,234,.9);
-  --sans:"Sofia Sans","Sofia Sans Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --cond:"Sofia Sans Semi Condensed","Sofia Sans SC Fallback","Sofia Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Source Serif 4","Source Serif 4 Fallback",Georgia,"Times New Roman",serif;
   --sys:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --display:var(--sans);
-  --body:var(--sans);
-  --mono:var(--cond);         /* the data voice: counts, codes, labels */
-  --display-track:-.022em;
-  --pad:clamp(16px,4vw,56px);
-  --max:1360px;
+  /* optical sizes: caption for labels and small interface text, display for
+     the large headings; running text takes the size it is set at (auto) */
+  --caption:"opsz" 8;
+  --display:"opsz" 60;
+  --display-track:-.012em;
+  --pad:clamp(20px,4vw,72px);
+  --max:1680px;               /* the container, gutters included */
   --ease:cubic-bezier(.2,.7,.1,1);
-  /* type: 12 / 13 / 14 / 15 / 17 / 20 / 24 / 30 / 56 */
-  --f-h2:clamp(1.55rem,2.3vw,1.875rem);
-  --f-h3:clamp(1.15rem,1.5vw,1.3rem);
-  --sec:clamp(72px,8.5vw,120px);
+  --f-h2:clamp(1.7rem,2.5vw,2.25rem);
+  --f-h3:clamp(1.18rem,1.5vw,1.36rem);
+  --sec:clamp(72px,8vw,128px);
 }
-/* Chinese: Latin letters and figures still set in Sofia Sans, Han in the
+/* Chinese: Latin letters and figures still set in Source Serif 4, Han in the
    system's CJK sans (no CJK webfont is viable at this size). Positive tracking
    would space Han glyphs apart, so it goes; measures are set in em, where one
    unit is one character; Han carries presence at a smaller size and a heavier
    weight than Latin, and Han has no italic to fake. */
 html[lang="zh"]{
-  --sans:"Sofia Sans","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
-  --cond:"Sofia Sans Semi Condensed","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+  --serif:"Source Serif 4","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
   --display-track:normal;
 }
 html[lang="zh"] body{line-height:1.8}
 html[lang="zh"] h1,html[lang="zh"] h2,html[lang="zh"] h3{text-wrap:pretty;letter-spacing:0}
-html[lang="zh"] h1{line-height:1.22;font-weight:400}
+html[lang="zh"] h1{line-height:1.22;font-weight:500}
 html[lang="zh"] h2{line-height:1.3}
 html[lang="zh"] h3{line-height:1.45}
-html[lang="zh"] h1 b,html[lang="zh"] h2 b{font-weight:600}
+html[lang="zh"] h1 b,html[lang="zh"] h2 b{font-weight:600;font-style:normal}
+html[lang="zh"] em,html[lang="zh"] cite,html[lang="zh"] i{font-style:normal}
 html[lang="zh"] .label,html[lang="zh"] .crumb,html[lang="zh"] .chip,html[lang="zh"] .inst-meta,
 html[lang="zh"] .fig .k,html[lang="zh"] .cred .r,html[lang="zh"] .bar-head span,html[lang="zh"] .read .tag,
 html[lang="zh"] .foot-bot,html[lang="zh"] .menu a,html[lang="zh"] .langs a,html[lang="zh"] .langs .lang-cur,
 html[lang="zh"] .see .k,html[lang="zh"] .ex-steps .tag,html[lang="zh"] .lbl-table thead th,
 html[lang="zh"] .work-table thead th,html[lang="zh"] .lbl-table .grp .tool,html[lang="zh"] .ecac-why .k,
-html[lang="zh"] .search-gh,html[lang="zh"] .tl-card .r{letter-spacing:0}
+html[lang="zh"] .search-gh,html[lang="zh"] .tl-card .r,html[lang="zh"] .key-dl dt,html[lang="zh"] .key-cols,
+html[lang="zh"] .tn-card .tn-k,html[lang="zh"] .bl-date{letter-spacing:0}
 html[lang="zh"] .lede,html[lang="zh"] .about p,html[lang="zh"] .read p{max-width:34em}
 html[lang="zh"] .bar-note{max-width:32em}
 html[lang="zh"] .disc{max-width:44em}
@@ -109,10 +117,11 @@ html[lang="zh"] .sec > .lede[style]{max-width:34em}
 *{box-sizing:border-box}
 /* Anchor links scroll smoothly with no JavaScript. The offset keeps a heading
    clear of the header while it is sticky (900 px and wider). */
-html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%;text-size-adjust:100%;
-     font-synthesis-style:none}
+html{scroll-behavior:smooth;scroll-padding-top:92px;-webkit-text-size-adjust:100%;text-size-adjust:100%;
+     font-synthesis:none}
 @media (max-width:899px){html{scroll-padding-top:16px}}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1rem;line-height:1.6;
+     font-optical-sizing:auto;font-kerning:normal;
      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
 @media (min-width:700px){body{font-size:1.0625rem}}
 p{text-wrap:pretty}
@@ -129,27 +138,29 @@ main:focus{outline:0}
 
 .wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
 /* a small label carries information (a section's kind, a figure's unit), never
-   decoration: condensed capitals, widely tracked */
-.label{font-family:var(--cond);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-       color:var(--ink-faint);line-height:1.4}
-.serif{font-family:var(--display)}
+   decoration: small capitals of the caption size, widely tracked */
+.label{font-family:var(--serif);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+       font-variation-settings:var(--caption);color:var(--ink-faint);line-height:1.4}
+.serif{font-family:var(--serif)}
 /* a link that stands on its own: the words, a brown line under them */
-.tlink{display:inline-flex;align-items:center;min-height:44px;font-family:var(--cond);font-size:1rem;font-weight:500;
-       letter-spacing:.01em;color:var(--ink);text-decoration:underline;text-decoration-color:var(--brown);
+.tlink{display:inline-flex;align-items:center;min-height:44px;font-family:var(--serif);font-size:1.0625rem;font-weight:500;
+       color:var(--ink);text-decoration:underline;text-decoration-color:var(--brown);
        text-decoration-thickness:1px;text-underline-offset:6px;transition:text-decoration-color .3s var(--ease)}
 .tlink:hover{text-decoration-color:var(--ink)}
 
 /* ---------- header ---------- */
-.top{position:sticky;top:0;z-index:20;background:rgba(241,240,234,.94);
+.top{position:sticky;top:0;z-index:20;background:rgba(241,240,234,.95);
      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:4px 28px;
-           flex-wrap:wrap;padding-block:8px;
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:4px 30px;
+           flex-wrap:wrap;padding-block:10px;
            clip-path:inset(-8px calc(var(--pad) - 12px))}
-/* wordmark stays Latin in every language: it is the brand, not copy */
-.mark{font-family:"Sofia Sans","Sofia Sans Fallback",var(--sys);font-size:1.3rem;font-weight:700;letter-spacing:-.012em;
-      text-decoration:none;color:var(--ink)}
-.mark span{font-weight:400}
-.top .mark{margin-inline-end:-8px}
+/* The wordmark: the logo mark (favicon.svg, inline) and the name in Source
+   Serif 4 semibold. It stays Latin in every language: it is the brand, not copy. */
+.mark{display:inline-flex;align-items:center;gap:11px;min-height:44px;font-family:var(--serif);font-size:1.4375rem;
+      font-weight:600;line-height:1;letter-spacing:-.008em;text-decoration:none;color:var(--ink);white-space:nowrap}
+.mark-i{flex:none;display:block;width:30px;height:30px}
+.mark-w{display:block;padding-bottom:1px}
+html[lang="zh"] .mark{font-family:"Source Serif 4","Source Serif 4 Fallback",Georgia,serif}
 /* the menu and the language links are items of the header row itself, so the
    languages are the first to move to a second row when a language's menu is
    long (es, ru), and the header never needs three rows on a desktop */
@@ -158,55 +169,56 @@ main:focus{outline:0}
 /* Every menu entry and language link is a 44 px target. The rule between the
    menu and the languages stands in the gap before them; when the languages
    start a row of their own the header row clips it (clip-path above). */
-.langs{display:flex;gap:0 6px;flex-wrap:wrap;align-items:center;position:relative;margin-inline-start:-4px}
-.langs::before{content:"";position:absolute;inset-inline-start:-11px;top:50%;width:1px;height:18px;
+.langs{display:flex;gap:0 7px;flex-wrap:wrap;align-items:center;position:relative;margin-inline-start:-4px}
+.langs::before{content:"";position:absolute;inset-inline-start:-12px;top:50%;width:1px;height:18px;
        margin-top:-9px;background:var(--rule)}
 .langs a,.langs .lang-cur{display:inline-flex;align-items:center;min-height:44px;padding-inline:4px;
-       font-family:var(--cond);font-size:.875rem;letter-spacing:.02em;text-decoration:none;text-underline-offset:6px}
-/* "Русский" on a page in another language sets in the system face: one word
+       font-family:var(--serif);font-size:.9375rem;text-decoration:none;text-underline-offset:6px}
+/* "Русский" on a page in another language sets in a system serif: one word
    would otherwise fetch the Cyrillic file on every page */
-.langs a[hreflang="ru"]{font-family:var(--sys);font-size:.8rem}
+.langs a[hreflang="ru"]{font-family:Georgia,"Times New Roman",serif;font-size:.9375rem}
 .langs a{color:var(--ink-faint)}
 .langs a:hover{color:var(--ink);text-decoration-line:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px}
 .langs .lang-cur{color:var(--ink);font-weight:600;text-decoration-line:underline;text-decoration-thickness:1.5px;
        text-decoration-color:var(--brown)}
-.menu{display:flex;gap:0 22px;flex-wrap:wrap}
-.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-family:var(--cond);
-        font-size:1rem;font-weight:450;letter-spacing:.015em;color:var(--ink-soft);
+.menu{display:flex;gap:0 24px;flex-wrap:wrap}
+.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-family:var(--serif);
+        font-size:1.0625rem;font-weight:400;color:var(--ink-soft);
         text-underline-offset:7px;text-decoration-thickness:1px;text-decoration-color:var(--brown)}
 .menu a:hover,.menu a[aria-current]{color:var(--ink);text-decoration-line:underline}
 /* Below 900 px the menu wraps and a sticky header would cover a fifth of the
    screen, so it scrolls away with the page. */
 @media (max-width:899px){.top{position:static}}
 @media (max-width:700px){
-  .top .wrap{gap:0 18px;padding-block:6px 4px}
-  .top .mark{margin-inline-end:0}
+  .top .wrap{gap:0 18px;padding-block:8px 4px}
   .top .menu{margin-left:0}
   .menu{gap:0 16px}
-  .menu a{font-size:.95rem}
+  .menu a{font-size:1rem}
+  .mark{font-size:1.375rem;gap:10px}
+  .mark-i{width:28px;height:28px}
 }
 
 /* ---------- type ---------- */
-h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:var(--display-track);text-wrap:balance;margin:0;
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:var(--display-track);text-wrap:balance;margin:0;
          color:var(--ink)}
-h1{font-size:clamp(2.2rem,4.4vw,3.5rem);line-height:1.05}
-h2{font-family:var(--cond);font-weight:400;font-size:var(--f-h2);line-height:1.16;letter-spacing:-.004em}
-h3{font-family:var(--cond);font-weight:500;font-size:var(--f-h3);line-height:1.28;letter-spacing:0}
-b,strong{font-weight:650}
-h1 b{font-weight:400}
-h2 b,h3 b{font-weight:600}
-/* no italic file is loaded: emphasis carries by weight, never a fake slant */
-em,i,cite{font-style:normal}
-em{font-weight:600}
-.lede{color:var(--ink-soft);max-width:60ch}
+h1{font-size:clamp(2.3rem,4.4vw,3.6rem);line-height:1.06;font-variation-settings:var(--display)}
+h2{font-size:var(--f-h2);line-height:1.15}
+h3{font-weight:600;font-size:var(--f-h3);line-height:1.28;letter-spacing:0}
+b,strong{font-weight:600}
+/* emphasis in a heading is the italic, as on the share cards */
+h1 b,h2 b{font-weight:400;font-style:italic}
+h3 b{font-weight:600}
+em,cite{font-style:italic}
+i{font-style:normal}
+.lede{color:var(--ink-soft);max-width:62ch}
 
 .sec{padding-block:var(--sec)}
 .sec-head{margin-bottom:34px}
 .sec-head .label{margin-bottom:12px}
 .sec-head h2{margin:12px 0 16px;max-width:30ch}
 /* a page whose title sits in a section head: h1 in the outline, h2 in scale */
-.sec-head h1.page-h{font-family:var(--cond);font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.12;
-  letter-spacing:-.006em;margin:12px 0 16px;max-width:28ch}
+.sec-head h1.page-h{font-size:clamp(1.9rem,3.1vw,2.6rem);line-height:1.12;
+  margin:12px 0 16px;max-width:28ch}
 html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.6rem,2.7vw,2.15rem);max-width:15em}
 html[lang="zh"] h2{font-size:clamp(1.4rem,2.2vw,1.75rem)}
 html[lang="zh"] .sec-head h2{max-width:16em}
@@ -215,68 +227,119 @@ html[lang="zh"] h3{font-size:clamp(1.05rem,1.5vw,1.22rem)}
 /* the home page's section heads: the heading on the left, a small label on the
    right, an ink rule beneath, like the margin of a map sheet */
 .sec-bar{display:flex;align-items:baseline;justify-content:space-between;gap:6px 28px;flex-wrap:wrap;
-  padding-bottom:14px;margin-bottom:clamp(26px,3vw,38px);border-bottom:1px solid var(--ink)}
-.sec-bar h2{max-width:36ch}
+  padding-bottom:16px;margin-bottom:clamp(28px,3vw,42px);border-bottom:1px solid var(--ink)}
+.sec-bar h2{max-width:40ch}
 .sec-bar .label{margin:0}
+/* centred (the blog row): the label above the heading */
+.sec-bar-c{flex-direction:column;align-items:center;text-align:center;gap:10px}
+.sec-bar-c h2{max-width:none}
 .sec-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 30px;margin:clamp(18px,2vw,26px) 0 0}
 /* the home page's sections follow one another: space above each, none below */
-.sec.tools,.sec.evidence,.sec.questions,.sec.games-row{padding-bottom:0}
+.sec.tools,.sec.games-row,.sec.blog-row{padding-bottom:0}
 
-/* ---------- cover (home): the map sheet ---------- */
-.cover{max-width:var(--max);margin-inline:auto;padding:clamp(22px,2.6vw,34px) var(--pad) 0}
-.sheet{position:relative;border:1px solid var(--ink)}
-/* the graticule: a tick every 96 px along the top and the left of the sheet */
-.sheet::before,.sheet::after{content:"";position:absolute;pointer-events:none}
-.sheet::before{left:-1px;right:-1px;top:-8px;height:7px;
-  background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 96px)}
-.sheet::after{top:-1px;bottom:-1px;left:-8px;width:7px;
-  background:repeating-linear-gradient(180deg,var(--ink) 0 1px,transparent 1px 96px)}
-/* not clipped: the search result list drops below the title block. The ground
-   layer clips the canvas instead. */
-.map{position:relative;display:flex;align-items:flex-end;min-height:clamp(600px,calc(100svh - 150px),860px);
-  padding:clamp(24px,3vw,44px);border:6px solid var(--paper);outline:1px solid var(--rule);outline-offset:-6px}
+/* ---------- cover (home): the terrain, full bleed ---------- */
+/* The map runs the full width of the window under the header's hairline, with
+   no frame. Not clipped: the search result list drops below the title block;
+   the ground layer clips the canvas instead. */
+.cover{position:relative}
+.map{position:relative;display:flex;align-items:flex-end;min-height:clamp(620px,calc(100svh - 128px),960px)}
 .map-ground{position:absolute;inset:0;overflow:hidden;z-index:0}
-/* the canvas's font is the labels' font (terrain.js reads it) */
-.terrain{position:absolute;inset:0;width:100%;height:100%;display:block;font:500 11.5px/1 var(--sans);letter-spacing:.01em}
-html[lang="zh"] .terrain{font-size:12.5px;letter-spacing:0}
-.title-block{position:relative;z-index:2;width:min(588px,100%);background:var(--paper);border:1px solid var(--ink);
-  padding:clamp(26px,3.2vw,46px) clamp(24px,3.2vw,46px) clamp(24px,2.8vw,40px);
-  box-shadow:0 0 0 6px var(--paper),0 0 0 7px var(--rule)}
-.title-block h1{font-size:clamp(2.35rem,4.3vw,3.55rem);line-height:1.03;letter-spacing:-.026em;max-width:13ch}
-.title-block h1 b{font-weight:390}
-.cover-lede{margin:22px 0 0;max-width:40ch;font-size:clamp(1.06rem,1.3vw,1.19rem);line-height:1.55;color:var(--ink)}
-.cover-aud{margin:10px 0 0;max-width:46ch;font-family:var(--cond);font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
+.terrain{position:absolute;inset:0;width:100%;height:100%;display:block;font:500 12.5px/1 var(--serif);
+  -webkit-tap-highlight-color:transparent}
+html[lang="zh"] .terrain{font-size:13px}
+.map-in{position:relative;z-index:2;width:100%;padding-block:clamp(36px,4.6vw,76px) clamp(30px,3.4vw,56px);
+  pointer-events:none}
+/* the title block: a quiet panel of paper over the map, no border */
+.title-block{pointer-events:auto;width:min(640px,100%);background:rgba(247,246,241,.93);
+  padding:clamp(28px,3.2vw,50px) clamp(26px,3.2vw,50px) clamp(26px,2.8vw,42px);
+  box-shadow:0 0 0 1px rgba(34,36,31,.05),0 22px 60px -30px rgba(34,36,31,.28);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.title-block h1{font-size:clamp(2.45rem,4.2vw,3.7rem);line-height:1.04;letter-spacing:-.016em;max-width:none}
+.cover-lede{margin:24px 0 0;max-width:44ch;font-size:clamp(1.08rem,1.3vw,1.22rem);line-height:1.55;color:var(--ink)}
+.cover-aud{margin:10px 0 0;max-width:46ch;font-size:.97rem;line-height:1.5;color:var(--ink-soft)}
 .title-block .search{margin-top:30px}
 html[lang="zh"] .title-block h1{font-size:clamp(2rem,3.6vw,2.85rem);max-width:11em}
 html[lang="zh"] .cover-lede,html[lang="zh"] .cover-aud{max-width:24em}
 /* Russian words run long: the headline comes down a step */
-html[lang="ru"] .title-block h1{font-size:clamp(2.05rem,3.6vw,2.95rem);max-width:15ch}
-html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
-/* the key to the map's labels, under the sheet */
+html[lang="ru"] .title-block h1{font-size:clamp(2.1rem,3.5vw,3rem)}
+/* the key to the map's labels, under the map, in the labels' two colours */
 .map-key{display:flex;justify-content:space-between;align-items:center;gap:4px 28px;flex-wrap:wrap;
-  padding:12px 0 0;font-family:var(--cond);font-size:.84rem;line-height:1.45;color:var(--ink-faint)}
+  padding-block:14px 0;font-size:.9rem;line-height:1.45;color:var(--ink-faint)}
 .map-key p{margin:0}
-.mk-key{display:flex;flex-wrap:wrap;gap:4px 22px}
-.mk-key span{display:inline-flex;align-items:center;gap:7px}
+.mk-key{display:flex;flex-wrap:wrap;gap:4px 24px}
+.mk-key span{display:inline-flex;align-items:center;gap:8px}
+.mk-c{color:var(--brown-ink);font-weight:500}
+.mk-o{color:var(--water-deep);font-style:italic}
+.mk-note{display:flex;flex-wrap:wrap;gap:0 .45em}
+.mk-hint{color:var(--ink-soft)}
 .tri{display:inline-block;flex:none;width:10px;height:9px;overflow:visible}
 .tri-c path{fill:var(--brown-ink)}
-.tri-o path{fill:none;stroke:var(--brown-ink);stroke-width:1.15;stroke-linejoin:round}
+.tri-o path{fill:none;stroke:var(--water-deep);stroke-width:1.15;stroke-linejoin:round}
 @media (max-width:899px){
-  .map{display:block;min-height:0;padding:clamp(200px,40vw,300px) 12px 12px;border-width:4px;outline-offset:-4px}
-  .title-block{width:auto;max-width:620px;box-shadow:none}
+  .map{display:block;min-height:0;padding-top:clamp(230px,52vw,340px)}
+  .map-in{padding-block:0 18px}
+  .title-block{width:auto;max-width:640px;box-shadow:0 0 0 1px rgba(34,36,31,.05),0 18px 40px -26px rgba(34,36,31,.3)}
 }
 @media (max-width:759px){
-  .sheet::before,.sheet::after{display:none}
-  .map{padding-top:clamp(176px,50vw,240px)}
-  .title-block{padding:24px 20px 22px}
+  .map{padding-top:clamp(240px,66vw,300px)}
+  .map-in{padding-inline:12px}
+  .title-block{padding:26px 20px 22px}
   .title-block h1{max-width:none}
 }
 /* On a phone a single long word runs past the measure; hyphenation is confined
    to these widths so display type on a wide screen sets unbroken. */
 @media (max-width:560px){
-  .title-block h1{overflow-wrap:break-word;font-size:clamp(2rem,9vw,2.4rem)}
-  html[lang="ru"] .title-block h1{hyphens:auto;font-size:clamp(1.8rem,8vw,2.1rem)}
+  .title-block h1{overflow-wrap:break-word;font-size:clamp(2.05rem,9vw,2.45rem)}
+  html[lang="ru"] .title-block h1{hyphens:auto;font-size:clamp(1.85rem,8vw,2.15rem)}
   html[lang="zh"] .title-block h1{hyphens:manual;font-size:clamp(1.75rem,7.6vw,2rem)}
+}
+
+/* The labels' interaction (assets/terrain.js builds these). The list of
+   buttons is for keyboards and screen readers: hidden until one of its buttons
+   has focus, then shown as a small key at the top of the map. */
+.tn-pick{position:absolute;z-index:6;top:14px;inset-inline-end:max(var(--pad),calc((100% - var(--max)) / 2 + var(--pad)));
+  margin:0;padding:0}
+.tn-pick:not(:focus-within){width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.tn-pick:focus-within{width:min(440px,calc(100% - 2 * var(--pad)));padding:12px 14px 10px;background:var(--paper-hi);
+  box-shadow:0 0 0 1px rgba(34,36,31,.14),0 18px 40px -22px rgba(34,36,31,.35)}
+.tn-pick p{margin:0 0 6px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.tn-pick ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}
+.tn-pick button{display:flex;align-items:center;gap:7px;width:100%;min-height:27px;padding:2px 4px;border:0;background:none;
+  font:inherit;font-size:.88rem;line-height:1.2;text-align:start;color:var(--brown-ink);cursor:pointer}
+.tn-pick button.o{color:var(--water-deep);font-style:italic}
+.tn-pick button[data-on="0"]{opacity:.55}
+.tn-pick button[aria-pressed="true"]{background:rgba(34,36,31,.07);font-weight:600}
+.tn-pick button:focus-visible{outline-offset:0}
+/* the card of the selected label, beside it on the map */
+.tn-card{position:absolute;z-index:5;left:0;top:0;width:max-content;max-width:min(340px,calc(100% - 24px));
+  padding:13px 14px 8px 16px;background:var(--paper-hi);font-size:.92rem;line-height:1.4;color:var(--ink);
+  box-shadow:0 0 0 1px rgba(34,36,31,.16),0 16px 36px -18px rgba(34,36,31,.38);will-change:transform}
+.tn-card[hidden]{display:none}
+.tn-card .tn-h{display:flex;align-items:flex-start;gap:8px;margin:0;padding-inline-end:26px;font-size:1.06rem;
+  font-weight:600;line-height:1.25;color:var(--brown-ink)}
+.tn-card.o .tn-h{color:var(--water-deep);font-style:italic;font-weight:400}
+.tn-card .tn-h .tri{margin-top:.38em}
+.tn-card .tn-k{margin:3px 0 0;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.tn-card .tn-x{position:absolute;top:4px;inset-inline-end:4px;display:grid;place-items:center;width:32px;height:32px;
+  border:0;background:none;color:var(--ink-faint);font:400 1.25rem/1 var(--serif);cursor:pointer}
+.tn-card .tn-x:hover{color:var(--ink)}
+.tn-card .tn-go{margin:10px 0 0;padding-top:2px;border-top:1px solid var(--rule)}
+.tn-card .tn-go p{margin:6px 0 0;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.tn-card .tn-go a{display:flex;align-items:center;min-height:32px;font-size:.92rem;font-weight:500;color:var(--ink);
+  text-decoration:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:4px}
+.tn-card .tn-go a:hover{text-decoration-color:var(--ink)}
+/* a phone: the card more compact, so the band of map keeps its lines in view */
+@media (max-width:759px){
+  .tn-card{padding:10px 12px 6px 13px;font-size:.86rem;max-width:min(300px,calc(100% - 24px))}
+  .tn-card .tn-h{font-size:.98rem}
+  .tn-card .tn-go{margin-top:7px}
+  .tn-card .tn-go p{margin-top:5px}
+  .tn-card .tn-go a{min-height:30px;font-size:.88rem}
+  .tn-pick:focus-within{top:8px;padding:10px 10px 8px}
+  .tn-pick button{font-size:.84rem}
 }
 
 /* ---------- site search (assets/search.js; markup in templates/index.html,
@@ -298,13 +361,13 @@ html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
   overscroll-behavior:contain;background:var(--paper-hi);border:1px solid var(--ink);border-top-color:var(--rule);
   box-shadow:0 18px 36px rgba(34,36,31,.14)}
 .search-list[hidden]{display:none}
-.search-gh{padding:12px 16px 6px;font-family:var(--cond);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+.search-gh{padding:12px 16px 6px;font-family:var(--serif);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   font-weight:600;color:var(--ink-faint)}
 .search-opt{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;min-height:44px;
   padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink);text-decoration:none}
 .search-opt:hover,.search-opt.is-active{background:var(--ink);color:var(--paper)}
 .search-n{font-weight:600;overflow-wrap:anywhere}
-.search-m{font-family:var(--cond);font-size:.82rem;color:var(--ink-faint)}
+.search-m{font-family:var(--serif);font-size:.82rem;color:var(--ink-faint)}
 .search-opt:hover .search-m,.search-opt.is-active .search-m{color:inherit}
 .search-msg{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;margin:0;padding:12px 16px;background:var(--paper-hi);
   border:1px solid var(--rule);color:var(--ink-soft);font-size:.92rem}
@@ -325,7 +388,7 @@ html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
 
 /* ---------- buttons: one filled style; the secondary action is a link ---------- */
 .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;padding:12px 22px 12px 21px;
-     font-family:var(--cond);font-weight:500;font-size:.95rem;letter-spacing:.035em;border:1px solid var(--ink);
+     font-family:var(--serif);font-weight:500;font-size:1rem;letter-spacing:.01em;border:1px solid var(--ink);
      transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
 .btn-solid{background:var(--ink);color:var(--paper)}
 .btn-solid:hover{background:#3B3D35;border-color:#3B3D35}
@@ -340,20 +403,32 @@ html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
 @media (min-width:900px){.sheets{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .tool-sheet{position:relative;display:flex;flex-direction:column;gap:20px;min-width:0;background:var(--paper-hi);
   border:1px solid var(--ink);padding:clamp(22px,2.6vw,36px)}
+/* side by side, the two sheets share their rows, so the names, the legends,
+   the sources and the actions line up across them */
+@supports (grid-template-rows:subgrid){
+  @media (min-width:900px){
+    .tool-sheet{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:20px;align-content:start}
+    .ts-acts{align-self:end}
+  }
+}
 .tool-sheet::before{content:"";position:absolute;inset:5px;border:1px solid var(--rule);pointer-events:none}
-.ts-head{display:grid;grid-template-columns:minmax(0,1fr) clamp(92px,10.5vw,132px);gap:22px;align-items:start}
-.ts-name h3{font-size:clamp(1.3rem,1.9vw,1.6rem);font-weight:500;line-height:1.15;letter-spacing:-.005em}
-.ts-q{margin:10px 0 0;color:var(--ink-soft);font-size:1rem;line-height:1.5;max-width:40ch}
+.ts-head{display:grid;grid-template-columns:minmax(0,1fr) clamp(96px,9vw,150px);gap:24px;align-items:start}
+/* the tool's name, set broad and large: the sheet's title */
+.ts-name h3{font-size:clamp(1.85rem,2.5vw,2.45rem);font-weight:600;line-height:1.06;letter-spacing:-.014em;
+  max-width:16ch}
+.ts-q{margin:14px 0 0;color:var(--ink-soft);font-size:1.0625rem;line-height:1.5;max-width:44ch}
 /* the network drawing as a map inset (inline from build_site.py) */
 .ts-inset{aspect-ratio:1;border:1px solid var(--rule);background-color:transparent;background-repeat:no-repeat;
   background-position:center;background-size:90%;filter:sepia(.22) saturate(.75)}
 .ts-legend{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
-.ts-legend li{display:flex;align-items:baseline;gap:10px;min-width:0;padding:11px 0 10px;border-bottom:1px solid var(--rule)}
-.ts-legend b{flex:none;min-width:2.4ch;font-family:var(--sans);font-weight:300;font-size:1.7rem;line-height:1;
-  letter-spacing:-.015em;font-variant-numeric:lining-nums tabular-nums;color:var(--ink)}
-.ts-legend span{font-family:var(--cond);font-size:.95rem;line-height:1.3;color:var(--ink-soft)}
-.ts-note{margin:-8px 0 0;font-family:var(--cond);font-size:.88rem;line-height:1.45;color:var(--ink-faint)}
+.ts-legend li{display:flex;align-items:baseline;gap:12px;min-width:0;padding:13px 0 12px;border-bottom:1px solid var(--rule)}
+/* the key numbers, bold */
+.ts-legend b{flex:none;min-width:2.2ch;font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,2.3vw,2.3rem);
+  line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums;color:var(--ink);
+  font-variation-settings:var(--display)}
+.ts-legend span{font-family:var(--serif);font-size:1rem;line-height:1.3;color:var(--ink-soft)}
+.ts-note{margin:-8px 0 0;font-family:var(--serif);font-size:.88rem;line-height:1.45;color:var(--ink-faint)}
 .ts-row{margin:0;font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
 .ts-row .label{display:block;margin-bottom:3px}
 .ts-start{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px}
@@ -363,12 +438,13 @@ html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
 .ts-start a:hover{text-decoration-color:var(--ink)}
 .ts-acts{display:flex;align-items:center;gap:8px 26px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
 html[lang="zh"] .ts-q{max-width:22em}
+html[lang="zh"] .ts-name h3{font-size:clamp(1.6rem,2.2vw,2.1rem);max-width:none}
 @media (max-width:520px){
   .ts-legend{grid-template-columns:minmax(0,1fr)}
   .ts-head{grid-template-columns:minmax(0,1fr) 84px;gap:16px}
 }
 
-/* ---------- home: how sure is the evidence, as a map key ---------- */
+/* ---------- the labels as a map key (explorer.html, chronic.html) ---------- */
 /* Each label's height is drawn as contour rings around a summit (the most
    certain label has the most rings), in the colour the tools give it. */
 :root{--ev-possible:#A98A25;--ev-ncl:#86867C;--ev-conflict:#63588F}
@@ -379,16 +455,49 @@ html[lang="zh"] .ts-q{max-width:22em}
   .key-col{display:grid;grid-template-rows:subgrid;grid-row:span 2}
   .key-h{align-self:end}
 }
-.key-h{margin:0 0 14px;font-size:1.06rem;font-weight:500;line-height:1.4;color:var(--ink);max-width:52ch}
+.key-h{margin:clamp(30px,3.4vw,44px) 0 14px;font-size:1.12rem;font-weight:600;line-height:1.4;color:var(--ink);max-width:52ch}
 .key-h .label{display:block;margin-bottom:6px}
 .key-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
 .key-list li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:14px 0 15px;
   border-bottom:1px solid var(--rule);align-items:start}
-.key-n{margin:0;font-family:var(--cond);font-size:1.06rem;line-height:1.35}
+.key-n{margin:0;font-family:var(--serif);font-size:1.06rem;line-height:1.35}
 .key-n b{font-weight:600}
 .key-n span{margin-inline-start:8px;font-size:.88rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .key-says{margin:3px 0 0;font-size:.94rem;line-height:1.5;color:var(--ink-soft);max-width:56ch}
 html[lang="zh"] .key-says{max-width:30em}
+html[lang="zh"] .key-cols,html[lang="zh"] .key-dl dt{font-size:.8rem}
+/* the full key: the label, what it says, what it does not say and, for IARC's
+   groups, IARC's own count, in columns on a wide screen, stacked below */
+.key-full li{grid-template-columns:44px minmax(0,1fr);padding:18px 0 19px}
+.key-full .key-n{font-size:1.15rem}
+.key-full .key-n span{display:inline-block}
+.key-dl{grid-column:2;margin:6px 0 0;display:grid;gap:8px}
+.key-dl div{min-width:0}
+.key-dl dt{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.key-dl dd{margin:2px 0 0;font-size:.97rem;line-height:1.5;color:var(--ink-soft);max-width:60ch}
+.key-count{grid-column:2;margin:4px 0 0;font-size:1.6rem;font-weight:400;line-height:1;font-variant-numeric:lining-nums tabular-nums;
+  font-variation-settings:var(--display)}
+.key-cols{display:none}
+.key-old .key-n,.key-old dd{color:var(--ink-faint)}
+.key-old .key-n{font-size:1rem}
+/* the two link strokes of the cancer tool's map */
+.kl{justify-self:center;width:30px;height:0;margin-top:.8em}
+.kl.est{border-top:2px solid var(--madder)}
+.kl.sus{border-top:2px dashed var(--sage)}
+@media (min-width:1000px){
+  .key-full li,.key-cols{grid-template-columns:44px minmax(0,15rem) minmax(0,1fr) minmax(0,1fr) 5.5rem;column-gap:28px}
+  .key-full.key-4 li,.key-cols-4{grid-template-columns:44px minmax(0,15rem) minmax(0,1fr) minmax(0,1fr)}
+  .key-full.key-links li{grid-template-columns:44px minmax(0,15rem) minmax(0,2fr) 5.5rem}
+  .key-cols{display:grid;padding-bottom:8px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    font-variation-settings:var(--caption);color:var(--ink-faint)}
+  .key-dl{grid-column:3 / span 2;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;margin:0}
+  .key-links .key-dl{grid-column:3;grid-template-columns:minmax(0,1fr)}
+  .key-dl dt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .key-dl dd{margin:0}
+  .key-count{grid-column:5;grid-row:1;justify-self:end;margin:0;font-size:2rem}
+  .key-full .key-n span{display:block;margin:4px 0 0}
+}
 .elev{--c:var(--ink);justify-self:center;margin-top:1px;border-radius:50%;
   background:repeating-radial-gradient(circle,var(--c) 0 1.4px,transparent 1.4px 4px)}
 .elev.e4{width:34px;height:34px;margin-top:-6px}
@@ -404,23 +513,24 @@ html[lang="zh"] .key-says{max-width:30em}
   -webkit-mask:repeating-conic-gradient(#000 0 22deg,transparent 22deg 45deg);
           mask:repeating-conic-gradient(#000 0 22deg,transparent 22deg 45deg)}
 
-/* ---------- home: four questions; the second leads, drawn to scale ---------- */
+/* ---------- questions answered from the tools (explorer.html, chronic.html);
+   the processed-meat question leads, drawn to scale ---------- */
 .lesson{display:grid;gap:30px 64px;padding-bottom:clamp(30px,3.6vw,46px);border-bottom:1px solid var(--rule)}
 @media (min-width:900px){.lesson{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}}
 .lesson h3{font-size:clamp(1.35rem,2vw,1.6rem);font-weight:500;line-height:1.2}
 .lesson-k{margin:10px 0 20px;font-size:clamp(1.06rem,1.3vw,1.19rem);line-height:1.45;color:var(--ink);max-width:36ch}
 .qa-a{margin:0;padding-inline-start:16px;border-inline-start:2px solid var(--brown)}
 .qa-a p{margin:0;font-size:1rem;line-height:1.55;color:var(--ink-soft);max-width:60ch}
-.qa-src{margin:8px 0 0;font-family:var(--cond);font-size:.84rem;line-height:1.45;color:var(--ink-faint)}
+.qa-src{margin:8px 0 0;font-family:var(--serif);font-size:.84rem;line-height:1.45;color:var(--ink-faint)}
 .qa-go{margin:12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
-.qa-go a{display:inline-flex;align-items:center;min-height:36px;font-family:var(--cond);font-size:1rem;font-weight:500;
+.qa-go a{display:inline-flex;align-items:center;min-height:36px;font-family:var(--serif);font-size:1rem;font-weight:500;
   text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:5px;text-decoration-thickness:1px}
 .qa-go a:hover{text-decoration-color:var(--ink)}
 .qa-go a + a{color:var(--ink-soft)}
 html[lang="zh"] .qa-a p{max-width:32em}
 /* the scale figure: the same certainty, two very different sizes */
 .scale-fig{--lab:150px;margin:0;padding-inline-end:26px;min-width:0}
-.scale-fig figcaption{margin:0 0 18px;font-family:var(--cond);font-size:.95rem;line-height:1.4;color:var(--ink-soft)}
+.scale-fig figcaption{margin:0 0 18px;font-family:var(--serif);font-size:.95rem;line-height:1.4;color:var(--ink-soft)}
 .sf-axis{position:relative;height:30px;margin-inline-start:var(--lab);border-bottom:1px solid var(--ink)}
 .sf-axis i{position:absolute;bottom:0;width:16.667%;height:7px;border:1px solid var(--ink);border-bottom:0;
   border-inline-end:0}
@@ -428,17 +538,17 @@ html[lang="zh"] .qa-a p{max-width:32em}
 .sf-axis i:nth-of-type(1){left:0}.sf-axis i:nth-of-type(2){left:16.667%}.sf-axis i:nth-of-type(3){left:33.333%}
 .sf-axis i:nth-of-type(4){left:50%}.sf-axis i:nth-of-type(5){left:66.667%}
 .sf-axis i:nth-of-type(6){left:83.333%;border-inline-end:1px solid var(--ink)}
-.sf-axis b{position:absolute;top:0;transform:translateX(-50%);font-family:var(--cond);font-size:.75rem;font-weight:500;
+.sf-axis b{position:absolute;top:0;transform:translateX(-50%);font-family:var(--serif);font-size:.75rem;font-weight:500;
   line-height:1;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .sf-row{position:relative;display:grid;grid-template-columns:var(--lab) minmax(0,1fr);align-items:center;margin-top:20px}
-.sf-who{padding-inline-end:14px;font-family:var(--cond);font-size:.95rem;line-height:1.25}
+.sf-who{padding-inline-end:14px;font-family:var(--serif);font-size:.95rem;line-height:1.25}
 .sf-track{position:relative;height:16px}
 .sf-solid,.sf-range{position:absolute;top:0;bottom:0}
 .sf-solid{left:0;background:var(--brown)}
 .sf-range{background:repeating-linear-gradient(135deg,var(--brown) 0 1.5px,transparent 1.5px 5px);
   box-shadow:inset 0 0 0 1px var(--brown)}
 .sf-val{position:absolute;inset-inline-start:calc(var(--lab) + (100% - var(--lab)) * var(--x,0) + 10px);
-  font-family:var(--cond);font-size:1rem;font-weight:600;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+  font-family:var(--serif);font-size:1rem;font-weight:600;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
 @media (max-width:560px){
   .scale-fig{--lab:0px;padding-inline-end:12px}
   .sf-row{grid-template-columns:minmax(0,1fr) auto;row-gap:8px}
@@ -454,6 +564,7 @@ html[lang="zh"] .qa-a p{max-width:32em}
 .qa-k{margin:0 0 12px;font-size:1rem;line-height:1.5;color:var(--ink);max-width:60ch}
 .qa-row .qa-a p{font-size:.94rem}
 .qa-row .qa-go{margin-top:6px}
+.qa-rows.qa-first{border-top:1px solid var(--ink)}
 
 /* ---------- home: what you can do, one calm band ---------- */
 .band{margin-top:var(--sec);background:var(--paper-deep);border-block:1px solid var(--rule)}
@@ -471,21 +582,39 @@ html[lang="zh"] .band-body p{max-width:32em}
              linear-gradient(rgba(110,139,91,.55),rgba(110,139,91,.55)) calc(var(--t) / 2) 50%/calc(100% - var(--t)) 1px no-repeat}
 @media (max-width:440px){.routes{--t:19px}}
 @media (max-width:360px){.routes{--t:16px}}
-.sec.games-row{padding-top:var(--sec)}
+.sec.games-row,.sec.blog-row{padding-top:var(--sec)}
+
+/* ---------- home: from the blog, centred like a contents page ---------- */
+.bl-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:44px clamp(40px,5vw,88px);
+  text-align:center}
+.bl-post{flex:1 1 300px;max-width:460px;min-width:0}
+.bl-list[data-n="1"] .bl-post{max-width:720px}
+.bl-date{margin:0;font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.bl-post h3{margin:12px auto 0;font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:400;line-height:1.14;
+  letter-spacing:-.012em;max-width:24ch}
+.bl-post h3 a{text-decoration:none}
+.bl-post h3 a:hover{text-decoration-line:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;
+  text-underline-offset:6px}
+.bl-sf{margin:14px auto 0;max-width:52ch;font-size:1.08rem;line-height:1.55;color:var(--ink-soft)}
+.bl-more{margin:6px 0 0}
+.blog-row .sec-links{justify-content:center}
+html[lang="zh"] .bl-post h3{max-width:16em}
+html[lang="zh"] .bl-sf{max-width:28em}
 
 /* ---------- home: games, small and alike ---------- */
 .game-list{list-style:none;margin:0;padding:0;display:grid;gap:20px 32px}
 @media (min-width:760px){.game-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.game-list a{display:grid;grid-template-columns:clamp(112px,10vw,148px) minmax(0,1fr);gap:16px;align-items:center;
+.game-list a{display:grid;grid-template-columns:clamp(116px,11vw,210px) minmax(0,1fr);gap:18px;align-items:center;
   text-decoration:none}
 .gl-img{display:block;padding:4px;border:1px solid var(--rule);background:var(--paper-hi);
   transition:border-color .5s var(--ease)}
 .gl-img img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;
   filter:saturate(.7) contrast(.96)}
-.gl-name{display:block;font-family:var(--cond);font-size:1.12rem;font-weight:500;line-height:1.25;
+.gl-name{display:block;font-family:var(--serif);font-size:1.12rem;font-weight:500;line-height:1.25;
   text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;text-decoration-thickness:1px;
   transition:text-decoration-color .3s var(--ease)}
-.gl-meta{display:block;margin-top:4px;font-family:var(--cond);font-size:.9rem;color:var(--ink-faint)}
+.gl-meta{display:block;margin-top:4px;font-family:var(--serif);font-size:.9rem;color:var(--ink-faint)}
 .game-list a:hover .gl-img{border-color:var(--ink)}
 .game-list a:hover .gl-name{text-decoration-color:var(--brown)}
 
@@ -501,7 +630,7 @@ html[lang="zh"] .band-body p{max-width:32em}
 .news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.94rem;line-height:1.5}
 html[lang="zh"] .trust-hwc h2{max-width:14em}
 /* a small label that is a heading in the outline keeps the label's type */
-h2.label,html[lang="zh"] h2.label{font-family:var(--cond);font-size:.75rem;line-height:1.5;font-weight:600;
+h2.label,html[lang="zh"] h2.label{font-family:var(--serif);font-size:.75rem;line-height:1.5;font-weight:600;
   letter-spacing:.14em;max-width:none}
 html[lang="zh"] h2.label{letter-spacing:0}
 
@@ -516,18 +645,20 @@ html[lang="zh"] h2.label{letter-spacing:0}
 .tool-hero .net{position:absolute;inset:0;z-index:0;pointer-events:none;
   background:url(assets/network.svg) no-repeat right -6% center;background-size:auto 128%;opacity:.2;
   filter:sepia(.35) saturate(.7)}
+.tool-hero .net-chronic{background-image:url(assets/chronic-network.svg);background-size:auto 118%;opacity:.24}
 .tool-hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(97deg,var(--paper) 0%,rgba(241,240,234,.96) 32%,rgba(241,240,234,.6) 62%,rgba(241,240,234,.25) 100%)}
 .tool-hero .wrap{position:relative;z-index:2;padding-block:clamp(56px,10vh,112px)}
-.tool-hero h1{margin:18px 0 0;max-width:22ch}
+.tool-hero h1{margin:18px 0 0;max-width:24ch;font-size:clamp(2.2rem,3.9vw,3.35rem)}
 html[lang="zh"] .tool-hero h1{font-size:clamp(1.95rem,4vw,2.85rem);max-width:15em}
+html[lang="ru"] .tool-hero h1{font-size:clamp(2rem,3.3vw,2.9rem);max-width:28ch}
 @media (max-width:820px){
   .tool-hero .net{background-position:center;background-size:cover;opacity:.13}
   .tool-hero .veil{background:linear-gradient(180deg,rgba(241,240,234,.7) 0%,var(--paper) 78%)}
   .tool-hero.plain::before{opacity:.45;background-size:auto 130%;
     -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,transparent 90%)}
 }
-.crumb{font-family:var(--cond);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.crumb{font-family:var(--serif);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
 .crumb a{text-decoration:none}
 .crumb a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:4px}
 .crumb span{color:var(--ink-soft)}
@@ -548,20 +679,20 @@ html[lang="zh"] .tool-hero h1{font-size:clamp(1.95rem,4vw,2.85rem);max-width:15e
 .inst-main{display:grid;gap:11px}
 .inst-top{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
 /* a short tag (a game's topic): condensed capitals in the map brown, no box */
-.chip{font-family:var(--cond);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+.chip{font-family:var(--serif);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
       color:var(--brown-ink);white-space:nowrap}
 .chip.live{color:var(--brown-ink)}
 .chip.soon{color:var(--ink-faint)}
 .inst h3{margin:0}
 .inst p{margin:0;color:var(--ink-soft);max-width:58ch}
-.inst-meta{display:flex;gap:4px 18px;flex-wrap:wrap;font-family:var(--cond);font-size:.88rem;letter-spacing:.01em;
+.inst-meta{display:flex;gap:4px 18px;flex-wrap:wrap;font-family:var(--serif);font-size:.88rem;letter-spacing:.01em;
            color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .inst.is-soon .inst-main{opacity:.62}
 .thumb{border:1px solid var(--rule);background:var(--paper-deep) url(assets/network.svg) no-repeat center/cover;
        aspect-ratio:16/10;position:relative}
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
-             font-family:var(--cond);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+             font-family:var(--serif);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
 
 /* ---------- about ---------- */
 /* Four parts in a two-by-two grid on a desktop:
@@ -596,11 +727,11 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .creds{display:grid;border-top:1px solid var(--ink);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
 .cred dd{margin:0}
-.cred .r{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);
+.cred .r{font-family:var(--serif);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 .cred .w{font-size:.95rem}
 .inline-links{display:flex;gap:4px 22px;flex-wrap:wrap;margin-top:6px}
-.inline-links a{display:inline-flex;align-items:center;min-height:40px;font-family:var(--cond);font-size:.98rem;
+.inline-links a{display:inline-flex;align-items:center;min-height:40px;font-family:var(--serif);font-size:.98rem;
                 text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:5px;text-decoration-thickness:1px}
 .inline-links a:hover{text-decoration-color:var(--ink)}
 /* The portrait is an engraved line screen: each density at its own size. */
@@ -611,18 +742,18 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
   background:var(--paper-hi);color:var(--ink);border:1px solid var(--ink);padding:20px 22px;text-decoration:none}
 .tl-card::before{content:"";position:absolute;inset:4px;border:1px solid var(--rule);pointer-events:none}
 .tl-txt{min-width:0}
-.tl-card .r{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+.tl-card .r{font-family:var(--serif);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
   font-weight:600;color:var(--ink-faint);display:block}
-.tl-card .w{font-family:var(--cond);font-size:1.15rem;font-weight:500;display:block;margin-top:6px;line-height:1.3}
+.tl-card .w{font-family:var(--serif);font-size:1.15rem;font-weight:500;display:block;margin-top:6px;line-height:1.3}
 .tl-card .arr{flex:none;font-size:1.15rem;line-height:1;transition:transform .5s var(--ease)}
 .tl-card:hover .arr{transform:translateX(5px)}
 .tl-card:hover{border-color:var(--ink)}
 
-.cite-line{font-family:var(--cond);font-size:1rem;line-height:1.65;max-width:72ch;
+.cite-line{font-family:var(--serif);font-size:1rem;line-height:1.65;max-width:72ch;
   border-inline-start:2px solid var(--brown);padding:8px 0 8px 18px;margin:0}
 
 /* ---------- contact ---------- */
-.contact-email{display:inline-block;margin-top:18px;font-family:var(--cond);font-size:1.15rem;font-weight:600;
+.contact-email{display:inline-block;margin-top:18px;font-family:var(--serif);font-size:1.15rem;font-weight:600;
   text-decoration:none;border-bottom:1px solid var(--brown);padding-bottom:3px}
 .contact-email:hover{border-bottom-color:var(--ink)}
 
@@ -631,21 +762,21 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .note{display:grid;gap:5px;padding-block:22px;border-bottom:1px solid var(--rule);text-decoration:none}
 .note h3{font-weight:400}
 .note:hover h3{text-decoration:underline;text-underline-offset:4px}
-.note .m{font-family:var(--cond);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+.note .m{font-family:var(--serif);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 
 /* ---------- figures / bars (explorer page) ---------- */
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
       background:var(--rule);border:1px solid var(--rule);margin-top:30px}
 .fig{background:var(--paper-hi);padding:22px 20px}
-.fig .v{font-family:var(--sans);font-weight:300;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1;
+.fig .v{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1;
         font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
-.fig .k{margin-top:10px;font-family:var(--cond);font-size:.9rem;line-height:1.4;color:var(--ink-faint)}
+.fig .k{margin-top:10px;font-family:var(--serif);font-size:.9rem;line-height:1.4;color:var(--ink-faint)}
 .bars{margin-top:36px;display:grid;gap:25px;max-width:640px}
 .bar-row{display:grid;gap:9px}
 .bar-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
 .bar-head b{font-weight:600}
-.bar-head span{font-family:var(--cond);font-size:.86rem;color:var(--ink-faint)}
+.bar-head span{font-family:var(--serif);font-size:.86rem;color:var(--ink-faint)}
 .bar{height:6px;background:var(--paper-deep);position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;display:block}
 .bar.est i{background:var(--madder)}
@@ -655,13 +786,13 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .reads{margin-top:26px;border-top:1px solid var(--ink)}
 .read{padding-block:26px;border-bottom:1px solid var(--rule);display:grid;gap:11px}
 @media (min-width:840px){.read{grid-template-columns:186px minmax(0,1fr);gap:30px;align-items:start}}
-.read .tag{font-family:var(--cond);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;
+.read .tag{font-family:var(--serif);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;
            font-weight:600;padding-top:5px}
 .read h3{margin:0 0 8px}
 .read p{margin:0;color:var(--ink-soft);max-width:60ch}
 
 .legend{margin-top:32px;display:flex;gap:24px;flex-wrap:wrap}
-.leg{display:flex;align-items:center;gap:9px;font-family:var(--cond);font-size:.9rem;color:var(--ink-soft)}
+.leg{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:.9rem;color:var(--ink-soft)}
 .leg i{width:26px;height:0;display:block}
 .leg.est i{border-top:2px solid var(--madder)}
 .leg.sus i{border-top:1px dashed var(--sage)}
@@ -677,7 +808,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .foot .menu a:hover{color:var(--ink)}
 /* How we check, How to cite, Report an error: in every footer */
 .foot-trust{display:flex;flex-wrap:wrap;gap:0 26px;margin:18px 0 0}
-.foot-trust a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-family:var(--cond);
+.foot-trust a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-family:var(--serif);
   font-size:1rem;font-weight:500;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px;
   text-decoration-color:var(--brown)}
 .foot-trust a:hover{text-decoration-color:var(--ink)}
@@ -690,7 +821,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
                  text-decoration-color:rgba(34,36,31,.4)}
 .creds a:hover,.disc a:hover{color:var(--ink);text-decoration-color:var(--ink)}
 .foot-bot{margin-top:30px;padding-top:16px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;
-          gap:16px;flex-wrap:wrap;font-family:var(--cond);font-size:.84rem;letter-spacing:.02em;color:var(--ink-faint)}
+          gap:16px;flex-wrap:wrap;font-family:var(--serif);font-size:.84rem;letter-spacing:.02em;color:var(--ink-faint)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -710,37 +841,37 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .stage-frame iframe{display:block;width:100%;height:100%;border:0;background:#0b2430}
 .stage-frame .play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,36,48,.28)}
 .stage-frame .play button{display:inline-flex;align-items:center;gap:12px;background:var(--paper);color:var(--ink);
-  border:1px solid var(--paper);padding:14px 26px;font:500 1.05rem/1 var(--cond);letter-spacing:.04em;
+  border:1px solid var(--paper);padding:14px 26px;font:500 1.05rem/1 var(--serif);letter-spacing:.04em;
   box-shadow:0 12px 34px rgba(0,0,0,.3);cursor:pointer;transition:background .4s var(--ease),color .4s var(--ease)}
 .stage-frame .play button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .stage-frame .play button::before{content:"";width:0;height:0;border-left:11px solid currentColor;
   border-top:7px solid transparent;border-bottom:7px solid transparent}
 .stage-cap{display:flex;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-top:10px;
-  font-family:var(--cond);font-size:.84rem;color:var(--ink-faint)}
+  font-family:var(--serif);font-size:.84rem;color:var(--ink-faint)}
 .stage-cap a{text-decoration:none;border-bottom:1px solid var(--brown)}
 .stage-cap a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .stage.is-playing .stage-frame{aspect-ratio:auto;height:clamp(420px,78vh,720px)}
 /* while a game runs, its screenshot and Play button step aside */
 .stage.is-playing .stage-frame picture,.stage.is-playing .stage-frame .play{display:none}
 .game-intro .label{margin-bottom:12px}
-.game-intro h1,.game-intro h2{font-family:var(--cond);font-weight:400;font-size:clamp(1.9rem,3.2vw,2.5rem);
+.game-intro h1,.game-intro h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.2vw,2.5rem);
   line-height:1.12;letter-spacing:-.006em;margin-bottom:14px}
 .game-intro p{color:var(--ink-soft);margin:0 0 14px;max-width:54ch}
 .game-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px 18px;margin:18px 0 22px;
   padding:14px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
 .game-facts div{display:grid;gap:2px}
-.game-facts b{font-family:var(--sans);font-weight:300;font-size:1.5rem;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
-.game-facts span{font-family:var(--cond);font-size:.88rem;color:var(--ink-faint)}
+.game-facts b{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
+.game-facts span{font-family:var(--serif);font-size:.88rem;color:var(--ink-faint)}
 .howto{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:10px;counter-reset:step}
 .howto li{display:flex;gap:12px;align-items:flex-start;color:var(--ink-soft)}
 .howto li>span{flex:1;min-width:0}
-.howto li::before{counter-increment:step;content:counter(step);font-family:var(--cond);font-size:.8rem;font-weight:600;
+.howto li::before{counter-increment:step;content:counter(step);font-family:var(--serif);font-size:.8rem;font-weight:600;
   flex:none;width:26px;height:26px;border:1px solid var(--brown);border-radius:999px;display:grid;place-items:center;color:var(--ink)}
-.howto kbd{font-family:var(--cond);font-size:.82rem;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;
+.howto kbd{font-family:var(--serif);font-size:.82rem;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;
   padding:1px 6px;background:var(--paper-deep);color:var(--ink)}
 .regions{margin:0 0 22px;padding:0;list-style:none;border-top:1px solid var(--rule)}
 .regions li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.94rem}
-.regions li span{font-family:var(--cond);font-size:.86rem;color:var(--ink-faint);white-space:nowrap}
+.regions li span{font-family:var(--serif);font-size:.86rem;color:var(--ink-faint);white-space:nowrap}
 .game-intro .fine{font-size:.86rem;color:var(--ink-faint);max-width:54ch}
 /* ---------- games overview: all three at first sight (games page) ---------- */
 .shelf .sec-head{margin-bottom:22px}
@@ -748,7 +879,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 /* the stage section is a grid, so the hidden attribute needs saying out loud */
 .game-page[hidden]{display:none}
 .games-over{padding-block:clamp(26px,4vh,48px) clamp(20px,3vh,36px)}
-.games-over .sec-head h1{font-family:var(--display);font-weight:300;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1.06;
+.games-over .sec-head h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1.06;
   max-width:24ch;margin:12px 0 0}
 .games-over .sec-head .lede{margin:16px 0 0;max-width:64ch;color:var(--ink-soft)}
 .game-grid{display:grid;gap:22px;margin-top:30px}
@@ -763,7 +894,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
   filter:saturate(.82)}
 .gc-body{display:flex;flex-direction:column;gap:11px;padding:18px 18px 20px}
 .gc-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.game-card h2,.game-card h3{font-family:var(--cond);font-weight:500;font-size:1.3rem;line-height:1.2;margin:0;letter-spacing:0}
+.game-card h2,.game-card h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;line-height:1.2;margin:0;letter-spacing:0}
 .game-card p{margin:0;color:var(--ink-soft);font-size:.95rem}
 .game-card .inst-meta{gap:2px 16px;line-height:1.5}
 .game-card .inst-actions{margin-top:auto;padding-top:6px}
@@ -771,7 +902,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .game-card.is-on .chip.on-stage{display:inline-block}
 .game-more{margin:22px 0 0}
 .game-page .back-row{grid-column:1/-1;margin-bottom:-14px}
-.back-all{font-family:var(--cond);font-size:.84rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+.back-all{font-family:var(--serif);font-size:.84rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
   color:var(--ink-faint);border-bottom:1px solid var(--brown);padding-bottom:2px}
 .back-all:hover{color:var(--ink);border-bottom-color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.game-card{transition:none}}
@@ -798,18 +929,21 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 .ln{display:inline-block;width:22px;height:0;margin-inline-end:8px;vertical-align:.3em}
 .ln.est{border-top:2px solid var(--madder)}
 .ln.sus{border-top:2px dashed var(--sage)}
+/* small capitals labels across the pages take the caption optical size */
+.crumb,.chip,.read .tag,.cred .r,.tl-card .r,.see .k,.ex-steps .tag,.lbl-table thead th,.work-table thead th,
+.lbl-table .grp .tool,.ecac-why .k,.search-gh,.note .m,.thumb.blank,.back-all,.inst-meta{font-variation-settings:var(--caption)}
 /* visually hidden, still read by screen readers */
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);
     white-space:nowrap;border:0}
 .cite-line{overflow-wrap:anywhere}
 
 /* reading guide: the ideas are h2 in the outline and keep the h3 scale */
-.read h2{font-family:var(--cond);font-size:var(--f-h3);line-height:1.28;font-weight:500;margin:0 0 8px;letter-spacing:0}
+.read h2{font-family:var(--serif);font-size:var(--f-h3);line-height:1.28;font-weight:500;margin:0 0 8px;letter-spacing:0}
 html[lang="zh"] .read h2{font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.45}
 .read p + p{margin-top:12px}
 .see{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:16px 0 0}
 .read .see{margin-top:14px}
-.see .k{font-family:var(--cond);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+.see .k{font-family:var(--serif);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
         color:var(--ink-faint)}
 .see a,.more-list a,.hwc-links a,.hwc-cite a,.about-hwc a,.term-link,.work-table tbody th a,.beyond a{
   text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
@@ -818,12 +952,12 @@ html[lang="zh"] .read h2{font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.45
 .see a{font-size:.94rem}
 
 /* the worked headline: a quoted headline, set as one */
-.ex-head{font-family:var(--cond);font-weight:500;font-size:clamp(1.3rem,2.3vw,1.7rem);
+.ex-head{font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,2.3vw,1.7rem);
          line-height:1.28;margin:0 0 14px;max-width:34ch}
 .ex-steps{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--ink)}
 .ex-steps li{padding-block:18px;border-bottom:1px solid var(--rule);display:grid;gap:6px}
 @media (min-width:840px){.ex-steps li{grid-template-columns:186px minmax(0,1fr);gap:30px}}
-.ex-steps .tag{font-family:var(--cond);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;
+.ex-steps .tag{font-family:var(--serif);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;
                text-transform:uppercase;font-weight:600;padding-top:4px}
 .ex-steps p{margin:0;color:var(--ink-soft);max-width:64ch}
 html[lang="zh"] .ex-steps p{max-width:34em}
@@ -836,15 +970,15 @@ html[lang="zh"] .ex-steps p{max-width:34em}
 .lbl-table,.work-table{width:100%;border-collapse:collapse;font-size:.92rem;line-height:1.5}
 .lbl-table th,.lbl-table td,.work-table th,.work-table td{text-align:start;vertical-align:top;
   padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
-.lbl-table thead th,.work-table thead th{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;
+.lbl-table thead th,.work-table thead th{font-family:var(--serif);font-size:.72rem;letter-spacing:.13em;
   text-transform:uppercase;font-weight:600;color:var(--ink-faint);padding-block:10px;vertical-align:bottom}
 .lbl-table tbody th,.work-table tbody th{font-weight:600;color:var(--ink)}
 .lbl-table td,.work-table td{color:var(--ink-soft)}
 .lbl-table{table-layout:fixed;min-width:680px}
 .lbl-table .c-label{width:16%}.lbl-table .c-says{width:31%}.lbl-table .c-not{width:30%}.lbl-table .c-term{width:23%}
-.lbl-table .grp th{padding-top:28px;font-family:var(--cond);font-size:1.1rem;font-weight:500;
+.lbl-table .grp th{padding-top:28px;font-family:var(--serif);font-size:1.1rem;font-weight:500;
   border-bottom:1px solid var(--ink)}
-.lbl-table .grp .tool{display:block;font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;
+.lbl-table .grp .tool{display:block;font-family:var(--serif);font-size:.72rem;letter-spacing:.13em;
   text-transform:uppercase;font-weight:600;color:var(--ink-faint);margin-bottom:4px}
 .lbl-table .old th,.lbl-table .old td{color:var(--ink-faint);font-size:.88rem}
 .term-link{display:inline-block;margin-top:8px;font-size:.88rem}
@@ -873,7 +1007,7 @@ html[lang="zh"] .ex-steps p{max-width:34em}
 .quiz details{border-bottom:1px solid var(--rule)}
 .quiz summary{cursor:pointer;padding:16px 34px 16px 0;font-weight:600;list-style:none;position:relative}
 .quiz summary::-webkit-details-marker{display:none}
-.quiz summary::after{content:"+";position:absolute;right:6px;top:13px;font-family:var(--cond);
+.quiz summary::after{content:"+";position:absolute;right:6px;top:13px;font-family:var(--serif);
   font-size:1.25rem;font-weight:400;color:var(--brown-ink)}
 .quiz details[open] summary::after{content:"\2212"}
 .quiz details p{margin:0 0 18px;color:var(--ink-soft);max-width:66ch}
@@ -882,7 +1016,14 @@ html[lang="zh"] .ex-steps p{max-width:34em}
 .exp-more{margin:26px 0 0;max-width:64ch;color:var(--ink-soft)}
 html[lang="zh"] .exp-more{max-width:34em}
 .lbl-figs{margin-top:26px}
+.fig-note{margin:14px 0 0;color:var(--ink-soft);font-size:.97rem}
+.fig-note + .fig-note{margin-top:6px}
+.fig-note .label{margin-inline-end:8px}
 .lbl-figs .fig .k{display:flex;align-items:baseline;flex-wrap:wrap}
+
+/* chronic.html: the sources, as on How we check */
+.src-list{margin:0;padding:0 0 0 20px;display:grid;gap:12px;max-width:72ch;color:var(--ink-soft)}
+.src-list li{padding-inline-start:4px}
 
 /* How we check */
 .hwc-grid{display:grid;gap:18px}
@@ -899,7 +1040,7 @@ html[lang="zh"] .exp-more{max-width:34em}
 @media (min-width:760px){.hwc-ver > div{grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px}}
 .hwc-ver dt{font-weight:600}
 .hwc-ver dd{margin:0;color:var(--ink-soft);max-width:66ch}
-.hwc-ver .v{display:block;font-family:var(--cond);font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:4px}
+.hwc-ver .v{display:block;font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:4px}
 .hwc-cite{margin:18px 0 0}
 .lede.hwc-not{color:var(--ink);font-weight:600}
 .hwc-fields{margin:16px 0 24px;padding-left:22px;display:grid;gap:6px}
@@ -909,10 +1050,10 @@ html[lang="zh"] .exp-more{max-width:34em}
 /* Work and cancer */
 .tool-hero .work-note{margin-top:14px;font-size:.96rem}
 .work-toc ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.work-toc a{display:inline-flex;align-items:baseline;gap:8px;min-height:36px;padding:8px 12px;font-family:var(--cond);
+.work-toc a{display:inline-flex;align-items:baseline;gap:8px;min-height:36px;padding:8px 12px;font-family:var(--serif);
   font-size:.95rem;text-decoration:none;border:1px solid var(--rule);background:var(--paper-hi)}
 .work-toc a:hover{border-color:var(--ink)}
-.work-toc .n,.work-sec h2 .n{font-family:var(--cond);font-size:.82rem;font-weight:600;color:var(--ink-faint);
+.work-toc .n,.work-sec h2 .n{font-family:var(--serif);font-size:.82rem;font-weight:600;color:var(--ink-faint);
   font-variant-numeric:tabular-nums}
 .work-sec{margin-top:clamp(44px,7vh,72px)}
 .work-sec h2{font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.2}
@@ -920,24 +1061,24 @@ html[lang="zh"] .work-sec h2{font-size:clamp(1.2rem,2vw,1.55rem)}
 .work-table{min-width:720px}
 .work-table .c-agent{width:23%}.work-table .c-label{width:17%}.work-table .c-est{width:25%}
 .work-table .c-sus{width:24%}.work-table .c-ev{width:11%}
-.work-table td .n{font-family:var(--cond);font-weight:600;color:var(--ink);margin-inline-end:4px;
+.work-table td .n{font-family:var(--serif);font-weight:600;color:var(--ink);margin-inline-end:4px;
   font-variant-numeric:tabular-nums}
-.work-table .gc{display:block;margin-top:2px;font-family:var(--cond);font-size:.8rem;letter-spacing:.02em;
+.work-table .gc{display:block;margin-top:2px;font-family:var(--serif);font-size:.8rem;letter-spacing:.02em;
   color:var(--ink-faint);white-space:nowrap}
-.work-table .ev{font-family:var(--cond);font-size:.86rem;white-space:nowrap}
+.work-table .ev{font-family:var(--serif);font-size:.86rem;white-space:nowrap}
 .work-find{margin-top:48px;padding:24px 26px;border:1px solid var(--rule);background:var(--paper-deep);
   display:grid;gap:14px;justify-items:start}
 .work-find p{margin:0;color:var(--ink-soft);max-width:64ch}
 .ecac-note{margin:0 0 14px;color:var(--ink-faint);font-size:.86rem;max-width:70ch}
 .ecac-note.summary{padding:10px 14px;border:1px dashed var(--rule);color:var(--ink-soft)}
 blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink);padding:4px 0 4px 20px}
-.ecac .ecac-t{margin:0 0 8px;font-family:var(--cond);font-weight:500;font-size:1.2rem;line-height:1.3}
-.ecac .ecac-t .n{font-family:var(--cond);font-size:.9rem;font-weight:600;color:var(--ink-faint);margin-inline-end:6px}
+.ecac .ecac-t{margin:0 0 8px;font-family:var(--serif);font-weight:500;font-size:1.2rem;line-height:1.3}
+.ecac .ecac-t .n{font-family:var(--serif);font-size:.9rem;font-weight:600;color:var(--ink-faint);margin-inline-end:6px}
 .ecac p{margin:0}
 .ecac-src{margin:14px 0 0;font-size:.92rem}
 .ecac-src a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
 .ecac-why{margin:18px 0 0;font-size:.9rem;color:var(--ink-soft);max-width:72ch;overflow-wrap:anywhere}
-.ecac-why .k{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+.ecac-why .k{font-family:var(--serif);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
   color:var(--ink-faint);margin-inline-end:6px}
 .ecac-why a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
 .beyond{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--ink)}
@@ -946,7 +1087,7 @@ blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink)
 .beyond .bn{font-weight:600;justify-self:start}
 .beyond .bl{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .beyond .bl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:.94rem}
-.beyond .gr{font-family:var(--cond);font-size:.86rem;color:var(--ink-soft);white-space:nowrap}
+.beyond .gr{font-family:var(--serif);font-size:.86rem;color:var(--ink-soft);white-space:nowrap}
 .beyond .rel{margin:6px 0 0;font-size:.86rem;color:var(--ink-faint)}
 
 /* games page: the evidence behind each game, for adults (Batch 7) */
@@ -963,35 +1104,46 @@ blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink)
 .crumb a{min-width:24px;justify-content:center}
 .work-table tbody th a,.beyond a,.ecac-why a,.creds a,.cite-line a{padding-block:4px}
 
-/* ---------- blog (Nov 2026) ----------
-   blog.html lists the posts in the reading guide's rows (.reads/.read: the date
-   in the tag column); blog/<slug>.html sets one post at a reading measure. */
+/* ---------- blog (Nov 2026; centred reading column 8 Nov 2026) ----------
+   blog.html and blog/<slug>.html set everything, title to sources, in one
+   reading column of about 66 characters, centred in the window: the crumb,
+   the title, the standfirst, the date and the text share its left edge. */
+:root{--col:37rem}
+.reading-hero .wrap,.sec.reading{max-width:calc(var(--col) + 2 * var(--pad))}
+.reading-hero .wrap{padding-block:clamp(52px,9vh,104px) clamp(40px,6vh,72px)}
+.tool-hero.reading-hero::before{opacity:.5}
+.tool-hero.plain.reading-hero h1{max-width:none}
+.sec.reading{padding-top:clamp(44px,6vw,80px)}
 .post-item h2 a{text-decoration:none}
 .post-item h2 a:hover{text-decoration-line:underline;text-decoration-color:var(--brown);
   text-decoration-thickness:1px;text-underline-offset:5px}
 .read .post-more{margin-top:4px}
-.tool-hero.plain h1.post-h{max-width:18ch}
-.post-lede{margin:22px 0 0;max-width:44ch;font-size:clamp(1.12rem,1.6vw,1.32rem);line-height:1.5}
-.post-meta{margin:26px 0 0;font-family:var(--cond);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-faint);font-weight:600}
-.post-body{max-width:38em}
-.post-body > p{margin:0 0 1.15em}
-.post-body h2{font-size:clamp(1.32rem,2vw,1.6rem);margin:2.1em 0 .65em}
-.post-body h3{margin:1.7em 0 .5em}
+.reading .reads{margin-top:0}
+.reading .read{grid-template-columns:minmax(0,1fr);gap:8px}
+.reading .read .tag{padding-top:0}
+.reading .post-item h2{font-size:clamp(1.5rem,2.2vw,1.9rem);font-weight:400;line-height:1.16;letter-spacing:-.01em;margin-bottom:10px}
+.reading .post-item h2 + p{font-size:1.06rem}
+.tool-hero.plain h1.post-h{font-size:clamp(2.3rem,4.6vw,3.5rem);line-height:1.06}
+.post-lede{margin:24px 0 0;font-size:clamp(1.18rem,1.7vw,1.38rem);line-height:1.5;color:var(--ink-soft)}
+.post-meta{margin:28px 0 0;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  font-variation-settings:var(--caption);color:var(--ink-faint)}
+.post-body{font-size:1.0625rem;line-height:1.65}
+@media (min-width:700px){.post-body{font-size:1.1875rem}}
+.post-body > p{margin:0 0 1.1em}
+.post-body h2{font-size:clamp(1.4rem,2.1vw,1.7rem);line-height:1.2;margin:2em 0 .6em}
+.post-body h3{font-size:1.15em;margin:1.7em 0 .5em}
 .post-body > :first-child{margin-top:0}
 .post-body a{text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:3px}
 .post-body a:hover{text-decoration-color:var(--ink)}
-.post-body ul{margin:0 0 1.15em;padding-inline-start:1.2em}
+.post-body ul{margin:0 0 1.1em;padding-inline-start:1.2em}
 .post-body li{margin-bottom:.45em}
 .post-body .post-refs{list-style:none;padding:0;margin-top:.4em;border-top:1px solid var(--rule);
-  font-size:.9rem;line-height:1.5;color:var(--ink-soft)}
+  font-size:.82em;line-height:1.5;color:var(--ink-soft)}
 .post-body .post-refs li{margin:0;padding-block:11px;border-bottom:1px solid var(--rule);overflow-wrap:anywhere}
-.post-note{margin:0 0 2.2em;padding:12px 16px;background:var(--paper-deep);font-size:.92rem;color:var(--ink-soft)}
+.post-note{margin:0 0 2.2em;padding:12px 16px;background:var(--paper-deep);font-size:.82em;color:var(--ink-soft)}
 .post-back{margin:clamp(40px,5vw,64px) 0 0}
-html[lang="zh"] .post-body{max-width:34em}
-html[lang="zh"] .post-lede{max-width:24em}
+html[lang="zh"] .post-body{font-size:1.0625rem;line-height:1.85}
 html[lang="zh"] .post-meta{letter-spacing:0}
-html[lang="zh"] .tool-hero.plain h1.post-h{max-width:14em}
 
 /* ---------- print ---------- */
 /* A printed page keeps the text and the sources: no menus, search, buttons or
@@ -1000,14 +1152,14 @@ html[lang="zh"] .tool-hero.plain h1.post-h{max-width:14em}
   @page{margin:16mm 15mm}
   html{scroll-padding-top:0;scroll-behavior:auto}
   body{background:#fff;color:#000;font-size:11pt;overflow:visible}
-  .skip,.top .top-right,.search,.inst-actions,.ts-acts,.qa-go,.game-more,.map-ground,.map-key,.sheet::before,
-  .sheet::after,.tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.gl-img,
+  .skip,.top .top-right,.search,.inst-actions,.ts-acts,.qa-go,.game-more,.map-ground,.map-key,.tn-pick,.tn-card,
+  .tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.gl-img,.mark-i,
   .stage,.back-row,.post-back,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,.routes,
   .sec-links{display:none!important}
   .top{position:static;background:none;border-bottom:1px solid #999;backdrop-filter:none;-webkit-backdrop-filter:none}
   .top .wrap{clip-path:none}
   .cover{padding:0}
-  .sheet,.map,.title-block{border:0;outline:0;box-shadow:none;min-height:0;padding:0;display:block}
+  .map,.map-in,.title-block{border:0;outline:0;box-shadow:none;min-height:0;padding:0;display:block;background:none}
   .tool-hero{border-bottom:1px solid #999}
   .title-block,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap,.band-in{padding-block:14pt}
   .band{background:none;border:0}
@@ -1016,10 +1168,11 @@ html[lang="zh"] .tool-hero.plain h1.post-h{max-width:14em}
   h1{font-size:24pt}
   h2{font-size:16pt}
   h1,h2,h3{break-after:avoid}
-  .tool-sheet,.lesson,.qa-row,.post-refs li,.key-list li,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
+  .tool-sheet,.lesson,.qa-row,.post-refs li,.key-list li,.bl-post,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
   .quiz details{break-inside:avoid}
   .tool-sheet{background:none}
-  .lede,.read p,.inst p,.about p,.post-body,.post-refs,.game-intro p,.qa-a p,.news li,.key-says,.ts-q{color:#000}
+  .lede,.read p,.inst p,.about p,.post-body,.post-refs,.game-intro p,.qa-a p,.news li,.key-says,.key-dl dd,.ts-q,.bl-sf{color:#000}
+  .reading-hero .wrap,.sec.reading{max-width:none}
   .cta-band{background:none}
   .foot{background:none;color:#000;border-top:1px solid #999}
   .foot .wrap{padding-block:12pt 0}

@@ -32,16 +32,43 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="../assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://epidetective.com/fr/explorer.html#page",
+  "url": "https://epidetective.com/fr/explorer.html",
+  "name": "Explorateur des preuves sur le cancer — EpiDetective",
+  "description": "Quelles expositions ont été associées à quels cancers, et quelle est la solidité des preuves derrière chaque lien. Données : Monographies du CIRC, Classifications par site de cancer (volumes 1 à 141). Un projet personnel de Wenxin Wan.",
+  "inLanguage": "fr",
+  "isPartOf": {
+    "@id": "https://epidetective.com/fr/#website"
+  },
+  "author": {
+    "@id": "https://epidetective.com/about.html#person"
+  },
+  "about": {
+    "@type": "WebApplication",
+    "name": "Explorateur des preuves sur le cancer",
+    "url": "https://tools.epidetective.com/cancer/?lang=fr",
+    "applicationCategory": "ReferenceApplication",
+    "operatingSystem": "Any web browser",
+    "isAccessibleForFree": true,
+    "author": {
+      "@id": "https://epidetective.com/about.html#person"
+    }
+  }
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#content">Aller au contenu</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">Outils</a>
@@ -111,17 +138,80 @@
     <h2>Chaque fiche porte l’un des <b>quatre groupes du CIRC</b>.</h2>
   </div>
   <p class="lede">Le groupe indique à quel point le CIRC est sûr qu’un agent peut causer un cancer chez l’être humain. Il ne dit rien de l’ampleur du risque, qui dépend de la dose et des circonstances.</p>
-  <div class="figs lbl-figs">
-    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>Cause avérée &middot; groupe 1</div></div>
-    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>Cause probable &middot; groupe 2A</div></div>
-    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>Cause possible &middot; groupe 2B</div></div>
-    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>Inclassable &middot; groupe 3</div></div>
-  </div>
+  <h3 class="key-h">À quel point le CIRC est sûr qu’un agent peut causer un cancer</h3>
+  <div class="key-cols" aria-hidden="true"><span></span><span></span><span>Ce qu’elle dit</span><span>Ce qu’elle ne dit pas</span><span></span></div>
+  <ol class="key-list key-full">
+    <li><span class="elev e4 g1" aria-hidden="true"></span><p class="key-n"><b>Cause avérée</b> <span>groupe 1</span></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>L’agent peut causer un cancer chez l’être humain. C’est le groupe où le CIRC est le plus sûr.</dd></div><div><dt>Ce qu’elle ne dit pas</dt><dd>Ni l’ampleur du risque, ni la dose à partir de laquelle il apparaît. La viande transformée et le tabagisme sont tous deux dans le groupe 1, avec des risques très différents.</dd></div></dl>
+      <p class="key-count">135</p></li>
+    <li><span class="elev e3 g2a" aria-hidden="true"></span><p class="key-n"><b>Cause probable</b> <span>groupe 2A</span></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>L’agent cause probablement un cancer chez l’être humain. Les preuves restent en deçà du groupe 1, le plus souvent parce que les études chez l’être humain sont limitées.</dd></div><div><dt>Ce qu’elle ne dit pas</dt><dd>Ni qu’il cause un cancer aux niveaux auxquels on est habituellement exposé, ni l’ampleur d’un éventuel risque.</dd></div></dl>
+      <p class="key-count">98</p></li>
+    <li><span class="elev e2 g2b" aria-hidden="true"></span><p class="key-n"><b>Cause possible</b> <span>groupe 2B</span></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>Il se pourrait que l’agent cause un cancer chez l’être humain. Un seul type de preuves va dans ce sens, par exemple des preuves limitées chez l’être humain ou suffisantes chez l’animal.</dd></div><div><dt>Ce qu’elle ne dit pas</dt><dd>Ni qu’il cause probablement un cancer, ni que les personnes exposées courent un risque.</dd></div></dl>
+      <p class="key-count">329</p></li>
+    <li><span class="elev e1 g3" aria-hidden="true"></span><p class="key-n"><b>Inclassable</b> <span>groupe 3</span></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>Les preuves ne remplissent les règles d’aucun autre groupe, le plus souvent parce qu’elles sont trop peu nombreuses.</dd></div><div><dt>Ce qu’elle ne dit pas</dt><dd>Qu’il est sans danger. Le groupe 3 décrit l’état des preuves.</dd></div></dl>
+      <p class="key-count">498</p></li>
+  </ol>
   <p class="exp-more">Les totaux du CIRC pour tous les agents qu’il a classés, d’après sa liste des classifications (volumes 1 à 142, dernière mise à jour le 23 juillet 2026). La carte réunit des agents des groupes 1, 2A et 2B ; les agents du groupe 3 se trouvent par la recherche.</p>
+  <h3 class="key-h key-h2">Ce que montrent les études chez l’être humain pour un cancer donné</h3>
+  <ol class="key-list key-full key-links">
+    <li><span class="kl est" aria-hidden="true"></span><p class="key-n"><b>Lien établi</b></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>Les études chez l’être humain montrent qu’il cause ce cancer. Le hasard, les biais et les facteurs de confusion ont été écartés avec une confiance raisonnable.</dd></div></dl></li>
+    <li><span class="kl sus" aria-hidden="true"></span><p class="key-n"><b>Lien suspecté</b></p>
+      <dl class="key-dl"><div><dt>Ce qu’elle dit</dt><dd>Les études chez l’être humain montrent un lien avec ce cancer, et un lien de cause à effet est crédible. Le hasard, les biais ou les facteurs de confusion n’ont pas pu être écartés.</dd></div></dl></li>
+  </ol>
   <div class="inst-actions" style="margin-top:22px">
     <a class="btn btn-ghost" href="reading.html#labels">Toutes les étiquettes, côte à côte &rarr;</a>
     <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">La liste des classifications du CIRC (en anglais) &rarr;</a>
   </div>
+</section>
+
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-head">
+    <div class="label">Questions</div>
+    <h2 id="qa-h">Trois questions, et les réponses de l’outil</h2>
+  </div>
+  <article class="lesson">
+    <div class="lesson-text">
+      <h3>La viande transformée est-elle aussi nocive que le tabac ?</h3>
+      <p class="lesson-k">Même certitude (groupe 1), ampleur très différente.</p>
+      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=fr#exposure=Processed%20meat"><p>Chaque portion de 50 grammes consommée chaque jour augmente de 18 % le risque de cancer de l’intestin. Selon des données européennes, environ 10 à 12 fumeurs sur 100 ont un cancer du poumon avant 75 ans, contre 4 à 5 sur 1 000 personnes qui n’ont jamais fumé.</p></blockquote>
+      <p class="qa-src">Extrait de l’Explorateur des preuves sur le cancer, traduit de l’anglais</p>
+      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Processed%20meat">Voir la fiche Viande transformée &rarr;</a> <a href="reading.html#relative-absolute">Risque relatif et risque absolu &rarr;</a></p>
+    </div>
+    <figure class="scale-fig">
+      <figcaption>Cancer du poumon avant 75 ans, pour 1 000 personnes</figcaption>
+      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
+        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
+      <div class="sf-row"><span class="sf-who">Fumeurs</span>
+        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
+        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
+      <div class="sf-row"><span class="sf-who">Personnes n’ayant jamais fumé</span>
+        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
+        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
+    </figure>
+  </article>
+  <ol class="qa-rows">
+    <li class="qa-row">
+      <h3>L’aspartame est-il dangereux ?</h3>
+      <div class="qa-body">
+        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=fr#exposure=Aspartame"><p>En juin 2023, le CIRC a classé l’aspartame comme peut-être cancérogène pour l’homme (groupe 2B), une évaluation du danger. Selon l’OMS, un adulte de 70 kilogrammes devrait boire plus de 9 à 14 canettes de boisson light par jour pour dépasser [la dose journalière admissible].</p></blockquote>
+        <p class="qa-src">Extrait de l’Explorateur des preuves sur le cancer, traduit de l’anglais</p>
+        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=fr#exposure=Aspartame">Voir la fiche Aspartame &rarr;</a></p>
+      </div>
+    </li>
+    <li class="qa-row">
+      <h3>Mon travail augmente-t-il mon risque de cancer ?</h3>
+      <div class="qa-body">
+        <p class="qa-k">La carte du cancer compte 68 agents et métiers du monde du travail, de l’amiante et de la poussière de silice au travail de nuit et au métier de pompier.</p>
+        <blockquote class="qa-a"><p>Les peintres ayant plus de 10 ans de métier avaient un risque de cancer de la vessie environ 1,8 fois plus élevé que les non-peintres. Le risque de cancer du poumon augmente avec la quantité totale de silice inhalée au fil des années.</p></blockquote>
+        <p class="qa-src">Extrait de l’Explorateur des preuves sur le cancer, traduit de l’anglais</p>
+        <p class="qa-go"><a href="work.html">Travail et cancer, secteur par secteur &rarr;</a></p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <section class="sec wrap">
@@ -173,7 +263,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">Des outils ouverts pour lire les preuves en santé.</p>
       </div>
       <nav class="menu">
