@@ -31,6 +31,12 @@ content:
       - name: "meta_explorer_desc"
         label: "Explorer — Google result description"
         type: text
+      - name: "meta_chronic_title"
+        label: "Chronic tool page — browser tab and Google headline"
+        type: string
+      - name: "meta_chronic_desc"
+        label: "Chronic tool page — Google result description"
+        type: text
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
@@ -141,6 +147,27 @@ content:
         type: string
       - name: "terrain_note"
         label: "HOME — Note under the map"
+        type: string
+      - name: "terrain_hint"
+        label: "HOME — Map key: how to use the labels"
+        type: string
+      - name: "terrain_open"
+        label: "HOME — Map card: link into the tool (one tool)"
+        type: string
+      - name: "terrain_say"
+        label: "HOME — Map, screen readers: {name} and {list} of linked labels"
+        type: text
+      - name: "terrain_say_none"
+        label: "HOME — Map, screen readers: nothing linked on the map ({name})"
+        type: string
+      - name: "terrain_say_off"
+        label: "HOME — Map, screen readers: label not on the map ({name})"
+        type: string
+      - name: "terrain_list"
+        label: "HOME — Map, keyboard list of labels: its name"
+        type: string
+      - name: "terrain_close"
+        label: "HOME — Map card: close button (screen readers)"
         type: string
       - name: "search_label"
         label: "SEARCH — label above the box"
@@ -801,6 +828,9 @@ content:
         type: string
       - name: "home_games_more"
         label: "home_games_more"
+        type: string
+      - name: "home_blog_h2"
+        label: "HOME — From the blog: heading"
         type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
@@ -1479,6 +1509,39 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "tool_qa_label"
+        label: "EXPLORER and CHRONIC pages — questions: small label"
+        type: string
+      - name: "exp_qa_h2"
+        label: "EXPLORER — questions: heading"
+        type: string
+      - name: "chr_crumb_current"
+        label: "CHRONIC page — crumb current"
+        type: string
+      - name: "chr_h1"
+        label: "CHRONIC page — h1"
+        type: text
+      - name: "chr_whatsin_h2"
+        label: "CHRONIC page — what is in here: heading"
+        type: string
+      - name: "chr_lbl_h2"
+        label: "CHRONIC page — labels: heading"
+        type: string
+      - name: "chr_lbl_p"
+        label: "CHRONIC page — labels: paragraph"
+        type: text
+      - name: "chr_qa_h2"
+        label: "CHRONIC page — question: heading"
+        type: string
+      - name: "chr_cta_h2"
+        label: "CHRONIC page — cta heading"
+        type: string
+      - name: "chr_cta_lede"
+        label: "CHRONIC page — cta paragraph"
+        type: string
+      - name: "chr_cta_btn"
+        label: "CHRONIC page — cta button"
         type: string
       - name: "meta_blog_title"
         label: "BLOG — browser tab and Google headline"
@@ -1532,6 +1595,12 @@ content:
       - name: "meta_explorer_desc"
         label: "Explorer — Google result description"
         type: text
+      - name: "meta_chronic_title"
+        label: "Chronic tool page — browser tab and Google headline"
+        type: string
+      - name: "meta_chronic_desc"
+        label: "Chronic tool page — Google result description"
+        type: text
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
@@ -1642,6 +1711,27 @@ content:
         type: string
       - name: "terrain_note"
         label: "HOME — Note under the map"
+        type: string
+      - name: "terrain_hint"
+        label: "HOME — Map key: how to use the labels"
+        type: string
+      - name: "terrain_open"
+        label: "HOME — Map card: link into the tool (one tool)"
+        type: string
+      - name: "terrain_say"
+        label: "HOME — Map, screen readers: {name} and {list} of linked labels"
+        type: text
+      - name: "terrain_say_none"
+        label: "HOME — Map, screen readers: nothing linked on the map ({name})"
+        type: string
+      - name: "terrain_say_off"
+        label: "HOME — Map, screen readers: label not on the map ({name})"
+        type: string
+      - name: "terrain_list"
+        label: "HOME — Map, keyboard list of labels: its name"
+        type: string
+      - name: "terrain_close"
+        label: "HOME — Map card: close button (screen readers)"
         type: string
       - name: "search_label"
         label: "SEARCH — label above the box"
@@ -2302,6 +2392,9 @@ content:
         type: string
       - name: "home_games_more"
         label: "home_games_more"
+        type: string
+      - name: "home_blog_h2"
+        label: "HOME — From the blog: heading"
         type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
@@ -2980,6 +3073,39 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "tool_qa_label"
+        label: "EXPLORER and CHRONIC pages — questions: small label"
+        type: string
+      - name: "exp_qa_h2"
+        label: "EXPLORER — questions: heading"
+        type: string
+      - name: "chr_crumb_current"
+        label: "CHRONIC page — crumb current"
+        type: string
+      - name: "chr_h1"
+        label: "CHRONIC page — h1"
+        type: text
+      - name: "chr_whatsin_h2"
+        label: "CHRONIC page — what is in here: heading"
+        type: string
+      - name: "chr_lbl_h2"
+        label: "CHRONIC page — labels: heading"
+        type: string
+      - name: "chr_lbl_p"
+        label: "CHRONIC page — labels: paragraph"
+        type: text
+      - name: "chr_qa_h2"
+        label: "CHRONIC page — question: heading"
+        type: string
+      - name: "chr_cta_h2"
+        label: "CHRONIC page — cta heading"
+        type: string
+      - name: "chr_cta_lede"
+        label: "CHRONIC page — cta paragraph"
+        type: string
+      - name: "chr_cta_btn"
+        label: "CHRONIC page — cta button"
         type: string
       - name: "meta_blog_title"
         label: "BLOG — browser tab and Google headline"
@@ -3033,6 +3159,12 @@ content:
       - name: "meta_explorer_desc"
         label: "Explorer — Google result description"
         type: text
+      - name: "meta_chronic_title"
+        label: "Chronic tool page — browser tab and Google headline"
+        type: string
+      - name: "meta_chronic_desc"
+        label: "Chronic tool page — Google result description"
+        type: text
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
@@ -3143,6 +3275,27 @@ content:
         type: string
       - name: "terrain_note"
         label: "HOME — Note under the map"
+        type: string
+      - name: "terrain_hint"
+        label: "HOME — Map key: how to use the labels"
+        type: string
+      - name: "terrain_open"
+        label: "HOME — Map card: link into the tool (one tool)"
+        type: string
+      - name: "terrain_say"
+        label: "HOME — Map, screen readers: {name} and {list} of linked labels"
+        type: text
+      - name: "terrain_say_none"
+        label: "HOME — Map, screen readers: nothing linked on the map ({name})"
+        type: string
+      - name: "terrain_say_off"
+        label: "HOME — Map, screen readers: label not on the map ({name})"
+        type: string
+      - name: "terrain_list"
+        label: "HOME — Map, keyboard list of labels: its name"
+        type: string
+      - name: "terrain_close"
+        label: "HOME — Map card: close button (screen readers)"
         type: string
       - name: "search_label"
         label: "SEARCH — label above the box"
@@ -3803,6 +3956,9 @@ content:
         type: string
       - name: "home_games_more"
         label: "home_games_more"
+        type: string
+      - name: "home_blog_h2"
+        label: "HOME — From the blog: heading"
         type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
@@ -4481,6 +4637,39 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "tool_qa_label"
+        label: "EXPLORER and CHRONIC pages — questions: small label"
+        type: string
+      - name: "exp_qa_h2"
+        label: "EXPLORER — questions: heading"
+        type: string
+      - name: "chr_crumb_current"
+        label: "CHRONIC page — crumb current"
+        type: string
+      - name: "chr_h1"
+        label: "CHRONIC page — h1"
+        type: text
+      - name: "chr_whatsin_h2"
+        label: "CHRONIC page — what is in here: heading"
+        type: string
+      - name: "chr_lbl_h2"
+        label: "CHRONIC page — labels: heading"
+        type: string
+      - name: "chr_lbl_p"
+        label: "CHRONIC page — labels: paragraph"
+        type: text
+      - name: "chr_qa_h2"
+        label: "CHRONIC page — question: heading"
+        type: string
+      - name: "chr_cta_h2"
+        label: "CHRONIC page — cta heading"
+        type: string
+      - name: "chr_cta_lede"
+        label: "CHRONIC page — cta paragraph"
+        type: string
+      - name: "chr_cta_btn"
+        label: "CHRONIC page — cta button"
         type: string
       - name: "meta_blog_title"
         label: "BLOG — browser tab and Google headline"
@@ -4534,6 +4723,12 @@ content:
       - name: "meta_explorer_desc"
         label: "Explorer — Google result description"
         type: text
+      - name: "meta_chronic_title"
+        label: "Chronic tool page — browser tab and Google headline"
+        type: string
+      - name: "meta_chronic_desc"
+        label: "Chronic tool page — Google result description"
+        type: text
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
@@ -4644,6 +4839,27 @@ content:
         type: string
       - name: "terrain_note"
         label: "HOME — Note under the map"
+        type: string
+      - name: "terrain_hint"
+        label: "HOME — Map key: how to use the labels"
+        type: string
+      - name: "terrain_open"
+        label: "HOME — Map card: link into the tool (one tool)"
+        type: string
+      - name: "terrain_say"
+        label: "HOME — Map, screen readers: {name} and {list} of linked labels"
+        type: text
+      - name: "terrain_say_none"
+        label: "HOME — Map, screen readers: nothing linked on the map ({name})"
+        type: string
+      - name: "terrain_say_off"
+        label: "HOME — Map, screen readers: label not on the map ({name})"
+        type: string
+      - name: "terrain_list"
+        label: "HOME — Map, keyboard list of labels: its name"
+        type: string
+      - name: "terrain_close"
+        label: "HOME — Map card: close button (screen readers)"
         type: string
       - name: "search_label"
         label: "SEARCH — label above the box"
@@ -5304,6 +5520,9 @@ content:
         type: string
       - name: "home_games_more"
         label: "home_games_more"
+        type: string
+      - name: "home_blog_h2"
+        label: "HOME — From the blog: heading"
         type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
@@ -5982,6 +6201,39 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "tool_qa_label"
+        label: "EXPLORER and CHRONIC pages — questions: small label"
+        type: string
+      - name: "exp_qa_h2"
+        label: "EXPLORER — questions: heading"
+        type: string
+      - name: "chr_crumb_current"
+        label: "CHRONIC page — crumb current"
+        type: string
+      - name: "chr_h1"
+        label: "CHRONIC page — h1"
+        type: text
+      - name: "chr_whatsin_h2"
+        label: "CHRONIC page — what is in here: heading"
+        type: string
+      - name: "chr_lbl_h2"
+        label: "CHRONIC page — labels: heading"
+        type: string
+      - name: "chr_lbl_p"
+        label: "CHRONIC page — labels: paragraph"
+        type: text
+      - name: "chr_qa_h2"
+        label: "CHRONIC page — question: heading"
+        type: string
+      - name: "chr_cta_h2"
+        label: "CHRONIC page — cta heading"
+        type: string
+      - name: "chr_cta_lede"
+        label: "CHRONIC page — cta paragraph"
+        type: string
+      - name: "chr_cta_btn"
+        label: "CHRONIC page — cta button"
         type: string
       - name: "meta_blog_title"
         label: "BLOG — browser tab and Google headline"
@@ -6035,6 +6287,12 @@ content:
       - name: "meta_explorer_desc"
         label: "Explorer — Google result description"
         type: text
+      - name: "meta_chronic_title"
+        label: "Chronic tool page — browser tab and Google headline"
+        type: string
+      - name: "meta_chronic_desc"
+        label: "Chronic tool page — Google result description"
+        type: text
       - name: "ui_language"
         label: "Language switcher label (screen readers)"
         type: string
@@ -6145,6 +6403,27 @@ content:
         type: string
       - name: "terrain_note"
         label: "HOME — Note under the map"
+        type: string
+      - name: "terrain_hint"
+        label: "HOME — Map key: how to use the labels"
+        type: string
+      - name: "terrain_open"
+        label: "HOME — Map card: link into the tool (one tool)"
+        type: string
+      - name: "terrain_say"
+        label: "HOME — Map, screen readers: {name} and {list} of linked labels"
+        type: text
+      - name: "terrain_say_none"
+        label: "HOME — Map, screen readers: nothing linked on the map ({name})"
+        type: string
+      - name: "terrain_say_off"
+        label: "HOME — Map, screen readers: label not on the map ({name})"
+        type: string
+      - name: "terrain_list"
+        label: "HOME — Map, keyboard list of labels: its name"
+        type: string
+      - name: "terrain_close"
+        label: "HOME — Map card: close button (screen readers)"
         type: string
       - name: "search_label"
         label: "SEARCH — label above the box"
@@ -6805,6 +7084,9 @@ content:
         type: string
       - name: "home_games_more"
         label: "home_games_more"
+        type: string
+      - name: "home_blog_h2"
+        label: "HOME — From the blog: heading"
         type: string
       - name: "meta_reading_title"
         label: "meta_reading_title"
@@ -7483,6 +7765,39 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "tool_qa_label"
+        label: "EXPLORER and CHRONIC pages — questions: small label"
+        type: string
+      - name: "exp_qa_h2"
+        label: "EXPLORER — questions: heading"
+        type: string
+      - name: "chr_crumb_current"
+        label: "CHRONIC page — crumb current"
+        type: string
+      - name: "chr_h1"
+        label: "CHRONIC page — h1"
+        type: text
+      - name: "chr_whatsin_h2"
+        label: "CHRONIC page — what is in here: heading"
+        type: string
+      - name: "chr_lbl_h2"
+        label: "CHRONIC page — labels: heading"
+        type: string
+      - name: "chr_lbl_p"
+        label: "CHRONIC page — labels: paragraph"
+        type: text
+      - name: "chr_qa_h2"
+        label: "CHRONIC page — question: heading"
+        type: string
+      - name: "chr_cta_h2"
+        label: "CHRONIC page — cta heading"
+        type: string
+      - name: "chr_cta_lede"
+        label: "CHRONIC page — cta paragraph"
+        type: string
+      - name: "chr_cta_btn"
+        label: "CHRONIC page — cta button"
         type: string
       - name: "meta_blog_title"
         label: "BLOG — browser tab and Google headline"

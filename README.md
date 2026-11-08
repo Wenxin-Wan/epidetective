@@ -14,7 +14,8 @@ python3 build_site.py
 Renders `templates/*.html` once per language into:
 
 ```
-index.html  explorer.html  games.html  about.html  reading.html   # en
+index.html  explorer.html  chronic.html  about.html  games.html   # en
+reading.html  how-we-check.html  work.html  blog.html  blog/
 zh/  fr/  es/  ru/                                                # one directory per language
 ```
 
@@ -24,7 +25,7 @@ English.
 
 ## Content
 
-All copy lives in `i18n/<lang>.json`, 488 keys each. `en.json` is the source of
+All copy lives in `i18n/<lang>.json`, 519 keys each. `en.json` is the source of
 truth for key parity. To change wording, edit the JSON and rebuild — never edit
 the generated HTML, it is overwritten.
 
@@ -33,38 +34,96 @@ alternates. No JavaScript is required for it to work.
 
 ## Typography
 
-The site sets in two faces of one family (the "Terrain" design, November 2026):
-`Sofia Sans` for running text and display, light (300) for the large headlines,
-and `Sofia Sans Semi Condensed` for section headings, labels, figures and the
-menus. Both carry Latin, Latin-ext and Cyrillic, so Russian sets in the same
-faces as English. They are self-hosted variable woff2 files in `assets/`
-(`sofiasans-*.woff2`, `sofiasanssc-*.woff2`), cut by Google Fonts into Latin,
-Latin-ext and Cyrillic and declared with `unicode-range`, so a page loads only
-the files its characters need; every page preloads the two Latin files. There
-is no italic file: emphasis in headings (`<b>`) is carried by weight, and
-`font-synthesis-style: none` keeps the browser from faking a slant. A metric
-fallback (`Sofia Sans Fallback`, Arial scaled to Sofia Sans's measure) keeps
-the swap from reflowing the page.
+The site sets in one face, **Source Serif 4** (Adobe, OFL; November 2026,
+replacing Sofia Sans): running text, display, the small labels, figures, menus
+and the wordmark. Its optical sizes do the work two faces did before: the
+small capitals labels, the map's names and other interface text use the
+caption size (`font-variation-settings: "opsz" 8`, the `--caption` token), the
+large headings the display size (`--display`, opsz 60), and running text takes
+the size it is set at (`font-optical-sizing: auto`). Emphasis in a heading
+(`<b>` in the copy) is the italic, as on the share cards; in Chinese it is
+weight.
 
-Chinese sets its Latin letters and figures in Sofia Sans and Han in the
+The files are self-hosted woff2 subsets in `assets/` (`sourceserif4-*.woff2`,
+roman and italic, each cut into Latin, Latin-ext, Cyrillic and Greek and
+declared with `unicode-range`, so a page loads only the files its characters
+need; every page preloads the Latin roman). They were cut from Google Fonts'
+subsets and trimmed with fontTools' instancer to fit the home page's budget
+(first screen at most 9 requests and about 300 KB): the roman keeps the
+optical-size axis (8 to 60) and weights 400 to 600, the italic the
+optical-size axis at weight 400 (Latin roman 80 KB, Latin italic 50 KB,
+Cyrillic 61 KB and 34 KB). To recut them:
+
+```python
+from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
+f = TTFont("google-latin-roman.woff2")     # css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700
+f = instancer.instantiateVariableFont(f, {"wght": (400, 600), "opsz": (8, 60)})   # italic: {"wght": 400, "opsz": (8, 60)}
+f.flavor = "woff2"; f.save("assets/sourceserif4-latin.woff2")
+```
+
+`font-synthesis: none` keeps the browser from faking a bold or a slant. A
+metric fallback (`Source Serif 4 Fallback`, Times New Roman scaled to Source
+Serif 4's measure) keeps the swap from reflowing the page.
+
+Chinese sets its Latin letters and figures in Source Serif 4 and Han in the
 system's CJK sans, since no CJK webfont is viable at this file size; there the
 display tracking is neutralised, measures are set in `em`, and emphasis is
 weight, never a synthesised oblique.
 
 `Literata` and `IBM Plex Mono` stay in `assets/` because the Code Against
-Cancer page, the timeline, the games and the chronic tool still use them.
+Cancer page, the timeline, the games, the chronic tool and the share cards
+(`scripts/og-template.html`) still use them.
+
+## Layout
+
+The container runs up to 1680 px with fluid gutters (`--max`, `--pad`:
+`clamp(20px, 4vw, 72px)`), so on a wide monitor the sections use the width
+(the two explorers side by side, the blog row, the games row, the Code band,
+How we check) while running text keeps a readable measure. The blog index and
+every post set in one centred reading column of about 66 characters.
+
+The home page, after the cover: the two explorers, Code Against Cancer, the
+newest posts (`BLOG_LATEST`, up to three), the games, How we check and What's
+new. The labels both tools print and the questions answered from them live on
+the tools' About pages: `explorer.html` (IARC's groups, the two link labels,
+three questions) and `chronic.html` (the five grades, the older names, the
+stroke question), which the chronic tool's "About this tool" button opens.
 
 ## The cover
 
 The home page opens on a contour map drawn by `assets/terrain.js` (no
-libraries): marching squares on seeded simplex noise, drifting very slowly,
-the field offset a little as the page scrolls, paused off screen and in a
-hidden tab, drawn once with `prefers-reduced-motion`. Small labels sit on the
-field's summits: names from both explorers (`tn_*` keys; a filled triangle for
-an exposure or risk factor, an outlined one for a cancer or disease), each
-fading in as its summit rises and out as it sinks, never over the title block
-or another label. Without JavaScript the cover shows `assets/contours.svg`, a
-still of the same field, which the inner pages also use behind their titles;
+libraries), full bleed under the header's hairline, with no frame: marching
+squares on seeded simplex noise, drifting very slowly, the field offset a
+little as the page scrolls, paused off screen and in a hidden tab, drawn once
+with `prefers-reduced-motion`. The title block sits over it as a quiet panel
+of paper. Small labels sit on the field's summits: names from both explorers
+(`tn_*` keys), each fading in as its summit rises and out as it sinks, never
+over the title block or another label. Causes (exposures, risk factors) are
+set in the map's brown with a filled triangle, outcomes (cancers, diseases) in
+a deep water blue (`--water-deep`, 7.0:1 on the paper), in italic, with an
+outlined triangle, both at Source Serif 4's caption size (the canvas sets the
+optical size from the font size, so the names are drawn at 8 px and scaled).
+
+Selecting a label (click, tap, or the keyboard list) draws thin dashed arcs to
+every other label on the map that the data link to it, each with its grade
+written on it; a line appears when a linked label rises while the selection
+lasts and fades with it. A small card beside the label gives its kind and the
+way into its entry in the tool(s); a polite live region reads the links
+("Tobacco smoking: linked on the map to Lung cancer (Established link), ...").
+Escape, the card's close button or a click elsewhere clears it. For keyboards,
+one tab stop after the search opens a list of the 24 names (arrow keys between
+them). The links are computed at build time (`build_site.py`
+`TERRAIN_POOL`, `terrain_model`, `terrain_json`) and written into the page as
+an inline JSON script: cancer links from `graph.json` (Established or
+Suspected), chronic links from the data embedded in
+`chronic-disease-explorer/index.html` (version 2.0 grades, counted links
+only, as the tool's own map draws them; `chronic-graph.json` is the fallback
+if that data cannot be read). The build stops if a mapped name is missing from
+the data.
+
+Without JavaScript the cover shows `assets/contours.svg`, a still of the same
+field, which the inner pages also use behind their titles;
 `scripts/make_contours.js` writes it (`node scripts/make_contours.js
 assets/contours.svg`).
 
@@ -76,6 +135,11 @@ Two are live.
 |---|---|---|
 | **Cancer Evidence Explorer** | its own repo, linked out | 10 |
 | **Chronic Disease Evidence Explorer** | `chronic-disease-explorer/` in this repo | en, zh |
+
+Each has an About page on this site: `explorer.html` for the cancer tool and
+`chronic.html` for the chronic one (both with hreflang, sitemap entries,
+WebPage JSON-LD and a share card: `explorer.png`, and the tool's own
+`chronic.png`).
 
 The second one is a single self-contained HTML file — data, styles and the
 force simulation all embedded — generated by the separate

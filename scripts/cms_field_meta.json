@@ -1538,5 +1538,89 @@
   "post_original": {
     "label": "BLOG ESSAY PAGE — link to the English original",
     "type": "string"
+  },
+  "meta_chronic_title": {
+    "label": "Chronic tool page — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_chronic_desc": {
+    "label": "Chronic tool page — Google result description",
+    "type": "text"
+  },
+  "terrain_hint": {
+    "label": "HOME — Map key: how to use the labels",
+    "type": "string"
+  },
+  "terrain_open": {
+    "label": "HOME — Map card: link into the tool (one tool)",
+    "type": "string"
+  },
+  "terrain_say": {
+    "label": "HOME — Map, screen readers: {name} and {list} of linked labels",
+    "type": "text"
+  },
+  "terrain_say_none": {
+    "label": "HOME — Map, screen readers: nothing linked on the map ({name})",
+    "type": "string"
+  },
+  "terrain_say_off": {
+    "label": "HOME — Map, screen readers: label not on the map ({name})",
+    "type": "string"
+  },
+  "terrain_list": {
+    "label": "HOME — Map, keyboard list of labels: its name",
+    "type": "string"
+  },
+  "terrain_close": {
+    "label": "HOME — Map card: close button (screen readers)",
+    "type": "string"
+  },
+  "tool_qa_label": {
+    "label": "EXPLORER and CHRONIC pages — questions: small label",
+    "type": "string"
+  },
+  "exp_qa_h2": {
+    "label": "EXPLORER — questions: heading",
+    "type": "string"
+  },
+  "chr_crumb_current": {
+    "label": "CHRONIC page — crumb current",
+    "type": "string"
+  },
+  "chr_h1": {
+    "label": "CHRONIC page — h1",
+    "type": "text"
+  },
+  "chr_whatsin_h2": {
+    "label": "CHRONIC page — what is in here: heading",
+    "type": "string"
+  },
+  "chr_lbl_h2": {
+    "label": "CHRONIC page — labels: heading",
+    "type": "string"
+  },
+  "chr_lbl_p": {
+    "label": "CHRONIC page — labels: paragraph",
+    "type": "text"
+  },
+  "chr_qa_h2": {
+    "label": "CHRONIC page — question: heading",
+    "type": "string"
+  },
+  "chr_cta_h2": {
+    "label": "CHRONIC page — cta heading",
+    "type": "string"
+  },
+  "chr_cta_lede": {
+    "label": "CHRONIC page — cta paragraph",
+    "type": "string"
+  },
+  "chr_cta_btn": {
+    "label": "CHRONIC page — cta button",
+    "type": "string"
+  },
+  "home_blog_h2": {
+    "label": "HOME — From the blog: heading",
+    "type": "string"
   }
 }
