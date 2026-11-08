@@ -27,13 +27,15 @@ TPL = os.path.join(HERE, "templates")
 # (and the GitHub Action, which checks out design/ alone) reads only these.
 #   data/work.json  <- scripts/build_work_data.py   (work.html)
 WORK_JSON = os.path.join(HERE, "data", "work.json")
-# The thumbnail of the chronic tool's card on the home page (its clustered
-# network) is written into the page as a data: URL, made here from the committed
-# file, so it always shows the current drawing. A separate request for it would
-# be the tenth on the Russian home page, which also loads the Cyrillic Literata;
-# the budget is 9 requests and 300 KB (Batch 6). The thumbnail sits below the
-# first screen, so its bytes go into the page and stay out of site.css, which
-# every page waits for. Re-run this build after make_chronic_svg.py.
+# The map insets of the two tools' sheets on the home page (the cancer tool's
+# free-floating network, the chronic tool's clustered one) are written into the
+# page as data: URLs, made here from the committed files, so they always show
+# the current drawings. Separate requests for them would push the Russian home
+# page, which also loads the two Cyrillic Sofia Sans files, past the budget of
+# 9 requests and 300 KB (Batch 6). The insets sit below the first screen, so
+# their bytes go into the page and stay out of site.css, which every page waits
+# for. Re-run this build after make_network_svg.py or make_chronic_svg.py.
+CANCER_NET_SVG = os.path.join(HERE, "assets", "network.svg")
 CHRONIC_NET_SVG = os.path.join(HERE, "assets", "chronic-network.svg")
 
 # en first: it is the source of truth for key parity
@@ -171,6 +173,9 @@ TOOL_DEEP = {
     "TL_BREAST": ("cancer", "cancer", "Breast"),
     "TL_ASPARTAME": ("cancer", "exposure", "Aspartame"),
     "TL_STROKE": ("chronic", "disease", "stroke_isch"),
+    "TL_T2D": ("chronic", "disease", "t2d"),
+    "TL_DEMENTIA": ("chronic", "disease", "dementia"),
+    "TL_CHD": ("chronic", "disease", "chd"),
     # an evaluated agent: no entry of its own, so the search opens on it
     "TL_COFFEE": ("cancer", "query", "Coffee, drinking"),
     "TL_HOW": ("chronic", "anchor", "how"),
@@ -340,6 +345,20 @@ def svg_data_url(path):
     return "data:image/svg+xml," + "".join(
         quote(ch, safe="") if ch in '%#<>&"{}|\\^`[]' or not " " <= ch <= "~" else ch
         for ch in s)
+
+
+# The tools' figures on the home page ("185 exposures", "124 个危险因素") are
+# set as a map legend: the count in figures, the words beside it. Every language
+# writes the count first, so the split is the leading number.
+FIG_KEYS = ["inst_t%d_m%d" % (t, m) for t in (1, 2) for m in (1, 2, 3, 4)]
+
+
+def fig_row(text):
+    """'185 exposures' -> '<b>185</b> <span>exposures</span>' for the legend."""
+    m = re.match(r"^(\d[\d.,\u00a0\u202f]*)\s*(.+)$", text)
+    if not m:
+        raise SystemExit("fig_row: %r does not start with a count" % text)
+    return '<b>%s</b> <span>%s</span>' % m.groups()
 
 
 def group_code(d, group):
@@ -589,7 +608,8 @@ def main():
     with open(WORK_JSON, encoding="utf-8") as fh:
         work = json.load(fh)
 
-    # same picture in every language (see CHRONIC_NET_SVG)
+    # same pictures in every language (see CHRONIC_NET_SVG)
+    thumb_cancer = "background-image:url(&quot;%s&quot;)" % svg_data_url(CANCER_NET_SVG)
     thumb_chronic = "background-image:url(&quot;%s&quot;)" % svg_data_url(CHRONIC_NET_SVG)
 
     written = []
@@ -615,7 +635,10 @@ def main():
         for i in (1, 2, 3):
             shared["Q_EX%d" % i] = quote(plain(d["search_ex%d" % i]), safe="")
         shared["JSONLD_HOME"] = jsonld_home(d, lang)
+        shared["THUMB_CANCER_BG"] = thumb_cancer
         shared["THUMB_CHRONIC_BG"] = thumb_chronic
+        for k in FIG_KEYS:
+            shared["FIG_" + k[5:].upper()] = fig_row(d[k])
         for g in GROUP_KEY:
             shared["GRP_" + g] = group_code(d, g)
 

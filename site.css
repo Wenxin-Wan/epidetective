@@ -1,359 +1,574 @@
-/* Literata carries Latin, Latin-ext and Cyrillic natively, so every language
-   (including Russian) sets in the same face; unicode-range keeps the Cyrillic
-   files out of Latin pages. IBM Plex Mono carries the data voice: counts,
-   ratios, group codes — measurements, visibly distinct from prose. */
-@font-face{font-family:"Literata";src:url(assets/literata-latin.woff2) format("woff2");
-           font-weight:400 800;font-style:normal;font-display:swap;
-           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Literata";src:url(assets/literata-latin-italic.woff2) format("woff2");
-           font-weight:400 800;font-style:italic;font-display:swap;
-           unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Literata";src:url(assets/literata-latinext.woff2) format("woff2");
-           font-weight:400 800;font-style:normal;font-display:swap;
-           unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Literata";src:url(assets/literata-cyr.woff2) format("woff2");
-           font-weight:400 800;font-style:normal;font-display:swap;
-           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Literata";src:url(assets/literata-cyr-italic.woff2) format("woff2");
-           font-weight:400 800;font-style:italic;font-display:swap;
-           unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"PlexMono";src:url(assets/plexmono-400.woff2) format("woff2");
-           font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"PlexMono";src:url(assets/plexmono-600.woff2) format("woff2");
-           font-weight:600;font-style:normal;font-display:swap}
-/* While Literata loads (font-display:swap), Georgia stands in, scaled to
-   Literata's measure so the swap does not reflow the page: size-adjust is the
-   ratio of the two fonts' average lowercase widths, the overrides are Literata's
-   ascent and descent (from the font files, 31 Oct 2026). The pages preload
-   literata-latin.woff2. */
-@font-face{font-family:"Literata Fallback";src:local("Georgia");font-style:normal;
-           size-adjust:108.6%;ascent-override:108.4%;descent-override:28.4%;line-gap-override:0%}
-@font-face{font-family:"Literata Fallback";src:local("Georgia Italic"),local("Georgia-Italic");font-style:italic;
-           size-adjust:108.6%;ascent-override:108.4%;descent-override:28.4%;line-gap-override:0%}
+/* EpiDetective site styles: "Terrain" (Nov 2026). Topographic paper, contour
+   brown and green, water blue, ink; Sofia Sans for text and display, Sofia Sans
+   Semi Condensed for headings, labels and figures. Colour that carries meaning
+   (the evidence scale: Group 1 red, probable amber ...) keeps that meaning and
+   is never decoration.
+
+   Budget: the home page stays within 9 requests and 300 KB (Batch 6): the page,
+   this file, the two Latin font files, search.js and terrain.js on the first
+   screen (two Cyrillic files more in Russian), then the three lazy game frames.
+   The map insets are inline (build_site.py), the contour still loads only
+   without JavaScript. */
+
+/* Sofia Sans and Sofia Sans Semi Condensed (Google Fonts, OFL), self-hosted as
+   variable woff2 files cut by Google into Latin, Latin-ext and Cyrillic;
+   unicode-range keeps each file off pages that do not use its characters. The
+   pages preload the two Latin files. No italic file: emphasis is carried by
+   weight, and font-synthesis below forbids a fake slant. */
+@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-latin.woff2) format("woff2");
+  font-weight:300 800;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-latinext.woff2) format("woff2");
+  font-weight:300 800;font-style:normal;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Sofia Sans";src:url(assets/sofiasans-cyr.woff2) format("woff2");
+  font-weight:300 800;font-style:normal;font-display:swap;
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-latin.woff2) format("woff2");
+  font-weight:400 700;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-latinext.woff2) format("woff2");
+  font-weight:400 700;font-style:normal;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Sofia Sans Semi Condensed";src:url(assets/sofiasanssc-cyr.woff2) format("woff2");
+  font-weight:400 700;font-style:normal;font-display:swap;
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+/* While the faces load (font-display:swap), Arial stands in, scaled to their
+   measure so the swap barely reflows: size-adjust is the ratio of the average
+   width of running English text (Sofia Sans 97.1 %, Semi Condensed 92.5 % of
+   Arial's), the overrides are the fonts' ascent (900) and descent (300) over
+   that ratio (from the font files, 8 Nov 2026). */
+@font-face{font-family:"Sofia Sans Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");
+  size-adjust:97.1%;ascent-override:92.7%;descent-override:30.9%;line-gap-override:0%}
+@font-face{font-family:"Sofia Sans SC Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");
+  size-adjust:92.5%;ascent-override:97.3%;descent-override:32.4%;line-gap-override:0%}
 
 :root{
-  /* "The Instrument": ink on laboratory paper. Colour appears only where it
-     carries meaning — the evidence scale — never as decoration. */
-  --chalk:#F5F4F0;            /* paper */
-  --chalk-deep:#EBEAE3;       /* recessed band */
-  --ink:#161713;
-  --ink-soft:#454740;
-  --ink-faint:#6B6E65;
-  --madder:#9E2F23;           /* semantic only: established / known-cause red */
+  /* topo paper, contour brown and green, water, ink (design-demos/14-terrain) */
+  --paper:#F1F0EA;            /* the sheet */
+  --paper-hi:#F7F6F1;         /* a map sheet laid on the paper */
+  --paper-deep:#E8E6DD;       /* recessed band */
+  --ink:#22241F;              /* 13.7:1 on the paper */
+  --ink-soft:#4A4C44;         /* 7.6:1 */
+  --ink-faint:#5F6158;        /* 5.5:1 on the paper, 5.0:1 on the recessed band */
+  --brown:#A7835A;            /* contour brown: lines and rules, never text */
+  --brown-ink:#6E5A3D;        /* the map labels' brown, 5.3:1 */
+  --green:#6E8B5B;            /* contour green */
+  --water:#5B88A6;            /* water */
+  --water-ink:#3F6A86;        /* water as text or focus, 5.1:1 */
+  --rule:rgba(34,36,31,.16);  /* hairline */
+  --madder:#9E2F23;           /* semantic only: established / known cause red */
   --sage:#B4681F;             /* semantic only: suspected / probable amber */
-  --teal:#161713;             /* entity marks (cancers, diseases) set in ink */
-  --veil:rgba(245,244,240,.88);
-  --rule:rgba(22,23,19,.14);
-  --display:"Literata","Literata Fallback",Georgia,serif;
-  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
-  --mono:"PlexMono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --wonk:normal;
-  --display-track:-.012em;
-  --pad:clamp(20px,5vw,56px);
+  --teal:#22241F;             /* entity marks (cancers, diseases) set in ink */
+  --chalk:var(--paper);       /* older names, still used by the inner pages */
+  --chalk-deep:var(--paper-deep);
+  --veil:rgba(241,240,234,.9);
+  --sans:"Sofia Sans","Sofia Sans Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --cond:"Sofia Sans Semi Condensed","Sofia Sans SC Fallback","Sofia Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sys:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --display:var(--sans);
+  --body:var(--sans);
+  --mono:var(--cond);         /* the data voice: counts, codes, labels */
+  --display-track:-.022em;
+  --pad:clamp(16px,4vw,56px);
+  --max:1360px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  /* type: 12 / 13 / 14 / 15 / 17 / 20 / 24 / 30 / 56 */
+  --f-h2:clamp(1.55rem,2.3vw,1.875rem);
+  --f-h3:clamp(1.15rem,1.5vw,1.3rem);
+  --sec:clamp(72px,8.5vw,120px);
 }
-/* Literata carries Cyrillic natively — Russian needs no substitute faces. */
-/* Chinese: measures are set in `ch`, which is the width of "0" — about half a
-   Han glyph. Left unadjusted every column is half as wide as intended and the
-   hero wraps to eight characters a line. CJK measures are therefore reset in
-   `em`, where one unit is one character, and the display sizes come down:
-   Han carries presence at a smaller size than Latin. */
-/* Han text can break between any two characters, and `balance` happily splits a
-   two-character word (证|据) to even the lines up. `pretty` respects the comma
-   instead, so the headline breaks where the sentence does. */
-html[lang="zh"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem);max-width:14em;
-                         text-wrap:pretty}
-/* Han has no true italic and synthesised oblique is a typographic error; in
-   Chinese the display emphasis carries by weight instead. */
-html[lang="zh"] .hero h1 b,
-html[lang="zh"] .sec-head h2 b,
-html[lang="zh"] .sec-head h1 b,
-html[lang="zh"] .tool-hero h1 b{font-style:normal;font-weight:700}
-/* Russian: the Cyrillic italic is a second font file (48 KB) that only the
-   emphasis in the display headings asks for. The home page has a budget of 9
-   requests and 300 KB (Batch 6), so in Russian that emphasis is carried by
-   weight, as in Chinese. Italic in running text (em) is unchanged. */
-html[lang="ru"] .hero h1 b,
-html[lang="ru"] .sec-head h2 b,
-html[lang="ru"] .sec-head h1 b,
-html[lang="ru"] .tool-hero h1 b,
-html[lang="ru"] .trust-hwc h2 b{font-style:normal;font-weight:600}
-html[lang="zh"] h2{font-size:clamp(1.5rem,2.7vw,2.15rem)}
-html[lang="zh"] .sec-head h2,
-html[lang="zh"] .tool-hero h1{max-width:15em}
-html[lang="zh"] h3{font-size:clamp(1.05rem,1.7vw,1.3rem)}
+/* Chinese: Latin letters and figures still set in Sofia Sans, Han in the
+   system's CJK sans (no CJK webfont is viable at this size). Positive tracking
+   would space Han glyphs apart, so it goes; measures are set in em, where one
+   unit is one character; Han carries presence at a smaller size and a heavier
+   weight than Latin, and Han has no italic to fake. */
+html[lang="zh"]{
+  --sans:"Sofia Sans","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+  --cond:"Sofia Sans Semi Condensed","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+  --display-track:normal;
+}
 html[lang="zh"] body{line-height:1.8}
-html[lang="zh"] .lede,
-html[lang="zh"] .about p,
-html[lang="zh"] .inst p,
-html[lang="zh"] .read p{max-width:34em}
+html[lang="zh"] h1,html[lang="zh"] h2,html[lang="zh"] h3{text-wrap:pretty;letter-spacing:0}
+html[lang="zh"] h1{line-height:1.22;font-weight:400}
+html[lang="zh"] h2{line-height:1.3}
+html[lang="zh"] h3{line-height:1.45}
+html[lang="zh"] h1 b,html[lang="zh"] h2 b{font-weight:600}
+html[lang="zh"] .label,html[lang="zh"] .crumb,html[lang="zh"] .chip,html[lang="zh"] .inst-meta,
+html[lang="zh"] .fig .k,html[lang="zh"] .cred .r,html[lang="zh"] .bar-head span,html[lang="zh"] .read .tag,
+html[lang="zh"] .foot-bot,html[lang="zh"] .menu a,html[lang="zh"] .langs a,html[lang="zh"] .langs .lang-cur,
+html[lang="zh"] .see .k,html[lang="zh"] .ex-steps .tag,html[lang="zh"] .lbl-table thead th,
+html[lang="zh"] .work-table thead th,html[lang="zh"] .lbl-table .grp .tool,html[lang="zh"] .ecac-why .k,
+html[lang="zh"] .search-gh,html[lang="zh"] .tl-card .r{letter-spacing:0}
+html[lang="zh"] .lede,html[lang="zh"] .about p,html[lang="zh"] .read p{max-width:34em}
 html[lang="zh"] .bar-note{max-width:32em}
 html[lang="zh"] .disc{max-width:44em}
 html[lang="zh"] .foot .tag{max-width:24em}
-/* keep the inline style attribute on .lede from re-imposing a ch measure */
 html[lang="zh"] .sec > .lede[style]{max-width:34em}
-
-html[lang="zh"]{
-  --display:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",
-            "Hiragino Sans GB",serif;
-  --body:"PingFang SC","Noto Sans SC","Source Han Sans SC","Hiragino Sans GB",
-         "Microsoft YaHei",sans-serif;
-  --wonk:normal;
-  --display-track:normal;   /* tight tracking damages Han glyphs */
-}
-/* Han text: positive tracking spaces Han glyphs apart the way it spaces Latin
-   caps — a spacing error, not a style. The uppercase-style labels are where the
-   tracking lives, so neutralise it there. */
-html[lang="zh"] .label,
-html[lang="zh"] .crumb,
-html[lang="zh"] .chip,
-html[lang="zh"] .inst-meta,
-html[lang="zh"] .fig .k,
-html[lang="zh"] .cred .r,
-html[lang="zh"] .bar-head span,
-html[lang="zh"] .read .tag,
-html[lang="zh"] .foot-bot,
-html[lang="zh"] .menu a,
-html[lang="zh"] .langs a,
-html[lang="zh"] .langs .lang-cur{letter-spacing:0}
-/* `balance` splits two-character words (证|据) to even the lines; `pretty`
-   respects the comma instead, so headings break where the sentence does. The
-   hero already sets this — extend it to every heading. Han glyphs fill their
-   em box, so the Latin-tight leading reads cramped across two lines; loosen it.
-   The explainer hero is reduced to the same size as the home hero, where Han
-   carries presence at a smaller size than Latin. */
-html[lang="zh"] h1,
-html[lang="zh"] h2,
-html[lang="zh"] h3{text-wrap:pretty}
-html[lang="zh"] h1{line-height:1.18}
-html[lang="zh"] h2{line-height:1.24}
-html[lang="zh"] h3{line-height:1.4}
-html[lang="zh"] .tool-hero h1{font-size:clamp(1.95rem,4vw,3.05rem)}
 
 *{box-sizing:border-box}
 /* Anchor links scroll smoothly with no JavaScript. The offset keeps a heading
    clear of the header while it is sticky (900 px and wider). */
-html{scroll-behavior:smooth;scroll-padding-top:88px}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%;text-size-adjust:100%;
+     font-synthesis-style:none}
 @media (max-width:899px){html{scroll-padding-top:16px}}
-body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--body);
-     font-size:clamp(15.5px,1vw,17px);line-height:1.6;-webkit-font-smoothing:antialiased;
-     text-rendering:optimizeLegibility;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;
+     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+@media (min-width:700px){body{font-size:1.0625rem}}
+p{text-wrap:pretty}
 a{color:inherit}
 img,svg{max-width:100%}
-:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+:focus-visible{outline:2px solid var(--water-ink);outline-offset:3px}
 /* first in the tab order on every page; visible only while it has focus */
-.skip{position:absolute;top:8px;left:8px;z-index:300;background:var(--ink);color:var(--chalk);
+.skip{position:absolute;top:8px;left:8px;z-index:300;background:var(--ink);color:var(--paper);
       padding:10px 16px;font-size:.92rem;font-weight:600;text-decoration:none}
 .skip:not(:focus){width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);
                   white-space:nowrap;border:0}
 html[dir=rtl] .skip{left:auto;right:8px}
 main:focus{outline:0}
 
-.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--pad)}
-.label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-       color:var(--ink-faint)}
-.serif{font-family:var(--display);font-variation-settings:var(--wonk)}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+/* a small label carries information (a section's kind, a figure's unit), never
+   decoration: condensed capitals, widely tracked */
+.label{font-family:var(--cond);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+       color:var(--ink-faint);line-height:1.4}
+.serif{font-family:var(--display)}
+/* a link that stands on its own: the words, a brown line under them */
+.tlink{display:inline-flex;align-items:center;min-height:44px;font-family:var(--cond);font-size:1rem;font-weight:500;
+       letter-spacing:.01em;color:var(--ink);text-decoration:underline;text-decoration-color:var(--brown);
+       text-decoration-thickness:1px;text-underline-offset:6px;transition:text-decoration-color .3s var(--ease)}
+.tlink:hover{text-decoration-color:var(--ink)}
 
 /* ---------- header ---------- */
-.top{position:sticky;top:0;z-index:20;background:rgba(245,244,240,.92);
-     backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
+.top{position:sticky;top:0;z-index:20;background:rgba(241,240,234,.94);
+     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:4px 28px;
            flex-wrap:wrap;padding-block:8px;
            clip-path:inset(-8px calc(var(--pad) - 12px))}
 /* wordmark stays Latin in every language: it is the brand, not copy */
-.mark{font-family:"Literata","Literata Fallback",Georgia,serif;font-size:1.18rem;
-      font-weight:700;letter-spacing:-.01em;text-decoration:none}
-.mark span{font-weight:450;font-style:italic}
-/* the 28 px gap of the header row is for the rule before the languages; the
-   wordmark keeps its 20 px from the menu */
+.mark{font-family:"Sofia Sans","Sofia Sans Fallback",var(--sys);font-size:1.3rem;font-weight:700;letter-spacing:-.012em;
+      text-decoration:none;color:var(--ink)}
+.mark span{font-weight:400}
 .top .mark{margin-inline-end:-8px}
 /* the menu and the language links are items of the header row itself, so the
    languages are the first to move to a second row when a language's menu is
    long (es, ru), and the header never needs three rows on a desktop */
 .top-right{display:contents}
 .top .menu{margin-left:auto}
-/* Every menu entry and language link is a 44 px target (WCAG 2.2 asks for 24
-   at least). The underline that marks hover and the current page sits under
-   the words, not at the foot of the target. */
-/* The rule between the menu and the language links stands in the gap before
-   the languages, halfway between the last menu entry and the first language.
-   When the languages move to a row of their own (es and ru on a desktop, the
-   other languages on narrower screens), the rule would stand alone at the
-   start of that row: the header row clips whatever lies more than 8 px
-   outside the text column (clip-path on .top .wrap above), so the rule goes
-   and focus rings (6 px) stay. The -4 px lines the first language up with the
-   wordmark when the languages start a row (each language link has 4 px of
-   padding). The row is no wider than it was with the old border, so no
-   language wraps sooner. */
-.langs{display:flex;gap:0 4px;flex-wrap:wrap;align-items:center;position:relative;margin-inline-start:-4px}
+/* Every menu entry and language link is a 44 px target. The rule between the
+   menu and the languages stands in the gap before them; when the languages
+   start a row of their own the header row clips it (clip-path above). */
+.langs{display:flex;gap:0 6px;flex-wrap:wrap;align-items:center;position:relative;margin-inline-start:-4px}
 .langs::before{content:"";position:absolute;inset-inline-start:-11px;top:50%;width:1px;height:18px;
        margin-top:-9px;background:var(--rule)}
 .langs a,.langs .lang-cur{display:inline-flex;align-items:center;min-height:44px;padding-inline:4px;
-       font-size:.76rem;letter-spacing:.03em;text-decoration:none;text-underline-offset:5px}
+       font-family:var(--cond);font-size:.875rem;letter-spacing:.02em;text-decoration:none;text-underline-offset:6px}
+/* "Русский" on a page in another language sets in the system face: one word
+   would otherwise fetch the Cyrillic file on every page */
+.langs a[hreflang="ru"]{font-family:var(--sys);font-size:.8rem}
 .langs a{color:var(--ink-faint)}
-.langs a:hover{color:var(--ink);text-decoration-line:underline;text-decoration-thickness:1px}
-.langs .lang-cur{color:var(--ink);font-weight:700;text-decoration-line:underline;text-decoration-thickness:2px}
-.menu{display:flex;gap:0 20px;flex-wrap:wrap}
-/* Sept 2026: the menu was set at .82rem and read as small print next to the
-   wordmark; a step up and a touch more weight make the entries legible at
-   a glance without competing with the page titles. */
-.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;
-        font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink-soft);
-        text-underline-offset:6px;text-decoration-thickness:1.5px}
+.langs a:hover{color:var(--ink);text-decoration-line:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px}
+.langs .lang-cur{color:var(--ink);font-weight:600;text-decoration-line:underline;text-decoration-thickness:1.5px;
+       text-decoration-color:var(--brown)}
+.menu{display:flex;gap:0 22px;flex-wrap:wrap}
+.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-family:var(--cond);
+        font-size:1rem;font-weight:450;letter-spacing:.015em;color:var(--ink-soft);
+        text-underline-offset:7px;text-decoration-thickness:1px;text-decoration-color:var(--brown)}
 .menu a:hover,.menu a[aria-current]{color:var(--ink);text-decoration-line:underline}
 /* Below 900 px the menu wraps and a sticky header would cover a fifth of the
-   screen, so it scrolls away with the page (T12). */
+   screen, so it scrolls away with the page. */
 @media (max-width:899px){.top{position:static}}
 @media (max-width:700px){
-  .top .wrap{gap:2px 20px;padding-block:6px 4px}
+  .top .wrap{gap:0 18px;padding-block:6px 4px}
   .top .mark{margin-inline-end:0}
   .top .menu{margin-left:0}
   .menu{gap:0 16px}
-  .menu a{font-size:.92rem}
+  .menu a{font-size:.95rem}
 }
 
 /* ---------- type ---------- */
-h1,h2,h3{font-family:var(--display);font-variation-settings:var(--wonk);font-weight:400;
-         letter-spacing:var(--display-track);text-wrap:balance;margin:0}
-h1{font-size:clamp(2.1rem,4.9vw,3.7rem);line-height:1.06}
-h2{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12}
-h3{font-size:clamp(1.1rem,1.9vw,1.4rem);line-height:1.22;font-weight:600}
-b,strong{font-weight:700}
-em{font-family:var(--display);font-style:italic;font-weight:500;color:inherit}
-/* Han characters have no true italic; a synthesised oblique is a typographic
-   error, so emphasis in Chinese carries by colour alone. */
-html[lang="zh"] em{font-style:normal;font-weight:inherit}
-.lede{color:var(--ink-soft);max-width:56ch}
+h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:var(--display-track);text-wrap:balance;margin:0;
+         color:var(--ink)}
+h1{font-size:clamp(2.2rem,4.4vw,3.5rem);line-height:1.05}
+h2{font-family:var(--cond);font-weight:400;font-size:var(--f-h2);line-height:1.16;letter-spacing:-.004em}
+h3{font-family:var(--cond);font-weight:500;font-size:var(--f-h3);line-height:1.28;letter-spacing:0}
+b,strong{font-weight:650}
+h1 b{font-weight:400}
+h2 b,h3 b{font-weight:600}
+/* no italic file is loaded: emphasis carries by weight, never a fake slant */
+em,i,cite{font-style:normal}
+em{font-weight:600}
+.lede{color:var(--ink-soft);max-width:60ch}
 
-.sec{padding-block:clamp(62px,9vh,112px)}
+.sec{padding-block:var(--sec)}
 .sec-head{margin-bottom:34px}
-.sec-head h2{margin:14px 0 16px;max-width:27ch}
+.sec-head .label{margin-bottom:12px}
+.sec-head h2{margin:12px 0 16px;max-width:30ch}
 /* a page whose title sits in a section head: h1 in the outline, h2 in scale */
-.sec-head h1.page-h{font-size:clamp(1.55rem,3vw,2.4rem);line-height:1.12;margin:14px 0 16px;max-width:27ch}
-html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.5rem,2.7vw,2.15rem);max-width:15em}
+.sec-head h1.page-h{font-family:var(--cond);font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.12;
+  letter-spacing:-.006em;margin:12px 0 16px;max-width:28ch}
+html[lang="zh"] .sec-head h1.page-h{font-size:clamp(1.6rem,2.7vw,2.15rem);max-width:15em}
+html[lang="zh"] h2{font-size:clamp(1.4rem,2.2vw,1.75rem)}
+html[lang="zh"] .sec-head h2{max-width:16em}
+html[lang="zh"] h3{font-size:clamp(1.05rem,1.5vw,1.22rem)}
 
-/* ---------- hero (platform) ---------- */
-/* not clipped: the search result list drops below the hero; the two
-   decorative layers fill the box and need no clipping */
-.hero{position:relative;border-bottom:1px solid var(--rule)}
-.hero-net{position:absolute;inset:0;z-index:0;pointer-events:none;
-          background:url(assets/network.svg) no-repeat right -6% center;
-          background-size:auto 128%;opacity:.24}
-.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-           background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
-                      rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
-.hero .wrap{position:relative;z-index:2;padding-block:clamp(28px,4.6vh,56px) clamp(30px,4.6vh,54px)}
-@media (max-width:700px){.hero .wrap{padding-block:30px 36px}}
-/* Oct 2026: the headline is a question the site answers, set on two lines on a
-   desktop; the search sits above the first scroll at 1440 x 900 */
-.hero h1{margin:0;max-width:38ch;font-size:clamp(2rem,4.1vw,3.25rem);line-height:1.08}
-/* emphasis inside display type: Literata speaks emphasis in italic, not bold */
-.hero h1 b,.sec-head h2 b,.sec-head h1 b,.tool-hero h1 b{font-weight:inherit;font-style:italic}
-/* who makes it (a personal project) and what it cannot do, then whom it is for */
-.hero-personal{margin:18px 0 0;max-width:62ch;color:var(--ink-soft);
-               font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.55;text-wrap:pretty}
-.hero-aud{margin:10px 0 0;max-width:62ch;color:var(--ink);font-weight:600;font-size:.95rem}
-html[lang="zh"] .hero-personal,html[lang="zh"] .hero-aud{max-width:36em}
-/* Russian words run long, so the headline is set smaller; its emphasis is
-   upright semibold (wider than the italic was), and at 2.5rem the headline
-   still sets on two lines on a desktop */
-html[lang="ru"] .hero h1{font-size:clamp(1.85rem,3.4vw,2.5rem);max-width:none}
-@media (max-width:820px){
-  .hero-net{background-position:center;background-size:cover;opacity:.16}
-  .hero-veil{background:linear-gradient(180deg,rgba(245,244,240,.72) 0%,var(--chalk) 78%)}
+/* the home page's section heads: the heading on the left, a small label on the
+   right, an ink rule beneath, like the margin of a map sheet */
+.sec-bar{display:flex;align-items:baseline;justify-content:space-between;gap:6px 28px;flex-wrap:wrap;
+  padding-bottom:14px;margin-bottom:clamp(26px,3vw,38px);border-bottom:1px solid var(--ink)}
+.sec-bar h2{max-width:36ch}
+.sec-bar .label{margin:0}
+.sec-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 30px;margin:clamp(18px,2vw,26px) 0 0}
+/* the home page's sections follow one another: space above each, none below */
+.sec.tools,.sec.evidence,.sec.questions,.sec.games-row{padding-bottom:0}
+
+/* ---------- cover (home): the map sheet ---------- */
+.cover{max-width:var(--max);margin-inline:auto;padding:clamp(22px,2.6vw,34px) var(--pad) 0}
+.sheet{position:relative;border:1px solid var(--ink)}
+/* the graticule: a tick every 96 px along the top and the left of the sheet */
+.sheet::before,.sheet::after{content:"";position:absolute;pointer-events:none}
+.sheet::before{left:-1px;right:-1px;top:-8px;height:7px;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 96px)}
+.sheet::after{top:-1px;bottom:-1px;left:-8px;width:7px;
+  background:repeating-linear-gradient(180deg,var(--ink) 0 1px,transparent 1px 96px)}
+/* not clipped: the search result list drops below the title block. The ground
+   layer clips the canvas instead. */
+.map{position:relative;display:flex;align-items:flex-end;min-height:clamp(600px,calc(100svh - 150px),860px);
+  padding:clamp(24px,3vw,44px);border:6px solid var(--paper);outline:1px solid var(--rule);outline-offset:-6px}
+.map-ground{position:absolute;inset:0;overflow:hidden;z-index:0}
+/* the canvas's font is the labels' font (terrain.js reads it) */
+.terrain{position:absolute;inset:0;width:100%;height:100%;display:block;font:500 11.5px/1 var(--sans);letter-spacing:.01em}
+html[lang="zh"] .terrain{font-size:12.5px;letter-spacing:0}
+.title-block{position:relative;z-index:2;width:min(588px,100%);background:var(--paper);border:1px solid var(--ink);
+  padding:clamp(26px,3.2vw,46px) clamp(24px,3.2vw,46px) clamp(24px,2.8vw,40px);
+  box-shadow:0 0 0 6px var(--paper),0 0 0 7px var(--rule)}
+.title-block h1{font-size:clamp(2.35rem,4.3vw,3.55rem);line-height:1.03;letter-spacing:-.026em;max-width:13ch}
+.title-block h1 b{font-weight:390}
+.cover-lede{margin:22px 0 0;max-width:40ch;font-size:clamp(1.06rem,1.3vw,1.19rem);line-height:1.55;color:var(--ink)}
+.cover-aud{margin:10px 0 0;max-width:46ch;font-family:var(--cond);font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
+.title-block .search{margin-top:30px}
+html[lang="zh"] .title-block h1{font-size:clamp(2rem,3.6vw,2.85rem);max-width:11em}
+html[lang="zh"] .cover-lede,html[lang="zh"] .cover-aud{max-width:24em}
+/* Russian words run long: the headline comes down a step */
+html[lang="ru"] .title-block h1{font-size:clamp(2.05rem,3.6vw,2.95rem);max-width:15ch}
+html[lang="fr"] .title-block h1,html[lang="es"] .title-block h1{max-width:15ch}
+/* the key to the map's labels, under the sheet */
+.map-key{display:flex;justify-content:space-between;align-items:center;gap:4px 28px;flex-wrap:wrap;
+  padding:12px 0 0;font-family:var(--cond);font-size:.84rem;line-height:1.45;color:var(--ink-faint)}
+.map-key p{margin:0}
+.mk-key{display:flex;flex-wrap:wrap;gap:4px 22px}
+.mk-key span{display:inline-flex;align-items:center;gap:7px}
+.tri{display:inline-block;flex:none;width:10px;height:9px;overflow:visible}
+.tri-c path{fill:var(--brown-ink)}
+.tri-o path{fill:none;stroke:var(--brown-ink);stroke-width:1.15;stroke-linejoin:round}
+@media (max-width:899px){
+  .map{display:block;min-height:0;padding:clamp(200px,40vw,300px) 12px 12px;border-width:4px;outline-offset:-4px}
+  .title-block{width:auto;max-width:620px;box-shadow:none}
 }
-/* On a phone a single long word runs past the measure -- "эпидемиологические",
-   "epidemiological". Hyphenation is confined to these widths so display type on
-   a wide screen still sets unbroken. Han does not hyphenate. */
+@media (max-width:759px){
+  .sheet::before,.sheet::after{display:none}
+  .map{padding-top:clamp(176px,50vw,240px)}
+  .title-block{padding:24px 20px 22px}
+  .title-block h1{max-width:none}
+}
+/* On a phone a single long word runs past the measure; hyphenation is confined
+   to these widths so display type on a wide screen sets unbroken. */
 @media (max-width:560px){
-  .hero h1{overflow-wrap:break-word}
-  html[lang="ru"] .hero h1{hyphens:auto}
-  html[lang="zh"] .hero h1{hyphens:manual}
+  .title-block h1{overflow-wrap:break-word;font-size:clamp(2rem,9vw,2.4rem)}
+  html[lang="ru"] .title-block h1{hyphens:auto;font-size:clamp(1.8rem,8vw,2.1rem)}
+  html[lang="zh"] .title-block h1{hyphens:manual;font-size:clamp(1.75rem,7.6vw,2rem)}
 }
 
-/* ---------- tool hero + crumb (explorer page) ---------- */
-/* The explainer page mirrors the home hero — same network background and veil —
-   but with a tighter vertical rhythm because its headline is a sentence, not a
-   banner. */
-.tool-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
-.tool-hero .net{position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url(assets/network.svg) no-repeat right -6% center;
-  background-size:auto 128%;opacity:.22}
-.tool-hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(97deg,var(--chalk) 0%,rgba(245,244,240,.96) 32%,
-             rgba(245,244,240,.62) 62%,rgba(245,244,240,.30) 100%)}
-.tool-hero .wrap{position:relative;z-index:2;padding-block:clamp(56px,10vh,112px)}
-.tool-hero h1{margin:20px 0 0;max-width:23ch}
-@media (max-width:820px){
-  .tool-hero .net{background-position:center;background-size:cover;opacity:.15}
-  .tool-hero .veil{background:linear-gradient(180deg,rgba(245,244,240,.72) 0%,var(--chalk) 78%)}
+/* ---------- site search (assets/search.js; markup in templates/index.html,
+   work.html and 404.html; records/b6-search-markup.html) ---------- */
+.search{max-width:680px}
+.search-label{display:block;margin-bottom:8px}
+.search-box{position:relative;display:flex;align-items:stretch;background:var(--paper-hi);
+  border:1px solid var(--rule);border-bottom-color:var(--ink)}
+.search-box:focus-within{border-color:var(--ink);box-shadow:inset 0 -1px 0 var(--ink)}
+.search-input{flex:1 1 auto;min-width:0;padding:14px 14px 13px;border:0;border-radius:0;background:transparent;
+  color:var(--ink);font:inherit;font-size:1rem;line-height:1.3;text-overflow:ellipsis;-webkit-appearance:none;appearance:none}
+.search-input:focus{outline:0}
+.search-input::placeholder{color:var(--ink-faint);opacity:1}
+.search-go{flex:none;display:grid;place-items:center;width:50px;min-height:44px;border:0;background:transparent;
+  color:var(--ink);cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease)}
+.search-go:hover{background:var(--ink);color:var(--paper)}
+.search-go svg{display:block}
+.search-list{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;max-height:min(70vh,30rem);overflow-y:auto;
+  overscroll-behavior:contain;background:var(--paper-hi);border:1px solid var(--ink);border-top-color:var(--rule);
+  box-shadow:0 18px 36px rgba(34,36,31,.14)}
+.search-list[hidden]{display:none}
+.search-gh{padding:12px 16px 6px;font-family:var(--cond);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--ink-faint)}
+.search-opt{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;min-height:44px;
+  padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink);text-decoration:none}
+.search-opt:hover,.search-opt.is-active{background:var(--ink);color:var(--paper)}
+.search-n{font-weight:600;overflow-wrap:anywhere}
+.search-m{font-family:var(--cond);font-size:.82rem;color:var(--ink-faint)}
+.search-opt:hover .search-m,.search-opt.is-active .search-m{color:inherit}
+.search-msg{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;margin:0;padding:12px 16px;background:var(--paper-hi);
+  border:1px solid var(--rule);color:var(--ink-soft);font-size:.92rem}
+/* stays in the page so screen readers hear the text when it appears */
+.search-msg:empty{height:0;padding:0;border:0;overflow:hidden}
+/* the three examples are plain links, not chips */
+.search-try{display:flex;flex-wrap:wrap;align-items:center;gap:0 16px;margin:10px 0 0}
+.search-try .label{margin-inline-end:2px}
+.search-chip{display:inline-flex;align-items:center;min-height:36px;color:var(--ink);font-size:.95rem;
+  text-decoration:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:5px}
+.search-chip:hover{text-decoration-color:var(--ink)}
+@media (forced-colors:active){
+  .search-box:focus-within,.search-opt.is-active{outline:2px solid CanvasText;outline-offset:-2px}
 }
-.crumb{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
-       color:var(--ink-faint);font-weight:600}
+.work-find .search{width:100%}
+.page-404{padding-top:10vh;padding-bottom:12vh}
+.page-404 .search{margin-top:26px}
+
+/* ---------- buttons: one filled style; the secondary action is a link ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;padding:12px 22px 12px 21px;
+     font-family:var(--cond);font-weight:500;font-size:.95rem;letter-spacing:.035em;border:1px solid var(--ink);
+     transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:#3B3D35;border-color:#3B3D35}
+.btn-ghost{background:transparent;color:var(--ink);border-color:transparent;padding-inline:0;
+  text-decoration:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:6px;
+  font-size:1rem;letter-spacing:.01em}
+.btn-ghost:hover{text-decoration-color:var(--ink)}
+.inst-actions{display:flex;gap:10px 28px;flex-wrap:wrap;align-items:center;margin-top:4px}
+
+/* ---------- home: the two explorers as map sheets ---------- */
+.sheets{display:grid;gap:clamp(20px,2.4vw,32px)}
+@media (min-width:900px){.sheets{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tool-sheet{position:relative;display:flex;flex-direction:column;gap:20px;min-width:0;background:var(--paper-hi);
+  border:1px solid var(--ink);padding:clamp(22px,2.6vw,36px)}
+.tool-sheet::before{content:"";position:absolute;inset:5px;border:1px solid var(--rule);pointer-events:none}
+.ts-head{display:grid;grid-template-columns:minmax(0,1fr) clamp(92px,10.5vw,132px);gap:22px;align-items:start}
+.ts-name h3{font-size:clamp(1.3rem,1.9vw,1.6rem);font-weight:500;line-height:1.15;letter-spacing:-.005em}
+.ts-q{margin:10px 0 0;color:var(--ink-soft);font-size:1rem;line-height:1.5;max-width:40ch}
+/* the network drawing as a map inset (inline from build_site.py) */
+.ts-inset{aspect-ratio:1;border:1px solid var(--rule);background-color:transparent;background-repeat:no-repeat;
+  background-position:center;background-size:90%;filter:sepia(.22) saturate(.75)}
+.ts-legend{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.ts-legend li{display:flex;align-items:baseline;gap:10px;min-width:0;padding:11px 0 10px;border-bottom:1px solid var(--rule)}
+.ts-legend b{flex:none;min-width:2.4ch;font-family:var(--sans);font-weight:300;font-size:1.7rem;line-height:1;
+  letter-spacing:-.015em;font-variant-numeric:lining-nums tabular-nums;color:var(--ink)}
+.ts-legend span{font-family:var(--cond);font-size:.95rem;line-height:1.3;color:var(--ink-soft)}
+.ts-note{margin:-8px 0 0;font-family:var(--cond);font-size:.88rem;line-height:1.45;color:var(--ink-faint)}
+.ts-row{margin:0;font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
+.ts-row .label{display:block;margin-bottom:3px}
+.ts-start{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px}
+.ts-start .label{flex-basis:100%;margin-bottom:0}
+.ts-start a{display:inline-flex;align-items:center;gap:7px;min-height:34px;color:var(--ink);font-size:.95rem;
+  text-decoration:underline;text-decoration-color:rgba(34,36,31,.28);text-underline-offset:4px;text-decoration-thickness:1px}
+.ts-start a:hover{text-decoration-color:var(--ink)}
+.ts-acts{display:flex;align-items:center;gap:8px 26px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+html[lang="zh"] .ts-q{max-width:22em}
+@media (max-width:520px){
+  .ts-legend{grid-template-columns:minmax(0,1fr)}
+  .ts-head{grid-template-columns:minmax(0,1fr) 84px;gap:16px}
+}
+
+/* ---------- home: how sure is the evidence, as a map key ---------- */
+/* Each label's height is drawn as contour rings around a summit (the most
+   certain label has the most rings), in the colour the tools give it. */
+:root{--ev-possible:#A98A25;--ev-ncl:#86867C;--ev-conflict:#63588F}
+.keys{display:grid;gap:40px}
+@media (min-width:900px){
+  .keys{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,5vw,72px);row-gap:0}
+  /* the two captions share a row, so the two lists start on one line */
+  .key-col{display:grid;grid-template-rows:subgrid;grid-row:span 2}
+  .key-h{align-self:end}
+}
+.key-h{margin:0 0 14px;font-size:1.06rem;font-weight:500;line-height:1.4;color:var(--ink);max-width:52ch}
+.key-h .label{display:block;margin-bottom:6px}
+.key-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.key-list li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:14px 0 15px;
+  border-bottom:1px solid var(--rule);align-items:start}
+.key-n{margin:0;font-family:var(--cond);font-size:1.06rem;line-height:1.35}
+.key-n b{font-weight:600}
+.key-n span{margin-inline-start:8px;font-size:.88rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.key-says{margin:3px 0 0;font-size:.94rem;line-height:1.5;color:var(--ink-soft);max-width:56ch}
+html[lang="zh"] .key-says{max-width:30em}
+.elev{--c:var(--ink);justify-self:center;margin-top:1px;border-radius:50%;
+  background:repeating-radial-gradient(circle,var(--c) 0 1.4px,transparent 1.4px 4px)}
+.elev.e4{width:34px;height:34px;margin-top:-6px}
+.elev.e3{width:26px;height:26px;margin-top:-2px}
+.elev.e2,.elev.ec{width:18px;height:18px;margin-top:2px}
+.elev.e1{width:10px;height:10px;margin-top:6px}
+.elev.g1,.elev.strong{--c:var(--madder)}
+.elev.g2a,.elev.moderate{--c:var(--sage)}
+.elev.g2b,.elev.suggestive{--c:var(--ev-possible)}
+.elev.g3,.elev.weak{--c:var(--ev-ncl)}
+/* contested: the rings broken, in the tool's colour for it */
+.elev.conflicting{--c:var(--ev-conflict);
+  -webkit-mask:repeating-conic-gradient(#000 0 22deg,transparent 22deg 45deg);
+          mask:repeating-conic-gradient(#000 0 22deg,transparent 22deg 45deg)}
+
+/* ---------- home: four questions; the second leads, drawn to scale ---------- */
+.lesson{display:grid;gap:30px 64px;padding-bottom:clamp(30px,3.6vw,46px);border-bottom:1px solid var(--rule)}
+@media (min-width:900px){.lesson{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}}
+.lesson h3{font-size:clamp(1.35rem,2vw,1.6rem);font-weight:500;line-height:1.2}
+.lesson-k{margin:10px 0 20px;font-size:clamp(1.06rem,1.3vw,1.19rem);line-height:1.45;color:var(--ink);max-width:36ch}
+.qa-a{margin:0;padding-inline-start:16px;border-inline-start:2px solid var(--brown)}
+.qa-a p{margin:0;font-size:1rem;line-height:1.55;color:var(--ink-soft);max-width:60ch}
+.qa-src{margin:8px 0 0;font-family:var(--cond);font-size:.84rem;line-height:1.45;color:var(--ink-faint)}
+.qa-go{margin:12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
+.qa-go a{display:inline-flex;align-items:center;min-height:36px;font-family:var(--cond);font-size:1rem;font-weight:500;
+  text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:5px;text-decoration-thickness:1px}
+.qa-go a:hover{text-decoration-color:var(--ink)}
+.qa-go a + a{color:var(--ink-soft)}
+html[lang="zh"] .qa-a p{max-width:32em}
+/* the scale figure: the same certainty, two very different sizes */
+.scale-fig{--lab:150px;margin:0;padding-inline-end:26px;min-width:0}
+.scale-fig figcaption{margin:0 0 18px;font-family:var(--cond);font-size:.95rem;line-height:1.4;color:var(--ink-soft)}
+.sf-axis{position:relative;height:30px;margin-inline-start:var(--lab);border-bottom:1px solid var(--ink)}
+.sf-axis i{position:absolute;bottom:0;width:16.667%;height:7px;border:1px solid var(--ink);border-bottom:0;
+  border-inline-end:0}
+.sf-axis i:nth-of-type(odd){background:var(--ink)}
+.sf-axis i:nth-of-type(1){left:0}.sf-axis i:nth-of-type(2){left:16.667%}.sf-axis i:nth-of-type(3){left:33.333%}
+.sf-axis i:nth-of-type(4){left:50%}.sf-axis i:nth-of-type(5){left:66.667%}
+.sf-axis i:nth-of-type(6){left:83.333%;border-inline-end:1px solid var(--ink)}
+.sf-axis b{position:absolute;top:0;transform:translateX(-50%);font-family:var(--cond);font-size:.75rem;font-weight:500;
+  line-height:1;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.sf-row{position:relative;display:grid;grid-template-columns:var(--lab) minmax(0,1fr);align-items:center;margin-top:20px}
+.sf-who{padding-inline-end:14px;font-family:var(--cond);font-size:.95rem;line-height:1.25}
+.sf-track{position:relative;height:16px}
+.sf-solid,.sf-range{position:absolute;top:0;bottom:0}
+.sf-solid{left:0;background:var(--brown)}
+.sf-range{background:repeating-linear-gradient(135deg,var(--brown) 0 1.5px,transparent 1.5px 5px);
+  box-shadow:inset 0 0 0 1px var(--brown)}
+.sf-val{position:absolute;inset-inline-start:calc(var(--lab) + (100% - var(--lab)) * var(--x,0) + 10px);
+  font-family:var(--cond);font-size:1rem;font-weight:600;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:560px){
+  .scale-fig{--lab:0px;padding-inline-end:12px}
+  .sf-row{grid-template-columns:minmax(0,1fr) auto;row-gap:8px}
+  .sf-who{padding:0}
+  .sf-track{grid-column:1 / -1;grid-row:2}
+  .sf-val{position:static;grid-column:2;grid-row:1}
+}
+/* the other three, compact */
+.qa-rows{list-style:none;margin:0;padding:0}
+.qa-row{display:grid;gap:10px 64px;padding:24px 0;border-bottom:1px solid var(--rule)}
+@media (min-width:900px){.qa-row{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.qa-row h3{font-size:1.2rem;font-weight:500;line-height:1.3;max-width:28ch}
+.qa-k{margin:0 0 12px;font-size:1rem;line-height:1.5;color:var(--ink);max-width:60ch}
+.qa-row .qa-a p{font-size:.94rem}
+.qa-row .qa-go{margin-top:6px}
+
+/* ---------- home: what you can do, one calm band ---------- */
+.band{margin-top:var(--sec);background:var(--paper-deep);border-block:1px solid var(--rule)}
+.band-in{display:grid;gap:18px 64px;padding-block:clamp(38px,4.6vw,60px)}
+@media (min-width:900px){.band-in{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
+.band-head h2{margin-top:8px}
+.band-body p{margin:0 0 22px;color:var(--ink-soft);max-width:60ch}
+html[lang="zh"] .band-body p{max-width:32em}
+.code-band .label{color:var(--ink-faint)}
+/* the two routes count the actions: 14 and 17 stops */
+.routes{display:grid;gap:12px;margin:0 0 26px;max-width:100%}
+.routes{--t:22px}
+.route{display:block;height:10px;width:calc(var(--n) * var(--t));
+  background:radial-gradient(circle,var(--paper-deep) 0 2.5px,var(--green) 2.7px 3.9px,transparent 4.1px) 0 0/var(--t) 10px repeat-x,
+             linear-gradient(rgba(110,139,91,.55),rgba(110,139,91,.55)) calc(var(--t) / 2) 50%/calc(100% - var(--t)) 1px no-repeat}
+@media (max-width:440px){.routes{--t:19px}}
+@media (max-width:360px){.routes{--t:16px}}
+.sec.games-row{padding-top:var(--sec)}
+
+/* ---------- home: games, small and alike ---------- */
+.game-list{list-style:none;margin:0;padding:0;display:grid;gap:20px 32px}
+@media (min-width:760px){.game-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.game-list a{display:grid;grid-template-columns:clamp(112px,10vw,148px) minmax(0,1fr);gap:16px;align-items:center;
+  text-decoration:none}
+.gl-img{display:block;padding:4px;border:1px solid var(--rule);background:var(--paper-hi);
+  transition:border-color .5s var(--ease)}
+.gl-img img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;
+  filter:saturate(.7) contrast(.96)}
+.gl-name{display:block;font-family:var(--cond);font-size:1.12rem;font-weight:500;line-height:1.25;
+  text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;text-decoration-thickness:1px;
+  transition:text-decoration-color .3s var(--ease)}
+.gl-meta{display:block;margin-top:4px;font-family:var(--cond);font-size:.9rem;color:var(--ink-faint)}
+.game-list a:hover .gl-img{border-color:var(--ink)}
+.game-list a:hover .gl-name{text-decoration-color:var(--brown)}
+
+/* ---------- home: how we check, and what is new ---------- */
+.sec.trust{padding-bottom:0}
+.trust-grid{display:grid;gap:40px;padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--ink)}
+@media (min-width:900px){.trust-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:64px}}
+.trust-hwc h2{margin:10px 0 12px;max-width:26ch}
+.trust-p{margin:0;color:var(--ink-soft);max-width:52ch}
+.trust-hwc .sec-links{margin-top:8px}
+.trust-news .label{margin:0}
+.news{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--rule)}
+.news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.94rem;line-height:1.5}
+html[lang="zh"] .trust-hwc h2{max-width:14em}
+/* a small label that is a heading in the outline keeps the label's type */
+h2.label,html[lang="zh"] h2.label{font-family:var(--cond);font-size:.75rem;line-height:1.5;font-weight:600;
+  letter-spacing:.14em;max-width:none}
+html[lang="zh"] h2.label{letter-spacing:0}
+
+/* ---------- tool hero + crumb (inner pages) ---------- */
+/* The inner pages open on the paper with a still of the cover's contours at the
+   right (assets/contours.svg); the explainer of the cancer tool keeps the
+   tool's own network there instead. */
+.tool-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.tool-hero.plain::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url(assets/contours.svg) right -40px center/auto 150% no-repeat;opacity:.7;
+  -webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 82%);mask-image:linear-gradient(90deg,transparent 30%,#000 82%)}
+.tool-hero .net{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url(assets/network.svg) no-repeat right -6% center;background-size:auto 128%;opacity:.2;
+  filter:sepia(.35) saturate(.7)}
+.tool-hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(97deg,var(--paper) 0%,rgba(241,240,234,.96) 32%,rgba(241,240,234,.6) 62%,rgba(241,240,234,.25) 100%)}
+.tool-hero .wrap{position:relative;z-index:2;padding-block:clamp(56px,10vh,112px)}
+.tool-hero h1{margin:18px 0 0;max-width:22ch}
+html[lang="zh"] .tool-hero h1{font-size:clamp(1.95rem,4vw,2.85rem);max-width:15em}
+@media (max-width:820px){
+  .tool-hero .net{background-position:center;background-size:cover;opacity:.13}
+  .tool-hero .veil{background:linear-gradient(180deg,rgba(241,240,234,.7) 0%,var(--paper) 78%)}
+  .tool-hero.plain::before{opacity:.45;background-size:auto 130%;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,transparent 90%)}
+}
+.crumb{font-family:var(--cond);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
 .crumb a{text-decoration:none}
-.crumb a:hover{color:var(--ink);border-bottom:1px solid var(--ink)}
+.crumb a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:4px}
 .crumb span{color:var(--ink-soft)}
+.tool-hero.plain .wrap{padding-block:clamp(48px,8vh,92px)}
+.tool-hero.plain h1{max-width:20ch}
 
 /* ---------- CTA band (explorer page) ---------- */
-.cta-band{border-top:1px solid var(--rule);background:var(--chalk-deep)}
+.cta-band{border-top:1px solid var(--rule);background:var(--paper-deep)}
 .cta-band .wrap{padding-block:clamp(56px,9vh,96px)}
 .cta-band .lede{color:var(--ink-soft);margin-top:14px}
-/* the source note sits on a light band, not the dark footer, so it needs the
-   light-theme palette rather than the footer's light-on-dark */
-.cta-band .disc{margin-top:26px;border-color:var(--rule);color:var(--ink-faint);
-                background:transparent}
+/* the source note sits on a light band */
+.cta-band .disc{margin-top:26px;border-color:var(--rule);color:var(--ink-soft);background:transparent}
 
-/* ---------- instruments rack ---------- */
+/* ---------- instruments rack and cards (other pages) ---------- */
 .rack{display:grid;gap:0;border-top:1px solid var(--rule)}
 .inst{border-bottom:1px solid var(--rule);padding-block:30px;display:grid;gap:16px}
-@media (min-width:900px){
-  .inst{grid-template-columns:minmax(0,1fr) 300px;gap:52px;align-items:start}
-}
+@media (min-width:900px){.inst{grid-template-columns:minmax(0,1fr) 300px;gap:52px;align-items:start}}
 .inst-main{display:grid;gap:11px}
 .inst-top{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
-.chip{font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
-      padding:4px 9px;border:1px solid currentColor;white-space:nowrap}
-.chip.live{color:var(--ink)}
+/* a short tag (a game's topic): condensed capitals in the map brown, no box */
+.chip{font-family:var(--cond);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+      color:var(--brown-ink);white-space:nowrap}
+.chip.live{color:var(--brown-ink)}
 .chip.soon{color:var(--ink-faint)}
 .inst h3{margin:0}
-.inst p{margin:0;color:var(--ink-soft);max-width:56ch}
-.inst-meta{display:flex;gap:8px 18px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;
-           text-transform:uppercase;color:var(--ink-faint);font-weight:400;
-           font-variant-numeric:tabular-nums}
-.inst-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+.inst p{margin:0;color:var(--ink-soft);max-width:58ch}
+.inst-meta{display:flex;gap:4px 18px;flex-wrap:wrap;font-family:var(--cond);font-size:.88rem;letter-spacing:.01em;
+           color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .inst.is-soon .inst-main{opacity:.62}
-
-/* thumbnail carries the network — the Explorer's signature, not the platform's */
-.thumb{border:1px solid var(--rule);background:var(--chalk-deep) url(assets/network.svg)
-       no-repeat center/cover;aspect-ratio:16/10;position:relative}
-/* the second tool's signature is the clustering, so its thumbnail is the
-   clustered layout rather than the same free-floating one. The home page sets
-   this picture inline (build_site.py, THUMB_CHRONIC_BG), so there it costs no
-   request; this rule serves any other page that shows the thumbnail. */
+.thumb{border:1px solid var(--rule);background:var(--paper-deep) url(assets/network.svg) no-repeat center/cover;
+       aspect-ratio:16/10;position:relative}
 .thumb-chronic{background-image:url(assets/chronic-network.svg)}
-/* the shelf section on the home page sits under the tools rack; no extra top padding */
-.sec.shelf{padding-top:0}
 .thumb.blank{background-image:none;display:grid;place-items:center;color:var(--ink-faint);
-             font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-
-/* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:13px 21px;
-     font-weight:600;font-size:.92rem;border:1px solid var(--ink);
-     transition:background .17s ease,color .17s ease,transform .17s ease}
-.btn-solid{background:var(--ink);color:var(--chalk)}
-.btn-solid:hover{background:var(--ink-soft);border-color:var(--ink-soft);transform:translateY(-2px)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
-.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+             font-family:var(--cond);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
 
 /* ---------- about ---------- */
 /* Four parts in a two-by-two grid on a desktop:
      headline        | portrait
      prose and links | record card and credentials
-   The headline sits level with the middle of the portrait. In the second row
-   both cells take the row's full height, so the prose and the credentials share
-   a top and a bottom edge in every language. Prose length varies a lot by
-   language (Chinese runs far shorter than French), so whichever cell is the
-   shorter one spreads its own parts evenly: the paragraphs open up a little, or
-   the credential rows grow a little. Neither leaves a hole. */
+   In the second row both cells take the row's full height, so the prose and
+   the credentials share a top and a bottom edge in every language. */
 .about{display:grid;gap:26px}
 .about-head{margin:0}
 .about-head h1.page-h{margin-bottom:0}
@@ -363,100 +578,90 @@ html[lang="ru"] .hero h1{font-size:clamp(1.85rem,3.4vw,2.5rem);max-width:none}
 @media (min-width:900px){
   .about{grid-template-columns:minmax(0,1fr) 300px;column-gap:56px;row-gap:40px}
   .about-head,.about-photo{align-self:center}
-  .about-head h1.page-h{font-size:clamp(1.7rem,3.3vw,2.7rem);max-width:21ch}
+  .about-head h1.page-h{font-size:clamp(1.9rem,3.3vw,2.7rem);max-width:21ch}
   .about-text{display:flex;flex-direction:column;justify-content:space-between}
   .about-facts{display:flex;flex-direction:column}
   .about-facts .creds{flex:1;display:flex;flex-direction:column}
   .about-facts .cred{flex:1 1 auto;align-content:center}
 }
-.about p{color:var(--ink-soft);margin:0;max-width:60ch}
-/* the opening sentence is set a step larger; its measure is trimmed by the same
-   ratio so that it ends on the same line edge as the paragraphs below it */
-.about .about-lead{color:var(--ink);font-size:1.05rem;max-width:57.1ch}
+.about p{color:var(--ink-soft);margin:0;max-width:62ch}
+.about .about-lead{color:var(--ink);font-size:1.1rem;max-width:56ch}
 html[lang="zh"] .about-text p{max-width:31em}
 html[lang="zh"] .about-text .about-lead{max-width:29.5em}
-/* a linked title stays on one line, and no value ends on a stranded word */
 .about-text p a{white-space:nowrap}
 .cred .w,.about-text p{text-wrap:pretty}
-/* a narrow desktop gives the prose a little more of the width */
 @media (min-width:900px) and (max-width:1079px){
   .about{grid-template-columns:minmax(0,1fr) 270px;column-gap:40px}
 }
-.creds{display:grid;border-top:1px solid var(--rule);margin:0}
+.creds{display:grid;border-top:1px solid var(--ink);margin:0}
 .cred{padding-block:13px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
 .cred dd{margin:0}
-.cred .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);
+.cred .r{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
-.cred .w{font-size:.92rem}
-.inline-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.inline-links a{text-decoration:none;border:1px solid var(--rule);padding:8px 13px;
-                font-size:.79rem;letter-spacing:.04em;
-                transition:border-color .16s ease,color .16s ease}
-.inline-links a:hover{border-color:var(--ink);color:var(--ink)}
-/* The portrait is an engraved line screen: a high-frequency pattern, so each
-   density is delivered at its own size via srcset rather than rescaled. */
-.portrait{display:block;width:100%;max-width:220px;height:auto;
-  border-radius:14px;margin:0 auto}
-.tl-card{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  background:var(--ink);color:var(--chalk);border-radius:16px;
-  padding:18px 20px;text-decoration:none}
+.cred .w{font-size:.95rem}
+.inline-links{display:flex;gap:4px 22px;flex-wrap:wrap;margin-top:6px}
+.inline-links a{display:inline-flex;align-items:center;min-height:40px;font-family:var(--cond);font-size:.98rem;
+                text-decoration:underline;text-decoration-color:var(--brown);text-underline-offset:5px;text-decoration-thickness:1px}
+.inline-links a:hover{text-decoration-color:var(--ink)}
+/* The portrait is an engraved line screen: each density at its own size. */
+.portrait{display:block;width:100%;max-width:220px;height:auto;border-radius:2px;margin:0 auto;
+  outline:1px solid var(--rule);outline-offset:5px}
+/* the timeline link as a small map sheet */
+.tl-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--paper-hi);color:var(--ink);border:1px solid var(--ink);padding:20px 22px;text-decoration:none}
+.tl-card::before{content:"";position:absolute;inset:4px;border:1px solid var(--rule);pointer-events:none}
 .tl-txt{min-width:0}
-.tl-card .r{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
-  font-weight:600;color:#B9BDB2;display:block}
-.tl-card .w{font-family:var(--display);font-size:1.08rem;font-weight:600;display:block;
-  margin-top:6px;line-height:1.35}
-.tl-card .arr{flex:none;font-size:1.15rem;line-height:1;transition:transform .18s ease}
+.tl-card .r{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:600;color:var(--ink-faint);display:block}
+.tl-card .w{font-family:var(--cond);font-size:1.15rem;font-weight:500;display:block;margin-top:6px;line-height:1.3}
+.tl-card .arr{flex:none;font-size:1.15rem;line-height:1;transition:transform .5s var(--ease)}
 .tl-card:hover .arr{transform:translateX(5px)}
-.tl-card:hover .r{color:var(--chalk)}
-html[lang="zh"] .tl-card .r{letter-spacing:.02em}
+.tl-card:hover{border-color:var(--ink)}
 
-.cite-line{font-family:var(--mono);font-size:.88rem;line-height:1.7;max-width:72ch;
-  border-left:3px solid var(--ink);padding:10px 0 10px 18px;margin:0}
+.cite-line{font-family:var(--cond);font-size:1rem;line-height:1.65;max-width:72ch;
+  border-inline-start:2px solid var(--brown);padding:8px 0 8px 18px;margin:0}
 
 /* ---------- contact ---------- */
-.contact-email{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:1rem;font-weight:600;
-  text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:3px}
-.contact-email:hover{background:var(--ink);color:var(--chalk)}
+.contact-email{display:inline-block;margin-top:18px;font-family:var(--cond);font-size:1.15rem;font-weight:600;
+  text-decoration:none;border-bottom:1px solid var(--brown);padding-bottom:3px}
+.contact-email:hover{border-bottom-color:var(--ink)}
 
 /* ---------- notes ---------- */
 .notes{border-top:1px solid var(--rule)}
-.note{display:grid;gap:5px;padding-block:22px;border-bottom:1px solid var(--rule);
-      text-decoration:none}
+.note{display:grid;gap:5px;padding-block:22px;border-bottom:1px solid var(--rule);text-decoration:none}
 .note h3{font-weight:400}
 .note:hover h3{text-decoration:underline;text-underline-offset:4px}
-.note .m{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);
+.note .m{font-family:var(--cond);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
          font-weight:600}
 
 /* ---------- figures / bars (explorer page) ---------- */
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
       background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.fig{background:var(--veil);padding:22px 20px}
-.fig .v{font-family:var(--mono);font-weight:600;
-        font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1;font-variant-numeric:tabular-nums;
-        letter-spacing:-.03em}
-.fig .k{margin-top:8px;font-family:var(--mono);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;
-        color:var(--ink-faint);font-weight:600}
+.fig{background:var(--paper-hi);padding:22px 20px}
+.fig .v{font-family:var(--sans);font-weight:300;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1;
+        font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
+.fig .k{margin-top:10px;font-family:var(--cond);font-size:.9rem;line-height:1.4;color:var(--ink-faint)}
 .bars{margin-top:36px;display:grid;gap:25px;max-width:640px}
 .bar-row{display:grid;gap:9px}
 .bar-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
 .bar-head b{font-weight:600}
-.bar-head span{font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint)}
-.bar{height:6px;background:var(--chalk-deep);position:relative;overflow:hidden}
+.bar-head span{font-family:var(--cond);font-size:.86rem;color:var(--ink-faint)}
+.bar{height:6px;background:var(--paper-deep);position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;display:block}
 .bar.est i{background:var(--madder)}
 .bar.sus i{background:repeating-linear-gradient(90deg,var(--sage) 0 5px,transparent 5px 10px)}
-.bar-note{color:var(--ink-soft);font-size:.93rem;max-width:54ch;margin:0}
+.bar-note{color:var(--ink-soft);font-size:.94rem;max-width:56ch;margin:0}
 
-.reads{margin-top:26px;border-top:1px solid var(--rule)}
+.reads{margin-top:26px;border-top:1px solid var(--ink)}
 .read{padding-block:26px;border-bottom:1px solid var(--rule);display:grid;gap:11px}
 @media (min-width:840px){.read{grid-template-columns:186px minmax(0,1fr);gap:30px;align-items:start}}
-.read .tag{font-family:var(--mono);color:var(--ink-faint);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;
+.read .tag{font-family:var(--cond);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;
            font-weight:600;padding-top:5px}
 .read h3{margin:0 0 8px}
-.read p{margin:0;color:var(--ink-soft);max-width:58ch}
+.read p{margin:0;color:var(--ink-soft);max-width:60ch}
 
 .legend{margin-top:32px;display:flex;gap:24px;flex-wrap:wrap}
-.leg{display:flex;align-items:center;gap:9px;font-size:.77rem;color:var(--ink-soft)}
+.leg{display:flex;align-items:center;gap:9px;font-family:var(--cond);font-size:.9rem;color:var(--ink-soft)}
 .leg i{width:26px;height:0;display:block}
 .leg.est i{border-top:2px solid var(--madder)}
 .leg.sus i{border-top:1px dashed var(--sage)}
@@ -464,130 +669,125 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 .leg.can i{width:9px;height:9px;background:#1F5B55}
 
 /* ---------- footer ---------- */
-.foot{background:var(--ink);color:var(--chalk)}
-.foot .wrap{padding-block:50px 38px}
-.foot .mark{color:var(--chalk);font-size:1.45rem}
-.foot .tag{color:#A7ADA2;margin:8px 0 0;max-width:42ch}
-.foot .menu a{color:#A7ADA2}
-.foot .menu a:hover{color:var(--chalk)}
+.foot{margin-top:var(--sec);background:var(--paper);color:var(--ink);border-top:1px solid var(--ink)}
+.foot .wrap{padding-block:48px 40px}
+.foot .mark{font-size:1.45rem}
+.foot .tag{color:var(--ink-soft);margin:8px 0 0;max-width:42ch}
+.foot .menu a{color:var(--ink-soft)}
+.foot .menu a:hover{color:var(--ink)}
 /* How we check, How to cite, Report an error: in every footer */
-.foot-trust{display:flex;flex-wrap:wrap;gap:0 24px;margin:18px 0 0}
-.foot-trust a{display:inline-flex;align-items:center;min-height:44px;color:var(--chalk);font-size:.92rem;
-  font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(245,244,240,.4)}
-.foot-trust a:hover{text-decoration-color:var(--chalk)}
+.foot-trust{display:flex;flex-wrap:wrap;gap:0 26px;margin:18px 0 0}
+.foot-trust a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-family:var(--cond);
+  font-size:1rem;font-weight:500;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px;
+  text-decoration-color:var(--brown)}
+.foot-trust a:hover{text-decoration-color:var(--ink)}
 .foot-row{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:baseline}
-.disc{margin-top:34px;border:1px solid rgba(245,244,240,.2);padding:18px 20px;color:#A7ADA2;
-      font-size:.86rem;max-width:44rem}
-/* affiliation notice reads as a formal aside, quieter than the health disclaimer */
-.disc.affil{margin-top:12px;border-color:rgba(245,244,240,.12);color:#949A90;font-size:.8rem}
+.disc{margin-top:30px;border:1px solid var(--rule);padding:18px 20px;color:var(--ink-soft);
+      font-size:.88rem;line-height:1.55;max-width:46rem}
+/* the affiliation notice reads as a formal aside, quieter than the health note */
+.disc.affil{margin-top:12px;color:var(--ink-faint);font-size:.82rem}
 .creds a,.disc a{color:inherit;text-decoration:underline;text-underline-offset:2px;
-                 text-decoration-color:rgba(22,23,19,.4)}
+                 text-decoration-color:rgba(34,36,31,.4)}
 .creds a:hover,.disc a:hover{color:var(--ink);text-decoration-color:var(--ink)}
-.foot .disc a{text-decoration-color:rgba(245,244,240,.4)}
-.foot .disc a:hover{color:var(--chalk);text-decoration-color:var(--chalk)}
-.foot-bot{margin-top:32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-          font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#8A8D85}
+.foot-bot{margin-top:30px;padding-top:16px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;
+          gap:16px;flex-wrap:wrap;font-family:var(--cond);font-size:.84rem;letter-spacing:.02em;color:var(--ink-faint)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn,.btn-solid:hover{transition:none;transform:none}
+  .btn,.tlink,.search-go,.gl-img,.gl-name,.tl-card .arr{transition:none}
+  .tl-card:hover .arr{transform:none}
 }
 
 /* ---------- games page ---------- */
 /* The stage on the left is the game itself: first a real screenshot of it
-   with one Play button, then, once pressed, the game loaded in place. The
-   column on the right explains what it teaches and how to play. */
+   with one Play button, then, once pressed, the game loaded in place. */
 .game-page{display:grid;gap:34px;padding-block:clamp(40px,6vh,72px)}
 @media (min-width:960px){.game-page{grid-template-columns:minmax(0,7fr) minmax(300px,4fr);gap:48px;align-items:start}}
 .stage{position:sticky;top:84px}
 @media (max-width:959px){.stage{position:static}}
-.stage-frame{position:relative;border:1px solid var(--rule);border-radius:14px;overflow:hidden;
-             background:#0b2430;aspect-ratio:16/10.4}
+.stage-frame{position:relative;border:1px solid var(--ink);overflow:hidden;background:#0b2430;aspect-ratio:16/10.4}
 .stage-frame img{display:block;width:100%;height:100%;object-fit:cover}
 .stage-frame iframe{display:block;width:100%;height:100%;border:0;background:#0b2430}
 .stage-frame .play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,36,48,.28)}
-.stage-frame .play button{display:inline-flex;align-items:center;gap:12px;background:var(--chalk);color:var(--ink);
-  border:1px solid var(--chalk);border-radius:999px;padding:14px 26px;font:600 1rem/1 var(--body);letter-spacing:.01em;
-  box-shadow:0 12px 34px rgba(0,0,0,.35);cursor:pointer}
-.stage-frame .play button:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.stage-frame .play button{display:inline-flex;align-items:center;gap:12px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--paper);padding:14px 26px;font:500 1.05rem/1 var(--cond);letter-spacing:.04em;
+  box-shadow:0 12px 34px rgba(0,0,0,.3);cursor:pointer;transition:background .4s var(--ease),color .4s var(--ease)}
+.stage-frame .play button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .stage-frame .play button::before{content:"";width:0;height:0;border-left:11px solid currentColor;
   border-top:7px solid transparent;border-bottom:7px solid transparent}
 .stage-cap{display:flex;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-top:10px;
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
-.stage-cap a{text-decoration:none;border-bottom:1px solid var(--rule)}
+  font-family:var(--cond);font-size:.84rem;color:var(--ink-faint)}
+.stage-cap a{text-decoration:none;border-bottom:1px solid var(--brown)}
 .stage-cap a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .stage.is-playing .stage-frame{aspect-ratio:auto;height:clamp(420px,78vh,720px)}
-/* while a game runs, its screenshot and Play button step aside; they stay in
-   the DOM so choosing another game from the shelf can bring them straight back */
+/* while a game runs, its screenshot and Play button step aside */
 .stage.is-playing .stage-frame picture,.stage.is-playing .stage-frame .play{display:none}
 .game-intro .label{margin-bottom:12px}
-.game-intro h1,.game-intro h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:14px}
-.game-intro p{color:var(--ink-soft);margin:0 0 14px;max-width:52ch}
+.game-intro h1,.game-intro h2{font-family:var(--cond);font-weight:400;font-size:clamp(1.9rem,3.2vw,2.5rem);
+  line-height:1.12;letter-spacing:-.006em;margin-bottom:14px}
+.game-intro p{color:var(--ink-soft);margin:0 0 14px;max-width:54ch}
 .game-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px 18px;margin:18px 0 22px;
-  padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  padding:14px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
 .game-facts div{display:grid;gap:2px}
-.game-facts b{font-family:var(--mono);font-weight:600;font-size:1rem}
-.game-facts span{font-size:.78rem;color:var(--ink-faint)}
+.game-facts b{font-family:var(--sans);font-weight:300;font-size:1.5rem;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
+.game-facts span{font-family:var(--cond);font-size:.88rem;color:var(--ink-faint)}
 .howto{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:10px;counter-reset:step}
 .howto li{display:flex;gap:12px;align-items:flex-start;color:var(--ink-soft)}
 .howto li>span{flex:1;min-width:0}
-.howto li::before{counter-increment:step;content:counter(step);font-family:var(--mono);font-size:.72rem;font-weight:600;
-  flex:none;width:26px;height:26px;border:1px solid var(--rule);border-radius:999px;display:grid;place-items:center;color:var(--ink)}
-.howto kbd{font-family:var(--mono);font-size:.72rem;border:1px solid var(--rule);border-bottom-width:2px;border-radius:5px;
-  padding:1px 6px;background:var(--chalk-deep);color:var(--ink)}
+.howto li::before{counter-increment:step;content:counter(step);font-family:var(--cond);font-size:.8rem;font-weight:600;
+  flex:none;width:26px;height:26px;border:1px solid var(--brown);border-radius:999px;display:grid;place-items:center;color:var(--ink)}
+.howto kbd{font-family:var(--cond);font-size:.82rem;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;
+  padding:1px 6px;background:var(--paper-deep);color:var(--ink)}
 .regions{margin:0 0 22px;padding:0;list-style:none;border-top:1px solid var(--rule)}
-.regions li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.92rem}
-.regions li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--ink-faint);white-space:nowrap}
-.game-intro .fine{font-size:.82rem;color:var(--ink-faint);max-width:52ch}
-/* ---------- games overview: all three at first sight (games page and home) ---------- */
+.regions li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.94rem}
+.regions li span{font-family:var(--cond);font-size:.86rem;color:var(--ink-faint);white-space:nowrap}
+.game-intro .fine{font-size:.86rem;color:var(--ink-faint);max-width:54ch}
+/* ---------- games overview: all three at first sight (games page) ---------- */
 .shelf .sec-head{margin-bottom:22px}
+.sec.shelf{padding-top:0}
 /* the stage section is a grid, so the hidden attribute needs saying out loud */
 .game-page[hidden]{display:none}
 .games-over{padding-block:clamp(26px,4vh,48px) clamp(20px,3vh,36px)}
-.games-over .sec-head h1{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:24ch;margin:12px 0 0}
+.games-over .sec-head h1{font-family:var(--display);font-weight:300;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1.06;
+  max-width:24ch;margin:12px 0 0}
 .games-over .sec-head .lede{margin:16px 0 0;max-width:64ch;color:var(--ink-soft)}
 .game-grid{display:grid;gap:22px;margin-top:30px}
 @media (min-width:780px){.game-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.game-card{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--rule);background:var(--chalk);
-  transition:border-color .16s ease,transform .16s ease}
-.game-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.game-card{position:relative;display:grid;grid-template-rows:auto 1fr;border:1px solid var(--rule);background:var(--paper-hi);
+  transition:border-color .5s var(--ease)}
+.game-card:hover{border-color:var(--ink)}
 .game-card.is-on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
-/* a game's thumbnail is a frame of the game itself, an <img loading=lazy> of
-   720 x 405 (assets/games/*-card.webp), so it loads only near the screen */
-.gc-thumb{display:block;overflow:hidden;background:var(--chalk-deep);border-bottom:1px solid var(--rule)}
-.gc-thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center top}
+/* a game's thumbnail is a frame of the game itself (assets/games/*-card.webp) */
+.gc-thumb{display:block;overflow:hidden;background:var(--paper-deep);border-bottom:1px solid var(--rule)}
+.gc-thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center top;
+  filter:saturate(.82)}
 .gc-body{display:flex;flex-direction:column;gap:11px;padding:18px 18px 20px}
-.gc-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.game-card h2,.game-card h3{font-size:1.35rem;line-height:1.2;margin:0}
+.gc-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.game-card h2,.game-card h3{font-family:var(--cond);font-weight:500;font-size:1.3rem;line-height:1.2;margin:0;letter-spacing:0}
 .game-card p{margin:0;color:var(--ink-soft);font-size:.95rem}
-.game-card .inst-meta{gap:3px 16px;line-height:1.5}
+.game-card .inst-meta{gap:2px 16px;line-height:1.5}
 .game-card .inst-actions{margin-top:auto;padding-top:6px}
-.game-card .chip.on-stage{display:none;background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.game-card .chip.on-stage{display:none;background:var(--ink);color:var(--paper);padding:3px 8px}
 .game-card.is-on .chip.on-stage{display:inline-block}
 .game-more{margin:22px 0 0}
 .game-page .back-row{grid-column:1/-1;margin-bottom:-14px}
-.back-all{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;
-  color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:2px}
+.back-all{font-family:var(--cond);font-size:.84rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink-faint);border-bottom:1px solid var(--brown);padding-bottom:2px}
 .back-all:hover{color:var(--ink);border-bottom-color:var(--ink)}
-@media (prefers-reduced-motion:reduce){.game-card{transition:none}.game-card:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.game-card{transition:none}}
 
-/* ---- the guide (reading.html) and its band on the home page */
-.tool-hero.plain .wrap{padding-block:clamp(48px,8vh,92px)}
-.tool-hero.plain h1{max-width:20ch}
+/* ---- the guide (reading.html) */
 .sec.guide{padding-bottom:clamp(48px,7vh,84px)}
 .guide .lede{margin:0 0 22px}
-/* a band that follows another on the home page opens with a rule across the
-   column, the space above it coming from the band before */
+/* a band that follows another opens with a rule across the column */
 .sec.sep{padding-top:0}
 .sep::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:clamp(44px,6.5vh,76px)}
 
 /* ---------- trust and understanding pages (Oct 2026) ----------
-   how-we-check.html, work.html and the new parts of the reading guide and the
-   explorer page. Colour stays on the evidence scale: a swatch carries the
-   tools' own colour for an IARC group (cancer tool --g1 ... --g3) or a chronic
-   grade (chronic tool --g-strong ... --g-conf); the label beside it carries the
-   meaning, so the swatch is hidden from screen readers. */
-:root{--ev-possible:#A98A25;--ev-ncl:#86867C;--ev-conflict:#63588F}
+   how-we-check.html, work.html and the reading guide. Colour stays on the
+   evidence scale: a swatch carries the tools' own colour for an IARC group or
+   a chronic grade; the label beside it carries the meaning, so the swatch is
+   hidden from screen readers. */
 .sw{display:inline-block;width:9px;height:9px;margin-inline-end:7px;flex:none;vertical-align:.02em}
 .sw.g1,.sw.strong{background:var(--madder)}
 .sw.g2a,.sw.moderate{background:var(--sage)}
@@ -601,69 +801,63 @@ html[lang="zh"] .tl-card .r{letter-spacing:.02em}
 /* visually hidden, still read by screen readers */
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);
     white-space:nowrap;border:0}
-/* long URLs in the citations wrap inside the line on a phone */
 .cite-line{overflow-wrap:anywhere}
 
 /* reading guide: the ideas are h2 in the outline and keep the h3 scale */
-.read h2{font-size:clamp(1.1rem,1.9vw,1.4rem);line-height:1.22;font-weight:600;margin:0 0 8px}
-html[lang="zh"] .read h2{font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.4}
+.read h2{font-family:var(--cond);font-size:var(--f-h3);line-height:1.28;font-weight:500;margin:0 0 8px;letter-spacing:0}
+html[lang="zh"] .read h2{font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.45}
 .read p + p{margin-top:12px}
-.see{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:16px 0 0}
+.see{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:16px 0 0}
 .read .see{margin-top:14px}
-.see .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+.see .k{font-family:var(--cond);font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
         color:var(--ink-faint)}
-html[lang="zh"] .see .k{letter-spacing:0}
 .see a,.more-list a,.hwc-links a,.hwc-cite a,.about-hwc a,.term-link,.work-table tbody th a,.beyond a{
-  text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(22,23,19,.4)}
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
 .see a:hover,.more-list a:hover,.hwc-links a:hover,.hwc-cite a:hover,.about-hwc a:hover,.term-link:hover,
 .work-table tbody th a:hover,.beyond a:hover{text-decoration-color:var(--ink)}
-.see a{font-size:.92rem}
+.see a{font-size:.94rem}
 
-/* the worked headline */
-.ex-head{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(1.25rem,2.4vw,1.7rem);
-         line-height:1.3;margin:0 0 14px;max-width:34ch}
-html[lang="zh"] .ex-head{font-style:normal;font-weight:600}
-.ex-steps{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--rule)}
+/* the worked headline: a quoted headline, set as one */
+.ex-head{font-family:var(--cond);font-weight:500;font-size:clamp(1.3rem,2.3vw,1.7rem);
+         line-height:1.28;margin:0 0 14px;max-width:34ch}
+.ex-steps{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--ink)}
 .ex-steps li{padding-block:18px;border-bottom:1px solid var(--rule);display:grid;gap:6px}
 @media (min-width:840px){.ex-steps li{grid-template-columns:186px minmax(0,1fr);gap:30px}}
-.ex-steps .tag{font-family:var(--mono);color:var(--ink-faint);font-size:.67rem;letter-spacing:.08em;
+.ex-steps .tag{font-family:var(--cond);color:var(--ink-faint);font-size:.75rem;letter-spacing:.13em;
                text-transform:uppercase;font-weight:600;padding-top:4px}
-html[lang="zh"] .ex-steps .tag{letter-spacing:0}
-.ex-steps p{margin:0;color:var(--ink-soft);max-width:62ch}
+.ex-steps p{margin:0;color:var(--ink-soft);max-width:64ch}
 html[lang="zh"] .ex-steps p{max-width:34em}
 
 /* tables: on a phone they scroll sideways inside their frame, with the first
    column held in place, and the page itself never does */
 .tbl-wrap{margin-top:28px;border-top:1px solid var(--ink);max-width:100%}
-.tbl-wrap:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.tbl-wrap:focus-visible{outline:2px solid var(--water-ink);outline-offset:4px}
 @media (max-width:760px){.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}}
-.lbl-table,.work-table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.5}
+.lbl-table,.work-table{width:100%;border-collapse:collapse;font-size:.92rem;line-height:1.5}
 .lbl-table th,.lbl-table td,.work-table th,.work-table td{text-align:start;vertical-align:top;
   padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
-.lbl-table thead th,.work-table thead th{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;
+.lbl-table thead th,.work-table thead th{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;
   text-transform:uppercase;font-weight:600;color:var(--ink-faint);padding-block:10px;vertical-align:bottom}
-html[lang="zh"] .lbl-table thead th,html[lang="zh"] .work-table thead th{letter-spacing:0}
 .lbl-table tbody th,.work-table tbody th{font-weight:600;color:var(--ink)}
 .lbl-table td,.work-table td{color:var(--ink-soft)}
 .lbl-table{table-layout:fixed;min-width:680px}
 .lbl-table .c-label{width:16%}.lbl-table .c-says{width:31%}.lbl-table .c-not{width:30%}.lbl-table .c-term{width:23%}
-.lbl-table .grp th{padding-top:28px;font-family:var(--display);font-size:1.02rem;font-weight:600;
+.lbl-table .grp th{padding-top:28px;font-family:var(--cond);font-size:1.1rem;font-weight:500;
   border-bottom:1px solid var(--ink)}
-.lbl-table .grp .tool{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
-html[lang="zh"] .lbl-table .grp .tool{letter-spacing:0}
-.lbl-table .old th,.lbl-table .old td{color:var(--ink-faint);font-size:.86rem}
-.term-link{display:inline-block;margin-top:8px;font-size:.86rem}
-.lbl-note{margin:20px 0 0;max-width:72ch;color:var(--ink-soft);font-size:.92rem;
-          border-left:3px solid var(--rule);padding-left:16px}
+.lbl-table .grp .tool{display:block;font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:600;color:var(--ink-faint);margin-bottom:4px}
+.lbl-table .old th,.lbl-table .old td{color:var(--ink-faint);font-size:.88rem}
+.term-link{display:inline-block;margin-top:8px;font-size:.88rem}
+.lbl-note{margin:20px 0 0;max-width:72ch;color:var(--ink-soft);font-size:.94rem;
+          border-inline-start:2px solid var(--brown);padding-inline-start:16px}
 /* phones: the first column stays in view while the rest scrolls; a soft
    shadow at the right edge says there is more, and goes once the end shows */
 @media (max-width:760px){
   .tbl-wrap{background:
-      linear-gradient(to right,rgba(245,244,240,0),var(--chalk) 70%) right center/36px 100% no-repeat local,
-      radial-gradient(farthest-side at 100% 50%,rgba(22,23,19,.18),rgba(22,23,19,0)) right center/12px 100% no-repeat scroll}
+      linear-gradient(to right,rgba(241,240,234,0),var(--paper) 70%) right center/36px 100% no-repeat local,
+      radial-gradient(farthest-side at 100% 50%,rgba(34,36,31,.18),rgba(34,36,31,0)) right center/12px 100% no-repeat scroll}
   .lbl-table tbody th[scope="row"],.work-table tbody th{position:sticky;left:0;z-index:1;
-    background:var(--chalk);box-shadow:1px 0 0 var(--rule);overflow-wrap:anywhere;hyphens:auto}
+    background:var(--paper);box-shadow:1px 0 0 var(--rule);overflow-wrap:anywhere;hyphens:auto}
   .lbl-table{min-width:600px}
   .lbl-table .c-label{width:124px}.lbl-table .c-says,.lbl-table .c-not,.lbl-table .c-term{width:auto}
   .lbl-table .grp .gh{display:block;position:sticky;left:0;max-width:calc(100vw - 2 * var(--pad))}
@@ -675,17 +869,17 @@ html[lang="zh"] .lbl-table .grp .tool{letter-spacing:0}
 .more-list{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:72ch}
 .quiz-h{margin:44px 0 6px}
 .quiz-hint{margin:0;color:var(--ink-soft)}
-.quiz{margin-top:16px;border-top:1px solid var(--rule);max-width:860px}
+.quiz{margin-top:16px;border-top:1px solid var(--ink);max-width:860px}
 .quiz details{border-bottom:1px solid var(--rule)}
 .quiz summary{cursor:pointer;padding:16px 34px 16px 0;font-weight:600;list-style:none;position:relative}
 .quiz summary::-webkit-details-marker{display:none}
-.quiz summary::after{content:"+";position:absolute;right:6px;top:13px;font-family:var(--mono);
-  font-size:1.15rem;font-weight:400;color:var(--ink-faint)}
+.quiz summary::after{content:"+";position:absolute;right:6px;top:13px;font-family:var(--cond);
+  font-size:1.25rem;font-weight:400;color:var(--brown-ink)}
 .quiz details[open] summary::after{content:"\2212"}
 .quiz details p{margin:0 0 18px;color:var(--ink-soft);max-width:66ch}
 
 /* explorer page: the two new sentences and the labels block */
-.exp-more{margin:26px 0 0;max-width:62ch;color:var(--ink-soft)}
+.exp-more{margin:26px 0 0;max-width:64ch;color:var(--ink-soft)}
 html[lang="zh"] .exp-more{max-width:34em}
 .lbl-figs{margin-top:26px}
 .lbl-figs .fig .k{display:flex;align-items:baseline;flex-wrap:wrap}
@@ -693,18 +887,19 @@ html[lang="zh"] .exp-more{max-width:34em}
 /* How we check */
 .hwc-grid{display:grid;gap:18px}
 @media (min-width:860px){.hwc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.hwc-card{border:1px solid var(--rule);padding:22px 22px 18px;display:grid;gap:12px;align-content:start}
+.hwc-card{position:relative;border:1px solid var(--rule);background:var(--paper-hi);padding:24px 24px 20px;display:grid;
+  gap:12px;align-content:start}
 .hwc-card h3{margin:0}
 .hwc-card ul{margin:0;padding-left:18px;display:grid;gap:9px;color:var(--ink-soft)}
-.hwc-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:2px 0 0;font-size:.9rem}
+.hwc-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:2px 0 0;font-size:.92rem}
 .hwc-ver .hwc-links{margin-top:8px}
-.hwc-ai{margin:24px 0 0;color:var(--ink-soft);max-width:72ch;border-left:3px solid var(--ink);padding-left:16px}
-.hwc-ver{margin:0;display:grid;border-top:1px solid var(--rule)}
+.hwc-ai{margin:24px 0 0;color:var(--ink-soft);max-width:72ch;border-inline-start:2px solid var(--brown);padding-inline-start:16px}
+.hwc-ver{margin:0;display:grid;border-top:1px solid var(--ink)}
 .hwc-ver > div{display:grid;gap:6px;padding-block:18px;border-bottom:1px solid var(--rule)}
 @media (min-width:760px){.hwc-ver > div{grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px}}
 .hwc-ver dt{font-weight:600}
-.hwc-ver dd{margin:0;color:var(--ink-soft);max-width:64ch}
-.hwc-ver .v{display:block;font-family:var(--mono);font-weight:600;font-size:.92rem;color:var(--ink);margin-bottom:4px}
+.hwc-ver dd{margin:0;color:var(--ink-soft);max-width:66ch}
+.hwc-ver .v{display:block;font-family:var(--cond);font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:4px}
 .hwc-cite{margin:18px 0 0}
 .lede.hwc-not{color:var(--ink);font-weight:600}
 .hwc-fields{margin:16px 0 24px;padding-left:22px;display:grid;gap:6px}
@@ -712,156 +907,52 @@ html[lang="zh"] .exp-more{max-width:34em}
 .about-hwc{margin:22px 0 0}
 
 /* Work and cancer */
-.tool-hero .work-note{margin-top:14px;font-size:.95rem}
+.tool-hero .work-note{margin-top:14px;font-size:.96rem}
 .work-toc ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.work-toc a{display:inline-flex;align-items:baseline;gap:8px;min-height:36px;padding:8px 12px;font-size:.86rem;
-  text-decoration:none;border:1px solid var(--rule)}
+.work-toc a{display:inline-flex;align-items:baseline;gap:8px;min-height:36px;padding:8px 12px;font-family:var(--cond);
+  font-size:.95rem;text-decoration:none;border:1px solid var(--rule);background:var(--paper-hi)}
 .work-toc a:hover{border-color:var(--ink)}
-.work-toc .n,.work-sec h2 .n{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--ink-faint);
+.work-toc .n,.work-sec h2 .n{font-family:var(--cond);font-size:.82rem;font-weight:600;color:var(--ink-faint);
   font-variant-numeric:tabular-nums}
 .work-sec{margin-top:clamp(44px,7vh,72px)}
-.work-sec h2{font-size:clamp(1.3rem,2.3vw,1.8rem);line-height:1.2}
-html[lang="zh"] .work-sec h2{font-size:clamp(1.2rem,2.1vw,1.6rem)}
+.work-sec h2{font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.2}
+html[lang="zh"] .work-sec h2{font-size:clamp(1.2rem,2vw,1.55rem)}
 .work-table{min-width:720px}
 .work-table .c-agent{width:23%}.work-table .c-label{width:17%}.work-table .c-est{width:25%}
 .work-table .c-sus{width:24%}.work-table .c-ev{width:11%}
-.work-table td .n{font-family:var(--mono);font-weight:600;color:var(--ink);margin-inline-end:4px;
+.work-table td .n{font-family:var(--cond);font-weight:600;color:var(--ink);margin-inline-end:4px;
   font-variant-numeric:tabular-nums}
-.work-table .gc{display:block;margin-top:2px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;
+.work-table .gc{display:block;margin-top:2px;font-family:var(--cond);font-size:.8rem;letter-spacing:.02em;
   color:var(--ink-faint);white-space:nowrap}
-.work-table .ev{font-family:var(--mono);font-size:.76rem;white-space:nowrap}
-.work-find{margin-top:48px;padding:22px 24px;border:1px solid var(--rule);background:var(--chalk-deep);
+.work-table .ev{font-family:var(--cond);font-size:.86rem;white-space:nowrap}
+.work-find{margin-top:48px;padding:24px 26px;border:1px solid var(--rule);background:var(--paper-deep);
   display:grid;gap:14px;justify-items:start}
-.work-find p{margin:0;color:var(--ink-soft);max-width:62ch}
-.ecac-note{margin:0 0 14px;color:var(--ink-faint);font-size:.82rem;max-width:70ch}
-.ecac-note.summary{padding:10px 14px;border:1px dashed var(--rule);border-radius:10px;color:var(--ink-soft)}
-blockquote.ecac{margin:0;max-width:64ch;border-left:3px solid var(--ink);padding:4px 0 4px 20px}
-.ecac .ecac-t{margin:0 0 8px;font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1.3}
-.ecac .ecac-t .n{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--ink-faint);margin-inline-end:6px}
+.work-find p{margin:0;color:var(--ink-soft);max-width:64ch}
+.ecac-note{margin:0 0 14px;color:var(--ink-faint);font-size:.86rem;max-width:70ch}
+.ecac-note.summary{padding:10px 14px;border:1px dashed var(--rule);color:var(--ink-soft)}
+blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink);padding:4px 0 4px 20px}
+.ecac .ecac-t{margin:0 0 8px;font-family:var(--cond);font-weight:500;font-size:1.2rem;line-height:1.3}
+.ecac .ecac-t .n{font-family:var(--cond);font-size:.9rem;font-weight:600;color:var(--ink-faint);margin-inline-end:6px}
 .ecac p{margin:0}
-.ecac-src{margin:14px 0 0;font-size:.9rem}
-.ecac-src a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(22,23,19,.4)}
-.ecac-why{margin:18px 0 0;font-size:.88rem;color:var(--ink-soft);max-width:72ch;overflow-wrap:anywhere}
-.ecac-why .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+.ecac-src{margin:14px 0 0;font-size:.92rem}
+.ecac-src a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
+.ecac-why{margin:18px 0 0;font-size:.9rem;color:var(--ink-soft);max-width:72ch;overflow-wrap:anywhere}
+.ecac-why .k{font-family:var(--cond);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
   color:var(--ink-faint);margin-inline-end:6px}
-html[lang="zh"] .ecac-why .k{letter-spacing:0}
-.ecac-why a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(22,23,19,.4)}
-.beyond{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--rule)}
+.ecac-why a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(34,36,31,.35)}
+.beyond{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--ink)}
 .beyond > li{display:grid;gap:8px;padding-block:16px;border-bottom:1px solid var(--rule)}
 @media (min-width:760px){.beyond > li{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:28px}}
 .beyond .bn{font-weight:600;justify-self:start}
 .beyond .bl{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.beyond .bl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:.92rem}
-.beyond .gr{font-family:var(--mono);font-size:.74rem;color:var(--ink-soft);white-space:nowrap}
-.beyond .rel{margin:6px 0 0;font-size:.82rem;color:var(--ink-faint)}
-
-/* ---------- front door (Batch 6, Oct 2026) ---------- */
-
-/* site search (assets/search.js; markup in templates/index.html, work.html and
-   404.html; records/b6-search-markup.html) */
-.search{max-width:680px}
-.hero .search{margin-top:22px}
-.search-label{display:block;margin-bottom:8px}
-.search-box{position:relative;display:flex;align-items:stretch;background:#fff;border:1px solid var(--ink)}
-.search-box:focus-within{box-shadow:inset 0 0 0 1px var(--ink)}
-.search-input{flex:1 1 auto;min-width:0;padding:14px 16px;border:0;border-radius:0;background:transparent;
-  color:var(--ink);font:inherit;font-size:1rem;line-height:1.3;text-overflow:ellipsis;-webkit-appearance:none;appearance:none}
-.search-input:focus{outline:0}
-.search-input::placeholder{color:var(--ink-faint);opacity:1}
-.search-go{flex:none;display:grid;place-items:center;width:52px;min-height:44px;border:0;border-left:1px solid var(--rule);
-  background:transparent;color:var(--ink);cursor:pointer}
-.search-go:hover{background:var(--ink);color:var(--chalk)}
-.search-go svg{display:block}
-.search-list{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;max-height:min(70vh,30rem);overflow-y:auto;
-  overscroll-behavior:contain;background:var(--chalk);border:1px solid var(--ink);border-top-color:var(--rule);
-  box-shadow:0 14px 30px rgba(22,23,19,.14)}
-.search-list[hidden]{display:none}
-.search-gh{padding:12px 16px 6px;font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
-  font-weight:600;color:var(--ink-faint)}
-.search-opt{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;min-height:44px;
-  padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink);text-decoration:none}
-.search-opt:hover,.search-opt.is-active{background:var(--ink);color:var(--chalk)}
-.search-n{font-weight:600;overflow-wrap:anywhere}
-.search-m{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint)}
-.search-opt:hover .search-m,.search-opt.is-active .search-m{color:inherit}
-.search-msg{position:absolute;z-index:30;top:100%;left:-1px;right:-1px;margin:0;padding:12px 16px;background:var(--chalk);
-  border:1px solid var(--rule);color:var(--ink-soft);font-size:.9rem}
-/* stays in the page so screen readers hear the text when it appears */
-.search-msg:empty{height:0;padding:0;border:0;overflow:hidden}
-.search-try{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:14px 0 0}
-.search-chip{display:inline-flex;align-items:center;min-height:36px;padding:4px 14px;border:1px solid var(--rule);
-  color:var(--ink);font-family:var(--mono);font-size:.78rem;text-decoration:none;background:var(--chalk)}
-.search-chip:hover{border-color:var(--ink)}
-html[lang="zh"] .search-gh{letter-spacing:0}
-@media (forced-colors:active){
-  .search-box:focus-within,.search-opt.is-active{outline:2px solid CanvasText;outline-offset:-2px}
-}
-.work-find .search{width:100%}
-.page-404{padding-top:10vh;padding-bottom:12vh}
-.page-404 .search{margin-top:26px}
-
-/* a small label that is a heading in the outline (the question cards, What's
-   new) keeps the label's type in every language */
-h2.label,html[lang="zh"] h2.label{font-family:var(--mono);font-size:.68rem;line-height:1.5;font-weight:600;
-  letter-spacing:.1em;max-width:none}
-html[lang="zh"] h2.label{letter-spacing:0}
-
-/* four questions, answered by sentences quoted from the tools */
-.sec.qa{padding-block:clamp(24px,3.4vh,40px) clamp(20px,3vh,36px)}
-.qa-h{margin:0 0 14px}
-html[lang="zh"] .qa-h{letter-spacing:0}
-.qa-grid{list-style:none;margin:0;padding:0;display:grid;gap:26px 22px}
-@media (min-width:640px){.qa-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1080px){.qa-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.qa-card{display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:2px solid var(--ink);min-width:0}
-.qa-card h3{font-size:clamp(1.05rem,1.35vw,1.18rem);line-height:1.25;margin:0}
-/* the kicker is EpiDetective's own short answer above the quoted one: the body
-   face at 13 px (the mono at 11.2 px fell back to a system monospace in
-   Chinese and Russian and read as small print) */
-.qa-k{margin:0;font-family:var(--body);font-size:.8125rem;line-height:1.45;color:var(--ink-soft);font-weight:600}
-.qa-a{margin:0;padding-left:12px;border-left:2px solid var(--rule)}
-.qa-a p{margin:0;font-size:.875rem;line-height:1.48;color:var(--ink-soft);text-wrap:pretty}
-.qa-src{margin:0;font-size:.74rem;line-height:1.45;color:var(--ink-faint)}
-.qa-go{margin:auto 0 0;display:flex;flex-direction:column;align-items:flex-start}
-.qa-go a{display:inline-flex;align-items:center;min-height:26px;padding-block:2px;font-size:.88rem;font-weight:600;
-  text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(22,23,19,.4)}
-.qa-go a:hover{text-decoration-color:var(--ink)}
-.qa-go a + a{color:var(--ink-soft);font-weight:500}
-
-/* the tools follow the questions: a compact head, the buttons under each name */
-#instruments{padding-block:clamp(24px,3.4vh,44px) clamp(26px,4vh,44px)}
-#instruments .sec-head{margin-bottom:12px}
-#instruments .sec-head h2{margin-bottom:0}
-#instruments .inst{padding-block:24px}
-#instruments .sec-head h2{max-width:none}
-.inst-main > .inst-actions{margin:2px 0 4px}
-
-/* what you can do: the Code Against Cancer card */
-.sec.code-home{padding-top:clamp(30px,4.5vh,48px)}
-.code-card{display:grid;gap:16px 40px;padding:24px 26px;border:1px solid var(--ink);background:var(--chalk-deep)}
-@media (min-width:900px){.code-card{grid-template-columns:minmax(0,1fr) auto;align-items:end}}
-.code-card h2{margin:10px 0 10px;font-size:clamp(1.35rem,2.3vw,1.8rem)}
-.code-card p{margin:0;color:var(--ink-soft);max-width:64ch}
-html[lang="zh"] .code-card p{max-width:34em}
-/* the faint ink is 4.3:1 on the recessed bands (chalk-deep), under the 4.5:1
-   that small text needs, so labels and notes on them take the soft ink */
-.code-card .label,.work-find .label,.cta-band .label,.cta-band .disc{color:var(--ink-soft)}
-
-/* how we check, and what is new */
-.trust-grid{display:grid;gap:40px}
-@media (min-width:900px){.trust-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px}}
-.trust-hwc h2{margin:14px 0 14px;font-size:clamp(1.4rem,2.6vw,2.1rem);max-width:24ch}
-html[lang="zh"] .trust-hwc h2{font-size:clamp(1.35rem,2.4vw,1.9rem);max-width:14em}
-.trust-hwc h2 b{font-weight:inherit;font-style:italic}
-html[lang="zh"] .trust-hwc h2 b{font-style:normal;font-weight:700}
-.trust-hwc .lede{margin:0 0 20px}
-.trust-news .label{margin:0}
-.news{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--rule)}
-.news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.92rem;line-height:1.5}
+.beyond .bl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:.94rem}
+.beyond .gr{font-family:var(--cond);font-size:.86rem;color:var(--ink-soft);white-space:nowrap}
+.beyond .rel{margin:6px 0 0;font-size:.86rem;color:var(--ink-faint)}
 
 /* games page: the evidence behind each game, for adults (Batch 7) */
-.game-adults{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center;margin:10px 0 0;font-size:.92rem}
-.game-adults a{display:inline-flex;align-items:center;min-height:32px;color:var(--ink);font-weight:600;text-underline-offset:3px}
+.game-adults{display:flex;flex-wrap:wrap;gap:0 20px;align-items:center;margin:10px 0 0;font-size:.94rem}
+.game-adults a{display:inline-flex;align-items:center;min-height:32px;color:var(--ink);font-weight:600;
+  text-decoration-color:var(--brown);text-underline-offset:4px}
 .game-adults a+a{color:var(--ink-soft);font-weight:500}
 
 /* target size: a link that stands on its own is at least 24 px tall; a link
@@ -869,34 +960,37 @@ html[lang="zh"] .trust-hwc h2 b{font-style:normal;font-weight:700}
 .crumb a,.see a,.more-list a,.hwc-links a,.hwc-cite a,.about-hwc a,.term-link,.ecac-src a,.back-all,
 .stage-cap a,.contact-email{display:inline-flex;align-items:center;min-height:24px}
 .contact-email{padding-top:3px}
-/* a short crumb (zh 工具) is still 24 px wide */
 .crumb a{min-width:24px;justify-content:center}
 .work-table tbody th a,.beyond a,.ecac-why a,.creds a,.cite-line a{padding-block:4px}
 
 /* ---------- print ---------- */
 /* A printed page keeps the text and the sources: no menus, search, buttons or
-   decoration, black on white, and the web address after each outside link in
-   the running text. The reading guide opens its folded answers before
-   printing (a small script on that page). */
+   decoration, black on white, and the web address after each outside link. */
 @media print{
   @page{margin:16mm 15mm}
   html{scroll-padding-top:0;scroll-behavior:auto}
   body{background:#fff;color:#000;font-size:11pt;overflow:visible}
-  .skip,.top .top-right,.search,.inst-actions,.qa-go,.game-more,.hero-net,.hero-veil,.tool-hero .net,
-  .tool-hero .veil,.thumb,.gc-thumb,.stage,.back-row,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,
-  .game-adults,.search-try{display:none!important}
+  .skip,.top .top-right,.search,.inst-actions,.ts-acts,.qa-go,.game-more,.map-ground,.map-key,.sheet::before,
+  .sheet::after,.tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.gl-img,
+  .stage,.back-row,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,.routes,
+  .sec-links{display:none!important}
   .top{position:static;background:none;border-bottom:1px solid #999;backdrop-filter:none;-webkit-backdrop-filter:none}
   .top .wrap{clip-path:none}
-  .hero,.tool-hero{border-bottom:1px solid #999}
-  .hero .wrap,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap{padding-block:14pt}
+  .cover{padding:0}
+  .sheet,.map,.title-block{border:0;outline:0;box-shadow:none;min-height:0;padding:0;display:block}
+  .tool-hero{border-bottom:1px solid #999}
+  .title-block,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap,.band-in{padding-block:14pt}
+  .band{background:none;border:0}
   .sep::before{margin-bottom:14pt}
   .wrap{max-width:none;padding-inline:0}
   h1{font-size:24pt}
   h2{font-size:16pt}
   h1,h2,h3{break-after:avoid}
-  .qa-card,.inst,.hwc-card,.code-card,.game-card,.read,.ex-steps li,.beyond > li,.quiz details{break-inside:avoid}
-  .lede,.read p,.inst p,.about p,.game-intro p,.qa-a p,.news li{color:#000}
-  .code-card,.cta-band{background:none}
+  .tool-sheet,.lesson,.qa-row,.key-list li,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
+  .quiz details{break-inside:avoid}
+  .tool-sheet{background:none}
+  .lede,.read p,.inst p,.about p,.game-intro p,.qa-a p,.news li,.key-says,.ts-q{color:#000}
+  .cta-band{background:none}
   .foot{background:none;color:#000;border-top:1px solid #999}
   .foot .wrap{padding-block:12pt 0}
   .foot .mark,.foot .tag,.disc,.disc.affil,.foot-bot{color:#000}
@@ -906,4 +1000,3 @@ html[lang="zh"] .trust-hwc h2 b{font-style:normal;font-weight:700}
   .see a[href^="http"]::after,.more-list a[href^="http"]::after,.ecac-src a::after,.hwc-links a[href^="http"]::after{
     content:" (" attr(href) ")";font-weight:400;font-size:.85em;overflow-wrap:anywhere}
 }
-

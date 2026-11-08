@@ -1358,5 +1358,145 @@
   "home_games_label": {
     "label": "HOME — Games section: small label",
     "type": "string"
+  },
+  "home_lede": {
+    "label": "HOME — Line under the headline",
+    "type": "text"
+  },
+  "terrain_key_cause": {
+    "label": "HOME — Map key: filled triangle (exposure or risk factor)",
+    "type": "string"
+  },
+  "terrain_key_outcome": {
+    "label": "HOME — Map key: outlined triangle (cancer or disease)",
+    "type": "string"
+  },
+  "terrain_note": {
+    "label": "HOME — Note under the map",
+    "type": "string"
+  },
+  "tool1_q": {
+    "label": "TOOLS — Cancer tool: the question it answers",
+    "type": "text"
+  },
+  "tool1_src": {
+    "label": "TOOLS — Cancer tool: sources",
+    "type": "string"
+  },
+  "tool2_q": {
+    "label": "TOOLS — Chronic tool: the question it answers",
+    "type": "text"
+  },
+  "tool_start": {
+    "label": "TOOLS — “Start from” before the quick links",
+    "type": "string"
+  },
+  "fig_smokers": {
+    "label": "HOME — Scale figure: smokers row",
+    "type": "string"
+  },
+  "fig_never": {
+    "label": "HOME — Scale figure: lifelong non-smokers row",
+    "type": "string"
+  },
+  "fig_axis": {
+    "label": "HOME — Scale figure: axis caption",
+    "type": "string"
+  },
+  "tn_tobacco": {
+    "label": "Map label and quick link — Tobacco smoking (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_alcohol": {
+    "label": "Map label and quick link — Alcoholic drinks (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_processed": {
+    "label": "Map label and quick link — Processed meat (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_asbestos": {
+    "label": "Map label and quick link — Asbestos (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_nightshift": {
+    "label": "Map label and quick link — Night-shift work (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_radon": {
+    "label": "Map label and quick link — Radon gas (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_hpv": {
+    "label": "Map label and quick link — High-risk HPV (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_airpoll": {
+    "label": "Map label and quick link — Outdoor air pollution (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_inactivity": {
+    "label": "Map label and quick link — Low physical activity (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_salt": {
+    "label": "Map label and quick link — High salt intake (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_shortsleep": {
+    "label": "Map label and quick link — Short sleep (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_noise": {
+    "label": "Map label and quick link — Road traffic noise (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_lonely": {
+    "label": "Map label and quick link — Social isolation and loneliness (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_bp": {
+    "label": "Map label and quick link — High blood pressure (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_lung": {
+    "label": "Map label and quick link — Lung cancer (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_breast": {
+    "label": "Map label and quick link — Breast cancer (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_colon": {
+    "label": "Map label and quick link — Colon cancer (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_liver": {
+    "label": "Map label and quick link — Liver cancer (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_chd": {
+    "label": "Map label and quick link — Coronary heart disease (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_stroke": {
+    "label": "Map label and quick link — Ischaemic stroke (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_t2d": {
+    "label": "Map label and quick link — Type 2 diabetes (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_dementia": {
+    "label": "Map label and quick link — Dementia (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_copd": {
+    "label": "Map label and quick link — COPD (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn_depression": {
+    "label": "Map label and quick link — Depression (no straight quotes or &)",
+    "type": "string"
   }
 }
