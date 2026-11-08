@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{meta_home_title}}</title>
 <meta name="description" content="{{meta_home_desc}}">
-<meta name="theme-color" content="#F5F4F0">
+<meta name="theme-color" content="#F1F0EA">
 <link rel="canonical" href="{{CANONICAL}}">
 {{HREFLANG}}
 <meta property="og:type" content="website">
@@ -27,8 +27,13 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="{{PREFIX}}assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{PREFIX}}assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{PREFIX}}assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{PREFIX}}site.css">
+<!-- without JavaScript the cover shows a faint still of the contour map (the
+     canvas draws the moving one, labels and all); with it, the still is never
+     requested. The key to the labels goes too: there are none to explain. -->
+<noscript><style>.map-ground{background:url({{PREFIX}}assets/contours.svg) center/cover no-repeat;opacity:.55}.map-key{visibility:hidden}</style></noscript>
 {{JSONLD_HOME}}
 </head>
 <body>
@@ -53,172 +58,260 @@
 
 <main id="content" tabindex="-1">
 
-<!-- Front door (Batch 6, Oct 2026): what the site answers, who makes it and for
-     whom, then the search. The search result list drops below the hero, so the
-     hero does not clip its content (site.css .hero). -->
-<section class="hero">
-  <div class="hero-net" aria-hidden="true"></div>
-  <div class="hero-veil" aria-hidden="true"></div>
-  <div class="wrap">
-    <h1>{{home_h1}}</h1>
-    <p class="hero-personal">{{home_personal}}</p>
-    <p class="hero-aud">{{home_audience}}</p>
-    <!-- Site search: markup from records/b6-search-markup.html, read by
-         assets/search.js (ids, classes and data-* attributes are its contract).
-         The values go into attributes: no straight double quote or ampersand. -->
-    <div class="search" data-search data-lang="{{LANG}}" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
-         data-loading="{{search_loading}}" data-none="{{search_none}}"
-         data-group-cancer="{{search_group_cancer}}" data-group-chronic="{{search_group_chronic}}" data-group-site="{{search_group_site}}"
-         data-lbl-1="{{search_lbl_group_1}}" data-lbl-2a="{{search_lbl_group_2A}}" data-lbl-2b="{{search_lbl_group_2B}}" data-lbl-3="{{search_lbl_group_3}}"
-         data-lbl-eval="{{search_lbl_eval}}" data-lbl-links="{{search_lbl_links}}">
-      <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
-        <label class="label search-label" id="site-search-label" for="site-search-q">{{search_label}}</label>
-        <div class="search-box">
-          <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="{{search_placeholder}}">
-          <input type="hidden" name="lang" value="{{LANG}}">
-          <button class="search-go" type="submit"><span class="vh">{{search_label}}</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-          <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
-          <p class="search-msg" role="status"></p>
+<!-- Cover (Terrain, Nov 2026): a map sheet. The contour field and its summit
+     labels are drawn by assets/terrain.js on the canvas; the names come from
+     both explorers (tn_* keys, separated by |; no straight double quote or
+     ampersand in them). The title block holds the site's scope, its readers
+     and the search; terrain.js keeps every label off it (data-terrain-avoid).
+     The search result list drops below the title block, so nothing here may
+     clip it (site.css .map). -->
+<section class="cover" aria-labelledby="cover-h">
+  <div class="sheet">
+    <div class="map">
+      <div class="map-ground" aria-hidden="true">
+        <canvas class="terrain" data-terrain
+          data-causes="{{tn_tobacco}}|{{tn_alcohol}}|{{tn_processed}}|{{tn_asbestos}}|{{tn_nightshift}}|{{tn_radon}}|{{tn_hpv}}|{{tn_airpoll}}|{{tn_inactivity}}|{{tn_salt}}|{{tn_shortsleep}}|{{tn_noise}}|{{tn_lonely}}|{{tn_bp}}"
+          data-outcomes="{{tn_lung}}|{{tn_breast}}|{{tn_colon}}|{{tn_liver}}|{{tn_chd}}|{{tn_stroke}}|{{tn_t2d}}|{{tn_dementia}}|{{tn_copd}}|{{tn_depression}}"></canvas>
+      </div>
+      <div class="title-block" data-terrain-avoid>
+        <h1 id="cover-h">{{home_h1}}</h1>
+        <p class="cover-lede">{{home_lede}}</p>
+        <p class="cover-aud">{{home_audience}}</p>
+        <!-- Site search: markup from records/b6-search-markup.html, read by
+             assets/search.js (ids, classes and data-* attributes are its contract).
+             The values go into attributes: no straight double quote or ampersand. -->
+        <div class="search" data-search data-lang="{{LANG}}" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
+             data-loading="{{search_loading}}" data-none="{{search_none}}"
+             data-group-cancer="{{search_group_cancer}}" data-group-chronic="{{search_group_chronic}}" data-group-site="{{search_group_site}}"
+             data-lbl-1="{{search_lbl_group_1}}" data-lbl-2a="{{search_lbl_group_2A}}" data-lbl-2b="{{search_lbl_group_2B}}" data-lbl-3="{{search_lbl_group_3}}"
+             data-lbl-eval="{{search_lbl_eval}}" data-lbl-links="{{search_lbl_links}}">
+          <form class="search-form" role="search" aria-labelledby="site-search-label" action="https://tools.epidetective.com/cancer/" method="get">
+            <label class="label search-label" id="site-search-label" for="site-search-q">{{search_label}}</label>
+            <div class="search-box">
+              <input class="search-input" id="site-search-q" name="q" type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="search" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-list" placeholder="{{search_placeholder}}">
+              <input type="hidden" name="lang" value="{{LANG}}">
+              <button class="search-go" type="submit"><span class="vh">{{search_label}}</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+              <div class="search-list" id="site-search-list" role="listbox" aria-labelledby="site-search-label" hidden></div>
+              <p class="search-msg" role="status"></p>
+            </div>
+          </form>
+          <p class="search-try"><span class="label">{{search_try}}</span>
+            <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX1}}&amp;lang={{LANG}}" data-q="{{search_ex1}}">{{search_ex1}}</a>
+            <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX2}}&amp;lang={{LANG}}" data-q="{{search_ex2}}">{{search_ex2}}</a>
+            <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX3}}&amp;lang={{LANG}}" data-q="{{search_ex3}}">{{search_ex3}}</a>
+          </p>
         </div>
-      </form>
-      <p class="search-try"><span class="label">{{search_try}}</span>
-        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX1}}&amp;lang={{LANG}}" data-q="{{search_ex1}}">{{search_ex1}}</a>
-        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX2}}&amp;lang={{LANG}}" data-q="{{search_ex2}}">{{search_ex2}}</a>
-        <a class="search-chip" href="https://tools.epidetective.com/cancer/?q={{Q_EX3}}&amp;lang={{LANG}}" data-q="{{search_ex3}}">{{search_ex3}}</a>
-      </p>
+      </div>
     </div>
   </div>
+  <!-- the key to the labels on the map -->
+  <div class="map-key">
+    <p class="mk-key"><span><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_cause}}</span>
+      <span><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{terrain_key_outcome}}</span></p>
+    <p class="mk-note">{{terrain_note}}</p>
+  </div>
+</section>
+
+<!-- The two explorers as map sheets: the question each answers, its figures
+     set as a legend, its sources, a few places to start, the two actions, and
+     its network as an inset (both pictures inline from build_site.py, no
+     request). The figures come split by build_site.py (FIG_*). -->
+<section class="sec wrap tools" id="instruments" aria-labelledby="tools-h">
+  <div class="sec-bar">
+    <h2 id="tools-h">{{inst_h2}}</h2>
+    <p class="label">{{inst_label}}</p>
+  </div>
+  <div class="sheets">
+    <article class="tool-sheet" aria-labelledby="t1-h">
+      <div class="ts-head">
+        <div class="ts-name">
+          <h3 id="t1-h">{{inst_t1_name}}</h3>
+          <p class="ts-q">{{tool1_q}}</p>
+        </div>
+        <div class="ts-inset" style="{{THUMB_CANCER_BG}}" aria-hidden="true"></div>
+      </div>
+      <ul class="ts-legend">
+        <li>{{FIG_T1_M1}}</li><li>{{FIG_T1_M2}}</li><li>{{FIG_T1_M3}}</li><li>{{FIG_T1_M4}}</li>
+      </ul>
+      <p class="ts-note">{{inst_t1_m5}}</p>
+      <p class="ts-row"><span class="label">{{hwc_src_label}}</span> <span>{{tool1_src}}</span></p>
+      <p class="ts-row ts-start"><span class="label">{{tool_start}}</span>
+        <a href="{{TL_LUNG}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_lung}}</a>
+        <a href="{{TL_BREAST}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_breast}}</a>
+        <a href="{{TL_TOBACCO}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_tobacco}}</a>
+        <a href="{{TL_ALCOHOL}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_alcohol}}</a></p>
+      <div class="ts-acts">
+        <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst_t1_btn_open}}</a>
+        <a class="tlink" href="{{URL_EXPLORER}}">{{inst_t1_btn_about}}</a>
+      </div>
+    </article>
+    <article class="tool-sheet" aria-labelledby="t2-h">
+      <div class="ts-head">
+        <div class="ts-name">
+          <h3 id="t2-h">{{inst_t2_name}}</h3>
+          <p class="ts-q">{{tool2_q}}</p>
+        </div>
+        <div class="ts-inset ts-inset-chronic" style="{{THUMB_CHRONIC_BG}}" aria-hidden="true"></div>
+      </div>
+      <ul class="ts-legend">
+        <li>{{FIG_T2_M1}}</li><li>{{FIG_T2_M2}}</li><li>{{FIG_T2_M3}}</li><li>{{FIG_T2_M4}}</li>
+      </ul>
+      <p class="ts-note">{{inst_t2_m6}}</p>
+      <p class="ts-row"><span class="label">{{hwc_src_label}}</span> <span>{{inst_t2_m5}}</span></p>
+      <p class="ts-row ts-start"><span class="label">{{tool_start}}</span>
+        <a href="{{TL_STROKE}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_stroke}}</a>
+        <a href="{{TL_T2D}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_t2d}}</a>
+        <a href="{{TL_DEMENTIA}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_dementia}}</a>
+        <a href="{{TL_CHD}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_chd}}</a></p>
+      <!-- the secondary action opens this tool's sources card on How we check -->
+      <div class="ts-acts">
+        <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst_t2_btn_open}}</a>
+        <a class="tlink" href="{{URL_HWC}}#chronic">{{inst_t2_btn_about}}</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- How sure is the evidence: the labels both tools print, as a map key. The
+     contour rings stand for height (most certain = most rings) in the colour
+     each tool gives the label; the words carry the meaning. Full table:
+     reading.html#labels. -->
+<section class="sec wrap evidence" id="evidence" aria-labelledby="ev-h">
+  <div class="sec-bar">
+    <h2 id="ev-h">{{lbl_h2}}</h2>
+  </div>
+  <div class="keys">
+    <div class="key-col">
+      <h3 class="key-h"><span class="label">{{inst_t1_name}}</span> {{lbl_cap_cause}}</h3>
+      <ol class="key-list">
+        <li><span class="elev e4 g1" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g1}}</b> <span>{{GRP_1}}</span></p><p class="key-says">{{lbl_g1_says}}</p></div></li>
+        <li><span class="elev e3 g2a" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g2a}}</b> <span>{{GRP_2A}}</span></p><p class="key-says">{{lbl_g2a_says}}</p></div></li>
+        <li><span class="elev e2 g2b" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g2b}}</b> <span>{{GRP_2B}}</span></p><p class="key-says">{{lbl_g2b_says}}</p></div></li>
+        <li><span class="elev e1 g3" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_g3}}</b> <span>{{GRP_3}}</span></p><p class="key-says">{{lbl_g3_says}}</p></div></li>
+      </ol>
+    </div>
+    <div class="key-col">
+      <h3 class="key-h"><span class="label">{{inst_t2_name}}</span> {{lbl_cap_chronic}}</h3>
+      <ol class="key-list">
+        <li><span class="elev e4 strong" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_strong}}</b></p><p class="key-says">{{lbl_strong_says}}</p></div></li>
+        <li><span class="elev e3 moderate" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_moderate}}</b></p><p class="key-says">{{lbl_moderate_says}}</p></div></li>
+        <li><span class="elev e2 suggestive" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_suggestive}}</b></p><p class="key-says">{{lbl_suggestive_says}}</p></div></li>
+        <li><span class="elev e1 weak" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_weak}}</b></p><p class="key-says">{{lbl_weak_says}}</p></div></li>
+        <li><span class="elev ec conflicting" aria-hidden="true"></span><div><p class="key-n"><b>{{lbl_conflicting}}</b></p><p class="key-says">{{lbl_conflicting_says}}</p></div></li>
+      </ol>
+    </div>
+  </div>
+  <p class="sec-links"><a class="tlink" href="{{URL_READING}}#labels">{{lbl_label}} &rarr;</a> <a class="tlink" href="{{URL_READING}}">{{read_home_btn}}</a></p>
 </section>
 
 <!-- Four questions a visitor brings, each answered by sentences quoted word for
      word from the published tool entries (en and zh; fr, es and ru translate
-     them and say so). The kicker above a quote is EpiDetective's own summary. -->
-<section class="sec wrap qa" id="questions" aria-labelledby="qa-h">
-  <h2 class="label qa-h" id="qa-h">{{qa_label}}</h2>
-  <ol class="qa-grid">
-    <li class="qa-card">
-      <h3>{{qa_q1}}</h3>
-      <blockquote class="qa-a" cite="{{TL_ASPARTAME}}"><p>{{qa_a1}}</p></blockquote>
-      <p class="qa-src">{{qa_from_cancer}}</p>
-      <p class="qa-go"><a href="{{TL_ASPARTAME}}">{{qa_go1}}</a></p>
-    </li>
-    <li class="qa-card">
+     them and say so). The kicker above a quote is EpiDetective's own summary.
+     The second question leads, with its lesson drawn to scale: lung cancer by
+     age 75 per 1,000 people, smokers 100 to 120, lifelong non-smokers 4 to 5
+     (the numbers in qa_a2); the axis runs 0 to 150. -->
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-bar">
+    <h2 id="qa-h">{{qa_label}}</h2>
+  </div>
+  <article class="lesson">
+    <div class="lesson-text">
       <h3>{{qa_q2}}</h3>
-      <p class="qa-k">{{qa_k2}}</p>
+      <p class="lesson-k">{{qa_k2}}</p>
       <blockquote class="qa-a" cite="{{TL_PROCESSED}}"><p>{{qa_a2}}</p></blockquote>
       <p class="qa-src">{{qa_from_cancer}}</p>
       <p class="qa-go"><a href="{{TL_PROCESSED}}">{{qa_go2}}</a> <a href="{{URL_READING}}#relative-absolute">{{qa_go2b}}</a></p>
+    </div>
+    <figure class="scale-fig">
+      <figcaption>{{fig_axis}}</figcaption>
+      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
+        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
+      <div class="sf-row"><span class="sf-who">{{fig_smokers}}</span>
+        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
+        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
+      <div class="sf-row"><span class="sf-who">{{fig_never}}</span>
+        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
+        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
+    </figure>
+  </article>
+  <ol class="qa-rows">
+    <li class="qa-row">
+      <h3>{{qa_q1}}</h3>
+      <div class="qa-body">
+        <blockquote class="qa-a" cite="{{TL_ASPARTAME}}"><p>{{qa_a1}}</p></blockquote>
+        <p class="qa-src">{{qa_from_cancer}}</p>
+        <p class="qa-go"><a href="{{TL_ASPARTAME}}">{{qa_go1}}</a></p>
+      </div>
     </li>
-    <li class="qa-card">
+    <li class="qa-row">
       <h3>{{qa_q3}}</h3>
-      <p class="qa-k">{{qa_k3}}</p>
-      <blockquote class="qa-a"><p>{{qa_a3}}</p></blockquote>
-      <p class="qa-src">{{qa_from_cancer}}</p>
-      <p class="qa-go"><a href="{{URL_WORK}}">{{qa_go3}}</a></p>
+      <div class="qa-body">
+        <p class="qa-k">{{qa_k3}}</p>
+        <blockquote class="qa-a"><p>{{qa_a3}}</p></blockquote>
+        <p class="qa-src">{{qa_from_cancer}}</p>
+        <p class="qa-go"><a href="{{URL_WORK}}">{{qa_go3}}</a></p>
+      </div>
     </li>
-    <li class="qa-card">
+    <li class="qa-row">
       <h3>{{qa_q4}}</h3>
-      <p class="qa-k">{{qa_k4}}</p>
-      <blockquote class="qa-a" cite="{{TL_STROKE}}"><p>{{qa_a4}}</p></blockquote>
-      <p class="qa-src">{{qa_from_chronic}}</p>
-      <p class="qa-go"><a href="{{TL_STROKE}}">{{qa_go4}}</a></p>
+      <div class="qa-body">
+        <p class="qa-k">{{qa_k4}}</p>
+        <blockquote class="qa-a" cite="{{TL_STROKE}}"><p>{{qa_a4}}</p></blockquote>
+        <p class="qa-src">{{qa_from_chronic}}</p>
+        <p class="qa-go"><a href="{{TL_STROKE}}">{{qa_go4}}</a></p>
+      </div>
     </li>
   </ol>
 </section>
 
-<section class="sec wrap" id="instruments">
-  <div class="sec-head">
-    <div class="label">{{inst_label}}</div>
-    <h2>{{inst_h2}}</h2>
-  </div>
-
-  <div class="rack">
-
-    <article class="inst">
-      <div class="inst-main">
-        <div class="inst-top">
-          <span class="chip live">{{inst_chip_live}}</span>
-          <h3>{{inst_t1_name}}</h3>
-        </div>
-        <!-- opening the tool is the primary action; the explainer page is the
-             secondary one. -->
-        <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_TOOL}}">{{inst_t1_btn_open}}</a>
-          <a class="btn btn-ghost" href="{{URL_EXPLORER}}">{{inst_t1_btn_about}}</a>
-        </div>
-        <p>{{inst_t1_desc}}</p>
-        <div class="inst-meta">
-          <span>{{inst_t1_m1}}</span><span>{{inst_t1_m2}}</span>
-          <span>{{inst_t1_m3}}</span><span>{{inst_t1_m4}}</span>
-          <span>{{inst_t1_m5}}</span>
-        </div>
-      </div>
-      <a href="{{URL_EXPLORER}}" class="thumb" aria-label="{{inst_t1_name}}"></a>
-    </article>
-
-    <article class="inst">
-      <div class="inst-main">
-        <div class="inst-top">
-          <span class="chip live">{{inst_chip_live}}</span>
-          <h3>{{inst_t2_name}}</h3>
-        </div>
-        <!-- the secondary action opens this tool's sources card on How we check -->
-        <div class="inst-actions">
-          <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst_t2_btn_open}}</a>
-          <a class="btn btn-ghost" href="{{URL_HWC}}#chronic">{{inst_t2_btn_about}}</a>
-        </div>
-        <p>{{inst_t2_desc}}</p>
-        <div class="inst-meta">
-          <span>{{inst_t2_m1}}</span><span>{{inst_t2_m2}}</span>
-          <span>{{inst_t2_m3}}</span><span>{{inst_t2_m4}}</span>
-          <span>{{inst_t2_m5}}</span><span>{{inst_t2_m6}}</span>
-        </div>
-      </div>
-      <!-- the picture comes inline from build_site.py (THUMB_CHRONIC_BG): no request -->
-      <a href="{{URL_TOOL2}}" class="thumb thumb-chronic" style="{{THUMB_CHRONIC_BG}}" aria-label="{{inst_t2_name}}"></a>
-    </article>
-
-  </div>
-</section>
-
-<!-- What you can do: the summary of the official Codes Against Cancer. -->
-<section class="sec wrap code-home" id="what-you-can-do">
-  <div class="code-card">
-    <div class="code-text">
-      <div class="label">{{code_home_label}}</div>
-      <h2>{{nav_prevention}}</h2>
-      <p>{{inst_cac_desc}}</p>
+<!-- What you can do: the summary of the official Codes Against Cancer. The two
+     dotted routes count the actions: 14 for Europe, 17 for Latin America and
+     the Caribbean (decoration; the sentence says it). -->
+<section class="band code-band" id="what-you-can-do" aria-labelledby="code-h">
+  <div class="wrap band-in">
+    <div class="band-head">
+      <p class="label">{{code_home_label}}</p>
+      <h2 id="code-h">{{nav_prevention}}</h2>
     </div>
-    <div class="inst-actions"><a class="btn btn-solid" href="{{URL_PREVENTION}}">{{code_home_btn}}</a></div>
+    <div class="band-body">
+      <p>{{inst_cac_desc}}</p>
+      <div class="routes" aria-hidden="true">
+        <span class="route" style="--n:14"></span>
+        <span class="route" style="--n:17"></span>
+      </div>
+      <a class="btn btn-solid" href="{{URL_PREVENTION}}">{{code_home_btn}}</a>
+    </div>
   </div>
 </section>
 
-<!-- The guide: seven ideas the tools lean on, and the table of what each label
-     says. -->
-<section class="sec wrap guide sep" id="reading">
-  <div class="sec-head">
-    <div class="label">{{read_label}}</div>
-    <h2>{{read_home_h2}}</h2>
+<!-- Games, for schools and families: small frames of the games, all cropped
+     alike; each opens the games page with that game on the stage. The pictures
+     load only when they come near the screen. -->
+<section class="sec wrap games-row" id="games" aria-labelledby="games-h">
+  <div class="sec-bar">
+    <h2 id="games-h">{{home_games_h2}}</h2>
+    <p class="label">{{home_games_label}}</p>
   </div>
-  <p class="lede">{{read_home_lede}}</p>
-  <div class="inst-actions">
-    <a class="btn btn-ghost" href="{{URL_READING}}">{{read_home_btn}}</a>
-    <a class="btn btn-ghost" href="{{URL_READING}}#labels">{{lbl_label}} &rarr;</a>
-  </div>
+  <ul class="game-list">
+    <li><a href="{{URL_GAMES}}#sun-safety"><span class="gl-img"><img src="{{PREFIX}}assets/games/sun-safety-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g1_card_alt}}"></span>
+      <span class="gl-txt"><span class="gl-name">Sol &amp; the UV Shield Quest</span><span class="gl-meta">{{games_g1_topic}} &middot; {{games_g1_m1}}</span></span></a></li>
+    <li><a href="{{URL_GAMES}}#lung-detective"><span class="gl-img"><img src="{{PREFIX}}assets/games/lung-detective-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g2_card_alt}}"></span>
+      <span class="gl-txt"><span class="gl-name">The Lung Detective</span><span class="gl-meta">{{games_g2_topic}} &middot; {{games_g2_m1}}</span></span></a></li>
+    <li><a href="{{URL_GAMES}}#town-of-1000"><span class="gl-img"><img src="{{PREFIX}}assets/games/town-of-1000-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g3_card_alt}}"></span>
+      <span class="gl-txt"><span class="gl-name">A Town of 1,000</span><span class="gl-meta">{{games_g3_topic}} &middot; {{games_g3_m1}}</span></span></a></li>
+  </ul>
+  <p class="sec-links"><a class="tlink" href="{{URL_GAMES}}">{{home_games_more}} &rarr;</a></p>
 </section>
 
 <!-- Trust: where the data come from and how errors are reported, next to what
      changed lately (newest first). -->
-<section class="sec wrap trust sep" id="how-we-check">
+<section class="sec wrap trust" id="how-we-check" aria-labelledby="trust-h">
   <div class="trust-grid">
     <div class="trust-hwc">
-      <div class="label">{{hwc_label}}</div>
-      <h2>{{hwc_home_h2}}</h2>
-      <p class="lede">{{hwc_rep_reply}}</p>
-      <div class="inst-actions">
-        <a class="btn btn-ghost" href="{{URL_HWC}}">{{hwc_home_btn}}</a>
-        <a class="btn btn-ghost" href="{{URL_HWC}}#report">{{foot_report}} &rarr;</a>
-      </div>
+      <p class="label">{{hwc_label}}</p>
+      <h2 id="trust-h">{{hwc_home_h2}}</h2>
+      <p class="trust-p">{{hwc_rep_reply}}</p>
+      <p class="sec-links"><a class="tlink" href="{{URL_HWC}}">{{hwc_home_btn}}</a> <a class="tlink" href="{{URL_HWC}}#report">{{foot_report}} &rarr;</a></p>
     </div>
     <div class="trust-news">
       <h2 class="label" id="news-h">{{news_label}}</h2>
@@ -229,48 +322,6 @@
       </ul>
     </div>
   </div>
-</section>
-
-<!-- Games, for schools and families. Each card opens the games page with that
-     game on the stage; the pictures load only when they come near the screen. -->
-<section class="sec wrap shelf sep" id="games">
-  <div class="sec-head">
-    <div class="label">{{home_games_label}}</div>
-    <h2>{{home_games_h2}}</h2>
-  </div>
-  <div class="game-grid">
-    <article class="game-card" data-game="sun-safety">
-      <a class="gc-thumb" href="{{URL_GAMES}}#sun-safety"><img src="{{PREFIX}}assets/games/sun-safety-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g1_card_alt}}"></a>
-      <div class="gc-body">
-        <div class="gc-top"><span class="chip live">{{games_g1_topic}}</span></div>
-        <h3>Sol &amp; the UV Shield Quest</h3>
-        <p>{{games_g1_desc}}</p>
-        <div class="inst-meta"><span>{{games_g1_m1}}</span><span>{{games_g1_m2}}</span><span>{{games_g1_m3}}</span></div>
-        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAMES}}#sun-safety">{{home_games_btn}}</a></div>
-      </div>
-    </article>
-    <article class="game-card" data-game="lung-detective">
-      <a class="gc-thumb" href="{{URL_GAMES}}#lung-detective"><img src="{{PREFIX}}assets/games/lung-detective-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g2_card_alt}}"></a>
-      <div class="gc-body">
-        <div class="gc-top"><span class="chip live">{{games_g2_topic}}</span></div>
-        <h3>The Lung Detective</h3>
-        <p>{{games_g2_desc}}</p>
-        <div class="inst-meta"><span>{{games_g2_m1}}</span><span>{{games_g2_m2}}</span><span>{{games_g2_m3}}</span></div>
-        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAMES}}#lung-detective">{{home_games_btn}}</a></div>
-      </div>
-    </article>
-    <article class="game-card" data-game="town-of-1000">
-      <a class="gc-thumb" href="{{URL_GAMES}}#town-of-1000"><img src="{{PREFIX}}assets/games/town-of-1000-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g3_card_alt}}"></a>
-      <div class="gc-body">
-        <div class="gc-top"><span class="chip live">{{games_g3_topic}}</span></div>
-        <h3>A Town of 1,000</h3>
-        <p>{{games_g3_desc}}</p>
-        <div class="inst-meta"><span>{{games_g3_m1}}</span><span>{{games_g3_m2}}</span><span>{{games_g3_m3}}</span></div>
-        <div class="inst-actions"><a class="btn btn-solid" href="{{URL_GAMES}}#town-of-1000">{{home_games_btn}}</a></div>
-      </div>
-    </article>
-  </div>
-  <p class="game-more"><a class="btn btn-ghost" href="{{URL_GAMES}}">{{home_games_more}}</a></p>
 </section>
 
 <!-- Notes section removed in the August 2026 pass: the section carried a single
@@ -308,5 +359,6 @@
 </footer>
 
 <script src="{{PREFIX}}assets/search.js" defer></script>
+<script src="{{PREFIX}}assets/terrain.js" defer></script>
 </body>
 </html>

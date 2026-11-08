@@ -24,7 +24,7 @@ English.
 
 ## Content
 
-All copy lives in `i18n/<lang>.json`, 211 keys each. `en.json` is the source of
+All copy lives in `i18n/<lang>.json`, 488 keys each. `en.json` is the source of
 truth for key parity. To change wording, edit the JSON and rebuild — never edit
 the generated HTML, it is overwritten.
 
@@ -33,14 +33,40 @@ alternates. No JavaScript is required for it to work.
 
 ## Typography
 
-`Fraunces` (display) and `DM Sans` (body) carry Latin. Neither contains a single
-Cyrillic glyph, so Russian substitutes `Playfair Display` and `Golos Text` —
-Golos being Cyrillic-first, so it reads native rather than bolted-on. Chinese
-uses a system CJK stack, since no CJK webfont is viable at this file size; there
-the display tracking is neutralised and `<em>` drops italic, because synthesised
-oblique on Han characters is a typographic error.
+The site sets in two faces of one family (the "Terrain" design, November 2026):
+`Sofia Sans` for running text and display, light (300) for the large headlines,
+and `Sofia Sans Semi Condensed` for section headings, labels, figures and the
+menus. Both carry Latin, Latin-ext and Cyrillic, so Russian sets in the same
+faces as English. They are self-hosted variable woff2 files in `assets/`
+(`sofiasans-*.woff2`, `sofiasanssc-*.woff2`), cut by Google Fonts into Latin,
+Latin-ext and Cyrillic and declared with `unicode-range`, so a page loads only
+the files its characters need; every page preloads the two Latin files. There
+is no italic file: emphasis in headings (`<b>`) is carried by weight, and
+`font-synthesis-style: none` keeps the browser from faking a slant. A metric
+fallback (`Sofia Sans Fallback`, Arial scaled to Sofia Sans's measure) keeps
+the swap from reflowing the page.
 
-Fonts in `assets/` are subset to the ranges actually used.
+Chinese sets its Latin letters and figures in Sofia Sans and Han in the
+system's CJK sans, since no CJK webfont is viable at this file size; there the
+display tracking is neutralised, measures are set in `em`, and emphasis is
+weight, never a synthesised oblique.
+
+`Literata` and `IBM Plex Mono` stay in `assets/` because the Code Against
+Cancer page, the timeline, the games and the chronic tool still use them.
+
+## The cover
+
+The home page opens on a contour map drawn by `assets/terrain.js` (no
+libraries): marching squares on seeded simplex noise, drifting very slowly,
+the field offset a little as the page scrolls, paused off screen and in a
+hidden tab, drawn once with `prefers-reduced-motion`. Small labels sit on the
+field's summits: names from both explorers (`tn_*` keys; a filled triangle for
+an exposure or risk factor, an outlined one for a cancer or disease), each
+fading in as its summit rises and out as it sinks, never over the title block
+or another label. Without JavaScript the cover shows `assets/contours.svg`, a
+still of the same field, which the inner pages also use behind their titles;
+`scripts/make_contours.js` writes it (`node scripts/make_contours.js
+assets/contours.svg`).
 
 ## The tools
 
@@ -90,7 +116,8 @@ before publishing.
 
 ## The network backgrounds
 
-Both thumbnails are static renders of the real graphs, not decoration.
+Both pictures (the map insets on the home page's tool sheets, written inline
+by the build) are static renders of the real graphs, not decoration.
 
 ```bash
 python3 make_network_svg.py     # assets/network.svg          185 exposures, 68 cancers, 469 links
