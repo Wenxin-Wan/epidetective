@@ -22,18 +22,17 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="EpiDetective. Объясняем эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
+<meta property="og:image:alt" content="EpiDetective. Объясняем наилучшие эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EpiDetective — научные данные о здоровье, открыто">
 <meta name="twitter:description" content="Личный проект Вэньсинь Вань, онкоэпидемиолога: бесплатные инструменты, которые показывают, что говорят опубликованные исследования о причинах рака и других хронических заболеваний и насколько прочна доказательная база. Данные о раке: Монографии МАИР.">
 <meta name="twitter:image" content="https://epidetective.com/assets/og/home-ru.png">
-<meta name="twitter:image:alt" content="EpiDetective. Объясняем эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
+<meta name="twitter:image:alt" content="EpiDetective. Объясняем наилучшие эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="../assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
 <noscript><style>.map-ground{background:url(../assets/contours.svg) center/cover no-repeat;opacity:.55}.map-key{visibility:hidden}</style></noscript>
 <script type="application/ld+json">
@@ -77,7 +76,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">Инструменты</a>
@@ -96,15 +95,13 @@
 <main id="content" tabindex="-1">
 
 <section class="cover" aria-labelledby="cover-h">
-  <div class="sheet">
-    <div class="map">
-      <div class="map-ground" aria-hidden="true">
-        <canvas class="terrain" data-terrain
-          data-causes="Курение табака|Алкогольные напитки|Обработанное мясо|Асбест|Работа в ночную смену|Радон (газ)|ВПЧ высокого онкогенного риска|Загрязнение атмосферного воздуха|Недостаток физической активности|Избыток соли|Слишком короткий сон|Шум дорожного движения|Социальная изоляция и одиночество|Высокое артериальное давление"
-          data-outcomes="Рак лёгкого|Рак молочной железы|Рак толстой кишки|Рак печени|Ишемическая болезнь сердца|Ишемический инсульт|Диабет 2-го типа|Деменция|ХОБЛ|Депрессия"></canvas>
-      </div>
+  <div class="map">
+    <div class="map-ground" aria-hidden="true">
+      <canvas class="terrain" data-terrain></canvas>
+    </div>
+    <div class="wrap map-in">
       <div class="title-block" data-terrain-avoid>
-        <h1 id="cover-h">Объясняем эпидемиологические данные <b>ради более здорового мира</b></h1>
+        <h1 id="cover-h">Объясняем наилучшие эпидемиологические данные <b>ради более здорового мира</b></h1>
         <p class="cover-lede">EpiDetective создаёт бесплатные инструменты, позволяющие самостоятельно изучать опубликованные исследования о здоровье.</p>
         <p class="cover-aud">Для любознательных читателей, врачей, студентов и журналистов.</p>
         <div class="search" data-search data-lang="ru" data-tools="https://tools.epidetective.com" data-index="/assets/search/"
@@ -131,10 +128,11 @@
       </div>
     </div>
   </div>
-  <div class="map-key">
-    <p class="mk-key"><span><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Воздействие или фактор риска</span>
-      <span><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Рак или заболевание</span></p>
-    <p class="mk-note">Названия взяты из обоих инструментов. Рельеф условный.</p>
+  <script type="application/json" id="terrain-data">{"items":[{"n":"Курение табака","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Tobacco%20smoking"],["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=smoking"]]},{"n":"Алкогольные напитки","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Alcoholic%20beverages"],["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=alcohol_heavy"]]},{"n":"Обработанное мясо","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Processed%20meat"],["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=processed_meat"]]},{"n":"Асбест","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Asbestos%20%28all%20forms%29"]]},{"n":"Работа в ночную смену","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Night%20shift%20work"],["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=night_shift"]]},{"n":"Радон (газ)","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Radon-222%20%26%20decay%20products"]]},{"n":"ВПЧ высокого онкогенного риска","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Human%20papillomavirus%20%28types%2016%2C18%2C31%2C33%2C35%2C39%2C45%2C51%2C52%2C56%2C58%2C59%29"]]},{"n":"Загрязнение атмосферного воздуха","o":0,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#exposure=Outdoor%20air%20pollution"],["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=pm25"]]},{"n":"Недостаток физической активности","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=low_pa"]]},{"n":"Избыток соли","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=high_sodium"]]},{"n":"Слишком короткий сон","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=short_sleep"]]},{"n":"Шум дорожного движения","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=traffic_noise"]]},{"n":"Социальная изоляция и одиночество","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=isolation"]]},{"n":"Высокое артериальное давление","o":0,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#risk=high_sbp"]]},{"n":"Рак лёгкого","o":1,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#cancer=Lung"]]},{"n":"Рак молочной железы","o":1,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#cancer=Breast"]]},{"n":"Рак толстой кишки","o":1,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#cancer=Colon"]]},{"n":"Рак печени","o":1,"u":[["Атлас доказательств: рак","https://tools.epidetective.com/cancer/?lang=ru#cancer=Liver"]]},{"n":"Ишемическая болезнь сердца","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=chd"]]},{"n":"Ишемический инсульт","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=stroke_isch"]]},{"n":"Диабет 2-го типа","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=t2d"]]},{"n":"Деменция","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=dementia"]]},{"n":"ХОБЛ","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=copd"]]},{"n":"Депрессия","o":1,"u":[["Атлас доказательств: хронические болезни","https://tools.epidetective.com/chronic/?lang=ru#disease=depression"]]}],"links":[[0,14,"Установленная связь"],[0,15,"Предполагаемая связь"],[0,16,"Установленная связь"],[0,17,"Установленная связь"],[0,18,"Высокий"],[0,19,"Высокий"],[0,20,"Высокий"],[0,21,"Умеренный"],[0,22,"Умеренный"],[0,23,"Умеренный"],[1,15,"Установленная связь"],[1,16,"Установленная связь"],[1,17,"Установленная связь"],[1,18,"Противоречивый"],[1,19,"Умеренный"],[1,21,"Предположительный"],[2,16,"Установленная связь"],[2,18,"Предположительный"],[2,20,"Умеренный"],[3,14,"Установленная связь"],[3,16,"Предполагаемая связь"],[4,15,"Предполагаемая связь"],[4,16,"Предполагаемая связь"],[4,18,"Предположительный"],[4,20,"Умеренный"],[5,14,"Установленная связь"],[7,14,"Установленная связь"],[7,18,"Высокий"],[7,19,"Умеренный"],[7,20,"Умеренный"],[7,21,"Предположительный"],[7,22,"Высокий"],[8,20,"Высокий"],[8,21,"Предположительный"],[8,23,"Умеренный"],[10,18,"Умеренный"],[10,20,"Предположительный"],[10,21,"Низкий"],[11,18,"Умеренный"],[12,18,"Предположительный"],[12,21,"Предположительный"],[12,23,"Предположительный"],[13,18,"Высокий"],[13,19,"Высокий"],[13,21,"Умеренный"]],"t":{"open":"Открыть в инструменте →","say":"{name}. Связи на карте: {list}.","say_none":"{name}. Связанных меток на карте сейчас нет.","say_off":"{name}. Сейчас этой метки нет на карте.","list":"Метки на карте: выберите одну, чтобы увидеть её связи","close":"Закрыть","key_cause":"Воздействие или фактор риска","key_outcome":"Рак или заболевание","open_in":"Открыть в инструменте","sep":", "}}</script>
+  <div class="wrap map-key">
+    <p class="mk-key"><span class="mk-c"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Воздействие или фактор риска</span>
+      <span class="mk-o"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Рак или заболевание</span></p>
+    <p class="mk-note"><span class="mk-hint">Выберите название, чтобы увидеть его связи.</span><span>Названия взяты из обоих инструментов. Рельеф условный.</span></p>
   </div>
 </section>
 
@@ -187,92 +185,10 @@
         <a href="https://tools.epidetective.com/chronic/?lang=ru#disease=chd"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>Ишемическая болезнь сердца</a></p>
       <div class="ts-acts">
         <a class="btn btn-solid" href="https://tools.epidetective.com/chronic/?lang=ru">Открыть &rarr;</a>
-        <a class="tlink" href="how-we-check.html#chronic">Об этом инструменте</a>
+        <a class="tlink" href="chronic.html">Об этом инструменте</a>
       </div>
     </article>
   </div>
-</section>
-
-<section class="sec wrap evidence" id="evidence" aria-labelledby="ev-h">
-  <div class="sec-bar">
-    <h2 id="ev-h">Обозначения обоих инструментов <b>рядом друг с другом</b>.</h2>
-  </div>
-  <div class="keys">
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">Атлас доказательств — рак</span> Насколько МАИР уверено, что фактор может вызывать рак</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 g1" aria-hidden="true"></span><div><p class="key-n"><b>Известная причина</b> <span>группа 1</span></p><p class="key-says">Фактор может вызывать рак у людей. В этой группе уверенность МАИР наибольшая.</p></div></li>
-        <li><span class="elev e3 g2a" aria-hidden="true"></span><div><p class="key-n"><b>Вероятная причина</b> <span>группа 2A</span></p><p class="key-says">Фактор, вероятно, вызывает рак у людей. Доказательств не хватает для группы 1, чаще всего потому, что исследования на людях дают лишь ограниченные данные.</p></div></li>
-        <li><span class="elev e2 g2b" aria-hidden="true"></span><div><p class="key-n"><b>Возможная причина</b> <span>группа 2B</span></p><p class="key-says">Фактор, возможно, вызывает рак у людей. В эту сторону указывает один вид доказательств, например ограниченные данные у людей или достаточные у животных.</p></div></li>
-        <li><span class="elev e1 g3" aria-hidden="true"></span><div><p class="key-n"><b>Не классифицируется</b> <span>группа 3</span></p><p class="key-says">Доказательства не отвечают правилам ни одной другой группы, обычно потому, что их слишком мало.</p></div></li>
-      </ol>
-    </div>
-    <div class="key-col">
-      <h3 class="key-h"><span class="label">Атлас доказательств — хронические болезни</span> Насколько надёжны доказательства того, что фактор риска вызывает болезнь</h3>
-      <ol class="key-list">
-        <li><span class="elev e4 strong" aria-hidden="true"></span><div><p class="key-n"><b>Высокий</b></p><p class="key-says">Разные виды доказательств сходятся в том, что это причина болезни, и пересмотр вывода маловероятен.</p></div></li>
-        <li><span class="elev e3 moderate" aria-hidden="true"></span><div><p class="key-n"><b>Умеренный</b></p><p class="key-says">Скорее всего, это причина: исследования согласуются и показывают зависимость от дозы или известный механизм, но одного звена доказательств ещё не хватает.</p></div></li>
-        <li><span class="elev e2 suggestive" aria-hidden="true"></span><div><p class="key-n"><b>Предположительный</b></p><p class="key-says">Связь последовательно повторяется, но влияние других факторов или обратную причинность пока не исключили.</p></div></li>
-        <li><span class="elev e1 weak" aria-hidden="true"></span><div><p class="key-n"><b>Низкий</b></p><p class="key-says">Сигнал из немногих, противоречивых или подверженных искажениям исследований. Он может не подтвердиться.</p></div></li>
-        <li><span class="elev ec conflicting" aria-hidden="true"></span><div><p class="key-n"><b>Противоречивый</b></p><p class="key-says">Качественные данные указывают в противоположные стороны, часто наблюдательные исследования расходятся с испытаниями или генетическими исследованиями.</p></div></li>
-      </ol>
-    </div>
-  </div>
-  <p class="sec-links"><a class="tlink" href="reading.html#labels">Что означают обозначения &rarr;</a> <a class="tlink" href="reading.html">Читать руководство &rarr;</a></p>
-</section>
-
-<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
-  <div class="sec-bar">
-    <h2 id="qa-h">Четыре вопроса и ответы из инструментов</h2>
-  </div>
-  <article class="lesson">
-    <div class="lesson-text">
-      <h3>Обработанное мясо так же вредно, как курение?</h3>
-      <p class="lesson-k">Уверенность одинаковая (группа 1), величина очень разная.</p>
-      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=ru#exposure=Processed%20meat"><p>Каждые 50 граммов в день повышают риск рака кишечника на 18 %. По европейским данным, к 75 годам рак лёгкого развивается примерно у 10–12 из 100 курильщиков и у 4–5 из 1 000 человек, которые никогда не курили.</p></blockquote>
-      <p class="qa-src">Цитата из «Атласа доказательств: рак», перевод с английского</p>
-      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=ru#exposure=Processed%20meat">Открыть карточку «Обработанное мясо» &rarr;</a> <a href="reading.html#relative-absolute">Относительный и абсолютный риск &rarr;</a></p>
-    </div>
-    <figure class="scale-fig">
-      <figcaption>Рак лёгкого к 75 годам, на 1000 человек</figcaption>
-      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
-        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
-      <div class="sf-row"><span class="sf-who">Курильщики</span>
-        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
-        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
-      <div class="sf-row"><span class="sf-who">Никогда не курившие</span>
-        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
-        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
-    </figure>
-  </article>
-  <ol class="qa-rows">
-    <li class="qa-row">
-      <h3>Опасен ли аспартам?</h3>
-      <div class="qa-body">
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=ru#exposure=Aspartame"><p>В июне 2023 года МАИР классифицировало аспартам как возможно канцерогенный для человека (группа 2B); это оценка опасности. По данным ВОЗ, взрослому человеку весом 70 килограммов пришлось бы выпивать больше 9–14 банок диетического напитка в день, чтобы превысить [допустимое суточное потребление].</p></blockquote>
-        <p class="qa-src">Цитата из «Атласа доказательств: рак», перевод с английского</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=ru#exposure=Aspartame">Открыть карточку «Аспартам» &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>Повышает ли моя работа риск рака?</h3>
-      <div class="qa-body">
-        <p class="qa-k">На карте рака 68 производственных факторов и профессий: от асбеста и кремнезёмной пыли до работы в ночную смену и работы пожарным.</p>
-        <blockquote class="qa-a"><p>У маляров со стажем более 10 лет риск рака мочевого пузыря был примерно в 1,8 раза выше, чем у тех, кто маляром не работал. Риск рака лёгкого растёт вместе с общим количеством кремнезёма, вдохнутого за годы.</p></blockquote>
-        <p class="qa-src">Цитата из «Атласа доказательств: рак», перевод с английского</p>
-        <p class="qa-go"><a href="work.html">Работа и рак: по отраслям &rarr;</a></p>
-      </div>
-    </li>
-    <li class="qa-row">
-      <h3>Что повышает риск инсульта?</h3>
-      <div class="qa-body">
-        <p class="qa-k">Для ишемического инсульта двенадцать факторов риска имеют оценку доказательности: от артериального давления, курения и диабета (Высокий) до депрессии (Предположительный).</p>
-        <blockquote class="qa-a" cite="https://tools.epidetective.com/chronic/?lang=ru#disease=stroke_isch"><p>Высокое артериальное давление является главной причиной инсульта.</p></blockquote>
-        <p class="qa-src">Цитата из «Атласа доказательств: хронические болезни», перевод с английского</p>
-        <p class="qa-go"><a href="https://tools.epidetective.com/chronic/?lang=ru#disease=stroke_isch">Открыть карточку «Ишемический инсульт» &rarr;</a></p>
-      </div>
-    </li>
-  </ol>
 </section>
 
 <section class="band code-band" id="what-you-can-do" aria-labelledby="code-h">
@@ -290,6 +206,22 @@
       <a class="btn btn-solid" href="../code-against-cancer/?lang=ru">Читать рекомендации &rarr;</a>
     </div>
   </div>
+</section>
+
+<section class="sec wrap blog-row" id="blog" aria-labelledby="blog-h">
+  <div class="sec-bar sec-bar-c">
+    <p class="label">Эссе и заметки</p>
+    <h2 id="blog-h">Из блога</h2>
+  </div>
+  <ol class="bl-list" data-n="1">
+<li class="bl-post">
+  <p class="bl-date"><time datetime="2026-11-08">8 ноября 2026 г.</time></p>
+  <h3><a href="blog/shoe-leather-in-the-age-of-ai.html">Стоптанные ботинки в эпоху ИИ</a></h3>
+  <p class="bl-sf">Если одного запроса хватает, чтобы превратить открытый набор данных в сносную эпидемиологическую статью, пора спросить, чего на самом деле стоили наши статьи и зачем ещё нужны эпидемиологи.</p>
+  <p class="bl-more"><a class="tlink" href="blog/shoe-leather-in-the-age-of-ai.html">Читать эссе</a></p>
+</li>
+</ol>
+  <p class="sec-links"><a class="tlink" href="blog.html">Все эссе &rarr;</a></p>
 </section>
 
 <section class="sec wrap games-row" id="games" aria-labelledby="games-h">
@@ -334,7 +266,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">Открытые инструменты для чтения научных данных о здоровье.</p>
       </div>
       <nav class="menu">

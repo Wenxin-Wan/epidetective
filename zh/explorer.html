@@ -32,16 +32,43 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="../assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://epidetective.com/zh/explorer.html#page",
+  "url": "https://epidetective.com/zh/explorer.html",
+  "name": "癌症证据探索器｜EpiDetective",
+  "description": "查看哪些暴露因素与哪些癌症相关，以及支撑每条关联的证据有多强。数据：《IARC 致癌物专论》“按癌症部位分类”（第 1–141 卷）。万汶鑫的个人项目。",
+  "inLanguage": "zh",
+  "isPartOf": {
+    "@id": "https://epidetective.com/zh/#website"
+  },
+  "author": {
+    "@id": "https://epidetective.com/about.html#person"
+  },
+  "about": {
+    "@type": "WebApplication",
+    "name": "癌症证据探索器",
+    "url": "https://tools.epidetective.com/cancer/?lang=zh",
+    "applicationCategory": "ReferenceApplication",
+    "operatingSystem": "Any web browser",
+    "isAccessibleForFree": true,
+    "author": {
+      "@id": "https://epidetective.com/about.html#person"
+    }
+  }
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#content">跳到正文</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">工具</a>
@@ -111,17 +138,80 @@
     <h2>每个条目都带有 <b>IARC 四个类别</b>之一。</h2>
   </div>
   <p class="lede">类别说明的是 IARC 对某种因素能否使人患癌有多大把握，并不涉及风险的大小；风险大小取决于剂量和具体情况。</p>
-  <div class="figs lbl-figs">
-    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>已知致癌 &middot; 1 类</div></div>
-    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>很可能致癌 &middot; 2A 类</div></div>
-    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>可能致癌 &middot; 2B 类</div></div>
-    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>无法分类 &middot; 3 类</div></div>
-  </div>
+  <h3 class="key-h">IARC 对某种因素能否致癌有多大把握</h3>
+  <div class="key-cols" aria-hidden="true"><span></span><span></span><span>它表达什么</span><span>它没有表达什么</span><span></span></div>
+  <ol class="key-list key-full">
+    <li><span class="elev e4 g1" aria-hidden="true"></span><p class="key-n"><b>已知致癌</b> <span>1 类</span></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>该因素能使人患癌。这是 IARC 把握最大的一类。</dd></div><div><dt>它没有表达什么</dt><dd>风险有多大，或在什么剂量下才有风险。加工肉类和吸烟都属于 1 类，风险却相差悬殊。</dd></div></dl>
+      <p class="key-count">135</p></li>
+    <li><span class="elev e3 g2a" aria-hidden="true"></span><p class="key-n"><b>很可能致癌</b> <span>2A 类</span></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>该因素很可能使人患癌。证据达不到 1 类的标准，最常见的原因是人群研究的证据有限。</dd></div><div><dt>它没有表达什么</dt><dd>它在人们通常接触的水平下会致癌，或者风险有多大。</dd></div></dl>
+      <p class="key-count">98</p></li>
+    <li><span class="elev e2 g2b" aria-hidden="true"></span><p class="key-n"><b>可能致癌</b> <span>2B 类</span></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>该因素可能使人患癌。有一种证据指向这个方向，例如人群证据有限，或动物证据充分。</dd></div><div><dt>它没有表达什么</dt><dd>它很可能致癌，或者接触它的人面临风险。</dd></div></dl>
+      <p class="key-count">329</p></li>
+    <li><span class="elev e1 g3" aria-hidden="true"></span><p class="key-n"><b>无法分类</b> <span>3 类</span></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>证据达不到其他任何一类的标准，通常是因为证据太少。</dd></div><div><dt>它没有表达什么</dt><dd>它是安全的。3 类描述的是证据的状况。</dd></div></dl>
+      <p class="key-count">498</p></li>
+  </ol>
   <p class="exp-more">以上是 IARC 分类清单（第 1–142 卷，最近一次更新于 2026 年 7 月 23 日）中所有已分类因素的总数。地图收录的是 1 类、2A 类和 2B 类的因素；3 类因素可以通过搜索找到。</p>
+  <h3 class="key-h key-h2">人群研究对某一种癌症显示了什么</h3>
+  <ol class="key-list key-full key-links">
+    <li><span class="kl est" aria-hidden="true"></span><p class="key-n"><b>已确认关联</b></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>人群研究表明它会导致这种癌症，并且可以有合理把握地排除偶然因素、偏倚和混杂。</dd></div></dl></li>
+    <li><span class="kl sus" aria-hidden="true"></span><p class="key-n"><b>疑似关联</b></p>
+      <dl class="key-dl"><div><dt>它表达什么</dt><dd>人群研究显示它与这种癌症存在关联，把这一关联解释为因果关系是可信的，但还不能排除偶然因素、偏倚或混杂。</dd></div></dl></li>
+  </ol>
   <div class="inst-actions" style="margin-top:22px">
     <a class="btn btn-ghost" href="reading.html#labels">所有标签对照 &rarr;</a>
     <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">IARC 分类清单（英文） &rarr;</a>
   </div>
+</section>
+
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-head">
+    <div class="label">问题</div>
+    <h2 id="qa-h">三个问题，用工具里的内容来回答</h2>
+  </div>
+  <article class="lesson">
+    <div class="lesson-text">
+      <h3>加工肉类和吸烟一样有害吗？</h3>
+      <p class="lesson-k">确定程度相同（1 类），风险大小却相差悬殊。</p>
+      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat"><p>每天每多吃 50 克，患肠癌的风险就增加 18%。欧洲的数据显示，到 75 岁时，每 100 名吸烟者中约有 10 至 12 人患肺癌；终生不吸烟者中，每 1,000 人约有 4 至 5 人患肺癌。</p></blockquote>
+      <p class="qa-src">引自癌症证据探索器</p>
+      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Processed%20meat">查看加工肉类条目 &rarr;</a> <a href="reading.html#relative-absolute">相对风险与绝对风险 &rarr;</a></p>
+    </div>
+    <figure class="scale-fig">
+      <figcaption>75 岁前患肺癌人数（每 1000 人）</figcaption>
+      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
+        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
+      <div class="sf-row"><span class="sf-who">吸烟者</span>
+        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
+        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
+      <div class="sf-row"><span class="sf-who">终生不吸烟者</span>
+        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
+        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
+    </figure>
+  </article>
+  <ol class="qa-rows">
+    <li class="qa-row">
+      <h3>阿斯巴甜危险吗？</h3>
+      <div class="qa-body">
+        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=zh#exposure=Aspartame"><p>2023 年 6 月，IARC 将阿斯巴甜列为可能致癌物（2B 类），这是对危害的评定。WHO 称，一名 70 千克的成年人每天要喝超过 9 至 14 罐无糖饮料，才会超过［每日可接受摄入量］。</p></blockquote>
+        <p class="qa-src">引自癌症证据探索器</p>
+        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=zh#exposure=Aspartame">查看阿斯巴甜条目 &rarr;</a></p>
+      </div>
+    </li>
+    <li class="qa-row">
+      <h3>我的工作会增加我患癌的风险吗？</h3>
+      <div class="qa-body">
+        <p class="qa-k">癌症图谱上有 68 种工作场所因素和职业，从石棉和二氧化硅粉尘，到夜班工作和消防工作。</p>
+        <blockquote class="qa-a"><p>从业超过 10 年的油漆工，患膀胱癌的风险约为非油漆工的 1.8 倍。肺癌风险随多年累计吸入的二氧化硅总量而升高。</p></blockquote>
+        <p class="qa-src">引自癌症证据探索器</p>
+        <p class="qa-go"><a href="work.html">工作与癌症：按行业查看 &rarr;</a></p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <section class="sec wrap">
@@ -173,7 +263,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">读懂健康证据的公开工具。</p>
       </div>
       <nav class="menu">

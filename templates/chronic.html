@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_chronic_title}}</title>
+<meta name="description" content="{{meta_chronic_desc}}">
+<meta name="theme-color" content="#F1F0EA">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_chronic_title}}">
+<meta property="og:description" content="{{meta_chronic_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="{{OG_IMAGE_W}}">
+<meta property="og:image:height" content="{{OG_IMAGE_H}}">
+<meta property="og:image:type" content="{{OG_IMAGE_TYPE}}">
+<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_chronic_title}}">
+<meta name="twitter:description" content="{{meta_chronic_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:image:alt" content="{{OG_IMAGE_ALT}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="{{PREFIX}}assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+{{JSONLD_TOOL}}
+</head>
+<body>
+<a class="skip" href="#content">{{skip_link}}</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">{{LOGO}}<span class="mark-w">EpiDetective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_BLOG}}">{{nav_blog}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<main id="content" tabindex="-1">
+
+<!-- The About page of the Chronic Disease Evidence Explorer (8 Nov 2026),
+     built like explorer.html from the keys the home page and How we check
+     already use: what is in the tool (inst_t2_m*), where its data come from
+     (hwc_src_k*), the five grades it prints and what each says and leaves open
+     (lbl_*), and the stroke question answered from its entries (qa_*4). Behind
+     the heading, the tool's clustered network (assets/chronic-network.svg). -->
+<section class="tool-hero">
+  <div class="net net-chronic" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="crumb"><a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a> &middot;
+      <span>{{chr_crumb_current}}</span></div>
+    <h1>{{chr_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{inst_t2_desc}}</p>
+    <div class="legend">
+      <span class="leg"><span class="sw strong" aria-hidden="true"></span>{{lbl_strong}}</span>
+      <span class="leg"><span class="sw moderate" aria-hidden="true"></span>{{lbl_moderate}}</span>
+      <span class="leg"><span class="sw suggestive" aria-hidden="true"></span>{{lbl_suggestive}}</span>
+      <span class="leg"><span class="sw weak" aria-hidden="true"></span>{{lbl_weak}}</span>
+      <span class="leg"><span class="sw conflicting" aria-hidden="true"></span>{{lbl_conflicting}}</span>
+    </div>
+  </div>
+</section>
+
+<!-- the figures of the home page's sheet (inst_t2_m1-m4, split by the build) -->
+<section class="sec wrap">
+  <div class="sec-head">
+    <div class="label">{{exp_whatsin_label}}</div>
+    <h2>{{chr_whatsin_h2}}</h2>
+  </div>
+  <div class="figs">
+    <div class="fig"><div class="v">{{CHR_V1}}</div><div class="k">{{CHR_K1}}</div></div>
+    <div class="fig"><div class="v">{{CHR_V2}}</div><div class="k">{{CHR_K2}}</div></div>
+    <div class="fig"><div class="v">{{CHR_V3}}</div><div class="k">{{CHR_K3}}</div></div>
+    <div class="fig"><div class="v">{{CHR_V4}}</div><div class="k">{{CHR_K4}}</div></div>
+  </div>
+  <p class="fig-note">{{inst_t2_m6}}</p>
+  <p class="fig-note"><span class="label">{{hwc_src_label}}</span> {{inst_t2_m5}}</p>
+</section>
+
+<section class="sec wrap" id="sources">
+  <div class="sec-head">
+    <div class="label">{{hwc_src_label}}</div>
+    <h2>{{hwc_src_h2}}</h2>
+  </div>
+  <ul class="src-list">
+    <li>{{hwc_src_k1}}</li>
+    <li>{{hwc_src_k2}}</li>
+  </ul>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="{{PREFIX}}chronic-disease-explorer/references.html">{{hwc_link_refs}} &rarr;</a>
+    <a class="btn btn-ghost" href="{{URL_HWC}}#chronic">{{hwc_label}} &rarr;</a>
+  </div>
+</section>
+
+<!-- The five grades, as a map key (moved here from the home page): rings for
+     height in the tool's colour for each grade, broken rings for Conflicting;
+     then the names used before version 2.0. -->
+<section class="sec wrap" id="labels">
+  <div class="sec-head">
+    <div class="label">{{exp_lbl_label}}</div>
+    <h2>{{chr_lbl_h2}}</h2>
+  </div>
+  <p class="lede">{{chr_lbl_p}}</p>
+  <h3 class="key-h">{{lbl_cap_chronic}}</h3>
+  <div class="key-cols key-cols-4" aria-hidden="true"><span></span><span></span><span>{{lbl_th_says}}</span><span>{{lbl_th_not}}</span></div>
+  <ol class="key-list key-full key-4">
+    <li><span class="elev e4 strong" aria-hidden="true"></span><p class="key-n"><b>{{lbl_strong}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_strong_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_strong_not}}</dd></div></dl></li>
+    <li><span class="elev e3 moderate" aria-hidden="true"></span><p class="key-n"><b>{{lbl_moderate}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_moderate_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_moderate_not}}</dd></div></dl></li>
+    <li><span class="elev e2 suggestive" aria-hidden="true"></span><p class="key-n"><b>{{lbl_suggestive}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_suggestive_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_suggestive_not}}</dd></div></dl></li>
+    <li><span class="elev e1 weak" aria-hidden="true"></span><p class="key-n"><b>{{lbl_weak}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_weak_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_weak_not}}</dd></div></dl></li>
+    <li><span class="elev ec conflicting" aria-hidden="true"></span><p class="key-n"><b>{{lbl_conflicting}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_conflicting_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_conflicting_not}}</dd></div></dl></li>
+    <li class="key-old"><span aria-hidden="true"></span><p class="key-n"><b>{{lbl_old}}</b></p>
+      <dl class="key-dl"><div><dt>{{lbl_th_says}}</dt><dd>{{lbl_old_says}}</dd></div><div><dt>{{lbl_th_not}}</dt><dd>{{lbl_old_not}}</dd></div></dl></li>
+  </ol>
+  <p class="lbl-note">{{lbl_chronic_term}}
+    <a class="term-link" href="{{PREFIX}}chronic-disease-explorer/framework.html#31-axis-1-the-evidence-grade">{{lbl_framework_link}}</a></p>
+  <div class="inst-actions" style="margin-top:22px">
+    <a class="btn btn-ghost" href="{{URL_READING}}#labels">{{exp_lbl_more}}</a>
+  </div>
+</section>
+
+<!-- The stroke question (moved here from the home page), answered by a
+     sentence quoted word for word from the tool's entry. -->
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-head">
+    <div class="label">{{tool_qa_label}}</div>
+    <h2 id="qa-h">{{chr_qa_h2}}</h2>
+  </div>
+  <ol class="qa-rows qa-first">
+    <li class="qa-row">
+      <h3>{{qa_q4}}</h3>
+      <div class="qa-body">
+        <p class="qa-k">{{qa_k4}}</p>
+        <blockquote class="qa-a" cite="{{TL_STROKE}}"><p>{{qa_a4}}</p></blockquote>
+        <p class="qa-src">{{qa_from_chronic}}</p>
+        <p class="qa-go"><a href="{{TL_STROKE}}">{{qa_go4}}</a></p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="label">{{exp_cta_label}}</div>
+    <h2 style="margin:14px 0 0">{{chr_cta_h2}}</h2>
+    <p class="lede">{{chr_cta_lede}}</p>
+    <div class="inst-actions" style="margin-top:30px">
+      <a class="btn btn-solid" href="{{URL_TOOL2}}">{{chr_cta_btn}}</a>
+    </div>
+    <div class="disc">{{hwc_ver_k}} {{hwc_ver_k_data}}</div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">{{LOGO}}<span class="mark-w">EpiDetective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_BLOG}}">{{nav_blog}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+    </div>
+    <p class="foot-trust"><a href="{{URL_HWC}}">{{foot_hwc}}</a><a href="{{URL_ABOUT}}#cite">{{foot_cite}}</a><a href="{{URL_HWC}}#report">{{foot_report}}</a></p>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

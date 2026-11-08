@@ -32,16 +32,43 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://epidetective.com/explorer.html#page",
+  "url": "https://epidetective.com/explorer.html",
+  "name": "Cancer Evidence Explorer — EpiDetective",
+  "description": "See which exposures have been linked to which cancers, and how strong the evidence is for each link. Data: IARC Monographs, Classifications by cancer site (Vols 1–141). A personal project by Wenxin Wan.",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@id": "https://epidetective.com/#website"
+  },
+  "author": {
+    "@id": "https://epidetective.com/about.html#person"
+  },
+  "about": {
+    "@type": "WebApplication",
+    "name": "Cancer Evidence Explorer",
+    "url": "https://tools.epidetective.com/cancer/?lang=en",
+    "applicationCategory": "ReferenceApplication",
+    "operatingSystem": "Any web browser",
+    "isAccessibleForFree": true,
+    "author": {
+      "@id": "https://epidetective.com/about.html#person"
+    }
+  }
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">Tools</a>
@@ -111,17 +138,80 @@
     <h2>Every entry carries one of <b>IARC’s four groups</b>.</h2>
   </div>
   <p class="lede">The group says how sure IARC is that an agent can cause cancer in people. It says nothing about how large the risk is, which depends on the dose and the circumstances.</p>
-  <div class="figs lbl-figs">
-    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>Known cause &middot; Group 1</div></div>
-    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>Probable cause &middot; Group 2A</div></div>
-    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>Possible cause &middot; Group 2B</div></div>
-    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>Not classifiable &middot; Group 3</div></div>
-  </div>
+  <h3 class="key-h">How sure IARC is that an agent can cause cancer</h3>
+  <div class="key-cols" aria-hidden="true"><span></span><span></span><span>What it says</span><span>What it does not say</span><span></span></div>
+  <ol class="key-list key-full">
+    <li><span class="elev e4 g1" aria-hidden="true"></span><p class="key-n"><b>Known cause</b> <span>Group 1</span></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>The agent can cause cancer in people. This is the group in which IARC is most certain.</dd></div><div><dt>What it does not say</dt><dd>How large the risk is, or at what dose. Processed meat and tobacco smoking are both in Group 1, with very different risks.</dd></div></dl>
+      <p class="key-count">135</p></li>
+    <li><span class="elev e3 g2a" aria-hidden="true"></span><p class="key-n"><b>Probable cause</b> <span>Group 2A</span></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>The agent probably causes cancer in people. The evidence falls short of Group 1, most often because the studies in people are limited.</dd></div><div><dt>What it does not say</dt><dd>That it causes cancer at the levels people usually meet, or how large any risk is.</dd></div></dl>
+      <p class="key-count">98</p></li>
+    <li><span class="elev e2 g2b" aria-hidden="true"></span><p class="key-n"><b>Possible cause</b> <span>Group 2B</span></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>The agent may cause cancer in people. One kind of evidence points that way, such as limited evidence in people or sufficient evidence in animals.</dd></div><div><dt>What it does not say</dt><dd>That it probably causes cancer, or that people exposed to it are at risk.</dd></div></dl>
+      <p class="key-count">329</p></li>
+    <li><span class="elev e1 g3" aria-hidden="true"></span><p class="key-n"><b>Not classifiable</b> <span>Group 3</span></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>The evidence does not meet the rules for any other group, usually because there is too little of it.</dd></div><div><dt>What it does not say</dt><dd>That it is safe. Group 3 describes the state of the evidence.</dd></div></dl>
+      <p class="key-count">498</p></li>
+  </ol>
   <p class="exp-more">IARC’s own totals for every agent it has classified, from its List of Classifications (Volumes 1–142, last updated 23 July 2026). The map holds agents from Groups 1, 2A and 2B; Group 3 agents are found by search.</p>
+  <h3 class="key-h key-h2">What studies in people show for one cancer</h3>
+  <ol class="key-list key-full key-links">
+    <li><span class="kl est" aria-hidden="true"></span><p class="key-n"><b>Established link</b></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>Studies in people show that it causes this cancer. Chance, bias and confounding were ruled out with reasonable confidence.</dd></div></dl></li>
+    <li><span class="kl sus" aria-hidden="true"></span><p class="key-n"><b>Suspected link</b></p>
+      <dl class="key-dl"><div><dt>What it says</dt><dd>Studies in people show a link with this cancer, and a causal link is credible. Chance, bias or confounding could not be ruled out.</dd></div></dl></li>
+  </ol>
   <div class="inst-actions" style="margin-top:22px">
     <a class="btn btn-ghost" href="reading.html#labels">All the labels, side by side &rarr;</a>
     <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">IARC’s List of Classifications &rarr;</a>
   </div>
+</section>
+
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-head">
+    <div class="label">Questions</div>
+    <h2 id="qa-h">Three questions, answered from the tool</h2>
+  </div>
+  <article class="lesson">
+    <div class="lesson-text">
+      <h3>Is processed meat as bad as smoking?</h3>
+      <p class="lesson-k">Same certainty (Group 1), very different size.</p>
+      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat"><p>Each 50 grams eaten every day raises the risk of bowel cancer by 18%. In European data, about 10 to 12 in 100 smokers get lung cancer by age 75, compared with 4 to 5 in 1,000 lifelong non-smokers.</p></blockquote>
+      <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
+      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Processed%20meat">Open the Processed meat entry &rarr;</a> <a href="reading.html#relative-absolute">Relative and absolute risk &rarr;</a></p>
+    </div>
+    <figure class="scale-fig">
+      <figcaption>Lung cancer by age 75, per 1,000 people</figcaption>
+      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
+        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
+      <div class="sf-row"><span class="sf-who">Smokers</span>
+        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
+        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
+      <div class="sf-row"><span class="sf-who">Lifelong non-smokers</span>
+        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
+        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
+    </figure>
+  </article>
+  <ol class="qa-rows">
+    <li class="qa-row">
+      <h3>Is aspartame dangerous?</h3>
+      <div class="qa-body">
+        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=en#exposure=Aspartame"><p>In June 2023 IARC classified aspartame as possibly carcinogenic to humans (Group 2B), a rating of hazard. WHO says a 70-kilogram adult would need more than 9 to 14 cans of diet drink a day to pass [the acceptable daily intake].</p></blockquote>
+        <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
+        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=en#exposure=Aspartame">Open the Aspartame entry &rarr;</a></p>
+      </div>
+    </li>
+    <li class="qa-row">
+      <h3>Does my job raise my cancer risk?</h3>
+      <div class="qa-body">
+        <p class="qa-k">68 workplace agents and jobs are on the cancer map, from asbestos and silica dust to night-shift work and firefighting.</p>
+        <blockquote class="qa-a"><p>Painters with over 10 years in the trade had about 1.8 times the bladder-cancer risk of non-painters. Lung-cancer risk rises with the total silica breathed over the years.</p></blockquote>
+        <p class="qa-src">Quoted from the Cancer Evidence Explorer</p>
+        <p class="qa-go"><a href="work.html">Work and cancer, sector by sector &rarr;</a></p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <section class="sec wrap">
@@ -173,7 +263,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">Open tools for reading health evidence.</p>
       </div>
       <nav class="menu">

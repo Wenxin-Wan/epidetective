@@ -32,16 +32,43 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="../assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://epidetective.com/es/explorer.html#page",
+  "url": "https://epidetective.com/es/explorer.html",
+  "name": "Explorador de evidencia sobre el cáncer — EpiDetective",
+  "description": "Qué exposiciones se han vinculado a qué cánceres, y qué solidez tiene la evidencia detrás de cada vínculo. Datos: Monografías del CIIC, Clasificaciones por localización del cáncer (volúmenes 1 a 141). Un proyecto personal de Wenxin Wan.",
+  "inLanguage": "es",
+  "isPartOf": {
+    "@id": "https://epidetective.com/es/#website"
+  },
+  "author": {
+    "@id": "https://epidetective.com/about.html#person"
+  },
+  "about": {
+    "@type": "WebApplication",
+    "name": "Explorador de evidencia sobre el cáncer",
+    "url": "https://tools.epidetective.com/cancer/?lang=es",
+    "applicationCategory": "ReferenceApplication",
+    "operatingSystem": "Any web browser",
+    "isAccessibleForFree": true,
+    "author": {
+      "@id": "https://epidetective.com/about.html#person"
+    }
+  }
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#content">Ir al contenido</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html">Epi<span>Detective</span></a>
+    <a class="mark" href="index.html"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="index.html#instruments">Herramientas</a>
@@ -111,17 +138,80 @@
     <h2>Cada ficha lleva uno de los <b>cuatro grupos del CIIC</b>.</h2>
   </div>
   <p class="lede">El grupo indica hasta qué punto el CIIC está seguro de que un agente puede causar cáncer en las personas. No dice nada de cuánto riesgo supone, que depende de la dosis y de las circunstancias.</p>
-  <div class="figs lbl-figs">
-    <div class="fig"><div class="v">135</div><div class="k"><span class="sw g1" aria-hidden="true"></span>Causa conocida &middot; Grupo 1</div></div>
-    <div class="fig"><div class="v">98</div><div class="k"><span class="sw g2a" aria-hidden="true"></span>Causa probable &middot; Grupo 2A</div></div>
-    <div class="fig"><div class="v">329</div><div class="k"><span class="sw g2b" aria-hidden="true"></span>Causa posible &middot; Grupo 2B</div></div>
-    <div class="fig"><div class="v">498</div><div class="k"><span class="sw g3" aria-hidden="true"></span>No clasificable &middot; Grupo 3</div></div>
-  </div>
+  <h3 class="key-h">Hasta qué punto está seguro el CIIC de que un agente puede causar cáncer</h3>
+  <div class="key-cols" aria-hidden="true"><span></span><span></span><span>Qué dice</span><span>Qué no dice</span><span></span></div>
+  <ol class="key-list key-full">
+    <li><span class="elev e4 g1" aria-hidden="true"></span><p class="key-n"><b>Causa conocida</b> <span>Grupo 1</span></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>El agente puede causar cáncer en las personas. Es el grupo en el que el CIIC tiene más certeza.</dd></div><div><dt>Qué no dice</dt><dd>Ni cuánto riesgo supone ni a partir de qué dosis. La carne procesada y el tabaquismo están ambos en el Grupo 1, con riesgos muy distintos.</dd></div></dl>
+      <p class="key-count">135</p></li>
+    <li><span class="elev e3 g2a" aria-hidden="true"></span><p class="key-n"><b>Causa probable</b> <span>Grupo 2A</span></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>El agente probablemente causa cáncer en las personas. La evidencia no llega al nivel del Grupo 1, la mayoría de las veces porque los estudios en humanos son limitados.</dd></div><div><dt>Qué no dice</dt><dd>Ni que cause cáncer a los niveles a los que la gente suele estar expuesta ni cuánto riesgo supone.</dd></div></dl>
+      <p class="key-count">98</p></li>
+    <li><span class="elev e2 g2b" aria-hidden="true"></span><p class="key-n"><b>Causa posible</b> <span>Grupo 2B</span></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>Es posible que el agente cause cáncer en las personas. Un solo tipo de evidencia apunta en esa dirección, por ejemplo evidencia limitada en humanos o suficiente en animales.</dd></div><div><dt>Qué no dice</dt><dd>Ni que probablemente cause cáncer ni que las personas expuestas corran un riesgo.</dd></div></dl>
+      <p class="key-count">329</p></li>
+    <li><span class="elev e1 g3" aria-hidden="true"></span><p class="key-n"><b>No clasificable</b> <span>Grupo 3</span></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>La evidencia no cumple las reglas de ningún otro grupo, normalmente porque es demasiado escasa.</dd></div><div><dt>Qué no dice</dt><dd>Que sea seguro. El Grupo 3 describe el estado de la evidencia.</dd></div></dl>
+      <p class="key-count">498</p></li>
+  </ol>
   <p class="exp-more">Los totales del propio CIIC para todos los agentes que ha clasificado, según su lista de clasificaciones (volúmenes 1 a 142, última actualización el 23 de julio de 2026). El mapa reúne agentes de los Grupos 1, 2A y 2B; los del Grupo 3 se encuentran con la búsqueda.</p>
+  <h3 class="key-h key-h2">Qué muestran los estudios en humanos para un cáncer concreto</h3>
+  <ol class="key-list key-full key-links">
+    <li><span class="kl est" aria-hidden="true"></span><p class="key-n"><b>Vínculo establecido</b></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>Los estudios en personas muestran que causa este cáncer. El azar, el sesgo y la confusión se descartaron con una confianza razonable.</dd></div></dl></li>
+    <li><span class="kl sus" aria-hidden="true"></span><p class="key-n"><b>Vínculo sospechado</b></p>
+      <dl class="key-dl"><div><dt>Qué dice</dt><dd>Los estudios en personas muestran un vínculo con este cáncer, y un vínculo causal es creíble. No se pudieron descartar el azar, el sesgo o la confusión.</dd></div></dl></li>
+  </ol>
   <div class="inst-actions" style="margin-top:22px">
     <a class="btn btn-ghost" href="reading.html#labels">Todas las etiquetas, una junto a otra &rarr;</a>
     <a class="btn btn-ghost" href="https://monographs.iarc.who.int/list-of-classifications/" rel="noopener">La lista de clasificaciones del CIIC (en inglés) &rarr;</a>
   </div>
+</section>
+
+<section class="sec wrap questions" id="questions" aria-labelledby="qa-h">
+  <div class="sec-head">
+    <div class="label">Preguntas</div>
+    <h2 id="qa-h">Tres preguntas, respondidas con la herramienta</h2>
+  </div>
+  <article class="lesson">
+    <div class="lesson-text">
+      <h3>¿Es la carne procesada tan mala como fumar?</h3>
+      <p class="lesson-k">Misma certeza (Grupo 1), magnitud muy distinta.</p>
+      <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=es#exposure=Processed%20meat"><p>Cada 50 gramos consumidos al día aumentan un 18 % el riesgo de cáncer de intestino. Según datos europeos, unas 10 a 12 de cada 100 personas fumadoras tienen cáncer de pulmón antes de los 75 años, frente a 4 o 5 de cada 1.000 que nunca han fumado.</p></blockquote>
+      <p class="qa-src">Extracto del Explorador de evidencia sobre el cáncer, traducido del inglés</p>
+      <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Processed%20meat">Ver la ficha de la carne procesada &rarr;</a> <a href="reading.html#relative-absolute">Riesgo relativo y riesgo absoluto &rarr;</a></p>
+    </div>
+    <figure class="scale-fig">
+      <figcaption>Cáncer de pulmón antes de los 75 años, por cada 1000 personas</figcaption>
+      <div class="sf-axis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i>
+        <b style="left:0">0</b><b style="left:33.333%">50</b><b style="left:66.667%">100</b><b style="left:100%">150</b></div>
+      <div class="sf-row"><span class="sf-who">Fumadores</span>
+        <span class="sf-track"><span class="sf-solid" style="width:66.667%"></span><span class="sf-range" style="left:66.667%;width:13.333%"></span></span>
+        <span class="sf-val" style="--x:.8">100&ndash;120</span></div>
+      <div class="sf-row"><span class="sf-who">Personas que nunca han fumado</span>
+        <span class="sf-track"><span class="sf-solid" style="width:2.667%"></span><span class="sf-range" style="left:2.667%;width:.667%"></span></span>
+        <span class="sf-val" style="--x:.0333">4&ndash;5</span></div>
+    </figure>
+  </article>
+  <ol class="qa-rows">
+    <li class="qa-row">
+      <h3>¿Es peligroso el aspartamo?</h3>
+      <div class="qa-body">
+        <blockquote class="qa-a" cite="https://tools.epidetective.com/cancer/?lang=es#exposure=Aspartame"><p>En junio de 2023, el CIIC clasificó el aspartamo como posiblemente carcinógeno para los seres humanos (Grupo 2B), una valoración del peligro. Según la OMS, un adulto de 70 kilogramos tendría que beber más de 9 a 14 latas de refresco light al día para superar [la ingesta diaria admisible].</p></blockquote>
+        <p class="qa-src">Extracto del Explorador de evidencia sobre el cáncer, traducido del inglés</p>
+        <p class="qa-go"><a href="https://tools.epidetective.com/cancer/?lang=es#exposure=Aspartame">Ver la ficha del aspartamo &rarr;</a></p>
+      </div>
+    </li>
+    <li class="qa-row">
+      <h3>¿Mi trabajo aumenta mi riesgo de cáncer?</h3>
+      <div class="qa-body">
+        <p class="qa-k">El mapa del cáncer incluye 68 agentes y oficios laborales, desde el amianto y el polvo de sílice hasta el trabajo nocturno y el de bombero.</p>
+        <blockquote class="qa-a"><p>Los pintores con más de 10 años en el oficio tenían alrededor de 1,8 veces el riesgo de cáncer de vejiga de quienes no eran pintores. El riesgo de cáncer de pulmón aumenta con la cantidad total de sílice respirada a lo largo de los años.</p></blockquote>
+        <p class="qa-src">Extracto del Explorador de evidencia sobre el cáncer, traducido del inglés</p>
+        <p class="qa-go"><a href="work.html">Trabajo y cáncer, sector por sector &rarr;</a></p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <section class="sec wrap">
@@ -173,7 +263,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark"><svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="13" fill="#22241F"/><g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round"><path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g><g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/><circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g><circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg><span class="mark-w">EpiDetective</span></div>
         <p class="tag">Herramientas abiertas para leer la evidencia en salud.</p>
       </div>
       <nav class="menu">

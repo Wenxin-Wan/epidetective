@@ -30,8 +30,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="{{PREFIX}}assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{PREFIX}}assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{PREFIX}}assets/sourceserif4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{PREFIX}}site.css">
 {{JSONLD_POST}}
 </head>
@@ -40,7 +39,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <a class="mark" href="{{URL_HOME}}">{{LOGO}}<span class="mark-w">EpiDetective</span></a>
     <div class="top-right">
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
@@ -61,9 +60,10 @@
 <!-- One post, rendered by build_site.py from posts/<slug>/<lang>.md into
      blog/<slug>.html one level below each language's root (so every relative
      link here carries one extra ../). The body is the post's Markdown;
-     translations say so above the text and link the English original. -->
+     translations say so above the text and link the English original. The
+     whole post, title to sources, sets in one centred reading column. -->
 <article>
-<section class="tool-hero plain">
+<section class="tool-hero plain reading-hero">
   <div class="wrap">
     <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
       <a href="{{URL_BLOG}}">{{nav_blog}}</a></div>
@@ -73,7 +73,7 @@
   </div>
 </section>
 
-<section class="sec wrap">
+<section class="sec wrap reading">
   <div class="post-body">
 {{POST_NOTE}}
 {{POST_BODY}}
@@ -88,7 +88,7 @@
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <div class="mark">Epi<span>Detective</span></div>
+        <div class="mark">{{LOGO}}<span class="mark-w">EpiDetective</span></div>
         <p class="tag">{{foot_tagline}}</p>
       </div>
       <nav class="menu">

@@ -31,7 +31,7 @@ WORK_JSON = os.path.join(HERE, "data", "work.json")
 # free-floating network, the chronic tool's clustered one) are written into the
 # page as data: URLs, made here from the committed files, so they always show
 # the current drawings. Separate requests for them would push the Russian home
-# page, which also loads the two Cyrillic Sofia Sans files, past the budget of
+# page, which also loads the two Cyrillic Source Serif 4 files, past the budget of
 # 9 requests and 300 KB (Batch 6). The insets sit below the first screen, so
 # their bytes go into the page and stay out of site.css, which every page waits
 # for. Re-run this build after make_network_svg.py or make_chronic_svg.py.
@@ -40,8 +40,8 @@ CHRONIC_NET_SVG = os.path.join(HERE, "assets", "chronic-network.svg")
 
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
-PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about",
-         "games.html": "games", "reading.html": "reading",
+PAGES = {"index.html": "home", "explorer.html": "explorer", "chronic.html": "chronic",
+         "about.html": "about", "games.html": "games", "reading.html": "reading",
          "how-we-check.html": "hwc", "work.html": "work", "blog.html": "blog"}
 SITE_URL = "https://epidetective.com"
 # Share images (og:image must be an absolute URL on a raster format; social
@@ -58,11 +58,11 @@ OG_IMAGES = {
     "index.html": {
         "file": "home-{lang}.png",
         "alt": {
-            "en": "EpiDetective. Translating epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
-            "zh": "EpiDetective。转化流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
-            "fr": "EpiDetective. Traduire les preuves épidémiologiques pour un monde en meilleure santé. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
-            "es": "EpiDetective. Traducir la evidencia epidemiológica para un mundo más sano. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
-            "ru": "EpiDetective. Объясняем эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+            "en": "EpiDetective. Translating the best epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。转化最佳流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Traduire les meilleures preuves épidémiologiques pour un monde en meilleure santé. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Traducir la mejor evidencia epidemiológica para un mundo más sano. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Объясняем наилучшие эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
         },
     },
     "explorer.html": {
@@ -73,6 +73,18 @@ OG_IMAGES = {
             "fr": "EpiDetective. Explorateur des preuves sur le cancer. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC.",
             "es": "EpiDetective. Explorador de evidencia sobre el cáncer. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC.",
             "ru": "EpiDetective. Атлас доказательств: рак. Личный проект Вэньсинь Вань. Данные: Монографии МАИР.",
+        },
+    },
+    # The About page of the chronic tool shares the tool's own card (chronic.png,
+    # rendered by make_og.mjs as the card of tools.epidetective.com/chronic/).
+    "chronic.html": {
+        "file": "chronic.png",
+        "alt": {
+            "en": "EpiDetective. Chronic Disease Evidence Explorer. What affects the risk of chronic disease. A personal project by Wenxin Wan. Data: published reviews and meta-analyses.",
+            "zh": "EpiDetective。慢性病证据图谱。影响慢性病风险的因素。万汶鑫的个人项目。数据：已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Atlas des preuves : maladies chroniques. Ce qui influence le risque de maladie chronique. Un projet personnel de Wenxin Wan. Données : revues et méta-analyses publiées.",
+            "es": "EpiDetective. Atlas de evidencia: enfermedades crónicas. Qué influye en el riesgo de las enfermedades crónicas. Un proyecto personal de Wenxin Wan. Datos: revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Атлас доказательств: хронические болезни. От чего зависит риск хронических болезней. Личный проект Вэньсинь Вань. Данные: опубликованные обзоры и метаанализы.",
         },
     },
     "about.html": {
@@ -194,6 +206,158 @@ TOOL_DEEP = {
     "TL_HOW": ("chronic", "anchor", "how"),
     "TL_REDMEAT_CHD": ("chronic", "link", ("red_meat", "chd")),
 }
+
+# ---------- the cover's labels and their links ----------
+# The 24 names on the home page's contour map (tn_* keys), each mapped to the
+# entry it stands for in each tool. Causes first, then outcomes: terrain.js
+# shuffles each list with a fixed seed, so this order fixes the map's sequence.
+#   cancer   graph.json names (the tool's exposures and cancers, as the map
+#            shows them) and the id the tool's DATA writes, for the deep link
+#   chronic  the id in the chronic tool's DATA (risk or disease)
+# Clicking a label on the map draws a line to every other label on the map
+# that the data link to it: cancer links from graph.json (Established or
+# Suspected), chronic links from the data embedded in
+# chronic-disease-explorer/index.html (version 2.0 grades), counted links only,
+# as the tool's own map draws them (no related-outcome links).
+GRAPH_JSON = os.path.join(HERE, "graph.json")
+CHRONIC_HTML = os.path.join(HERE, "chronic-disease-explorer", "index.html")
+CHRONIC_GRAPH_JSON = os.path.join(HERE, "chronic-graph.json")
+TERRAIN_POOL = [
+    # key            kind       cancer: (view, tool id, [graph.json names])          chronic: (view, id)
+    ("tobacco",    "cause",   ("exposure", "Tobacco smoking", ["Tobacco smoking"]), ("risk", "smoking")),
+    ("alcohol",    "cause",   ("exposure", "Alcoholic beverages", ["Alcoholic drinks"]), ("risk", "alcohol_heavy")),
+    ("processed",  "cause",   ("exposure", "Processed meat", ["Processed meat"]), ("risk", "processed_meat")),
+    ("asbestos",   "cause",   ("exposure", "Asbestos (all forms)", ["Asbestos"]), None),
+    ("nightshift", "cause",   ("exposure", "Night shift work", ["Night-shift work"]), ("risk", "night_shift")),
+    ("radon",      "cause",   ("exposure", "Radon-222 & decay products", ["Radon gas"]), None),
+    ("hpv",        "cause",   ("exposure", "Human papillomavirus (types 16,18,31,33,35,39,45,51,52,56,58,59)",
+                               ["High-risk HPV"]), None),
+    ("airpoll",    "cause",   ("exposure", "Outdoor air pollution",
+                               ["Outdoor air pollution", "Outdoor air pollution – particulate matter"]), ("risk", "pm25")),
+    ("inactivity", "cause",   None, ("risk", "low_pa")),
+    ("salt",       "cause",   None, ("risk", "high_sodium")),
+    ("shortsleep", "cause",   None, ("risk", "short_sleep")),
+    ("noise",      "cause",   None, ("risk", "traffic_noise")),
+    ("lonely",     "cause",   None, ("risk", "isolation")),
+    ("bp",         "cause",   None, ("risk", "high_sbp")),          # the risk factor, not the disease
+    ("lung",       "outcome", ("cancer", "Lung", ["Lung cancer"]), None),
+    ("breast",     "outcome", ("cancer", "Breast", ["Breast cancer"]), None),
+    ("colon",      "outcome", ("cancer", "Colon", ["Colon cancer"]), None),
+    ("liver",      "outcome", ("cancer", "Liver", ["Liver cancer"]), None),
+    ("chd",        "outcome", None, ("disease", "chd")),
+    ("stroke",     "outcome", None, ("disease", "stroke_isch")),
+    ("t2d",        "outcome", None, ("disease", "t2d")),
+    ("dementia",   "outcome", None, ("disease", "dementia")),
+    ("copd",       "outcome", None, ("disease", "copd")),
+    ("depression", "outcome", None, ("disease", "depression")),
+]
+# The chronic tool's map leaves these out of its counted links (isRel in the tool).
+CHRONIC_RELATED = ("broader", "proxy", "composite_other", "progression")
+# Fallback only if the tool's DATA cannot be read: chronic-graph.json (version
+# 1.4, names instead of ids, old grade names).
+CHRONIC_V14_NAME = {"smoking": "Current cigarette smoking", "alcohol_heavy": "Heavy alcohol use",
+                    "processed_meat": "Processed meat", "night_shift": "Night shift work",
+                    "pm25": "Fine particulate air pollution", "low_pa": "Low physical activity",
+                    "high_sodium": "High salt intake", "short_sleep": "Short sleep",
+                    "traffic_noise": "Road traffic noise", "isolation": "Social isolation and loneliness",
+                    "high_sbp": "High blood pressure", "chd": "Coronary heart disease",
+                    "stroke_isch": "Ischaemic stroke", "t2d": "Type 2 diabetes",
+                    "dementia": "Dementia (all-cause)", "copd": "COPD", "depression": "Major depression"}
+CHRONIC_V14_GRADE = {"Convincing": "Strong", "Probable": "Moderate", "Limited": "Weak",
+                     "Contested": "Conflicting", "Suggestive": "Suggestive"}
+
+
+def chronic_links():
+    """{(risk id, disease id): grade} for the chronic tool's counted links."""
+    try:
+        with open(CHRONIC_HTML, encoding="utf-8") as fh:
+            text = fh.read()
+        start = text.index("const DATA = ") + len("const DATA = ")
+        data, _ = json.JSONDecoder().raw_decode(text, start)
+        risks = {r["id"] for r in data["risks"]}
+        diseases = {d["id"] for d in data["diseases"]}
+        out = {}
+        for l in data["links"]:
+            if l.get("related_outcome") is True or l.get("outcome_match") in CHRONIC_RELATED:
+                continue
+            out[(l["risk"], l["disease"])] = l["grade"]
+        return out, risks, diseases
+    except (OSError, ValueError, KeyError) as err:
+        print("NOTE: chronic tool data unreadable (%s); using chronic-graph.json" % err)
+    with open(CHRONIC_GRAPH_JSON, encoding="utf-8") as fh:
+        g = json.load(fh)
+    by_name = {}
+    for i, n in enumerate(g["nodes"]):
+        by_name.setdefault((n["t"], n["n"]), i)
+    ids = {}
+    for cid, name in CHRONIC_V14_NAME.items():
+        kind = "d" if cid in ("chd", "stroke_isch", "t2d", "dementia", "copd", "depression") else "r"
+        if (kind, name) in by_name:
+            ids[by_name[(kind, name)]] = cid
+    out = {}
+    for l in g["links"]:
+        if l["s"] in ids and l["t"] in ids:
+            out[(ids[l["s"]], ids[l["t"]])] = CHRONIC_V14_GRADE.get(l["g"], l["g"])
+    return out, {v for v in ids.values()}, {v for v in ids.values()}
+
+
+def terrain_model():
+    """The pool's links: [(i, j, tool, grade)] between causes i and outcomes j,
+    checked against the data (a name the data does not have stops the build)."""
+    with open(GRAPH_JSON, encoding="utf-8") as fh:
+        graph = json.load(fh)
+    names = {n["n"]: i for i, n in enumerate(graph["nodes"])}
+    cancer = {}
+    for l in graph["links"]:
+        key = (l["s"], l["t"])
+        cancer[key] = max(cancer.get(key, 0), l["e"])
+    chronic, risks, diseases = chronic_links()
+    for key, kind, c, k in TERRAIN_POOL:
+        for name in (c[2] if c else []):
+            if name not in names:
+                raise SystemExit("TERRAIN_POOL %s: graph.json has no node %r" % (key, name))
+        if k and k[1] not in (risks if k[0] == "risk" else diseases):
+            raise SystemExit("TERRAIN_POOL %s: the chronic tool has no %s %r" % (key, k[0], k[1]))
+    links = []
+    for i, (_, ki, ci, chi) in enumerate(TERRAIN_POOL):
+        for j, (_, kj, cj, chj) in enumerate(TERRAIN_POOL):
+            if ki != "cause" or kj != "outcome":
+                continue
+            if ci and cj:
+                hits = [cancer[(names[a], names[b])] for a in ci[2] for b in cj[2]
+                        if (names[a], names[b]) in cancer]
+                if hits:
+                    links.append((i, j, "cancer", "est" if max(hits) else "sus"))
+            if chi and chj and (chi[1], chj[1]) in chronic:
+                links.append((i, j, "chronic", chronic[(chi[1], chj[1])]))
+    return links
+
+
+def terrain_json(links, d, lang):
+    """The cover's data as an inline JSON script: names, kinds, deep links
+    into the tools, the links with their grade in words, and the strings of
+    the card and of the announcement."""
+    sep = LIST_SEP.get(lang, ", ")
+    items = []
+    for key, kind, c, k in TERRAIN_POOL:
+        urls = []
+        if c:
+            urls.append([plain(d["search_group_cancer"]), tool_link("cancer", c[0], c[1], lang)])
+        if k:
+            urls.append([plain(d["search_group_chronic"]), tool_link("chronic", k[0], k[1], lang)])
+        items.append({"n": plain(d["tn_" + key]), "o": 1 if kind == "outcome" else 0, "u": urls})
+    out = []
+    for i, j, tool, grade in links:
+        word = d["lbl_est" if grade == "est" else "lbl_sus"] if tool == "cancer" else d[GRADE_KEY[grade]]
+        out.append([i, j, plain(word)])
+    strings = {k: plain(d["terrain_" + k]) for k in
+               ("open", "say", "say_none", "say_off", "list", "close", "key_cause", "key_outcome")}
+    strings["open_in"] = strings["open"].rstrip(" →")
+    strings["sep"] = sep
+    body = json.dumps({"items": items, "links": out, "t": strings}, ensure_ascii=False,
+                      separators=(",", ":")).replace("</", "<\\/")
+    return '<script type="application/json" id="terrain-data">%s</script>' % body
+
 
 # Corrections go to one address; the subject stays English in every language so
 # the reports can be filtered, and the body holds the four lines of the form.
@@ -493,8 +657,8 @@ def render_work_chronic(work, d, lang):
 #   ---
 #
 # and the text follows in a small Markdown: "## " and "### " headings,
-# paragraphs, "- " lists, [links](https://...) and *titles of works*. The
-# site loads no italic file (site.css), so *...* becomes <cite>, set upright.
+# paragraphs, "- " lists, [links](https://...) and *titles of works*, which
+# become <cite> and set in Source Serif 4 italic (site.css).
 # A post ends with its sources: the list after the last heading is set as the
 # reference list. Posts render to blog/<slug>.html, one level below each
 # language's root (en at the site root, the others under zh/, fr/ ...), and the
@@ -676,6 +840,29 @@ def render_blog_list(posts, d, lang):
     return '<div class="reads post-list">\n%s\n</div>' % "\n".join(items)
 
 
+# the home page's blog section shows the newest posts, at most this many
+HOME_POSTS = 3
+
+
+def render_blog_latest(posts, d, lang):
+    """The home page's blog section (BLOG_LATEST): the newest posts, each with
+    its date, title, standfirst and a link; centred like a contents page."""
+    items = []
+    for p in posts[:HOME_POSTS]:
+        m = p["lang"][lang]
+        href = post_page(p["slug"])
+        items.append(
+            '<li class="bl-post">\n'
+            '  <p class="bl-date"><time datetime="%s">%s</time></p>\n'
+            '  <h3><a href="%s">%s</a></h3>\n'
+            '  <p class="bl-sf">%s</p>\n'
+            '  <p class="bl-more"><a class="tlink" href="%s">%s</a></p>\n'
+            '</li>'
+            % (p["date"], date_text(p["date"], lang), href, esc(m["title"]),
+               md_span(m["standfirst"]), href, d["blog_read"]))
+    return '<ol class="bl-list" data-n="%d">\n%s\n</ol>' % (len(items), "\n".join(items))
+
+
 def jsonld_post(post, lang):
     """BlogPosting for one post; a translation names the English original."""
     m = post["lang"][lang]
@@ -700,6 +887,55 @@ def jsonld_post(post, lang):
         data["translationOfWork"] = {"@id": abs_url("en", page) + "#post"}
     body = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
     return '<script type="application/ld+json">\n%s\n</script>' % body
+
+
+def jsonld_tool(d, lang, page, tool):
+    """explorer.html and chronic.html: a WebPage about the tool it explains,
+    linked to the site and to its author by @id."""
+    name = d["inst_t1_name" if tool == "cancer" else "inst_t2_name"]
+    title, desc = ("meta_explorer_title", "meta_explorer_desc") if tool == "cancer" else \
+        ("meta_chronic_title", "meta_chronic_desc")
+    data = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": abs_url(lang, page) + "#page",
+        "url": abs_url(lang, page),
+        "name": plain(d[title]),
+        "description": plain(d[desc]),
+        "inLanguage": lang,
+        "isPartOf": {"@id": abs_url(lang, "index.html") + "#website"},
+        "author": {"@id": PERSON_ID},
+        "about": {
+            "@type": "WebApplication",
+            "name": plain(name),
+            "url": tool_link(tool, None, None, lang),
+            "applicationCategory": "ReferenceApplication",
+            "operatingSystem": "Any web browser",
+            "isAccessibleForFree": True,
+            "author": {"@id": PERSON_ID},
+        },
+    }
+    body = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return '<script type="application/ld+json">\n%s\n</script>' % body
+
+
+# The logo mark beside the wordmark in every header and footer: the network of
+# favicon.svg, drawn inline (no request). The link's text names it.
+LOGO_SVG = ('<svg class="mark-i" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false">'
+            '<rect width="64" height="64" rx="13" fill="#22241F"/>'
+            '<g stroke="#F1F0EA" stroke-width="3.2" stroke-linecap="round">'
+            '<path d="M30 34 16 18M30 34l20-10M30 34l-8 16M30 34l19 13"/></g>'
+            '<g fill="#F1F0EA"><circle cx="16" cy="18" r="5"/><circle cx="50" cy="24" r="4.2"/>'
+            '<circle cx="22" cy="50" r="4.2"/><circle cx="49" cy="47" r="5"/></g>'
+            '<circle cx="30" cy="34" r="7.5" fill="#9E2F23" stroke="#22241F" stroke-width="2.5"/></svg>')
+
+
+def fig_parts(text):
+    """'124 risk factors' -> ('124', 'risk factors'), as fig_row splits it."""
+    m = re.match(r"^(\d[\d.,  ]*)\s*(.+)$", text)
+    if not m:
+        raise SystemExit("fig_parts: %r does not start with a count" % text)
+    return m.groups()
 
 
 # Pages outside the build that the sitemap lists: the file (or game folder) whose
@@ -864,6 +1100,9 @@ def main():
         post_tpl = fh.read()
     posts = load_posts()
 
+    # the cover's labels: which of the 24 names the data link to which
+    terrain_links = terrain_model()
+
     # work.html renders the committed output of scripts/build_work_data.py
     with open(WORK_JSON, encoding="utf-8") as fh:
         work = json.load(fh)
@@ -896,6 +1135,11 @@ def main():
         for i in (1, 2, 3):
             shared["Q_EX%d" % i] = quote(plain(d["search_ex%d" % i]), safe="")
         shared["JSONLD_HOME"] = jsonld_home(d, lang)
+        shared["BLOG_LATEST"] = render_blog_latest(posts, d, lang)
+        shared["TERRAIN_DATA"] = terrain_json(terrain_links, d, lang)
+        shared["LOGO"] = LOGO_SVG
+        for m_ in (1, 2, 3, 4):
+            shared["CHR_V%d" % m_], shared["CHR_K%d" % m_] = fig_parts(d["inst_t2_m%d" % m_])
         shared["THUMB_CANCER_BG"] = thumb_cancer
         shared["THUMB_CHRONIC_BG"] = thumb_chronic
         for k in FIG_KEYS:
@@ -929,6 +1173,7 @@ def main():
             ctx["PREFIX"] = "" if lang == "en" else "../"
             ctx["URL_HOME"] = url(lang, "index.html", lang)
             ctx["URL_EXPLORER"] = url(lang, "explorer.html", lang)
+            ctx["URL_CHRONIC"] = url(lang, "chronic.html", lang)
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_GAMES"] = url(lang, "games.html", lang)
             ctx["URL_READING"] = url(lang, "reading.html", lang)
@@ -954,6 +1199,9 @@ def main():
             ctx["LANGSWITCH"] = switch_html
             ctx["HREFLANG"] = "\n".join(alts)
             ctx.update(shared)
+            if page in ("explorer.html", "chronic.html"):
+                ctx["JSONLD_TOOL"] = jsonld_tool(d, lang, page,
+                                                 "cancer" if page == "explorer.html" else "chronic")
 
             path = os.path.join(outdir, page)
             with open(path, "w", encoding="utf-8") as fh:
@@ -983,6 +1231,7 @@ def main():
             ctx = dict(d)
             ctx.update(shared)
             for key, leaf in (("URL_HOME", "index.html"), ("URL_EXPLORER", "explorer.html"),
+                              ("URL_CHRONIC", "chronic.html"),
                               ("URL_ABOUT", "about.html"), ("URL_GAMES", "games.html"),
                               ("URL_READING", "reading.html"), ("URL_BLOG", "blog.html"),
                               ("URL_HWC", "how-we-check.html"), ("URL_WORK", "work.html")):
