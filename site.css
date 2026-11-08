@@ -963,6 +963,36 @@ blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink)
 .crumb a{min-width:24px;justify-content:center}
 .work-table tbody th a,.beyond a,.ecac-why a,.creds a,.cite-line a{padding-block:4px}
 
+/* ---------- blog (Nov 2026) ----------
+   blog.html lists the posts in the reading guide's rows (.reads/.read: the date
+   in the tag column); blog/<slug>.html sets one post at a reading measure. */
+.post-item h2 a{text-decoration:none}
+.post-item h2 a:hover{text-decoration-line:underline;text-decoration-color:var(--brown);
+  text-decoration-thickness:1px;text-underline-offset:5px}
+.read .post-more{margin-top:4px}
+.tool-hero.plain h1.post-h{max-width:18ch}
+.post-lede{margin:22px 0 0;max-width:44ch;font-size:clamp(1.12rem,1.6vw,1.32rem);line-height:1.5}
+.post-meta{margin:26px 0 0;font-family:var(--cond);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:600}
+.post-body{max-width:38em}
+.post-body > p{margin:0 0 1.15em}
+.post-body h2{font-size:clamp(1.32rem,2vw,1.6rem);margin:2.1em 0 .65em}
+.post-body h3{margin:1.7em 0 .5em}
+.post-body > :first-child{margin-top:0}
+.post-body a{text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:3px}
+.post-body a:hover{text-decoration-color:var(--ink)}
+.post-body ul{margin:0 0 1.15em;padding-inline-start:1.2em}
+.post-body li{margin-bottom:.45em}
+.post-body .post-refs{list-style:none;padding:0;margin-top:.4em;border-top:1px solid var(--rule);
+  font-size:.9rem;line-height:1.5;color:var(--ink-soft)}
+.post-body .post-refs li{margin:0;padding-block:11px;border-bottom:1px solid var(--rule);overflow-wrap:anywhere}
+.post-note{margin:0 0 2.2em;padding:12px 16px;background:var(--paper-deep);font-size:.92rem;color:var(--ink-soft)}
+.post-back{margin:clamp(40px,5vw,64px) 0 0}
+html[lang="zh"] .post-body{max-width:34em}
+html[lang="zh"] .post-lede{max-width:24em}
+html[lang="zh"] .post-meta{letter-spacing:0}
+html[lang="zh"] .tool-hero.plain h1.post-h{max-width:14em}
+
 /* ---------- print ---------- */
 /* A printed page keeps the text and the sources: no menus, search, buttons or
    decoration, black on white, and the web address after each outside link. */
@@ -972,7 +1002,7 @@ blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink)
   body{background:#fff;color:#000;font-size:11pt;overflow:visible}
   .skip,.top .top-right,.search,.inst-actions,.ts-acts,.qa-go,.game-more,.map-ground,.map-key,.sheet::before,
   .sheet::after,.tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.gl-img,
-  .stage,.back-row,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,.routes,
+  .stage,.back-row,.post-back,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,.routes,
   .sec-links{display:none!important}
   .top{position:static;background:none;border-bottom:1px solid #999;backdrop-filter:none;-webkit-backdrop-filter:none}
   .top .wrap{clip-path:none}
@@ -986,10 +1016,10 @@ blockquote.ecac{margin:0;max-width:66ch;border-inline-start:2px solid var(--ink)
   h1{font-size:24pt}
   h2{font-size:16pt}
   h1,h2,h3{break-after:avoid}
-  .tool-sheet,.lesson,.qa-row,.key-list li,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
+  .tool-sheet,.lesson,.qa-row,.post-refs li,.key-list li,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
   .quiz details{break-inside:avoid}
   .tool-sheet{background:none}
-  .lede,.read p,.inst p,.about p,.game-intro p,.qa-a p,.news li,.key-says,.ts-q{color:#000}
+  .lede,.read p,.inst p,.about p,.post-body,.post-refs,.game-intro p,.qa-a p,.news li,.key-says,.ts-q{color:#000}
   .cta-band{background:none}
   .foot{background:none;color:#000;border-top:1px solid #999}
   .foot .wrap{padding-block:12pt 0}

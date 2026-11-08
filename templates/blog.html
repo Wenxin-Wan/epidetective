@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="{{LANG}}" dir="{{DIR}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta_blog_title}}</title>
+<meta name="description" content="{{meta_blog_desc}}">
+<meta name="theme-color" content="#F1F0EA">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANG}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EpiDetective">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:title" content="{{meta_blog_title}}">
+<meta property="og:description" content="{{meta_blog_desc}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="{{OG_IMAGE_W}}">
+<meta property="og:image:height" content="{{OG_IMAGE_H}}">
+<meta property="og:image:type" content="{{OG_IMAGE_TYPE}}">
+<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{meta_blog_title}}">
+<meta name="twitter:description" content="{{meta_blog_desc}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:image:alt" content="{{OG_IMAGE_ALT}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="{{PREFIX}}assets/sofiasans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{PREFIX}}assets/sofiasanssc-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{PREFIX}}site.css">
+</head>
+<body>
+<a class="skip" href="#content">{{skip_link}}</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="{{URL_HOME}}">Epi<span>Detective</span></a>
+    <div class="top-right">
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_BLOG}}" aria-current="page">{{nav_blog}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+      <nav class="langs" aria-label="{{ui_language}}">{{LANGSWITCH}}</nav>
+    </div>
+  </div>
+</header>
+
+<main id="content" tabindex="-1">
+
+<!-- The blog index: one entry per post in posts/<slug>/, newest first, written
+     by build_site.py (BLOG_LIST). Every post ships in all five languages, so
+     each language's index lists the same posts in its own words. -->
+<section class="tool-hero plain">
+  <div class="wrap">
+    <div class="crumb"><a href="{{URL_HOME}}">EpiDetective</a> &middot;
+      <span>{{nav_blog}}</span></div>
+    <h1>{{blog_h1}}</h1>
+    <p class="lede" style="margin-top:24px">{{blog_lede}}</p>
+  </div>
+</section>
+
+<section class="sec wrap">
+{{BLOG_LIST}}
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="mark">Epi<span>Detective</span></div>
+        <p class="tag">{{foot_tagline}}</p>
+      </div>
+      <nav class="menu">
+        <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
+        <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
+        <a href="{{URL_READING}}">{{read_label}}</a>
+        <a href="{{URL_GAMES}}">{{nav_games}}</a>
+        <a href="{{URL_BLOG}}">{{nav_blog}}</a>
+        <a href="{{URL_ABOUT}}">{{nav_about}}</a>
+        <a href="{{URL_ABOUT}}#contact">{{nav_contact}}</a>
+      </nav>
+    </div>
+    <p class="foot-trust"><a href="{{URL_HWC}}">{{foot_hwc}}</a><a href="{{URL_ABOUT}}#cite">{{foot_cite}}</a><a href="{{URL_HWC}}#report">{{foot_report}}</a></p>
+    <div class="disc affil">{{foot_affiliation}}</div>
+    <div class="foot-bot">
+      <span>{{foot_created}}</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

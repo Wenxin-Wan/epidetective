@@ -178,6 +178,7 @@
   "tool2_q": "什么会增加心脏病、卒中、糖尿病、痴呆等疾病的风险？证据有多强？",
   "tool_start": "从这里开始",
   "nav_games": "小游戏",
+  "nav_blog": "博客",
   "meta_games_title": "防癌小游戏｜皮肤癌、肺癌与乳腺癌｜EpiDetective",
   "meta_games_desc": "三款免费的浏览器防癌小游戏：Sol & the UV Shield Quest（防晒，6 至 12 岁）、The Lung Detective（肺癌的成因，10 至 16 岁）和 A Town of 1,000（乳腺癌，14 岁以上）。无需下载，不收集任何数据。",
   "games_label": "防癌小游戏",
@@ -486,5 +487,14 @@
   "exp_lbl_p": "类别说明的是 IARC 对某种因素能否使人患癌有多大把握，并不涉及风险的大小；风险大小取决于剂量和具体情况。",
   "exp_lbl_totals": "以上是 IARC 分类清单（第 1–142 卷，最近一次更新于 2026 年 7 月 23 日）中所有已分类因素的总数。地图收录的是 1 类、2A 类和 2B 类的因素；3 类因素可以通过搜索找到。",
   "exp_lbl_more": "所有标签对照 &rarr;",
-  "exp_lbl_iarc": "IARC 分类清单（英文） &rarr;"
+  "exp_lbl_iarc": "IARC 分类清单（英文） &rarr;",
+  "meta_blog_title": "随笔与札记｜EpiDetective",
+  "meta_blog_desc": "癌症流行病学研究者万汶鑫的随笔：谈证据，谈这个学科的习惯，也谈流行病学究竟有什么用。",
+  "blog_h1": "随笔与札记",
+  "blog_lede": "关于流行病学的长文：证据如何产生，会在哪里出错，这份工作又为何依然重要。每篇先以英文写成，再译成本站的另外四种语言。",
+  "blog_read": "阅读全文",
+  "post_by": "作者：万汶鑫",
+  "post_back": "全部随笔",
+  "post_translated": "本文译自英文。",
+  "post_original": "阅读英文原文"
 }

@@ -1,7 +1,7 @@
-# The site's pages are generated: i18n/*.json plus templates/*.html are rendered
-# into index.html, zh/index.html and the rest by build_site.py. GitHub Pages only
-# serves files, so editing the JSON through Pages CMS would otherwise change
-# nothing a visitor sees. This runs the build for every content commit and pushes
+# The site's pages are generated: i18n/*.json plus templates/*.html (and the blog
+# posts in posts/) are rendered into index.html, zh/index.html and the rest by
+# build_site.py. GitHub Pages only serves files, so editing the JSON through
+# Pages CMS would otherwise change nothing a visitor sees. This runs the build for every content commit and pushes
 # the regenerated pages back.
 #
 # build_site.py exits non-zero if a translation key is missing from any language,
@@ -14,6 +14,7 @@ on:
     paths:
       - "i18n/**"
       - "templates/**"
+      - "posts/**"
       - "build_site.py"
   workflow_dispatch:
 

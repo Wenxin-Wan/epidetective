@@ -550,6 +550,9 @@ content:
       - name: "nav_games"
         label: "MENU — Games"
         type: string
+      - name: "nav_blog"
+        label: "MENU — Blog"
+        type: string
       - name: "meta_games_title"
         label: "meta_games_title"
         type: string
@@ -1476,6 +1479,33 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "meta_blog_title"
+        label: "BLOG — browser tab and Google headline"
+        type: string
+      - name: "meta_blog_desc"
+        label: "BLOG — Google snippet and share text"
+        type: text
+      - name: "blog_h1"
+        label: "BLOG — page heading"
+        type: string
+      - name: "blog_lede"
+        label: "BLOG — paragraph under the heading"
+        type: text
+      - name: "blog_read"
+        label: "BLOG — link under each essay in the list"
+        type: string
+      - name: "post_by"
+        label: "BLOG ESSAY PAGE — byline"
+        type: string
+      - name: "post_back"
+        label: "BLOG ESSAY PAGE — link back to the list"
+        type: string
+      - name: "post_translated"
+        label: "BLOG ESSAY PAGE — note above a translation"
+        type: string
+      - name: "post_original"
+        label: "BLOG ESSAY PAGE — link to the English original"
         type: string
 
   - name: zh
@@ -2021,6 +2051,9 @@ content:
       - name: "nav_games"
         label: "MENU — Games"
         type: string
+      - name: "nav_blog"
+        label: "MENU — Blog"
+        type: string
       - name: "meta_games_title"
         label: "meta_games_title"
         type: string
@@ -2947,6 +2980,33 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "meta_blog_title"
+        label: "BLOG — browser tab and Google headline"
+        type: string
+      - name: "meta_blog_desc"
+        label: "BLOG — Google snippet and share text"
+        type: text
+      - name: "blog_h1"
+        label: "BLOG — page heading"
+        type: string
+      - name: "blog_lede"
+        label: "BLOG — paragraph under the heading"
+        type: text
+      - name: "blog_read"
+        label: "BLOG — link under each essay in the list"
+        type: string
+      - name: "post_by"
+        label: "BLOG ESSAY PAGE — byline"
+        type: string
+      - name: "post_back"
+        label: "BLOG ESSAY PAGE — link back to the list"
+        type: string
+      - name: "post_translated"
+        label: "BLOG ESSAY PAGE — note above a translation"
+        type: string
+      - name: "post_original"
+        label: "BLOG ESSAY PAGE — link to the English original"
         type: string
 
   - name: fr
@@ -3492,6 +3552,9 @@ content:
       - name: "nav_games"
         label: "MENU — Games"
         type: string
+      - name: "nav_blog"
+        label: "MENU — Blog"
+        type: string
       - name: "meta_games_title"
         label: "meta_games_title"
         type: string
@@ -4418,6 +4481,33 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "meta_blog_title"
+        label: "BLOG — browser tab and Google headline"
+        type: string
+      - name: "meta_blog_desc"
+        label: "BLOG — Google snippet and share text"
+        type: text
+      - name: "blog_h1"
+        label: "BLOG — page heading"
+        type: string
+      - name: "blog_lede"
+        label: "BLOG — paragraph under the heading"
+        type: text
+      - name: "blog_read"
+        label: "BLOG — link under each essay in the list"
+        type: string
+      - name: "post_by"
+        label: "BLOG ESSAY PAGE — byline"
+        type: string
+      - name: "post_back"
+        label: "BLOG ESSAY PAGE — link back to the list"
+        type: string
+      - name: "post_translated"
+        label: "BLOG ESSAY PAGE — note above a translation"
+        type: string
+      - name: "post_original"
+        label: "BLOG ESSAY PAGE — link to the English original"
         type: string
 
   - name: es
@@ -4963,6 +5053,9 @@ content:
       - name: "nav_games"
         label: "MENU — Games"
         type: string
+      - name: "nav_blog"
+        label: "MENU — Blog"
+        type: string
       - name: "meta_games_title"
         label: "meta_games_title"
         type: string
@@ -5889,6 +5982,33 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "meta_blog_title"
+        label: "BLOG — browser tab and Google headline"
+        type: string
+      - name: "meta_blog_desc"
+        label: "BLOG — Google snippet and share text"
+        type: text
+      - name: "blog_h1"
+        label: "BLOG — page heading"
+        type: string
+      - name: "blog_lede"
+        label: "BLOG — paragraph under the heading"
+        type: text
+      - name: "blog_read"
+        label: "BLOG — link under each essay in the list"
+        type: string
+      - name: "post_by"
+        label: "BLOG ESSAY PAGE — byline"
+        type: string
+      - name: "post_back"
+        label: "BLOG ESSAY PAGE — link back to the list"
+        type: string
+      - name: "post_translated"
+        label: "BLOG ESSAY PAGE — note above a translation"
+        type: string
+      - name: "post_original"
+        label: "BLOG ESSAY PAGE — link to the English original"
         type: string
 
   - name: ru
@@ -6434,6 +6554,9 @@ content:
       - name: "nav_games"
         label: "MENU — Games"
         type: string
+      - name: "nav_blog"
+        label: "MENU — Blog"
+        type: string
       - name: "meta_games_title"
         label: "meta_games_title"
         type: string
@@ -7360,4 +7483,31 @@ content:
         type: string
       - name: "exp_lbl_iarc"
         label: "EXPLORER — labels block: link to IARC's list"
+        type: string
+      - name: "meta_blog_title"
+        label: "BLOG — browser tab and Google headline"
+        type: string
+      - name: "meta_blog_desc"
+        label: "BLOG — Google snippet and share text"
+        type: text
+      - name: "blog_h1"
+        label: "BLOG — page heading"
+        type: string
+      - name: "blog_lede"
+        label: "BLOG — paragraph under the heading"
+        type: text
+      - name: "blog_read"
+        label: "BLOG — link under each essay in the list"
+        type: string
+      - name: "post_by"
+        label: "BLOG ESSAY PAGE — byline"
+        type: string
+      - name: "post_back"
+        label: "BLOG ESSAY PAGE — link back to the list"
+        type: string
+      - name: "post_translated"
+        label: "BLOG ESSAY PAGE — note above a translation"
+        type: string
+      - name: "post_original"
+        label: "BLOG ESSAY PAGE — link to the English original"
         type: string

@@ -178,6 +178,7 @@
   "tool2_q": "What raises the risk of heart disease, stroke, diabetes, dementia and more, and how strong is the evidence?",
   "tool_start": "Start from",
   "nav_games": "Games",
+  "nav_blog": "Blog",
   "meta_games_title": "Cancer awareness games — skin, lung and breast — EpiDetective",
   "meta_games_desc": "Three free browser games about cancer prevention: sun safety for ages 6 to 12, what causes lung cancer for ages 10 to 16, and breast cancer for 14 and up.",
   "games_label": "Cancer awareness games",
@@ -486,5 +487,14 @@
   "exp_lbl_p": "The group says how sure IARC is that an agent can cause cancer in people. It says nothing about how large the risk is, which depends on the dose and the circumstances.",
   "exp_lbl_totals": "IARC’s own totals for every agent it has classified, from its List of Classifications (Volumes 1–142, last updated 23 July 2026). The map holds agents from Groups 1, 2A and 2B; Group 3 agents are found by search.",
   "exp_lbl_more": "All the labels, side by side &rarr;",
-  "exp_lbl_iarc": "IARC’s List of Classifications &rarr;"
+  "exp_lbl_iarc": "IARC’s List of Classifications &rarr;",
+  "meta_blog_title": "Essays and notes — EpiDetective",
+  "meta_blog_desc": "Essays by Wenxin Wan, a cancer epidemiologist, on evidence, the habits of the field and what epidemiology is for.",
+  "blog_h1": "Essays and notes",
+  "blog_lede": "Longer pieces on epidemiology: how its evidence is made, where it goes wrong and why the work still matters. Each is written in English and translated into the site’s four other languages.",
+  "blog_read": "Read the essay",
+  "post_by": "By Wenxin Wan",
+  "post_back": "All essays",
+  "post_translated": "Translated from English.",
+  "post_original": "Read the original"
 }

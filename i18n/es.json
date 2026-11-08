@@ -178,6 +178,7 @@
   "tool2_q": "¿Qué aumenta el riesgo de enfermedad cardíaca, ictus, diabetes, demencia y otras, y qué solidez tiene la evidencia?",
   "tool_start": "Empezar por",
   "nav_games": "Juegos",
+  "nav_blog": "Blog",
   "meta_games_title": "Juegos sobre el cáncer — piel, pulmón y mama — EpiDetective",
   "meta_games_desc": "Tres juegos gratuitos en el navegador sobre prevención del cáncer: protección solar (de 6 a 12 años), causas del cáncer de pulmón (de 10 a 16) y cáncer de mama (desde los 14).",
   "games_label": "Juegos de sensibilización sobre el cáncer",
@@ -486,5 +487,14 @@
   "exp_lbl_p": "El grupo indica hasta qué punto el CIIC está seguro de que un agente puede causar cáncer en las personas. No dice nada de cuánto riesgo supone, que depende de la dosis y de las circunstancias.",
   "exp_lbl_totals": "Los totales del propio CIIC para todos los agentes que ha clasificado, según su lista de clasificaciones (volúmenes 1 a 142, última actualización el 23 de julio de 2026). El mapa reúne agentes de los Grupos 1, 2A y 2B; los del Grupo 3 se encuentran con la búsqueda.",
   "exp_lbl_more": "Todas las etiquetas, una junto a otra &rarr;",
-  "exp_lbl_iarc": "La lista de clasificaciones del CIIC (en inglés) &rarr;"
+  "exp_lbl_iarc": "La lista de clasificaciones del CIIC (en inglés) &rarr;",
+  "meta_blog_title": "Ensayos y notas — EpiDetective",
+  "meta_blog_desc": "Ensayos de Wenxin Wan, epidemiólogo del cáncer, sobre la evidencia, los hábitos de la disciplina y para qué sirve la epidemiología.",
+  "blog_h1": "Ensayos y notas",
+  "blog_lede": "Textos más largos sobre epidemiología: cómo se construye su evidencia, dónde falla y por qué este trabajo sigue importando. Cada uno se escribe en inglés y se traduce a los otros cuatro idiomas del sitio.",
+  "blog_read": "Leer el ensayo",
+  "post_by": "Por Wenxin Wan",
+  "post_back": "Todos los ensayos",
+  "post_translated": "Traducido del inglés.",
+  "post_original": "Leer el original"
 }

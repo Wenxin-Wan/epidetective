@@ -2,8 +2,8 @@
 /*
   make_og.mjs: the share images and the game card images of epidetective.com.
 
-    node scripts/make_og.mjs                  14 share images + 3 game cards
-    node scripts/make_og.mjs og               the 14 share images (assets/og/*.png)
+    node scripts/make_og.mjs                  16 share images + 3 game cards
+    node scripts/make_og.mjs og               the 16 share images (assets/og/*.png)
     node scripts/make_og.mjs games            the 3 game cards (assets/games/*-card.webp)
     node scripts/make_og.mjs og --only home-fr,cancer
     node scripts/make_og.mjs --out DIR        write the share images to DIR instead of assets/og (a trial run)
@@ -93,6 +93,8 @@ const SRC = {
     es: 'Fuentes: CIIC, OMS, Código Europeo contra el Cáncer y estudios publicados',
     ru: 'Источники: МАИР, ВОЗ, Европейский кодекс против рака и опубликованные исследования',
   },
+  /* the blog and its essays carry no data line (the card hides an empty one) */
+  none: { en: '', zh: '', fr: '', es: '', ru: '' },
   code: {
     en: 'Source: the official Codes Against Cancer (IARC and partners)',
     zh: '来源：官方防癌守则（IARC 及其合作伙伴）',
@@ -172,6 +174,25 @@ const PAGES = [
       es: ['Fuentes, versiones y correcciones', 'Cómo verificamos'],
       ru: ['Источники, версии и исправления', 'Как мы проверяем данные'],
     } },
+  { id: 'blog', file: 'blog.png', page: 'blog.html', art: 'cancer', src: 'none',
+    t: {
+      en: ['Blog', 'Essays and notes'],
+      zh: ['博客', '随笔与札记'],
+      fr: ['Blog', 'Essais et notes'],
+      es: ['Blog', 'Ensayos y notas'],
+      ru: ['Блог', 'Эссе и заметки'],
+    } },
+  /* one card per post, id blog-<slug> (build_site.py POST_OG_FILE); the alt texts
+     are the og_alt lines of posts/<slug>/<lang>.md and must match these words */
+  { id: 'blog-shoe-leather-in-the-age-of-ai', file: 'blog-shoe-leather-in-the-age-of-ai.png',
+    page: 'blog/shoe-leather-in-the-age-of-ai.html', art: 'cancer', src: 'none',
+    t: {
+      en: ['Essay', 'Shoe leather in the age of AI'],
+      zh: ['随笔', 'AI 时代，还得磨破鞋底'],
+      fr: ['Essai', 'User ses semelles à l’ère de l’IA'],
+      es: ['Ensayo', 'Gastar suela en la era de la IA'],
+      ru: ['Эссе', 'Стоптанные ботинки в эпоху ИИ'],
+    } },
   /* the two tools: their own titles (docTitle) and their own address */
   { id: 'cancer', file: 'cancer.png', page: 'tools:cancer', art: 'cancer', src: 'iarc', domain: 'tools.epidetective.com',
     t: {
@@ -206,7 +227,7 @@ function altText(lang, kicker, title, srcKey) {
   }).join('');
 }
 
-/* ---- the card list: 5 home cards, then the 9 others ---- */
+/* ---- the card list: 5 home cards, then the 11 others ---- */
 function buildCards(homeTitles) {
   const cards = [];
   for (const lang of LANGS) {

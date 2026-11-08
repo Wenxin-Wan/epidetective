@@ -1351,6 +1351,10 @@
     "label": "MENU — Games",
     "type": "string"
   },
+  "nav_blog": {
+    "label": "MENU — Blog",
+    "type": "string"
+  },
   "read_label": {
     "label": "MENU and READING — Reading the evidence (menu entry, small label)",
     "type": "string"
@@ -1497,6 +1501,42 @@
   },
   "tn_depression": {
     "label": "Map label and quick link — Depression (no straight quotes or &)",
+    "type": "string"
+  },
+  "meta_blog_title": {
+    "label": "BLOG — browser tab and Google headline",
+    "type": "string"
+  },
+  "meta_blog_desc": {
+    "label": "BLOG — Google snippet and share text",
+    "type": "text"
+  },
+  "blog_h1": {
+    "label": "BLOG — page heading",
+    "type": "string"
+  },
+  "blog_lede": {
+    "label": "BLOG — paragraph under the heading",
+    "type": "text"
+  },
+  "blog_read": {
+    "label": "BLOG — link under each essay in the list",
+    "type": "string"
+  },
+  "post_by": {
+    "label": "BLOG ESSAY PAGE — byline",
+    "type": "string"
+  },
+  "post_back": {
+    "label": "BLOG ESSAY PAGE — link back to the list",
+    "type": "string"
+  },
+  "post_translated": {
+    "label": "BLOG ESSAY PAGE — note above a translation",
+    "type": "string"
+  },
+  "post_original": {
+    "label": "BLOG ESSAY PAGE — link to the English original",
     "type": "string"
   }
 }

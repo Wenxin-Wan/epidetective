@@ -6,5 +6,6 @@ Disallow: /editorial-2026-09-20/
 Disallow: /scripts/
 Disallow: /i18n/
 Disallow: /data/
+Disallow: /posts/
 
 Sitemap: https://epidetective.com/sitemap.xml

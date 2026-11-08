@@ -267,11 +267,11 @@
 var LANG_LIST = [["en","English"],["zh","中文"],["fr","Français"],["es","Español"],["ru","Русский"]];
 /* The site menu, as it reads on every other page: tools, this page, the reading guide, games, about, contact. */
 var SITE_NAV = {
-  en:["Tools","Code Against Cancer","Reading the evidence","Games","About","Contact"],
-  zh:["工具","防癌守则","读懂证据","小游戏","关于","联系"],
-  fr:["Outils","Code contre le cancer","Lire les preuves","Jeux","À propos","Contact"],
-  es:["Herramientas","Código contra el cáncer","Leer la evidencia","Juegos","Acerca de","Contacto"],
-  ru:["Инструменты","Кодекс против рака","Как читать научные данные","Игры","Об авторе","Контакты"]
+  en:["Tools","Code Against Cancer","Reading the evidence","Games","Blog","About","Contact"],
+  zh:["工具","防癌守则","读懂证据","小游戏","博客","关于","联系"],
+  fr:["Outils","Code contre le cancer","Lire les preuves","Jeux","Blog","À propos","Contact"],
+  es:["Herramientas","Código contra el cáncer","Leer la evidencia","Juegos","Blog","Acerca de","Contacto"],
+  ru:["Инструменты","Кодекс против рака","Как читать научные данные","Игры","Блог","Об авторе","Контакты"]
 };
 
 var STRINGS = {
@@ -1373,8 +1373,9 @@ function build(lang){
     '<a href="./" aria-current="page">'+esc(labels[1])+'</a>'+
     '<a href="'+base+'reading.html">'+esc(labels[2])+'</a>'+
     '<a href="'+base+'games.html">'+esc(labels[3])+'</a>'+
-    '<a href="'+base+'about.html">'+esc(labels[4])+'</a>'+
-    '<a href="'+base+'about.html#contact">'+esc(labels[5])+'</a>';
+    '<a href="'+base+'blog.html">'+esc(labels[4])+'</a>'+
+    '<a href="'+base+'about.html">'+esc(labels[5])+'</a>'+
+    '<a href="'+base+'about.html#contact">'+esc(labels[6])+'</a>';
 
   /* language switcher */
   var nav = document.getElementById("langNav");

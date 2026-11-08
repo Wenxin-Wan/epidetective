@@ -42,7 +42,7 @@ CHRONIC_NET_SVG = os.path.join(HERE, "assets", "chronic-network.svg")
 LANGS = ["en", "zh", "fr", "es", "ru"]
 PAGES = {"index.html": "home", "explorer.html": "explorer", "about.html": "about",
          "games.html": "games", "reading.html": "reading",
-         "how-we-check.html": "hwc", "work.html": "work"}
+         "how-we-check.html": "hwc", "work.html": "work", "blog.html": "blog"}
 SITE_URL = "https://epidetective.com"
 # Share images (og:image must be an absolute URL on a raster format; social
 # scrapers ignore SVG): 1200x630 PNG cards rendered by scripts/make_og.mjs from
@@ -125,7 +125,20 @@ OG_IMAGES = {
             "ru": "EpiDetective. Что установило МАИР, отрасль за отраслью. Работа и рак. Личный проект Вэньсинь Вань. Данные: Монографии МАИР.",
         },
     },
+    "blog.html": {
+        "file": "blog.png",
+        "alt": {
+            "en": "EpiDetective. Blog. Essays and notes. A personal project by Wenxin Wan.",
+            "zh": "EpiDetective。博客。随笔与札记。万汶鑫的个人项目。",
+            "fr": "EpiDetective. Blog. Essais et notes. Un projet personnel de Wenxin Wan.",
+            "es": "EpiDetective. Blog. Ensayos y notas. Un proyecto personal de Wenxin Wan.",
+            "ru": "EpiDetective. Блог. Эссе и заметки. Личный проект Вэньсинь Вань.",
+        },
+    },
 }
+# Each post's card is assets/og/blog-<slug>.png (make_og.mjs, id blog-<slug>);
+# its alt text is the og_alt line of the post's file in each language.
+POST_OG_FILE = "blog-{slug}.png"
 # og:locale wants a full locale, not the bare language code
 OG_LOCALE = {"en": "en_GB", "zh": "zh_CN", "fr": "fr_FR", "es": "es_ES", "ru": "ru_RU"}
 TOOL_URL = "https://tools.epidetective.com/cancer/"
@@ -466,6 +479,229 @@ def render_work_chronic(work, d, lang):
     return '<ul class="beyond">\n%s\n</ul>' % "\n".join(items)
 
 
+# ---------- the blog ----------
+# Every post is a folder posts/<slug>/ holding one Markdown file per language:
+# en.md is the original, the other four its translations, and the build stops
+# if one is missing. Each file opens with a front matter block:
+#
+#   ---
+#   title: Shoe leather in the age of AI
+#   date: 2026-11-08            (the same in all five files)
+#   standfirst: the one sentence under the title, also the list entry
+#   description: the Google snippet and share text
+#   og_alt: the share card's alt text, in the file's language
+#   ---
+#
+# and the text follows in a small Markdown: "## " and "### " headings,
+# paragraphs, "- " lists, [links](https://...) and *titles of works*. The
+# site loads no italic file (site.css), so *...* becomes <cite>, set upright.
+# A post ends with its sources: the list after the last heading is set as the
+# reference list. Posts render to blog/<slug>.html, one level below each
+# language's root (en at the site root, the others under zh/, fr/ ...), and the
+# folder posts/ itself stays out of search (robots.txt).
+POSTS_DIR = os.path.join(HERE, "posts")
+BLOG_DIR = "blog"
+POST_FIELDS = ("title", "date", "standfirst", "description", "og_alt")
+POST_AUTHOR = "Wenxin Wan"
+# the page title's separator before the site name, as the i18n meta_*_title use
+TITLE_SEP = {"zh": "｜"}
+MONTHS = {
+    "en": ["January", "February", "March", "April", "May", "June", "July",
+           "August", "September", "October", "November", "December"],
+    "fr": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
+           "août", "septembre", "octobre", "novembre", "décembre"],
+    "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+           "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+    # genitive, as a date wants it
+    "ru": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+           "августа", "сентября", "октября", "ноября", "декабря"],
+}
+MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+MD_CITE = re.compile(r"\*([^*\s][^*]*?)\*")
+
+
+def date_text(iso, lang):
+    """2026-11-08 -> '8 November 2026', '2026年11月8日', '8 novembre 2026' ..."""
+    y, m, d = (int(x) for x in iso.split("-"))
+    if lang == "zh":
+        return "%d年%d月%d日" % (y, m, d)
+    if lang == "es":
+        return "%d de %s de %d" % (d, MONTHS["es"][m - 1], y)
+    if lang == "ru":
+        return "%d %s %d г." % (d, MONTHS["ru"][m - 1], y)
+    if lang == "fr":
+        return "%s %s %d" % ("1er" if d == 1 else d, MONTHS["fr"][m - 1], y)
+    return "%d %s %d" % (d, MONTHS["en"][m - 1], y)
+
+
+def md_span(text):
+    """Plain text with *titles*, escaped for HTML."""
+    return MD_CITE.sub(r"<cite>\1</cite>", html.escape(text, quote=False))
+
+
+def md_inline(text):
+    """One line of a post: links and *titles*; everything else escaped."""
+    out, pos = [], 0
+    for m in MD_LINK.finditer(text):
+        out.append(md_span(text[pos:m.start()]))
+        out.append('<a href="%s">%s</a>' % (esc(m.group(2)), md_span(m.group(1))))
+        pos = m.end()
+    out.append(md_span(text[pos:]))
+    return "".join(out)
+
+
+def md_blocks(md, where):
+    """A post's Markdown body as HTML (the subset described above)."""
+    blocks, para, items = [], [], []
+
+    def flush():
+        if para:
+            blocks.append(("p", " ".join(para)))
+            del para[:]
+        if items:
+            blocks.append(("ul", list(items)))
+            del items[:]
+
+    for raw in md.splitlines():
+        line = raw.rstrip()
+        if not line.strip():
+            flush()
+        elif line.startswith(("## ", "### ")):
+            flush()
+            level = 2 if line.startswith("## ") else 3
+            blocks.append(("h%d" % level, line[level + 1:].strip()))
+        elif line.startswith("- "):
+            if para:
+                flush()
+            items.append(line[2:].strip())
+        elif items and raw.startswith("  "):
+            items[-1] += " " + line.strip()       # a list item run onto the next line
+        elif line.lstrip().startswith(("#", ">", "|", "```")) or re.match(r"\s*\d+\.\s", line):
+            raise SystemExit("%s: this Markdown is not supported here: %r" % (where, line[:60]))
+        else:
+            if items:
+                flush()
+            para.append(line.strip())
+    flush()
+
+    last_h = max((i for i, b in enumerate(blocks) if b[0] == "h2"), default=-1)
+    out = []
+    for i, (kind, val) in enumerate(blocks):
+        if kind == "ul":
+            refs = last_h >= 0 and i == last_h + 1 and i == len(blocks) - 1
+            out.append('<ul%s>\n%s\n</ul>' % (' class="post-refs"' if refs else "",
+                                             "\n".join("<li>%s</li>" % md_inline(t) for t in val)))
+        else:
+            out.append("<%s>%s</%s>" % (kind, md_inline(val), kind))
+    return "\n".join(out)
+
+
+def read_post(path):
+    """(front matter dict, Markdown body) of one post file."""
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read().lstrip("﻿")
+    m = re.match(r"---\n(.*?)\n---\n(.*)$", text, flags=re.S)
+    if not m:
+        raise SystemExit("%s: no front matter (a --- block at the top)" % path)
+    meta = {}
+    for line in m.group(1).splitlines():
+        if line.strip():
+            key, sep, value = line.partition(":")
+            if not sep:
+                raise SystemExit("%s: front matter line without a colon: %r" % (path, line))
+            meta[key.strip()] = value.strip()
+    return meta, m.group(2)
+
+
+def load_posts():
+    """Every post in posts/, newest first, each with all five languages."""
+    posts = []
+    if not os.path.isdir(POSTS_DIR):
+        return posts
+    for slug in sorted(os.listdir(POSTS_DIR)):
+        folder = os.path.join(POSTS_DIR, slug)
+        if not os.path.isdir(folder):
+            continue
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            raise SystemExit("posts/%s: a post's folder name is its URL: lower-case letters,"
+                             " digits and hyphens only" % slug)
+        post = {"slug": slug, "lang": {}}
+        for lang in LANGS:
+            path = os.path.join(folder, lang + ".md")
+            where = "posts/%s/%s.md" % (slug, lang)
+            if not os.path.exists(path):
+                raise SystemExit("%s is missing: every post ships in all five languages" % where)
+            meta, body = read_post(path)
+            missing = [f for f in POST_FIELDS if not meta.get(f)]
+            if missing:
+                raise SystemExit("%s: front matter lacks %s" % (where, ", ".join(missing)))
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", meta["date"]):
+                raise SystemExit("%s: date must read YYYY-MM-DD, not %r" % (where, meta["date"]))
+            meta["html"] = md_blocks(body, where)
+            post["lang"][lang] = meta
+        dates = {post["lang"][l]["date"] for l in LANGS}
+        if len(dates) != 1:
+            raise SystemExit("posts/%s: the five files give different dates %s" % (slug, sorted(dates)))
+        post["date"] = dates.pop()
+        og = POST_OG_FILE.replace("{slug}", slug)
+        if not os.path.exists(os.path.join(HERE, "assets", "og", og)):
+            raise SystemExit("share image assets/og/%s is missing: render it with"
+                             " node scripts/make_og.mjs og --only blog-%s" % (og, slug))
+        posts.append(post)
+    posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
+    return posts
+
+
+def post_page(slug):
+    """A post's path below its language's root."""
+    return "%s/%s.html" % (BLOG_DIR, slug)
+
+
+def render_blog_list(posts, d, lang):
+    """blog.html: one entry per post, newest first (BLOG_LIST)."""
+    if not posts:
+        return ""
+    items = []
+    for p in posts:
+        m = p["lang"][lang]
+        href = post_page(p["slug"])
+        items.append(
+            '<article class="read post-item">\n'
+            '  <p class="tag"><time datetime="%s">%s</time></p>\n'
+            '  <div>\n    <h2><a href="%s">%s</a></h2>\n    <p>%s</p>\n'
+            '    <p class="post-more"><a class="tlink" href="%s">%s</a></p>\n  </div>\n'
+            '</article>'
+            % (p["date"], date_text(p["date"], lang), href, esc(m["title"]),
+               md_span(m["standfirst"]), href, d["blog_read"]))
+    return '<div class="reads post-list">\n%s\n</div>' % "\n".join(items)
+
+
+def jsonld_post(post, lang):
+    """BlogPosting for one post; a translation names the English original."""
+    m = post["lang"][lang]
+    page = post_page(post["slug"])
+    data = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": abs_url(lang, page) + "#post",
+        "headline": m["title"],
+        "description": m["description"],
+        "datePublished": post["date"],
+        "inLanguage": lang,
+        "url": abs_url(lang, page),
+        "mainEntityOfPage": abs_url(lang, page),
+        "image": OG_BASE + POST_OG_FILE.replace("{slug}", post["slug"]),
+        "author": {"@type": "Person", "@id": PERSON_ID, "name": POST_AUTHOR,
+                   "url": SITE_URL + "/about.html"},
+        "isPartOf": {"@type": "Blog", "@id": abs_url(lang, "blog.html") + "#blog",
+                     "url": abs_url(lang, "blog.html")},
+    }
+    if lang != "en":
+        data["translationOfWork"] = {"@id": abs_url("en", page) + "#post"}
+    body = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return '<script type="application/ld+json">\n%s\n</script>' % body
+
+
 # Pages outside the build that the sitemap lists: the file (or game folder) whose
 # history dates the page, and the URL of each language it answers in. The Code
 # page localises itself from ?lang= and carries hreflang for these URLs; the
@@ -524,7 +760,7 @@ def lastmod(path, dirty):
     return day or date.today().isoformat()
 
 
-def write_sitemap():
+def write_sitemap(posts=()):
     """One <url> per page per language, each with its <lastmod> and every
     language as an alternate. Search engines want the alternates repeated inside
     every entry, not only on the page that happens to be canonical."""
@@ -545,7 +781,7 @@ def write_sitemap():
                        % html.escape(alternates["en"]))
         out.append("  </url>")
 
-    for page in PAGES:
+    for page in list(PAGES) + [post_page(p["slug"]) for p in posts]:
         alternates = {l: abs_url(l, page) for l in LANGS}
         for lang in LANGS:
             path = page if lang == "en" else "%s/%s" % (lang, page)
@@ -563,13 +799,34 @@ def write_sitemap():
 def write_robots():
     """GitHub Pages serves the whole repository, so robots.txt asks crawlers to
     leave the build inputs and internal files alone: the search index, the
-    templates, the 2026-09-20 review, the scripts, the translations and data."""
+    templates, the 2026-09-20 review, the scripts, the translations and data,
+    and the Markdown sources of the blog (posts/; the pages are blog/)."""
     lines = ["User-agent: *", "Allow: /",
              "Disallow: /assets/search/", "Disallow: /templates/", "Disallow: /editorial-2026-09-20/",
-             "Disallow: /scripts/", "Disallow: /i18n/", "Disallow: /data/",
+             "Disallow: /scripts/", "Disallow: /i18n/", "Disallow: /data/", "Disallow: /posts/",
              "", "Sitemap: %s/sitemap.xml" % SITE_URL]
     with open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
+
+
+def fill(template, ctx, where):
+    """A template with every {{key}} filled from ctx and its dev-notes dropped;
+    a key ctx does not know stops the build."""
+    missing = []
+
+    def sub(m):
+        k = m.group(1)
+        if k not in ctx:
+            missing.append(k)
+            return m.group(0)
+        return str(ctx[k])
+
+    out = PLACEHOLDER.sub(sub, template)
+    # dev-notes stay in the templates; the shipped page carries none
+    out = re.sub(r"[ \t]*<!--(?!\[).*?-->\n?", "", out, flags=re.S)
+    if missing:
+        raise SystemExit("%s: unresolved placeholders %s" % (where, sorted(set(missing))))
+    return out
 
 
 def main():
@@ -603,6 +860,9 @@ def main():
     for page in PAGES:
         with open(os.path.join(TPL, page), encoding="utf-8") as fh:
             templates[page] = fh.read()
+    with open(os.path.join(TPL, "post.html"), encoding="utf-8") as fh:
+        post_tpl = fh.read()
+    posts = load_posts()
 
     # work.html renders the committed output of scripts/build_work_data.py
     with open(WORK_JSON, encoding="utf-8") as fh:
@@ -627,6 +887,7 @@ def main():
             "WORK_SECTORS": work_sectors,
             "WORK_REC9": render_rec9(work, d, lang),
             "WORK_CHRONIC": render_work_chronic(work, d, lang),
+            "BLOG_LIST": render_blog_list(posts, d, lang),
         }
         for key, (tool, kind, id_) in TOOL_DEEP.items():
             shared[key] = esc(tool_link(tool, kind, id_, lang))
@@ -671,6 +932,7 @@ def main():
             ctx["URL_ABOUT"] = url(lang, "about.html", lang)
             ctx["URL_GAMES"] = url(lang, "games.html", lang)
             ctx["URL_READING"] = url(lang, "reading.html", lang)
+            ctx["URL_BLOG"] = url(lang, "blog.html", lang)
             ctx["URL_GAME1"] = ctx["PREFIX"] + GAME1_PATH
             ctx["URL_GAME2"] = ctx["PREFIX"] + GAME2_PATH
             ctx["URL_GAME3"] = ctx["PREFIX"] + GAME3_PATH
@@ -693,28 +955,71 @@ def main():
             ctx["HREFLANG"] = "\n".join(alts)
             ctx.update(shared)
 
-            missing = []
-
-            def sub(m):
-                k = m.group(1)
-                if k not in ctx:
-                    missing.append(k)
-                    return m.group(0)
-                return str(ctx[k])
-
-            html = PLACEHOLDER.sub(sub, templates[page])
-            # dev-notes stay in the templates; the shipped page carries none
-            html = re.sub(r"[ \t]*<!--(?!\[).*?-->\n?", "", html, flags=re.S)
-            if missing:
-                raise SystemExit("%s/%s: unresolved placeholders %s"
-                                 % (lang, page, sorted(set(missing))))
-
             path = os.path.join(outdir, page)
             with open(path, "w", encoding="utf-8") as fh:
-                fh.write(html)
+                fh.write(fill(templates[page], ctx, "%s/%s" % (lang, page)))
             written.append(os.path.relpath(path, HERE))
 
-    write_sitemap()
+        # The posts, one level down (blog/<slug>.html): every link to a page of
+        # the same language takes one ../, and the assets one more than the
+        # language's own pages do.
+        for post in posts:
+            page = post_page(post["slug"])
+            m = post["lang"][lang]
+            prefix = "../" if lang == "en" else "../../"
+            switch = []
+            for other in LANGS:
+                label = data[other]["lang_name"]
+                if other == lang:
+                    switch.append('<span class="lang-cur" aria-current="true">%s</span>' % label)
+                else:
+                    switch.append('<a href="%s%s%s" hreflang="%s">%s</a>'
+                                  % (prefix, "" if other == "en" else other + "/", page, other, label))
+            alts = ['<link rel="alternate" hreflang="%s" href="%s">'
+                    % (o, abs_url(o, page)) for o in LANGS]
+            alts.append('<link rel="alternate" hreflang="x-default" href="%s">'
+                        % abs_url("en", page))
+
+            ctx = dict(d)
+            ctx.update(shared)
+            for key, leaf in (("URL_HOME", "index.html"), ("URL_EXPLORER", "explorer.html"),
+                              ("URL_ABOUT", "about.html"), ("URL_GAMES", "games.html"),
+                              ("URL_READING", "reading.html"), ("URL_BLOG", "blog.html"),
+                              ("URL_HWC", "how-we-check.html"), ("URL_WORK", "work.html")):
+                ctx[key] = "../" + leaf
+            ctx["LANG"] = lang
+            ctx["DIR"] = d.get("lang_dir", "ltr")
+            ctx["PREFIX"] = prefix
+            ctx["URL_PREVENTION"] = (prefix + PREVENTION_PATH
+                                     + ("" if lang == "en" else "?lang=" + lang))
+            ctx["CANONICAL"] = abs_url(lang, page)
+            ctx["OG_IMAGE"] = OG_BASE + POST_OG_FILE.replace("{slug}", post["slug"])
+            ctx["OG_IMAGE_ALT"] = esc(m["og_alt"])
+            ctx["OG_IMAGE_W"], ctx["OG_IMAGE_H"], ctx["OG_IMAGE_TYPE"] = OG_W, OG_H, OG_TYPE
+            ctx["OG_LOCALE"] = OG_LOCALE[lang]
+            ctx["LANGSWITCH"] = "".join(switch)
+            ctx["HREFLANG"] = "\n".join(alts)
+            ctx["POST_TITLE"] = esc(m["title"])
+            ctx["POST_PAGE_TITLE"] = esc(m["title"] + TITLE_SEP.get(lang, " — ") + "EpiDetective")
+            ctx["POST_DESC"] = esc(m["description"])
+            ctx["POST_AUTHOR"] = POST_AUTHOR
+            ctx["POST_STANDFIRST"] = md_span(m["standfirst"])
+            ctx["POST_DATE"] = post["date"]
+            ctx["POST_DATE_TEXT"] = date_text(post["date"], lang)
+            ctx["POST_BODY"] = m["html"]
+            ctx["POST_NOTE"] = ("" if lang == "en" else
+                                '<p class="post-note">%s%s<a href="%s%s" hreflang="en">%s</a></p>'
+                                % (d["post_translated"], "" if lang == "zh" else " ", prefix, page,
+                                   d["post_original"]))
+            ctx["JSONLD_POST"] = jsonld_post(post, lang)
+
+            path = os.path.join(outdir, page)
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(fill(post_tpl, ctx, "%s/%s" % (lang, page)))
+            written.append(os.path.relpath(path, HERE))
+
+    write_sitemap(posts)
     write_robots()
 
     print("Built %d pages across %d languages:" % (len(written), len(LANGS)))

@@ -279,7 +279,7 @@ var STRINGS = {
   en: {
     skip:"Skip to content",
     ogAlt:"EpiDetective. Cancer epidemiologist. About Wenxin Wan. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
-    nav:["Tools","Code Against Cancer","Reading the evidence","Games","About","Contact"],
+    nav:["Tools","Code Against Cancer","Reading the evidence","Games","Blog","About","Contact"],
     eyebrow:"EpiDetective · The developer’s record",
     h1:'Me, and <i>the work</i>',
     lede:'Degrees, positions, papers, consortium roles, tools, conference records and press coverage, most recent first. Open any entry for the detail, or filter to one kind. Each entry links to its source. Assembled by Wenxin Wan; the full record is at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>.',
@@ -294,7 +294,7 @@ var STRINGS = {
   zh: {
     skip:"跳到正文",
     ogAlt:"EpiDetective。癌症流行病学研究者。关于万汶鑫。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
-    nav:["工具","防癌守则","读懂证据","小游戏","关于","联系"],
+    nav:["工具","防癌守则","读懂证据","小游戏","博客","关于","联系"],
     eyebrow:"EPIDETECTIVE · 开发者档案",
     h1:'我，和<b>我的工作</b>',
     lede:'学位、任职、论文、国际联盟职责、工具、会议记录和媒体报道，按时间倒序排列。点开任意一条可查看详情，也可以只看某一类。每一条都链接到出处。由万汶鑫整理；完整记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。',
@@ -538,8 +538,9 @@ function build(lang){
     '<a href="../code-against-cancer/' + (lang === "zh" ? '?lang=zh' : '') + '">' + S.nav[1] + '</a>' +
     '<a href="' + site + 'reading.html">' + S.nav[2] + '</a>' +
     '<a href="' + site + 'games.html">' + S.nav[3] + '</a>' +
-    '<a href="' + site + 'about.html">' + S.nav[4] + '</a>' +
-    '<a href="' + site + 'about.html#contact">' + S.nav[5] + '</a>';
+    '<a href="' + site + 'blog.html">' + S.nav[4] + '</a>' +
+    '<a href="' + site + 'about.html">' + S.nav[5] + '</a>' +
+    '<a href="' + site + 'about.html#contact">' + S.nav[6] + '</a>';
   /* each language is its own address: one canonical, the one that names this version */
   var here = lang === "zh" ? "https://epidetective.com/timeline/?lang=zh" : "https://epidetective.com/timeline/";
   var cn = document.querySelector('link[rel="canonical"]'); if (cn) cn.setAttribute("href", here);

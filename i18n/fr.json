@@ -178,6 +178,7 @@
   "tool2_q": "Qu’est-ce qui augmente le risque de maladie cardiaque, d’AVC, de diabète, de démence et d’autres maladies, et avec quelle solidité ?",
   "tool_start": "Commencer par",
   "nav_games": "Jeux",
+  "nav_blog": "Blog",
   "meta_games_title": "Jeux de sensibilisation au cancer — EpiDetective",
   "meta_games_desc": "Trois jeux gratuits dans le navigateur sur la prévention du cancer : la protection solaire (6 à 12 ans), les causes du cancer du poumon (10 à 16 ans) et le cancer du sein (14 ans et plus).",
   "games_label": "Jeux de sensibilisation au cancer",
@@ -486,5 +487,14 @@
   "exp_lbl_p": "Le groupe indique à quel point le CIRC est sûr qu’un agent peut causer un cancer chez l’être humain. Il ne dit rien de l’ampleur du risque, qui dépend de la dose et des circonstances.",
   "exp_lbl_totals": "Les totaux du CIRC pour tous les agents qu’il a classés, d’après sa liste des classifications (volumes 1 à 142, dernière mise à jour le 23 juillet 2026). La carte réunit des agents des groupes 1, 2A et 2B ; les agents du groupe 3 se trouvent par la recherche.",
   "exp_lbl_more": "Toutes les étiquettes, côte à côte &rarr;",
-  "exp_lbl_iarc": "La liste des classifications du CIRC (en anglais) &rarr;"
+  "exp_lbl_iarc": "La liste des classifications du CIRC (en anglais) &rarr;",
+  "meta_blog_title": "Essais et notes — EpiDetective",
+  "meta_blog_desc": "Les essais de Wenxin Wan, épidémiologiste du cancer, sur les preuves, les habitudes de la discipline et ce à quoi sert l’épidémiologie.",
+  "blog_h1": "Essais et notes",
+  "blog_lede": "Des textes plus longs sur l’épidémiologie : comment ses preuves se construisent, où elles se trompent et pourquoi ce travail compte encore. Chacun est écrit en anglais, puis traduit dans les quatre autres langues du site.",
+  "blog_read": "Lire l’essai",
+  "post_by": "Par Wenxin Wan",
+  "post_back": "Tous les essais",
+  "post_translated": "Traduit de l’anglais.",
+  "post_original": "Lire l’original"
 }
