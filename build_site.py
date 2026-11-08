@@ -58,11 +58,11 @@ OG_IMAGES = {
     "index.html": {
         "file": "home-{lang}.png",
         "alt": {
-            "en": "EpiDetective. What causes cancer and other chronic diseases, and how sure the evidence is. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
-            "zh": "EpiDetective。什么会导致癌症和其他慢性病，以及证据有多可靠。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
-            "fr": "EpiDetective. Ce qui provoque le cancer et d’autres maladies chroniques, et la solidité des preuves. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
-            "es": "EpiDetective. Qué causa el cáncer y otras enfermedades crónicas, y qué solidez tiene la evidencia. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
-            "ru": "EpiDetective. Что вызывает рак и другие хронические заболевания, и насколько надёжны доказательства. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
+            "en": "EpiDetective. Translating epidemiological evidence for a healthier world. A personal project by Wenxin Wan. Data: IARC Monographs, published reviews and meta-analyses.",
+            "zh": "EpiDetective。转化流行病学证据，让世界更健康。万汶鑫的个人项目。数据：《IARC 致癌物专论》、已发表的综述和荟萃分析。",
+            "fr": "EpiDetective. Traduire les preuves épidémiologiques pour un monde en meilleure santé. Un projet personnel de Wenxin Wan. Données : Monographies du CIRC, revues et méta-analyses publiées.",
+            "es": "EpiDetective. Traducir la evidencia epidemiológica para un mundo más sano. Un proyecto personal de Wenxin Wan. Datos: Monografías del CIIC, revisiones y metaanálisis publicados.",
+            "ru": "EpiDetective. Объясняем эпидемиологические данные ради более здорового мира. Личный проект Вэньсинь Вань. Данные: Монографии МАИР, опубликованные обзоры и метаанализы.",
         },
     },
     "explorer.html": {
