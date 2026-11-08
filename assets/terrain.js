@@ -31,7 +31,7 @@
       INK = '#6E5A3D', HALO = 'rgba(241,240,234,.92)';
   var STEP = 0.065, WATER = -0.47, LOW = -0.2;   /* contour interval; shoreline; top of the green lowland */
   var SPEED = 0.0000105;                         /* drift, noise units per millisecond */
-  var SCROLL_PX = 0.25;                          /* the field moves a quarter of a pixel per pixel scrolled */
+  var SCROLL_PX = 0.25;                          /* scrolling, the map lags a quarter behind the page */
   var PEAK_MIN = 0.16, RISE = 0.12, TAU = 0.7;   /* a summit shows above PEAK_MIN, fully RISE higher; fade time (s) */
 
   /* seeded 2D simplex noise */
@@ -248,7 +248,7 @@
 
   function draw(ms, dt) {
     if (!val) return;
-    var oy = still ? 0 : (window.scrollY || window.pageYOffset || 0) * SCROLL_PX / scale;
+    var oy = still ? 0 : -(window.scrollY || window.pageYOffset || 0) * SCROLL_PX / scale;
     field(ms, oy);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
