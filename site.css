@@ -696,6 +696,12 @@ html[lang="ru"] .tool-hero h1{font-size:clamp(2rem,3.3vw,2.9rem);max-width:28ch}
      prose and links | record card and credentials
    In the second row both cells take the row's full height, so the prose and
    the credentials share a top and a bottom edge in every language. */
+/* The About page sits in one centred column (the prose and the record side by
+   side, then How to cite and Contact on the same left edge), so on a wide
+   screen the two columns stay close instead of drifting to the window's
+   edges. The three sections follow one another with one gap between them. */
+.about-col{max-width:calc(960px + 2 * var(--pad))}
+.about-col + .about-col{padding-top:0}
 .about{display:grid;gap:26px}
 .about-head{margin:0}
 .about-head h1.page-h{margin-bottom:0}
@@ -703,7 +709,7 @@ html[lang="ru"] .tool-hero h1{font-size:clamp(2rem,3.3vw,2.9rem);max-width:28ch}
 .about-text,.about-facts{display:grid;gap:14px;align-content:start}
 .about-facts{gap:22px}
 @media (min-width:900px){
-  .about{grid-template-columns:minmax(0,1fr) 300px;column-gap:56px;row-gap:40px}
+  .about{grid-template-columns:minmax(0,1fr) 300px;column-gap:64px;row-gap:40px}
   .about-head,.about-photo{align-self:center}
   .about-head h1.page-h{font-size:clamp(1.9rem,3.3vw,2.7rem);max-width:21ch}
   .about-text{display:flex;flex-direction:column;justify-content:space-between}
