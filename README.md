@@ -25,7 +25,7 @@ English.
 
 ## Content
 
-All copy lives in `i18n/<lang>.json`, 519 keys each. `en.json` is the source of
+All copy lives in `i18n/<lang>.json`, 524 keys each. `en.json` is the source of
 truth for key parity. To change wording, edit the JSON and rebuild — never edit
 the generated HTML, it is overwritten.
 
@@ -71,24 +71,63 @@ system's CJK sans, since no CJK webfont is viable at this file size; there the
 display tracking is neutralised, measures are set in `em`, and emphasis is
 weight, never a synthesised oblique.
 
-`Literata` and `IBM Plex Mono` stay in `assets/` because the Code Against
-Cancer page, the timeline, the games, the chronic tool and the share cards
-(`scripts/og-template.html`) still use them.
+`Literata` and `IBM Plex Mono` stay in `assets/` because the timeline, the
+games, the chronic tool and the share cards (`scripts/og-template.html`) still
+use them. The Code Against Cancer page sets in Source Serif 4 like the rest of
+the site (see below).
 
 ## Layout
 
 The container runs up to 1680 px with fluid gutters (`--max`, `--pad`:
 `clamp(20px, 4vw, 72px)`), so on a wide monitor the sections use the width
-(the two explorers side by side, the blog row, the games row, the Code band,
-How we check) while running text keeps a readable measure. The blog index and
-every post set in one centred reading column of about 66 characters.
+(the two explorers side by side, the blog row, How we check) while running
+text keeps a readable measure. The blog index and every post set in one
+centred reading column of about 66 characters.
 
-The home page, after the cover: the two explorers, Code Against Cancer, the
-newest posts (`BLOG_LATEST`, up to three), the games, How we check and What's
-new. The labels both tools print and the questions answered from them live on
-the tools' About pages: `explorer.html` (IARC's groups, the two link labels,
+The home page shows only the author's own work (November 2026). After the
+cover: the two explorers, the newest posts, How we check and What's new, then
+the footer. Each explorer's sheet gives the question it answers, two key
+figures (`FIG_T1_M1`/`M2`, `FIG_T2_M1`/`M2`: exposures and cancer types,
+risk factors and diseases), the source of its evidence in a ruled panel (its
+name, a short note on who produces it and how, taken from what How we check
+and the About pages say, and a link to How we check `#cancer` / `#chronic`),
+a few places to start, the two actions and the network inset. The other counts
+(links, languages, the agents and related outcomes beyond the map) are on the
+About pages. The blog section (`BLOG_LATEST`, up to three posts) has the same
+section head as the tools and sets its posts left, in a row of up to three; a
+single post spans the row, on the columns of How we check. The Code Against
+Cancer band and the games row left the home page; both pages stay in the menu.
+The labels both tools print and the questions answered from them live on the
+tools' About pages: `explorer.html` (IARC's groups, the two link labels,
 three questions) and `chronic.html` (the five grades, the older names, the
 stroke question), which the chronic tool's "About this tool" button opens.
+
+## The menu
+
+Every page's header and footer carry the same menu: Tools, Code Against
+Cancer, Games, Blog, About, Contact. "Reading the evidence" left the menu in
+November 2026 (its labels and questions now live on the tools' About pages);
+`reading.html` itself stays, and the About pages, Work and cancer, the games
+page and the games still link to it. Besides the templates, three
+hand-written pages carry the menu and must be kept in step: `404.html`,
+`code-against-cancer/index.html` (`SITE_NAV`) and `timeline/index.html` (its
+`nav` arrays).
+
+## The Code Against Cancer page
+
+`code-against-cancer/index.html` is written by hand, outside the build: one
+file with its five languages inside (`STRINGS`, `REGIONS`), read from
+`?lang=` (English has no query) and remembered in `localStorage`. It looks
+like every other page: its header is the built pages' header in markup, size,
+position and behaviour (the wordmark with the logo, the menu, then the
+languages, the current one as text and the others as links to `?lang=xx`,
+which switch in place), and it sets in Source Serif 4 on the site's paper, ink
+and 1680 px container, with the inner pages' contour still behind its title.
+The fonts, tokens and header rules are copied from `site.css` into the page's
+own `<style>`, so a change to the site's header must be copied there too. The
+region tabs, the `#europe`, `#lac`, `#asia` and `#europe-3` addresses and the
+per-language meta tags work as before; the recommendation cards run in two
+columns from 1100 px, read across in order.
 
 ## The cover
 

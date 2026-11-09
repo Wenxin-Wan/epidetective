@@ -45,7 +45,6 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
-        <a href="{{URL_READING}}">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_BLOG}}">{{nav_blog}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>
@@ -116,10 +115,14 @@
   </div>
 </section>
 
-<!-- The two explorers as map sheets: the question each answers, its figures
-     set as a legend, its sources, a few places to start, the two actions, and
-     its network as an inset (both pictures inline from build_site.py, no
-     request). The figures come split by build_site.py (FIG_*). -->
+<!-- The two explorers as map sheets: the question each answers, two key
+     figures set as a legend, the source of its evidence in a ruled panel (who
+     produces it, why it can be trusted, and the way to How we check), a few
+     places to start, the two actions, and its network as an inset (both
+     pictures inline from build_site.py, no request). The figures come split by
+     build_site.py (FIG_*); the other counts (links, languages, the agents and
+     outcomes beyond the map) are on the tools' About pages. The source notes
+     say only what How we check and the About pages say. -->
 <section class="sec wrap tools" id="instruments" aria-labelledby="tools-h">
   <div class="sec-bar">
     <h2 id="tools-h">{{inst_h2}}</h2>
@@ -135,11 +138,15 @@
         <div class="ts-inset" style="{{THUMB_CANCER_BG}}" aria-hidden="true"></div>
       </div>
       <ul class="ts-legend">
-        <li>{{FIG_T1_M1}}</li><li>{{FIG_T1_M2}}</li><li>{{FIG_T1_M3}}</li><li>{{FIG_T1_M4}}</li>
+        <li>{{FIG_T1_M1}}</li><li>{{FIG_T1_M2}}</li>
       </ul>
-      <p class="ts-note">{{inst_t1_m5}}</p>
-      <p class="ts-row"><span class="label">{{hwc_src_label}}</span> <span>{{tool1_src}}</span></p>
-      <p class="ts-row ts-start"><span class="label">{{tool_start}}</span>
+      <div class="ts-src">
+        <p class="label">{{home_src_from}}</p>
+        <p class="ts-src-name">{{tool1_src}}</p>
+        <p class="ts-src-why">{{tool1_src_note}}</p>
+        <p class="ts-src-go"><a href="{{URL_HWC}}#cancer">{{hwc_home_btn}}</a></p>
+      </div>
+      <p class="ts-start"><span class="label">{{tool_start}}</span>
         <a href="{{TL_LUNG}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_lung}}</a>
         <a href="{{TL_BREAST}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_breast}}</a>
         <a href="{{TL_TOBACCO}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_tobacco}}</a>
@@ -158,11 +165,16 @@
         <div class="ts-inset ts-inset-chronic" style="{{THUMB_CHRONIC_BG}}" aria-hidden="true"></div>
       </div>
       <ul class="ts-legend">
-        <li>{{FIG_T2_M1}}</li><li>{{FIG_T2_M2}}</li><li>{{FIG_T2_M3}}</li><li>{{FIG_T2_M4}}</li>
+        <li>{{FIG_T2_M1}}</li><li>{{FIG_T2_M2}}</li>
       </ul>
-      <p class="ts-note">{{inst_t2_m6}}</p>
-      <p class="ts-row"><span class="label">{{hwc_src_label}}</span> <span>{{inst_t2_m5}}</span></p>
-      <p class="ts-row ts-start"><span class="label">{{tool_start}}</span>
+      <!-- the version of the tool's data stays small, beside the link -->
+      <div class="ts-src">
+        <p class="label">{{home_src_from}}</p>
+        <p class="ts-src-name">{{tool2_src}}</p>
+        <p class="ts-src-why">{{tool2_src_note}}</p>
+        <p class="ts-src-go"><a href="{{URL_HWC}}#chronic">{{hwc_home_btn}}</a> <span class="ts-ver">{{tool2_ver}}</span></p>
+      </div>
+      <p class="ts-start"><span class="label">{{tool_start}}</span>
         <a href="{{TL_STROKE}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_stroke}}</a>
         <a href="{{TL_T2D}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_t2d}}</a>
         <a href="{{TL_DEMENTIA}}"><svg class="tri tri-o" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn_dementia}}</a>
@@ -176,54 +188,19 @@
   </div>
 </section>
 
-<!-- What you can do: the summary of the official Codes Against Cancer. The two
-     dotted routes count the actions: 14 for Europe, 17 for Latin America and
-     the Caribbean (decoration; the sentence says it). -->
-<section class="band code-band" id="what-you-can-do" aria-labelledby="code-h">
-  <div class="wrap band-in">
-    <div class="band-head">
-      <p class="label">{{code_home_label}}</p>
-      <h2 id="code-h">{{nav_prevention}}</h2>
-    </div>
-    <div class="band-body">
-      <p>{{inst_cac_desc}}</p>
-      <div class="routes" aria-hidden="true">
-        <span class="route" style="--n:14"></span>
-        <span class="route" style="--n:17"></span>
-      </div>
-      <a class="btn btn-solid" href="{{URL_PREVENTION}}">{{code_home_btn}}</a>
-    </div>
-  </div>
-</section>
-
 <!-- From the blog: the newest posts in posts/ (at most three, newest first),
-     written by build_site.py (BLOG_LATEST), centred like a contents page. -->
+     written by build_site.py (BLOG_LATEST), with the same section head as the
+     tools and set left like the rest of the page. The blog's own pages keep
+     their centred reading column. (The Code Against Cancer band and the games
+     row that stood around it left the home page on 9 Nov 2026: the home page
+     shows the author's own work; the menu still leads to both pages.) -->
 <section class="sec wrap blog-row" id="blog" aria-labelledby="blog-h">
-  <div class="sec-bar sec-bar-c">
-    <p class="label">{{blog_h1}}</p>
+  <div class="sec-bar">
     <h2 id="blog-h">{{home_blog_h2}}</h2>
+    <p class="label">{{blog_h1}}</p>
   </div>
   {{BLOG_LATEST}}
   <p class="sec-links"><a class="tlink" href="{{URL_BLOG}}">{{post_back}} &rarr;</a></p>
-</section>
-
-<!-- Games, for schools and families: small frames of the games, all cropped
-     alike; each opens the games page with that game on the stage. The pictures
-     load only when they come near the screen. -->
-<section class="sec wrap games-row" id="games" aria-labelledby="games-h">
-  <div class="sec-bar">
-    <h2 id="games-h">{{home_games_h2}}</h2>
-    <p class="label">{{home_games_label}}</p>
-  </div>
-  <ul class="game-list">
-    <li><a href="{{URL_GAMES}}#sun-safety"><span class="gl-img"><img src="{{PREFIX}}assets/games/sun-safety-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g1_card_alt}}"></span>
-      <span class="gl-txt"><span class="gl-name">Sol &amp; the UV Shield Quest</span><span class="gl-meta">{{games_g1_topic}} &middot; {{games_g1_m1}}</span></span></a></li>
-    <li><a href="{{URL_GAMES}}#lung-detective"><span class="gl-img"><img src="{{PREFIX}}assets/games/lung-detective-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g2_card_alt}}"></span>
-      <span class="gl-txt"><span class="gl-name">The Lung Detective</span><span class="gl-meta">{{games_g2_topic}} &middot; {{games_g2_m1}}</span></span></a></li>
-    <li><a href="{{URL_GAMES}}#town-of-1000"><span class="gl-img"><img src="{{PREFIX}}assets/games/town-of-1000-card.webp" width="720" height="405" loading="lazy" decoding="async" alt="{{games_g3_card_alt}}"></span>
-      <span class="gl-txt"><span class="gl-name">A Town of 1,000</span><span class="gl-meta">{{games_g3_topic}} &middot; {{games_g3_m1}}</span></span></a></li>
-  </ul>
-  <p class="sec-links"><a class="tlink" href="{{URL_GAMES}}">{{home_games_more}} &rarr;</a></p>
 </section>
 
 <!-- Trust: where the data come from and how errors are reported, next to what
@@ -264,7 +241,6 @@
       <nav class="menu">
         <a href="{{URL_HOME}}#instruments">{{nav_instruments}}</a>
         <a href="{{URL_PREVENTION}}">{{nav_prevention}}</a>
-        <a href="{{URL_READING}}">{{read_label}}</a>
         <a href="{{URL_GAMES}}">{{nav_games}}</a>
         <a href="{{URL_BLOG}}">{{nav_blog}}</a>
         <a href="{{URL_ABOUT}}">{{nav_about}}</a>

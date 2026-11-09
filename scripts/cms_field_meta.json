@@ -1384,7 +1384,27 @@
     "type": "text"
   },
   "tool1_src": {
-    "label": "TOOLS — Cancer tool: sources",
+    "label": "TOOLS — Cancer tool: the source’s name",
+    "type": "string"
+  },
+  "home_src_from": {
+    "label": "TOOLS — source panel: small label above the source’s name (both tools)",
+    "type": "string"
+  },
+  "tool1_src_note": {
+    "label": "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)",
+    "type": "text"
+  },
+  "tool2_src": {
+    "label": "TOOLS — Chronic tool: the source’s name",
+    "type": "string"
+  },
+  "tool2_src_note": {
+    "label": "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)",
+    "type": "text"
+  },
+  "tool2_ver": {
+    "label": "TOOLS — Chronic tool: data version, set small beside the link",
     "type": "string"
   },
   "tool2_q": {
