@@ -1384,7 +1384,7 @@
     "type": "text"
   },
   "tool1_src": {
-    "label": "TOOLS — Cancer tool: sources",
+    "label": "TOOLS — Cancer tool: the source’s name",
     "type": "string"
   },
   "home_src_from": {

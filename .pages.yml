@@ -566,7 +566,7 @@ content:
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
       - name: "tool1_src"
-        label: "TOOLS — Cancer tool: sources"
+        label: "TOOLS — Cancer tool: the source’s name"
         type: string
       - name: "home_src_from"
         label: "TOOLS — source panel: small label above the source’s name (both tools)"
@@ -2145,7 +2145,7 @@ content:
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
       - name: "tool1_src"
-        label: "TOOLS — Cancer tool: sources"
+        label: "TOOLS — Cancer tool: the source’s name"
         type: string
       - name: "home_src_from"
         label: "TOOLS — source panel: small label above the source’s name (both tools)"
@@ -3724,7 +3724,7 @@ content:
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
       - name: "tool1_src"
-        label: "TOOLS — Cancer tool: sources"
+        label: "TOOLS — Cancer tool: the source’s name"
         type: string
       - name: "home_src_from"
         label: "TOOLS — source panel: small label above the source’s name (both tools)"
@@ -5303,7 +5303,7 @@ content:
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
       - name: "tool1_src"
-        label: "TOOLS — Cancer tool: sources"
+        label: "TOOLS — Cancer tool: the source’s name"
         type: string
       - name: "home_src_from"
         label: "TOOLS — source panel: small label above the source’s name (both tools)"
@@ -6882,7 +6882,7 @@ content:
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
       - name: "tool1_src"
-        label: "TOOLS — Cancer tool: sources"
+        label: "TOOLS — Cancer tool: the source’s name"
         type: string
       - name: "home_src_from"
         label: "TOOLS — source panel: small label above the source’s name (both tools)"
