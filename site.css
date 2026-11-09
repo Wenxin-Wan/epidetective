@@ -1184,3 +1184,23 @@ html[lang="zh"] .post-meta{letter-spacing:0}
   .see a[href^="http"]::after,.more-list a[href^="http"]::after,.ecac-src a::after,.hwc-links a[href^="http"]::after{
     content:" (" attr(href) ")";font-weight:400;font-size:.85em;overflow-wrap:anywhere}
 }
+
+/* ---------- one type scale on every page (Nov 2026) ----------
+   Placed last so it settles the page-specific sizes above. Every inner page's
+   title (the explorers' About pages, How we check, Reading, Work, the blog and
+   its posts, Games, About, 404, and the Code page, which copies these sizes)
+   takes the .tool-hero h1 size, with the Chinese and Russian sizes beside it.
+   The home cover keeps its own, larger headline. */
+.tool-hero.plain h1.post-h,.games-over .sec-head h1,.sec-head h1.page-h,.about-head h1.page-h{
+  font-size:clamp(2.2rem,3.9vw,3.35rem)}
+html[lang="zh"] .tool-hero.plain h1.post-h,html[lang="zh"] .games-over .sec-head h1,
+html[lang="zh"] .sec-head h1.page-h,html[lang="zh"] .about-head h1.page-h{font-size:clamp(1.95rem,4vw,2.85rem)}
+html[lang="ru"] .tool-hero.plain h1.post-h,html[lang="ru"] .games-over .sec-head h1,
+html[lang="ru"] .sec-head h1.page-h,html[lang="ru"] .about-head h1.page-h{font-size:clamp(2rem,3.3vw,2.9rem)}
+/* card titles share the h3 size (game cards, like the guide's idea cards) */
+.game-card h2,.game-card h3{font-size:var(--f-h3)}
+/* In Chinese, the general h2 size (html[lang="zh"] h2) outranked the smaller
+   headings of components; they take their own Chinese sizes again. */
+html[lang="zh"] .game-card h2,html[lang="zh"] .game-card h3{font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.45}
+html[lang="zh"] .reading .post-item h2{font-size:clamp(1.3rem,1.9vw,1.62rem);line-height:1.35}
+
