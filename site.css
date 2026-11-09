@@ -614,17 +614,17 @@ html[lang="zh"] .qa-a p{max-width:32em}
 html[lang="zh"] .bl-post h3{max-width:16em}
 html[lang="zh"] .bl-sf{max-width:28em}
 
-/* ---------- home: how we check, and what is new ---------- */
-.sec.trust{padding-bottom:0}
-.trust-grid{display:grid;gap:40px;padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--ink)}
-@media (min-width:900px){.trust-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:64px}}
-.trust-hwc h2{margin:10px 0 12px;max-width:26ch}
-.trust-p{margin:0;color:var(--ink-soft);max-width:52ch}
-.trust-hwc .sec-links{margin-top:8px}
-.trust-news .label{margin:0}
+/* ---------- home: what is new ---------- */
+/* the last section before the footer: a label over the three latest changes,
+   side by side on a wide screen, stacked on a phone */
+.sec.news-row{padding-bottom:0}
+.news-grid{padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--ink)}
+.news-grid .label{margin:0}
 .news{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--rule)}
 .news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.94rem;line-height:1.5}
-html[lang="zh"] .trust-hwc h2{max-width:14em}
+@media (min-width:900px){
+  .news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(32px,4vw,64px)}
+}
 /* a small label that is a heading in the outline keeps the label's type */
 h2.label,html[lang="zh"] h2.label{font-family:var(--serif);font-size:.75rem;line-height:1.5;font-weight:600;
   letter-spacing:.14em;max-width:none}

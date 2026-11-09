@@ -203,24 +203,16 @@
   <p class="sec-links"><a class="tlink" href="{{URL_BLOG}}">{{post_back}} &rarr;</a></p>
 </section>
 
-<!-- Trust: where the data come from and how errors are reported, next to what
-     changed lately (newest first). -->
-<section class="sec wrap trust" id="how-we-check" aria-labelledby="trust-h">
-  <div class="trust-grid">
-    <div class="trust-hwc">
-      <p class="label">{{hwc_label}}</p>
-      <h2 id="trust-h">{{hwc_home_h2}}</h2>
-      <p class="trust-p">{{hwc_rep_reply}}</p>
-      <p class="sec-links"><a class="tlink" href="{{URL_HWC}}">{{hwc_home_btn}}</a> <a class="tlink" href="{{URL_HWC}}#report">{{foot_report}} &rarr;</a></p>
-    </div>
-    <div class="trust-news">
-      <h2 class="label" id="news-h">{{news_label}}</h2>
-      <ul class="news" aria-labelledby="news-h">
-        <li>{{news_3}}</li>
-        <li>{{news_1}}</li>
-        <li>{{news_2}}</li>
-      </ul>
-    </div>
+<!-- What's new: the latest changes to the tools and the site, newest first.
+     How we check is a click away from each tool's source panel and the footer. -->
+<section class="sec wrap news-row" id="whats-new" aria-labelledby="news-h">
+  <div class="news-grid">
+    <h2 class="label" id="news-h">{{news_label}}</h2>
+    <ul class="news" aria-labelledby="news-h">
+      <li>{{news_3}}</li>
+      <li>{{news_1}}</li>
+      <li>{{news_2}}</li>
+    </ul>
   </div>
 </section>
 

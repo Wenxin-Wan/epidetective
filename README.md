@@ -80,13 +80,14 @@ the site (see below).
 
 The container runs up to 1680 px with fluid gutters (`--max`, `--pad`:
 `clamp(20px, 4vw, 72px)`), so on a wide monitor the sections use the width
-(the two explorers side by side, the blog row, How we check) while running
+(the two explorers side by side, the blog row, What's new) while running
 text keeps a readable measure. The blog index and every post set in one
 centred reading column of about 66 characters.
 
 The home page shows only the author's own work (November 2026). After the
-cover: the two explorers, the newest posts, How we check and What's new, then
-the footer. Each explorer's sheet gives the question it answers, two key
+cover: the two explorers, the newest posts and What's new (the three latest
+changes, side by side on a wide screen), then the footer. How we check left the
+home page in November 2026; each tool's source panel and the footer link to it. Each explorer's sheet gives the question it answers, two key
 figures (`FIG_T1_M1`/`M2`, `FIG_T2_M1`/`M2`: exposures and cancer types,
 risk factors and diseases), the source of its evidence in a ruled panel (its
 name, a short note on who produces it and how, taken from what How we check
@@ -95,7 +96,7 @@ a few places to start, the two actions and the network inset. The other counts
 (links, languages, the agents and related outcomes beyond the map) are on the
 About pages. The blog section (`BLOG_LATEST`, up to three posts) has the same
 section head as the tools and sets its posts left, in a row of up to three; a
-single post spans the row, on the columns of How we check. The Code Against
+single post spans the row, its title and standfirst side by side. The Code Against
 Cancer band and the games row left the home page; both pages stay in the menu.
 The labels both tools print and the questions answered from them live on the
 tools' About pages: `explorer.html` (IARC's groups, the two link labels,
