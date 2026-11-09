@@ -7,8 +7,9 @@
 
    Budget: the home page's first screen stays within 9 requests and about
    300 KB (Batch 6): the page, this file, the Latin roman and italic font files,
-   search.js and terrain.js (two Cyrillic files more in Russian); the three game
-   frames load lazily further down. The map insets are inline (build_site.py),
+   search.js and terrain.js (two Cyrillic files more in Russian). Below it the
+   page loads nothing more: the map insets are inline (build_site.py), the
+   home page carries no pictures since the games row left it (9 Nov 2026), and
    the contour still loads only without JavaScript. */
 
 /* Source Serif 4 (Adobe, OFL), self-hosted. Cut from Google Fonts' woff2
@@ -230,12 +231,9 @@ html[lang="zh"] h3{font-size:clamp(1.05rem,1.5vw,1.22rem)}
   padding-bottom:16px;margin-bottom:clamp(28px,3vw,42px);border-bottom:1px solid var(--ink)}
 .sec-bar h2{max-width:40ch}
 .sec-bar .label{margin:0}
-/* centred (the blog row): the label above the heading */
-.sec-bar-c{flex-direction:column;align-items:center;text-align:center;gap:10px}
-.sec-bar-c h2{max-width:none}
 .sec-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 30px;margin:clamp(18px,2vw,26px) 0 0}
 /* the home page's sections follow one another: space above each, none below */
-.sec.tools,.sec.games-row,.sec.blog-row{padding-bottom:0}
+.sec.tools,.sec.blog-row{padding-bottom:0}
 
 /* ---------- cover (home): the terrain, full bleed ---------- */
 /* The map runs the full width of the window under the header's hairline, with
@@ -404,10 +402,10 @@ html[lang="ru"] .title-block h1{font-size:clamp(2.1rem,3.5vw,3rem)}
 .tool-sheet{position:relative;display:flex;flex-direction:column;gap:20px;min-width:0;background:var(--paper-hi);
   border:1px solid var(--ink);padding:clamp(22px,2.6vw,36px)}
 /* side by side, the two sheets share their rows, so the names, the legends,
-   the sources and the actions line up across them */
+   the source panels and the actions line up across them */
 @supports (grid-template-rows:subgrid){
   @media (min-width:900px){
-    .tool-sheet{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:20px;align-content:start}
+    .tool-sheet{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:22px;align-content:start}
     .ts-acts{align-self:end}
   }
 }
@@ -420,18 +418,34 @@ html[lang="ru"] .title-block h1{font-size:clamp(2.1rem,3.5vw,3rem)}
 /* the network drawing as a map inset (inline from build_site.py) */
 .ts-inset{aspect-ratio:1;border:1px solid var(--rule);background-color:transparent;background-repeat:no-repeat;
   background-position:center;background-size:90%;filter:sepia(.22) saturate(.75)}
+/* the two key figures, set as the sheet's legend: the count large and bold,
+   the words beside it */
 .ts-legend{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
-.ts-legend li{display:flex;align-items:baseline;gap:12px;min-width:0;padding:13px 0 12px;border-bottom:1px solid var(--rule)}
-/* the key numbers, bold */
-.ts-legend b{flex:none;min-width:2.2ch;font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,2.3vw,2.3rem);
-  line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums;color:var(--ink);
+.ts-legend li{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;min-width:0;padding:16px 0 15px;
+  border-bottom:1px solid var(--rule)}
+.ts-legend b{flex:none;font-family:var(--serif);font-weight:600;font-size:clamp(2.35rem,3vw,3.1rem);
+  line-height:1;letter-spacing:-.015em;font-variant-numeric:lining-nums tabular-nums;color:var(--ink);
   font-variation-settings:var(--display)}
-.ts-legend span{font-family:var(--serif);font-size:1rem;line-height:1.3;color:var(--ink-soft)}
-.ts-note{margin:-8px 0 0;font-family:var(--serif);font-size:.88rem;line-height:1.45;color:var(--ink-faint)}
-.ts-row{margin:0;font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
-.ts-row .label{display:block;margin-bottom:3px}
-.ts-start{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px}
+.ts-legend span{font-family:var(--serif);font-size:1.0625rem;line-height:1.3;color:var(--ink-soft)}
+/* the source of the evidence, in a ruled panel recessed into the sheet: who
+   produces it and why it can be trusted, and the way to How we check */
+.ts-src{display:flex;flex-direction:column;min-width:0;padding:18px 20px 8px;background:var(--paper);
+  border:1px solid var(--rule);border-top:2px solid var(--brown)}
+.ts-src .label{margin:0}
+.ts-src-name{margin:6px 0 0;font-size:clamp(1.22rem,1.45vw,1.4rem);font-weight:600;line-height:1.25;
+  letter-spacing:-.006em;color:var(--ink)}
+.ts-src-why{margin:10px 0 0;font-size:.97rem;line-height:1.55;color:var(--ink-soft);max-width:64ch}
+.ts-src-go{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 18px;
+  margin:auto 0 0;padding-top:6px}
+.ts-src-go a{display:inline-flex;align-items:center;min-height:40px;font-size:.97rem;font-weight:500;color:var(--ink);
+  text-decoration:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;text-underline-offset:5px}
+.ts-src-go a:hover{text-decoration-color:var(--ink)}
+.ts-ver{font-size:.82rem;color:var(--ink-faint);font-variant-numeric:lining-nums}
+/* a few places to start, each opening its entry in the tool */
+/* (align-content: in the shared row the lines stay together at the top) */
+.ts-start{display:flex;flex-wrap:wrap;align-items:center;align-content:flex-start;gap:0 18px;margin:0;
+  font-size:.95rem;line-height:1.5}
 .ts-start .label{flex-basis:100%;margin-bottom:0}
 .ts-start a{display:inline-flex;align-items:center;gap:7px;min-height:34px;color:var(--ink);font-size:.95rem;
   text-decoration:underline;text-decoration-color:rgba(34,36,31,.28);text-underline-offset:4px;text-decoration-thickness:1px}
@@ -439,9 +453,13 @@ html[lang="ru"] .title-block h1{font-size:clamp(2.1rem,3.5vw,3rem)}
 .ts-acts{display:flex;align-items:center;gap:8px 26px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
 html[lang="zh"] .ts-q{max-width:22em}
 html[lang="zh"] .ts-name h3{font-size:clamp(1.6rem,2.2vw,2.1rem);max-width:none}
+html[lang="zh"] .ts-src-why{max-width:34em}
 @media (max-width:520px){
-  .ts-legend{grid-template-columns:minmax(0,1fr)}
   .ts-head{grid-template-columns:minmax(0,1fr) 84px;gap:16px}
+  /* on a phone the words go under the count */
+  .ts-legend{column-gap:20px}
+  .ts-legend li{flex-direction:column;align-items:flex-start;gap:6px}
+  .ts-src{padding:16px 16px 6px}
 }
 
 /* ---------- the labels as a map key (explorer.html, chronic.html) ---------- */
@@ -566,57 +584,35 @@ html[lang="zh"] .qa-a p{max-width:32em}
 .qa-row .qa-go{margin-top:6px}
 .qa-rows.qa-first{border-top:1px solid var(--ink)}
 
-/* ---------- home: what you can do, one calm band ---------- */
-.band{margin-top:var(--sec);background:var(--paper-deep);border-block:1px solid var(--rule)}
-.band-in{display:grid;gap:18px 64px;padding-block:clamp(38px,4.6vw,60px)}
-@media (min-width:900px){.band-in{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
-.band-head h2{margin-top:8px}
-.band-body p{margin:0 0 22px;color:var(--ink-soft);max-width:60ch}
-html[lang="zh"] .band-body p{max-width:32em}
-.code-band .label{color:var(--ink-faint)}
-/* the two routes count the actions: 14 and 17 stops */
-.routes{display:grid;gap:12px;margin:0 0 26px;max-width:100%}
-.routes{--t:22px}
-.route{display:block;height:10px;width:calc(var(--n) * var(--t));
-  background:radial-gradient(circle,var(--paper-deep) 0 2.5px,var(--green) 2.7px 3.9px,transparent 4.1px) 0 0/var(--t) 10px repeat-x,
-             linear-gradient(rgba(110,139,91,.55),rgba(110,139,91,.55)) calc(var(--t) / 2) 50%/calc(100% - var(--t)) 1px no-repeat}
-@media (max-width:440px){.routes{--t:19px}}
-@media (max-width:360px){.routes{--t:16px}}
-.sec.games-row,.sec.blog-row{padding-top:var(--sec)}
-
-/* ---------- home: from the blog, centred like a contents page ---------- */
-.bl-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:44px clamp(40px,5vw,88px);
-  text-align:center}
-.bl-post{flex:1 1 300px;max-width:460px;min-width:0}
-.bl-list[data-n="1"] .bl-post{max-width:720px}
+/* ---------- home: from the blog ----------
+   The newest posts (build_site.py BLOG_LATEST), set left under the same
+   section head as the tools, in a row of up to three. The blog's own pages
+   keep their centred reading column (blog section below). */
+.bl-list{list-style:none;margin:0;padding:0;display:grid;gap:40px clamp(32px,4vw,72px)}
+@media (min-width:760px){.bl-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* A single post spans the row: its date and title on the left, the standfirst
+   and the link on the right, on the columns of How we check below. */
+@media (min-width:900px){
+  .bl-list[data-n="1"]{grid-template-columns:minmax(0,1fr)}
+  .bl-list[data-n="1"] .bl-post{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:64px;
+    grid-template-areas:"date sf" "title sf" "title more";grid-template-rows:auto auto 1fr;align-items:start}
+  .bl-list[data-n="1"] .bl-date{grid-area:date}
+  .bl-list[data-n="1"] h3{grid-area:title;font-size:clamp(2rem,3vw,2.75rem);max-width:18ch}
+  .bl-list[data-n="1"] .bl-sf{grid-area:sf;margin-top:0}
+  .bl-list[data-n="1"] .bl-more{grid-area:more}
+}
+.bl-post{min-width:0}
 .bl-date{margin:0;font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
   font-variation-settings:var(--caption);color:var(--ink-faint)}
-.bl-post h3{margin:12px auto 0;font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:400;line-height:1.14;
-  letter-spacing:-.012em;max-width:24ch}
+.bl-post h3{margin:10px 0 0;font-size:clamp(1.6rem,2.2vw,2.1rem);font-weight:400;line-height:1.14;
+  letter-spacing:-.012em;max-width:24ch;font-variation-settings:var(--display)}
 .bl-post h3 a{text-decoration:none}
 .bl-post h3 a:hover{text-decoration-line:underline;text-decoration-color:var(--brown);text-decoration-thickness:1px;
   text-underline-offset:6px}
-.bl-sf{margin:14px auto 0;max-width:52ch;font-size:1.08rem;line-height:1.55;color:var(--ink-soft)}
+.bl-sf{margin:14px 0 0;max-width:52ch;font-size:1.06rem;line-height:1.55;color:var(--ink-soft)}
 .bl-more{margin:6px 0 0}
-.blog-row .sec-links{justify-content:center}
 html[lang="zh"] .bl-post h3{max-width:16em}
 html[lang="zh"] .bl-sf{max-width:28em}
-
-/* ---------- home: games, small and alike ---------- */
-.game-list{list-style:none;margin:0;padding:0;display:grid;gap:20px 32px}
-@media (min-width:760px){.game-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.game-list a{display:grid;grid-template-columns:clamp(116px,11vw,210px) minmax(0,1fr);gap:18px;align-items:center;
-  text-decoration:none}
-.gl-img{display:block;padding:4px;border:1px solid var(--rule);background:var(--paper-hi);
-  transition:border-color .5s var(--ease)}
-.gl-img img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;
-  filter:saturate(.7) contrast(.96)}
-.gl-name{display:block;font-family:var(--serif);font-size:1.12rem;font-weight:500;line-height:1.25;
-  text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;text-decoration-thickness:1px;
-  transition:text-decoration-color .3s var(--ease)}
-.gl-meta{display:block;margin-top:4px;font-family:var(--serif);font-size:.9rem;color:var(--ink-faint)}
-.game-list a:hover .gl-img{border-color:var(--ink)}
-.game-list a:hover .gl-name{text-decoration-color:var(--brown)}
 
 /* ---------- home: how we check, and what is new ---------- */
 .sec.trust{padding-bottom:0}
@@ -825,7 +821,7 @@ html[lang="zh"] .about-text .about-lead{max-width:29.5em}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn,.tlink,.search-go,.gl-img,.gl-name,.tl-card .arr{transition:none}
+  .btn,.tlink,.search-go,.tl-card .arr{transition:none}
   .tl-card:hover .arr{transform:none}
 }
 
@@ -1153,16 +1149,15 @@ html[lang="zh"] .post-meta{letter-spacing:0}
   html{scroll-padding-top:0;scroll-behavior:auto}
   body{background:#fff;color:#000;font-size:11pt;overflow:visible}
   .skip,.top .top-right,.search,.inst-actions,.ts-acts,.qa-go,.game-more,.map-ground,.map-key,.tn-pick,.tn-card,
-  .tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.gl-img,.mark-i,
-  .stage,.back-row,.post-back,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,.routes,
-  .sec-links{display:none!important}
+  .tool-hero .net,.tool-hero .veil,.tool-hero.plain::before,.thumb,.ts-inset,.gc-thumb,.mark-i,
+  .stage,.back-row,.post-back,.foot .menu,.foot-trust,.work-toc,.cta-band .inst-actions,.game-adults,.search-try,
+  .sec-links,.ts-src-go{display:none!important}
   .top{position:static;background:none;border-bottom:1px solid #999;backdrop-filter:none;-webkit-backdrop-filter:none}
   .top .wrap{clip-path:none}
   .cover{padding:0}
   .map,.map-in,.title-block{border:0;outline:0;box-shadow:none;min-height:0;padding:0;display:block;background:none}
   .tool-hero{border-bottom:1px solid #999}
-  .title-block,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap,.band-in{padding-block:14pt}
-  .band{background:none;border:0}
+  .title-block,.tool-hero .wrap,.tool-hero.plain .wrap,.sec,.cta-band .wrap{padding-block:14pt}
   .sep::before{margin-bottom:14pt}
   .wrap{max-width:none;padding-inline:0}
   h1{font-size:24pt}
@@ -1170,8 +1165,8 @@ html[lang="zh"] .post-meta{letter-spacing:0}
   h1,h2,h3{break-after:avoid}
   .tool-sheet,.lesson,.qa-row,.post-refs li,.key-list li,.bl-post,.inst,.hwc-card,.game-card,.read,.ex-steps li,.beyond > li,
   .quiz details{break-inside:avoid}
-  .tool-sheet{background:none}
-  .lede,.read p,.inst p,.about p,.post-body,.post-refs,.game-intro p,.qa-a p,.news li,.key-says,.key-dl dd,.ts-q,.bl-sf{color:#000}
+  .tool-sheet,.ts-src{background:none}
+  .lede,.read p,.inst p,.about p,.post-body,.post-refs,.game-intro p,.qa-a p,.news li,.key-says,.key-dl dd,.ts-q,.bl-sf,.ts-src-why{color:#000}
   .reading-hero .wrap,.sec.reading{max-width:none}
   .cta-band{background:none}
   .foot{background:none;color:#000;border-top:1px solid #999}

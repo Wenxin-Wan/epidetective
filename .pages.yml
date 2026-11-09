@@ -568,6 +568,21 @@ content:
       - name: "tool1_src"
         label: "TOOLS — Cancer tool: sources"
         type: string
+      - name: "home_src_from"
+        label: "TOOLS — source panel: small label above the source’s name (both tools)"
+        type: string
+      - name: "tool1_src_note"
+        label: "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)"
+        type: text
+      - name: "tool2_src"
+        label: "TOOLS — Chronic tool: the source’s name"
+        type: string
+      - name: "tool2_src_note"
+        label: "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)"
+        type: text
+      - name: "tool2_ver"
+        label: "TOOLS — Chronic tool: data version, set small beside the link"
+        type: string
       - name: "tool2_q"
         label: "TOOLS — Chronic tool: the question it answers"
         type: text
@@ -2131,6 +2146,21 @@ content:
         type: text
       - name: "tool1_src"
         label: "TOOLS — Cancer tool: sources"
+        type: string
+      - name: "home_src_from"
+        label: "TOOLS — source panel: small label above the source’s name (both tools)"
+        type: string
+      - name: "tool1_src_note"
+        label: "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)"
+        type: text
+      - name: "tool2_src"
+        label: "TOOLS — Chronic tool: the source’s name"
+        type: string
+      - name: "tool2_src_note"
+        label: "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)"
+        type: text
+      - name: "tool2_ver"
+        label: "TOOLS — Chronic tool: data version, set small beside the link"
         type: string
       - name: "tool2_q"
         label: "TOOLS — Chronic tool: the question it answers"
@@ -3696,6 +3726,21 @@ content:
       - name: "tool1_src"
         label: "TOOLS — Cancer tool: sources"
         type: string
+      - name: "home_src_from"
+        label: "TOOLS — source panel: small label above the source’s name (both tools)"
+        type: string
+      - name: "tool1_src_note"
+        label: "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)"
+        type: text
+      - name: "tool2_src"
+        label: "TOOLS — Chronic tool: the source’s name"
+        type: string
+      - name: "tool2_src_note"
+        label: "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)"
+        type: text
+      - name: "tool2_ver"
+        label: "TOOLS — Chronic tool: data version, set small beside the link"
+        type: string
       - name: "tool2_q"
         label: "TOOLS — Chronic tool: the question it answers"
         type: text
@@ -5260,6 +5305,21 @@ content:
       - name: "tool1_src"
         label: "TOOLS — Cancer tool: sources"
         type: string
+      - name: "home_src_from"
+        label: "TOOLS — source panel: small label above the source’s name (both tools)"
+        type: string
+      - name: "tool1_src_note"
+        label: "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)"
+        type: text
+      - name: "tool2_src"
+        label: "TOOLS — Chronic tool: the source’s name"
+        type: string
+      - name: "tool2_src_note"
+        label: "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)"
+        type: text
+      - name: "tool2_ver"
+        label: "TOOLS — Chronic tool: data version, set small beside the link"
+        type: string
       - name: "tool2_q"
         label: "TOOLS — Chronic tool: the question it answers"
         type: text
@@ -6823,6 +6883,21 @@ content:
         type: text
       - name: "tool1_src"
         label: "TOOLS — Cancer tool: sources"
+        type: string
+      - name: "home_src_from"
+        label: "TOOLS — source panel: small label above the source’s name (both tools)"
+        type: string
+      - name: "tool1_src_note"
+        label: "TOOLS — Cancer tool: why the source can be trusted (who produces it and how; no endorsement claims)"
+        type: text
+      - name: "tool2_src"
+        label: "TOOLS — Chronic tool: the source’s name"
+        type: string
+      - name: "tool2_src_note"
+        label: "TOOLS — Chronic tool: why the sources can be trusted (who produces them and how)"
+        type: text
+      - name: "tool2_ver"
+        label: "TOOLS — Chronic tool: data version, set small beside the link"
         type: string
       - name: "tool2_q"
         label: "TOOLS — Chronic tool: the question it answers"

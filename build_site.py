@@ -524,9 +524,10 @@ def svg_data_url(path):
         for ch in s)
 
 
-# The tools' figures on the home page ("185 exposures", "124 个危险因素") are
-# set as a map legend: the count in figures, the words beside it. Every language
-# writes the count first, so the split is the leading number.
+# The tools' figures ("185 exposures", "124 个危险因素") are set as a map
+# legend: the count in figures, the words beside it. Every language writes the
+# count first, so the split is the leading number. The home page shows the
+# first two of each tool (FIG_T1_M1/M2, FIG_T2_M1/M2); all four are checked.
 FIG_KEYS = ["inst_t%d_m%d" % (t, m) for t in (1, 2) for m in (1, 2, 3, 4)]
 
 
@@ -846,7 +847,8 @@ HOME_POSTS = 3
 
 def render_blog_latest(posts, d, lang):
     """The home page's blog section (BLOG_LATEST): the newest posts, each with
-    its date, title, standfirst and a link; centred like a contents page."""
+    its date, title, standfirst and a link, set left in a row of up to three
+    (site.css .bl-list); the blog's own pages keep their centred column."""
     items = []
     for p in posts[:HOME_POSTS]:
         m = p["lang"][lang]
