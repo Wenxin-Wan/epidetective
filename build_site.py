@@ -658,7 +658,7 @@ def render_work_chronic(work, d, lang):
 #   ---
 #
 # and the text follows in a small Markdown: "## " and "### " headings,
-# paragraphs, "- " lists, [links](https://...) and *titles of works*, which
+# paragraphs, "- " lists, [links](https://...), **bold** and *titles of works*, which
 # become <cite> and set in Source Serif 4 italic (site.css).
 # A post ends with its sources: the list after the last heading is set as the
 # reference list. Posts render to blog/<slug>.html, one level below each
@@ -682,6 +682,7 @@ MONTHS = {
            "августа", "сентября", "октября", "ноября", "декабря"],
 }
 MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+MD_BOLD = re.compile(r"\*\*([^*\s][^*]*?)\*\*")
 MD_CITE = re.compile(r"\*([^*\s][^*]*?)\*")
 
 
@@ -700,8 +701,9 @@ def date_text(iso, lang):
 
 
 def md_span(text):
-    """Plain text with *titles*, escaped for HTML."""
-    return MD_CITE.sub(r"<cite>\1</cite>", html.escape(text, quote=False))
+    """Plain text with **bold** and *titles*, escaped for HTML."""
+    text = MD_BOLD.sub(r"<strong>\1</strong>", html.escape(text, quote=False))
+    return MD_CITE.sub(r"<cite>\1</cite>", text)
 
 
 def md_inline(text):
