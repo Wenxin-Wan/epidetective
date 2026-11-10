@@ -12,7 +12,7 @@ Il y a quelques années, j’assistais à un séminaire où une doctorante prés
 
 Personne ne riait d’elle. Elle avait fait exactement ce qu’on apprend aux doctorants à faire. Ce moment m’est pourtant resté. Il montrait combien la question, et les raisons qui l’avaient fait naître, s’étaient éloignées de tout ce qu’on appellerait un problème hors de cette salle.
 
-J’ai souvent repensé à ce rire depuis, surtout ces dernières années, maintenant que l’épidémiologie et l’intelligence artificielle n’ont plus besoin d’être présentées. La pandémie a appris au monde entier ce qu’était le nombre de reproduction et ce que voulait dire aplatir la courbe. Lancé en novembre 2022, ChatGPT a fait des grands modèles de langage un outil de tous les jours. Ces modèles écrivent en prédisant sans relâche ce qui vient ensuite, à partir de régularités apprises dans des masses énormes de textes, un procédé rendu praticable par une puissance de calcul colossale.
+J’ai souvent repensé à ce rire depuis, surtout ces dernières années, maintenant que l’épidémiologie et l’intelligence artificielle n’ont plus besoin d’être présentées. La pandémie a appris au monde entier ce qu’était le nombre de reproduction et ce que voulait dire aplatir la courbe. Lancé en novembre 2022, ChatGPT a fait des grands modèles de langage un outil de tous les jours. Ces modèles écrivent en prédisant sans relâche ce qui vient ensuite, à partir de régularités apprises dans des masses énormes de textes, un procédé rendu praticable par une puissance de calcul colossale. Les deux domaines se sont maintenant rencontrés, et nous commençons à peine à comprendre ce que l’IA va changer pour l’épidémiologie. Cet essai est ma façon d’y voir plus clair.
 
 ## À quoi sert l’épidémiologie ?
 
