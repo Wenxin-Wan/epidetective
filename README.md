@@ -80,14 +80,15 @@ the site (see below).
 
 The container runs up to 1680 px with fluid gutters (`--max`, `--pad`:
 `clamp(20px, 4vw, 72px)`), so on a wide monitor the sections use the width
-(the two explorers side by side, the blog row, What's new) while running
+(the two explorers side by side, the blog row) while running
 text keeps a readable measure. The blog index and every post set in one
 centred reading column of about 66 characters.
 
 The home page shows only the author's own work (November 2026). After the
-cover: the two explorers, the newest posts and What's new (the three latest
-changes, side by side on a wide screen), then the footer. How we check left the
-home page in November 2026; each tool's source panel and the footer link to it. Each explorer's sheet gives the question it answers, two key
+cover: the two explorers and the newest posts, then the footer. How we check
+and What's new left the home page in November 2026: each tool's source panel and
+the footer link to How we check; each explorer's About page ends with its latest
+change, and How we check's Versions section carries the site's. Each explorer's sheet gives the question it answers, two key
 figures (`FIG_T1_M1`/`M2`, `FIG_T2_M1`/`M2`: exposures and cancer types,
 risk factors and diseases), the source of its evidence in a ruled panel (its
 name, a short note on who produces it and how, taken from what How we check
