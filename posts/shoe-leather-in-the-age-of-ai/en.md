@@ -12,7 +12,7 @@ Some years ago, I sat in a seminar where a PhD student presented her work on cof
 
 Nobody was laughing at her. She had done exactly what PhD students are trained to do. Still, the moment stayed with me. It showed how far the question, and the motive behind it, had drifted from anything people outside that room would call a problem.
 
-I have thought about that laugh often since, especially in the past few years, as epidemiology and artificial intelligence both stopped needing an introduction. The pandemic taught the world about reproduction numbers and flattened curves. ChatGPT, released in November 2022, made large language models an everyday tool. They generate text by repeatedly predicting what comes next, drawing on patterns learned from enormous amounts of writing, a process made practical by vast computing power.
+I have thought about that laugh often since, especially in the past few years, as epidemiology and artificial intelligence both stopped needing an introduction. The pandemic taught the world about reproduction numbers and flattened curves. ChatGPT, released in November 2022, made large language models an everyday tool. They generate text by repeatedly predicting what comes next, drawing on patterns learned from enormous amounts of writing, a process made practical by vast computing power. Now the two fields have met, and we are only beginning to work out what AI will do to the field of epidemiology. This essay is my attempt to think that through.
 
 ## What is epidemiology for?
 

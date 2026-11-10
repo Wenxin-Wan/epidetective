@@ -12,7 +12,7 @@ Hace unos años asistí a un seminario en el que una doctoranda presentaba su tr
 
 Nadie se reía de ella. Había hecho exactamente lo que se enseña a hacer a cualquier doctorando. Aun así, aquel momento se me quedó grabado. Dejaba ver hasta qué punto la pregunta, y el motivo que la había inspirado, se habían alejado de lo que cualquiera fuera de esa sala llamaría un problema.
 
-Desde entonces he pensado a menudo en aquella risa, sobre todo estos últimos años, ahora que la epidemiología y la inteligencia artificial ya no necesitan presentación. La pandemia enseñó al mundo entero qué era el número reproductivo y qué significaba aplanar la curva. ChatGPT, lanzado en noviembre de 2022, convirtió los grandes modelos de lenguaje en una herramienta de uso diario. Estos modelos escriben prediciendo una y otra vez lo que viene a continuación, a partir de patrones aprendidos en cantidades enormes de texto, algo que una potencia de cálculo descomunal ha hecho viable.
+Desde entonces he pensado a menudo en aquella risa, sobre todo estos últimos años, ahora que la epidemiología y la inteligencia artificial ya no necesitan presentación. La pandemia enseñó al mundo entero qué era el número reproductivo y qué significaba aplanar la curva. ChatGPT, lanzado en noviembre de 2022, convirtió los grandes modelos de lenguaje en una herramienta de uso diario. Estos modelos escriben prediciendo una y otra vez lo que viene a continuación, a partir de patrones aprendidos en cantidades enormes de texto, algo que una potencia de cálculo descomunal ha hecho viable. Ahora los dos campos se han encontrado, y apenas empezamos a entender qué hará la IA con la epidemiología. Este ensayo es mi intento de pensarlo a fondo.
 
 ## ¿Para qué sirve la epidemiología?
 
