@@ -614,13 +614,15 @@ html[lang="zh"] .qa-a p{max-width:32em}
 html[lang="zh"] .bl-post h3{max-width:16em}
 html[lang="zh"] .bl-sf{max-width:28em}
 
-/* ---------- home: what is new ---------- */
-/* the last section before the footer: a label over the three latest changes,
-   side by side on a wide screen, stacked on a phone */
-.sec.news-row{padding-bottom:0}
+/* ---------- what is new (the explorers' About pages) ---------- */
+/* a label over a tool's latest change, before the page's closing band; it left
+   the home page in November 2026. Several entries sit side by side on a wide
+   screen and stack on a phone. */
+.sec.news-row{padding-top:0;padding-bottom:clamp(48px,6vw,88px)}
 .news-grid{padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--ink)}
 .news-grid .label{margin:0}
 .news{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--rule)}
+.news.news-one{display:block;max-width:72ch}
 .news li{padding-block:12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);font-size:.94rem;line-height:1.5}
 @media (min-width:900px){
   .news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(32px,4vw,64px)}
