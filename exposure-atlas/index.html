@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carcinogen Exposure Atlas · EpiDetective</title>
+<meta name="description" content="How common exposure to known and probable causes of cancer, as classified by IARC, is country by country, at work and over time. A personal project by Wenxin Wan; every figure is traced to its source.">
+<!-- REVISION GATE: remove this meta at public launch -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="https://epidetective.com/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="https://epidetective.com/assets/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/echarts@6/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
+<style>
+  @font-face{font-family:"Literata";src:url(https://epidetective.com/assets/literata-latin.woff2) format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+  @font-face{font-family:"Literata";src:url(https://epidetective.com/assets/literata-latin-italic.woff2) format("woff2");font-weight:400 800;font-style:italic;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(https://epidetective.com/assets/plexmono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(https://epidetective.com/assets/plexmono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+  :root{
+    --paper:#F5F4F0;--paper-deep:#EBEAE3;--card:#FFFFFF;--ink:#161713;--ink-soft:#454740;
+    --faint:#6B6E65;--rule:rgba(22,23,19,.14);--rule-soft:rgba(22,23,19,.08);
+    --prot:#39694F;--rust:#9A4E2B;--ochre:#A98A25;--bar:#4A6389;--bar-soft:#9EADC5;
+    --serif:'Literata',ui-serif,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--wrap:1240px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans)}
+  a{color:inherit}
+  button{font:inherit}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .revgate{position:sticky;top:0;z-index:500;background:var(--ink);color:#E8D48B;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;font-size:13px;flex-wrap:wrap}
+  .top a{text-decoration:none;color:var(--ink-soft)} .top a:hover{text-decoration:underline}
+  .brand{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink)!important}
+  .secnav{display:flex;gap:14px;flex-wrap:wrap}
+  header.hero{padding:22px 0 26px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.2vw,48px);line-height:1.08;margin:8px 0 10px;letter-spacing:-.01em;max-width:900px}
+  h1 em{font-style:italic;font-weight:500}
+  .lede{max-width:720px;font-size:17px;color:var(--ink-soft);margin:0 0 18px}
+  .search{position:relative;max-width:640px}
+  .search input{width:100%;font:16px var(--sans);padding:13px 16px 13px 42px;border:1px solid var(--rule);border-radius:10px;background:var(--card);color:var(--ink);outline:none}
+  .search input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(22,23,19,.08)}
+  .search .mag{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.55;pointer-events:none}
+  .results{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--rule);border-radius:10px;box-shadow:0 12px 30px rgba(22,23,19,.12);z-index:300;max-height:420px;overflow:auto;padding:6px 0;display:none}
+  .results.on{display:block}
+  .results .grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 14px 4px}
+  .results [role=option]{display:flex;justify-content:space-between;gap:12px;padding:8px 14px;cursor:pointer;font-size:14px}
+  .results [role=option] small{color:var(--faint);font-size:12px;text-align:right}
+  .results [role=option][aria-selected=true],.results [role=option]:hover{background:var(--paper)}
+  .results .none{padding:10px 14px;color:var(--faint);font-size:13.5px}
+  section.sec{padding:40px 0 10px}
+  .sec-head{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;margin-bottom:18px}
+  .num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--faint);border:1px solid var(--rule);border-radius:999px;padding:4px 10px;margin-top:6px}
+  h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.2;margin:0 0 6px}
+  h3{font-family:var(--serif);font-weight:600;font-size:18px;margin:0 0 6px;line-height:1.3}
+  .sec-lede{max-width:780px;color:var(--ink-soft);margin:0}
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+  .note{font-size:12.5px;color:var(--faint)}
+  .tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--rule);margin-bottom:12px}
+  .tab{appearance:none;border:0;background:none;font:600 13.5px var(--sans);color:var(--faint);padding:10px 12px;border-bottom:2px solid transparent;cursor:pointer}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .chip{appearance:none;border:1px solid var(--rule);background:var(--card);border-radius:999px;font:13px var(--sans);padding:6px 12px;cursor:pointer;color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .layerbar{display:flex;justify-content:space-between;align-items:flex-end;gap:14px 24px;flex-wrap:wrap;margin:4px 0 12px}
+  .q{font-family:var(--serif);font-size:23px;font-weight:600;margin:0 0 4px;line-height:1.25}
+  .sub{font-size:13px;color:var(--ink-soft);margin:0;max-width:760px}
+  .badge{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--rule);border-radius:3px;padding:1px 6px;margin-right:6px;color:var(--ink-soft);background:var(--paper);vertical-align:1px}
+  .badge.study{border-color:var(--ochre);color:#6E5A17} .badge.policy{border-color:var(--prot);color:var(--prot)}
+  .ctrls{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;font-size:13px}
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--card)}
+  .seg button{appearance:none;border:0;background:var(--card);font:13px var(--sans);padding:6px 11px;cursor:pointer;color:var(--ink-soft)}
+  .seg button+button{border-left:1px solid var(--rule)}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  select{font:13px var(--sans);padding:6px 9px;border:1px solid var(--rule);border-radius:6px;background:var(--card);color:var(--ink);max-width:100%}
+  .yearbox{display:flex;align-items:center;gap:8px}
+  .yearbox input[type=range]{width:200px;accent-color:var(--ink)}
+  .yr{font-family:var(--mono);font-weight:600;font-size:15px;min-width:44px}
+  .icon{appearance:none;border:1px solid var(--rule);background:var(--card);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:13px;color:var(--ink)}
+  .explore{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:stretch}
+  .mapcard{padding:10px 12px 12px}
+  .mapwrap{position:relative}
+  #map{height:520px;width:100%}
+  .zoom{position:absolute;right:6px;top:6px;display:flex;flex-direction:column;gap:4px;z-index:5}
+  .legend{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:8px 4px 0}
+  .lbar{display:flex;flex-direction:column;gap:4px;flex:1 1 320px;max-width:520px;min-width:240px}
+  .lbar .sw{display:flex;height:11px;border-radius:2px;overflow:hidden}
+  .lbar .sw span{flex:1}
+  .lbar .tk{position:relative;height:14px;font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
+  .lbar .tk span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+  .lbar .cap{font-size:11.5px;color:var(--faint)}
+  .lcat{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--ink-soft)}
+  .lcat i,.nod i{display:inline-block;width:13px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.06)}
+  .nod{font-size:12px;color:var(--ink-soft)}
+  .maphint{font-size:12px;color:var(--faint);margin:8px 4px 0}
+  .side{display:flex;flex-direction:column;min-height:0;padding:14px 16px}
+  @media (min-width:1021px){.side.all{contain:size}}
+  .side h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:14px 0 6px;font-weight:600}
+  .side h4:first-child{margin-top:0}
+  .reg{display:grid;grid-template-columns:18px 136px 1fr 54px;gap:6px;align-items:center;font-size:12.5px;margin:4px 0}
+  .reg .rk{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .reg .bar{position:relative;height:12px;background:var(--paper-deep);border-radius:2px}
+  .reg .rng{position:absolute;top:4px;height:4px;background:var(--bar-soft);border-radius:2px}
+  .reg .med{position:absolute;top:0;width:3px;height:12px;background:var(--ink);border-radius:1px}
+  .reg .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
+  .reg .v{font-family:var(--mono);font-size:11.5px;text-align:right}
+  .rank{list-style:none;margin:0;padding:0;font-size:13px;counter-reset:r}
+  .rank li{display:grid;grid-template-columns:22px 1fr auto;gap:6px;padding:4px 0;border-bottom:1px solid var(--rule-soft);cursor:pointer}
+  .rank li::before{counter-increment:r;content:counter(r);font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:1px}
+  .rank li:hover{background:var(--paper)}
+  .rank .v{font-family:var(--mono);font-size:12px;white-space:nowrap}
+  .ranklist{flex:1 1 auto;min-height:0;overflow:auto}
+  .linkbtn{appearance:none;border:0;background:none;padding:0;font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;color:var(--ink-soft);text-align:left}
+  .about{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:16px;margin-top:16px}
+  .about h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;font-weight:600}
+  .agents a{display:inline-block;margin:0 6px 6px 0;font-size:12.5px;text-decoration:none;border:1px solid var(--rule);border-radius:4px;padding:3px 8px;background:var(--paper)}
+  .agents a b{font-family:var(--mono);font-weight:600;margin-right:5px}
+  .cav{margin:0;padding-left:16px;font-size:13px;color:var(--ink-soft)} .cav li{margin:4px 0}
+  .src{font-size:12.5px;color:var(--ink-soft);margin:0 0 8px} .src a{color:var(--ink-soft)}
+  .veil{position:fixed;inset:0;background:rgba(22,23,19,.28);opacity:0;pointer-events:none;transition:opacity .2s;z-index:600}
+  .veil.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--paper);z-index:610;transform:translateX(100%);transition:transform .25s;overflow:auto;box-shadow:-8px 0 24px rgba(0,0,0,.08)}
+  .drawer.on{transform:none}
+  .drawer .in{padding:20px 22px 40px}
+  .drawer .close{float:right}
+  .xrow{display:grid;grid-template-columns:1fr auto;gap:8px;padding:6px 0;border-bottom:1px solid var(--rule-soft);font-size:13.5px}
+  .xrow .v{font-family:var(--mono);font-size:12.5px;text-align:right}
+  .xrow .cmp{grid-column:1/-1;font-size:12px;color:var(--faint);margin-top:-2px}
+  .xgroup{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:18px 0 4px}
+  #trend{height:220px}
+  .empbar{display:grid;grid-template-columns:220px 1fr 48px;gap:8px;align-items:center;font-size:12.5px;margin:3px 0}
+  .empbar .b{height:10px;background:var(--paper-deep);border-radius:2px;position:relative}
+  .empbar .b span{position:absolute;left:0;top:0;bottom:0;background:var(--bar-soft);border-radius:2px}
+  .empbar.hi .b span{background:var(--ink)}
+  .empbar .v{font-family:var(--mono);font-size:11.5px;text-align:right}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .grid2>*,.grid3>*,.about>*,.explore>*,.cards>*{min-width:0}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:26px 0 10px;font-weight:600}
+  .fact{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1}
+  .fact small{display:block;font-family:var(--sans);font-size:13px;font-weight:400;color:var(--ink-soft);margin-top:6px;line-height:1.45}
+  .where{display:inline-block;font-size:12px;color:var(--rust);border:1px solid rgba(154,78,43,.35);background:#FBF5F1;border-radius:4px;padding:2px 8px;margin:0 0 8px}
+  .sbar{display:grid;grid-template-columns:minmax(0,1fr) 140px 48px;gap:8px;align-items:center;font-size:13px;padding:2px 0}
+  .sbar .b{height:11px;background:var(--paper-deep);border-radius:2px;position:relative}
+  .sbar .b span{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:2px}
+  .sbar .v{font-family:var(--mono);font-size:12px;text-align:right}
+  .sbar .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  table.mx{border-collapse:collapse;font-size:12.5px;width:100%}
+  table.mx th,table.mx td{border-bottom:1px solid var(--rule-soft);padding:5px 6px;text-align:left}
+  table.mx td.c{font-family:var(--mono);text-align:right}
+  table.mx th{font-weight:600;font-size:12px;color:var(--ink-soft)}
+  .ill{display:grid;grid-template-columns:minmax(0,1fr) 1fr 52px;gap:8px;align-items:center;font-size:13px;padding:3px 0}
+  .ill .b{height:12px;background:var(--paper-deep);border-radius:2px;position:relative}
+  .ill .b span{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:2px}
+  .ill .v{font-family:var(--mono);font-size:12px;text-align:right}
+  .ill.head{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+  .callout{border-left:3px solid var(--ochre);background:#FBF8EE;padding:10px 14px;font-size:13px;color:var(--ink-soft);border-radius:0 6px 6px 0;margin:12px 0 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .cards:has(.xcard.open){align-items:start}
+  .xcard{display:flex;flex-direction:column}
+  .xcard .sub2{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);margin:0 0 6px}
+  .xcard .lead{font-weight:600;font-size:14px;margin:0 0 6px;color:var(--ink)}
+  .xcard p.sum{margin:0;font-size:14px;color:var(--ink-soft)}
+  .xcard .more{appearance:none;border:1px solid var(--rule);background:var(--paper);border-radius:999px;width:32px;height:32px;cursor:pointer;font-size:18px;line-height:1;color:var(--ink);align-self:flex-start;margin-top:12px}
+  .xcard .more[aria-expanded=true]{background:var(--ink);color:var(--paper)}
+  .xcard .detail{display:none;margin-top:12px;border-top:1px solid var(--rule-soft);padding-top:10px}
+  .xcard.open .detail{display:block}
+  .xcard dl{margin:0 0 8px} .xcard dt{font-size:12px;color:var(--faint);margin-top:8px} .xcard dd{margin:2px 0 0;font-family:var(--mono);font-size:12.5px}
+  .xcard dd .s{display:block;font-family:var(--sans);font-size:11.5px;color:var(--faint)}
+  .xcard ul{margin:6px 0 0;padding-left:16px;font-size:13.5px} .xcard li{margin:6px 0}
+  .xcard li .s{display:block;font-size:11.5px;color:var(--faint);margin-top:2px}
+  .xcard .tags{margin-top:8px}
+  .methods-toggle{appearance:none;width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;cursor:pointer;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+  .methods-toggle .pm{font-family:var(--mono);font-size:20px}
+  .methods{display:none;margin-top:10px}
+  .methods.on{display:block}
+  .methods p{max-width:840px;color:var(--ink-soft)}
+  .mtabs{display:flex;gap:2px;border-bottom:1px solid var(--rule);margin-bottom:12px}
+  table.srcs{border-collapse:collapse;font-size:12.5px;width:100%}
+  table.srcs td,table.srcs th{border-bottom:1px solid var(--rule-soft);padding:6px;vertical-align:top;text-align:left}
+  footer{border-top:1px solid var(--rule);margin-top:40px;padding:24px 0 44px;font-size:12.5px;color:var(--faint)}
+  footer p{max-width:900px;margin:0 0 8px}
+  @media (max-width:1020px){.explore{grid-template-columns:minmax(0,1fr)}.about{grid-template-columns:minmax(0,1fr)}.grid2,.grid3{grid-template-columns:minmax(0,1fr)}#map{height:400px}}
+  @media (max-width:560px){#map{height:290px}.reg{grid-template-columns:18px 92px 1fr 52px}.empbar{grid-template-columns:130px 1fr 40px}.sbar{grid-template-columns:minmax(0,1fr) 80px 44px}.yearbox input[type=range]{width:140px}.secnav{display:none}h2{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="revgate">Preview · under scientific revision</div>
+<div class="wrap">
+  <nav class="top" aria-label="Site">
+    <a class="brand" href="https://epidetective.com/">EpiDetective</a>
+    <span class="secnav"><a href="#map-sec">Map</a><a href="#work">At work</a><a href="#change">What changed</a><a href="#nomap">Without a map</a><a href="#how">How it was made</a></span>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">Carcinogen Exposure Atlas</div>
+    <h1>Where people meet the causes of cancer, <em>country by country</em></h1>
+    <p class="lede">See how common exposure to known and probable causes of cancer is around the world, at work and over time. The agents are those classified by the International Agency for Research on Cancer (IARC).</p>
+    <div class="search" role="search">
+      <svg class="mag" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5.2" fill="none" stroke="#161713" stroke-width="1.6"/><path d="M11 11l3.6 3.6" stroke="#161713" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <label class="vh" for="q-in">Search the atlas</label>
+      <input id="q-in" type="search" autocomplete="off" placeholder="Search an exposure, an agent or a country: asbestos, radon, India…" role="combobox" aria-expanded="false" aria-controls="q-res" aria-autocomplete="list">
+      <div class="results" id="q-res" role="listbox" aria-label="Search results"></div>
+    </div>
+  </header>
+
+  <section class="sec" id="map-sec" aria-labelledby="map-h">
+    <div class="sec-head"><span class="num">01</span><div><h2 id="map-h">Exposure around the world</h2>
+      <p class="sec-lede">Choose an exposure to see how common it is in each country. Click a country for everything the atlas knows about it.</p></div></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="chips" id="chips"></div>
+    <div class="layerbar">
+      <div><p class="q" id="q">Loading…</p><p class="sub" id="sub"></p></div>
+      <div class="ctrls">
+        <div class="seg" id="variants" role="group" aria-label="Group shown"></div>
+        <div class="yearbox" id="yearbox">
+          <button class="icon" id="play" aria-label="Play through the years" title="Play through the years">▶</button>
+          <input type="range" id="year" aria-label="Year"><span class="yr" id="yr"></span>
+        </div>
+      </div>
+    </div>
+    <div class="explore">
+      <div class="card mapcard">
+        <div class="mapwrap">
+          <div class="zoom"><button class="icon" id="zin" aria-label="Zoom in">+</button><button class="icon" id="zout" aria-label="Zoom out">−</button><button class="icon" id="zreset" aria-label="Reset the map">⟲</button></div>
+          <div id="map" role="img" aria-label="World map of the selected exposure"></div>
+        </div>
+        <div class="legend" id="legend"></div>
+        <p class="maphint">Hover a country for its figure, click it for its profile. Grey with dashed borders: disputed areas. Dots mark states too small to see.</p>
+      </div>
+      <aside class="card side" id="side" aria-label="Regions and countries"></aside>
+    </div>
+    <div class="about" id="about"></div>
+  </section>
+
+  <section class="sec" id="work" aria-labelledby="work-h">
+    <div class="sec-head"><span class="num">02</span><div><h2 id="work-h">Carcinogens at work, by sector and region</h2>
+      <p class="sec-lede">Silica, asbestos, diesel exhaust and wood dust are met mostly at work, and outdoor workers spend long hours in the sun. Global models estimate exposure for most countries; surveys measure it sector by sector in only a few. How many people work in each sector, known for most countries, hints at where these exposures could matter most.</p></div></div>
+    <div class="kicker">Key figures</div>
+    <div class="grid3" id="workfacts"></div>
+    <div class="kicker">Measured in surveys</div>
+    <div class="grid2">
+      <div class="card"><h3>Share of workers exposed to at least one carcinogen, by sector</h3><div id="wes-where"></div><p class="note" id="wes-note"></p><div id="wesbars"></div><button class="linkbtn" id="wesmore" style="margin-top:8px"></button></div>
+      <div class="card"><h3>Which carcinogens, in which industry</h3><div id="awes-where"></div><p class="note" id="awes-note"></p><div id="awesmx"></div></div>
+    </div>
+    <div class="kicker">EU survey rates applied to every region</div>
+    <div class="card"><h3>If every sector were as exposed as in the six EU countries surveyed</h3><div id="illus"></div></div>
+    <div class="kicker">How large these sectors are</div>
+    <div class="card"><h3>Who works in which sector</h3>
+      <p class="note" id="emp-note"></p>
+      <label class="note">Region, income group or country <select id="empsel"></select></label>
+      <div id="empbars" style="margin-top:12px"></div></div>
+  </section>
+
+  <section class="sec" id="change" aria-labelledby="change-h">
+    <div class="sec-head"><span class="num">03</span><div><h2 id="change-h">Where exposure fell, and where it persists</h2>
+      <p class="sec-lede">Bans, laws, vaccines and new fuels have cut some exposures sharply in some countries, while other exposures persist. Open a card for the figures and their sources.</p></div></div>
+    <div class="cards" id="stories"></div>
+  </section>
+
+  <section class="sec" id="nomap" aria-labelledby="nomap-h">
+    <div class="sec-head"><span class="num">04</span><div><h2 id="nomap-h">Known exposures without a country map</h2>
+      <p class="sec-lede">For these agents no source counts exposure country by country. What is known comes from regional studies, outbreaks or surveys of one place. Group 1 means IARC classifies the agent as a cause of cancer in humans; Group 2A, as a probable cause.</p></div></div>
+    <div class="cards" id="cardgrid"></div>
+  </section>
+
+  <section class="sec" id="how" aria-label="How this atlas was made">
+    <button class="methods-toggle" id="how-btn" aria-expanded="false" aria-controls="methods"><span>How this atlas was made</span><span class="pm" aria-hidden="true">+</span></button>
+    <div class="methods card" id="methods">
+      <div class="mtabs" role="tablist" id="mtabs">
+        <button class="tab" role="tab" aria-selected="true" data-m="m1">Method</button>
+        <button class="tab" role="tab" aria-selected="false" data-m="m2">Kinds of figures</button>
+        <button class="tab" role="tab" aria-selected="false" data-m="m3">Sources</button>
+      </div>
+      <div data-mp="m1">
+        <p>Each map layer comes from one published source, named on the layer with its year and terms of use. Figures taken from papers and reports were saved with their source files, and a script checked that every figure and its quotation appear in those files; figures read from images were checked by a second reader.</p>
+        <p>The atlas estimates nothing for a country its source leaves blank. Where a country has no figure for the year chosen, its latest earlier figure is shown, marked with its own year, if it is recent enough (within 1 to 10 years, depending on the layer). Regional panels show the median and range of the countries in each region. The only step the atlas models itself is the illustration in the work section, which applies the six EU countries' sector rates to each region's workforce and says so.</p>
+        <p>How common an exposure is says little on its own about how many cancers it causes. A country where many people are exposed to a weak cause can have fewer cancers than a country where fewer people are exposed to a strong one, and the amount and duration of exposure matter too. The Cancer Evidence Explorer gives the evidence that each agent causes cancer.</p>
+      </div>
+      <div data-mp="m2" hidden>
+        <p><b>Modelled</b>: an estimate by WHO, UNICEF, ILO, UNAIDS or the Global Burden of Disease (GBD) study that combines surveys and reported data with statistical models.</p>
+        <p><b>Reported</b>: measured in national surveys or compiled from national statistics, as published.</p>
+        <p><b>Study-based</b>: pooled from published studies that differ in design and year.</p>
+        <p><b>Policy</b>: a law or programme that limits exposure.</p>
+        <p><b>Summary exposure value</b> (SEV): the GBD study's measure, the share of people exposed weighted by how much each level of exposure raises risk, from 0 to 100. For a yes-or-no exposure such as secondhand smoke it equals the share of people exposed.</p>
+      </div>
+      <div data-mp="m3" hidden><div style="overflow-x:auto"><table class="srcs" id="srcs"></table></div></div>
+    </div>
+  </section>
+</div>
+<footer><div class="wrap">
+  <p>Carcinogen Exposure Atlas, preview built <span id="built"></span>. A personal project by Wenxin Wan. Wenxin Wan works at IARC; he alone is responsible for the views expressed here, which do not necessarily represent the decisions, policy or views of IARC or WHO.</p>
+  <p>Map: WHO boundaries (WHO GIS Centre for Health). The boundaries and names shown and the designations used on this map do not imply the expression of any opinion whatsoever concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.</p>
+  <p><a href="https://epidetective.com/">EpiDetective</a> · <a href="https://tools.epidetective.com/cancer/">Cancer Evidence Explorer</a> · <a href="https://tools.epidetective.com/chronic/">Chronic Disease Evidence Explorer</a></p>
+</div></footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Country profile"><div class="in" id="drawer-in"></div></aside>
+
+<script>
+const INK='#161713', PAPER='#F5F4F0', NODATA='#ECEBE5', DISPUTED='#D6D4CC';
+const RAMP=['#DCE2EB','#B9C6D8','#94A8C3','#6E87A9','#4A6389','#2A4068'];
+const RAMP_P=['#E3EDE6','#C2D8C9','#9CC0A8','#72A286','#4C8466','#2F5E45'];
+const HATCH='repeating-linear-gradient(135deg,#ECEBE5 0 3px,#C9C7BE 3px 4px)';
+const TABS=[['habits','Habits',['habits']],['home','Home and environment',['home','environment']],['infection','Infections',['infection']],
+            ['work','Work',['work']],['medical','Medicines',['medical']],['regulation','Rules and use',['regulation']]];
+const NATURE={modelled:'modelled',survey:'reported','study-based':'study-based',policy:'policy'};
+const VLABEL={both:'Both sexes',men:'Men',women:'Women',total:'All',urban:'Urban',rural:'Rural',all:'All',tonnes:'Tonnes',kg_per_person:'kg per person'};
+const REGNAME={AFRO:'Africa',AMRO:'Americas',SEARO:'South-East Asia',EURO:'Europe',EMRO:'Eastern Mediterranean',WPRO:'Western Pacific'};
+const SRCREG={AFR:'AFRO',AMR:'AMRO',SEA:'SEARO',SEAR:'SEARO',EUR:'EURO',EMR:'EMRO',WPR:'WPRO'};
+const TOUCH=matchMedia('(pointer:coarse)').matches;
+let HIGH=new Set();   // ILO sector groups where the EU survey found 55% or more of workers exposed (set when the data load)
+const SHORTG={A:'agriculture',B:'mining',C:'manufacturing',DE:'utilities and waste',F:'construction',G:'trade',HJ:'transport',I:'hotels and restaurants',K:'finance',LMN:'business services',O:'public administration',P:'education',Q:'health care',RSTU:'other services'};
+const incomeLabel=s=>String(s).replace('Lower middle','Lower-middle').replace('Upper middle','Upper-middle');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+const st={layer:'smoking',variant:null,year:null,country:null,tab:'habits',showAll:false};
+let IDX=null, GEO=null, REG=null, SECT=null, CARDS=null, AGENTS=null, MARKERS=[], BORDERS=[], map=null, trend=null, PROJ=null;
+const LAYERS={}, view={zoom:1,center:null};
+let MAP_ASPECT=2.27, MAPLAY={left:4,right:4,top:'middle'};
+
+const PSEUDO={
+  asbestos_ban:{id:'asbestos_ban',group:'regulation',family:'asbestos',title:'Asbestos bans',question:'Where is asbestos banned?',
+    agents:['asbestos'],kind:'status',nature:'policy',unit:'',variants:['all'],metric:'National ban on all forms of asbestos, by the year it was adopted, as of the year chosen',
+    caveats:['A ban year is the year the national ban was adopted; some bans took effect later, and some allow minor exemptions.',
+             'A partial ban covers some types of asbestos (usually the amphiboles, blue and brown asbestos); white asbestos (chrysotile) stays in use.',
+             'A ban stops new use; asbestos already in buildings stays, and disease follows decades after exposure.']},
+  hepb_intro:{id:'hepb_intro',group:'regulation',family:'hepatitis',title:'Hepatitis B vaccine in the schedule',question:'Where is the hepatitis B vaccine in the national schedule?',
+    agents:['hepatitis-b-virus'],kind:'status',nature:'policy',unit:'',variants:['all'],prevention:true,
+    metric:'Hepatitis B vaccine in the national immunization schedule for the whole country, as of the year chosen',
+    caveats:['"In part of the country or for some groups" covers regional programmes and vaccination of risk groups only.']},
+  hpv_intro:{id:'hpv_intro',group:'regulation',family:'hpv',title:'HPV vaccine in the schedule',question:'Where is the HPV vaccine in the national schedule?',
+    agents:['high-risk-hpv'],kind:'status',nature:'policy',unit:'',variants:['all'],prevention:true,
+    metric:'HPV vaccine in the national immunization schedule for the whole country, as of the year chosen',
+    caveats:['Most programmes vaccinate girls aged 9 to 14; some also vaccinate boys.']},
+};
+const STATUS={
+  asbestos_ban:[['banned','Banned','#39694F'],['partial','Partial ban','#A9C4B2'],['none','No national ban (yet)','#9A4E2B']],
+  hepb_intro:[['yes','In the national schedule','#2F5E45'],['part','In part of the country or for some groups','#9CC0A8'],['no','Not yet','#D9CDBE']],
+  hpv_intro:[['yes','In the national schedule','#2F5E45'],['part','In part of the country or for some groups','#9CC0A8'],['no','Not yet','#D9CDBE']],
+};
+
+function fmt(v,d){ if(v==null||isNaN(v)) return '–'; const a=Math.abs(v);
+  if(a>=1e6) return (v/1e6).toLocaleString('en-GB',{maximumFractionDigits:1})+' million';
+  return v.toLocaleString('en-GB',{minimumFractionDigits:d??0,maximumFractionDigits:d??0}); }
+function unitTxt(L,v,d){ const n=fmt(v,d); return L.unit==='%'? n+'%' : n+(L.unit?' '+L.unit:''); }
+function projection(){ if(!PROJ && window.d3 && d3.geoEqualEarth){ const p=d3.geoEqualEarth(); PROJ={project:pt=>p(pt),unproject:pt=>p.invert(pt)}; } return PROJ; }
+function roamMode(){ return (TOUCH && view.zoom<=1.05) ? 'scale' : true; }
+/* The map keeps the shape of its projection: the box takes its height from its width (Equal Earth without
+   Antarctica is about 2.3 times as wide as it is tall). ECharts stretches the map when all four margins are set,
+   so only the margins that fit are passed. */
+function mapAspect(){
+  const pj=projection(); if(!pj) return 2.27;
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  const walk=c=>{ if(typeof c[0]==='number'){ const q=pj.project(c); if(q){ if(q[0]<x0)x0=q[0]; if(q[0]>x1)x1=q[0]; if(q[1]<y0)y0=q[1]; if(q[1]>y1)y1=q[1]; } } else c.forEach(walk); };
+  GEO.features.forEach(f=>f.geometry&&walk(f.geometry.coordinates));
+  return (x1-x0)/(y1-y0) || 2.27;
+}
+function fitMapBox(){
+  const el=document.getElementById('map'), W=el.clientWidth, wide=innerWidth>1020;
+  const MAXH=wide?560:420, MINH=wide?430:150, need=Math.round((W-8)/MAP_ASPECT+8);
+  if(need<=MAXH){ el.style.height=Math.max(MINH,need)+'px'; return {left:4,right:4,top:'middle'}; }
+  el.style.height=MAXH+'px'; return {top:4,bottom:4,left:'center'};
+}
+function cname(iso){ return (IDX.countries[iso]||{}).name||iso; }
+function layerMeta(id){ return PSEUDO[id] || IDX.layers.find(l=>l.id===id); }
+function vlabel(L,x){ return (L.variant_labels||{})[x]||VLABEL[x]||x; }
+function loadLayer(id){
+  if(PSEUDO[id]) return Promise.resolve(PSEUDO[id]);
+  if(LAYERS[id]) return Promise.resolve(LAYERS[id]);
+  return fetch('data/layers/'+id+'.json').then(r=>r.json()).then(L=>{ LAYERS[id]=L; return L; });
+}
+function yearsOf(L){
+  if(L.kind==='status') return Array.from({length:2025-1980+1},(_,i)=>1980+i);
+  return (L.years||[]).filter(y=>!(L.projected_from && y>=L.projected_from));
+}
+/* How far back a country's latest figure may be carried when its source has no figure for the year chosen.
+   Survey rounds of the pill come every five to ten years; WHO's hepatitis estimates have different reference
+   years by country; vaccine coverage is reported with gaps; other series are annual or share the same years. */
+function maxAge(L){
+  if(L.id==='pill') return 10;
+  if(L.id==='hbv'||L.id==='hcv') return 9;
+  if(L.id==='hepb_vaccine'||L.id==='hpv_vaccine') return 3;
+  if(L.nature==='survey') return 3;
+  if(L.nature==='policy') return 2;
+  return 1;
+}
+function valueAt(L,iso,variant,year){
+  const rows=((L.data||{})[iso]||{})[variant]; if(!rows||!rows.length) return null;
+  if(L.single_year) return rows[rows.length-1];
+  let best=null;
+  for(const r of rows){ if(r[0]<=year && r[1]!=null && (!L.projected_from||r[0]<L.projected_from)) best=r; }
+  if(best && year-best[0] > maxAge(L)) return null;
+  return best;
+}
+function statusAt(id,iso,year){
+  if(id==='asbestos_ban'){
+    const a=REG.asbestos[iso]; if(!a) return null;
+    if(a.status==='banned' && a.year && a.year<=year) return 'banned';
+    if(a.status==='partial' && a.year && a.year<=year) return 'partial';
+    return 'none';
+  }
+  const v=REG.vaccine_intro[iso]; if(!v) return null;
+  const k=id==='hepb_intro'?'hepb':'hpv';
+  if(v[k] && v[k]<=year) return 'yes';
+  if(v[k+'_part'] && v[k+'_part']<=year) return 'part';
+  return 'no';
+}
+function niceNum(x){ if(x===0) return 0; const p=Math.pow(10,Math.floor(Math.log10(Math.abs(x)))-1); return Math.round(x/p)*p; }
+function binsFor(L,variant){
+  if(L.bins) return Array.isArray(L.bins)? L.bins : (L.bins[variant]||[]);
+  const vals=[];
+  for(const iso in L.data){ for(const r of (L.data[iso][variant]||[])){ if(r[1]!=null && r[1]>0 && !(L.projected_from && r[0]>=L.projected_from)) vals.push(r[1]); } }
+  vals.sort((a,b)=>a-b); if(!vals.length) return [];
+  const cuts=[]; for(let i=1;i<6;i++){ cuts.push(niceNum(vals[Math.min(vals.length-1,Math.floor(i*vals.length/6))])); }
+  return [...new Set(cuts)].sort((a,b)=>a-b);
+}
+function rampIdx(i,n,len){ return Math.min(len-1, Math.round(i*(len-1)/Math.max(1,n))); }
+function colorFor(L,v,cuts){
+  if(v==null) return NODATA;
+  const ramp=L.prevention?RAMP_P:RAMP;
+  if(v<=0 && L.id==='asbestos_use') return '#F1EFE8';
+  let i=0; while(i<cuts.length && v>=cuts[i]) i++;
+  return ramp[rampIdx(i,cuts.length,ramp.length)];
+}
+function median(a){ const v=a.filter(x=>x!=null).sort((x,y)=>x-y); const n=v.length; return n? (n%2? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2) : null; }
+function fb(x){ return fmt(x, Number.isInteger(x)?0:(Math.abs(x)<0.1?2:1)); }
+
+Promise.all(['data/index.json','geo/world.geojson','data/regulation.json','data/sectors.json','data/cards.json','data/agents.json']
+  .map(u=>fetch(u).then(r=>r.json()))).then(([idx,geo,reg,sect,cards,ag])=>{
+  IDX=idx; GEO=geo; REG=reg; SECT=sect; CARDS=cards; AGENTS=ag; MARKERS=geo.markers||[]; BORDERS=geo.borders||[];
+  HIGH=new Set(Object.entries(sect.ilo.eu_rates).filter(([,v])=>v>=55).map(([g])=>g));
+  document.getElementById('built').textContent=idx.built;
+  echarts.registerMap('who-world',{type:'FeatureCollection',features:GEO.features});
+  MAP_ASPECT=mapAspect();
+  readHash(); buildTabs(); initMap(); buildWork(); buildStories(); buildCards(); buildMethods(); buildSearch();
+  let t; addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>{
+    try{ if(map && map.getDom().clientWidth){ MAPLAY=fitMapBox(); map.resize(); render(); } }catch(e){}
+    try{ if(trend && trend.getDom().clientWidth) trend.resize(); }catch(e){}
+  },90); });
+}).catch(e=>{ console.error(e); document.getElementById('q').textContent='The data could not be loaded. If you opened this file directly, serve the folder over http.'; });
+
+function readHash(){
+  const h=new URLSearchParams(location.hash.slice(1));
+  if(h.get('layer') && layerMeta(h.get('layer'))) st.layer=h.get('layer');
+  if(h.get('v')) st.variant=h.get('v');
+  if(h.get('year')) st.year=+h.get('year');
+  if(h.get('c')) st.country=h.get('c').toUpperCase();
+  const g=layerMeta(st.layer).group; st.tab=(TABS.find(t=>t[2].includes(g))||TABS[0])[0];
+}
+function writeHash(){
+  const h=new URLSearchParams({layer:st.layer}); if(st.variant) h.set('v',st.variant); if(st.year) h.set('year',st.year); if(st.country) h.set('c',st.country);
+  history.replaceState(null,'','#'+h.toString());
+}
+
+function layersInTab(tab){
+  const groups=TABS.find(t=>t[0]===tab)[2];
+  const list=IDX.layers.filter(l=>groups.includes(l.group));
+  if(tab==='regulation') return [PSEUDO.asbestos_ban, ...list, PSEUDO.hepb_intro, PSEUDO.hpv_intro];
+  return list;
+}
+function buildTabs(){
+  const el=document.getElementById('tabs');
+  el.innerHTML=TABS.map(([id,label])=>`<button class="tab" role="tab" data-tab="${id}" aria-selected="${id===st.tab}">${label}</button>`).join('');
+  el.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ setTab(b.dataset.tab); selectLayer(layersInTab(st.tab)[0].id); });
+  buildChips();
+}
+function setTab(tab){ st.tab=tab; document.querySelectorAll('#tabs .tab').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===tab)); }
+function buildChips(){
+  const el=document.getElementById('chips');
+  el.innerHTML=layersInTab(st.tab).map(l=>`<button class="chip" data-id="${l.id}" aria-pressed="${l.id===st.layer}">${esc(l.title)}</button>`).join('');
+  el.querySelectorAll('.chip').forEach(b=>b.onclick=()=>selectLayer(b.dataset.id));
+}
+function selectLayer(id,variant){
+  const g=layerMeta(id).group, tab=(TABS.find(t=>t[2].includes(g))||TABS[0])[0];
+  if(tab!==st.tab) setTab(tab);
+  st.layer=id; st.variant=variant||null; st.year=null; st.showAll=false; buildChips(); render(); writeHash();
+}
+
+function initMap(){
+  const el=document.getElementById('map');
+  if(!el.clientWidth||!el.clientHeight){ setTimeout(initMap,120); return; }
+  if(map){ try{ echarts.dispose(map); }catch(e){} }
+  MAPLAY=fitMapBox();
+  map=echarts.init(el,null,{devicePixelRatio:Math.max(2,window.devicePixelRatio||1)});
+  map.on('click',p=>{ if(p.name && IDX.countries[p.name]) openCountry(p.name); });
+  map.on('georoam',()=>{ const g=(map.getOption().geo||[])[0]; if(g){ view.zoom=g.zoom||1; view.center=g.center||null; } });
+  render();
+  if(st.country) openCountry(st.country);
+}
+document.getElementById('zin').onclick=()=>zoomBy(1.7);
+document.getElementById('zout').onclick=()=>zoomBy(1/1.7);
+document.getElementById('zreset').onclick=()=>{ view.zoom=1; view.center=null; render(); };
+function zoomBy(f){ view.zoom=Math.max(1,Math.min(14,view.zoom*f)); if(view.zoom===1) view.center=null; try{ map.setOption({geo:[{zoom:view.zoom,roam:roamMode()}]}); }catch(e){} }
+let playT=null;
+document.getElementById('play').onclick=()=>{
+  if(playT){ clearInterval(playT); playT=null; document.getElementById('play').textContent='▶'; return; }
+  const L=LAYERS[st.layer]||layerMeta(st.layer), ys=yearsOf(L); if(ys.length<2) return;
+  let i=ys.indexOf(st.year); if(i<0||i>=ys.length-1) i=-1;
+  document.getElementById('play').textContent='❚❚';
+  playT=setInterval(()=>{ i++; if(i>=ys.length){ clearInterval(playT); playT=null; document.getElementById('play').textContent='▶'; return; } st.year=ys[i]; render(); },700);
+};
+document.getElementById('year').oninput=e=>{ const L=LAYERS[st.layer]||layerMeta(st.layer); st.year=yearsOf(L)[+e.target.value]; render(); writeHash(); };
+
+function render(){
+  loadLayer(st.layer).then(L=>{
+    if(!st.variant || !L.variants.includes(st.variant)) st.variant=L.variants[0];
+    const ys=yearsOf(L);
+    if(!st.year || !ys.includes(st.year)) st.year = L.kind==='status' ? 2025 : (L.default_year && ys.includes(L.default_year) ? L.default_year : ys[ys.length-1]);
+    const rows=mapRows(L);
+    drawHeader(L, ys); drawMap(L, rows); drawSide(L, rows); drawAbout(L);
+    if(st.country && document.getElementById('drawer').classList.contains('on')) drawTrend(L, st.country);
+  });
+}
+function shortSource(s){ const c=(s.citation||'').split(/\.\s/)[0]; return c.length>80? c.slice(0,78)+'…' : c; }
+function srcOf(L){ return L.source||REG.sources[L.id==='asbestos_ban'?'asbestos':'vaccine_intro']||{}; }
+function drawHeader(L, ys){
+  document.getElementById('q').textContent=L.question;
+  const badge=`<span class="badge ${L.nature==='study-based'?'study':L.nature==='policy'?'policy':''}">${NATURE[L.nature]||L.nature}</span>`;
+  const yrTxt = L.single_year ? 'latest survey per country' : (L.kind==='status' ? 'as of '+st.year : String(st.year));
+  document.getElementById('sub').innerHTML=badge+esc(L.metric)+' · <b>'+esc(yrTxt)+'</b> · '+esc(shortSource(srcOf(L)));
+  const v=document.getElementById('variants');
+  if(L.variants.length>4){
+    v.innerHTML=`<select aria-label="Agent">${L.variants.map(x=>`<option value="${x}"${x===st.variant?' selected':''}>${esc(vlabel(L,x))}</option>`).join('')}</select>`;
+    v.style.border='0'; v.style.background='none'; v.querySelector('select').onchange=e=>{ st.variant=e.target.value; render(); writeHash(); };
+  } else {
+    v.style.border=''; v.style.background='';
+    v.innerHTML = L.variants.length>1 ? L.variants.map(x=>`<button data-v="${x}" aria-pressed="${x===st.variant}">${esc(vlabel(L,x))}</button>`).join('') : '';
+    v.querySelectorAll('button').forEach(b=>b.onclick=()=>{ st.variant=b.dataset.v; render(); writeHash(); });
+  }
+  v.style.display = L.variants.length>1 ? '' : 'none';
+  const yb=document.getElementById('yearbox'), sl=document.getElementById('year');
+  if(L.single_year || ys.length<2){ yb.style.display='none'; }
+  else { yb.style.display=''; sl.min=0; sl.max=ys.length-1; sl.step=1; sl.value=Math.max(0,ys.indexOf(st.year)); document.getElementById('yr').textContent=st.year; }
+}
+function mapRows(L){
+  const out={};
+  for(const iso in IDX.countries){
+    if(L.kind==='status'){ const s=statusAt(L.id,iso,st.year); if(s) out[iso]={status:s}; continue; }
+    const r=valueAt(L,iso,st.variant,st.year); if(r) out[iso]={row:r};
+  }
+  return out;
+}
+function legendHTML(L,cuts){
+  if(L.kind==='status')
+    return `<div class="lcat">`+STATUS[L.id].map(c=>`<span><i style="background:${c[2]}"></i>${c[1]}</span>`).join('')+`<span><i style="background:${HATCH}"></i>no record</span></div>`;
+  const ramp=L.prevention?RAMP_P:RAMP, n=cuts.length+1, cols=[];
+  for(let i=0;i<n;i++) cols.push(ramp[rampIdx(i,cuts.length,ramp.length)]);
+  const cap=L.unit==='%'?'percent':L.kind==='index'?'summary exposure value, 0 to 100':L.unit;
+  const ticks=cuts.map((c,i)=>`<span style="left:${100*(i+1)/n}%">${fb(c)}</span>`).join('');
+  return `<div class="lbar"><div class="sw">${cols.map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="tk">${ticks}</div>`+
+    `<div class="cap">${esc(cap)}${L.reference?' · '+esc(L.reference.label):''}</div></div><span class="nod"><i style="background:${HATCH}"></i>no figure</span>`;
+}
+function drawMap(L, rows){
+  let colorOf, cuts=[];
+  if(L.kind==='status'){
+    const col=Object.fromEntries(STATUS[L.id].map(c=>[c[0],c[2]]));
+    colorOf=iso=>rows[iso]? col[rows[iso].status] : null;
+  } else {
+    cuts=binsFor(L,st.variant);
+    colorOf=iso=>rows[iso]? colorFor(L,rows[iso].row[1],cuts) : null;
+  }
+  document.getElementById('legend').innerHTML=legendHTML(L,cuts);
+  const tip=p=>{
+    const iso=p.name, c=IDX.countries[iso];
+    if(!c){ const f=GEO.features.find(x=>x.properties.iso3===iso); return f&&f.properties.disputed? esc(f.properties.name)+'<br><span style="color:#B9BDB2">disputed area</span>' : ''; }
+    const r=rows[iso]; let body;
+    if(!r) body='no figure in this source';
+    else if(L.kind==='status'){ body=(STATUS[L.id].find(x=>x[0]===r.status)||[,''])[1]; const a=L.id==='asbestos_ban'?REG.asbestos[iso]:null; if(a&&a.year&&r.status!=='none') body+=' ('+a.year+')'; }
+    else { const [y,v,lo,hi]=r.row; body=unitTxt(L,v,L.decimals); if(lo!=null&&hi!=null) body+=` <span style="color:#B9BDB2">(${fmt(lo,L.decimals)} to ${fmt(hi,L.decimals)})</span>`; if(L.single_year) body+=` · ${y}`; else if(y!==st.year) body+=` · figure for ${y}`; }
+    return `<b>${esc(c.name)}</b><br>${body}<br><span style="color:#B9BDB2">click for the country profile</span>`;
+  };
+  const proj=projection();
+  const regions=GEO.features.map(f=>{ const iso=f.properties.iso3;
+    if(f.properties.disputed) return {name:iso,itemStyle:{areaColor:DISPUTED,borderColor:'#FFFFFF',borderWidth:.4},emphasis:{disabled:true}};
+    const c=colorOf(iso);
+    return {name:iso,itemStyle: c? {areaColor:c} : {areaColor:NODATA,decal:{symbol:'rect',symbolSize:1,dashArrayX:[1,0],dashArrayY:[1,4],rotation:-0.785,color:'rgba(22,23,19,.14)'}}};
+  });
+  const opt={
+    animation:false,
+    tooltip:{trigger:'item',backgroundColor:INK,borderWidth:0,padding:[9,12],textStyle:{color:PAPER,fontFamily:'IBM Plex Mono',fontSize:12},formatter:tip},
+    geo:{map:'who-world',nameProperty:'iso3',roam:roamMode(),zoom:view.zoom,center:view.center||undefined,scaleLimit:{min:1,max:14},
+      projection:proj||undefined,boundingCoords:proj?undefined:[[-170,83],[190,-58]],...MAPLAY,
+      itemStyle:{areaColor:NODATA,borderColor:'#FFFFFF',borderWidth:.5},regions,
+      label:{show:false},emphasis:{label:{show:true,formatter:p=>cname(p.name),fontFamily:'IBM Plex Mono',fontSize:11,color:PAPER,textBorderColor:INK,textBorderWidth:2},itemStyle:{areaColor:INK}},
+      select:{disabled:true}},
+    series:[
+      {type:'map',map:'who-world',geoIndex:0,nameProperty:'iso3',data:Object.keys(rows).map(iso=>({name:iso,value:1}))},
+      {type:'lines',coordinateSystem:'geo',geoIndex:0,polyline:true,silent:true,z:4,lineStyle:{color:'#8C8B83',width:.8,type:[3,2],opacity:1},data:BORDERS.map(c=>({coords:c}))},
+      {type:'scatter',coordinateSystem:'geo',geoIndex:0,symbol:'circle',symbolSize:6,z:6,itemStyle:{borderColor:'#FFFFFF',borderWidth:.8},emphasis:{scale:1.6,itemStyle:{color:INK}},
+       data:MARKERS.filter(m=>rows[m.iso3]).map(m=>({name:m.iso3,value:[m.lon,m.lat],itemStyle:{color:colorOf(m.iso3)}}))},
+    ],
+  };
+  try{ map.setOption(opt,true); }catch(e){ console.warn('map render failed; rebuilding',e); setTimeout(initMap,150); }
+}
+
+function regionStats(L, rows){
+  const by={};
+  for(const iso in rows){ const w=(IDX.countries[iso]||{}).who; if(!w||!REGNAME[w]) continue; (by[w]=by[w]||[]).push(rows[iso].row[1]); }
+  return Object.entries(by).filter(([,v])=>v.length>=3).map(([w,v])=>({w,med:median(v),min:Math.min(...v),max:Math.max(...v),n:v.length}));
+}
+function drawSide(L, rows){
+  const el=document.getElementById('side'); let h='';
+  if(L.kind!=='status'){
+    let regs, note;
+    if(L.source_regions){
+      const latestRow=v=>(v[st.variant]||[]).filter(x=>x[0]<=st.year).pop();
+      regs=Object.entries(L.source_regions).map(([k,v])=>{ const code=SRCREG[(k.match(/\(([A-Z]+)\)/)||[])[1]||k]; const r=latestRow(v); return r&&code? {w:code,med:r[1],min:r[2]??r[1],max:r[3]??r[1],n:null} : null; }).filter(Boolean);
+      const gk=Object.keys(L.source_regions).find(k=>/global|world/i.test(k)), g=gk&&latestRow(L.source_regions[gk]);
+      note=(g?`World: ${unitTxt(L,g[1],L.decimals)}${g[2]!=null?` (${fmt(g[2],L.decimals)} to ${fmt(g[3],L.decimals)})`:''}. `:'')+'Regional estimates published by the source, with their uncertainty range.';
+    } else { regs=regionStats(L, rows); note='Black mark: median country. Blue line: range.'; }
+    regs.sort((a,b)=>b.med-a.med);
+    const mx=Math.max(...regs.map(r=>r.max),1e-9);
+    h+=`<h4>WHO regions, highest first · ${st.year}</h4>`;
+    h+= regs.length? regs.map((r,i)=>`<div class="reg" title="${r.n?`median ${fmt(r.med,L.decimals)}, range ${fmt(r.min,L.decimals)} to ${fmt(r.max,L.decimals)}, ${r.n} countries`:`estimate ${fmt(r.med,L.decimals)}, uncertainty ${fmt(r.min,L.decimals)} to ${fmt(r.max,L.decimals)}`}"><span class="rk">${i+1}</span><span>${REGNAME[r.w]}</span><span class="bar"><span class="rng" style="left:${100*r.min/mx}%;width:${Math.max(.8,100*(r.max-r.min)/mx)}%"></span><span class="med" style="left:calc(${100*r.med/mx}% - 1px)"></span></span><span class="v">${unitTxt(L,r.med,L.decimals)}</span></div>`).join('')
+      +`<p class="note" style="margin:6px 0 0">${note}</p>` : `<p class="note">Too few countries with a figure to compare regions.</p>`;
+    const ranked=Object.entries(rows).map(([iso,o])=>[iso,o.row]).sort((a,b)=>b[1][1]-a[1][1]);
+    const shown=st.showAll? ranked : ranked.slice(0,8);
+    h+=`<h4>${ranked.length} countries, highest first</h4><div class="ranklist"><ol class="rank">`+
+       shown.map(([iso,r])=>`<li data-iso="${iso}"><span>${esc(cname(iso))}</span><span class="v">${unitTxt(L,r[1],L.decimals)}${r[0]!==st.year&&!L.single_year?' ('+r[0]+')':''}</span></li>`).join('')+`</ol></div>`;
+    if(ranked.length>8) h+=`<button class="linkbtn" id="allbtn" style="margin-top:8px">${st.showAll?'Show the top 8':'Show all '+ranked.length+' countries'}</button>`;
+  } else {
+    const c={}; Object.values(rows).forEach(o=>c[o.status]=(c[o.status]||0)+1);
+    const tot=Object.values(c).reduce((a,b)=>a+b,0)||1;
+    h+=`<h4>Countries, as of ${st.year}</h4>`+STATUS[L.id].map((s,i)=>`<div class="reg"><span class="rk">${i+1}</span><span>${esc(s[1])}</span><span class="bar"><span class="fill" style="width:${100*(c[s[0]]||0)/tot}%;background:${s[2]}"></span></span><span class="v">${c[s[0]]||0}</span></div>`).join('');
+    if(L.id==='asbestos_ban'){
+      const list=Object.entries(REG.asbestos).filter(([iso,a])=>a.status==='banned'&&a.year&&a.year<=st.year).sort((a,b)=>a[1].year-b[1].year);
+      const shown=st.showAll? list : list.slice(0,8);
+      h+=`<h4>First national bans</h4><div class="ranklist"><ol class="rank">`+shown.map(([iso,a])=>`<li data-iso="${iso}"><span>${esc(cname(iso))}</span><span class="v">${a.year}</span></li>`).join('')+`</ol></div>`;
+      if(list.length>8) h+=`<button class="linkbtn" id="allbtn" style="margin-top:8px">${st.showAll?'Show the first 8':'Show all '+list.length+' bans'}</button>`;
+    }
+  }
+  el.innerHTML=h; el.classList.toggle('all',!!st.showAll);
+  el.querySelectorAll('[data-iso]').forEach(li=>li.onclick=()=>openCountry(li.dataset.iso));
+  const b=document.getElementById('allbtn'); if(b) b.onclick=()=>{ st.showAll=!st.showAll; render(); };
+}
+function drawAbout(L){
+  const shown=(L.variant_agents&&L.variant_agents[st.variant])||L.agents||[];
+  let world='';
+  if(L.global_values){ const g=((L.global_values[st.variant]||[]).filter(r=>r[0]<=st.year).pop()); if(g) world=`<p class="src"><b>World</b>: ${esc(unitTxt(L,g[1],L.decimals))} in ${g[0]}${g[2]!=null?` (${fmt(g[2],L.decimals)} to ${fmt(g[3],L.decimals)})`:''}, GBD estimate</p>`; }
+  const s=srcOf(L);
+  document.getElementById('about').innerHTML=
+    `<div class="card"><h4>The agent${shown.length>1?'s':''} behind this layer</h4><div class="agents">`+shown.filter(a=>AGENTS[a]).map(a=>`<a href="${AGENTS[a].url}" target="_blank" rel="noopener" title="Open in the Cancer Evidence Explorer"><b>${esc(AGENTS[a].group)}</b>${esc(AGENTS[a].name)}</a>`).join('')+`</div>`+
+    `<p class="note" style="margin:4px 0 0">IARC Group 1: causes cancer in humans. Group 2A: probably causes cancer in humans. Each link opens the Cancer Evidence Explorer.</p></div>`+
+    `<div class="card"><h4>Read with care</h4><ul class="cav">`+(L.caveats||[]).map(c=>`<li>${esc(c)}</li>`).join('')+`</ul></div>`+
+    `<div class="card"><h4>Source</h4>${world}<p class="src">${esc(s.citation||'')}${s.url?` <a href="${esc(s.url)}" target="_blank" rel="noopener">Link</a>`:''}</p>`+
+    (L.method?`<p class="src">Method: ${esc(L.method.citation)} <a href="${esc(L.method.url)}" target="_blank" rel="noopener">Link</a></p>`:'')+
+    `<p class="note" style="margin:0 0 8px">${s.licence?'Terms: '+esc(s.licence)+'. ':''}${s.retrieved?'Retrieved '+esc(s.retrieved)+'.':''}</p>`+
+    (L.kind!=='status'?`<button class="linkbtn" id="dl">Download this layer (CSV)</button>`:'')+`</div>`;
+  const dl=document.getElementById('dl'); if(dl) dl.onclick=()=>downloadCSV(L);
+}
+function downloadCSV(L){
+  const lines=['iso3,country,variant,year,value,low,high,unit'];
+  for(const iso in L.data) for(const v in L.data[iso]) for(const r of L.data[iso][v]) lines.push([iso,'"'+cname(iso).replace(/"/g,'""')+'"',v,r[0],r[1]??'',r[2]??'',r[3]??'',L.unit].join(','));
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'})); a.download='exposure-atlas-'+L.id+'.csv'; a.click();
+}
+
+document.getElementById('veil').onclick=closeCountry;
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeCountry(); });
+function closeCountry(){ document.getElementById('drawer').classList.remove('on'); document.getElementById('veil').classList.remove('on'); st.country=null; writeHash(); }
+function openCountry(iso){
+  if(!IDX.countries[iso]) return;
+  st.country=iso; writeHash();
+  const c=IDX.countries[iso], g=SECT.ilo.groups_of[iso]||{}; const el=document.getElementById('drawer-in');
+  el.innerHTML=`<button class="icon close" aria-label="Close" id="dclose">✕</button><div class="eyebrow">${esc(REGNAME[c.who]||'')}${g.income?' · '+esc(incomeLabel(g.income)):''}</div><h2>${esc(c.name)}</h2>
+    <h3 style="margin-top:14px" id="tr-title"></h3><div id="trend"></div><div id="dx"><p class="note">Loading all layers…</p></div>`;
+  document.getElementById('drawer').classList.add('on'); document.getElementById('veil').classList.add('on');
+  document.getElementById('dclose').onclick=closeCountry;
+  if(trend){ try{ echarts.dispose(trend); }catch(e){} trend=null; }
+  loadLayer(st.layer).then(L=>drawTrend(L,iso));
+  Promise.all(IDX.layers.map(l=>loadLayer(l.id))).then(()=>drawProfile(iso));
+}
+function drawTrend(L,iso){
+  const t=document.getElementById('tr-title'); if(!t) return;
+  const el=document.getElementById('trend');
+  const rows=((L.data||{})[iso]||{})[st.variant]||[];
+  if(L.kind==='status' || L.single_year || rows.length<2){ t.textContent=''; el.style.display='none'; return; }
+  el.style.display=''; t.textContent=L.title+(L.variants.length>4?': '+vlabel(L,st.variant):'')+' over time';
+  if(!trend) trend=echarts.init(el,null,{devicePixelRatio:Math.max(2,window.devicePixelRatio||1)});
+  const pf=L.projected_from||9999;
+  const est=rows.filter(r=>r[0]<pf).map(r=>[r[0],r[1]]);
+  const lastEst=(est[est.length-1]||[0])[0];
+  const proj=rows.filter(r=>r[0]>=lastEst&&r[0]>=pf-1).map(r=>[r[0],r[1]]);
+  const reg=[]; const ys=[...new Set(Object.values(L.data).flatMap(c=>(c[st.variant]||[]).map(r=>r[0])))].sort((a,b)=>a-b);
+  for(const y of ys){ const v=[]; for(const i2 in L.data){ if((IDX.countries[i2]||{}).who!==IDX.countries[iso].who) continue; const r=(L.data[i2][st.variant]||[]).find(x=>x[0]===y); if(r) v.push(r[1]); } if(v.length>=3) reg.push([y,median(v)]); }
+  trend.setOption({animation:false,grid:{left:46,right:12,top:26,bottom:28},tooltip:{trigger:'axis',valueFormatter:v=>v==null?'–':unitTxt(L,v,L.decimals)},
+    xAxis:{type:'value',min:'dataMin',max:'dataMax',axisLabel:{formatter:v=>String(v),fontFamily:'IBM Plex Mono',fontSize:10}},
+    yAxis:{type:'value',axisLabel:{fontFamily:'IBM Plex Mono',fontSize:10}},
+    legend:{top:0,right:0,textStyle:{fontSize:11},data:[cname(iso),'Median of the region']},
+    series:[{name:cname(iso),type:'line',data:est,symbolSize:4,lineStyle:{color:INK,width:2},itemStyle:{color:INK}},
+            {name:'Projection',type:'line',data:proj.length>1?proj:[],lineStyle:{type:'dashed',color:INK},itemStyle:{color:INK},symbolSize:3},
+            {name:'Median of the region',type:'line',data:reg,symbol:'none',lineStyle:{color:'#94A8C3',width:2}}]},true);
+}
+function latest(L,iso,variant){ const rows=((L.data||{})[iso]||{})[variant||L.variants[0]]||[]; const ok=rows.filter(r=>r[1]!=null&&!(L.projected_from&&r[0]>=L.projected_from)); return ok.pop()||null; }
+function drawProfile(iso){
+  const c=IDX.countries[iso]; let h='', anyIndex=false;
+  for(const [tab,label,groups] of TABS){
+    const ls=IDX.layers.filter(l=>groups.includes(l.group)); if(!ls.length) continue;
+    let part='';
+    for(const meta of ls){ const L=LAYERS[meta.id];
+      const vars=L.variants.length>4? L.variants : [L.variants[0]];
+      for(const v of vars){ const r=latest(L,iso,v); if(!r) continue;
+        const name=L.title+(L.variants.length>4?': '+vlabel(L,v):'');
+        const vals=[]; for(const i2 in L.data){ if((IDX.countries[i2]||{}).who!==c.who) continue; const rr=(L.data[i2][v]||[]).find(x=>x[0]===r[0]); if(rr) vals.push(rr[1]); }
+        const md=vals.length>=3? median(vals) : null;
+        const cmp= md!=null? `median in ${esc(REGNAME[c.who]||'the region')} in ${r[0]}: ${unitTxt(L,md,L.decimals)}${L.kind==='index'?' SEV':''} (${vals.length} countries)` : '';
+        const sev=L.kind==='index'?' SEV':''; if(sev) anyIndex=true;
+        part+=`<div class="xrow"><span>${esc(name)} <button class="linkbtn" data-layer="${L.id}" data-v="${v}" style="font-size:11.5px">map</button></span><span class="v">${unitTxt(L,r[1],L.decimals)}${sev} · ${r[0]}</span>${cmp?`<span class="cmp">${cmp}</span>`:''}</div>`; }
+    }
+    if(part) h+=`<div class="xgroup">${label}</div>`+part;
+  }
+  if(anyIndex) h=`<p class="note" style="margin:10px 0 0">SEV: the Global Burden of Disease summary exposure value, from 0 (nobody exposed) to 100 (everyone exposed at the level of highest risk).</p>`+h;
+  const a=REG.asbestos[iso], v=REG.vaccine_intro[iso]||{};
+  h+=`<div class="xgroup">Laws and vaccines</div>`;
+  h+=`<div class="xrow"><span>Asbestos</span><span class="v">${a? (a.status==='banned'?'banned '+(a.year||''):a.status==='partial'?'partial ban '+(a.year||''):'no national ban, still used') : 'no record'}</span>${a&&a.scope?`<span class="cmp">${esc(a.scope)}</span>`:''}</div>`;
+  const sf=latest(LAYERS.smokefree,iso); if(sf) h+=`<div class="xrow"><span>Smoke-free laws</span><span class="v">${sf[1]} of 8 kinds of place · ${sf[0]}</span></div>`;
+  h+=`<div class="xrow"><span>Hepatitis B vaccine in the schedule</span><span class="v">${v.hepb?'since '+v.hepb+(v.hepb_part&&v.hepb_part<v.hepb?' (in part since '+v.hepb_part+')':''):v.hepb_part?'in part since '+v.hepb_part:'no record'}</span></div>`;
+  h+=`<div class="xrow"><span>HPV vaccine in the schedule</span><span class="v">${v.hpv?'since '+v.hpv+(v.hpv_part&&v.hpv_part<v.hpv?' (in part since '+v.hpv_part+')':''):v.hpv_part?'in part since '+v.hpv_part:'not yet or no record'}</span></div>`;
+  const e=SECT.ilo.countries[iso];
+  if(e){ h+=`<div class="xgroup">Work · employment by sector, ${SECT.ilo.year}</div>`+empBars(e)+`<p class="note">Dark bars: sectors where the six-country EU survey found 55% or more of workers exposed to at least one carcinogen. <a href="#work" id="towork">More on work</a></p>`; }
+  const el=document.getElementById('dx'); if(!el) return;
+  el.innerHTML=h;
+  el.querySelectorAll('[data-layer]').forEach(b=>b.onclick=()=>{ closeCountry(); selectLayer(b.dataset.layer,b.dataset.v); document.getElementById('map-sec').scrollIntoView(); });
+  const tw=document.getElementById('towork'); if(tw) tw.onclick=()=>closeCountry();
+}
+function empBars(e){
+  const rows=SECT.ilo.groups.map(g=>[g,e.share[g]]).filter(r=>r[1]!=null).sort((a,b)=>b[1]-a[1]);
+  const mx=Math.max(...rows.map(r=>r[1]),1);
+  return rows.map(([g,v])=>`<div class="empbar${HIGH.has(g)?' hi':''}"><span>${esc(SECT.ilo.labels[g])}</span><span class="b"><span style="width:${100*v/mx}%"></span></span><span class="v">${fmt(v,1)}%</span></div>`).join('');
+}
+
+function buildWork(){
+  const wes=SECT.surveys.find(s=>s.id==='wes'), aw=SECT.surveys.find(s=>s.id==='awes');
+  Promise.all([loadLayer('uv_work'),loadLayer('gbd_occ')]).then(([uv,occ])=>{
+    const g=(uv.source_regions||{}); const gk=Object.keys(g).find(k=>/global|world/i.test(k));
+    const uvw=gk? (g[gk].both||[]).filter(r=>r[0]===2019).pop() : null;
+    const ord=occ.variants.map(k=>[k,((occ.global_values||{})[k]||[]).filter(r=>r[0]<=2023).pop()]).filter(x=>x[1]).sort((a,b)=>b[1][1]-a[1][1]).slice(0,4);
+    document.getElementById('workfacts').innerHTML=
+      `<div class="card"><div class="fact">1.6 billion<small>people worked in the sun in 2019, ${uvw?fmt(uvw[1],1)+'%':'28.4%'} of the population aged 15 and over: WHO/ILO estimate. <a href="#map-sec" data-goto="uv_work">See the map</a></small></div></div>`+
+      `<div class="card"><div class="fact">${wes&&wes.headline?fmt(wes.headline,1)+'%':'–'}<small>of workers in six EU countries were probably exposed to at least one of 24 cancer risk factors in their last working week (survey by the European Agency for Safety and Health at Work, EU-OSHA, 2022–2023).</small></div></div>`+
+      `<div class="card"><div class="fact" style="font-size:22px">Ever exposed at work, worldwide</div><small class="note" style="display:block;margin-top:6px;font-size:13px;color:var(--ink-soft)">GBD 2023 summary exposure values, 0 to 100, for the four agents with the highest values: `+
+        ord.map(([k,r])=>`${esc(vlabel(occ,k))} ${fmt(r[1],1)}`).join(' · ')+`. <a href="#map-sec" data-goto="gbd_occ">See the map</a></small></div>`;
+    document.querySelectorAll('[data-goto]').forEach(a=>a.onclick=e=>{ e.preventDefault(); selectLayer(a.dataset.goto); document.getElementById('map-sec').scrollIntoView(); });
+  });
+  if(wes){
+    document.getElementById('wes-where').innerHTML=`<span class="where">Measured in six EU countries only: Germany, Ireland, Spain, France, Hungary, Finland · 2022–2023</span>`;
+    document.getElementById('wes-note').textContent=`${wes.measure}. Telephone survey of 24,402 workers; sectors with fewer than 30 respondents are not reported.`;
+    const rows=wes.sectors.filter(s=>!/all workers/i.test(s.label)).sort((a,b)=>b.value-a.value);
+    let all=false; const draw=()=>{ document.getElementById('wesbars').innerHTML=(all?rows:rows.slice(0,10)).map(s=>`<div class="sbar"><span title="${esc(s.label)}">${esc(s.label)}${s.n?` <span class="n">n=${s.n}</span>`:''}</span><span class="b"><span style="width:${s.value}%"></span></span><span class="v">${fmt(s.value,1)}%</span></div>`).join(''); document.getElementById('wesmore').textContent=all?'Show the top 10':'Show all '+rows.length+' sectors'; };
+    document.getElementById('wesmore').onclick=()=>{ all=!all; draw(); }; draw();
+  }
+  if(aw){
+    document.getElementById('awes-where').innerHTML=`<span class="where">Measured in Australia only · 2011–2012</span>`;
+    document.getElementById('awes-note').textContent=`Share of survey respondents in each industry probably exposed in their current job. Telephone survey of 5,023 workers; three industries reported in detail.`;
+    const inds=[...new Set(aw.sector_agent.map(r=>r.label))];
+    const keyOf=r=> r.agent || ('x:'+r.factor.toLowerCase().replace(/\s+/g,' ').trim());
+    const nameOf={}; aw.sector_agent.forEach(r=>{ const k=keyOf(r); nameOf[k]= r.agent&&AGENTS[r.agent]? AGENTS[r.agent].name : (nameOf[k]||r.factor); });
+    const cell=(i,k)=>{ const v=aw.sector_agent.filter(x=>x.label===i&&keyOf(x)===k).map(x=>x.value); return v.length? Math.max(...v) : null; };
+    const keys=[...new Set(aw.sector_agent.map(keyOf))];
+    const summary=keys.filter(k=>/at least one/i.test(nameOf[k]));
+    const order=summary.concat(keys.filter(k=>!summary.includes(k)).map(k=>[k,Math.max(...inds.map(i=>cell(i,k)||0))]).sort((a,b)=>b[1]-a[1]).map(x=>x[0]).slice(0,12));
+    document.getElementById('awesmx').innerHTML=`<div style="overflow-x:auto"><table class="mx"><thead><tr><th>Carcinogen</th>${inds.map(i=>`<th>${esc(i.replace(/ industry$/i,''))}</th>`).join('')}</tr></thead><tbody>`+
+      order.map(f=>`<tr${summary.includes(f)?' style="font-weight:600"':''}><td>${esc(nameOf[f])}</td>${inds.map(i=>{ const v=cell(i,f); return `<td class="c" style="background:${v==null?'transparent':colorFor({prevention:false},v,[5,10,20,35,50])};${v!=null&&v>=35?'color:#fff':''}">${v==null?'–':v+'%'}</td>`; }).join('')}</tr>`).join('')+`</tbody></table></div>`;
+  }
+  const I=SECT.ilo, ag=I.aggregates;
+  const row=a=>`<div class="ill"><span>${esc(a.label)}${a.kind==='region'?` <span class="note">${a.n_countries} countries</span>`:''}</span><span class="b"><span style="width:${a.illustration.value}%"></span></span><span class="v">${fmt(a.illustration.value,0)}%</span></div>`;
+  document.getElementById('illus').innerHTML=
+    `<p class="note" style="margin:0 0 8px">Share of workers who would be exposed to at least one carcinogen if each sector's exposure matched the six EU countries surveyed, given how each region's workforce is spread across sectors (ILO, ${I.year}).</p>`+
+    `<div class="ill head"><span>World</span><span></span><span></span></div>`+row(ag.find(a=>a.kind==='world'))+
+    `<div class="ill head"><span>By region</span><span></span><span></span></div>`+ag.filter(a=>a.kind==='region').sort((a,b)=>b.illustration.value-a.illustration.value).map(row).join('')+
+    `<div class="ill head"><span>By income group</span><span></span><span></span></div>`+ag.filter(a=>a.kind==='income').map(row).join('')+
+    `<div class="callout">These figures are an illustration. They show only how the size of agriculture, construction, mining and the other high-exposure sectors changes the result. How exposed workers are within each sector differs between countries and has been measured in very few of them.</div>`;
+  const hl=I.groups.filter(g=>HIGH.has(g)).map(g=>SHORTG[g]); const hlTxt=hl.length>2? hl.slice(0,-1).join(', ')+', and '+hl[hl.length-1] : hl.join(' and ');
+  document.getElementById('emp-note').textContent=`Share of all employed people working in each sector, ${I.year}: ILO modelled estimates. Dark bars mark the sectors where the six-country EU survey found 55% or more of workers exposed to at least one carcinogen: ${hlTxt}.`;
+  const sel=document.getElementById('empsel');
+  let opts=`<optgroup label="World and groups">`+ag.map(a=>`<option value="${esc(a.key)}">${esc(a.label)}</option>`).join('')+`</optgroup>`;
+  const regs=[...new Set(Object.values(I.groups_of).map(g=>g.region))].sort();
+  for(const r of regs){
+    const cs=Object.keys(I.countries).filter(i=>(I.groups_of[i]||{}).region===r).sort((a,b)=>cname(a).localeCompare(cname(b)));
+    if(cs.length) opts+=`<optgroup label="${esc(r)}">`+cs.map(i=>`<option value="${i}">${esc(cname(i))}</option>`).join('')+`</optgroup>`;
+  }
+  sel.innerHTML=opts; sel.value='WORLD';
+  const drawE=()=>{ const v=sel.value; const e= v.length===3? I.countries[v] : ag.find(a=>a.key===v);
+    document.getElementById('empbars').innerHTML= e? empBars(e)+`<p class="note">At the six EU countries' sector rates, ${fmt(e.illustration.value,0)}% of these workers would be exposed to at least one carcinogen. Employment: ${fmt(e.total_thousands/1000,1)} million people.</p>` : ''; };
+  sel.onchange=drawE; drawE();
+}
+
+function factList(c){
+  return (c.facts||[]).length? `<ul>`+c.facts.map(f=>`<li>${esc(f.text)}<span class="s">${esc((f.source||'').split('. ').slice(0,2).join('. '))}${f.url?` · <a href="${esc(f.url)}" target="_blank" rel="noopener">source</a>`:''}</span></li>`).join('')+`</ul>` : '';
+}
+function agentTags(c){ return `<div class="tags agents">`+(c.agents||[]).filter(a=>AGENTS[a]).map(a=>`<a href="${AGENTS[a].url}" target="_blank" rel="noopener"><b>${esc(AGENTS[a].group)}</b>${esc(AGENTS[a].name)}</a>`).join('')+`</div>`; }
+function cardHTML(c, story){
+  const stats=(c.stats||[]).length? `<dl>`+c.stats.map(s=>`<dt>${esc(s.label)}</dt><dd>${esc(s.value)}<span class="s">${esc(s.source||'')}</span></dd>`).join('')+`</dl>` : '';
+  return `<article class="card xcard" id="card-${c.id}"><h3>${esc(c.title)}</h3>`+
+    (story? `<p class="lead">${esc(c.subtitle||'')}</p>` : `<p class="sub2">${esc(c.subtitle||'')}</p>`)+
+    `<p class="sum">${esc(c.summary||'')}</p>`+
+    `<button class="more" aria-expanded="false" aria-controls="det-${c.id}" aria-label="More on ${esc(c.title)}">+</button>`+
+    `<div class="detail" id="det-${c.id}">${stats}${factList(c)}${agentTags(c)}</div></article>`;
+}
+function wireCards(root){ root.querySelectorAll('.xcard .more').forEach(b=>b.onclick=()=>{ const card=b.closest('.xcard'); const on=!card.classList.contains('open'); card.classList.toggle('open',on); b.setAttribute('aria-expanded',on); b.textContent=on?'−':'+'; }); }
+function buildStories(){ const el=document.getElementById('stories'); el.innerHTML=CARDS.stories.map(c=>cardHTML(c,true)).join(''); wireCards(el); }
+function buildCards(){ const el=document.getElementById('cardgrid'); el.innerHTML=CARDS.cards.map(c=>cardHTML(c,false)).join(''); wireCards(el); }
+function openCard(id){ const card=document.getElementById('card-'+id); if(!card) return; if(!card.classList.contains('open')) card.querySelector('.more').click(); card.scrollIntoView({block:'center'}); }
+
+function buildMethods(){
+  const btn=document.getElementById('how-btn'), box=document.getElementById('methods');
+  btn.onclick=()=>{ const on=!box.classList.contains('on'); box.classList.toggle('on',on); btn.setAttribute('aria-expanded',on); btn.querySelector('.pm').textContent=on?'−':'+'; };
+  document.querySelectorAll('#mtabs .tab').forEach(t=>t.onclick=()=>{ document.querySelectorAll('#mtabs .tab').forEach(x=>x.setAttribute('aria-selected',x===t)); document.querySelectorAll('[data-mp]').forEach(p=>p.hidden=p.dataset.mp!==t.dataset.m); });
+  const rows=IDX.layers.map(l=>`<tr><td>${esc(l.title)}</td><td><span class="badge">${NATURE[l.nature]||''}</span></td><td>${esc((l.source||{}).citation||'')}${(l.source||{}).url?` <a href="${esc(l.source.url)}" target="_blank" rel="noopener">link</a>`:''}</td><td>${esc((l.source||{}).licence||'')}</td></tr>`);
+  const extra=[['Asbestos bans',REG.sources.asbestos],['Vaccine introduction',REG.sources.vaccine_intro],['Employment by sector',SECT.ilo.source],['Regions and income groups',SECT.ilo.groups_source]].concat(SECT.surveys.map(s=>[s.title,s.source]))
+    .map(([t,s])=>`<tr><td>${esc(t)}</td><td></td><td>${esc((s||{}).citation||'')}${(s||{}).url?` <a href="${esc(s.url)}" target="_blank" rel="noopener">link</a>`:''}</td><td>${esc((s||{}).licence||'')}</td></tr>`);
+  document.getElementById('srcs').innerHTML='<thead><tr><th>Layer</th><th>Kind</th><th>Source</th><th>Terms</th></tr></thead><tbody>'+rows.concat(extra).join('')+'</tbody>';
+}
+
+let SIDX=[], sel=-1;
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function buildSearch(){
+  const add=(type,label,sub,keys,act)=>SIDX.push({type,label,sub,keys:norm(label+' '+(keys||'')),act});
+  const names=a=>(a||[]).map(x=>(AGENTS[x]||{}).name||'').join(' ');
+  for(const L of IDX.layers.concat(Object.values(PSEUDO))){
+    if(L.variant_labels){ for(const v of L.variants) add('Map',L.title+': '+L.variant_labels[v],'map layer',(L.question||'')+' '+names((L.variant_agents||{})[v]),()=>{ selectLayer(L.id,v); document.getElementById('map-sec').scrollIntoView(); }); }
+    else add('Map',L.title,'map layer',(L.question||'')+' '+names(L.agents)+' '+(L.family||''),()=>{ selectLayer(L.id); document.getElementById('map-sec').scrollIntoView(); });
+  }
+  for(const iso in IDX.countries) add('Country',IDX.countries[iso].name,'country profile','',()=>openCountry(iso));
+  for(const c of CARDS.stories) add('What changed',c.title,'story',(c.subtitle||'')+' '+names(c.agents),()=>openCard(c.id));
+  for(const c of CARDS.cards) add('Without a map',c.title,'card',(c.subtitle||'')+' '+names(c.agents),()=>openCard(c.id));
+  add('At work','Carcinogens at work, by sector and region','section','work workers sector industry occupation job silica construction farming mining',()=>document.getElementById('work').scrollIntoView());
+  const inp=document.getElementById('q-in'), box=document.getElementById('q-res');
+  const close=()=>{ box.classList.remove('on'); inp.setAttribute('aria-expanded','false'); inp.removeAttribute('aria-activedescendant'); sel=-1; };
+  const choose=i=>{ const it=(box._items||[])[i]; if(!it) return; close(); inp.value=''; inp.blur(); it.act(); };
+  const run=()=>{
+    const q=norm(inp.value.trim()); if(q.length<2){ close(); return; }
+    const scored=[];
+    for(const it of SIDX){ const l=norm(it.label); let s=-1;
+      if(l.startsWith(q)) s=3; else if((' '+l).includes(' '+q)) s=2; else if(it.keys.includes(q)) s=1;
+      if(s>0) scored.push([s,it]); }
+    const typeOrder={'Map':0,'Country':1,'What changed':2,'Without a map':3,'At work':4};
+    scored.sort((a,b)=>b[0]-a[0]||typeOrder[a[1].type]-typeOrder[b[1].type]||a[1].label.localeCompare(b[1].label));
+    const top=scored.slice(0,12).map(x=>x[1]).sort((a,b)=>typeOrder[a.type]-typeOrder[b.type]);
+    if(!top.length) box.innerHTML=`<div class="none">Nothing found. Try an agent (asbestos, radon), an exposure (alcohol, smoke) or a country.</div>`;
+    else { let h='', last=''; top.forEach((it,i)=>{ if(it.type!==last){ h+=`<div class="grp">${esc(it.type)}</div>`; last=it.type; } h+=`<div role="option" id="opt-${i}" data-i="${i}" aria-selected="false"><span>${esc(it.label)}</span><small>${esc(it.sub)}</small></div>`; }); box.innerHTML=h; }
+    box._items=top; box.classList.add('on'); inp.setAttribute('aria-expanded','true'); sel=-1;
+    box.querySelectorAll('[role=option]').forEach(o=>o.onmousedown=e=>{ e.preventDefault(); choose(+o.dataset.i); });
+  };
+  inp.addEventListener('input',run);
+  inp.addEventListener('keydown',e=>{
+    const opts=[...box.querySelectorAll('[role=option]')];
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); if(!opts.length) return; sel=(sel+(e.key==='ArrowDown'?1:-1)+opts.length)%opts.length; opts.forEach((o,j)=>o.setAttribute('aria-selected',j===sel)); inp.setAttribute('aria-activedescendant',opts[sel].id); opts[sel].scrollIntoView({block:'nearest'}); }
+    else if(e.key==='Enter'){ e.preventDefault(); choose(sel>=0?sel:0); }
+    else if(e.key==='Escape'){ close(); }
+  });
+  inp.addEventListener('blur',()=>setTimeout(close,120));
+}
+</script>
+</body>
+</html>

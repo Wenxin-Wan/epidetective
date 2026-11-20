@@ -1,0 +1,2434 @@
+{
+ "built": "2026-11-20",
+ "layers": [
+  {
+   "id": "smoking",
+   "bins": [
+    10,
+    15,
+    20,
+    25,
+    30
+   ],
+   "group": "habits",
+   "family": "tobacco",
+   "title": "Tobacco smoking",
+   "question": "How many adults smoke tobacco?",
+   "agents": [
+    "tobacco-smoking"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of people aged 15 and over who currently smoke any tobacco product, age-standardized",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "projected_from": 2025,
+   "default_year": 2024,
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: estimate of current tobacco smoking prevalence, age-standardized (indicator M_Est_smk_curr_std).",
+    "url": "https://www.who.int/publications/i/item/9789240116276",
+    "api": "https://ghoapi.azureedge.net/api/M_Est_smk_curr_std",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "WHO modelled estimates from national surveys; years after 2024 are WHO projections.",
+    "Age-standardized so that countries with different age structures can be compared."
+   ],
+   "decimals": 1,
+   "years": [
+    2000,
+    2005,
+    2007,
+    2010,
+    2015,
+    2020,
+    2022,
+    2023,
+    2024,
+    2025,
+    2030
+   ],
+   "n_countries": 167
+  },
+  {
+   "id": "smokeless",
+   "bins": [
+    1,
+    3,
+    5,
+    10,
+    20
+   ],
+   "group": "habits",
+   "family": "tobacco",
+   "title": "Smokeless tobacco",
+   "question": "How many adults use chewing tobacco, snuff or other smokeless tobacco?",
+   "agents": [
+    "smokeless-tobacco"
+   ],
+   "kind": "prevalence",
+   "nature": "survey",
+   "metric": "Share of adults who currently use smokeless tobacco, latest national survey",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "single_year": true,
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: population-based national surveys, current smokeless tobacco use (indicator TOBACCO_MPOWER_M2_PREVALENCE).",
+    "url": "https://www.who.int/teams/health-promotion/tobacco-control/global-tobacco-report-2025",
+    "api": "https://ghoapi.azureedge.net/api/TOBACCO_MPOWER_M2_PREVALENCE",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "The year is the WHO report edition (2024 data release); each country's survey may be several years older.",
+    "Crude survey percentages without age-standardization; age ranges differ between surveys."
+   ],
+   "decimals": 1,
+   "years": [
+    2024
+   ],
+   "n_countries": 123
+  },
+  {
+   "id": "alcohol_litres",
+   "bins": [
+    2,
+    4,
+    6,
+    8,
+    10
+   ],
+   "group": "habits",
+   "family": "alcohol",
+   "title": "Alcohol: litres per person",
+   "question": "How much alcohol do adults drink?",
+   "agents": [
+    "alcoholic-drinks",
+    "acetaldehyde"
+   ],
+   "kind": "consumption",
+   "nature": "modelled",
+   "decimals": 2,
+   "metric": "Total alcohol per person aged 15 and over, recorded and unrecorded, in litres of pure alcohol per year",
+   "unit": "litres",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: total alcohol per capita (15+) consumption (indicator SA_0000001688).",
+    "url": "https://www.who.int/data/gho/data/themes/global-information-system-on-alcohol-and-health",
+    "api": "https://ghoapi.azureedge.net/api/SA_0000001688",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Includes alcohol that escapes official statistics (home-made, smuggled, or drunk by tourists) as estimated by WHO.",
+    "An average over drinkers and non-drinkers: where few people drink, those who do may drink heavily."
+   ],
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_countries": 204
+  },
+  {
+   "id": "alcohol_drinkers",
+   "bins": [
+    20,
+    40,
+    50,
+    60,
+    70
+   ],
+   "group": "habits",
+   "family": "alcohol",
+   "title": "Alcohol: share who drink",
+   "question": "How many adults drank alcohol in the past year?",
+   "agents": [
+    "alcoholic-drinks"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of people aged 15 and over who drank alcohol in the past 12 months, age-standardized",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: alcohol, current drinkers (15+), age-standardized (indicator SA_0000001413).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/SA_0000001413",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "WHO estimates; the latest year is 2020."
+   ],
+   "decimals": 1,
+   "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020
+   ],
+   "n_countries": 187
+  },
+  {
+   "id": "heavy_drinking",
+   "bins": [
+    5,
+    10,
+    15,
+    20,
+    30
+   ],
+   "group": "habits",
+   "family": "alcohol",
+   "title": "Alcohol: heavy episodic drinking",
+   "question": "How many adults drink heavily on one occasion?",
+   "agents": [
+    "alcoholic-drinks"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of people aged 15 and over who had 60 g or more of pure alcohol on one occasion in the past 30 days, age-standardized",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: heavy episodic drinking (15+) past 30 days, age-standardized (indicator SA_0000001739).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/SA_0000001739",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "60 g of pure alcohol is about six standard drinks."
+   ],
+   "decimals": 1,
+   "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020
+   ],
+   "n_countries": 189
+  },
+  {
+   "id": "pm25",
+   "bins": [
+    5,
+    10,
+    15,
+    25,
+    35
+   ],
+   "group": "environment",
+   "family": "air",
+   "title": "Outdoor air pollution (fine particles)",
+   "question": "How polluted is the air people breathe outdoors?",
+   "agents": [
+    "outdoor-air-pollution",
+    "outdoor-air-pollution-particulate-matter"
+   ],
+   "kind": "level",
+   "nature": "modelled",
+   "metric": "Annual mean concentration of fine particulate matter (PM2.5), weighted by where people live",
+   "unit": "µg/m³",
+   "variants": [
+    "total",
+    "urban",
+    "rural"
+   ],
+   "reference": {
+    "value": 5,
+    "label": "WHO guideline (2021): 5 µg/m³"
+   },
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: concentrations of fine particulate matter (PM2.5) (indicator SDGPM25).",
+    "url": "https://www.who.int/data/gho/data/themes/air-pollution",
+    "api": "https://ghoapi.azureedge.net/api/SDGPM25",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Modelled from satellites, ground monitors and chemical transport models.",
+    "Everyone breathes outdoor air, so this is a level of exposure for the whole population."
+   ],
+   "decimals": 1,
+   "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+   ],
+   "n_countries": 225
+  },
+  {
+   "id": "polluting_fuels",
+   "bins": [
+    5,
+    25,
+    50,
+    75,
+    95
+   ],
+   "group": "home",
+   "family": "air",
+   "title": "Cooking with polluting fuels",
+   "question": "How many people cook with coal, wood, dung, crop waste or kerosene?",
+   "agents": [
+    "indoor-coal-smoke",
+    "indoor-wood-smoke"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of the population relying mainly on polluting fuels and technologies for cooking",
+   "unit": "%",
+   "variants": [
+    "total",
+    "urban",
+    "rural"
+   ],
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: proportion of population with primary reliance on polluting fuels and technologies for cooking (indicator PHE_HHAIR_PROP_POP_POLLUTING_FUELS).",
+    "url": "https://www.who.int/data/gho/data/themes/air-pollution/household-air-pollution",
+    "api": "https://ghoapi.azureedge.net/api/PHE_HHAIR_PROP_POP_POLLUTING_FUELS",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Coal smoke indoors is a known cause of lung cancer (IARC Group 1); wood smoke indoors is a probable cause (Group 2A). This layer combines all polluting fuels; WHO does not publish the coal share openly by country."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1991,
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+   ],
+   "n_countries": 194
+  },
+  {
+   "id": "radon",
+   "bins": [
+    20,
+    40,
+    60,
+    100,
+    150
+   ],
+   "group": "home",
+   "family": "radon",
+   "title": "Radon indoors",
+   "question": "How much radon gas is there in homes?",
+   "agents": [
+    "radon-gas"
+   ],
+   "kind": "level",
+   "nature": "study-based",
+   "decimals": 0,
+   "metric": "Typical indoor radon concentration in homes: geometric mean of national surveys",
+   "unit": "Bq/m³",
+   "single_year": true,
+   "reference": {
+    "value": 100,
+    "label": "WHO reference level: 100 Bq/m³, 300 at most"
+   },
+   "source": {
+    "citation": "WHO national radon survey (Global Health Observatory indicator RADON_Q302, 2019 and 2021 rounds); Gaskin J, et al. Global estimate of lung cancer mortality attributable to residential radon. Environ Health Perspect 2018;126:057009, Table 1.",
+    "url": "https://doi.org/10.1289/EHP2503",
+    "licence": "WHO data policy; EHP open access",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Surveys differ in design and year; a national figure hides large local differences (geology, building type).",
+    "Countries without a representative survey are left blank, and so are countries whose reported figures contradict each other: Peru, Poland, Paraguay, Turkmenistan."
+   ],
+   "excluded": {
+    "POL": "WHO survey answer inconsistent (arithmetic mean 40, geometric mean 100); Gaskin geometric mean 133 above the WHO survey arithmetic mean 40",
+    "TKM": "WHO survey answer inconsistent (arithmetic mean 200, geometric mean 200)",
+    "PRY": "Gaskin geometric mean 21 above the WHO survey arithmetic mean 5.5",
+    "PER": "Gaskin geometric mean 24 above the WHO survey arithmetic mean 22"
+   },
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2018,
+    2019,
+    2021
+   ],
+   "n_countries": 67
+  },
+  {
+   "id": "hbv",
+   "bins": [
+    1,
+    2,
+    5,
+    8
+   ],
+   "group": "infection",
+   "family": "hepatitis",
+   "title": "Chronic hepatitis B",
+   "question": "How many people live with chronic hepatitis B?",
+   "agents": [
+    "hepatitis-b-virus"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of the population living with chronic hepatitis B infection (all ages)",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: prevalence of chronic hepatitis B, per 100 population (indicator HEPATITIS_HBV_PREVALENCE_PER100).",
+    "url": "https://www.who.int/publications/i/item/9789240091672",
+    "api": "https://ghoapi.azureedge.net/api/HEPATITIS_HBV_PREVALENCE_PER100",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "A mix of WHO modelled estimates and country-reported figures, marked for each value.",
+    "The reference year differs between countries."
+   ],
+   "variants": [
+    "all"
+   ],
+   "decimals": 1,
+   "years": [
+    2015,
+    2019,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_countries": 108
+  },
+  {
+   "id": "hbv_children",
+   "bins": [
+    0.1,
+    0.5,
+    1,
+    2,
+    5
+   ],
+   "group": "infection",
+   "family": "hepatitis",
+   "title": "Hepatitis B in children under five",
+   "question": "How many young children are infected with hepatitis B?",
+   "agents": [
+    "hepatitis-b-virus"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "decimals": 2,
+   "metric": "Share of children under five years carrying hepatitis B surface antigen (HBsAg)",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: hepatitis B surface antigen (HBsAg) prevalence among children under 5 years (indicator SDGHEPHBSAGPRV).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/SDGHEPHBSAGPRV",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "This layer shows how well vaccination at birth and in infancy protects children; adult levels reflect infections from before vaccination."
+   ],
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_countries": 195
+  },
+  {
+   "id": "hcv",
+   "bins": [
+    0.5,
+    1,
+    2,
+    3,
+    5
+   ],
+   "group": "infection",
+   "family": "hepatitis",
+   "title": "Chronic hepatitis C",
+   "question": "How many people live with chronic hepatitis C?",
+   "agents": [
+    "hepatitis-c-virus"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of the population living with chronic hepatitis C infection (all ages)",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: prevalence of chronic hepatitis C, per 100 population (indicator HEPATITIS_HCV_PREVALENCE_PER100).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/HEPATITIS_HCV_PREVALENCE_PER100",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "A mix of WHO modelled estimates and country-reported figures, marked for each value."
+   ],
+   "variants": [
+    "all"
+   ],
+   "decimals": 1,
+   "years": [
+    2015,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_countries": 106
+  },
+  {
+   "id": "hiv",
+   "bins": [
+    0.5,
+    1,
+    5,
+    10,
+    20
+   ],
+   "group": "infection",
+   "family": "hiv",
+   "title": "HIV",
+   "question": "How many adults aged 15 to 49 live with HIV?",
+   "agents": [
+    "hiv-1"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of adults aged 15 to 49 living with HIV",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: prevalence of HIV among adults aged 15 to 49 (UNAIDS estimates) (indicator MDG_0000000029).",
+    "url": "https://aidsinfo.unaids.org/",
+    "api": "https://ghoapi.azureedge.net/api/MDG_0000000029",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "UNAIDS/WHO modelled estimates."
+   ],
+   "variants": [
+    "all"
+   ],
+   "decimals": 1,
+   "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_countries": 145
+  },
+  {
+   "id": "hpv_vaccine",
+   "bins": [
+    20,
+    40,
+    60,
+    80,
+    90
+   ],
+   "group": "infection",
+   "family": "hpv",
+   "title": "HPV vaccination of girls",
+   "question": "How many girls are vaccinated against HPV?",
+   "agents": [
+    "high-risk-hpv"
+   ],
+   "kind": "coverage",
+   "nature": "modelled",
+   "decimals": 0,
+   "prevention": true,
+   "metric": "Share of girls in the national target age group (9 to 14 years) who received the HPV vaccine",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: HPV immunization coverage among the primary target cohort (girls 9 to 14 years) (indicator SDGHPVRECEIVED).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/SDGHPVRECEIVED",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Coverage among girls only; several countries also vaccinate boys.",
+    "A protective measure: higher is better."
+   ],
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_countries": 160
+  },
+  {
+   "id": "hepb_vaccine",
+   "bins": [
+    50,
+    70,
+    80,
+    90,
+    95
+   ],
+   "group": "infection",
+   "family": "hepatitis",
+   "title": "Hepatitis B vaccination of infants",
+   "question": "How many infants receive three doses of hepatitis B vaccine?",
+   "agents": [
+    "hepatitis-b-virus"
+   ],
+   "kind": "coverage",
+   "nature": "modelled",
+   "decimals": 0,
+   "prevention": true,
+   "metric": "Share of one-year-olds who received three doses of hepatitis B vaccine (HepB3)",
+   "unit": "%",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: hepatitis B (HepB3) immunization coverage among 1-year-olds (WUENIC) (indicator WHS4_117).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/WHS4_117",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "WHO/UNICEF estimates of national immunization coverage.",
+    "A protective measure: higher is better."
+   ],
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_countries": 195
+  },
+  {
+   "id": "uv_work",
+   "bins": [
+    15,
+    20,
+    25,
+    30,
+    35
+   ],
+   "group": "work",
+   "family": "uv",
+   "title": "Working in the sun",
+   "question": "How many people are exposed to the sun's ultraviolet radiation at work?",
+   "agents": [
+    "sunlight"
+   ],
+   "kind": "prevalence",
+   "nature": "modelled",
+   "metric": "Share of the population aged 15 and over who work outdoors and are exposed to solar UV radiation at work",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "source": {
+    "citation": "Pega F, Momen NC, Streicher KN, Leon-Roux M, Neupane S, Schubauer-Berigan MK, Schuz J, et al. Global, regional and national burdens of non-melanoma skin cancer attributable to occupational exposure to solar ultraviolet radiation for 183 countries, 2000-2019: a systematic analysis from the WHO/ILO Joint Estimates of the Work-related Burden of Disease and Injury. Environment International 2023;181:108226.",
+    "url": "https://doi.org/10.1016/j.envint.2023.108226",
+    "licence": "Europe PMC record lists licence 'cc by'; Crossref lists CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/) for the version of record",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "WHO/ILO modelled estimates based on 763 labour force surveys and the occupations in which people work outdoors.",
+    "Exposure means working outdoors; it says nothing about hours in the sun or protection."
+   ],
+   "decimals": 1,
+   "years": [
+    2000,
+    2010,
+    2019
+   ],
+   "n_countries": 195
+  },
+  {
+   "id": "night_work",
+   "bins": [
+    10,
+    15,
+    20,
+    25,
+    30
+   ],
+   "group": "work",
+   "family": "shift",
+   "title": "Night work (Europe)",
+   "question": "How many workers usually or sometimes work at night?",
+   "agents": [
+    "night-shift-work"
+   ],
+   "kind": "prevalence",
+   "nature": "survey",
+   "metric": "Share of employed people aged 15 to 64 who usually or sometimes work at night (EU Labour Force Survey)",
+   "unit": "%",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "source": {
+    "citation": "Eurostat. Employed persons working at nights by professional status (lfsa_ewpnig), EU Labour Force Survey.",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsa_ewpnig/default/table",
+    "licence": "CC BY 4.0 (Eurostat reuse policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Europe only: EU countries, Iceland, Norway, Switzerland and EU candidate countries.",
+    "Night work in general: IARC classifies night shift work that disrupts the body clock as a probable cause of cancer (Group 2A)."
+   ],
+   "decimals": 1,
+   "years": [
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2023,
+    2025
+   ],
+   "n_countries": 36
+  },
+  {
+   "id": "pill",
+   "bins": [
+    2,
+    5,
+    10,
+    20,
+    30
+   ],
+   "group": "medical",
+   "family": "hormones",
+   "title": "The contraceptive pill",
+   "question": "How many married or cohabiting women use the contraceptive pill?",
+   "agents": [
+    "the-combined-pill"
+   ],
+   "kind": "prevalence",
+   "nature": "survey",
+   "metric": "Share of married or in-union women of reproductive age using the pill, by survey",
+   "unit": "%",
+   "source": {
+    "citation": "United Nations, Department of Economic and Social Affairs, Population Division. World Contraceptive Use 2024 (POP/DB/CP/Rev2024).",
+    "url": "https://www.un.org/development/desa/pd/data/world-contraceptive-use",
+    "licence": "CC BY 3.0 IGO",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Surveys cover married or in-union women; the pill counts combined and progestogen-only pills together.",
+    "The combined pill raises the risk of some cancers and lowers the risk of others (endometrial and ovarian cancer); IARC classifies combined oral contraceptives in Group 1."
+   ],
+   "variants": [
+    "all"
+   ],
+   "decimals": 1,
+   "years": [
+    1963,
+    1965,
+    1966,
+    1967,
+    1968,
+    1969,
+    1970,
+    1971,
+    1972,
+    1973,
+    1974,
+    1975,
+    1976,
+    1977,
+    1978,
+    1979,
+    1980,
+    1981,
+    1982,
+    1983,
+    1984,
+    1985,
+    1986,
+    1987,
+    1988,
+    1989,
+    1990,
+    1991,
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+   ],
+   "n_countries": 182
+  },
+  {
+   "id": "asbestos_use",
+   "bins": {
+    "tonnes": [
+     100,
+     1000,
+     10000,
+     50000,
+     100000
+    ],
+    "kg_per_person": [
+     0.01,
+     0.05,
+     0.1,
+     0.2,
+     0.4
+    ]
+   },
+   "group": "regulation",
+   "family": "asbestos",
+   "title": "Asbestos use",
+   "question": "Which countries still use asbestos, and how much?",
+   "agents": [
+    "asbestos"
+   ],
+   "kind": "consumption",
+   "nature": "survey",
+   "decimals": 0,
+   "metric": "Apparent consumption of asbestos (production plus imports minus exports), tonnes per year; kilograms per person from 2015",
+   "unit": "tonnes",
+   "variants": [
+    "tonnes",
+    "kg_per_person"
+   ],
+   "gap_years": [
+    2004,
+    2014
+   ],
+   "source": {
+    "citation": "U.S. Geological Survey. Minerals Yearbook, asbestos chapters 2019 and 2023 (Table 7); Virta RL. Worldwide asbestos supply and consumption trends from 1900 through 2003. USGS Circular 1298 (2006). Population: World Bank (SP.POP.TOTL, CC BY 4.0).",
+    "url": "https://www.usgs.gov/centers/national-minerals-information-center/asbestos-statistics-and-information",
+    "licence": "US Government work, public domain",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "USGS calls these estimates better suited to trends than to exact amounts.",
+    "Years 2004 to 2014 are missing from the USGS archive available to us.",
+    "Countries that only export, or use too little to be listed, are blank."
+   ],
+   "years": [
+    1920,
+    1930,
+    1940,
+    1950,
+    1960,
+    1970,
+    1975,
+    1980,
+    1985,
+    1990,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+   ],
+   "n_countries": 144
+  },
+  {
+   "id": "smokefree",
+   "bins": [
+    1,
+    3,
+    5,
+    7,
+    8
+   ],
+   "group": "regulation",
+   "family": "tobacco",
+   "title": "Smoke-free laws",
+   "question": "In how many kinds of public place is smoking banned by law?",
+   "agents": [
+    "secondhand-smoke",
+    "tobacco-smoking"
+   ],
+   "kind": "policy_count",
+   "nature": "policy",
+   "decimals": 0,
+   "scale_max": 8,
+   "prevention": true,
+   "metric": "Number of the eight kinds of public place where national law bans smoking completely (health care, education, universities, government buildings, indoor offices, restaurants, pubs and bars, public transport)",
+   "unit": "of 8 places",
+   "source": {
+    "citation": "World Health Organization. Global Health Observatory: smoke-free legislation by type of place (WHO report on the global tobacco epidemic) (indicator TOBACCO_MPOWER_P1_SMOKEFREEPLACES).",
+    "url": "https://www.who.int/data/gho/data/indicators",
+    "api": "https://ghoapi.azureedge.net/api/TOBACCO_MPOWER_P1_SMOKEFREEPLACES",
+    "licence": "WHO Global Health Observatory data, CC BY-NC-SA 3.0 IGO (WHO data policy)",
+    "retrieved": "2026-11-20"
+   },
+   "caveats": [
+    "Counts national laws; subnational laws are noted by WHO but not counted here.",
+    "A protective measure: higher means fewer people breathe others' smoke."
+   ],
+   "variants": [
+    "all"
+   ],
+   "years": [
+    2007,
+    2008,
+    2010,
+    2012,
+    2014,
+    2016,
+    2018,
+    2020,
+    2022,
+    2024
+   ],
+   "n_countries": 194
+  },
+  {
+   "id": "gbd_shs",
+   "group": "habits",
+   "family": "tobacco",
+   "title": "Secondhand smoke",
+   "agents": [
+    "secondhand-smoke"
+   ],
+   "question": "How many non-smokers breathe other people's tobacco smoke?",
+   "kind": "prevalence",
+   "unit": "%",
+   "metric": "Share of non-smokers exposed to tobacco smoke at home, at work or in other places (GBD estimate, age-standardized)",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "bins": [
+    10,
+    20,
+    30,
+    40,
+    50
+   ],
+   "caveats": [
+    "GBD modelled estimate from surveys of exposure; for a yes-or-no exposure the summary exposure value equals the share of people exposed.",
+    "Children are counted too; secondhand smoke in pregnancy and childhood is part of the burden."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  },
+  {
+   "id": "gbd_chewing",
+   "group": "habits",
+   "family": "tobacco",
+   "title": "Chewing tobacco (GBD)",
+   "agents": [
+    "smokeless-tobacco"
+   ],
+   "question": "How many people chew tobacco?",
+   "kind": "prevalence",
+   "unit": "%",
+   "metric": "Share of people who currently use chewing tobacco (GBD estimate, age-standardized)",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "bins": [
+    1,
+    3,
+    5,
+    10,
+    20
+   ],
+   "caveats": [
+    "GBD modelled estimate; the WHO survey layer \"Smokeless tobacco\" gives the national survey figures."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  },
+  {
+   "id": "gbd_processed_meat",
+   "group": "habits",
+   "family": "diet",
+   "title": "Processed meat",
+   "agents": [
+    "processed-meat"
+   ],
+   "question": "How common is a diet high in processed meat?",
+   "kind": "index",
+   "unit": "",
+   "metric": "GBD summary exposure value for a diet high in processed meat, 0 to 100, age-standardized",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "caveats": [
+    "The summary exposure value is GBD's measure: the share of people exposed, weighted by how much each level of exposure raises risk, from 0 (no one exposed at a level that adds risk) to 100 (everyone at the highest-risk level).",
+    "GBD models intake from dietary surveys and food supply data; a higher value means more people eat amounts that GBD links to a higher risk."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  },
+  {
+   "id": "gbd_red_meat",
+   "group": "habits",
+   "family": "diet",
+   "title": "Red meat",
+   "agents": [
+    "red-meat"
+   ],
+   "question": "How common is a diet high in red meat?",
+   "kind": "index",
+   "unit": "",
+   "metric": "GBD summary exposure value for a diet high in red meat, 0 to 100, age-standardized",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "caveats": [
+    "The summary exposure value is GBD's measure: the share of people exposed, weighted by how much each level of exposure raises risk, from 0 (no one exposed at a level that adds risk) to 100 (everyone at the highest-risk level).",
+    "GBD models intake from dietary surveys and food supply data; a higher value means more people eat amounts that GBD links to a higher risk."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  },
+  {
+   "id": "gbd_radon",
+   "group": "home",
+   "family": "radon",
+   "title": "Radon (GBD model)",
+   "agents": [
+    "radon-gas"
+   ],
+   "question": "How much radon exposure is there in homes (GBD model)?",
+   "kind": "index",
+   "unit": "",
+   "metric": "GBD summary exposure value for residential radon, 0 to 100, age-standardized",
+   "variants": [
+    "both",
+    "men",
+    "women"
+   ],
+   "caveats": [
+    "The summary exposure value is GBD's measure: the share of people exposed, weighted by how much each level of exposure raises risk, from 0 (no one exposed at a level that adds risk) to 100 (everyone at the highest-risk level).",
+    "GBD fills countries without a survey with a model; the layer \"Radon indoors\" shows the measured national surveys."
+   ],
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  },
+  {
+   "id": "gbd_occ",
+   "group": "work",
+   "family": "work",
+   "title": "Carcinogens at work (GBD)",
+   "question": "How widespread is exposure to carcinogens at work?",
+   "kind": "index",
+   "unit": "",
+   "agents": [
+    "asbestos",
+    "silica-dust",
+    "diesel-engine-exhaust",
+    "coal-tar-pitch",
+    "coke-production",
+    "soot",
+    "formaldehyde",
+    "benzene",
+    "arsenic",
+    "cadmium",
+    "chromium-6",
+    "nickel-compounds",
+    "beryllium",
+    "strong-acid-mists",
+    "trichloroethylene"
+   ],
+   "variant_agents": {
+    "asbestos": [
+     "asbestos"
+    ],
+    "silica": [
+     "silica-dust"
+    ],
+    "diesel": [
+     "diesel-engine-exhaust"
+    ],
+    "pah": [
+     "coal-tar-pitch",
+     "coke-production",
+     "soot"
+    ],
+    "formaldehyde": [
+     "formaldehyde"
+    ],
+    "benzene": [
+     "benzene"
+    ],
+    "arsenic": [
+     "arsenic"
+    ],
+    "cadmium": [
+     "cadmium"
+    ],
+    "chromium": [
+     "chromium-6"
+    ],
+    "nickel": [
+     "nickel-compounds"
+    ],
+    "beryllium": [
+     "beryllium"
+    ],
+    "sulfuric": [
+     "strong-acid-mists"
+    ],
+    "tce": [
+     "trichloroethylene"
+    ]
+   },
+   "variant_labels": {
+    "asbestos": "Asbestos",
+    "silica": "Silica dust",
+    "diesel": "Diesel engine exhaust",
+    "pah": "Polycyclic aromatic hydrocarbons",
+    "formaldehyde": "Formaldehyde",
+    "benzene": "Benzene",
+    "arsenic": "Arsenic",
+    "cadmium": "Cadmium",
+    "chromium": "Chromium (VI)",
+    "nickel": "Nickel",
+    "beryllium": "Beryllium",
+    "sulfuric": "Sulfuric acid mists",
+    "tce": "Trichloroethylene"
+   },
+   "variants": [
+    "asbestos",
+    "silica",
+    "diesel",
+    "pah",
+    "formaldehyde",
+    "benzene",
+    "arsenic",
+    "cadmium",
+    "chromium",
+    "nickel",
+    "beryllium",
+    "sulfuric",
+    "tce"
+   ],
+   "metric": "GBD summary exposure value for occupational exposure, 0 to 100, age-standardized, both sexes",
+   "caveats": [
+    "The summary exposure value is GBD's measure: the share of people exposed, weighted by how much each level of exposure raises risk, from 0 (no one exposed at a level that adds risk) to 100 (everyone at the highest-risk level).",
+    "GBD counts people exposed at work at any time in the past 10 to 50 years, the period over which such exposure can still lead to cancer. It combines exposure levels by industry from CAREX, an international database of occupational exposure, with each country's employment by industry; for asbestos it works back from mesothelioma rates.",
+    "So these values reflect past as well as present exposure: a country that banned asbestos decades ago can still score high.",
+    "For asbestos, GBD works back from recorded mesothelioma deaths, so its estimate depends on how completely mesothelioma is recorded; the layer \"Asbestos use\" shows how much each country uses today."
+   ],
+   "method": {
+    "citation": "GBD 2016 Occupational Carcinogens Collaborators. Global and regional burden of cancer in 2016 arising from occupational exposure to selected carcinogens. Occup Environ Med 2020;77:133–141.",
+    "url": "https://doi.org/10.1136/oemed-2019-106008"
+   },
+   "decimals": 1,
+   "years": [
+    1990,
+    1995,
+    2000,
+    2005,
+    2010,
+    2015,
+    2020,
+    2023
+   ],
+   "n_countries": 202,
+   "source": {
+    "citation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "url": "https://vizhub.healthdata.org/gbd-results/",
+    "licence": "IHME Free-of-Charge Non-commercial User Agreement",
+    "retrieved": "2026-11-20"
+   },
+   "nature": "modelled"
+  }
+ ],
+ "countries": {
+  "ABW": {
+   "name": "Aruba",
+   "who": "AMRO"
+  },
+  "AFG": {
+   "name": "Afghanistan",
+   "who": "EMRO"
+  },
+  "AGO": {
+   "name": "Angola",
+   "who": "AFRO"
+  },
+  "AIA": {
+   "name": "Anguilla",
+   "who": "AMRO"
+  },
+  "ALB": {
+   "name": "Albania",
+   "who": "EURO"
+  },
+  "AND": {
+   "name": "Andorra",
+   "who": "EURO"
+  },
+  "ARE": {
+   "name": "United Arab Emirates",
+   "who": "EMRO"
+  },
+  "ARG": {
+   "name": "Argentina",
+   "who": "AMRO"
+  },
+  "ARM": {
+   "name": "Armenia",
+   "who": "EURO"
+  },
+  "ASM": {
+   "name": "American Samoa",
+   "who": "WPRO"
+  },
+  "ATG": {
+   "name": "Antigua and Barbuda",
+   "who": "AMRO"
+  },
+  "AUS": {
+   "name": "Australia",
+   "who": "WPRO"
+  },
+  "AUT": {
+   "name": "Austria",
+   "who": "EURO"
+  },
+  "AZE": {
+   "name": "Azerbaijan",
+   "who": "EURO"
+  },
+  "BDI": {
+   "name": "Burundi",
+   "who": "AFRO"
+  },
+  "BEL": {
+   "name": "Belgium",
+   "who": "EURO"
+  },
+  "BEN": {
+   "name": "Benin",
+   "who": "AFRO"
+  },
+  "BES": {
+   "name": "Bonaire, Sint Eustatius and Saba",
+   "who": "AMRO"
+  },
+  "BFA": {
+   "name": "Burkina Faso",
+   "who": "AFRO"
+  },
+  "BGD": {
+   "name": "Bangladesh",
+   "who": "SEARO"
+  },
+  "BGR": {
+   "name": "Bulgaria",
+   "who": "EURO"
+  },
+  "BHR": {
+   "name": "Bahrain",
+   "who": "EMRO"
+  },
+  "BHS": {
+   "name": "Bahamas",
+   "who": "AMRO"
+  },
+  "BIH": {
+   "name": "Bosnia and Herzegovina",
+   "who": "EURO"
+  },
+  "BLM": {
+   "name": "Saint Barthélemy",
+   "who": "AMRO"
+  },
+  "BLR": {
+   "name": "Belarus",
+   "who": "EURO"
+  },
+  "BLZ": {
+   "name": "Belize",
+   "who": "AMRO"
+  },
+  "BOL": {
+   "name": "Bolivia",
+   "who": "AMRO"
+  },
+  "BRA": {
+   "name": "Brazil",
+   "who": "AMRO"
+  },
+  "BRB": {
+   "name": "Barbados",
+   "who": "AMRO"
+  },
+  "BRN": {
+   "name": "Brunei Darussalam",
+   "who": "WPRO"
+  },
+  "BTN": {
+   "name": "Bhutan",
+   "who": "SEARO"
+  },
+  "BWA": {
+   "name": "Botswana",
+   "who": "AFRO"
+  },
+  "CAF": {
+   "name": "Central African Republic",
+   "who": "AFRO"
+  },
+  "CAN": {
+   "name": "Canada",
+   "who": "AMRO"
+  },
+  "CHE": {
+   "name": "Switzerland",
+   "who": "EURO"
+  },
+  "CHL": {
+   "name": "Chile",
+   "who": "AMRO"
+  },
+  "CHN": {
+   "name": "China",
+   "who": "WPRO"
+  },
+  "CIV": {
+   "name": "Côte d'Ivoire",
+   "who": "AFRO"
+  },
+  "CMR": {
+   "name": "Cameroon",
+   "who": "AFRO"
+  },
+  "COD": {
+   "name": "Democratic Republic of the Congo",
+   "who": "AFRO"
+  },
+  "COG": {
+   "name": "Congo",
+   "who": "AFRO"
+  },
+  "COK": {
+   "name": "Cook Islands",
+   "who": "WPRO"
+  },
+  "COL": {
+   "name": "Colombia",
+   "who": "AMRO"
+  },
+  "COM": {
+   "name": "Comoros",
+   "who": "AFRO"
+  },
+  "CPV": {
+   "name": "Cabo Verde",
+   "who": "AFRO"
+  },
+  "CRI": {
+   "name": "Costa Rica",
+   "who": "AMRO"
+  },
+  "CUB": {
+   "name": "Cuba",
+   "who": "AMRO"
+  },
+  "CUW": {
+   "name": "Curaçao",
+   "who": "AMRO"
+  },
+  "CXR": {
+   "name": "Christmas Island",
+   "who": "WPRO"
+  },
+  "CYM": {
+   "name": "Cayman Islands",
+   "who": "AMRO"
+  },
+  "CYP": {
+   "name": "Cyprus",
+   "who": "EURO"
+  },
+  "CZE": {
+   "name": "Czechia",
+   "who": "EURO"
+  },
+  "DEU": {
+   "name": "Germany",
+   "who": "EURO"
+  },
+  "DJI": {
+   "name": "Djibouti",
+   "who": "EMRO"
+  },
+  "DMA": {
+   "name": "Dominica",
+   "who": "AMRO"
+  },
+  "DNK": {
+   "name": "Denmark",
+   "who": "EURO"
+  },
+  "DOM": {
+   "name": "Dominican Republic",
+   "who": "AMRO"
+  },
+  "DZA": {
+   "name": "Algeria",
+   "who": "AFRO"
+  },
+  "ECU": {
+   "name": "Ecuador",
+   "who": "AMRO"
+  },
+  "EGY": {
+   "name": "Egypt",
+   "who": "EMRO"
+  },
+  "ERI": {
+   "name": "Eritrea",
+   "who": "AFRO"
+  },
+  "ESH": {
+   "name": "Western Sahara",
+   "who": "AFRO"
+  },
+  "ESP": {
+   "name": "Spain",
+   "who": "EURO"
+  },
+  "EST": {
+   "name": "Estonia",
+   "who": "EURO"
+  },
+  "ETH": {
+   "name": "Ethiopia",
+   "who": "AFRO"
+  },
+  "FIN": {
+   "name": "Finland",
+   "who": "EURO"
+  },
+  "FJI": {
+   "name": "Fiji",
+   "who": "WPRO"
+  },
+  "FLK": {
+   "name": "Falkland Islands (Malvinas)",
+   "who": "AMRO"
+  },
+  "FRA": {
+   "name": "France",
+   "who": "EURO"
+  },
+  "FRO": {
+   "name": "Faroe Islands",
+   "who": "EURO"
+  },
+  "FSM": {
+   "name": "Micronesia",
+   "who": "WPRO"
+  },
+  "GAB": {
+   "name": "Gabon",
+   "who": "AFRO"
+  },
+  "GBR": {
+   "name": "United Kingdom",
+   "who": "EURO"
+  },
+  "GEO": {
+   "name": "Georgia",
+   "who": "EURO"
+  },
+  "GGY": {
+   "name": "Guernsey",
+   "who": "EURO"
+  },
+  "GHA": {
+   "name": "Ghana",
+   "who": "AFRO"
+  },
+  "GIN": {
+   "name": "Guinea",
+   "who": "AFRO"
+  },
+  "GLP": {
+   "name": "Guadeloupe",
+   "who": "AMRO"
+  },
+  "GMB": {
+   "name": "Gambia",
+   "who": "AFRO"
+  },
+  "GNB": {
+   "name": "Guinea-Bissau",
+   "who": "AFRO"
+  },
+  "GNQ": {
+   "name": "Equatorial Guinea",
+   "who": "AFRO"
+  },
+  "GRC": {
+   "name": "Greece",
+   "who": "EURO"
+  },
+  "GRD": {
+   "name": "Grenada",
+   "who": "AMRO"
+  },
+  "GRL": {
+   "name": "Greenland",
+   "who": "EURO"
+  },
+  "GTM": {
+   "name": "Guatemala",
+   "who": "AMRO"
+  },
+  "GUF": {
+   "name": "French Guiana",
+   "who": "AMRO"
+  },
+  "GUM": {
+   "name": "Guam",
+   "who": "WPRO"
+  },
+  "GUY": {
+   "name": "Guyana",
+   "who": "AMRO"
+  },
+  "HND": {
+   "name": "Honduras",
+   "who": "AMRO"
+  },
+  "HRV": {
+   "name": "Croatia",
+   "who": "EURO"
+  },
+  "HTI": {
+   "name": "Haiti",
+   "who": "AMRO"
+  },
+  "HUN": {
+   "name": "Hungary",
+   "who": "EURO"
+  },
+  "IDN": {
+   "name": "Indonesia",
+   "who": "WPRO"
+  },
+  "IMN": {
+   "name": "Isle of Man",
+   "who": "EURO"
+  },
+  "IND": {
+   "name": "India",
+   "who": "SEARO"
+  },
+  "IRL": {
+   "name": "Ireland",
+   "who": "EURO"
+  },
+  "IRN": {
+   "name": "Iran",
+   "who": "EMRO"
+  },
+  "IRQ": {
+   "name": "Iraq",
+   "who": "EMRO"
+  },
+  "ISL": {
+   "name": "Iceland",
+   "who": "EURO"
+  },
+  "ISR": {
+   "name": "Israel",
+   "who": "EURO"
+  },
+  "ITA": {
+   "name": "Italy",
+   "who": "EURO"
+  },
+  "JAM": {
+   "name": "Jamaica",
+   "who": "AMRO"
+  },
+  "JEY": {
+   "name": "Jersey",
+   "who": "EURO"
+  },
+  "JOR": {
+   "name": "Jordan",
+   "who": "EMRO"
+  },
+  "JPN": {
+   "name": "Japan",
+   "who": "WPRO"
+  },
+  "KAZ": {
+   "name": "Kazakhstan",
+   "who": "EURO"
+  },
+  "KEN": {
+   "name": "Kenya",
+   "who": "AFRO"
+  },
+  "KGZ": {
+   "name": "Kyrgyzstan",
+   "who": "EURO"
+  },
+  "KHM": {
+   "name": "Cambodia",
+   "who": "WPRO"
+  },
+  "KIR": {
+   "name": "Kiribati",
+   "who": "WPRO"
+  },
+  "KNA": {
+   "name": "Saint Kitts and Nevis",
+   "who": "AMRO"
+  },
+  "KOR": {
+   "name": "Republic of Korea",
+   "who": "WPRO"
+  },
+  "KWT": {
+   "name": "Kuwait",
+   "who": "EMRO"
+  },
+  "LAO": {
+   "name": "Lao People's Democratic Republic",
+   "who": "WPRO"
+  },
+  "LBN": {
+   "name": "Lebanon",
+   "who": "EMRO"
+  },
+  "LBR": {
+   "name": "Liberia",
+   "who": "AFRO"
+  },
+  "LBY": {
+   "name": "Libya",
+   "who": "EMRO"
+  },
+  "LCA": {
+   "name": "Saint Lucia",
+   "who": "AMRO"
+  },
+  "LIE": {
+   "name": "Liechtenstein",
+   "who": "EURO"
+  },
+  "LKA": {
+   "name": "Sri Lanka",
+   "who": "SEARO"
+  },
+  "LSO": {
+   "name": "Lesotho",
+   "who": "AFRO"
+  },
+  "LTU": {
+   "name": "Lithuania",
+   "who": "EURO"
+  },
+  "LUX": {
+   "name": "Luxembourg",
+   "who": "EURO"
+  },
+  "LVA": {
+   "name": "Latvia",
+   "who": "EURO"
+  },
+  "MAF": {
+   "name": "Saint Martin",
+   "who": "AMRO"
+  },
+  "MAR": {
+   "name": "Morocco",
+   "who": "EMRO"
+  },
+  "MCO": {
+   "name": "Monaco",
+   "who": null
+  },
+  "MDA": {
+   "name": "Republic of Moldova",
+   "who": "EURO"
+  },
+  "MDG": {
+   "name": "Madagascar",
+   "who": "AFRO"
+  },
+  "MDV": {
+   "name": "Maldives",
+   "who": "SEARO"
+  },
+  "MEX": {
+   "name": "Mexico",
+   "who": "AMRO"
+  },
+  "MHL": {
+   "name": "Marshall Islands",
+   "who": null
+  },
+  "MKD": {
+   "name": "North Macedonia",
+   "who": "EURO"
+  },
+  "MLI": {
+   "name": "Mali",
+   "who": "AFRO"
+  },
+  "MLT": {
+   "name": "Malta",
+   "who": "EURO"
+  },
+  "MMR": {
+   "name": "Myanmar",
+   "who": "SEARO"
+  },
+  "MNE": {
+   "name": "Montenegro",
+   "who": "EURO"
+  },
+  "MNG": {
+   "name": "Mongolia",
+   "who": "WPRO"
+  },
+  "MNP": {
+   "name": "Northern Mariana Islands (commonwealth of The)",
+   "who": "WPRO"
+  },
+  "MOZ": {
+   "name": "Mozambique",
+   "who": "AFRO"
+  },
+  "MRT": {
+   "name": "Mauritania",
+   "who": "AFRO"
+  },
+  "MSR": {
+   "name": "Montserrat",
+   "who": "AMRO"
+  },
+  "MTQ": {
+   "name": "Martinique",
+   "who": "AMRO"
+  },
+  "MUS": {
+   "name": "Mauritius",
+   "who": "AFRO"
+  },
+  "MWI": {
+   "name": "Malawi",
+   "who": "AFRO"
+  },
+  "MYS": {
+   "name": "Malaysia",
+   "who": "WPRO"
+  },
+  "MYT": {
+   "name": "Mayotte",
+   "who": "AFRO"
+  },
+  "NAM": {
+   "name": "Namibia",
+   "who": "AFRO"
+  },
+  "NCL": {
+   "name": "New Caledonia",
+   "who": "WPRO"
+  },
+  "NER": {
+   "name": "Niger",
+   "who": "AFRO"
+  },
+  "NFK": {
+   "name": "Norfolk Island",
+   "who": "WPRO"
+  },
+  "NGA": {
+   "name": "Nigeria",
+   "who": "AFRO"
+  },
+  "NIC": {
+   "name": "Nicaragua",
+   "who": "AMRO"
+  },
+  "NIU": {
+   "name": "Niue",
+   "who": "WPRO"
+  },
+  "NLD": {
+   "name": "Netherlands",
+   "who": "EURO"
+  },
+  "NOR": {
+   "name": "Norway",
+   "who": "EURO"
+  },
+  "NPL": {
+   "name": "Nepal",
+   "who": "SEARO"
+  },
+  "NRU": {
+   "name": "Nauru",
+   "who": null
+  },
+  "NZL": {
+   "name": "New Zealand",
+   "who": "WPRO"
+  },
+  "OMN": {
+   "name": "Oman",
+   "who": "EMRO"
+  },
+  "PAK": {
+   "name": "Pakistan",
+   "who": "EMRO"
+  },
+  "PAN": {
+   "name": "Panama",
+   "who": "AMRO"
+  },
+  "PER": {
+   "name": "Peru",
+   "who": "AMRO"
+  },
+  "PHL": {
+   "name": "Philippines",
+   "who": "WPRO"
+  },
+  "PLW": {
+   "name": "Palau",
+   "who": "WPRO"
+  },
+  "PNG": {
+   "name": "Papua New Guinea",
+   "who": "WPRO"
+  },
+  "POL": {
+   "name": "Poland",
+   "who": "EURO"
+  },
+  "PRI": {
+   "name": "Puerto Rico",
+   "who": "AMRO"
+  },
+  "PRK": {
+   "name": "Democratic People's Republic of Korea",
+   "who": "SEARO"
+  },
+  "PRT": {
+   "name": "Portugal",
+   "who": "EURO"
+  },
+  "PRY": {
+   "name": "Paraguay",
+   "who": "AMRO"
+  },
+  "PSE": {
+   "name": "West Bank and Gaza Strip",
+   "who": "EMRO"
+  },
+  "PYF": {
+   "name": "French Polynesia",
+   "who": "WPRO"
+  },
+  "QAT": {
+   "name": "Qatar",
+   "who": "EMRO"
+  },
+  "REU": {
+   "name": "Réunion",
+   "who": "AFRO"
+  },
+  "ROU": {
+   "name": "Romania",
+   "who": "EURO"
+  },
+  "RUS": {
+   "name": "Russia",
+   "who": "EURO"
+  },
+  "RWA": {
+   "name": "Rwanda",
+   "who": "AFRO"
+  },
+  "SAU": {
+   "name": "Saudi Arabia",
+   "who": "EMRO"
+  },
+  "SDN": {
+   "name": "Sudan",
+   "who": "EMRO"
+  },
+  "SEN": {
+   "name": "Senegal",
+   "who": "AFRO"
+  },
+  "SGP": {
+   "name": "Singapore",
+   "who": "WPRO"
+  },
+  "SHN": {
+   "name": "St Helena, Ascension and Tristan Da Cunha",
+   "who": "AFRO"
+  },
+  "SJM": {
+   "name": "Svalbard and Jan Mayen Islands",
+   "who": "EURO"
+  },
+  "SLB": {
+   "name": "Solomon Islands",
+   "who": "WPRO"
+  },
+  "SLE": {
+   "name": "Sierra Leone",
+   "who": "AFRO"
+  },
+  "SLV": {
+   "name": "El Salvador",
+   "who": "AMRO"
+  },
+  "SMR": {
+   "name": "San Marino",
+   "who": "EURO"
+  },
+  "SOM": {
+   "name": "Somalia",
+   "who": "EMRO"
+  },
+  "SPM": {
+   "name": "Saint Pierre and Miquelon",
+   "who": "AMRO"
+  },
+  "SRB": {
+   "name": "Serbia",
+   "who": "EURO"
+  },
+  "SSD": {
+   "name": "South Sudan",
+   "who": "AFRO"
+  },
+  "STP": {
+   "name": "Sao Tome and Principe",
+   "who": "AFRO"
+  },
+  "SUR": {
+   "name": "Suriname",
+   "who": "AMRO"
+  },
+  "SVK": {
+   "name": "Slovakia",
+   "who": "EURO"
+  },
+  "SVN": {
+   "name": "Slovenia",
+   "who": "EURO"
+  },
+  "SWE": {
+   "name": "Sweden",
+   "who": "EURO"
+  },
+  "SWZ": {
+   "name": "Eswatini",
+   "who": "AFRO"
+  },
+  "SXM": {
+   "name": "Sint Maarten",
+   "who": "AMRO"
+  },
+  "SYC": {
+   "name": "Seychelles",
+   "who": "AFRO"
+  },
+  "SYR": {
+   "name": "Syrian Arab Republic",
+   "who": "EMRO"
+  },
+  "TCA": {
+   "name": "Turks and Caicos Islands",
+   "who": "AMRO"
+  },
+  "TCD": {
+   "name": "Chad",
+   "who": "AFRO"
+  },
+  "TGO": {
+   "name": "Togo",
+   "who": "AFRO"
+  },
+  "THA": {
+   "name": "Thailand",
+   "who": "SEARO"
+  },
+  "TJK": {
+   "name": "Tajikistan",
+   "who": "EURO"
+  },
+  "TKL": {
+   "name": "Tokelau",
+   "who": null
+  },
+  "TKM": {
+   "name": "Turkmenistan",
+   "who": "EURO"
+  },
+  "TLS": {
+   "name": "Timor-Leste",
+   "who": "SEARO"
+  },
+  "TON": {
+   "name": "Tonga",
+   "who": "WPRO"
+  },
+  "TTO": {
+   "name": "Trinidad and Tobago",
+   "who": "AMRO"
+  },
+  "TUN": {
+   "name": "Tunisia",
+   "who": "EMRO"
+  },
+  "TUR": {
+   "name": "Türkiye",
+   "who": "EURO"
+  },
+  "TUV": {
+   "name": "Tuvalu",
+   "who": null
+  },
+  "TZA": {
+   "name": "United Republic of Tanzania",
+   "who": "AFRO"
+  },
+  "UGA": {
+   "name": "Uganda",
+   "who": "AFRO"
+  },
+  "UKR": {
+   "name": "Ukraine",
+   "who": "EURO"
+  },
+  "URY": {
+   "name": "Uruguay",
+   "who": "AMRO"
+  },
+  "USA": {
+   "name": "United States",
+   "who": "AMRO"
+  },
+  "UZB": {
+   "name": "Uzbekistan",
+   "who": "EURO"
+  },
+  "VCT": {
+   "name": "Saint Vincent and the Grenadines",
+   "who": "AMRO"
+  },
+  "VEN": {
+   "name": "Venezuela",
+   "who": "AMRO"
+  },
+  "VGB": {
+   "name": "British Virgin Islands",
+   "who": "AMRO"
+  },
+  "VIR": {
+   "name": "United States Virgin Islands",
+   "who": "AMRO"
+  },
+  "VNM": {
+   "name": "Viet Nam",
+   "who": "WPRO"
+  },
+  "VUT": {
+   "name": "Vanuatu",
+   "who": "WPRO"
+  },
+  "WLF": {
+   "name": "Wallis and Futuna",
+   "who": "WPRO"
+  },
+  "WSM": {
+   "name": "Samoa",
+   "who": "WPRO"
+  },
+  "YEM": {
+   "name": "Yemen",
+   "who": "EMRO"
+  },
+  "ZAF": {
+   "name": "South Africa",
+   "who": "AFRO"
+  },
+  "ZMB": {
+   "name": "Zambia",
+   "who": "AFRO"
+  },
+  "ZWE": {
+   "name": "Zimbabwe",
+   "who": "AFRO"
+  }
+ },
+ "who_regions": {
+  "AFRO": "African Region",
+  "AMRO": "Region of the Americas",
+  "SEARO": "South-East Asia Region",
+  "EURO": "European Region",
+  "EMRO": "Eastern Mediterranean Region",
+  "WPRO": "Western Pacific Region"
+ }
+}
