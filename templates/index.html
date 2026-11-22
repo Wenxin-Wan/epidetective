@@ -115,7 +115,7 @@
   </div>
 </section>
 
-<!-- The two explorers as map sheets: the question each answers, two key
+<!-- The two explorers as map sheets (and the atlas as a wide third sheet): the question each answers, two key
      figures set as a legend, the source of its evidence in a ruled panel (who
      produces it, why it can be trusted, and the way to How we check), a few
      places to start, the two actions, and its network as an inset (both
@@ -183,6 +183,36 @@
       <div class="ts-acts">
         <a class="btn btn-solid" href="{{URL_TOOL2}}">{{inst_t2_btn_open}}</a>
         <a class="tlink" href="{{URL_CHRONIC}}">{{inst_t2_btn_about}}</a>
+      </div>
+    </article>
+    <!-- the Carcinogen Exposure Atlas (preview, English only): one wide sheet
+         under the two explorers, the same parts set in two columns; its inset is
+         assets/atlas-map.svg (scripts/make_atlas_svg.py) -->
+    <article class="tool-sheet ts-wide" aria-labelledby="t3-h">
+      <div class="ts-head">
+        <div class="ts-name">
+          <h3 id="t3-h">{{inst_t3_name}}</h3>
+          <p class="ts-q">{{tool3_q}}</p>
+        </div>
+        <div class="ts-inset ts-inset-atlas" style="{{THUMB_ATLAS_BG}}" aria-hidden="true"></div>
+      </div>
+      <ul class="ts-legend">
+        <li>{{FIG_T3_M1}}</li><li>{{FIG_T3_M2}}</li>
+      </ul>
+      <div class="ts-src">
+        <p class="label">{{home_src_from}}</p>
+        <p class="ts-src-name">{{tool3_src}}</p>
+        <p class="ts-src-why">{{tool3_src_note}}</p>
+        <p class="ts-src-go"><a href="{{URL_TOOL3}}#how">{{tool3_how}}</a> <span class="ts-ver">{{tool3_ver}}</span></p>
+      </div>
+      <p class="ts-start"><span class="label">{{tool_start}}</span>
+        <a href="{{TL3_ASBESTOS}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn3_asbestos}}</a>
+        <a href="{{TL3_RADON}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn3_radon}}</a>
+        <a href="{{TL3_SUN}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn3_sun}}</a>
+        <a href="{{TL3_AIR}}"><svg class="tri tri-c" viewBox="0 0 10 9" aria-hidden="true"><path d="M5 .9 9.2 8.1H.8z"/></svg>{{tn3_air}}</a></p>
+      <div class="ts-acts">
+        <a class="btn btn-solid" href="{{URL_TOOL3}}">{{inst_t3_btn_open}}</a>
+        <a class="tlink" href="{{URL_TOOL3}}#work">{{inst_t3_btn_work}}</a>
       </div>
     </article>
   </div>

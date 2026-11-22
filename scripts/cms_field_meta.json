@@ -127,6 +127,62 @@
     "label": "Tool 2 — stat 6 (related-outcome links)",
     "type": "string"
   },
+  "inst_t3_name": {
+    "label": "Tool 3 (Carcinogen Exposure Atlas) — name",
+    "type": "string"
+  },
+  "tool3_q": {
+    "label": "TOOLS — Atlas: the question it answers",
+    "type": "text"
+  },
+  "inst_t3_m1": {
+    "label": "Tool 3 — stat 1 (exposure maps; starts with the number)",
+    "type": "string"
+  },
+  "inst_t3_m2": {
+    "label": "Tool 3 — stat 2 (countries; starts with the number)",
+    "type": "string"
+  },
+  "tool3_src": {
+    "label": "TOOLS — Atlas: where its evidence comes from",
+    "type": "string"
+  },
+  "tool3_src_note": {
+    "label": "TOOLS — Atlas: why the sources can be trusted",
+    "type": "text"
+  },
+  "tool3_how": {
+    "label": "TOOLS — Atlas: link to how the atlas was made",
+    "type": "string"
+  },
+  "tool3_ver": {
+    "label": "TOOLS — Atlas: status, set small beside the link",
+    "type": "string"
+  },
+  "tn3_asbestos": {
+    "label": "Atlas quick link — Asbestos bans (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn3_radon": {
+    "label": "Atlas quick link — Radon indoors (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn3_sun": {
+    "label": "Atlas quick link — Working in the sun (no straight quotes or &)",
+    "type": "string"
+  },
+  "tn3_air": {
+    "label": "Atlas quick link — Air pollution (no straight quotes or &)",
+    "type": "string"
+  },
+  "inst_t3_btn_open": {
+    "label": "Tool 3 — primary button",
+    "type": "string"
+  },
+  "inst_t3_btn_work": {
+    "label": "Tool 3 — secondary link (the work section)",
+    "type": "string"
+  },
   "inst_t2_btn_open": {
     "label": "Tool 2 — primary button",
     "type": "string"

@@ -562,6 +562,48 @@ content:
       - name: "inst_t2_m6"
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
+      - name: "inst_t3_name"
+        label: "Tool 3 (Carcinogen Exposure Atlas) — name"
+        type: string
+      - name: "tool3_q"
+        label: "TOOLS — Atlas: the question it answers"
+        type: text
+      - name: "inst_t3_m1"
+        label: "Tool 3 — stat 1 (exposure maps; starts with the number)"
+        type: string
+      - name: "inst_t3_m2"
+        label: "Tool 3 — stat 2 (countries; starts with the number)"
+        type: string
+      - name: "tool3_src"
+        label: "TOOLS — Atlas: where its evidence comes from"
+        type: string
+      - name: "tool3_src_note"
+        label: "TOOLS — Atlas: why the sources can be trusted"
+        type: text
+      - name: "tool3_how"
+        label: "TOOLS — Atlas: link to how the atlas was made"
+        type: string
+      - name: "tool3_ver"
+        label: "TOOLS — Atlas: status, set small beside the link"
+        type: string
+      - name: "tn3_asbestos"
+        label: "Atlas quick link — Asbestos bans (no straight quotes or &)"
+        type: string
+      - name: "tn3_radon"
+        label: "Atlas quick link — Radon indoors (no straight quotes or &)"
+        type: string
+      - name: "tn3_sun"
+        label: "Atlas quick link — Working in the sun (no straight quotes or &)"
+        type: string
+      - name: "tn3_air"
+        label: "Atlas quick link — Air pollution (no straight quotes or &)"
+        type: string
+      - name: "inst_t3_btn_open"
+        label: "Tool 3 — primary button"
+        type: string
+      - name: "inst_t3_btn_work"
+        label: "Tool 3 — secondary link (the work section)"
+        type: string
       - name: "tool1_q"
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
@@ -2140,6 +2182,48 @@ content:
         type: string
       - name: "inst_t2_m6"
         label: "Tool 2 — stat 6 (related-outcome links)"
+        type: string
+      - name: "inst_t3_name"
+        label: "Tool 3 (Carcinogen Exposure Atlas) — name"
+        type: string
+      - name: "tool3_q"
+        label: "TOOLS — Atlas: the question it answers"
+        type: text
+      - name: "inst_t3_m1"
+        label: "Tool 3 — stat 1 (exposure maps; starts with the number)"
+        type: string
+      - name: "inst_t3_m2"
+        label: "Tool 3 — stat 2 (countries; starts with the number)"
+        type: string
+      - name: "tool3_src"
+        label: "TOOLS — Atlas: where its evidence comes from"
+        type: string
+      - name: "tool3_src_note"
+        label: "TOOLS — Atlas: why the sources can be trusted"
+        type: text
+      - name: "tool3_how"
+        label: "TOOLS — Atlas: link to how the atlas was made"
+        type: string
+      - name: "tool3_ver"
+        label: "TOOLS — Atlas: status, set small beside the link"
+        type: string
+      - name: "tn3_asbestos"
+        label: "Atlas quick link — Asbestos bans (no straight quotes or &)"
+        type: string
+      - name: "tn3_radon"
+        label: "Atlas quick link — Radon indoors (no straight quotes or &)"
+        type: string
+      - name: "tn3_sun"
+        label: "Atlas quick link — Working in the sun (no straight quotes or &)"
+        type: string
+      - name: "tn3_air"
+        label: "Atlas quick link — Air pollution (no straight quotes or &)"
+        type: string
+      - name: "inst_t3_btn_open"
+        label: "Tool 3 — primary button"
+        type: string
+      - name: "inst_t3_btn_work"
+        label: "Tool 3 — secondary link (the work section)"
         type: string
       - name: "tool1_q"
         label: "TOOLS — Cancer tool: the question it answers"
@@ -3720,6 +3804,48 @@ content:
       - name: "inst_t2_m6"
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
+      - name: "inst_t3_name"
+        label: "Tool 3 (Carcinogen Exposure Atlas) — name"
+        type: string
+      - name: "tool3_q"
+        label: "TOOLS — Atlas: the question it answers"
+        type: text
+      - name: "inst_t3_m1"
+        label: "Tool 3 — stat 1 (exposure maps; starts with the number)"
+        type: string
+      - name: "inst_t3_m2"
+        label: "Tool 3 — stat 2 (countries; starts with the number)"
+        type: string
+      - name: "tool3_src"
+        label: "TOOLS — Atlas: where its evidence comes from"
+        type: string
+      - name: "tool3_src_note"
+        label: "TOOLS — Atlas: why the sources can be trusted"
+        type: text
+      - name: "tool3_how"
+        label: "TOOLS — Atlas: link to how the atlas was made"
+        type: string
+      - name: "tool3_ver"
+        label: "TOOLS — Atlas: status, set small beside the link"
+        type: string
+      - name: "tn3_asbestos"
+        label: "Atlas quick link — Asbestos bans (no straight quotes or &)"
+        type: string
+      - name: "tn3_radon"
+        label: "Atlas quick link — Radon indoors (no straight quotes or &)"
+        type: string
+      - name: "tn3_sun"
+        label: "Atlas quick link — Working in the sun (no straight quotes or &)"
+        type: string
+      - name: "tn3_air"
+        label: "Atlas quick link — Air pollution (no straight quotes or &)"
+        type: string
+      - name: "inst_t3_btn_open"
+        label: "Tool 3 — primary button"
+        type: string
+      - name: "inst_t3_btn_work"
+        label: "Tool 3 — secondary link (the work section)"
+        type: string
       - name: "tool1_q"
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
@@ -5299,6 +5425,48 @@ content:
       - name: "inst_t2_m6"
         label: "Tool 2 — stat 6 (related-outcome links)"
         type: string
+      - name: "inst_t3_name"
+        label: "Tool 3 (Carcinogen Exposure Atlas) — name"
+        type: string
+      - name: "tool3_q"
+        label: "TOOLS — Atlas: the question it answers"
+        type: text
+      - name: "inst_t3_m1"
+        label: "Tool 3 — stat 1 (exposure maps; starts with the number)"
+        type: string
+      - name: "inst_t3_m2"
+        label: "Tool 3 — stat 2 (countries; starts with the number)"
+        type: string
+      - name: "tool3_src"
+        label: "TOOLS — Atlas: where its evidence comes from"
+        type: string
+      - name: "tool3_src_note"
+        label: "TOOLS — Atlas: why the sources can be trusted"
+        type: text
+      - name: "tool3_how"
+        label: "TOOLS — Atlas: link to how the atlas was made"
+        type: string
+      - name: "tool3_ver"
+        label: "TOOLS — Atlas: status, set small beside the link"
+        type: string
+      - name: "tn3_asbestos"
+        label: "Atlas quick link — Asbestos bans (no straight quotes or &)"
+        type: string
+      - name: "tn3_radon"
+        label: "Atlas quick link — Radon indoors (no straight quotes or &)"
+        type: string
+      - name: "tn3_sun"
+        label: "Atlas quick link — Working in the sun (no straight quotes or &)"
+        type: string
+      - name: "tn3_air"
+        label: "Atlas quick link — Air pollution (no straight quotes or &)"
+        type: string
+      - name: "inst_t3_btn_open"
+        label: "Tool 3 — primary button"
+        type: string
+      - name: "inst_t3_btn_work"
+        label: "Tool 3 — secondary link (the work section)"
+        type: string
       - name: "tool1_q"
         label: "TOOLS — Cancer tool: the question it answers"
         type: text
@@ -6877,6 +7045,48 @@ content:
         type: string
       - name: "inst_t2_m6"
         label: "Tool 2 — stat 6 (related-outcome links)"
+        type: string
+      - name: "inst_t3_name"
+        label: "Tool 3 (Carcinogen Exposure Atlas) — name"
+        type: string
+      - name: "tool3_q"
+        label: "TOOLS — Atlas: the question it answers"
+        type: text
+      - name: "inst_t3_m1"
+        label: "Tool 3 — stat 1 (exposure maps; starts with the number)"
+        type: string
+      - name: "inst_t3_m2"
+        label: "Tool 3 — stat 2 (countries; starts with the number)"
+        type: string
+      - name: "tool3_src"
+        label: "TOOLS — Atlas: where its evidence comes from"
+        type: string
+      - name: "tool3_src_note"
+        label: "TOOLS — Atlas: why the sources can be trusted"
+        type: text
+      - name: "tool3_how"
+        label: "TOOLS — Atlas: link to how the atlas was made"
+        type: string
+      - name: "tool3_ver"
+        label: "TOOLS — Atlas: status, set small beside the link"
+        type: string
+      - name: "tn3_asbestos"
+        label: "Atlas quick link — Asbestos bans (no straight quotes or &)"
+        type: string
+      - name: "tn3_radon"
+        label: "Atlas quick link — Radon indoors (no straight quotes or &)"
+        type: string
+      - name: "tn3_sun"
+        label: "Atlas quick link — Working in the sun (no straight quotes or &)"
+        type: string
+      - name: "tn3_air"
+        label: "Atlas quick link — Air pollution (no straight quotes or &)"
+        type: string
+      - name: "inst_t3_btn_open"
+        label: "Tool 3 — primary button"
+        type: string
+      - name: "inst_t3_btn_work"
+        label: "Tool 3 — secondary link (the work section)"
         type: string
       - name: "tool1_q"
         label: "TOOLS — Cancer tool: the question it answers"
