@@ -357,6 +357,7 @@
   <section class="keyline wrap">
     <p id="key1"></p>
     <p id="key2"></p>
+    <p id="key3"></p>
   </section>
 </main>
 
@@ -380,7 +381,8 @@ var STRINGS = {
     preview:"in gated preview", present:"present", nextLabel:"Next",
     viewLabel:"Show", viewCompact:"Overview", viewFull:"In full",
     key1:'Sources: journal articles are linked by DOI; conference items link their published abstracts; roles link the consortium sites. The full publication record lives at <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> and <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>. Conference abstracts and works in review are listed only where a public record exists.',
-    key2:'EpiDetective is a personal project by Wenxin Wan, independent of IARC and WHO. <a href="../about.html">About the developer</a> · <a href="../about.html#cite">How to cite</a> · <a href="../about.html#contact">Contact</a>'
+    key2:'EpiDetective is a personal project by Wenxin Wan, independent of IARC and WHO. <a href="../about.html">About the developer</a> · <a href="../about.html#cite">How to cite</a> · <a href="../about.html#contact">Contact</a>',
+    key3:"Non-commercial: EpiDetective is not for profit in any way. It sells nothing, shows no advertising and earns no money for anyone."
   },
   zh: {
     skip:"跳到正文",
@@ -395,7 +397,8 @@ var STRINGS = {
     preview:"预览 · 审校中", present:"至今", nextLabel:"即将",
     viewLabel:"显示", viewCompact:"总览", viewFull:"全部展开",
     key1:'来源说明：期刊论文以 DOI 链接；会议条目链接已发表的摘要；联盟职责链接项目官网。完整发表记录见 <a href="https://orcid.org/0000-0002-1957-4034" rel="noopener">ORCID 0000-0002-1957-4034</a> 与 <a href="https://scholar.google.com/citations?user=xkxHpUsAAAAJ" rel="noopener">Google Scholar</a>。会议摘要与审稿中的工作，仅在已有公开记录时列出。',
-    key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../zh/about.html">关于开发者</a> · <a href="../zh/about.html#cite">如何引用</a> · <a href="../zh/about.html#contact">联系方式</a>'
+    key2:'EpiDetective 是万汶鑫的个人项目，独立于 IARC 与 WHO。<a href="../zh/about.html">关于开发者</a> · <a href="../zh/about.html#cite">如何引用</a> · <a href="../zh/about.html#contact">联系方式</a>',
+    key3:"非商业声明：EpiDetective 完全不以营利为目的。本站不出售任何产品或服务，不刊登广告，任何人均不从中获取收入。"
   }
 };
 
@@ -650,6 +653,7 @@ function build(lang){
   document.getElementById("lede").innerHTML = S.lede;
   document.getElementById("key1").innerHTML = S.key1;
   document.getElementById("key2").innerHTML = S.key2;
+  document.getElementById("key3").textContent = S.key3;
 
   /* counts */
   var counts = {all:0};

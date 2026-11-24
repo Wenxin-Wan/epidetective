@@ -283,6 +283,10 @@
     "label": "FOOTER — affiliation notice",
     "type": "text"
   },
+  "foot_noncommercial": {
+    "label": "FOOTER — non-commercial notice",
+    "type": "text"
+  },
   "foot_disclaimer": {
     "label": "FOOTER — health disclaimer",
     "type": "text"
