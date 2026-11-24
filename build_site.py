@@ -37,6 +37,8 @@ WORK_JSON = os.path.join(HERE, "data", "work.json")
 # for. Re-run this build after make_network_svg.py or make_chronic_svg.py.
 CANCER_NET_SVG = os.path.join(HERE, "assets", "network.svg")
 CHRONIC_NET_SVG = os.path.join(HERE, "assets", "chronic-network.svg")
+ATLAS_SVG = os.path.join(HERE, "assets", "atlas-map.svg")      # scripts/make_atlas_svg.py
+ATLAS_URL = "https://epidetective.com/exposure-atlas/"
 
 # en first: it is the source of truth for key parity
 LANGS = ["en", "zh", "fr", "es", "ru"]
@@ -528,7 +530,7 @@ def svg_data_url(path):
 # legend: the count in figures, the words beside it. Every language writes the
 # count first, so the split is the leading number. The home page shows the
 # first two of each tool (FIG_T1_M1/M2, FIG_T2_M1/M2); all four are checked.
-FIG_KEYS = ["inst_t%d_m%d" % (t, m) for t in (1, 2) for m in (1, 2, 3, 4)]
+FIG_KEYS = ["inst_t%d_m%d" % (t, m) for t in (1, 2) for m in (1, 2, 3, 4)] + ["inst_t3_m1", "inst_t3_m2"]
 
 
 def fig_row(text):
@@ -1114,6 +1116,7 @@ def main():
     # same pictures in every language (see CHRONIC_NET_SVG)
     thumb_cancer = "background-image:url(&quot;%s&quot;)" % svg_data_url(CANCER_NET_SVG)
     thumb_chronic = "background-image:url(&quot;%s&quot;)" % svg_data_url(CHRONIC_NET_SVG)
+    thumb_atlas = "background-image:url(&quot;%s&quot;)" % svg_data_url(ATLAS_SVG)
 
     written = []
     for lang in LANGS:
@@ -1146,6 +1149,11 @@ def main():
             shared["CHR_V%d" % m_], shared["CHR_K%d" % m_] = fig_parts(d["inst_t2_m%d" % m_])
         shared["THUMB_CANCER_BG"] = thumb_cancer
         shared["THUMB_CHRONIC_BG"] = thumb_chronic
+        shared["THUMB_ATLAS_BG"] = thumb_atlas
+        # the atlas is one English page on this site; its layers open from the hash
+        shared["URL_TOOL3"] = ATLAS_URL
+        for key, layer in (("TL3_ASBESTOS", "asbestos_ban"), ("TL3_RADON", "radon"), ("TL3_SUN", "uv_work"), ("TL3_AIR", "pm25")):
+            shared[key] = ATLAS_URL + "#layer=" + layer
         for k in FIG_KEYS:
             shared["FIG_" + k[5:].upper()] = fig_row(d[k])
         for g in GROUP_KEY:

@@ -1,0 +1,637 @@
+{
+ "cards": [
+  {
+   "id": "betel_areca",
+   "title": "Betel quid and areca nut",
+   "agents": [
+    "betel-quid-with-tobacco",
+    "betel-quid"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "In Papua New Guinea almost half of the population chews betel nut, men and women alike.",
+     "source": "Brucato N et al. Influence of betel nut chewing on oral microbiome in Papua New Guinea. Evol Med Public Health 2025;13:36-44.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11928724/"
+    }
+   ],
+   "subtitle": "Group 1 · chewing habit",
+   "summary": "In Papua New Guinea almost half of the population chews betel nut (areca nut), men and women alike. IARC classifies betel quid and areca nut as causes of mouth cancer."
+  },
+  {
+   "id": "opium",
+   "title": "Opium",
+   "agents": [
+    "opium-use"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "IARC estimates that about 5 million people worldwide consume opium in minimally processed form.",
+     "source": "IARC Monographs Volume 126: Opium consumption (news release, 27 Sep 2021).",
+     "url": "https://monographs.iarc.who.int/news-events/volume-126-opium-consumption-2/"
+    },
+    {
+     "text": "IARC classified opium consumption as carcinogenic to humans (Group 1), causing cancers of the larynx, lung and urinary bladder.",
+     "source": "IARC Monographs Volume 126: Opium consumption (news release, 27 Sep 2021).",
+     "url": "https://monographs.iarc.who.int/news-events/volume-126-opium-consumption-2/"
+    },
+    {
+     "text": "Opium is used in more than 50 countries, with the highest prevalence in Western Asia, and the cancer studies come almost entirely from Iran.",
+     "source": "The carcinogenicity of opium consumption: a systematic review and meta-analysis. Eur J Epidemiol 2023.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10082119/"
+    },
+    {
+     "text": "For all opiates together (opium, heroin and other plant-derived opioids), UNODC reports world past-year use at 0.57% of the population in 2024.",
+     "source": "UNODC. World Drug Report 2026, Demand: Global and regional trends in opiate use.",
+     "url": "https://data.unodc.org/wdr2026?page=74"
+    }
+   ],
+   "subtitle": "Group 1 · drug use",
+   "summary": "About 5 million people worldwide consume opium (IARC estimate, 2021), with the highest rates in Western Asia. It causes cancers of the larynx, lung and urinary bladder."
+  },
+  {
+   "id": "salted_fish",
+   "title": "Chinese-style salted fish",
+   "agents": [
+    "chinese-style-salted-fish"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "In a Hong Kong study of 250 young people with nasopharyngeal cancer, eating Cantonese-style salted fish as a weaning food was linked to a 7.5-fold higher risk.",
+     "source": "Yu MC, Ho JH, Lai SH, Henderson BE. Cantonese-style salted fish as a cause of nasopharyngeal carcinoma. Cancer Res 1986;46:956-61.",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/3940655/"
+    },
+    {
+     "text": "The same study estimated that over 90% of young nasopharyngeal cancer cases in Hong Kong Chinese could be attributed to eating this food in childhood (mid-1980s data).",
+     "source": "Yu MC, Ho JH, Lai SH, Henderson BE. Cantonese-style salted fish as a cause of nasopharyngeal carcinoma. Cancer Res 1986;46:956-61.",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/3940655/"
+    },
+    {
+     "text": "Nasopharyngeal cancer is rare worldwide but has particularly high rates in southern China.",
+     "source": "Secular trends of salted fish consumption and nasopharyngeal carcinoma: a multi-jurisdiction ecological study in 8 regions from 3 continents. BMC Cancer 2013.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3729410/"
+    },
+    {
+     "text": "In Hong Kong, nasopharyngeal cancer rates fell markedly over 30 years, alongside falling salted fish use, although the authors found the link did not hold after adjusting for smoking and vegetables.",
+     "source": "Secular trends of salted fish consumption and nasopharyngeal carcinoma: a multi-jurisdiction ecological study in 8 regions from 3 continents. BMC Cancer 2013.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3729410/"
+    }
+   ],
+   "subtitle": "Group 1 · diet",
+   "summary": "Cantonese-style salted fish eaten in childhood was linked to nasopharyngeal cancer in Hong Kong. The cancer has become less common there over 30 years; a study of that trend could not tie the fall to salted fish once smoking and vegetables were taken into account."
+  },
+  {
+   "id": "aflatoxins",
+   "title": "Aflatoxins",
+   "agents": [
+    "aflatoxins"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "Aflatoxin may cause between 4.6% and 28.2% of liver cancers worldwide.",
+     "source": "Liu Y, Wu F. Global burden of aflatoxin-induced hepatocellular carcinoma: a risk assessment. Environ Health Perspect 2010;118:818-24.",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/20172840/"
+    },
+    {
+     "text": "Most aflatoxin-related liver cancers occur in sub-Saharan Africa, South-East Asia and China, where hepatitis B is common and food exposure is largely uncontrolled.",
+     "source": "Liu Y, Wu F. Global burden of aflatoxin-induced hepatocellular carcinoma: a risk assessment. Environ Health Perspect 2010;118:818-24.",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/20172840/"
+    },
+    {
+     "text": "Blood tests in Tanzania, Gambia, Senegal, Uganda, Kenya and Guinea found aflatoxin exposure in every population tested, highest in Kenya.",
+     "source": "Xu Y, Gong YY, Routledge MN. Aflatoxin exposure assessed by aflatoxin albumin adduct biomarker in populations from six African countries. World Mycotoxin J 2018;11:411-419.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7797627/"
+    },
+    {
+     "text": "Exposure swings from year to year: in schoolchildren in one Kenyan district the average blood adduct level rose from 73.2 pg/mg in 2002 to 578.5 pg/mg in 2004, the year of a deadly aflatoxicosis outbreak.",
+     "source": "Xu Y, Gong YY, Routledge MN. Aflatoxin exposure assessed by aflatoxin albumin adduct biomarker in populations from six African countries. World Mycotoxin J 2018;11:411-419.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7797627/"
+    }
+   ],
+   "subtitle": "Group 1 · contaminated food",
+   "summary": "Mould toxins in food may cause between 4.6% and 28.2% of liver cancers worldwide (a 2010 estimate). Most of these cases occur in sub-Saharan Africa, South-East Asia and China."
+  },
+  {
+   "id": "very_hot_drinks",
+   "title": "Very hot drinks",
+   "agents": [
+    "very-hot-drinks"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "IARC counts any drink consumed above 65 °C as very hot and judged very hot drinks a probable cause of oesophageal cancer (Group 2A, 2016).",
+     "source": "IARC Monographs evaluate drinking coffee, maté, and very hot beverages. IARC/PAHO news release, 15 Jun 2016 (Loomis et al., Lancet Oncol 2016;17:877).",
+     "url": "https://www.paho.org/en/news/15-6-2016-iarc-monographs-evaluate-drinking-coffee-mate-and-very-hot-beverages"
+    },
+    {
+     "text": "Most oesophageal cancers occur in parts of Asia, South America and East Africa, where regularly drinking very hot beverages is common.",
+     "source": "IARC Monographs evaluate drinking coffee, maté, and very hot beverages. IARC/PAHO news release, 15 Jun 2016 (Loomis et al., Lancet Oncol 2016;17:877).",
+     "url": "https://www.paho.org/en/news/15-6-2016-iarc-monographs-evaluate-drinking-coffee-mate-and-very-hot-beverages"
+    },
+    {
+     "text": "In Golestan, Iran, 22.0% of 48,582 cohort members drank tea at 65 °C or hotter, and nearly all (98%) drank black tea regularly.",
+     "source": "Islami F et al. Tea drinking habits and oesophageal cancer in a high risk area in northern Iran. BMJ 2009;338:b929.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3269898/"
+    },
+    {
+     "text": "In the Golestan case-control study, drinking very hot tea was linked to an eightfold higher risk of oesophageal cancer than drinking warm or lukewarm tea.",
+     "source": "Islami F et al. Tea drinking habits and oesophageal cancer in a high risk area in northern Iran. BMJ 2009;338:b929.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3269898/"
+    }
+   ],
+   "subtitle": "Group 2A · habit",
+   "summary": "Drinks above about 65 °C probably cause oesophageal cancer. In a large study in Golestan, Iran, about one in five people drank tea that hot."
+  },
+  {
+   "id": "natural_fibres",
+   "title": "Erionite and fluoro-edenite",
+   "agents": [
+    "erionite",
+    "fluoro-edenite"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "In affected Cappadocia villages in Türkiye, erionite-linked mesothelioma accounted for 21% to 51% of all deaths.",
+     "source": "Environmental and occupational exposure to erionite and related health risks: progress and prospects. Ann Work Expo Health 2025.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12313451/"
+    },
+    {
+     "text": "In North Dakota, a 2011 study found chest X-ray abnormalities consistent with erionite exposure in 21% of residents, possibly from road gravel containing erionite.",
+     "source": "Environmental and occupational exposure to erionite and related health risks: progress and prospects. Ann Work Expo Health 2025.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12313451/"
+    },
+    {
+     "text": "In the Mexican village of Tierra Blanca, 4 of 45 deaths in 2000 to 2012 were mesothelioma and 10 were lung cancer.",
+     "source": "Environmental and occupational exposure to erionite and related health risks: progress and prospects. Ann Work Expo Health 2025.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12313451/"
+    },
+    {
+     "text": "In Biancavilla, Sicily, 17 cases of pleural mesothelioma were found among residents from 1980 to 1997, linked to fluoro-edenite fibres from a local quarry.",
+     "source": "Pathological characterization of lung fibrosis in Sprague-Dawley rats treated with fluoro-edenite fibres. J Occup Med Toxicol 2024.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639117/"
+    },
+    {
+     "text": "Environmental remediation of the former fluoro-edenite mine at Biancavilla only started at the end of February 2023.",
+     "source": "The Epidemiological Surveillance of Mesothelioma Mortality in Italy as a Tool for the Prevention of Asbestos Exposure. Int J Environ Res Public Health 2023.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10252364/"
+    }
+   ],
+   "subtitle": "Group 1 · rock fibres",
+   "summary": "Natural mineral fibres in local rock (erionite, fluoro-edenite) have been linked to clusters of mesothelioma in Cappadocia (Türkiye), Tierra Blanca (Mexico) and Biancavilla (Sicily). In North Dakota, gravel roads containing erionite may explain chest X-ray changes in residents."
+  },
+  {
+   "id": "aristolochic_acid",
+   "title": "Aristolochic acid",
+   "agents": [
+    "aristolochic-acid",
+    "plants-containing-aristolochic-acid"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "Taiwan announced a complete ban on all herbal materials and preparations containing aristolochic acid on 3 November 2003.",
+     "source": "Policy Evaluation for Regulating Toxic Traditional Chinese Medicines in Taiwan. Risk Manag Healthc Policy 2026.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13021543/"
+    },
+    {
+     "text": "Before the ban, aristolochic acid herbal products were widely prescribed in Taiwan under the national insurance scheme that covers over 99% of residents.",
+     "source": "Increased risk of urinary tract cancer in ESRD patients associated with usage of Chinese herbal products suspected of containing aristolochic acid. PLoS One 2014.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4149424/"
+    },
+    {
+     "text": "Even after the ban, upper urinary tract cancer incidence in Taiwan kept rising from 2001 to 2018 while bladder cancer fell.",
+     "source": "Liao CI et al. Trends in the incidence of urothelial carcinoma in Taiwan after the ban on aristolochic acid-containing Chinese herbal preparations, 2001-2018. J Cancer Res Clin Oncol 2023;149:8201-8211 (PubMed abstract).",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/37061628/"
+    },
+    {
+     "text": "The UK prohibited Aristolochia in herbal medicines in 1999, yet the regulator still finds illegal products containing it.",
+     "source": "UK MHRA. Illegal herbal remedies containing Aristolochia: vigilance needed. Drug Safety Update, 11 Dec 2014.",
+     "url": "https://www.gov.uk/drug-safety-update/illegal-herbal-remedies-containing-aristolochia-vigilance-needed"
+    },
+    {
+     "text": "In Balkan endemic areas, 30% to 45% of people with Balkan endemic nephropathy, a kidney disease from flour contaminated with Aristolochia seeds, develop upper urinary tract cancer.",
+     "source": "Beyond Tradition: An Integrated Toxicological, Ecological, and Public Health Perspective on Aristolochic Acids. J Appl Toxicol 2026.",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13327222/"
+    }
+   ],
+   "subtitle": "Group 1 · herbal medicine",
+   "summary": "Herbal remedies made from Aristolochia plants cause cancers of the urinary tract. Taiwan banned them in 2003 and the United Kingdom in 1999."
+  },
+  {
+   "id": "htlv1",
+   "title": "HTLV-1",
+   "agents": [
+    "htlv-1-virus"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "An estimated 5 to 10 million people worldwide live with HTLV-1 infection.",
+     "source": "World Health Organization. HTLV-1 programme page, WHO Global HIV, Hepatitis and STIs Programmes.",
+     "url": "https://www.who.int/teams/global-hiv-hepatitis-and-stis-programmes/stis/htlv-1"
+    },
+    {
+     "text": "HTLV-1 is concentrated in a few endemic regions: south-western Japan, sub-Saharan Africa, South America, the Caribbean, and foci in the Middle East and Australo-Melanesia.",
+     "source": "Gessain A, Cassar O. Epidemiological aspects and world distribution of HTLV-1 infection. Front Microbiol 2012;3:388.",
+     "url": "https://doi.org/10.3389/fmicb.2012.00388"
+    },
+    {
+     "text": "HTLV-1 spreads from mother to child, through sex, and through contaminated blood products.",
+     "source": "Gessain A, Cassar O. Epidemiological aspects and world distribution of HTLV-1 infection. Front Microbiol 2012;3:388.",
+     "url": "https://doi.org/10.3389/fmicb.2012.00388"
+    },
+    {
+     "text": "The true number of carriers is probably higher, because reliable data cover only about 1.5 billion people from known endemic areas.",
+     "source": "Gessain A, Cassar O. Epidemiological aspects and world distribution of HTLV-1 infection. Front Microbiol 2012;3:388.",
+     "url": "https://doi.org/10.3389/fmicb.2012.00388"
+    }
+   ],
+   "subtitle": "Group 1 · virus",
+   "summary": "An estimated 5 to 10 million people, probably more, live with the HTLV-1 virus. It is concentrated in south-western Japan, sub-Saharan Africa, South America and the Caribbean."
+  },
+  {
+   "id": "kshv",
+   "title": "Kaposi sarcoma herpesvirus",
+   "agents": [
+    "kaposi-sarcoma-herpesvirus"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "Almost half of African countries (47%) had no published data on KSHV (HHV-8) infection in a review of studies from 1998 to 2017.",
+     "source": "HHV-8 seroprevalence and genotype distribution in Africa, 1998-2017: a systematic review. Viruses 2018;10(9):458.",
+     "url": "https://doi.org/10.3390/v10090458"
+    },
+    {
+     "text": "Among African children, studies found KSHV antibodies in between 2% and 69% of those tested.",
+     "source": "HHV-8 seroprevalence and genotype distribution in Africa, 1998-2017: a systematic review. Viruses 2018;10(9):458.",
+     "url": "https://doi.org/10.3390/v10090458"
+    },
+    {
+     "text": "The review authors describe KSHV infection as ubiquitous across African regions, where Kaposi sarcoma is also more common.",
+     "source": "HHV-8 seroprevalence and genotype distribution in Africa, 1998-2017: a systematic review. Viruses 2018;10(9):458.",
+     "url": "https://doi.org/10.3390/v10090458"
+    },
+    {
+     "text": "Studies used very different blood tests, so KSHV infection rates from different studies are hard to compare.",
+     "source": "HHV-8 seroprevalence and genotype distribution in Africa, 1998-2017: a systematic review. Viruses 2018;10(9):458.",
+     "url": "https://doi.org/10.3390/v10090458"
+    }
+   ],
+   "subtitle": "Group 1 · virus",
+   "summary": "A review of studies from 1998 to 2017 found infection widespread across Africa, where Kaposi sarcoma is also more common. Almost half of African countries had no published data."
+  },
+  {
+   "id": "ebv",
+   "title": "Epstein–Barr virus",
+   "agents": [
+    "epstein-barr-virus"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "More than 90% of the world population is infected with Epstein–Barr virus.",
+     "source": "Epstein-Barr virus seroprevalence in Thailand: a temporal and global perspective. Am J Trop Med Hyg 2025 (PMID 40300594).",
+     "url": "https://doi.org/10.4269/ajtmh.24-0857"
+    },
+    {
+     "text": "Once infected, a person carries EBV for life, and infection in early childhood is often silent.",
+     "source": "Epstein-Barr virus seroprevalence in Thailand: a temporal and global perspective. Am J Trop Med Hyg 2025 (PMID 40300594).",
+     "url": "https://doi.org/10.4269/ajtmh.24-0857"
+    },
+    {
+     "text": "In a 2024 Thai survey, the share of people with EBV antibodies rose from 35.9% in infants to nearly 100% in adolescents and adults.",
+     "source": "Epstein-Barr virus seroprevalence in Thailand: a temporal and global perspective. Am J Trop Med Hyg 2025 (PMID 40300594).",
+     "url": "https://doi.org/10.4269/ajtmh.24-0857"
+    },
+    {
+     "text": "EBV is caught earlier in life in Thailand and other developing countries than in developed countries.",
+     "source": "Epstein-Barr virus seroprevalence in Thailand: a temporal and global perspective. Am J Trop Med Hyg 2025 (PMID 40300594).",
+     "url": "https://doi.org/10.4269/ajtmh.24-0857"
+    }
+   ],
+   "subtitle": "Group 1 · virus",
+   "summary": "More than 90% of people worldwide carry Epstein–Barr virus, often from early childhood and earlier in developing countries, so exposure is almost universal."
+  },
+  {
+   "id": "liver_flukes",
+   "title": "Liver flukes",
+   "agents": [
+    "opisthorchis-viverrini",
+    "clonorchis-sinensis"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "Across 30 years of studies in the Greater Mekong subregion, 21% of people tested had Opisthorchis viverrini infection.",
+     "source": "Prevalence estimates of Opisthorchis viverrini and Clonorchis sinensis infection in the Greater Mekong subregion: a systematic review and meta-analysis. Infect Dis Poverty 2024 (PMC11077858).",
+     "url": "https://doi.org/10.1186/s40249-024-01201-8"
+    },
+    {
+     "text": "Pooled prevalence of O. viverrini was highest in Laos (34%), then Thailand (18%) and Cambodia (10%).",
+     "source": "Prevalence estimates of Opisthorchis viverrini and Clonorchis sinensis infection in the Greater Mekong subregion: a systematic review and meta-analysis. Infect Dis Poverty 2024 (PMC11077858).",
+     "url": "https://doi.org/10.1186/s40249-024-01201-8"
+    },
+    {
+     "text": "In Thailand, O. viverrini infection in surveys fell from about 41% before the year 2000 to about 1% from 2020 (national pooled estimates; the north-east was not analysed separately).",
+     "source": "Prevalence estimates of Opisthorchis viverrini and Clonorchis sinensis infection in the Greater Mekong subregion: a systematic review and meta-analysis. Infect Dis Poverty 2024 (PMC11077858).",
+     "url": "https://doi.org/10.1186/s40249-024-01201-8"
+    },
+    {
+     "text": "About 9.5 million people in China were estimated to be infected with Clonorchis sinensis in 2020.",
+     "source": "Clonorchiasis in China: geospatial modeling of the population infected and at risk, based on national surveillance. J Infect 2025 (PMID 40472937).",
+     "url": "https://doi.org/10.1016/j.jinf.2025.106528"
+    },
+    {
+     "text": "Eating raw or undercooked fish is the most commonly reported risk factor for liver fluke infection in the Lower Mekong Basin.",
+     "source": "Risk factors and control of Opisthorchis viverrini in the Lower Mekong Basin: a systematic review. PLoS Negl Trop Dis 2025 (PMC12698015).",
+     "url": "https://doi.org/10.1371/journal.pntd.0013790"
+    }
+   ],
+   "subtitle": "Group 1 · parasites",
+   "summary": "Liver flukes spread through raw or undercooked fish in the Mekong region and China. About 9.5 million people in China were infected with the liver fluke Clonorchis sinensis in 2020."
+  },
+  {
+   "id": "schistosoma",
+   "title": "Schistosoma haematobium",
+   "agents": [
+    "schistosoma-haematobium"
+   ],
+   "story": false,
+   "facts": [
+    {
+     "text": "At least 253.7 million people needed preventive treatment for schistosomiasis in 2024 (all species).",
+     "source": "World Health Organization. Schistosomiasis fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/schistosomiasis"
+    },
+    {
+     "text": "Schistosomiasis transmission has been reported from 79 countries.",
+     "source": "World Health Organization. Schistosomiasis fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/schistosomiasis"
+    },
+    {
+     "text": "Schistosoma haematobium, the species that causes urogenital schistosomiasis, occurs in Africa, the Middle East and Corsica (France).",
+     "source": "World Health Organization. Schistosomiasis fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/schistosomiasis"
+    },
+    {
+     "text": "Bladder cancer is a possible late complication of urogenital schistosomiasis.",
+     "source": "World Health Organization. Schistosomiasis fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/schistosomiasis"
+    },
+    {
+     "text": "More than 100.5 million people were reported treated in 2024.",
+     "source": "World Health Organization. Schistosomiasis fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/schistosomiasis"
+    }
+   ],
+   "subtitle": "Group 1 · parasite",
+   "summary": "At least 253.7 million people worldwide needed preventive treatment for schistosomiasis in 2024, counting all species. Schistosoma haematobium, the species linked to bladder cancer, occurs in Africa, the Middle East and Corsica."
+  }
+ ],
+ "stories": [
+  {
+   "id": "story_asbestos",
+   "title": "Asbestos",
+   "agents": [
+    "asbestos"
+   ],
+   "story": true,
+   "facts": [
+    {
+     "text": "Australia banned asbestos in 2003, but mesothelioma still appears decades later because the disease has a long latency.",
+     "source": "Walker-Bone KE et al. Incidence and mortality from malignant mesothelioma 1982-2020 and relationship with asbestos exposure: the Australian Mesothelioma Registry. Occup Environ Med 2023 (PMID 36754595).",
+     "url": "https://doi.org/10.1136/oemed-2022-108669"
+    },
+    {
+     "text": "Mesothelioma rates in Australia have fallen steadily since the early 2000s, after peaking at 5.9 per 100,000 in men (the decline began around the time of the ban and followed earlier restrictions).",
+     "source": "Walker-Bone KE et al. Incidence and mortality from malignant mesothelioma 1982-2020 and relationship with asbestos exposure: the Australian Mesothelioma Registry. Occup Environ Med 2023 (PMID 36754595).",
+     "url": "https://doi.org/10.1136/oemed-2022-108669"
+    },
+    {
+     "text": "Spain banned asbestos in 2002, and male pleural mesothelioma mortality peaked around 2001–2002 before a modest decline.",
+     "source": "Cayuela L et al. Spain's pleural cancer mortality 1984-2023: insights from a delayed asbestos prohibition. Arch Bronconeumol 2026;62:381-386 (PMID 41862332).",
+     "url": "https://doi.org/10.1016/j.arbres.2026.02.011"
+    },
+    {
+     "text": "In Spain, men born in 1974 had an 85% lower risk of pleural mesothelioma death than men born in 1944, and mortality stays high in older cohorts because of the long latency.",
+     "source": "Cayuela L et al. Spain's pleural cancer mortality 1984-2023: insights from a delayed asbestos prohibition. Arch Bronconeumol 2026;62:381-386 (PMID 41862332).",
+     "url": "https://doi.org/10.1016/j.arbres.2026.02.011"
+    },
+    {
+     "text": "Italy banned asbestos in 1992, and a model estimates that between 8,341 and 21,981 mesothelioma deaths were avoided from 1992 to 2020.",
+     "source": "Modelled effect on mesothelioma mortality of the asbestos ban in Italy and the subsequent phases of exposure. J Epidemiol Community Health 2026 (PMID 41895818).",
+     "url": "https://doi.org/10.1136/jech-2025-224991"
+    }
+   ],
+   "subtitle": "Banned in 73 countries, still used in many others",
+   "summary": "World use fell from about 2 million tonnes in 2000 to about 930,000 tonnes in 2025. India used about 482,000 tonnes in 2023, the most of any country, while 73 countries have adopted bans on all forms.",
+   "stats": [
+    {
+     "label": "Countries with a national ban, by year adopted (67 of the 73 bans have a known year)",
+     "value": "1990: 7 · 2000: 23 · 2010: 53 · 2020: 63 · 2026: 67",
+     "source": "International Ban Asbestos Secretariat; official texts for the EU, United Kingdom, Canada and United States"
+    },
+    {
+     "label": "Largest users in 2023 (tonnes)",
+     "value": "India 482,000 · China 284,000 · Uzbekistan 125,000 · Russia 109,000 · Indonesia 94,400 · Bangladesh 42,600",
+     "source": "U.S. Geological Survey, Minerals Yearbook 2023, Table 7"
+    },
+    {
+     "label": "Largest producers in 2025 (tonnes, estimated)",
+     "value": "Russia 310,000 · Kazakhstan 250,000 · China 250,000 · Brazil 150,000 (world production 960,000)",
+     "source": "U.S. Geological Survey, Mineral Commodity Summaries 2026"
+    },
+    {
+     "label": "World use (consumption of asbestos fibre)",
+     "value": "about 2 million tonnes in 2000; about 930,000 tonnes in 2025",
+     "source": "U.S. Geological Survey, Mineral Commodity Summaries 2026"
+    }
+   ]
+  },
+  {
+   "id": "story_tobacco",
+   "facts": [],
+   "title": "Tobacco smoke",
+   "agents": [
+    "tobacco-smoking",
+    "secondhand-smoke"
+   ],
+   "story": true,
+   "subtitle": "A smaller share of adults smoke, and more countries ban smoking in public places",
+   "summary": "Across 167 countries, the typical share of adults who smoke fell from 28% in 2000 to 17% in 2024. Countries banning smoking in all eight kinds of public place went from 8 in 2007 to 77 in 2024.",
+   "stats": [
+    {
+     "label": "Median share of adults who smoke, across countries",
+     "value": "28.0% in 2000 · 16.7% in 2024 (167 countries)",
+     "source": "World Health Organization, Global Health Observatory, age-standardized estimates of current tobacco smoking"
+    },
+    {
+     "label": "Countries with smoke-free laws in all eight kinds of public place",
+     "value": "8 in 2007 · 77 in 2024",
+     "source": "World Health Organization, Global Health Observatory, smoke-free legislation (WHO report on the global tobacco epidemic)"
+    }
+   ]
+  },
+  {
+   "id": "story_hepb",
+   "title": "Hepatitis B vaccination",
+   "agents": [
+    "hepatitis-b-virus"
+   ],
+   "story": true,
+   "facts": [
+    {
+     "text": "Taiwan began a nationwide hepatitis B vaccination programme in July 1984.",
+     "source": "Chang MH et al. Universal hepatitis B vaccination in Taiwan and the incidence of hepatocellular carcinoma in children. N Engl J Med 1997;336:1855-9.",
+     "url": "https://doi.org/10.1056/nejm199706263362602"
+    },
+    {
+     "text": "Liver cancer in Taiwanese children aged 6 to 14 fell from 0.70 per 100,000 in 1981–1986 to 0.36 in 1990–1994.",
+     "source": "Chang MH et al. Universal hepatitis B vaccination in Taiwan and the incidence of hepatocellular carcinoma in children. N Engl J Med 1997;336:1855-9.",
+     "url": "https://doi.org/10.1056/nejm199706263362602"
+    },
+    {
+     "text": "Among children aged 6 to 9, liver cancer incidence was 0.52 per 100,000 for those born 1974–1984 and 0.13 for those born 1984–1986.",
+     "source": "Chang MH et al. Universal hepatitis B vaccination in Taiwan and the incidence of hepatocellular carcinoma in children. N Engl J Med 1997;336:1855-9.",
+     "url": "https://doi.org/10.1056/nejm199706263362602"
+    },
+    {
+     "text": "WHO estimates that 0.6% of children under 5 had chronic hepatitis B infection worldwide in 2024.",
+     "source": "World Health Organization. Hepatitis B fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/hepatitis-b"
+    },
+    {
+     "text": "In the pre-vaccine era (1980s to early 2000s), around 5% of children under 5 were chronically infected.",
+     "source": "World Health Organization. Hepatitis B fact sheet.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/hepatitis-b"
+    }
+   ],
+   "subtitle": "The vaccine entered almost every national schedule, and chronic infection in young children fell sharply",
+   "summary": "Countries with the hepatitis B vaccine in their national schedule rose from 22 in 1990 to 190 in 2025. WHO estimates that 0.6% of children under five were chronically infected in 2024, against about 5% before vaccination.",
+   "stats": [
+    {
+     "label": "Countries with the vaccine in the national schedule",
+     "value": "1990: 22 · 2000: 97 · 2010: 178 · 2025: 190",
+     "source": "WHO Immunization Data portal, vaccine introduction"
+    },
+    {
+     "label": "Countries vaccinating at least 90% of infants with three doses",
+     "value": "50 in 2000 · 97 in 2025",
+     "source": "WHO/UNICEF estimates of national immunization coverage"
+    }
+   ]
+  },
+  {
+   "id": "story_hpv",
+   "facts": [],
+   "title": "HPV vaccination",
+   "agents": [
+    "high-risk-hpv"
+   ],
+   "story": true,
+   "subtitle": "A vaccine against human papillomavirus (HPV), a cause of cervical cancer, offered in most countries within two decades",
+   "summary": "The HPV vaccine entered national schedules in 15 countries by 2008 and 159 by 2025. In 2025 the typical country vaccinated 69% of girls in its target age group (159 countries reporting).",
+   "stats": [
+    {
+     "label": "Countries with the vaccine in the national schedule",
+     "value": "2008: 15 · 2012: 42 · 2016: 69 · 2020: 107 · 2025: 159",
+     "source": "WHO Immunization Data portal, vaccine introduction"
+    },
+    {
+     "label": "Median coverage of girls in the target age group, 2025",
+     "value": "69% (159 countries)",
+     "source": "WHO/UNICEF estimates, HPV immunization coverage (girls 9 to 14 years)"
+    }
+   ]
+  },
+  {
+   "id": "story_fuels",
+   "title": "Cooking fuels",
+   "agents": [
+    "indoor-coal-smoke",
+    "indoor-wood-smoke"
+   ],
+   "story": true,
+   "facts": [
+    {
+     "text": "About 2.1 billion people, around a quarter of the world, still cook with open fires or inefficient stoves using kerosene, biomass or coal.",
+     "source": "World Health Organization. Household air pollution fact sheet, 16 December 2025.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health"
+    },
+    {
+     "source": "World Health Organization. Global Health Observatory: proportion of population with primary reliance on clean fuels and technologies for cooking (PHE_HHAIR_PROP_POP_CLEAN_FUELS).",
+     "url": "https://www.who.int/data/gho/data/themes/air-pollution/household-air-pollution",
+     "text": "Worldwide, the share of people relying mainly on clean fuels for cooking rose from 47% in 2000 to 75% in 2024."
+    },
+    {
+     "source": "World Health Organization. Global Health Observatory: proportion of population with primary reliance on clean fuels and technologies for cooking (PHE_HHAIR_PROP_POP_CLEAN_FUELS).",
+     "url": "https://www.who.int/data/gho/data/themes/air-pollution/household-air-pollution",
+     "text": "In China, the share of people relying mainly on clean fuels for cooking rose from 38% in 2000 to 90% in 2024."
+    },
+    {
+     "source": "World Health Organization. Global Health Observatory: proportion of population with primary reliance on clean fuels and technologies for cooking (PHE_HHAIR_PROP_POP_CLEAN_FUELS).",
+     "url": "https://www.who.int/data/gho/data/themes/air-pollution/household-air-pollution",
+     "text": "In India, the share of people relying mainly on clean fuels for cooking rose from 22% in 2000 to 81% in 2024."
+    },
+    {
+     "text": "At current rates only 78% of people are expected to have clean cooking by 2030, leaving nearly 1.8 billion without it.",
+     "source": "World Health Organization. Household air pollution fact sheet, 16 December 2025.",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health"
+    }
+   ],
+   "subtitle": "Clean cooking spread quickly, but 2.1 billion people still lack it",
+   "summary": "Worldwide, the share of people cooking mainly with clean fuels rose from 47% in 2000 to 75% in 2024. Countries where most people cook with coal, wood, dung or kerosene went from 82 in 2000 to 57 in 2023.",
+   "stats": [
+    {
+     "label": "Countries where more than half the population cooks with polluting fuels",
+     "value": "82 in 2000 · 57 in 2023",
+     "source": "World Health Organization, Global Health Observatory, household energy"
+    }
+   ]
+  },
+  {
+   "id": "story_hrt",
+   "title": "Menopausal hormone therapy",
+   "agents": [
+    "combined-hrt"
+   ],
+   "story": true,
+   "facts": [
+    {
+     "text": "US breast cancer incidence fell by 6.7% in 2003 compared with 2002, after the first Women's Health Initiative report and the drop in hormone therapy use.",
+     "source": "Ravdin PM et al. The decrease in breast-cancer incidence in 2003 in the United States. N Engl J Med 2007;356:1670-4.",
+     "url": "https://doi.org/10.1056/nejmsr070105"
+    },
+    {
+     "text": "The US decline was seen only in women aged 50 and older and was larger for oestrogen-receptor-positive cancers; incidence in 2004 was 8.6% lower than in 2001.",
+     "source": "Ravdin PM et al. The decrease in breast-cancer incidence in 2003 in the United States. N Engl J Med 2007;356:1670-4.",
+     "url": "https://doi.org/10.1056/nejmsr070105"
+    },
+    {
+     "text": "Across 17 European countries, hormone therapy use fell by 50% to 77% between 2002 and 2010.",
+     "source": "Ameye L et al. Menopausal hormone therapy use in 17 European countries during the last decade. Maturitas 2014 (PMID 25156453).",
+     "url": "https://doi.org/10.1016/j.maturitas.2014.07.002"
+    },
+    {
+     "text": "In France, the number of hormone therapy users fell by 62% between 2001 and 2006, while breast cancer incidence fell between 2003 and 2006 only in women aged 50 or above.",
+     "source": "Changes by age in breast cancer incidence, mammography screening and hormone therapy use in France from 2000 to 2006. Bull Cancer 2009 (PMID 19435691).",
+     "url": "https://doi.org/10.1684/bdc.2009.0869"
+    },
+    {
+     "text": "In Schleswig-Holstein, Germany, the fall in breast cancer incidence started about two years after the fall in hormone therapy use.",
+     "source": "Decline in breast cancer incidence after decrease in utilisation of hormone replacement therapy (Schleswig-Holstein, Germany). Breast Cancer Res Treat 2008 (PMID 17453336).",
+     "url": "https://doi.org/10.1007/s10549-007-9566-z"
+    }
+   ],
+   "subtitle": "Use fell sharply after 2002, and breast cancer in women aged 50 and over fell soon after",
+   "summary": "After the first Women's Health Initiative report in 2002, use of menopausal hormone therapy fell by 50% to 77% in 17 European countries by 2010. In the United States, breast cancer incidence in 2003 was 6.7% lower than in 2002.",
+   "stats": []
+  }
+ ]
+}
