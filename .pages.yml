@@ -424,6 +424,9 @@ content:
       - name: "foot_affiliation"
         label: "FOOTER — affiliation notice"
         type: text
+      - name: "foot_noncommercial"
+        label: "FOOTER — non-commercial notice"
+        type: text
       - name: "foot_disclaimer"
         label: "FOOTER — health disclaimer"
         type: text
@@ -2044,6 +2047,9 @@ content:
         type: string
       - name: "foot_affiliation"
         label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot_noncommercial"
+        label: "FOOTER — non-commercial notice"
         type: text
       - name: "foot_disclaimer"
         label: "FOOTER — health disclaimer"
@@ -3666,6 +3672,9 @@ content:
       - name: "foot_affiliation"
         label: "FOOTER — affiliation notice"
         type: text
+      - name: "foot_noncommercial"
+        label: "FOOTER — non-commercial notice"
+        type: text
       - name: "foot_disclaimer"
         label: "FOOTER — health disclaimer"
         type: text
@@ -5287,6 +5296,9 @@ content:
       - name: "foot_affiliation"
         label: "FOOTER — affiliation notice"
         type: text
+      - name: "foot_noncommercial"
+        label: "FOOTER — non-commercial notice"
+        type: text
       - name: "foot_disclaimer"
         label: "FOOTER — health disclaimer"
         type: text
@@ -6907,6 +6919,9 @@ content:
         type: string
       - name: "foot_affiliation"
         label: "FOOTER — affiliation notice"
+        type: text
+      - name: "foot_noncommercial"
+        label: "FOOTER — non-commercial notice"
         type: text
       - name: "foot_disclaimer"
         label: "FOOTER — health disclaimer"
